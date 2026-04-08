@@ -5,7 +5,7 @@ const QUERY = 'artificial intelligence OR LLM OR "large language model" OR "gene
 
 function get(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));

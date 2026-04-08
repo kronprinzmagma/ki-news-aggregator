@@ -1,6 +1,16 @@
 import fs from 'fs/promises';
+import { readFileSync } from 'fs';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchNewsApi } from './adapters/newsapi.js';
+
+// .env laden
+try {
+  const lines = readFileSync('.env', 'utf-8').split('\n');
+  for (const line of lines) {
+    const match = /^([^#=]+)=(.*)$/.exec(line.trim());
+    if (match) process.env[match[1].trim()] = match[2].trim();
+  }
+} catch { /* .env optional */ }
 
 const ADAPTERS = [
   { name: 'simonwillison', fn: fetchWillison },
