@@ -52,17 +52,22 @@ async function claudeText(prompt, maxTokens = 400) {
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
-Der Leser ist ein erfahrener Product Owner / Product Manager im Schweizer Digital- und InsurTech-Umfeld. Er ist kein Entwickler. Er will verstehen:
-1. Was ist die Kernaussage? (1-2 Sätze, kein Tech-Jargon)
-2. Was bedeutet das für meine Arbeit als PO? (1-2 Sätze, konkreter Bezug zu Produktentwicklung, Teamführung oder Stakeholder-Kommunikation)
-3. Projektidee: Was könnte man damit konkret machen? (1 Satz, umsetzbar)
+Der Leser ist ein erfahrener, nichttechnischer Produktmensch (PO, PM, Head of Product). Er baut nebenbei eigene kleine Projekte mit Claude Code und interessiert sich für die praktische Anwendung von KI.
 
-Schreib direkt und knapp, wie eine Slack-Nachricht an einen Kollegen. Kein Marketing, keine Floskeln, kein "könnte interessant sein". Sprache: Deutsch, Schweizer Hochdeutsch.
+Schreibe für diesen Artikel:
 
-Antworte mit genau diesem Format (die drei nummerierten Punkte als Markdown):
-**1. Kernaussage:** <Text>
-**2. Was bedeutet das für mich als PO?** <Text>
-**3. Projektidee:** <Text>
+1. Was ist passiert und warum ist es wichtig? (3-4 Sätze, allgemein verständlich, kein Tech-Jargon. Wenn Fachbegriffe unvermeidbar sind, kurz erklären.)
+
+2. Was bedeutet das für die Produktarbeit? (2-3 Sätze. Nicht nur Teamführung, sondern breit: Wie verändert das, wie digitale Produkte entstehen, bewertet oder verkauft werden?)
+
+3. Was könnte ich damit konkret bauen? (1-2 Sätze. Kleine, umsetzbare Projektideen, die eine Einzelperson mit Claude Code an einem Wochenende starten könnte. Keine Team-Workshops oder Organisationsprojekte.)
+
+Tonalität: Deutsch, Schweizer Hochdeutsch, direkt und knapp wie eine Nachricht an einen Kollegen. Kein Marketing, keine Floskeln.
+
+Antworte mit genau diesem Format:
+**1. Was ist passiert?** <Text>
+**2. Was bedeutet das für die Produktarbeit?** <Text>
+**3. Was könnte ich damit bauen?** <Text>
 
 Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
@@ -99,10 +104,14 @@ async function main() {
   console.log(`${articles.length} Artikel geladen`);
 
   const sorted = [...articles].sort((a, b) => b.score - a.score);
-  const topArtikel = sorted.filter(a => a.score >= 4);
-  const linkArtikel = sorted.filter(a => a.score === 3);
+  const hatGenugText = a => (a.rohtext || '').length >= 200;
+  const topArtikel = sorted.filter(a => a.score >= 4 && hatGenugText(a));
+  const linkArtikel = [
+    ...sorted.filter(a => a.score >= 4 && !hatGenugText(a)),
+    ...sorted.filter(a => a.score === 3),
+  ];
 
-  console.log(`\n${topArtikel.length} Top-Artikel (Score >= 4), ${linkArtikel.length} Link-Artikel (Score 3)`);
+  console.log(`\n${topArtikel.length} Top-Artikel (Score >= 4, Rohtext >= 200 Zeichen), ${linkArtikel.length} Link-Artikel`);
 
   // Überblick generieren
   console.log('\nGeneriere Überblick...');
