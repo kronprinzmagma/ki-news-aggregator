@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import { readFileSync } from 'fs';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchNewsApi } from './adapters/newsapi.js';
+import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 
 // .env laden
 try {
@@ -15,6 +16,7 @@ try {
 const ADAPTERS = [
   { name: 'simonwillison', fn: fetchWillison },
   { name: 'newsapi', fn: fetchNewsApi },
+  { name: 'latentspace', fn: fetchLatentSpace },
 ];
 
 async function runAdapters() {
