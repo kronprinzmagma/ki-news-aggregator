@@ -158,6 +158,55 @@ async function main() {
   const filename = `summary-${date}.md`;
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
+
+  await postGithubIssue(date, markdown);
+}
+
+async function postGithubIssue(date, body) {
+  const token = process.env.GH_PAT;
+  if (!token) {
+    console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
+    return;
+  }
+
+  const payload = JSON.stringify({
+    title: `KI-News Summary – ${date}`,
+    body,
+    labels: ['summary'],
+  });
+
+  await new Promise((resolve, reject) => {
+    const req = https.request(
+      {
+        hostname: 'api.github.com',
+        path: '/repos/kronprinzmagma/ki-news-aggregator/issues',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'User-Agent': 'ki-news-aggregator',
+          'Accept': 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      },
+      (res) => {
+        let data = '';
+        res.on('data', chunk => (data += chunk));
+        res.on('end', () => {
+          if (res.statusCode === 201) {
+            const issue = JSON.parse(data);
+            console.log(`GitHub Issue erstellt: ${issue.html_url}`);
+          } else {
+            console.error(`GitHub API Fehler: HTTP ${res.statusCode} – ${data}`);
+          }
+          resolve();
+        });
+      }
+    );
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
 }
 
 main();

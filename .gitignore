@@ -1,2 +1,5 @@
 articles-*.json
+scored-*.json
+summary-*.md
 .env
+# .env enthält Secrets: ANTHROPIC_API_KEY, GH_PAT
