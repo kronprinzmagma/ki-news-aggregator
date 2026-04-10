@@ -1,22 +1,16 @@
 import fs from 'fs/promises';
-import { readFileSync } from 'fs';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
-import { fetchArticles as fetchNewsApi } from './adapters/newsapi.js';
 import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
-
-// .env laden
-try {
-  const lines = readFileSync('.env', 'utf-8').split('\n');
-  for (const line of lines) {
-    const match = /^([^#=]+)=(.*)$/.exec(line.trim());
-    if (match) process.env[match[1].trim()] = match[2].trim();
-  }
-} catch { /* .env optional */ }
+import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
+import { fetchArticles as fetchHackerNews } from './adapters/hackernews.js';
+import { fetchArticles as fetchLastWeekInAI } from './adapters/lastweekinai.js';
 
 const ADAPTERS = [
   { name: 'simonwillison', fn: fetchWillison },
-  { name: 'newsapi', fn: fetchNewsApi },
   { name: 'latentspace', fn: fetchLatentSpace },
+  { name: 'anthropic', fn: fetchAnthropic },
+  { name: 'hackernews', fn: fetchHackerNews },
+  { name: 'lastweekinai', fn: fetchLastWeekInAI },
 ];
 
 async function runAdapters() {
