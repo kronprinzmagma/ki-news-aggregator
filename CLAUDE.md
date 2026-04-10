@@ -30,3 +30,20 @@ Drei Bausteine, sequenziell:
 - Duplikate werden per URL erkannt und gefiltert
 - Ergebnis wird als JSON-File gespeichert (z.B. articles-2025-04-08.json)
 - Fehler einzelner Quellen brechen nicht den ganzen Lauf ab
+
+## Akzeptanzkriterien Baustein 2 (Score)
+
+- CLI-Befehl `node score.js` liest das neueste articles-*.json ein
+- Jeder Artikel wird per Claude API (claude-sonnet-4-6) bewertet
+- Prompt enthält Relevanzprofil: KI-Produktentwicklung, Agentic Coding, API-Design, Datengetriebene Entscheidungslogik
+- Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
+- Rate Limiting: maximal 5 parallele Requests, Retry bei 429
+- Ergebnis wird als scored-YYYY-MM-DD.json gespeichert
+- Artikel mit Score < 3 werden aussortiert
+
+## Akzeptanzkriterien Baustein 3 (Deliver)
+
+- CLI-Befehl `node deliver.js` liest das neueste scored-*.json ein
+- Generiert ein Markdown-Summary mit Titel, Score, Begründung und Link pro Artikel
+- Sortiert nach Score absteigend
+- Speichert als summary-YYYY-MM-DD.md
