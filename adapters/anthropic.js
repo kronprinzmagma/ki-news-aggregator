@@ -1,6 +1,6 @@
 import https from 'https';
 
-const FEED_URL = 'https://www.anthropic.com/rss';
+const FEED_URL = 'https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml';
 
 function get(url) {
   return new Promise((resolve, reject) => {
