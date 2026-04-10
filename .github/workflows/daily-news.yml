@@ -1,0 +1,30 @@
+name: Daily KI-News
+
+on:
+  schedule:
+    # 05:00 UTC = 07:00 CEST (Sommer) / 06:00 CET (Winter)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GH_PAT: ${{ secrets.GH_PAT }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Ingest
+        run: node ingest.js
+
+      - name: Score
+        run: node score.js
+
+      - name: Deliver
+        run: node deliver.js
