@@ -82,9 +82,50 @@ Direkt und knapp, Schweizer Hochdeutsch, keine Floskeln.
 Top-Artikel heute:
 ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
 
+const HIGHLIGHTS_UEBERBLICK_PROMPT = (topArtikel) => `\
+Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und InsurTech-Umfeld. Er ist kein Entwickler.
+
+Heute gibt es keine neuen relevanten KI-Meldungen. Stattdessen werden die wichtigsten Artikel der letzten zwei Wochen nochmals aufbereitet.
+
+Fasse in 2-3 Sätzen zusammen: Was sind die prägenden KI-Themen der letzten zwei Wochen, und was sollte ein PO davon mitnehmen?
+
+Direkt und knapp, Schweizer Hochdeutsch, keine Floskeln.
+
+Top-Artikel der letzten zwei Wochen:
+${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
+
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
   return claudeText(ARTIKEL_PROMPT(artikel));
+}
+
+const MIN_TOP_ARTIKEL = 3;
+
+async function ladeHighlights() {
+  const files = await fs.readdir('.');
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 14);
+
+  const scoredFiles = files
+    .filter(f => f.startsWith('scored-') && f.endsWith('.json'))
+    .filter(f => {
+      const dateStr = f.replace('scored-', '').replace('.json', '');
+      return new Date(dateStr) >= cutoff;
+    })
+    .sort();
+
+  const seen = new Set();
+  const all = [];
+  for (const file of scoredFiles) {
+    const articles = JSON.parse(await fs.readFile(file, 'utf-8'));
+    for (const a of articles) {
+      if (!seen.has(a.url)) {
+        seen.add(a.url);
+        all.push(a);
+      }
+    }
+  }
+  return all;
 }
 
 async function main() {
@@ -103,19 +144,39 @@ async function main() {
   const articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
   console.log(`${articles.length} Artikel geladen`);
 
-  const sorted = [...articles].sort((a, b) => b.score - a.score);
   const hatGenugText = a => (a.rohtext || '').length >= 200;
-  const topArtikel = sorted.filter(a => a.score >= 4 && hatGenugText(a));
-  const linkArtikel = [
-    ...sorted.filter(a => a.score >= 4 && !hatGenugText(a)),
-    ...sorted.filter(a => a.score === 3),
-  ];
+  const tagesSorted = [...articles].sort((a, b) => b.score - a.score);
+  const tagesTop = tagesSorted.filter(a => a.score >= 4 && hatGenugText(a));
 
-  console.log(`\n${topArtikel.length} Top-Artikel (Score >= 4, Rohtext >= 200 Zeichen), ${linkArtikel.length} Link-Artikel`);
+  let isHighlights = false;
+  let topArtikel;
+  let linkArtikel;
+
+  if (tagesTop.length < MIN_TOP_ARTIKEL) {
+    console.log(`\nNur ${tagesTop.length} Top-Artikel heute (< ${MIN_TOP_ARTIKEL}) – wechsle zu KI Highlights (letzte 2 Wochen)`);
+    isHighlights = true;
+    const allArticles = await ladeHighlights();
+    console.log(`${allArticles.length} Artikel aus den letzten 14 Tagen geladen`);
+    const sorted = [...allArticles].sort((a, b) => b.score - a.score);
+    topArtikel = sorted.filter(a => a.score >= 4 && hatGenugText(a)).slice(0, 5);
+    linkArtikel = [];
+  } else {
+    const sorted = tagesSorted;
+    topArtikel = tagesTop;
+    linkArtikel = [
+      ...sorted.filter(a => a.score >= 4 && !hatGenugText(a)),
+      ...sorted.filter(a => a.score === 3),
+    ];
+  }
+
+  console.log(`\n${topArtikel.length} Top-Artikel, ${linkArtikel.length} Link-Artikel`);
 
   // Überblick generieren
   console.log('\nGeneriere Überblick...');
-  const ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel.length > 0 ? topArtikel : sorted.slice(0, 5)), 300);
+  const ueberblickPrompt = isHighlights
+    ? HIGHLIGHTS_UEBERBLICK_PROMPT(topArtikel)
+    : UEBERBLICK_PROMPT(topArtikel.length > 0 ? topArtikel : tagesSorted.slice(0, 5));
+  const ueberblick = await claudeText(ueberblickPrompt, 300);
 
   // Top-Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
@@ -126,8 +187,9 @@ async function main() {
 
   // Markdown zusammensetzen
   const date = todayString();
+  const titel = isHighlights ? `KI Highlights` : `KI-News`;
   const lines = [
-    `# KI-News – ${date}`,
+    `# ${titel} – ${date}`,
     '',
     '## Überblick',
     '',
@@ -168,18 +230,19 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  await postGithubIssue(date, markdown);
+  await postGithubIssue(date, markdown, isHighlights);
 }
 
-async function postGithubIssue(date, body) {
+async function postGithubIssue(date, body, isHighlights = false) {
   const token = process.env.GH_PAT;
   if (!token) {
     console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
     return;
   }
 
+  const issueTitle = isHighlights ? `KI Highlights – ${date}` : `KI-News Summary – ${date}`;
   const payload = JSON.stringify({
-    title: `KI-News Summary – ${date}`,
+    title: issueTitle,
     body,
     labels: ['summary'],
   });
