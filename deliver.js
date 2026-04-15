@@ -52,22 +52,22 @@ async function claudeText(prompt, maxTokens = 400) {
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
-Der Leser ist ein erfahrener, nichttechnischer Produktmensch (PO, PM, Head of Product). Er baut nebenbei eigene kleine Projekte mit Claude Code und interessiert sich für die praktische Anwendung von KI.
+Der Leser ist ein erfahrener, nichttechnischer Produktmensch (PO, PM, Head of Product) im Schweizer Digital-Umfeld. Er baut nebenbei eigene kleine Projekte mit Claude Code und interessiert sich für die praktische Anwendung von KI.
 
 Schreibe für diesen Artikel:
 
-1. Was ist passiert und warum ist es wichtig? (3-4 Sätze, allgemein verständlich, kein Tech-Jargon. Wenn Fachbegriffe unvermeidbar sind, kurz erklären.)
+1. Was ist die Kernaussage? (5-6 Sätze, kein Tech-Jargon. Wenn Fachbegriffe unvermeidbar sind, kurz erklären. Was ist passiert, wer steckt dahinter, warum ist es relevant, und was ist neu daran?)
 
-2. Was bedeutet das für die Produktarbeit? (2-3 Sätze. Nicht nur Teamführung, sondern breit: Wie verändert das, wie digitale Produkte entstehen, bewertet oder verkauft werden?)
+2. Was bedeutet das für meine Arbeit als PO? (5-6 Sätze. Breit denken: Wie verändert das, wie digitale Produkte entstehen, priorisiert, bewertet oder verkauft werden? Was ändert sich in der Zusammenarbeit mit Entwicklern, Stakeholdern oder Nutzern? Was sollte ein PO jetzt wissen oder anders machen?)
 
-3. Was könnte ich damit konkret bauen? (1-2 Sätze. Kleine, umsetzbare Projektideen, die eine Einzelperson mit Claude Code an einem Wochenende starten könnte. Keine Team-Workshops oder Organisationsprojekte.)
+3. Projektidee: Was könnte man damit konkret machen? (2-3 konkrete Ideen in je 1-2 Sätzen. Umsetzbar von einer Einzelperson mit Claude Code – kein grosses Budget, kein Team. Keine Workshops, keine Strategieprojekte.)
 
-Tonalität: Deutsch, Schweizer Hochdeutsch, direkt und knapp wie eine Nachricht an einen Kollegen. Kein Marketing, keine Floskeln.
+Tonalität: Deutsch, Schweizer Hochdeutsch, direkt und klar. Kein Marketing, keine Floskeln.
 
 Antworte mit genau diesem Format:
-**1. Was ist passiert?** <Text>
-**2. Was bedeutet das für die Produktarbeit?** <Text>
-**3. Was könnte ich damit bauen?** <Text>
+**1. Was ist die Kernaussage?** <Text>
+**2. Was bedeutet das für meine Arbeit als PO?** <Text>
+**3. Projektideen** <Text>
 
 Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
@@ -96,7 +96,7 @@ ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join(
 
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
-  return claudeText(ARTIKEL_PROMPT(artikel));
+  return claudeText(ARTIKEL_PROMPT(artikel), 800);
 }
 
 const MIN_TOP_ARTIKEL = 3;
