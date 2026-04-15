@@ -46,7 +46,7 @@ Drei Bausteine, sequenziell:
 - CLI-Befehl `node deliver.js` liest das neueste scored-*.json ein
 - Die Top-Artikel (Score >= 4) werden per Claude API einzeln aufbereitet mit folgendem Prompt-Profil:
 
-  "Der Leser ist ein erfahrener Product Owner / Product Manager im Schweizer Digital- und InsurTech-Umfeld. Er ist kein Entwickler. Er will verstehen:
+  "Der Leser ist ein erfahrener Product Owner / Product Manager im Schweizer Digital-Umfeld. Er ist kein Entwickler. Er will verstehen:
   1. Was ist die Kernaussage? (1-2 Sätze, kein Tech-Jargon)
   2. Was bedeutet das für meine Arbeit als PO? (1-2 Sätze, konkreter Bezug zu Produktentwicklung, Teamführung oder Stakeholder-Kommunikation)
   3. Projektidee: Was könnte man damit konkret machen? (1 Satz, umsetzbar)

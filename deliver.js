@@ -73,7 +73,7 @@ Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
 
 const UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und InsurTech-Umfeld. Er ist kein Entwickler.
+Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und Digital-Umfeld. Er ist kein Entwickler.
 
 Fasse in 2-3 Sätzen zusammen: Was waren heute die wichtigsten KI-Themen, und was sollte ein PO davon mitnehmen?
 
@@ -83,7 +83,7 @@ Top-Artikel heute:
 ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
 
 const HIGHLIGHTS_UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und InsurTech-Umfeld. Er ist kein Entwickler.
+Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und Digital-Umfeld. Er ist kein Entwickler.
 
 Heute gibt es keine neuen relevanten KI-Meldungen. Stattdessen werden die wichtigsten Artikel der letzten zwei Wochen nochmals aufbereitet.
 

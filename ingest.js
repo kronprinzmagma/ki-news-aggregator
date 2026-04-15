@@ -4,6 +4,11 @@ import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
 import { fetchArticles as fetchHackerNews } from './adapters/hackernews.js';
 import { fetchArticles as fetchLastWeekInAI } from './adapters/lastweekinai.js';
+import { fetchArticles as fetchVentureBeat } from './adapters/venturebeat.js';
+import { fetchArticles as fetchHuggingFace } from './adapters/huggingface.js';
+
+// Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
+const MAX_ARTICLE_AGE_DAYS = 3;
 
 const ADAPTERS = [
   { name: 'simonwillison', fn: fetchWillison },
@@ -11,6 +16,8 @@ const ADAPTERS = [
   { name: 'anthropic', fn: fetchAnthropic },
   { name: 'hackernews', fn: fetchHackerNews },
   { name: 'lastweekinai', fn: fetchLastWeekInAI },
+  { name: 'venturebeat', fn: fetchVentureBeat },
+  { name: 'huggingface', fn: fetchHuggingFace },
 ];
 
 async function runAdapters() {
@@ -40,15 +47,31 @@ function deduplicate(articles) {
   });
 }
 
+function filterByAge(articles) {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - MAX_ARTICLE_AGE_DAYS);
+
+  const filtered = articles.filter(a => {
+    if (!a.datum) return true; // kein Datum → behalten
+    const date = new Date(a.datum);
+    return isNaN(date.getTime()) || date >= cutoff;
+  });
+
+  const dropped = articles.length - filtered.length;
+  if (dropped > 0) console.log(`${dropped} Artikel als zu alt gefiltert (> ${MAX_ARTICLE_AGE_DAYS} Tage)`);
+  return filtered;
+}
+
 function todayString() {
   return new Date().toISOString().slice(0, 10);
 }
 
 async function main() {
   const raw = await runAdapters();
-  const articles = deduplicate(raw);
+  const deduped = deduplicate(raw);
+  const articles = filterByAge(deduped);
 
-  console.log(`${articles.length} Artikel nach Deduplizierung (${raw.length - articles.length} Duplikate entfernt)`);
+  console.log(`${articles.length} Artikel nach Deduplizierung (${raw.length - deduped.length} Duplikate entfernt)`);
 
   const filename = `articles-${todayString()}.json`;
   await fs.writeFile(filename, JSON.stringify(articles, null, 2), 'utf-8');
