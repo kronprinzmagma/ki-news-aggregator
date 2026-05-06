@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Set run date
+        run: echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV
+
       - name: Ingest
         run: node ingest.js
 
@@ -28,3 +31,14 @@ jobs:
 
       - name: Deliver
         run: node deliver.js
+
+      - name: Upload Run Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-${{ env.RUN_DATE }}
+          retention-days: 30
+          path: |
+            articles-*.json
+            scored-*.json
+            run-summary-*.json
