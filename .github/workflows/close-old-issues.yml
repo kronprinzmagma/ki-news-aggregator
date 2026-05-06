@@ -1,0 +1,33 @@
+name: Close Old Issues
+
+on:
+  schedule:
+    # täglich 07:30 UTC – nach dem Daily-Run
+    - cron: '30 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  close-old-issues:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Issues mit Label 'summary' schliessen, die älter als 7 Tage sind
+        run: |
+          CUTOFF=$(date -d '7 days ago' --iso-8601=seconds)
+          echo "Schliesse Issues älter als: $CUTOFF"
+
+          gh issue list \
+            --repo kronprinzmagma/ki-news-aggregator \
+            --label summary \
+            --state open \
+            --json number,createdAt \
+            | jq -r --arg cutoff "$CUTOFF" \
+                '.[] | select(.createdAt < $cutoff) | .number' \
+            | while read -r num; do
+                echo "Schliesse Issue #$num"
+                gh issue close "$num" \
+                  --repo kronprinzmagma/ki-news-aggregator \
+                  --comment "Automatisch geschlossen nach 7 Tagen."
+              done
