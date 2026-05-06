@@ -2,11 +2,20 @@ import https from 'https';
 
 const FEED_URL = 'https://venturebeat.com/category/ai/feed/';
 
+// Löst Redirect-Locations zu absoluten URLs auf.
+// Ohne das schlägt https.get bei protocol-relativen URLs (//domain/path) fehl.
+function resolveUrl(location, base) {
+  if (location.startsWith('http://') || location.startsWith('https://')) return location;
+  if (location.startsWith('//')) return 'https:' + location;
+  return new URL(location, base).href;
+}
+
 function get(url) {
   return new Promise((resolve, reject) => {
     https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return get(res.headers.location).then(resolve).catch(reject);
+        const next = resolveUrl(res.headers.location, url);
+        return get(next).then(resolve).catch(reject);
       }
       let data = '';
       res.on('data', chunk => data += chunk);

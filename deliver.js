@@ -97,11 +97,11 @@ function dedupByTheme(articles) {
   const words = (titel) => new Set(
     titel.toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
   );
-  const overlap = (a, b) => {
+  const overlapWords = (a, b) => {
     const wa = words(a.titel);
-    let n = 0;
-    for (const w of words(b.titel)) if (wa.has(w)) n++;
-    return n;
+    const shared = [];
+    for (const w of words(b.titel)) if (wa.has(w)) shared.push(w);
+    return shared;
   };
   const kept = [];
   const removedDetails = [];
@@ -111,8 +111,9 @@ function dedupByTheme(articles) {
     kept.push(articles[i]);
     for (let j = i + 1; j < articles.length; j++) {
       if (removedIdx.has(j)) continue;
-      if (overlap(articles[i], articles[j]) >= 2) {
-        console.log(`[dedup] Themen-Duplikat entfernt: "${articles[j].titel}" (ähnlich: "${articles[i].titel}")`);
+      const shared = overlapWords(articles[i], articles[j]);
+      if (shared.length >= 2) {
+        console.log(`[dedup] "${articles[j].titel}" entfernt (overlap: "${shared.join(', ')}" mit "${articles[i].titel}")`);
         removedDetails.push({
           titel: articles[j].titel,
           url: articles[j].url,
@@ -120,6 +121,7 @@ function dedupByTheme(articles) {
           score: articles[j].score,
           begründung: articles[j].begründung,
           duplicate_of: articles[i].titel,
+          overlap_words: shared,
         });
         removedIdx.add(j);
       }

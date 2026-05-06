@@ -1,6 +1,7 @@
 import https from 'https';
 
-const FEED_URL = 'https://www.deeplearning.ai/the-batch/rss.xml';
+// /the-batch/rss.xml existiert nicht – WordPress-Standard-Feed-Pfad verwenden
+const FEED_URL = 'https://www.deeplearning.ai/the-batch/feed/';
 
 function get(url) {
   return new Promise((resolve, reject) => {
