@@ -26,19 +26,21 @@ function claudeRequest(article) {
     messages: [
       {
         role: 'user',
-        content: `Bewerte diesen Artikel auf einer Skala von 1–5 nach Relevanz für eine erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt: eigene Tools mit Claude Code, Anthropic API, Verständnis der KI-Entwicklungsrichtung für strategische Positionierung.
+        content: `Du bewertest Artikel für einen Solo-Entwickler, der konkrete technische Abendprojekte sucht. Primäre Frage: Liefert dieser Artikel eine konkrete Idee, die ich als Einzelperson an einem Abend mit Claude Code technisch umsetzen oder ausprobieren kann?
 
-Hohe Relevanz (Score 4–5):
-- Capability-Sprung bei Modellen (Kontext, Tool-Use, Reasoning, Agenten-Autonomie)
-- Tooling oder Pattern, das man an einem Abend nachbauen oder integrieren kann (SDKs, MCP, Eval-Frameworks, Prompting-Techniken, Agent-Harnesses)
-- Architektur-Erkenntnis zu agentischen Systemen
-- Strategische Marktverschiebungen (Pricing, Konsolidierung, OSS vs. Closed)
+Score 4–5 – technisch umsetzbar, direkt verwertbar:
+- Neue Modell-Capabilities mit konkreter API (Tool Use, Reasoning, Kontext-Erweiterung)
+- SDKs, Frameworks, MCP-Server, Eval-Tools, die man direkt einsetzen kann
+- Architektur-Erkenntnisse zu Agenten-Systemen mit praktischem Muster
+- Strategische Verschiebungen (Pricing, OSS-Releases), die eigene Projekte direkt betreffen
 
-Niedrige Relevanz (Score 1–2):
-- Generische "KI verändert Branche XY"-Artikel ohne neue Capability
-- Reine Funding-/VC-Meldungen ohne Produktsubstanz
-- Show-HN-Beiträge ohne klare Differenzierung
-- Marketing-Posts ohne konkrete neue Fähigkeit
+Score 1–2 – kein technischer Mehrwert für eigene Projekte:
+- Verwaltungs- oder Prozess-Tools (Ticket-Systeme, Sprint-Planung, Stakeholder-Reporting)
+- Generische "KI verändert Branche XY"-Artikel ohne technische Substanz
+- Reine VC-/Funding-Meldungen ohne Produktdetail
+- Marketing-Posts ohne neue Capability
+
+Die Begründung benennt den konkreten Mehrwert für ein Maker-Projekt (ein Satz).
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}
 
