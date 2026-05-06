@@ -13,7 +13,7 @@ Das Eval misst, wie gut das Modell mit den eigenen Urteilen übereinstimmt, die 
 
 ## Wie der Goldstandard entstanden ist
 
-`goldstandard.json` enthält 40 Artikel, die manuell ausgewählt und bewertet wurden. Die Artikel decken das gesamte Score-Spektrum ab (1–5) und stammen aus verschiedenen Quellen (anthropic, simonwillison, hackernews, venturebeat, etc.).
+`goldstandard.json` enthält aktuell nur einen kleinen Seed-Satz. Der frühere Zielwert von 40 Artikeln ist bewusst noch offen, weil der Prozess und die Bewertungslogik nochmals grundlegend angepasst wurden. Der Goldstandard sollte erst wieder ausgebaut werden, wenn ein paar Daily-Runs mit dem neuen Maker-Fokus stabil sind.
 
 **Bewertungskriterium:** Liefert dieser Artikel eine konkrete Idee, die ich als Einzelperson an einem Abend mit Claude Code technisch umsetzen oder ausprobieren kann?
 
@@ -86,6 +86,8 @@ Anteil der Artikel, bei denen der Model-Score **maximal einen Punkt** vom Human-
 - Bei jeder Änderung an `score.js` (Prompt, Modell, Parameter) → via GitHub Actions automatisch
 - Nach grösseren Quellenänderungen (neue Adapter können das Score-Spektrum verschieben)
 - Wenn das Daily-Issue sich qualitativ verändert (zu viel Rauschen, zu wenige Artikel)
+
+Solange der Goldstandard klein ist, dient das Eval vor allem als Smoke-Test für API-Aufruf, JSON-Parsing und grobe Prompt-Richtung. Belastbare Qualitätsmetriken entstehen erst wieder mit einem breiteren Set über alle Score-Stufen und Quellentypen.
 
 ## Resultate interpretieren
 

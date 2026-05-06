@@ -12,8 +12,14 @@ try {
 } catch { /* .env optional */ }
 
 function todayString() {
-  return new Date().toISOString().slice(0, 10);
+  return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
 }
+
+const API_TIMEOUT_MS = 60_000;
+const GITHUB_TIMEOUT_MS = 30_000;
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 2000;
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504, 529]);
 
 function claudeRequest(body) {
   return new Promise((resolve, reject) => {
@@ -34,18 +40,43 @@ function claudeRequest(body) {
         res.on('end', () => resolve({ status: res.statusCode, body: data }));
       }
     );
+    req.setTimeout(API_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Claude API Timeout nach ${API_TIMEOUT_MS / 1000}s`));
+    });
     req.on('error', reject);
     req.write(JSON.stringify(body));
     req.end();
   });
 }
 
-async function claudeText(prompt, maxTokens = 400) {
-  const { status, body } = await claudeRequest({
-    model: 'claude-sonnet-4-6',
-    max_tokens: maxTokens,
-    messages: [{ role: 'user', content: prompt }],
-  });
+function retryDelay(retries) {
+  return RETRY_DELAY_MS * (retries + 1);
+}
+
+async function claudeText(prompt, maxTokens = 400, retries = 0) {
+  let response;
+  try {
+    response = await claudeRequest({
+      model: 'claude-sonnet-4-6',
+      max_tokens: maxTokens,
+      messages: [{ role: 'user', content: prompt }],
+    });
+  } catch (err) {
+    if (retries >= MAX_RETRIES) throw err;
+    const delay = retryDelay(retries);
+    console.warn(`[deliver] Request fehlgeschlagen (${err.message}) – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+    await new Promise(r => setTimeout(r, delay));
+    return claudeText(prompt, maxTokens, retries + 1);
+  }
+
+  const { status, body } = response;
+  if (RETRYABLE_STATUSES.has(status)) {
+    if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
+    const delay = retryDelay(retries);
+    console.warn(`[deliver] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+    await new Promise(r => setTimeout(r, delay));
+    return claudeText(prompt, maxTokens, retries + 1);
+  }
   if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status}`);
   const parsed = JSON.parse(body);
   return parsed.content[0].text.trim();
@@ -152,15 +183,12 @@ function scoreDistributionPerSource(articles) {
 
 async function main() {
   const date = todayString();
-  const files = await fs.readdir('.');
+  const scoredFile = `scored-${date}.json`;
 
-  const scoredFile = files
-    .filter(f => f.startsWith('scored-') && f.endsWith('.json'))
-    .sort()
-    .pop();
-
-  if (!scoredFile) {
-    console.error('Keine scored-*.json gefunden. Bitte zuerst node score.js ausführen.');
+  try {
+    await fs.access(scoredFile);
+  } catch {
+    console.error(`${scoredFile} nicht gefunden. Bitte zuerst node score.js für denselben Lauf ausführen.`);
     process.exit(1);
   }
 
@@ -333,10 +361,14 @@ async function postGithubIssue(date, body) {
         });
       }
     );
+    req.setTimeout(GITHUB_TIMEOUT_MS, () => {
+      req.destroy(new Error(`GitHub API Timeout nach ${GITHUB_TIMEOUT_MS / 1000}s`));
+    });
     req.on('error', reject);
     req.write(payload);
     req.end();
   });
 }
 
-main();
+main()
+  .finally(() => https.globalAgent.destroy());

@@ -14,9 +14,11 @@ try {
 const CONCURRENCY = 5;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
+const API_TIMEOUT_MS = 45_000;
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504, 529]);
 
 function todayString() {
-  return new Date().toISOString().slice(0, 10);
+  return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
 }
 
 function claudeRequest(article) {
@@ -70,19 +72,37 @@ Text: ${(article.rohtext || '').slice(0, 1500)}`
         res.on('end', () => resolve({ status: res.statusCode, body: data }));
       }
     );
+    req.setTimeout(API_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Claude API Timeout nach ${API_TIMEOUT_MS / 1000}s`));
+    });
     req.on('error', reject);
     req.write(body);
     req.end();
   });
 }
 
-async function scoreArticle(article, retries = 0) {
-  const { status, body } = await claudeRequest(article);
+function retryDelay(retries) {
+  return RETRY_DELAY_MS * (retries + 1);
+}
 
-  if (status === 429) {
-    if (retries >= MAX_RETRIES) throw new Error('Rate limit: maximale Retries erreicht');
-    const delay = RETRY_DELAY_MS * (retries + 1);
-    console.warn(`[score] 429 Rate Limit – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+async function scoreArticle(article, retries = 0) {
+  let response;
+  try {
+    response = await claudeRequest(article);
+  } catch (err) {
+    if (retries >= MAX_RETRIES) throw err;
+    const delay = retryDelay(retries);
+    console.warn(`[score] Request fehlgeschlagen (${err.message}) – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+    await new Promise(r => setTimeout(r, delay));
+    return scoreArticle(article, retries + 1);
+  }
+
+  const { status, body } = response;
+
+  if (RETRYABLE_STATUSES.has(status)) {
+    if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
+    const delay = retryDelay(retries);
+    console.warn(`[score] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
     await new Promise(r => setTimeout(r, delay));
     return scoreArticle(article, retries + 1);
   }
@@ -119,14 +139,13 @@ async function runWithConcurrency(articles, limit) {
 }
 
 async function main() {
-  const files = await fs.readdir('.');
-  const articleFile = files
-    .filter(f => f.startsWith('articles-') && f.endsWith('.json'))
-    .sort()
-    .pop();
+  const date = todayString();
+  const articleFile = `articles-${date}.json`;
 
-  if (!articleFile) {
-    console.error('Keine articles-*.json gefunden. Bitte zuerst node ingest.js ausführen.');
+  try {
+    await fs.access(articleFile);
+  } catch {
+    console.error(`${articleFile} nicht gefunden. Bitte zuerst node ingest.js für denselben Lauf ausführen.`);
     process.exit(1);
   }
 
@@ -140,9 +159,10 @@ async function main() {
   const dropped = scored.length - relevant.length;
   console.log(`\n${relevant.length} relevante Artikel (Score >= 3), ${dropped} aussortiert`);
 
-  const filename = `scored-${todayString()}.json`;
+  const filename = `scored-${date}.json`;
   await fs.writeFile(filename, JSON.stringify(relevant, null, 2), 'utf-8');
   console.log(`Gespeichert: ${filename}`);
 }
 
-main();
+main()
+  .finally(() => https.globalAgent.destroy());

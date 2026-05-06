@@ -81,7 +81,7 @@ function filterByAge(articles) {
 }
 
 function todayString() {
-  return new Date().toISOString().slice(0, 10);
+  return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
 }
 
 async function main() {
@@ -96,4 +96,5 @@ async function main() {
   console.log(`Gespeichert: ${filename}`);
 }
 
-main();
+main()
+  .finally(() => https.globalAgent.destroy());

@@ -1,6 +1,6 @@
 # ki-news-aggregator
 
-CLI-Tool das täglich KI-relevante Artikel aus mehreren Quellen aggregiert, per Claude API auf Relevanz scored und als kompaktes Markdown-Summary ausgibt.
+CLI-Tool, das täglich KI-relevante Artikel aus mehreren Quellen aggregiert, per Claude API auf Relevanz scored und als kompaktes GitHub-Issue ausgibt.
 
 ## Architektur
 
@@ -8,19 +8,18 @@ Drei Bausteine, sequenziell:
 
 1. **Ingest** – Artikel aus heterogenen Quellen holen und in ein einheitliches JSON-Schema normalisieren (titel, url, datum, quelle, rohtext)
 2. **Score** – Jeden Artikel per Claude API bewerten (Relevanz-Score 1-5, Einzeiler-Begründung), strukturierter JSON-Output
-3. **Deliver** – Top-Artikel als Markdown-Summary ausgeben
+3. **Deliver** – Top-Artikel als Markdown-Summary speichern und als GitHub Issue veröffentlichen
 
 ## Stack
 
 - Node.js, keine Frameworks
-- Claude API (claude-sonnet-4-6) via REST
+- Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring, `claude-sonnet-4-6` fürs Delivering
 - Keine Datenbank – JSON-Files für Zwischenergebnisse
 
 ## Quellen (Baustein 1)
 
-- RSS/Atom-Feed: Simon Willison's Blog (XML parsen)
-- REST-API mit API-Key: NewsAPI.org (Developer-Tier)
-- Dritte Quelle nach Bedarf
+- RSS/Atom-Feeds: Simon Willison, Latent Space, Anthropic News, Hacker News, Last Week in AI, VentureBeat, Hugging Face, Ahead of AI, Interconnects, The Batch, Yannic Kilcher
+- NewsAPI-Adapter existiert, ist aber aktuell nicht im Haupt-Ingest aktiviert
 
 ## Akzeptanzkriterien Baustein 1 (Ingest)
 
@@ -37,8 +36,8 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 
 ## Akzeptanzkriterien Baustein 2 (Score)
 
-- CLI-Befehl `node score.js` liest das neueste articles-*.json ein
-- Jeder Artikel wird per Claude API (claude-sonnet-4-6) bewertet
+- CLI-Befehl `node score.js` liest `articles-YYYY-MM-DD.json` für `RUN_DATE` oder das heutige UTC-Datum ein
+- Jeder Artikel wird per Claude API (`claude-haiku-4-5-20251001`) bewertet
 - Relevanzprofil: Capability-Sprünge bei Modellen, hands-on Tooling/Pattern (SDKs, MCP, Eval, Prompting), Architektur-Erkenntnisse zu agentischen Systemen, strategische Marktverschiebungen
 - Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
@@ -47,7 +46,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 
 ## Akzeptanzkriterien Baustein 3 (Deliver)
 
-- CLI-Befehl `node deliver.js` liest das neueste scored-*.json ein
+- CLI-Befehl `node deliver.js` liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum ein
 - Nur Artikel mit Score >= 4 werden verwendet
 - Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
 - Maximal 5 Artikel pro Issue; bei Gleichstand bevorzugt Lab-Quellen (anthropic, openai, deepmind)
@@ -59,8 +58,11 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
 - Speichert als summary-YYYY-MM-DD.md
+- Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
 
 ## Schedule
 
 Mo–Fr, 06:00 UTC (= 08:00 CEST / 07:00 CET). Wochenende deaktiviert (für spätere Weekly/Monthly-Synthesis reserviert).
+
+Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.

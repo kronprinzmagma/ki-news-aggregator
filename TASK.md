@@ -1,7 +1,7 @@
 # Task: Scoring-Prompt auf Maker-Persona anpassen
 
 **Phase:** 1 – Qualität  
-**Status:** offen  
+**Status:** erledigt
 **Scope:** ausschliesslich `score.js`
 
 ---
@@ -36,6 +36,10 @@ Den Scoring-Prompt in `score.js` so umschreiben, dass er Artikel aus der Perspek
 - Keine Änderung am Modell oder an den Rate-Limiting-Parametern
 
 ---
+
+## Ergebnis
+
+Der Scoring-Prompt in `score.js` ist auf die Maker-Persona umgestellt. Die Begründung bleibt ein einzelner Satz, Show-HN wird explizit depriorisiert, und Score 4–5 ist an konkrete technische Umsetzbarkeit gebunden.
 
 ## Commit
 

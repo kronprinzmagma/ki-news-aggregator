@@ -4,9 +4,9 @@
 
 Ziel: Der tägliche Output ist dicht, relevant und ohne PO-/Verwaltungs-Rauschen.
 
-- [ ] Scoring-Prompt auf Maker-Persona anpassen: Kriterium "Gibt das eine konkrete technische Idee für ein eigenes Projekt?" als primären Relevanz-Treiber
-- [ ] Schwellenwert-Logik: Nur Score >= 4 erscheint im Issue, Score 1–3 wird komplett verworfen (auch nicht als Link-Liste)
-- [ ] Redundanz-Filter: Zwei Artikel zum gleichen Trend → nur stärkster erscheint, kein Doppel-Entry im Issue
+- [x] Scoring-Prompt auf Maker-Persona anpassen: Kriterium "Gibt das eine konkrete technische Idee für ein eigenes Projekt?" als primären Relevanz-Treiber
+- [x] Schwellenwert-Logik: Nur Score >= 4 erscheint im Issue, Score 1–3 wird komplett verworfen (auch nicht als Link-Liste)
+- [x] Redundanz-Filter: Zwei Artikel zum gleichen Trend → nur stärkster erscheint, kein Doppel-Entry im Issue
 
 ---
 
@@ -50,3 +50,4 @@ Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Ko
 - [x] Themen-Dedup über Titel-Wort-Overlap
 - [x] Schedule auf Mo–Fr 06:00 UTC begrenzt, Wochenende deaktiviert
 - [x] Anthropic-News-Adapter vorhanden und aktiv
+- [x] Laufdatum gehärtet: Score und Deliver verwenden nur noch Dateien desselben Run-Datums, kein Fallback auf alte Artefakte

@@ -20,9 +20,9 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Ingest** (`ingest.js`): Lädt Artikel aus allen aktiven Adaptern parallel, normalisiert auf einheitliches Schema, dedupliziert per URL, filtert Artikel älter als 3 Tage.
 
-**Score** (`score.js`): Bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle Artikel mit Score >= 3.
+**Score** (`score.js`): Liest `articles-YYYY-MM-DD.json` für das aktuelle Laufdatum (`RUN_DATE` oder heutiges UTC-Datum), bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle Artikel mit Score >= 3.
 
-**Deliver** (`deliver.js`): Liest scored-*.json, filtert auf Score >= 4, dedupliziert Themen-Cluster, wählt max. 5 Artikel (Lab-Quellen bevorzugt bei Gleichstand), bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
+**Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, filtert auf Score >= 4, dedupliziert Themen-Cluster, wählt max. 5 Artikel (Lab-Quellen bevorzugt bei Gleichstand), bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
@@ -50,3 +50,4 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI |
 | Datenhaltung | Keine Datenbank – JSON-Files im Repo-Root als Zwischenergebnisse |
 | Modellversion | `claude-haiku-4-5` für Score, `claude-sonnet-4-6` für Deliver |
+| Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |
