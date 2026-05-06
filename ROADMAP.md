@@ -26,9 +26,9 @@ Ziel: Breitere und gezieltere Abdeckung der relevanten KI-Communitys.
 
 Ziel: Saubereres Issue-Format, keine abgeschnittenen Texte, automatische Hygiene.
 
-- [ ] Token-Limit-Bug in `deliver.js` beheben: Überblicks-Block bricht bei langen Zusammenfassungen ab (max_tokens zu tief gesetzt)
-- [ ] Issue-Template vereinfachen: Überblick-Block als ersten Abschnitt ohne zusätzliche Heading-Ebene
-- [ ] Automatisches Schliessen alter Issues nach 7 Tagen via GitHub Actions (separater Workflow)
+- [x] Token-Limit-Bug in `deliver.js` beheben: max_tokens für Überblick und Artikel auf 400 erhöht
+- [x] Issue-Template vereinfachen: Überblick-Block direkt nach Titel, ohne `## Überblick` / `## Artikel` Headings
+- [x] Automatisches Schliessen alter Issues nach 7 Tagen via `close-old-issues.yml` (läuft täglich 07:30 UTC)
 
 ---
 
