@@ -8,7 +8,8 @@ import { fetchArticles as fetchVentureBeat } from './adapters/venturebeat.js';
 import { fetchArticles as fetchHuggingFace } from './adapters/huggingface.js';
 import { fetchArticles as fetchAheadOfAI } from './adapters/aheadofai.js';
 import { fetchArticles as fetchInterconnects } from './adapters/interconnects.js';
-import { fetchArticles as fetchTheBatch } from './adapters/thebatch.js';
+// thebatch deaktiviert: deeplearning.ai hat keinen öffentlichen RSS-Feed (Next.js-SPA, nur E-Mail-Newsletter)
+// import { fetchArticles as fetchTheBatch } from './adapters/thebatch.js';
 import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js';
 
 // Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
@@ -32,7 +33,7 @@ const ADAPTERS = [
   { name: 'huggingface', fn: fetchHuggingFace },
   { name: 'aheadofai', fn: fetchAheadOfAI },
   { name: 'interconnects', fn: fetchInterconnects },
-  { name: 'thebatch', fn: fetchTheBatch },
+  // thebatch: kein RSS-Feed verfügbar, deaktiviert
   { name: 'yannickilcher', fn: fetchYannicKilcher },
 ];
 

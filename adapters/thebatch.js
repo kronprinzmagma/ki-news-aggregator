@@ -1,6 +1,9 @@
 import https from 'https';
 
-// /the-batch/rss.xml existiert nicht – WordPress-Standard-Feed-Pfad verwenden
+// DEAKTIVIERT: deeplearning.ai betreibt The Batch als reinen E-Mail-Newsletter
+// auf einer Next.js-SPA. Alle getesteten Feed-URLs (/feed/, /rss.xml, /the-batch/feed/)
+// geben 404 zurück. Kein öffentlicher RSS-Feed vorhanden (verifiziert 2026-05-06).
+// Adapter wird in ingest.js nicht eingebunden bis eine alternative Quelle gefunden ist.
 const FEED_URL = 'https://www.deeplearning.ai/the-batch/feed/';
 
 function get(url) {
