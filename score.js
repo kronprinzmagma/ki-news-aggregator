@@ -21,7 +21,7 @@ function todayString() {
 
 function claudeRequest(article) {
   const body = JSON.stringify({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 200,
     messages: [
       {
