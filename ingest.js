@@ -6,6 +6,10 @@ import { fetchArticles as fetchHackerNews } from './adapters/hackernews.js';
 import { fetchArticles as fetchLastWeekInAI } from './adapters/lastweekinai.js';
 import { fetchArticles as fetchVentureBeat } from './adapters/venturebeat.js';
 import { fetchArticles as fetchHuggingFace } from './adapters/huggingface.js';
+import { fetchArticles as fetchAheadOfAI } from './adapters/aheadofai.js';
+import { fetchArticles as fetchInterconnects } from './adapters/interconnects.js';
+import { fetchArticles as fetchTheBatch } from './adapters/thebatch.js';
+import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js';
 
 // Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
 const MAX_ARTICLE_AGE_DAYS = 3;
@@ -18,6 +22,10 @@ const ADAPTERS = [
   { name: 'lastweekinai', fn: fetchLastWeekInAI },
   { name: 'venturebeat', fn: fetchVentureBeat },
   { name: 'huggingface', fn: fetchHuggingFace },
+  { name: 'aheadofai', fn: fetchAheadOfAI },
+  { name: 'interconnects', fn: fetchInterconnects },
+  { name: 'thebatch', fn: fetchTheBatch },
+  { name: 'yannickilcher', fn: fetchYannicKilcher },
 ];
 
 async function runAdapters() {
