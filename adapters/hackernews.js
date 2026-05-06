@@ -43,7 +43,11 @@ function parseRss(xml) {
       ? stripTags(extractCdata(descMatch[1])).slice(0, 2000)
       : '';
 
-    articles.push({ titel, url, datum, quelle: 'hackernews', rohtext });
+    // Show HN-Einträge separat markieren – werden im Scoring deprioritisiert
+    const isShowHN = titel.startsWith('Show HN:');
+    const quelle = isShowHN ? 'hackernews-show' : 'hackernews';
+
+    articles.push({ titel, url, datum, quelle, rohtext });
   }
 
   return articles;

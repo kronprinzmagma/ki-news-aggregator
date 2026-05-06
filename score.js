@@ -39,12 +39,14 @@ Score 1–2 – kein technischer Mehrwert für eigene Projekte:
 - Generische "KI verändert Branche XY"-Artikel ohne technische Substanz
 - Reine VC-/Funding-Meldungen ohne Produktdetail
 - Marketing-Posts ohne neue Capability
+- Quelle "hackernews-show": Show-HN-Selbstpromotion ohne klare technische Differenzierung → maximal Score 2, ausser der Inhalt ist technisch aussergewöhnlich
 
 Die Begründung benennt den konkreten Mehrwert für ein Maker-Projekt (ein Satz).
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}
 
 Titel: ${article.titel}
+Quelle: ${article.quelle}
 Text: ${(article.rohtext || '').slice(0, 1500)}`
       }
     ]
