@@ -13,6 +13,14 @@ import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js
 
 // Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
 const MAX_ARTICLE_AGE_DAYS = 3;
+const ADAPTER_TIMEOUT_MS = 10_000;
+
+function withTimeout(promise, ms, name) {
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error(`Timeout nach ${ms / 1000}s`)), ms)
+  );
+  return Promise.race([promise, timeout]);
+}
 
 const ADAPTERS = [
   { name: 'simonwillison', fn: fetchWillison },
@@ -29,7 +37,9 @@ const ADAPTERS = [
 ];
 
 async function runAdapters() {
-  const results = await Promise.allSettled(ADAPTERS.map(a => a.fn()));
+  const results = await Promise.allSettled(
+    ADAPTERS.map(a => withTimeout(a.fn(), ADAPTER_TIMEOUT_MS, a.name))
+  );
   const articles = [];
 
   for (let i = 0; i < ADAPTERS.length; i++) {
