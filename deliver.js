@@ -81,7 +81,7 @@ ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join(
 
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
-  return claudeText(ARTIKEL_PROMPT(artikel), 300);
+  return claudeText(ARTIKEL_PROMPT(artikel), 400);
 }
 
 // Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
@@ -161,7 +161,7 @@ async function main() {
 
   // Überblick generieren
   console.log('\nGeneriere Überblick...');
-  const ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 300);
+  const ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 400);
 
   // Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
