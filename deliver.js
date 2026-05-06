@@ -175,13 +175,9 @@ async function main() {
   const lines = [
     `# KI Daily – ${date}`,
     '',
-    '## Überblick',
-    '',
     ueberblick,
     '',
     '---',
-    '',
-    '## Artikel',
     '',
   ];
 
