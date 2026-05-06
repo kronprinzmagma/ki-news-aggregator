@@ -1,0 +1,26 @@
+[
+  {
+    "titel": "Anthropic releases Claude 3.5 Sonnet with extended thinking",
+    "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+    "datum": "2025-10-15T00:00:00.000Z",
+    "quelle": "anthropic",
+    "rohtext": "Anthropic has released Claude 3.5 Sonnet, featuring extended thinking capabilities that allow the model to reason through complex problems step by step before giving a final answer. The feature is accessible via the API using the new thinking parameter. Developers can control the thinking budget in tokens.",
+    "human_score": 5
+  },
+  {
+    "titel": "AI startup raises $200M Series B",
+    "url": "https://techcrunch.com/2025/10/14/ai-startup-funding",
+    "datum": "2025-10-14T00:00:00.000Z",
+    "quelle": "venturebeat",
+    "rohtext": "A well-known AI startup announced a $200 million Series B funding round led by top-tier venture capital firms. The company plans to use the funds to expand its enterprise sales team and accelerate product development.",
+    "human_score": 1
+  },
+  {
+    "titel": "Building a local MCP server with Node.js in 30 minutes",
+    "url": "https://simonwillison.net/2025/Oct/13/mcp-server/",
+    "datum": "2025-10-13T00:00:00.000Z",
+    "quelle": "simonwillison",
+    "rohtext": "A step-by-step walkthrough of building a Model Context Protocol server using Node.js. The tutorial covers tool registration, request handling, and connecting the server to Claude Desktop. Full source code included, under 200 lines.",
+    "human_score": 5
+  }
+]
