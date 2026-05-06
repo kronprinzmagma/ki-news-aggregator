@@ -86,6 +86,7 @@ async function aufbereiten(artikel, index, total) {
 
 // Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
 // Artikel sind bereits nach Score absteigend sortiert – der erste (stärkere) gewinnt.
+// Gibt { kept, removedDetails } zurück – removedDetails für run-summary.
 function dedupByTheme(articles) {
   const stopWords = new Set([
     'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
@@ -103,25 +104,54 @@ function dedupByTheme(articles) {
     return n;
   };
   const kept = [];
-  const removed = new Set();
+  const removedDetails = [];
+  const removedIdx = new Set();
   for (let i = 0; i < articles.length; i++) {
-    if (removed.has(i)) continue;
+    if (removedIdx.has(i)) continue;
     kept.push(articles[i]);
     for (let j = i + 1; j < articles.length; j++) {
-      if (removed.has(j)) continue;
+      if (removedIdx.has(j)) continue;
       if (overlap(articles[i], articles[j]) >= 2) {
         console.log(`[dedup] Themen-Duplikat entfernt: "${articles[j].titel}" (ähnlich: "${articles[i].titel}")`);
-        removed.add(j);
+        removedDetails.push({
+          titel: articles[j].titel,
+          url: articles[j].url,
+          quelle: articles[j].quelle,
+          score: articles[j].score,
+          begründung: articles[j].begründung,
+          duplicate_of: articles[i].titel,
+        });
+        removedIdx.add(j);
       }
     }
   }
-  return kept;
+  return { kept, removedDetails };
 }
 
 const MAX_ARTIKEL = 5;
 
+// Hilfsfunktion: Anzahl Artikel pro Quelle zählen
+function countPerSource(articles) {
+  const counts = {};
+  for (const a of articles) counts[a.quelle] = (counts[a.quelle] || 0) + 1;
+  return counts;
+}
+
+// Hilfsfunktion: Score-Verteilung pro Quelle
+function scoreDistributionPerSource(articles) {
+  const dist = {};
+  for (const a of articles) {
+    if (a.score === null) continue;
+    if (!dist[a.quelle]) dist[a.quelle] = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    dist[a.quelle][a.score] = (dist[a.quelle][a.score] || 0) + 1;
+  }
+  return dist;
+}
+
 async function main() {
+  const date = todayString();
   const files = await fs.readdir('.');
+
   const scoredFile = files
     .filter(f => f.startsWith('scored-') && f.endsWith('.json'))
     .sort()
@@ -136,24 +166,67 @@ async function main() {
   const articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
   console.log(`${articles.length} Artikel geladen`);
 
+  // articles-*.json für Ingest-Statistiken laden (optional – kein Abbruch bei Fehler)
+  let ingestArtikel = null;
+  try {
+    const articlesFile = scoredFile.replace('scored-', 'articles-');
+    ingestArtikel = JSON.parse(await fs.readFile(articlesFile, 'utf-8'));
+    console.log(`[summary] Ingest-Datei geladen: ${articlesFile} (${ingestArtikel.length} Artikel)`);
+  } catch {
+    console.warn('[summary] articles-*.json nicht gefunden – Ingest-Statistik wird übersprungen.');
+  }
+
   // Nur Score >= 4, nach Score absteigend, dann nach Quelle priorisieren (Lab > HN)
   const LAB_QUELLEN = new Set(['anthropic', 'openai', 'deepmind', 'latentspace', 'simonwillison']);
+  const belowCutoff = articles.filter(a => a.score < 4);
   const sorted = [...articles]
     .filter(a => a.score >= 4)
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
-      // Gleichstand: Lab-Quellen bevorzugen
       const aLab = LAB_QUELLEN.has(a.quelle) ? 1 : 0;
       const bLab = LAB_QUELLEN.has(b.quelle) ? 1 : 0;
       return bLab - aLab;
     });
 
   // Themen-Dedup, dann auf MAX_ARTIKEL begrenzen
-  const deduped = dedupByTheme(sorted);
+  const { kept: deduped, removedDetails: dedupedOut } = dedupByTheme(sorted);
   const topArtikel = deduped.slice(0, MAX_ARTIKEL);
+  const overLimit   = deduped.slice(MAX_ARTIKEL);
+
+  // Run-Summary aufbauen (wird am Ende geschrieben)
+  const runSummary = {
+    date,
+    ingest: ingestArtikel ? {
+      total: ingestArtikel.length,
+      per_source: countPerSource(ingestArtikel),
+    } : null,
+    scoring: {
+      total: articles.length,
+      score_distribution_per_source: scoreDistributionPerSource(articles),
+      below_cutoff: belowCutoff.map(a => ({
+        titel: a.titel, url: a.url, quelle: a.quelle,
+        score: a.score, begründung: a.begründung,
+      })),
+    },
+    deliver: {
+      after_cutoff: sorted.length,
+      after_dedup: deduped.length,
+      in_issue: 0,
+      issue_articles: [],
+      deduped_out: dedupedOut,
+      over_limit: overLimit.map(a => ({
+        titel: a.titel, url: a.url, quelle: a.quelle,
+        score: a.score, begründung: a.begründung,
+      })),
+    },
+    issue_created: false,
+    issue_url: null,
+  };
 
   if (topArtikel.length === 0) {
     console.log('Kein Artikel erreicht Score >= 4 – kein Issue erstellt (leerer Tag ist Feature, nicht Bug).');
+    runSummary.deliver.reason = 'Kein Artikel mit Score >= 4';
+    await writeRunSummary(date, runSummary);
     process.exit(0);
   }
 
@@ -171,7 +244,6 @@ async function main() {
   }
 
   // Markdown zusammensetzen
-  const date = todayString();
   const lines = [
     `# KI Daily – ${date}`,
     '',
@@ -198,14 +270,29 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  await postGithubIssue(date, markdown);
+  const issueUrl = await postGithubIssue(date, markdown);
+
+  // Run-Summary finalisieren und schreiben
+  runSummary.issue_created = !!issueUrl;
+  runSummary.issue_url = issueUrl;
+  runSummary.deliver.in_issue = topArtikel.length;
+  runSummary.deliver.issue_articles = topArtikel.map(a => ({
+    titel: a.titel, url: a.url, quelle: a.quelle, score: a.score,
+  }));
+  await writeRunSummary(date, runSummary);
+}
+
+async function writeRunSummary(date, summary) {
+  const filename = `run-summary-${date}.json`;
+  await fs.writeFile(filename, JSON.stringify(summary, null, 2), 'utf-8');
+  console.log(`Run-Summary gespeichert: ${filename}`);
 }
 
 async function postGithubIssue(date, body) {
   const token = process.env.GH_PAT;
   if (!token) {
     console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
-    return;
+    return null;
   }
 
   const issueTitle = `KI Daily – ${date}`;
@@ -215,7 +302,7 @@ async function postGithubIssue(date, body) {
     labels: ['summary'],
   });
 
-  await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const req = https.request(
       {
         hostname: 'api.github.com',
@@ -236,10 +323,11 @@ async function postGithubIssue(date, body) {
           if (res.statusCode === 201) {
             const issue = JSON.parse(data);
             console.log(`GitHub Issue erstellt: ${issue.html_url}`);
+            resolve(issue.html_url);
           } else {
             console.error(`GitHub API Fehler: HTTP ${res.statusCode} – ${data}`);
+            resolve(null);
           }
-          resolve();
         });
       }
     );
