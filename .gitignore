@@ -3,3 +3,6 @@ scored-*.json
 summary-*.md
 .env
 # .env enthält Secrets: ANTHROPIC_API_KEY, GH_PAT
+
+# Generierte Eval-Resultate – nur Code und Goldstandard committen
+evals/results/
