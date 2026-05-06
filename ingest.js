@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import https from 'https';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
@@ -16,10 +17,12 @@ const MAX_ARTICLE_AGE_DAYS = 3;
 const ADAPTER_TIMEOUT_MS = 10_000;
 
 function withTimeout(promise, ms, name) {
-  const timeout = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error(`Timeout nach ${ms / 1000}s`)), ms)
-  );
-  return Promise.race([promise, timeout]);
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error(`Timeout nach ${ms / 1000}s`)), ms);
+  });
+  return Promise.race([promise, timeout])
+    .finally(() => clearTimeout(timeoutId));
 }
 
 const ADAPTERS = [
