@@ -14,7 +14,7 @@ Ziel: Der tägliche Output ist dicht, relevant und ohne PO-/Verwaltungs-Rauschen
 
 Ziel: Breitere und gezieltere Abdeckung der relevanten KI-Communitys.
 
-- [~] Adapter: **The Batch / deeplearning.ai** – deaktiviert, kein öffentlicher RSS-Feed (Next.js-SPA, nur E-Mail-Newsletter, verifiziert 2026-05-06)
+- [x] Adapter: **The Batch / deeplearning.ai** – `adapters/thebatch.js`, community-maintained Feed via `Olshansk/rss-feeds`
 - [x] Adapter: **Ahead of AI** (Sebastian Raschka) – `adapters/aheadofai.js`
 - [x] Adapter: **Interconnects** (Nathan Lambert) – `adapters/interconnects.js`
 - [x] Adapter: **Yannic Kilcher** – `adapters/yannickilcher.js`, YouTube Atom-Feed
