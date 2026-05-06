@@ -26,7 +26,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
-**GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `0 16 * * 1-5` → Mo–Fr 16:00 UTC (= 18:00 CEST / 17:00 CET). Wochenende deaktiviert.
+**GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `0 6 * * 1-5` → Mo–Fr 06:00 UTC (= 08:00 CEST / 07:00 CET). Wochenende deaktiviert.
 
 ## Was guten Output ausmacht
 

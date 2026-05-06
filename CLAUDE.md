@@ -63,4 +63,4 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 
 ## Schedule
 
-Mo–Fr, 16:00 UTC (= 18:00 CEST / 17:00 CET). Wochenende deaktiviert (für spätere Weekly/Monthly-Synthesis reserviert).
+Mo–Fr, 06:00 UTC (= 08:00 CEST / 07:00 CET). Wochenende deaktiviert (für spätere Weekly/Monthly-Synthesis reserviert).
