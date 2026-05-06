@@ -14,11 +14,11 @@ Ziel: Der tägliche Output ist dicht, relevant und ohne PO-/Verwaltungs-Rauschen
 
 Ziel: Breitere und gezieltere Abdeckung der relevanten KI-Communitys.
 
-- [ ] Adapter: **The Batch / deeplearning.ai** – wöchentlicher Newsletter, RSS prüfen
-- [ ] Adapter: **Ahead of AI** (Sebastian Raschka) – Substack, RSS verfügbar
-- [ ] Adapter: **Interconnects** (Nathan Lambert) – Substack, RSS verfügbar
-- [ ] Adapter: **Yannic Kilcher** – YouTube-Kanal-RSS (`https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew`) prüfen und Titel/Beschreibung als rohtext nutzen
-- [ ] HN-Adapter überarbeiten: Show-HN-Einträge im Scoring explizit deprioritisieren (Score-Malus im Prompt oder Vorfilter)
+- [x] Adapter: **The Batch / deeplearning.ai** – `adapters/thebatch.js`
+- [x] Adapter: **Ahead of AI** (Sebastian Raschka) – `adapters/aheadofai.js`
+- [x] Adapter: **Interconnects** (Nathan Lambert) – `adapters/interconnects.js`
+- [x] Adapter: **Yannic Kilcher** – `adapters/yannickilcher.js`, YouTube Atom-Feed
+- [x] HN-Adapter: Show-HN-Einträge als `hackernews-show` markiert, Scoring-Prompt deprioritisiert diese Quelle explizit
 
 ---
 
@@ -48,5 +48,5 @@ Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Ko
 - [x] Leerer Tag erzeugt kein Issue
 - [x] Issue-Titel vereinheitlicht auf `KI Daily – YYYY-MM-DD`
 - [x] Themen-Dedup über Titel-Wort-Overlap
-- [x] Schedule auf Mo–Fr 16:00 UTC begrenzt, Wochenende deaktiviert
+- [x] Schedule auf Mo–Fr 06:00 UTC begrenzt, Wochenende deaktiviert
 - [x] Anthropic-News-Adapter vorhanden und aktiv
