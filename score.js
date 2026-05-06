@@ -26,7 +26,19 @@ function claudeRequest(article) {
     messages: [
       {
         role: 'user',
-        content: `Bewerte diesen Artikel auf einer Skala von 1-5 nach Relevanz für jemanden, der sich für KI-Produktentwicklung, Agentic Coding, API-Design und Datengetriebene Entscheidungslogik interessiert.
+        content: `Bewerte diesen Artikel auf einer Skala von 1–5 nach Relevanz für eine erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt: eigene Tools mit Claude Code, Anthropic API, Verständnis der KI-Entwicklungsrichtung für strategische Positionierung.
+
+Hohe Relevanz (Score 4–5):
+- Capability-Sprung bei Modellen (Kontext, Tool-Use, Reasoning, Agenten-Autonomie)
+- Tooling oder Pattern, das man an einem Abend nachbauen oder integrieren kann (SDKs, MCP, Eval-Frameworks, Prompting-Techniken, Agent-Harnesses)
+- Architektur-Erkenntnis zu agentischen Systemen
+- Strategische Marktverschiebungen (Pricing, Konsolidierung, OSS vs. Closed)
+
+Niedrige Relevanz (Score 1–2):
+- Generische "KI verändert Branche XY"-Artikel ohne neue Capability
+- Reine Funding-/VC-Meldungen ohne Produktsubstanz
+- Show-HN-Beiträge ohne klare Differenzierung
+- Marketing-Posts ohne konkrete neue Fähigkeit
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}
 

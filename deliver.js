@@ -52,81 +52,73 @@ async function claudeText(prompt, maxTokens = 400) {
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
-Der Leser ist ein erfahrener, nichttechnischer Produktmensch (PO, PM, Head of Product) im Schweizer Digital-Umfeld. Er baut nebenbei eigene kleine Projekte mit Claude Code und interessiert sich für die praktische Anwendung von KI.
+Du schreibst für eine erfahrene Senior-Produktperson, die ihre Kompetenz hands-on Richtung KI-Builder entwickelt. Sie setzt eigene Tools mit Claude Code und Anthropic API um und will die Entwicklungsrichtung der KI für ihre strategische Positionierung verstehen.
 
-Schreibe für diesen Artikel:
+WICHTIG: Kein Bezug zu Backlog, Sprint, Tickets, Stakeholder-Kommunikation oder Teamführung. Keine Formulierungen wie "als PO" oder "für dein Team".
 
-1. Was ist die Kernaussage? (5-6 Sätze, kein Tech-Jargon. Wenn Fachbegriffe unvermeidbar sind, kurz erklären. Was ist passiert, wer steckt dahinter, warum ist es relevant, und was ist neu daran?)
+Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
-2. Was bedeutet das für meine Arbeit als PO? (5-6 Sätze. Breit denken: Wie verändert das, wie digitale Produkte entstehen, priorisiert, bewertet oder verkauft werden? Was ändert sich in der Zusammenarbeit mit Entwicklern, Stakeholdern oder Nutzern? Was sollte ein PO jetzt wissen oder anders machen?)
+**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?
 
-3. Projektidee: Was könnte man damit konkret machen? (2-3 konkrete Ideen in je 1-2 Sätzen. Umsetzbar von einer Einzelperson mit Claude Code – kein grosses Budget, kein Team. Keine Workshops, keine Strategieprojekte.)
+**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung oder Entwicklungslinie steckt dahinter?
 
-Tonalität: Deutsch, Schweizer Hochdeutsch, direkt und klar. Kein Marketing, keine Floskeln.
+**Build-Anker** (1–2 Sätze): Eine konkrete kleine Sache, die man an einem Abend mit Claude Code ausprobieren oder in ein eigenes Projekt integrieren kann.
 
-Antworte mit genau diesem Format:
-**1. Was ist die Kernaussage?** <Text>
-**2. Was bedeutet das für meine Arbeit als PO?** <Text>
-**3. Projektideen** <Text>
+Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
 Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
 
 const UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und Digital-Umfeld. Er ist kein Entwickler.
+Du schreibst einen Tagesüberblick für jemanden, der KI hands-on anwendet und die Entwicklungsrichtung des Feldes versteht.
 
-Fasse in 2-3 Sätzen zusammen: Was waren heute die wichtigsten KI-Themen, und was sollte ein PO davon mitnehmen?
+Fasse in maximal 4 Sätzen zusammen: Welcher Trend zeichnet sich heute ab, in welche Richtung bewegt sich das Feld?
 
-Direkt und knapp, Schweizer Hochdeutsch, keine Floskeln.
+Keine PO-Empfehlungen, keine Stakeholder-Sprache. Direkt, Schweizer Hochdeutsch, keine Floskeln.
 
 Top-Artikel heute:
 ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
 
-const HIGHLIGHTS_UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Überblick für einen Product Owner / Product Manager im Schweizer Digital- und Digital-Umfeld. Er ist kein Entwickler.
-
-Heute gibt es keine neuen relevanten KI-Meldungen. Stattdessen werden die wichtigsten Artikel der letzten zwei Wochen nochmals aufbereitet.
-
-Fasse in 2-3 Sätzen zusammen: Was sind die prägenden KI-Themen der letzten zwei Wochen, und was sollte ein PO davon mitnehmen?
-
-Direkt und knapp, Schweizer Hochdeutsch, keine Floskeln.
-
-Top-Artikel der letzten zwei Wochen:
-${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
-
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
-  return claudeText(ARTIKEL_PROMPT(artikel), 800);
+  return claudeText(ARTIKEL_PROMPT(artikel), 300);
 }
 
-const MIN_TOP_ARTIKEL = 3;
-
-async function ladeHighlights() {
-  const files = await fs.readdir('.');
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - 14);
-
-  const scoredFiles = files
-    .filter(f => f.startsWith('scored-') && f.endsWith('.json'))
-    .filter(f => {
-      const dateStr = f.replace('scored-', '').replace('.json', '');
-      return new Date(dateStr) >= cutoff;
-    })
-    .sort();
-
-  const seen = new Set();
-  const all = [];
-  for (const file of scoredFiles) {
-    const articles = JSON.parse(await fs.readFile(file, 'utf-8'));
-    for (const a of articles) {
-      if (!seen.has(a.url)) {
-        seen.add(a.url);
-        all.push(a);
+// Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
+// Artikel sind bereits nach Score absteigend sortiert – der erste (stärkere) gewinnt.
+function dedupByTheme(articles) {
+  const stopWords = new Set([
+    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'an', 'of', 'to', 'in', 'for',
+    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
+    'what', 'new', 'show', 'hn', 'using', 'via',
+  ]);
+  const words = (titel) => new Set(
+    titel.toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
+  );
+  const overlap = (a, b) => {
+    const wa = words(a.titel);
+    let n = 0;
+    for (const w of words(b.titel)) if (wa.has(w)) n++;
+    return n;
+  };
+  const kept = [];
+  const removed = new Set();
+  for (let i = 0; i < articles.length; i++) {
+    if (removed.has(i)) continue;
+    kept.push(articles[i]);
+    for (let j = i + 1; j < articles.length; j++) {
+      if (removed.has(j)) continue;
+      if (overlap(articles[i], articles[j]) >= 2) {
+        console.log(`[dedup] Themen-Duplikat entfernt: "${articles[j].titel}" (ähnlich: "${articles[i].titel}")`);
+        removed.add(j);
       }
     }
   }
-  return all;
+  return kept;
 }
+
+const MAX_ARTIKEL = 5;
 
 async function main() {
   const files = await fs.readdir('.');
@@ -144,41 +136,34 @@ async function main() {
   const articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
   console.log(`${articles.length} Artikel geladen`);
 
-  const hatGenugText = a => (a.rohtext || '').length >= 200;
-  const tagesSorted = [...articles].sort((a, b) => b.score - a.score);
-  const tagesTop = tagesSorted.filter(a => a.score >= 4 && hatGenugText(a));
+  // Nur Score >= 4, nach Score absteigend, dann nach Quelle priorisieren (Lab > HN)
+  const LAB_QUELLEN = new Set(['anthropic', 'openai', 'deepmind', 'latentspace', 'simonwillison']);
+  const sorted = [...articles]
+    .filter(a => a.score >= 4)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      // Gleichstand: Lab-Quellen bevorzugen
+      const aLab = LAB_QUELLEN.has(a.quelle) ? 1 : 0;
+      const bLab = LAB_QUELLEN.has(b.quelle) ? 1 : 0;
+      return bLab - aLab;
+    });
 
-  let isHighlights = false;
-  let topArtikel;
-  let linkArtikel;
+  // Themen-Dedup, dann auf MAX_ARTIKEL begrenzen
+  const deduped = dedupByTheme(sorted);
+  const topArtikel = deduped.slice(0, MAX_ARTIKEL);
 
-  if (tagesTop.length < MIN_TOP_ARTIKEL) {
-    console.log(`\nNur ${tagesTop.length} Top-Artikel heute (< ${MIN_TOP_ARTIKEL}) – wechsle zu KI Highlights (letzte 2 Wochen)`);
-    isHighlights = true;
-    const allArticles = await ladeHighlights();
-    console.log(`${allArticles.length} Artikel aus den letzten 14 Tagen geladen`);
-    const sorted = [...allArticles].sort((a, b) => b.score - a.score);
-    topArtikel = sorted.filter(a => a.score >= 4 && hatGenugText(a)).slice(0, 5);
-    linkArtikel = [];
-  } else {
-    const sorted = tagesSorted;
-    topArtikel = tagesTop;
-    linkArtikel = [
-      ...sorted.filter(a => a.score >= 4 && !hatGenugText(a)),
-      ...sorted.filter(a => a.score === 3),
-    ];
+  if (topArtikel.length === 0) {
+    console.log('Kein Artikel erreicht Score >= 4 – kein Issue erstellt (leerer Tag ist Feature, nicht Bug).');
+    process.exit(0);
   }
 
-  console.log(`\n${topArtikel.length} Top-Artikel, ${linkArtikel.length} Link-Artikel`);
+  console.log(`\n${topArtikel.length} Artikel nach Dedup und Cutoff`);
 
   // Überblick generieren
   console.log('\nGeneriere Überblick...');
-  const ueberblickPrompt = isHighlights
-    ? HIGHLIGHTS_UEBERBLICK_PROMPT(topArtikel)
-    : UEBERBLICK_PROMPT(topArtikel.length > 0 ? topArtikel : tagesSorted.slice(0, 5));
-  const ueberblick = await claudeText(ueberblickPrompt, 300);
+  const ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 300);
 
-  // Top-Artikel sequenziell aufbereiten (Rate Limiting)
+  // Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
   for (let i = 0; i < topArtikel.length; i++) {
     const text = await aufbereiten(topArtikel[i], i, topArtikel.length);
@@ -187,9 +172,8 @@ async function main() {
 
   // Markdown zusammensetzen
   const date = todayString();
-  const titel = isHighlights ? `KI Highlights` : `KI-News`;
   const lines = [
-    `# ${titel} – ${date}`,
+    `# KI Daily – ${date}`,
     '',
     '## Überblick',
     '',
@@ -197,31 +181,19 @@ async function main() {
     '',
     '---',
     '',
+    '## Artikel',
+    '',
   ];
 
-  if (topArtikel.length > 0) {
-    lines.push('## Top-Artikel');
+  for (let i = 0; i < topArtikel.length; i++) {
+    const a = topArtikel[i];
+    lines.push(`### ${a.titel}`);
     lines.push('');
-
-    for (let i = 0; i < topArtikel.length; i++) {
-      const a = topArtikel[i];
-      lines.push(`### ${a.titel}`);
-      lines.push('');
-      lines.push(`Score ${a.score}/5 · [${a.quelle}](${a.url})`);
-      lines.push('');
-      lines.push(aufbereitungen[i]);
-      lines.push('');
-      lines.push('---');
-      lines.push('');
-    }
-  }
-
-  if (linkArtikel.length > 0) {
-    lines.push('## Weitere relevante Artikel');
+    lines.push(`Score ${a.score}/5 · [${a.quelle}](${a.url})`);
     lines.push('');
-    for (const a of linkArtikel) {
-      lines.push(`- [${a.titel}](${a.url}) _(${a.quelle})_ – ${a.begründung}`);
-    }
+    lines.push(aufbereitungen[i]);
+    lines.push('');
+    lines.push('---');
     lines.push('');
   }
 
@@ -230,17 +202,17 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  await postGithubIssue(date, markdown, isHighlights);
+  await postGithubIssue(date, markdown);
 }
 
-async function postGithubIssue(date, body, isHighlights = false) {
+async function postGithubIssue(date, body) {
   const token = process.env.GH_PAT;
   if (!token) {
     console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
     return;
   }
 
-  const issueTitle = isHighlights ? `KI Highlights – ${date}` : `KI-News Summary – ${date}`;
+  const issueTitle = `KI Daily – ${date}`;
   const payload = JSON.stringify({
     title: issueTitle,
     body,

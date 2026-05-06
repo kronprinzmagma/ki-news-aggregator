@@ -31,29 +31,36 @@ Drei Bausteine, sequenziell:
 - Ergebnis wird als JSON-File gespeichert (z.B. articles-2025-04-08.json)
 - Fehler einzelner Quellen brechen nicht den ganzen Lauf ab
 
+## Persona
+
+Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt. Setzt eigene Tools mit Claude Code und Anthropic API um. Will die Entwicklungsrichtung der KI für strategische Positionierung verstehen. **Nicht Teil der Persona:** Backlog-Pflege, Tickets, Stakeholder-Kommunikation, Sprint-Mechanik.
+
 ## Akzeptanzkriterien Baustein 2 (Score)
 
 - CLI-Befehl `node score.js` liest das neueste articles-*.json ein
 - Jeder Artikel wird per Claude API (claude-sonnet-4-6) bewertet
-- Prompt enthält Relevanzprofil: KI-Produktentwicklung, Agentic Coding, API-Design, Datengetriebene Entscheidungslogik
+- Relevanzprofil: Capability-Sprünge bei Modellen, hands-on Tooling/Pattern (SDKs, MCP, Eval, Prompting), Architektur-Erkenntnisse zu agentischen Systemen, strategische Marktverschiebungen
+- Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
 - Rate Limiting: maximal 5 parallele Requests, Retry bei 429
-- Ergebnis wird als scored-YYYY-MM-DD.json gespeichert
-- Artikel mit Score < 3 werden aussortiert
+- Ergebnis wird als scored-YYYY-MM-DD.json gespeichert (alle Artikel >= 3 gespeichert)
 
 ## Akzeptanzkriterien Baustein 3 (Deliver)
 
 - CLI-Befehl `node deliver.js` liest das neueste scored-*.json ein
-- Die Top-Artikel (Score >= 4) werden per Claude API einzeln aufbereitet mit folgendem Prompt-Profil:
-
-  "Der Leser ist ein erfahrener Product Owner / Product Manager im Schweizer Digital-Umfeld. Er ist kein Entwickler. Er will verstehen:
-  1. Was ist die Kernaussage? (1-2 Sätze, kein Tech-Jargon)
-  2. Was bedeutet das für meine Arbeit als PO? (1-2 Sätze, konkreter Bezug zu Produktentwicklung, Teamführung oder Stakeholder-Kommunikation)
-  3. Projektidee: Was könnte man damit konkret machen? (1 Satz, umsetzbar)
-
-  Schreib direkt und knapp, wie eine Slack-Nachricht an einen Kollegen. Kein Marketing, keine Floskeln, kein 'könnte interessant sein'."
-
-- Artikel mit Score 3 werden nur als Link-Liste aufgeführt
-- Am Anfang ein Überblick in 2-3 Sätzen: Was waren die wichtigsten Themen und was sollte ein PO davon mitnehmen?
+- Nur Artikel mit Score >= 4 werden verwendet
+- Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
+- Maximal 5 Artikel pro Issue; bei Gleichstand bevorzugt Lab-Quellen (anthropic, openai, deepmind)
+- Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 120 Wörter):
+  1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
+  2. **Was es für die KI-Richtung heisst** (1–2 Sätze): Strömung dahinter
+  3. **Build-Anker** (1–2 Sätze): konkret, ein Abend mit Claude Code – keine Backlog/Sprint-Anwendungen
+- Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
+- Issue-Titel: `KI Daily – YYYY-MM-DD`
+- Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
 - Speichert als summary-YYYY-MM-DD.md
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
+
+## Schedule
+
+Mo–Fr, 16:00 UTC (= 18:00 CEST / 17:00 CET). Wochenende deaktiviert (für spätere Weekly/Monthly-Synthesis reserviert).
