@@ -102,30 +102,32 @@ Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
 
-const UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Tagesüberblick für eine Product-Owner-/Product-Manager-Person, die KI-Entwicklungen strategisch einordnen und daraus eigene Prototyp-Ideen ableiten will.
+function topicLabel(article) {
+  const text = `${article.titel} ${article.begründung || ''}`.toLowerCase();
+  if (/agent|cowork|managed agents|mcp/.test(text)) return 'fertige Agenten-Bausteine';
+  if (/usage limit|rate limit|compute|capacity|gpu|infrastruktur|api-limit/.test(text)) return 'LLM-Kapazität und API-Planbarkeit';
+  if (/fraud|recaptcha|security|trust|bot|auth/.test(text)) return 'Trust-, Auth- und Fraud-Infrastruktur';
+  if (/fine-?tuning|training|moe|model|inferenz|inference|open weights|quant/.test(text)) return 'günstigere Modell- und Training-Optionen';
+  if (/pricing|cost|kosten|lizenz|license/.test(text)) return 'Kosten-, Lizenz- und Build-vs-Buy-Fragen';
+  return 'Produkt- und Plattformsignale';
+}
 
-Antworte ohne Überschrift, ohne Markdown und ohne separaten Prototyp-Impuls.
-Maximal 100 Wörter, maximal 4 Sätze.
-Nutze nur die Titel und Begründungen unten. Erfinde keine zusätzlichen Fakten, Standards, Zahlen, Produktnamen oder Integrationen.
-Fasse zusammen: Welche Produkt-, Plattform- oder Marktbewegung ist heute wichtig? Was sollte man daraus lernen oder beobachten?
+function buildOverview(topArtikel) {
+  const articleCount = topArtikel.length;
+  const strongestSignals = topArtikel
+    .slice(0, 3)
+    .map(a => a.titel)
+    .join('; ');
+  const themes = [...new Set(topArtikel.map(topicLabel))]
+    .slice(0, 4)
+    .join(', ');
 
-Direkt, Schweizer Hochdeutsch, keine Floskeln, keine Sprint-/Stakeholder-Sprache.
-
-Top-Artikel heute:
-${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
-
-function trimIncompleteSentence(text) {
-  const trimmed = text.trim();
-  if (/[.!?][)"'»]*$/.test(trimmed)) return trimmed;
-
-  const lastSentenceEnd = Math.max(
-    trimmed.lastIndexOf('.'),
-    trimmed.lastIndexOf('!'),
-    trimmed.lastIndexOf('?')
-  );
-  if (lastSentenceEnd > 0) return trimmed.slice(0, lastSentenceEnd + 1).trim();
-  return trimmed;
+  return [
+    `Heute haben ${articleCount} Entwicklungen den Cutoff erreicht.`,
+    `Die stärksten Signale sind: ${strongestSignals}.`,
+    `Das Muster: ${themes}.`,
+    'Für eigene Projekte lohnt sich heute vor allem, Build-vs-Buy neu zu prüfen und die Projektanker unten als kleine Validierungstests zu behandeln.',
+  ].join(' ');
 }
 
 async function aufbereiten(artikel, index, total) {
@@ -274,9 +276,8 @@ async function main() {
 
   console.log(`\n${topArtikel.length} Artikel nach Dedup und Cutoff`);
 
-  // Überblick generieren
-  console.log('\nGeneriere Überblick...');
-  const ueberblick = trimIncompleteSentence(await claudeText(UEBERBLICK_PROMPT(topArtikel), 300));
+  // Überblick deterministisch aus den ausgewählten Artikeln bauen.
+  const ueberblick = buildOverview(topArtikel);
 
   // Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
