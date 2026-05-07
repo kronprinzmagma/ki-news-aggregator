@@ -105,12 +105,28 @@ Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
 const UEBERBLICK_PROMPT = (topArtikel) => `\
 Du schreibst einen Tagesüberblick für eine Product-Owner-/Product-Manager-Person, die KI-Entwicklungen strategisch einordnen und daraus eigene Prototyp-Ideen ableiten will.
 
-Fasse in maximal 4 Sätzen zusammen: Welche Produkt-, Plattform- oder Marktbewegung ist heute wichtig? Was sollte man als PM/PO daraus lernen oder beobachten?
+Antworte ohne Überschrift, ohne Markdown und ohne separaten Prototyp-Impuls.
+Maximal 100 Wörter, maximal 4 Sätze.
+Nutze nur die Titel und Begründungen unten. Erfinde keine zusätzlichen Fakten, Standards, Zahlen, Produktnamen oder Integrationen.
+Fasse zusammen: Welche Produkt-, Plattform- oder Marktbewegung ist heute wichtig? Was sollte man daraus lernen oder beobachten?
 
 Direkt, Schweizer Hochdeutsch, keine Floskeln, keine Sprint-/Stakeholder-Sprache.
 
 Top-Artikel heute:
 ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
+
+function trimIncompleteSentence(text) {
+  const trimmed = text.trim();
+  if (/[.!?][)"'»]*$/.test(trimmed)) return trimmed;
+
+  const lastSentenceEnd = Math.max(
+    trimmed.lastIndexOf('.'),
+    trimmed.lastIndexOf('!'),
+    trimmed.lastIndexOf('?')
+  );
+  if (lastSentenceEnd > 0) return trimmed.slice(0, lastSentenceEnd + 1).trim();
+  return trimmed;
+}
 
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
@@ -260,7 +276,7 @@ async function main() {
 
   // Überblick generieren
   console.log('\nGeneriere Überblick...');
-  const ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 400);
+  const ueberblick = trimIncompleteSentence(await claudeText(UEBERBLICK_PROMPT(topArtikel), 300));
 
   // Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
