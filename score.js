@@ -52,6 +52,8 @@ Score 1–2 – kein relevanter PM-/Produkt-Mehrwert:
 
 Wichtig: Kleine Plugin-Releases, Bugfixes, einzelne Header-/CLI-/Konfigurationsänderungen oder persönliche Changelog-Posts sind maximal Score 3, ausser sie stehen klar für ein grösseres Produkt- oder Plattformmuster. Ein Artikel ist nicht schon deshalb Score 4, weil daraus ein Abendprojekt möglich ist.
 
+Wenn der Text extrem dünn ist (nur Titel, Teaser oder unter ca. 200 Zeichen), darfst du höchstens Score 2 vergeben, ausser der Text enthält selbst konkrete überprüfbare Details zu Capability, Preis, API, Limit, Lizenz oder Plattformänderung. Erfinde keine Details aus dem Titel.
+
 Die Begründung ist ein einzelner Satz und benennt den konkreten PM-/Produkt-Mehrwert plus möglichen Projektanker.
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}

@@ -87,6 +87,8 @@ Du schreibst für eine erfahrene Product-Owner-/Product-Manager-Person, die KI-P
 
 WICHTIG: Keine Sprint-, Ticket- oder Stakeholder-Floskeln. Schreibe nicht generisch "als PO". Jede Aussage muss helfen, eine Produktentscheidung, Marktbeobachtung oder eigene Bauidee schärfer zu sehen.
 
+Nutze ausschliesslich Titel und Text unten. Erfinde keine Firmen, Produkte, Zahlen, Integrationen, Kunden, technischen Details oder Schlussfolgerungen, die nicht aus dem Text hervorgehen. Wenn der Text zu dünn ist, benenne die Unsicherheit knapp statt Lücken zu füllen.
+
 Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
 **Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?
@@ -161,8 +163,6 @@ function dedupByTheme(articles) {
   return { kept, removedDetails };
 }
 
-const MAX_ARTIKEL = 5;
-
 // Hilfsfunktion: Anzahl Artikel pro Quelle zählen
 function countPerSource(articles) {
   const counts = {};
@@ -218,10 +218,9 @@ async function main() {
       return bLab - aLab;
     });
 
-  // Themen-Dedup, dann auf MAX_ARTIKEL begrenzen. Relevanz gewinnt, keine künstliche Quellenquote.
+  // Themen-Dedup. Relevanz gewinnt: kein künstliches Quellen- oder Mengenlimit.
   const { kept: deduped, removedDetails: dedupedOut } = dedupByTheme(sorted);
-  const topArtikel = deduped.slice(0, MAX_ARTIKEL);
-  const overLimit = deduped.slice(MAX_ARTIKEL);
+  const topArtikel = deduped;
 
   // Run-Summary aufbauen (wird am Ende geschrieben)
   const runSummary = {
@@ -244,10 +243,7 @@ async function main() {
       in_issue: 0,
       issue_articles: [],
       deduped_out: dedupedOut,
-      over_limit: overLimit.map(a => ({
-        titel: a.titel, url: a.url, quelle: a.quelle,
-        score: a.score, begründung: a.begründung,
-      })),
+      over_limit: [],
     },
     issue_created: false,
     issue_url: null,
