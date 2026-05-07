@@ -300,7 +300,7 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  const issueUrl = await postGithubIssue(date, markdown);
+  const issueUrl = await upsertGithubIssue(date, markdown);
 
   // Run-Summary finalisieren und schreiben
   runSummary.issue_created = !!issueUrl;
@@ -318,26 +318,13 @@ async function writeRunSummary(date, summary) {
   console.log(`Run-Summary gespeichert: ${filename}`);
 }
 
-async function postGithubIssue(date, body) {
-  const token = process.env.GH_PAT;
-  if (!token) {
-    console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
-    return null;
-  }
-
-  const issueTitle = `KI Daily – ${date}`;
-  const payload = JSON.stringify({
-    title: issueTitle,
-    body,
-    labels: ['summary'],
-  });
-
+function githubRequest(token, method, path, payload = null) {
   return new Promise((resolve, reject) => {
     const req = https.request(
       {
         hostname: 'api.github.com',
-        path: '/repos/kronprinzmagma/ki-news-aggregator/issues',
-        method: 'POST',
+        path,
+        method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -349,25 +336,79 @@ async function postGithubIssue(date, body) {
       (res) => {
         let data = '';
         res.on('data', chunk => (data += chunk));
-        res.on('end', () => {
-          if (res.statusCode === 201) {
-            const issue = JSON.parse(data);
-            console.log(`GitHub Issue erstellt: ${issue.html_url}`);
-            resolve(issue.html_url);
-          } else {
-            console.error(`GitHub API Fehler: HTTP ${res.statusCode} – ${data}`);
-            resolve(null);
-          }
-        });
+        res.on('end', () => resolve({ status: res.statusCode, body: data }));
       }
     );
     req.setTimeout(GITHUB_TIMEOUT_MS, () => {
       req.destroy(new Error(`GitHub API Timeout nach ${GITHUB_TIMEOUT_MS / 1000}s`));
     });
     req.on('error', reject);
-    req.write(payload);
+    if (payload) req.write(JSON.stringify(payload));
     req.end();
   });
+}
+
+async function findExistingIssue(token, issueTitle) {
+  const q = new URLSearchParams({
+    q: `repo:kronprinzmagma/ki-news-aggregator is:issue in:title "${issueTitle}"`,
+  });
+  const { status, body } = await githubRequest(token, 'GET', `/search/issues?${q}`);
+  if (status !== 200) {
+    console.warn(`GitHub Issue-Suche fehlgeschlagen: HTTP ${status} – ${body}`);
+    return null;
+  }
+
+  const result = JSON.parse(body);
+  return result.items.find(issue => issue.title === issueTitle) || null;
+}
+
+async function upsertGithubIssue(date, body) {
+  const token = process.env.GH_PAT;
+  if (!token) {
+    console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
+    return null;
+  }
+
+  const issueTitle = `KI Daily – ${date}`;
+  const existingIssue = await findExistingIssue(token, issueTitle);
+  if (existingIssue) {
+    const { status, body: responseBody } = await githubRequest(
+      token,
+      'PATCH',
+      `/repos/kronprinzmagma/ki-news-aggregator/issues/${existingIssue.number}`,
+      { title: issueTitle, body, labels: ['summary'] }
+    );
+
+    if (status === 200) {
+      const issue = JSON.parse(responseBody);
+      console.log(`GitHub Issue aktualisiert: ${issue.html_url}`);
+      return issue.html_url;
+    }
+
+    console.error(`GitHub API Fehler beim Aktualisieren: HTTP ${status} – ${responseBody}`);
+    return null;
+  }
+
+  const payload = {
+    title: issueTitle,
+    body,
+    labels: ['summary'],
+  };
+  const { status, body: responseBody } = await githubRequest(
+    token,
+    'POST',
+    '/repos/kronprinzmagma/ki-news-aggregator/issues',
+    payload
+  );
+
+  if (status === 201) {
+    const issue = JSON.parse(responseBody);
+    console.log(`GitHub Issue erstellt: ${issue.html_url}`);
+    return issue.html_url;
+  }
+
+  console.error(`GitHub API Fehler beim Erstellen: HTTP ${status} – ${responseBody}`);
+  return null;
 }
 
 main()
