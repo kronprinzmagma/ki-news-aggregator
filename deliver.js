@@ -83,17 +83,17 @@ async function claudeText(prompt, maxTokens = 400, retries = 0) {
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
-Du schreibst für eine erfahrene Senior-Produktperson, die ihre Kompetenz hands-on Richtung KI-Builder entwickelt. Sie setzt eigene Tools mit Claude Code und Anthropic API um und will die Entwicklungsrichtung der KI für ihre strategische Positionierung verstehen.
+Du schreibst für eine erfahrene Product-Owner-/Product-Manager-Person, die KI-Produkte strategisch verstehen und zugleich eigene kleine AI-Prototypen bauen will.
 
-WICHTIG: Kein Bezug zu Backlog, Sprint, Tickets, Stakeholder-Kommunikation oder Teamführung. Keine Formulierungen wie "als PO" oder "für dein Team".
+WICHTIG: Keine Sprint-, Ticket- oder Stakeholder-Floskeln. Schreibe nicht generisch "als PO". Jede Aussage muss helfen, eine Produktentscheidung, Marktbeobachtung oder eigene Bauidee schärfer zu sehen.
 
 Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
 **Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?
 
-**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung oder Entwicklungslinie steckt dahinter?
+**Warum es produktrelevant ist** (1–2 Sätze): Welche Auswirkung hat das auf Produktstrategie, Build-vs-Buy, Nutzererwartung, Kosten, Risiko oder AI-Adoption?
 
-**Build-Anker** (1–2 Sätze): Eine konkrete kleine Sache, die man an einem Abend mit Claude Code ausprobieren oder in ein eigenes Projekt integrieren kann.
+**Projektanker** (1–2 Sätze): Eine konkrete Sache, die man selbst ausprobieren, messen oder prototypen kann. Nicht bloss ein Tool installieren – ein Erkenntnisgewinn muss sichtbar sein.
 
 Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
@@ -101,11 +101,11 @@ Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
 
 const UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst einen Tagesüberblick für jemanden, der KI hands-on anwendet und die Entwicklungsrichtung des Feldes versteht.
+Du schreibst einen Tagesüberblick für eine Product-Owner-/Product-Manager-Person, die KI-Entwicklungen strategisch einordnen und daraus eigene Prototyp-Ideen ableiten will.
 
-Fasse in maximal 4 Sätzen zusammen: Welcher Trend zeichnet sich heute ab, in welche Richtung bewegt sich das Feld?
+Fasse in maximal 4 Sätzen zusammen: Welche Produkt-, Plattform- oder Marktbewegung ist heute wichtig? Was sollte man als PM/PO daraus lernen oder beobachten?
 
-Keine PO-Empfehlungen, keine Stakeholder-Sprache. Direkt, Schweizer Hochdeutsch, keine Floskeln.
+Direkt, Schweizer Hochdeutsch, keine Floskeln, keine Sprint-/Stakeholder-Sprache.
 
 Top-Artikel heute:
 ${topArtikel.map(a => `- ${a.titel} (Score ${a.score}): ${a.begründung}`).join('\n')}`;
@@ -218,10 +218,10 @@ async function main() {
       return bLab - aLab;
     });
 
-  // Themen-Dedup, dann auf MAX_ARTIKEL begrenzen
+  // Themen-Dedup, dann auf MAX_ARTIKEL begrenzen. Relevanz gewinnt, keine künstliche Quellenquote.
   const { kept: deduped, removedDetails: dedupedOut } = dedupByTheme(sorted);
   const topArtikel = deduped.slice(0, MAX_ARTIKEL);
-  const overLimit   = deduped.slice(MAX_ARTIKEL);
+  const overLimit = deduped.slice(MAX_ARTIKEL);
 
   // Run-Summary aufbauen (wird am Ende geschrieben)
   const runSummary = {

@@ -28,22 +28,31 @@ function claudeRequest(article) {
     messages: [
       {
         role: 'user',
-        content: `Du bewertest Artikel für einen Solo-Entwickler, der konkrete technische Abendprojekte sucht. Primäre Frage: Liefert dieser Artikel eine konkrete Idee, die ich als Einzelperson an einem Abend mit Claude Code technisch umsetzen oder ausprobieren kann?
+        content: `Du bewertest KI-News für eine erfahrene Product-Owner-/Product-Manager-Person mit technischer Hands-on-Ambition. Sie will wissen, welche Entwicklungen für Produktstrategie, Roadmap-Entscheidungen, Build-vs-Buy, AI-Adoption und eigene Prototypen wirklich wichtig sind.
 
-Score 4–5 – technisch umsetzbar, direkt verwertbar:
-- Neue Modell-Capabilities mit konkreter API (Tool Use, Reasoning, Kontext-Erweiterung)
-- SDKs, Frameworks, MCP-Server, Eval-Tools, die man direkt einsetzen kann
-- Architektur-Erkenntnisse zu Agenten-Systemen mit praktischem Muster
-- Strategische Verschiebungen (Pricing, OSS-Releases), die eigene Projekte direkt betreffen
+Primäre Frage: Ändert dieser Artikel, was ich als PM/PO über KI-Produkte, Plattformen, Nutzererwartungen, Kosten, Risiken oder eigene AI-Prototypen wissen sollte?
 
-Score 1–2 – kein technischer Mehrwert für eigene Projekte:
-- Verwaltungs- oder Prozess-Tools (Ticket-Systeme, Sprint-Planung, Stakeholder-Reporting)
-- Generische "KI verändert Branche XY"-Artikel ohne technische Substanz
-- Reine VC-/Funding-Meldungen ohne Produktdetail
-- Marketing-Posts ohne neue Capability
-- Quelle "hackernews-show": Show-HN-Selbstpromotion ohne klare technische Differenzierung → maximal Score 2, ausser der Inhalt ist technisch aussergewöhnlich
+Score 5 – wichtiges Signal mit Produkt- oder Strategie-Auswirkung:
+- Neue Modell- oder Plattform-Capabilities mit klarer Auswirkung auf mögliche Produktfunktionen
+- Relevante Änderungen bei API-Zugang, Pricing, Limits, Lizenzierung, Open Weights oder Distribution
+- Breite Adoption, neue Produktmuster, Sicherheits-/Regulierungsfragen oder Marktverschiebungen mit PM-Konsequenz
+- Technische Architektur-Erkenntnisse, die zeigen, wie AI-Produkte künftig gebaut oder betrieben werden
 
-Die Begründung benennt den konkreten Mehrwert für ein Maker-Projekt (ein Satz).
+Score 4 – verwertbar, aber enger:
+- Praktische Frameworks, SDKs, Eval-Tools, Agenten-Patterns oder Case Studies mit übertragbarem Produktnutzen
+- Konkrete Tooling-Releases, wenn sie ein grösseres Muster zeigen oder eigene Prototypen deutlich erleichtern
+- Strategische Meldungen, wenn sie eine klare Entscheidung oder Beobachtung für eigene Projekte nahelegen
+
+Score 1–2 – kein relevanter PM-/Produkt-Mehrwert:
+- Reine Verwaltungs- oder Prozess-Tools (Ticket-Systeme, Sprint-Planung, Stakeholder-Reporting)
+- Generische "KI verändert Branche XY"-Artikel ohne konkrete Substanz
+- Reine VC-/Funding-Meldungen ohne Produkt-, Plattform- oder Capability-Details
+- Marketing-Posts ohne neue Capability, Daten oder konkrete Produktimplikation
+- Quelle "hackernews-show": Selbstpromotion ohne klare Differenzierung → maximal Score 2
+
+Wichtig: Kleine Plugin-Releases, Bugfixes, einzelne Header-/CLI-/Konfigurationsänderungen oder persönliche Changelog-Posts sind maximal Score 3, ausser sie stehen klar für ein grösseres Produkt- oder Plattformmuster. Ein Artikel ist nicht schon deshalb Score 4, weil daraus ein Abendprojekt möglich ist.
+
+Die Begründung ist ein einzelner Satz und benennt den konkreten PM-/Produkt-Mehrwert plus möglichen Projektanker.
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}
 

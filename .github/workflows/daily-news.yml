@@ -2,8 +2,8 @@ name: Daily KI-News
 
 on:
   schedule:
-    # 06:00 UTC = 08:00 CEST (Sommer) / 07:00 CET (Winter) – Mo–Fr
-    - cron: '0 6 * * 1-5'
+    # 05:30 UTC = 07:30 CEST (Sommer) / 06:30 CET (Winter) – Mo–Fr
+    - cron: '30 5 * * 1-5'
   workflow_dispatch:
 
 jobs:
@@ -42,4 +42,5 @@ jobs:
           path: |
             articles-*.json
             scored-*.json
+            summary-*.md
             run-summary-*.json

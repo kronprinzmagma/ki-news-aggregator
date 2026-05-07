@@ -2,13 +2,15 @@
 
 ## Zweck
 
-Täglicher KI-News-Aggregator für den persönlichen Gebrauch. Holt Artikel aus mehreren Quellen, bewertet sie automatisch auf Relevanz und liefert ein kompaktes Daily-Issue auf GitHub. Kein Dashboard, kein Frontend, kein Team-Tool – ein persönliches Frühwarnsystem für relevante KI-Entwicklungen.
+Täglicher KI-News-Aggregator für den persönlichen Gebrauch. Holt Artikel aus mehreren Quellen, bewertet sie automatisch auf Relevanz und liefert ein kompaktes Daily-Issue auf GitHub.
+
+Der Zweck ist ein persönlicher PM-/Produkt-Intelligence-Feed: wichtige KI-Entwicklungen früh erkennen, ihre Bedeutung für Produktstrategie, AI-Adoption, Build-vs-Buy, Kosten, Risiken und Nutzererwartungen verstehen und daraus konkrete Denk- oder Prototyp-Impulse ableiten. Kein Dashboard, kein Frontend, kein Team-Tool.
 
 ## Persona
 
-Solo-Entwickler, der sich hands-on Richtung KI-Builder entwickelt. Baut eigene Tools mit Claude Code und Anthropic API. Will verstehen, wohin sich das KI-Feld bewegt – für die eigene strategische Positionierung und als Input für konkrete Abendprojekte.
+Product Owner / Product Manager mit technischer Hands-on-Ambition. Will wichtige KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, AI-Adoption, Build-vs-Buy, Kosten, Risiken, Nutzererwartungen und eigene Prototypen? Baut eigene Tools mit Claude Code und Anthropic API, aber der Primärfilter ist nicht "kann ich daraus ein Mini-Tool bauen?", sondern "ändert das meine Produkt- oder Markt-Sicht?"
 
-**Explizit nicht im Scope:** PO-Prozesse, Backlog-Pflege, Stakeholder-Kommunikation, Sprint-Mechanik, Jira-/Linear-Integrationen.
+**Explizit nicht im Scope:** Backlog-Pflege, Sprint-Mechanik, Ticket-Optimierung, generische Stakeholder-Kommunikation, Jira-/Linear-Integrationen.
 
 ## Architektur
 
@@ -26,7 +28,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
-**GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `0 6 * * 1-5` → Mo–Fr 06:00 UTC (= 08:00 CEST / 07:00 CET). Wochenende deaktiviert.
+**GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `30 5 * * 1-5` → Mo–Fr 05:30 UTC (= 07:30 CEST / 06:30 CET). Wochenende deaktiviert.
 
 ## Was guten Output ausmacht
 
@@ -34,9 +36,10 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
   1. Was ist neu (max. 3 Sätze, nüchtern)
-  2. Was es für die KI-Richtung heisst (1–2 Sätze)
-  3. Build-Anker: eine konkrete Idee für ein Abendprojekt mit Claude Code (technisch, solo umsetzbar)
+  2. Warum es produktrelevant ist (1–2 Sätze)
+  3. Projektanker: eine konkrete Idee, um die Entwicklung selbst zu prüfen oder in einem Prototyp nutzbar zu machen
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
+- **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.
 - **Leerer Tag = kein Issue** – ein Tag ohne relevante News ist kein Fehler
 
 ## Constraints
