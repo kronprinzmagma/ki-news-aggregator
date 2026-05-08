@@ -34,7 +34,20 @@ Ziel: Saubereres Issue-Format, keine abgeschnittenen Texte, automatische Hygiene
 
 ---
 
-## Phase 4 – Autonomie
+## Phase 4 – Robustheit (Code Review)
+
+Ziel: Bekannte Schwachstellen aus Code Review 2026-05-08 beheben.
+
+- [x] CR-03/CR-04: Defensives API-Response-Parsing + `.catch()` auf `main()` in allen drei Hauptdateien
+- [x] WR-01: JSON-Parse mit try/catch in `score.js` und `deliver.js`
+- [x] WR-02: Socket-Timeout in 6 Adaptern nachgezogen (willison, latentspace, aheadofai, lastweekinai, interconnects, yannickilcher)
+- [x] WR-03: Redirect-Loop-Schutz in `venturebeat.js` und `huggingface.js`
+- [x] WR-04/05/06/07/08 + IN-01/02/03: Kleinere Fixes (env-Parser, Redirect-Codes, Retry-After, Floskel-Satz, Dedup-Konsistenz, stopWords, Actions-Versionen)
+- [ ] Idee: API-Keys aus `.env` im Projektordner herausziehen → Shell-Profil (`~/.zprofile`) oder macOS Keychain; `.env` löschen. Hintergrund: Keys liegen aktuell als Klartext im Projektverzeichnis, auch wenn nicht in Git.
+
+---
+
+## Phase 5 – Autonomie
 
 Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Kontext.
 
