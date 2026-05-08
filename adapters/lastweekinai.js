@@ -1,14 +1,18 @@
 import https from 'https';
 
 const FEED_URL = 'https://lastweekin.ai/feed';
+const REQUEST_TIMEOUT_MS = 10_000;
 
 function get(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    const req = https.get(url, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
     }).on('error', reject);
+    req.setTimeout(REQUEST_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Timeout nach ${REQUEST_TIMEOUT_MS / 1000}s für ${url}`));
+    });
   });
 }
 

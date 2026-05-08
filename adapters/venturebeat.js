@@ -10,12 +10,20 @@ function resolveUrl(location, base) {
   return new URL(location, base).href;
 }
 
-function get(url) {
+const MAX_REDIRECTS = 3;
+
+function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
     https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        res.resume();
+        if (redirects >= MAX_REDIRECTS) {
+          reject(new Error(`Zu viele Redirects für ${url}`));
+          return;
+        }
         const next = resolveUrl(res.headers.location, url);
-        return get(next).then(resolve).catch(reject);
+        resolve(get(next, redirects + 1));
+        return;
       }
       let data = '';
       res.on('data', chunk => data += chunk);

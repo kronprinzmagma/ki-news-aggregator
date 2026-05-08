@@ -7,7 +7,7 @@ try {
   const lines = readFileSync('.env', 'utf-8').split('\n');
   for (const line of lines) {
     const match = /^([^#=]+)=(.*)$/.exec(line.trim());
-    if (match) process.env[match[1].trim()] = match[2].trim();
+    if (match) process.env[match[1].trim()] = match[2].trim().replace(/^["']|["']$/g, '');
   }
 } catch { /* .env optional */ }
 
@@ -80,7 +80,7 @@ Text: ${(article.rohtext || '').slice(0, 1500)}`
       (res) => {
         let data = '';
         res.on('data', chunk => (data += chunk));
-        res.on('end', () => resolve({ status: res.statusCode, body: data }));
+        res.on('end', () => resolve({ status: res.statusCode, body: data, headers: res.headers }));
       }
     );
     req.setTimeout(API_TIMEOUT_MS, () => {
@@ -108,11 +108,12 @@ async function scoreArticle(article, retries = 0) {
     return scoreArticle(article, retries + 1);
   }
 
-  const { status, body } = response;
+  const { status, body, headers: responseHeaders } = response;
 
   if (RETRYABLE_STATUSES.has(status)) {
     if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
-    const delay = retryDelay(retries);
+    const retryAfter = parseInt(responseHeaders?.['retry-after'] || '0', 10) * 1000;
+    const delay = Math.max(retryDelay(retries), retryAfter);
     console.warn(`[score] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
     await new Promise(r => setTimeout(r, delay));
     return scoreArticle(article, retries + 1);
@@ -121,7 +122,9 @@ async function scoreArticle(article, retries = 0) {
   if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status} – ${body}`);
 
   const parsed = JSON.parse(body);
-  const text = parsed.content[0].text.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+  const content = parsed?.content?.[0]?.text;
+  if (!content) throw new Error(`Unerwartetes API-Response-Format: ${body.slice(0, 200)}`);
+  const text = content.replace(/```json\n?/g, '').replace(/```/g, '').trim();
   const result = JSON.parse(text);
   return { score: result.score, begründung: result.begründung };
 }
@@ -161,7 +164,13 @@ async function main() {
   }
 
   console.log(`Lese: ${articleFile}`);
-  const articles = JSON.parse(await fs.readFile(articleFile, 'utf-8'));
+  let articles;
+  try {
+    articles = JSON.parse(await fs.readFile(articleFile, 'utf-8'));
+  } catch (err) {
+    console.error(`Fehler beim Lesen von ${articleFile}: ${err.message}`);
+    process.exit(1);
+  }
   console.log(`${articles.length} Artikel geladen`);
 
   const scored = await runWithConcurrency(articles, CONCURRENCY);
@@ -176,4 +185,5 @@ async function main() {
 }
 
 main()
+  .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
   .finally(() => https.globalAgent.destroy());

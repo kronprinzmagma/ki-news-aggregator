@@ -7,8 +7,8 @@ const FEED_URL = 'https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feed
 function get(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
-      // Redirects folgen
-      if (res.statusCode === 301 || res.statusCode === 302) {
+      // Redirects folgen (301/302/303/307/308)
+      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
         https.get(res.headers.location, (res2) => {
           let data = '';
           res2.on('data', chunk => data += chunk);

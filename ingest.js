@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import https from 'https';
+import https from 'https'; // nur für globalAgent.destroy() am Ende
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
@@ -100,4 +100,5 @@ async function main() {
 }
 
 main()
+  .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
   .finally(() => https.globalAgent.destroy());

@@ -7,7 +7,7 @@ try {
   const lines = readFileSync('.env', 'utf-8').split('\n');
   for (const line of lines) {
     const match = /^([^#=]+)=(.*)$/.exec(line.trim());
-    if (match) process.env[match[1].trim()] = match[2].trim();
+    if (match) process.env[match[1].trim()] = match[2].trim().replace(/^["']|["']$/g, '');
   }
 } catch { /* .env optional */ }
 
@@ -79,7 +79,9 @@ async function claudeText(prompt, maxTokens = 400, retries = 0) {
   }
   if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status}`);
   const parsed = JSON.parse(body);
-  return parsed.content[0].text.trim();
+  const content = parsed?.content?.[0]?.text;
+  if (!content) throw new Error(`Unerwartetes API-Response-Format: ${body.slice(0, 200)}`);
+  return content.trim();
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
@@ -126,7 +128,6 @@ function buildOverview(topArtikel) {
     `Heute haben ${articleCount} Entwicklungen den Cutoff erreicht.`,
     `Die stärksten Signale sind: ${strongestSignals}.`,
     `Das Muster: ${themes}.`,
-    'Für eigene Projekte lohnt sich heute vor allem, Build-vs-Buy neu zu prüfen und die Projektanker unten als kleine Validierungstests zu behandeln.',
   ].join(' ');
 }
 
@@ -136,12 +137,16 @@ async function aufbereiten(artikel, index, total) {
 }
 
 // Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
+// Hinweis: Dies ist eine vereinfachte Heuristik – nur Titelwörter werden verglichen.
+// Die 'begründung' aus dem Scoring wird hier bewusst nicht einbezogen, obwohl
+// topicLabel() sie nutzt. Thematisch verwandte Artikel ohne Titelüberlapp können
+// daher nicht dedupliziert werden.
 // Artikel sind bereits nach Score absteigend sortiert – der erste (stärkere) gewinnt.
 // Gibt { kept, removedDetails } zurück – removedDetails für run-summary.
 function dedupByTheme(articles) {
   const stopWords = new Set([
     'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
-    'ist', 'in', 'an', 'zu', 'the', 'a', 'an', 'of', 'to', 'in', 'for',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'in', 'for',
     'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
     'what', 'new', 'show', 'hn', 'using', 'via',
   ]);
@@ -211,7 +216,13 @@ async function main() {
   }
 
   console.log(`Lese: ${scoredFile}`);
-  const articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
+  let articles;
+  try {
+    articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
+  } catch (err) {
+    console.error(`Fehler beim Lesen von ${scoredFile}: ${err.message}`);
+    process.exit(1);
+  }
   console.log(`${articles.length} Artikel geladen`);
 
   // articles-*.json für Ingest-Statistiken laden (optional – kein Abbruch bei Fehler)
@@ -362,6 +373,12 @@ function githubRequest(token, method, path, payload = null) {
 }
 
 async function findExistingIssue(token, issueTitle) {
+  // Sicherheitshinweis: issueTitle wird direkt in den Suchquery interpoliert.
+  // Das ist aktuell unkritisch, weil issueTitle immer aus dem fixen String
+  // "KI Daily – " + Datum besteht. Der eigentliche Guard ist issue.title === issueTitle
+  // weiter unten: Auch wenn der Suchquery mehr Treffer liefert als erwartet
+  // (z.B. durch einen manipulierten RUN_DATE bei workflow_dispatch), wird
+  // nur das Issue mit exakt passendem Titel verwendet.
   const q = new URLSearchParams({
     q: `repo:kronprinzmagma/ki-news-aggregator is:issue in:title "${issueTitle}"`,
   });
@@ -425,4 +442,5 @@ async function upsertGithubIssue(date, body) {
 }
 
 main()
+  .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
   .finally(() => https.globalAgent.destroy());
