@@ -1,0 +1,52 @@
+name: Watchdog – Daily KI-News
+
+on:
+  schedule:
+    # 07:00 UTC = 90 Min nach Haupt-Workflow (05:30 UTC) – Mo–Fr
+    - cron: '0 7 * * 1-5'
+
+jobs:
+  check-and-trigger:
+    runs-on: ubuntu-latest
+    env:
+      GH_PAT: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Prüfe ob Haupt-Workflow heute bereits gelaufen ist
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          echo "Prüfe Runs für $TODAY..."
+
+          # Alle Runs des Haupt-Workflows von heute abrufen
+          RUNS=$(gh run list \
+            --repo ${{ github.repository }} \
+            --workflow daily-news.yml \
+            --created "$TODAY" \
+            --json status,conclusion \
+            --limit 10)
+
+          echo "Runs heute: $RUNS"
+
+          # Prüfe ob ein erfolgreicher oder noch laufender Run existiert
+          ACTIVE=$(echo "$RUNS" | jq '[.[] | select(.status == "completed" and .conclusion == "success" or .status == "in_progress" or .status == "queued")] | length')
+          echo "Aktive/erfolgreiche Runs: $ACTIVE"
+
+          if [ "$ACTIVE" -gt "0" ]; then
+            echo "run_needed=false" >> $GITHUB_OUTPUT
+            echo "Haupt-Workflow hat heute bereits erfolgreich gelaufen – kein Eingriff nötig."
+          else
+            echo "run_needed=true" >> $GITHUB_OUTPUT
+            echo "Kein erfolgreicher Run heute gefunden – Watchdog löst Haupt-Workflow aus."
+          fi
+
+      - name: Haupt-Workflow auslösen (Fallback)
+        if: steps.check.outputs.run_needed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh workflow run daily-news.yml \
+            --repo ${{ github.repository }}
+          echo "Haupt-Workflow ausgelöst."
