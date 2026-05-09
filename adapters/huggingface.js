@@ -3,23 +3,34 @@ import https from 'https';
 const FEED_URL = 'https://huggingface.co/blog/feed.xml';
 
 const MAX_REDIRECTS = 3;
+const REQUEST_TIMEOUT_MS = 10_000;
 
 function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         if (redirects >= MAX_REDIRECTS) {
           reject(new Error(`Zu viele Redirects für ${url}`));
           return;
         }
-        resolve(get(res.headers.location, redirects + 1));
+        const nextUrl = new URL(res.headers.location, url).toString();
+        resolve(get(nextUrl, redirects + 1));
+        return;
+      }
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.resume();
+        reject(new Error(`HTTP ${res.statusCode} für ${url}`));
         return;
       }
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
-    }).on('error', reject);
+    });
+    req.setTimeout(REQUEST_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Timeout nach ${REQUEST_TIMEOUT_MS / 1000}s für ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 

@@ -11,10 +11,11 @@ function resolveUrl(location, base) {
 }
 
 const MAX_REDIRECTS = 3;
+const REQUEST_TIMEOUT_MS = 10_000;
 
 function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'ki-news-aggregator/1.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
         if (redirects >= MAX_REDIRECTS) {
@@ -25,16 +26,36 @@ function get(url, redirects = 0) {
         resolve(get(next, redirects + 1));
         return;
       }
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.resume();
+        reject(new Error(`HTTP ${res.statusCode} für ${url}`));
+        return;
+      }
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
-    }).on('error', reject);
+    });
+    req.setTimeout(REQUEST_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Timeout nach ${REQUEST_TIMEOUT_MS / 1000}s für ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 
 function extractCdata(str) {
   const cdata = /\<\!\[CDATA\[([\s\S]*?)\]\]\>/.exec(str);
   return cdata ? cdata[1].trim() : str.trim();
+}
+
+function decodeHtmlEntities(str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
 }
 
 function stripTags(html) {
@@ -56,7 +77,7 @@ function parseRss(xml) {
 
     if (!titleMatch || !linkMatch) continue;
 
-    const titel = extractCdata(titleMatch[1]);
+    const titel = decodeHtmlEntities(extractCdata(titleMatch[1]));
     const url = extractCdata(linkMatch[1]);
     const datum = pubDateMatch ? new Date(extractCdata(pubDateMatch[1])).toISOString() : null;
     const rohtext = descMatch

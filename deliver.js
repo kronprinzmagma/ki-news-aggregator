@@ -37,7 +37,7 @@ function claudeRequest(body) {
       (res) => {
         let data = '';
         res.on('data', chunk => (data += chunk));
-        res.on('end', () => resolve({ status: res.statusCode, body: data }));
+        res.on('end', () => resolve({ status: res.statusCode, body: data, headers: res.headers }));
       }
     );
     req.setTimeout(API_TIMEOUT_MS, () => {
@@ -69,10 +69,11 @@ async function claudeText(prompt, maxTokens = 400, retries = 0) {
     return claudeText(prompt, maxTokens, retries + 1);
   }
 
-  const { status, body } = response;
+  const { status, body, headers: responseHeaders } = response;
   if (RETRYABLE_STATUSES.has(status)) {
     if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
-    const delay = retryDelay(retries);
+    const retryAfter = parseInt(responseHeaders?.['retry-after'] || '0', 10) * 1000;
+    const delay = Math.max(retryDelay(retries), retryAfter);
     console.warn(`[deliver] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
     await new Promise(r => setTimeout(r, delay));
     return claudeText(prompt, maxTokens, retries + 1);
@@ -82,6 +83,11 @@ async function claudeText(prompt, maxTokens = 400, retries = 0) {
   const content = parsed?.content?.[0]?.text;
   if (!content) throw new Error(`Unerwartetes API-Response-Format: ${body.slice(0, 200)}`);
   return content.trim();
+}
+
+function parseClaudeJson(text) {
+  const cleaned = text.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+  return JSON.parse(cleaned);
 }
 
 const ARTIKEL_PROMPT = (artikel) => `\
@@ -102,7 +108,73 @@ Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
 Titel: ${artikel.titel}
-Text: ${(artikel.rohtext || '').slice(0, 1500)}`;
+Text: ${(artikel.rohtext || '').slice(0, 2500)}`;
+
+const REVIEW_PROMPT = ({ selectedArticles, lowScoreSamples }) => `\
+Du bist eine unabhängige Review-Schlaufe für einen persönlichen KI-News-Aggregator.
+
+Kontext:
+- Das Daily-Issue ist für eine erfahrene Product-/PM-Person mit Hands-on-Ambition.
+- Ziel ist nicht "alles Interessante", sondern wenige starke Signale für KI-Produkte, Plattformen, Build-vs-Buy, Nutzererwartungen, Kosten, Risiken und eigene AI-Prototypen.
+- Diese Review-Schlaufe ist advisory: Sie liefert strukturierte Qualitäts- und Prozesshinweise. Sie ändert keine Auswahl selbst.
+
+Bewerte aus vier Perspektiven:
+1. Produkt-Relevanz: Ist der Artikel für KI-Produkte/Plattformen/Strategie relevant?
+2. Technische Substanz: Enthält der Input konkrete Details zu Capability, API, Architektur, Modell, Kosten, Lizenz oder Tooling?
+3. Lernwert: Lohnt sich spätere Vertiefung für persönliche KI-Weiterbildung?
+4. Aufbereitungsqualität: Reicht Titel/Text/Summary aus, oder wirkt der Input dünn/kaputt?
+
+Analysiere:
+- selected_articles: Artikel, die ins Issue kommen.
+- low_score_samples: Bis zu zwei Beispiele je niedriger Score-Stufe 1, 2 und 3. Prüfe nur, ob der Ausschluss plausibel war oder ob möglicherweise Relevanz verloren ging.
+
+Gib NUR valides JSON zurück:
+{
+  "selected_articles": [
+    {
+      "url": "...",
+      "title": "...",
+      "product_relevance": 1-5,
+      "technical_substance": 1-5,
+      "learning_value": 1-5,
+      "input_quality": "good" | "thin" | "broken",
+      "issue_fit": "strong" | "ok" | "weak",
+      "suggested_feedback": {
+        "besonders_wertvoll": true | false,
+        "spaeter_weiterverfolgen": true | false
+      },
+      "reason": "ein kurzer Satz"
+    }
+  ],
+  "low_score_samples": [
+    {
+      "url": "...",
+      "title": "...",
+      "score_seems_right": true | false,
+      "missed_opportunity": true | false,
+      "input_quality": "good" | "thin" | "broken",
+      "reason": "ein kurzer Satz"
+    }
+  ],
+  "process_adjustments": [
+    {
+      "area": "scoring" | "ingest" | "delivery" | "source",
+      "priority": "low" | "medium" | "high",
+      "recommendation": "konkrete Empfehlung",
+      "auto_apply_safe": false
+    }
+  ],
+  "overall_assessment": "maximal zwei Sätze"
+}
+
+Wichtig:
+- Erfinde keine Details, die nicht im Input stehen.
+- Wenn ein Originalartikel vermutlich spannend wäre, der Input aber dünn ist, markiere input_quality="thin" und empfehle eine Ingest-Verbesserung.
+- Setze auto_apply_safe immer auf false. Prozessänderungen sollen erst sichtbar gemacht und später bewusst übernommen werden.
+
+Input:
+${JSON.stringify({ selected_articles: selectedArticles, low_score_samples: lowScoreSamples }, null, 2)}
+`;
 
 function topicLabel(article) {
   const text = `${article.titel} ${article.begründung || ''}`.toLowerCase();
@@ -131,6 +203,93 @@ function buildOverview(topArtikel) {
   ].join(' ');
 }
 
+function pickLowScoreSamples(belowCutoff, limit = 2) {
+  return [1, 2, 3].flatMap(score => (
+    belowCutoff
+      .filter(article => article.score === score)
+      .sort((a, b) => (a.titel || '').localeCompare(b.titel || ''))
+      .slice(0, limit)
+  ));
+}
+
+async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
+  const selectedPayload = selectedArticles.map((article, index) => ({
+    title: article.titel,
+    url: article.url,
+    source: article.quelle,
+    score: article.score,
+    scoring_reason: article.begründung,
+    raw_text: (article.rohtext || '').slice(0, 700),
+    issue_summary: summaries[index],
+  }));
+
+  const samplePayload = lowScoreSamples.map(article => ({
+    title: article.titel,
+    url: article.url,
+    source: article.quelle,
+    score: article.score,
+    scoring_reason: article.begründung,
+    raw_text: (article.rohtext || '').slice(0, 600),
+  }));
+
+  let text;
+  try {
+    console.log('[review] Starte Claude-only Review-Schlaufe');
+    text = await claudeText(
+      REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
+      3000
+    );
+    return {
+      enabled: true,
+      model: 'claude-sonnet-4-6',
+      mode: 'advisory',
+      reviewed_selected: selectedArticles.length,
+      reviewed_low_score_samples: lowScoreSamples.length,
+      result: parseClaudeJson(text),
+    };
+  } catch (err) {
+    console.warn(`[review] Review-Schlaufe übersprungen: ${err.message}`);
+    return {
+      enabled: true,
+      mode: 'advisory',
+      error: err.message,
+      raw_response: text?.slice(0, 500),
+    };
+  }
+}
+
+function extractFeedbackStates(body = '') {
+  const states = new Map();
+  const sections = body.split(/\n(?=### )/);
+
+  for (const section of sections) {
+    const url = section.match(/Score \d+\/5 · \[[^\]]+\]\(([^)]+)\)/)?.[1];
+    if (!url) continue;
+    states.set(url, {
+      standout: /- \[[xX]\] Besonders wertvoll/.test(section),
+      followUp: /- \[[xX]\] Später weiterverfolgen/.test(section),
+    });
+  }
+
+  return states;
+}
+
+function applyFeedbackStates(markdown, states) {
+  if (!states.size) return markdown;
+
+  return markdown
+    .split(/\n(?=### )/)
+    .map(section => {
+      const url = section.match(/Score \d+\/5 · \[[^\]]+\]\(([^)]+)\)/)?.[1];
+      const state = url ? states.get(url) : null;
+      if (!state) return section;
+      return section
+        .replace('- [ ] Besonders wertvoll', `- [${state.standout ? 'x' : ' '}] Besonders wertvoll`)
+        .replace('- [ ] Später weiterverfolgen', `- [${state.followUp ? 'x' : ' '}] Später weiterverfolgen`);
+    })
+    .join('\n');
+}
+
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
   return claudeText(ARTIKEL_PROMPT(artikel), 400);
@@ -146,7 +305,7 @@ async function aufbereiten(artikel, index, total) {
 function dedupByTheme(articles) {
   const stopWords = new Set([
     'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
-    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'in', 'for',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
     'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
     'what', 'new', 'show', 'hn', 'using', 'via',
   ]);
@@ -237,7 +396,7 @@ async function main() {
 
   // Nur Score >= 4, nach Score absteigend, dann nach Quelle priorisieren (Lab > HN)
   const LAB_QUELLEN = new Set(['anthropic', 'openai', 'deepmind', 'latentspace', 'simonwillison']);
-  const belowCutoff = articles.filter(a => a.score < 4);
+  const belowCutoff = articles.filter(a => a.score !== null && a.score < 4);
   const sorted = [...articles]
     .filter(a => a.score >= 4)
     .sort((a, b) => {
@@ -250,6 +409,7 @@ async function main() {
   // Themen-Dedup. Relevanz gewinnt: kein künstliches Quellen- oder Mengenlimit.
   const { kept: deduped, removedDetails: dedupedOut } = dedupByTheme(sorted);
   const topArtikel = deduped;
+  const lowScoreSamples = pickLowScoreSamples(belowCutoff);
 
   // Run-Summary aufbauen (wird am Ende geschrieben)
   const runSummary = {
@@ -274,6 +434,7 @@ async function main() {
       deduped_out: dedupedOut,
       over_limit: [],
     },
+    review: null,
     issue_created: false,
     issue_url: null,
   };
@@ -287,7 +448,8 @@ async function main() {
 
   console.log(`\n${topArtikel.length} Artikel nach Dedup und Cutoff`);
 
-  // Überblick deterministisch aus den ausgewählten Artikeln bauen.
+  // Überblick deterministisch aus Top-Titeln bauen, kein LLM-Aufruf.
+  // Bewusste Entscheidung: Kein LLM für den Überblick, um Halluzinationen zu vermeiden.
   const ueberblick = buildOverview(topArtikel);
 
   // Artikel sequenziell aufbereiten (Rate Limiting)
@@ -296,6 +458,8 @@ async function main() {
     const text = await aufbereiten(topArtikel[i], i, topArtikel.length);
     aufbereitungen.push(text);
   }
+
+  runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
   // Markdown zusammensetzen
   const lines = [
@@ -312,6 +476,9 @@ async function main() {
     lines.push(`### ${a.titel}`);
     lines.push('');
     lines.push(`Score ${a.score}/5 · [${a.quelle}](${a.url})`);
+    lines.push('');
+    lines.push('- [ ] Besonders wertvoll');
+    lines.push('- [ ] Später weiterverfolgen');
     lines.push('');
     lines.push(aufbereitungen[i]);
     lines.push('');
@@ -388,8 +555,14 @@ async function findExistingIssue(token, issueTitle) {
     return null;
   }
 
-  const result = JSON.parse(body);
-  return result.items.find(issue => issue.title === issueTitle) || null;
+  let result;
+  try {
+    result = JSON.parse(body);
+  } catch {
+    console.warn(`GitHub Issue-Suche: ungültige JSON-Antwort – ${body.slice(0, 100)}`);
+    return null;
+  }
+  return result.items?.find(issue => issue.title === issueTitle) || null;
 }
 
 async function upsertGithubIssue(date, body) {
@@ -402,11 +575,26 @@ async function upsertGithubIssue(date, body) {
   const issueTitle = `KI Daily – ${date}`;
   const existingIssue = await findExistingIssue(token, issueTitle);
   if (existingIssue) {
+    let existingBody = existingIssue.body || '';
+    if (!existingBody && existingIssue.number) {
+      const existingResponse = await githubRequest(
+        token,
+        'GET',
+        `/repos/kronprinzmagma/ki-news-aggregator/issues/${existingIssue.number}`
+      );
+      if (existingResponse.status === 200) {
+        existingBody = JSON.parse(existingResponse.body).body || '';
+      } else {
+        console.warn(`GitHub Issue konnte für Feedback-Erhalt nicht geladen werden: HTTP ${existingResponse.status}`);
+      }
+    }
+    const feedbackStates = extractFeedbackStates(existingBody);
+    const bodyWithPreservedFeedback = applyFeedbackStates(body, feedbackStates);
     const { status, body: responseBody } = await githubRequest(
       token,
       'PATCH',
       `/repos/kronprinzmagma/ki-news-aggregator/issues/${existingIssue.number}`,
-      { title: issueTitle, body, labels: ['summary'] }
+      { title: issueTitle, body: bodyWithPreservedFeedback, labels: ['summary'] }
     );
 
     if (status === 200) {

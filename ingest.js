@@ -14,7 +14,7 @@ import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js
 
 // Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
 const MAX_ARTICLE_AGE_DAYS = 3;
-const ADAPTER_TIMEOUT_MS = 10_000;
+const ADAPTER_TIMEOUT_MS = 30_000;
 
 function withTimeout(promise, ms, name) {
   let timeoutId;

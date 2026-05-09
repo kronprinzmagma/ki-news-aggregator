@@ -6,14 +6,31 @@ const REQUEST_TIMEOUT_MS = 10_000;
 function get(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, (res) => {
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.resume();
+        reject(new Error(`HTTP ${res.statusCode} für ${url}`));
+        return;
+      }
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
-    }).on('error', reject);
+    });
     req.setTimeout(REQUEST_TIMEOUT_MS, () => {
       req.destroy(new Error(`Timeout nach ${REQUEST_TIMEOUT_MS / 1000}s für ${url}`));
     });
+    req.on('error', reject);
   });
+}
+
+function decodeHtmlEntities(str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
 }
 
 function stripTags(html) {
@@ -36,7 +53,7 @@ function parseAtom(xml) {
 
     if (!titleMatch || !linkMatch) continue;
 
-    const titel = titleMatch[1].trim();
+    const titel = decodeHtmlEntities(titleMatch[1].trim());
     const url = linkMatch[1].trim();
     const datum = publishedMatch ? publishedMatch[1].trim() : null;
     const rohtext = descMatch

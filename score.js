@@ -60,7 +60,7 @@ Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begrü
 
 Titel: ${article.titel}
 Quelle: ${article.quelle}
-Text: ${(article.rohtext || '').slice(0, 1500)}`
+Text: ${(article.rohtext || '').slice(0, 2500)}`
       }
     ]
   });
@@ -125,7 +125,12 @@ async function scoreArticle(article, retries = 0) {
   const content = parsed?.content?.[0]?.text;
   if (!content) throw new Error(`Unerwartetes API-Response-Format: ${body.slice(0, 200)}`);
   const text = content.replace(/```json\n?/g, '').replace(/```/g, '').trim();
-  const result = JSON.parse(text);
+  let result;
+  try {
+    result = JSON.parse(text);
+  } catch (err) {
+    throw new Error(`JSON-Parse-Fehler: ${err.message} – Rohtext: "${text.slice(0, 200)}"`);
+  }
   return { score: result.score, begründung: result.begründung };
 }
 

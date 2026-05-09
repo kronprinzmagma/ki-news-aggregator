@@ -21,6 +21,17 @@ function extractCdata(str) {
   return cdata ? cdata[1].trim() : str.trim();
 }
 
+function decodeHtmlEntities(str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
 function stripTags(html) {
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
@@ -40,7 +51,7 @@ function parseRss(xml) {
 
     if (!titleMatch || !linkMatch) continue;
 
-    const titel = extractCdata(titleMatch[1]);
+    const titel = decodeHtmlEntities(extractCdata(titleMatch[1]));
     const url = extractCdata(linkMatch[1]);
     const datum = pubDateMatch ? new Date(extractCdata(pubDateMatch[1])).toISOString() : null;
     const rohtext = descMatch
