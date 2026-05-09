@@ -124,6 +124,35 @@ Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 3000)}`;
 };
 
+const REWRITE_PROMPT = (artikel, currentSummary, hints) => {
+  const hintLines = [];
+  if (hints.was_ist_neu) hintLines.push(`- "Was ist neu": ${hints.was_ist_neu}`);
+  if (hints.ki_richtung) hintLines.push(`- "Was es für die KI-Richtung heisst": ${hints.ki_richtung}`);
+  if (hints.build_anker) hintLines.push(`- "Build-Anker": ${hints.build_anker}`);
+
+  return `\
+Du überarbeitest eine bestehende Artikelaufbereitung für einen KI-News-Aggregator.
+
+Die bisherige Aufbereitung hatte folgende Schwächen:
+${hintLines.join('\n')}
+
+Schreibe die drei Blöcke neu. Gesamt maximal 120 Wörter. Selbe Struktur wie bisher.
+
+**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Nur belegbare Fakten aus dem Text.
+
+**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung steckt dahinter? Nicht nur den Fakt beschreiben, sondern was dieser Schritt über die Entwicklungsrichtung der KI sagt.
+
+**Build-Anker** (1–2 Sätze): Aktiver Imperativsatz. Konkret genug für einen Abend mit Claude Code. Kein Hedging ("könnte man", "liesse sich"). Erkenntnisgewinn im Satz selbst sichtbar.
+
+Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
+
+Bisherige Aufbereitung (zur Orientierung, nicht kopieren):
+${currentSummary}
+
+Titel: ${artikel.titel}
+Text: ${(artikel.rohtext || '').slice(0, 3000)}`;
+};
+
 const UEBERBLICK_PROMPT = (topArtikel) => `\
 Du schreibst den Einleitungstext eines täglichen KI-News-Issues für eine erfahrene Product-/PM-Person mit Hands-on-KI-Ambitionen.
 
@@ -144,14 +173,21 @@ Kontext:
 - Ziel ist nicht "alles Interessante", sondern wenige starke Signale für KI-Produkte, Plattformen, Build-vs-Buy, Nutzererwartungen, Kosten, Risiken und eigene AI-Prototypen.
 - Diese Review-Schlaufe ist advisory: Sie liefert strukturierte Qualitäts- und Prozesshinweise. Sie ändert keine Auswahl selbst.
 
-Bewerte aus vier Perspektiven:
+Bewerte jeden Artikel aus vier Perspektiven:
 1. Produkt-Relevanz: Ist der Artikel für KI-Produkte/Plattformen/Strategie relevant?
 2. Technische Substanz: Enthält der Input konkrete Details zu Capability, API, Architektur, Modell, Kosten, Lizenz oder Tooling?
 3. Lernwert: Lohnt sich spätere Vertiefung für persönliche KI-Weiterbildung?
 4. Aufbereitungsqualität: Reicht Titel/Text/Summary aus, oder wirkt der Input dünn/kaputt?
 
+Bewerte zusätzlich den geschriebenen Output (issue_summary) – die drei Blöcke:
+- "Was ist neu": Nüchtern, kein Marketing, keine Titel-Wiederholung, nur belegbare Fakten.
+- "Was es für die KI-Richtung heisst": Zeigt die Strömung dahinter, nicht nur den Fakt.
+- "Build-Anker": Aktiver Imperativsatz, konkret genug für einen Abend, kein Hedging.
+
+Falls der Output eines Artikels in einer oder mehreren Dimensionen schwach ist, gib konkrete rewrite_hints – was genau soll besser werden. Diese werden genutzt, um den Artikel sofort neu aufzubereiten.
+
 Analysiere:
-- selected_articles: Artikel, die ins Issue kommen.
+- selected_articles: Artikel, die ins Issue kommen (inkl. issue_summary = geschriebener Output).
 - low_score_samples: Bis zu zwei Beispiele je niedriger Score-Stufe 1, 2 und 3. Prüfe nur, ob der Ausschluss plausibel war oder ob möglicherweise Relevanz verloren ging.
 
 Gib NUR valides JSON zurück:
@@ -165,6 +201,12 @@ Gib NUR valides JSON zurück:
       "learning_value": 1-5,
       "input_quality": "good" | "thin" | "broken",
       "issue_fit": "strong" | "ok" | "weak",
+      "needs_rewrite": true | false,
+      "rewrite_hints": {
+        "was_ist_neu": "konkreter Hinweis was verbessert werden soll, oder null",
+        "ki_richtung": "konkreter Hinweis was verbessert werden soll, oder null",
+        "build_anker": "konkreter Hinweis was verbessert werden soll, oder null"
+      },
       "suggested_feedback": {
         "besonders_wertvoll": true | false,
         "spaeter_weiterverfolgen": true | false
@@ -195,9 +237,11 @@ Gib NUR valides JSON zurück:
 }
 
 Wichtig:
+- needs_rewrite: true wenn issue_fit != "strong" ODER wenn einer der drei Blöcke klar verbesserungswürdig ist.
+- rewrite_hints: Nur ausfüllen wenn needs_rewrite=true. Null für Blöcke die gut sind.
 - Erfinde keine Details, die nicht im Input stehen.
-- Wenn ein Originalartikel vermutlich spannend wäre, der Input aber dünn ist, markiere input_quality="thin" und empfehle eine Ingest-Verbesserung.
-- Setze auto_apply_safe immer auf false. Prozessänderungen sollen erst sichtbar gemacht und später bewusst übernommen werden.
+- Wenn ein Originalartikel vermutlich spannend wäre, der Input aber dünn ist, markiere input_quality="thin".
+- Setze auto_apply_safe immer auf false.
 
 Input:
 ${JSON.stringify({ selected_articles: selectedArticles, low_score_samples: lowScoreSamples }, null, 2)}
@@ -535,6 +579,28 @@ async function main() {
   }
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
+
+  // Rewrite-Schritt: Artikel mit needs_rewrite=true neu aufbereiten
+  const reviewedArticles = runSummary.review?.result?.selected_articles || [];
+  let rewriteCount = 0;
+  for (let i = 0; i < topArtikel.length; i++) {
+    const reviewResult = reviewedArticles.find(r => r.url === topArtikel[i].url);
+    if (!reviewResult?.needs_rewrite) continue;
+    const hints = reviewResult.rewrite_hints || {};
+    const hasHints = hints.was_ist_neu || hints.ki_richtung || hints.build_anker;
+    if (!hasHints) continue;
+
+    try {
+      console.log(`[rewrite] Überarbeite "${topArtikel[i].titel}" (${reviewResult.reason})`);
+      const rewritten = await claudeText(REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], hints), 400);
+      aufbereitungen[i] = rewritten;
+      rewriteCount++;
+    } catch (err) {
+      console.warn(`[rewrite] Überarbeitung fehlgeschlagen für "${topArtikel[i].titel}": ${err.message}`);
+    }
+  }
+  if (rewriteCount > 0) console.log(`[rewrite] ${rewriteCount} Artikel neu aufbereitet`);
+  runSummary.deliver.rewrites = rewriteCount;
 
   // "Lies auch"-Links berechnen
   const relatedMap = findRelatedArticles(topArtikel);
