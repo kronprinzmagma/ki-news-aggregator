@@ -15,7 +15,7 @@ function todayString() {
   return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
 }
 
-const API_TIMEOUT_MS = 60_000;
+const API_TIMEOUT_MS = 120_000;
 const GITHUB_TIMEOUT_MS = 30_000;
 const MAX_RETRIES = 2;
 const RETRY_DELAY_MS = 2000;
@@ -112,11 +112,11 @@ Nutze ausschliesslich Titel und Text unten. Erfinde keine Firmen, Produkte, Zahl
 
 Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
-**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?${pricingHint}
+**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?${pricingHint} WICHTIG: Erfinde keine Modellnamen, Zahlen oder technischen Details die nicht explizit im Text stehen. Marketing-Begriffe wie "class-leading" oder "X-class reasoning" entweder als Zitat kennzeichnen oder durch belegte Benchmarks ersetzen. Wenn der Text zu dünn ist, schreibe "Volltext nicht verfügbar – Angaben basieren auf Teaser."
 
-**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung steckt dahinter? Nicht nur den Fakt beschreiben, sondern was dieser Schritt über die Entwicklungsrichtung der KI sagt.
+**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung steckt dahinter? Nicht nur den Fakt beschreiben, sondern was dieser Schritt über die Entwicklungsrichtung der KI sagt. Konkret: welche Failure-Modes, Produktentscheidungen oder Marktverschiebungen folgen daraus?
 
-**Build-Anker** (1–2 Sätze): Konkret genug für einen Abend mit Claude Code. Verbot: "könnte man", "liesse sich", "wäre möglich", "um zu messen ob". Gebot: ein aktiver Imperativsatz – "Baue X mit Y, der Z produziert." Der Erkenntnisgewinn muss im Satz selbst sichtbar sein, nicht als Absichtserklärung.
+**Build-Anker** (1–2 Sätze): Muss zwingend enthalten: (1) ein Verb im Imperativ, (2) ein konkretes Tool oder eine Technologie aus dem Artikeltext, (3) eine messbare Ausgabe ("siehst du X", "miss Y", "vergleiche Z"). Verbot: "könnte man", "liesse sich", "wäre möglich". Der Build-Anker muss thematisch zum Artikel passen – kein Themensprung.
 
 Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
@@ -125,16 +125,11 @@ Text: ${(artikel.rohtext || '').slice(0, 3000)}`;
 };
 
 const REWRITE_PROMPT = (artikel, currentSummary, hints) => {
-  const hintLines = [];
-  if (hints.was_ist_neu) hintLines.push(`- "Was ist neu": ${hints.was_ist_neu}`);
-  if (hints.ki_richtung) hintLines.push(`- "Was es für die KI-Richtung heisst": ${hints.ki_richtung}`);
-  if (hints.build_anker) hintLines.push(`- "Build-Anker": ${hints.build_anker}`);
-
   return `\
 Du überarbeitest eine bestehende Artikelaufbereitung für einen KI-News-Aggregator.
 
-Die bisherige Aufbereitung hatte folgende Schwächen:
-${hintLines.join('\n')}
+Die bisherige Aufbereitung hatte folgende Schwäche:
+${hints.hint}
 
 Schreibe die drei Blöcke neu. Gesamt maximal 120 Wörter. Selbe Struktur wie bisher.
 
@@ -202,11 +197,7 @@ Gib NUR valides JSON zurück:
       "input_quality": "good" | "thin" | "broken",
       "issue_fit": "strong" | "ok" | "weak",
       "needs_rewrite": true | false,
-      "rewrite_hints": {
-        "was_ist_neu": "konkreter Hinweis was verbessert werden soll, oder null",
-        "ki_richtung": "konkreter Hinweis was verbessert werden soll, oder null",
-        "build_anker": "konkreter Hinweis was verbessert werden soll, oder null"
-      },
+      "rewrite_hint": "Ein Satz: Was genau soll besser werden? Nur ausfüllen wenn needs_rewrite=true, sonst null.",
       "suggested_feedback": {
         "besonders_wertvoll": true | false,
         "spaeter_weiterverfolgen": true | false
@@ -238,7 +229,7 @@ Gib NUR valides JSON zurück:
 
 Wichtig:
 - needs_rewrite: true wenn issue_fit != "strong" ODER wenn einer der drei Blöcke klar verbesserungswürdig ist.
-- rewrite_hints: Nur ausfüllen wenn needs_rewrite=true. Null für Blöcke die gut sind.
+- rewrite_hint: Ein präziser Satz was verbessert werden soll. Nur wenn needs_rewrite=true, sonst null.
 - Erfinde keine Details, die nicht im Input stehen.
 - Wenn ein Originalartikel vermutlich spannend wäre, der Input aber dünn ist, markiere input_quality="thin".
 - Setze auto_apply_safe immer auf false.
@@ -294,7 +285,7 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
     source: article.quelle,
     score: article.score,
     scoring_reason: article.begründung,
-    raw_text: (article.rohtext || '').slice(0, 700),
+    raw_text: (article.rohtext || '').slice(0, 400),
     issue_summary: summaries[index],
   }));
 
@@ -312,7 +303,7 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
     console.log('[review] Starte Claude-only Review-Schlaufe');
     text = await claudeText(
       REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
-      3000
+      4000
     );
     return {
       enabled: true,
@@ -367,7 +358,7 @@ function applyFeedbackStates(markdown, states) {
 
 async function aufbereiten(artikel, index, total) {
   console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
-  return claudeText(ARTIKEL_PROMPT(artikel), 400);
+  return claudeText(ARTIKEL_PROMPT(artikel), 600);
 }
 
 // "Lies auch"-Links: Findet thematisch verwandte Artikel-Paare im Issue.
@@ -585,14 +576,11 @@ async function main() {
   let rewriteCount = 0;
   for (let i = 0; i < topArtikel.length; i++) {
     const reviewResult = reviewedArticles.find(r => r.url === topArtikel[i].url);
-    if (!reviewResult?.needs_rewrite) continue;
-    const hints = reviewResult.rewrite_hints || {};
-    const hasHints = hints.was_ist_neu || hints.ki_richtung || hints.build_anker;
-    if (!hasHints) continue;
+    if (!reviewResult?.needs_rewrite || !reviewResult.rewrite_hint) continue;
 
     try {
-      console.log(`[rewrite] Überarbeite "${topArtikel[i].titel}" (${reviewResult.reason})`);
-      const rewritten = await claudeText(REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], hints), 400);
+      console.log(`[rewrite] Überarbeite "${topArtikel[i].titel}" (${reviewResult.rewrite_hint})`);
+      const rewritten = await claudeText(REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], { hint: reviewResult.rewrite_hint }), 600);
       aufbereitungen[i] = rewritten;
       rewriteCount++;
     } catch (err) {
