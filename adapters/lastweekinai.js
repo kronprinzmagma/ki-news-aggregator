@@ -36,6 +36,43 @@ function stripTags(html) {
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+function extractArticleText(html) {
+  const articleMatch = /<article\b[^>]*>([\s\S]*?)<\/article>/i.exec(html);
+  const mainMatch = /<main\b[^>]*>([\s\S]*?)<\/main>/i.exec(html);
+  const content = (articleMatch ? articleMatch[1] : (mainMatch ? mainMatch[1] : html))
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<nav[\s\S]*?<\/nav>/gi, ' ')
+    .replace(/<header[\s\S]*?<\/header>/gi, ' ')
+    .replace(/<footer[\s\S]*?<\/footer>/gi, ' ');
+  const chunks = [];
+  const blockRegex = /<(h1|h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/gi;
+  let match;
+  while ((match = blockRegex.exec(content)) !== null) {
+    const text = stripTags(match[2]);
+    if (text.length >= 45 && !/(subscribe|newsletter|sign in|privacy|terms)/i.test(text)) {
+      chunks.push(text);
+    }
+  }
+  return chunks.join(' ').replace(/\s+/g, ' ').trim().slice(0, 4000);
+}
+
+async function enrichArticleText(article) {
+  if ((article.rohtext || '').length >= 1500 || !/^https?:\/\//.test(article.url)) {
+    return article;
+  }
+  try {
+    const html = await get(article.url);
+    const enriched = extractArticleText(html);
+    if (enriched.length > (article.rohtext || '').length) {
+      return { ...article, rohtext: enriched };
+    }
+  } catch (err) {
+    console.warn(`[lastweekinai] Artikeltext konnte nicht geladen werden (${article.titel}): ${err.message}`);
+  }
+  return article;
+}
+
 function parseRss(xml) {
   const articles = [];
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
@@ -66,5 +103,6 @@ function parseRss(xml) {
 
 export async function fetchArticles() {
   const xml = await get(FEED_URL);
-  return parseRss(xml);
+  const articles = parseRss(xml);
+  return Promise.all(articles.map(enrichArticleText));
 }

@@ -79,16 +79,38 @@ function extractArticleText(html) {
   return chunks.join(' ').replace(/\s+/g, ' ').trim().slice(0, 4000);
 }
 
+function extractExternalLink(html) {
+  // Simon Willison verlinkt oft auf externe Artikel – diesen Link extrahieren
+  const match = /<p[^>]*>.*?<a href="(https?:\/\/(?!simonwillison\.net)[^"]+)"[^>]*>/i.exec(html);
+  return match ? match[1] : null;
+}
+
 async function enrichArticleText(article) {
-  if ((article.rohtext || '').length >= 1800 || !/^https?:\/\//.test(article.url)) {
-    return article;
-  }
+  if (!/^https?:\/\//.test(article.url)) return article;
 
   try {
     const html = await get(article.url);
-    const enriched = extractArticleText(html);
-    if (enriched.length > (article.rohtext || '').length) {
-      return { ...article, rohtext: enriched };
+    const fromPage = extractArticleText(html);
+
+    // Wenn der Artikel-Text dünn ist: externen Link nachladen
+    if (fromPage.length < 2500) {
+      const externalUrl = extractExternalLink(html);
+      if (externalUrl) {
+        try {
+          const externalHtml = await get(externalUrl);
+          const externalText = extractArticleText(externalHtml);
+          const combined = [fromPage, externalText].filter(Boolean).join(' ').trim();
+          if (combined.length > (article.rohtext || '').length) {
+            return { ...article, rohtext: combined.slice(0, 4000) };
+          }
+        } catch (err) {
+          console.warn(`[simonwillison] Externer Link nicht ladbar (${externalUrl}): ${err.message}`);
+        }
+      }
+    }
+
+    if (fromPage.length > (article.rohtext || '').length) {
+      return { ...article, rohtext: fromPage.slice(0, 4000) };
     }
   } catch (err) {
     console.warn(`[simonwillison] Artikeltext konnte nicht geladen werden (${article.titel}): ${err.message}`);
