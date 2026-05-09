@@ -90,7 +90,20 @@ function parseClaudeJson(text) {
   return JSON.parse(cleaned);
 }
 
-const ARTIKEL_PROMPT = (artikel) => `\
+// Erkennt ob ein Artikel API-Features mit Pricing-Relevanz enthält.
+// Nutzt das pricing_signal_found-Flag aus dem Ingest falls vorhanden,
+// sonst Fallback auf Textsuche.
+function hasPricingContext(artikel) {
+  if (artikel.pricing_signal_found !== undefined) return artikel.pricing_signal_found;
+  const text = `${artikel.titel} ${artikel.rohtext || ''}`.toLowerCase();
+  return /api|sdk|pricing|price|cost|kosten|preis|\$|per token|per request|rate limit|limit/.test(text);
+}
+
+const ARTIKEL_PROMPT = (artikel) => {
+  const pricingHint = hasPricingContext(artikel)
+    ? '\n\nFalls der Text Kosten-, Preis- oder Limit-Informationen enthält: erwähne diese knapp im "Was ist neu"-Block. Falls keine solchen Angaben im Text sind, füge am Ende von "Was ist neu" folgende Zeile an: _Kosten/Limits: keine Angabe im Text._'
+    : '';
+  return `\
 Du schreibst für eine erfahrene Product-Owner-/Product-Manager-Person, die KI-Produkte strategisch verstehen und zugleich eigene kleine AI-Prototypen bauen will.
 
 WICHTIG: Keine Sprint-, Ticket- oder Stakeholder-Floskeln. Schreibe nicht generisch "als PO". Jede Aussage muss helfen, eine Produktentscheidung, Marktbeobachtung oder eigene Bauidee schärfer zu sehen.
@@ -99,7 +112,7 @@ Nutze ausschliesslich Titel und Text unten. Erfinde keine Firmen, Produkte, Zahl
 
 Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
-**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?
+**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?${pricingHint}
 
 **Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung steckt dahinter? Nicht nur den Fakt beschreiben, sondern was dieser Schritt über die Entwicklungsrichtung der KI sagt.
 
@@ -109,6 +122,7 @@ Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
 Titel: ${artikel.titel}
 Text: ${(artikel.rohtext || '').slice(0, 3000)}`;
+};
 
 const UEBERBLICK_PROMPT = (topArtikel) => `\
 Du schreibst den Einleitungstext eines täglichen KI-News-Issues für eine erfahrene Product-/PM-Person mit Hands-on-KI-Ambitionen.
@@ -312,6 +326,43 @@ async function aufbereiten(artikel, index, total) {
   return claudeText(ARTIKEL_PROMPT(artikel), 400);
 }
 
+// "Lies auch"-Links: Findet thematisch verwandte Artikel-Paare im Issue.
+// Kriterium: 2 gemeinsame Schlüsselwörter in Titel+Begründung, aber kein Dedup-Kandidat.
+function findRelatedArticles(articles) {
+  const stopWords = new Set([
+    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
+    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
+    'what', 'new', 'show', 'hn', 'using', 'via',
+  ]);
+  const words = (text) => new Set(
+    (text || '').toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
+  );
+  const overlapCount = (a, b) => {
+    const textA = `${a.titel} ${a.begründung || ''}`;
+    const textB = `${b.titel} ${b.begründung || ''}`;
+    const wa = words(textA);
+    let count = 0;
+    for (const w of words(textB)) if (wa.has(w)) count++;
+    return count;
+  };
+
+  // Map: URL → [verwandte Artikel (Titel + URL)]
+  const related = new Map();
+  for (let i = 0; i < articles.length; i++) {
+    for (let j = i + 1; j < articles.length; j++) {
+      const overlap = overlapCount(articles[i], articles[j]);
+      if (overlap >= 2) {
+        if (!related.has(articles[i].url)) related.set(articles[i].url, []);
+        if (!related.has(articles[j].url)) related.set(articles[j].url, []);
+        related.get(articles[i].url).push({ titel: articles[j].titel, url: articles[j].url });
+        related.get(articles[j].url).push({ titel: articles[i].titel, url: articles[i].url });
+      }
+    }
+  }
+  return related;
+}
+
 // Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
 // Hinweis: Dies ist eine vereinfachte Heuristik – nur Titelwörter werden verglichen.
 // Die 'begründung' aus dem Scoring wird hier bewusst nicht einbezogen, obwohl
@@ -485,15 +536,25 @@ async function main() {
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
+  // "Lies auch"-Links berechnen
+  const relatedMap = findRelatedArticles(topArtikel);
+
   // Markdown zusammensetzen
   const lines = [
     `# KI Daily – ${date}`,
     '',
     ueberblick,
     '',
-    '---',
-    '',
   ];
+
+  // Duplikat-Warnung: wenn Artikel durch Themen-Dedup zusammengeführt wurden
+  if (dedupedOut.length > 0) {
+    lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${a.titel}](${a.url})`).join(' · ')}`);
+    lines.push('');
+  }
+
+  lines.push('---');
+  lines.push('');
 
   for (let i = 0; i < topArtikel.length; i++) {
     const a = topArtikel[i];
@@ -505,6 +566,14 @@ async function main() {
     lines.push('- [ ] Später weiterverfolgen');
     lines.push('');
     lines.push(aufbereitungen[i]);
+
+    // "Lies auch"-Links für verwandte Artikel im selben Issue
+    const related = relatedMap.get(a.url);
+    if (related && related.length > 0) {
+      lines.push('');
+      lines.push(`> **Lies auch:** ${related.map(r => `[${r.titel}](${r.url})`).join(' · ')}`);
+    }
+
     lines.push('');
     lines.push('---');
     lines.push('');

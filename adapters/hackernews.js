@@ -98,7 +98,7 @@ function extractArticleText(html) {
 }
 
 async function enrichArticleText(article) {
-  if (article.quelle === 'hackernews-show' || (article.rohtext || '').length >= 500 || !/^https?:\/\//.test(article.url)) {
+  if (article.quelle === 'hackernews-show' || (article.rohtext || '').length >= 1500 || !/^https?:\/\//.test(article.url)) {
     return article;
   }
 

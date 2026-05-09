@@ -90,7 +90,7 @@ function extractArticleText(html) {
 }
 
 async function enrichArticleText(article) {
-  if ((article.rohtext || '').length >= 300 || !article.url.includes('anthropic.com/news/')) {
+  if ((article.rohtext || '').length >= 1500 || !article.url.includes('anthropic.com/news/')) {
     return article;
   }
 

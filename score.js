@@ -56,7 +56,9 @@ Wenn der Text extrem dünn ist (nur Titel, Teaser oder unter ca. 200 Zeichen), d
 
 Die Begründung ist ein einzelner Satz und benennt den konkreten PM-/Produkt-Mehrwert plus möglichen Projektanker.
 
-Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>"}
+Kennzeichne mit "strategy_only": true, wenn der Artikel ausschliesslich strategische oder kontextuelle Relevanz hat (Markt, Deal, Positionierung), aber keine konkreten technischen Implementierungs-Details enthält. Bei technisch substanziellen Artikeln setze "strategy_only": false.
+
+Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>", "strategy_only": true|false}
 
 Titel: ${article.titel}
 Quelle: ${article.quelle}
@@ -131,7 +133,11 @@ async function scoreArticle(article, retries = 0) {
   } catch (err) {
     throw new Error(`JSON-Parse-Fehler: ${err.message} – Rohtext: "${text.slice(0, 200)}"`);
   }
-  return { score: result.score, begründung: result.begründung };
+  return {
+    score: result.score,
+    begründung: result.begründung,
+    ...(result.strategy_only !== undefined ? { strategy_only: result.strategy_only } : {}),
+  };
 }
 
 async function runWithConcurrency(articles, limit) {
@@ -157,6 +163,89 @@ async function runWithConcurrency(articles, limit) {
   return results;
 }
 
+// Thematischer Dedup-Check: Gleicher Event (>= 3 gemeinsame Schlüsselwörter im Titel)
+// → schwächerer Artikel erhält Score -1. Artikel müssen bereits nach Score sortiert sein.
+function applyEventDedup(scored) {
+  const stopWords = new Set([
+    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
+    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
+    'what', 'new', 'show', 'hn', 'using', 'via',
+  ]);
+  const words = (titel) => new Set(
+    (titel || '').toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
+  );
+  const overlapCount = (a, b) => {
+    const wa = words(a.titel);
+    let count = 0;
+    for (const w of words(b.titel)) if (wa.has(w)) count++;
+    return count;
+  };
+
+  // Nach Score absteigend sortiert – Index 0 ist der stärkste
+  const sorted = [...scored].sort((a, b) => (b.score || 0) - (a.score || 0));
+  const adjusted = sorted.map(a => ({ ...a }));
+
+  for (let i = 0; i < adjusted.length; i++) {
+    for (let j = i + 1; j < adjusted.length; j++) {
+      if (overlapCount(adjusted[i], adjusted[j]) >= 3) {
+        const before = adjusted[j].score;
+        adjusted[j].score = Math.max(1, (adjusted[j].score || 1) - 1);
+        adjusted[j].dedup_penalty = true;
+        adjusted[j].dedup_of = adjusted[i].titel;
+        if (before !== adjusted[j].score) {
+          console.log(`[dedup] Score -1 für "${adjusted[j].titel}" (Event-Überschneidung mit "${adjusted[i].titel}")`);
+        }
+      }
+    }
+  }
+  return adjusted;
+}
+
+// Thematischer Cluster-Bonus: Artikel, die einen bereits ausgewählten Artikel (Score >= 4)
+// thematisch ergänzen (2 gemeinsame Schlüsselwörter, aber unter dem Dedup-Schwellwert),
+// erhalten +0.5 (aufgerundet auf ganze Zahl, max. 5).
+function applyClusterBonus(scored) {
+  const stopWords = new Set([
+    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
+    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
+    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
+    'what', 'new', 'show', 'hn', 'using', 'via',
+  ]);
+  const words = (text) => new Set(
+    (text || '').toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
+  );
+  const overlapCount = (a, b) => {
+    const textA = `${a.titel} ${a.begründung || ''}`;
+    const textB = `${b.titel} ${b.begründung || ''}`;
+    const wa = words(textA);
+    let count = 0;
+    for (const w of words(textB)) if (wa.has(w)) count++;
+    return count;
+  };
+
+  const result = scored.map(a => ({ ...a }));
+  const anchors = result.filter(a => (a.score || 0) >= 4);
+
+  for (const article of result) {
+    if ((article.score || 0) >= 4) continue; // Nur Artikel unter dem Cutoff boosten
+    for (const anchor of anchors) {
+      const overlap = overlapCount(anchor, article);
+      if (overlap >= 2 && overlap < 3) {
+        const before = article.score;
+        article.score = Math.min(5, Math.round((article.score || 0) + 0.5 + 0.0001)); // 0.5 → aufrunden
+        article.cluster_bonus = true;
+        article.cluster_anchor = anchor.titel;
+        if (before !== article.score) {
+          console.log(`[cluster] Score +1 für "${article.titel}" (ergänzt "${anchor.titel}")`);
+        }
+        break; // Nur einmal bonusen pro Artikel
+      }
+    }
+  }
+  return result;
+}
+
 async function main() {
   const date = todayString();
   const articleFile = `articles-${date}.json`;
@@ -180,7 +269,14 @@ async function main() {
 
   const scored = await runWithConcurrency(articles, CONCURRENCY);
 
-  const relevant = scored.filter(a => a.score !== null && a.score >= 3);
+  // Post-Processing: Dedup-Penalty für Event-Überschneidungen, dann Cluster-Bonus
+  const deduplicated = applyEventDedup(scored.filter(a => a.score !== null));
+  const boosted = applyClusterBonus(deduplicated);
+  // Artikel ohne Score wieder hinzufügen (unveränderter Fehlerfall)
+  const failed = scored.filter(a => a.score === null);
+  const allProcessed = [...boosted, ...failed];
+
+  const relevant = allProcessed.filter(a => a.score !== null && a.score >= 3);
   const dropped = scored.length - relevant.length;
   console.log(`\n${relevant.length} relevante Artikel (Score >= 3), ${dropped} aussortiert`);
 

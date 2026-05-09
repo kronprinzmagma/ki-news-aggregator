@@ -87,10 +87,38 @@ function todayString() {
   return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
 }
 
+// Artikel mit raw_text < 300 Zeichen werden als truncated geflakt und gewarnt
+function flagTruncated(articles) {
+  let truncatedCount = 0;
+  const flagged = articles.map(a => {
+    const len = (a.rohtext || '').length;
+    if (len < 300) {
+      truncatedCount++;
+      return { ...a, truncated: true };
+    }
+    return a;
+  });
+  if (truncatedCount > 0) {
+    console.warn(`[ingest] ${truncatedCount} Artikel mit raw_text < 300 Zeichen (truncated: true gesetzt)`);
+  }
+  return flagged;
+}
+
+// Artikel auf Pricing-Signale prüfen und pricing_signal_found-Flag setzen
+function flagPricingSignals(articles) {
+  const PRICING_PATTERN = /\$[\d.,]+|\bpricing\b|\bprice\b|\bkosten\b|\bpreis\b|\bper token\b|\bper request\b|\brate limit\b|\bfree tier\b|\bpaid plan\b|\bcost\b|\bgebühr\b|\btier\b/i;
+  return articles.map(a => {
+    const text = `${a.titel} ${a.rohtext || ''}`;
+    return { ...a, pricing_signal_found: PRICING_PATTERN.test(text) };
+  });
+}
+
 async function main() {
   const raw = await runAdapters();
   const deduped = deduplicate(raw);
-  const articles = filterByAge(deduped);
+  const aged = filterByAge(deduped);
+  const truncated = flagTruncated(aged);
+  const articles = flagPricingSignals(truncated);
 
   console.log(`${articles.length} Artikel nach Deduplizierung (${raw.length - deduped.length} Duplikate entfernt)`);
 
