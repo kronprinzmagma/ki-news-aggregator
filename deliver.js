@@ -101,14 +101,26 @@ Schreibe genau drei Blöcke. Gesamt maximal 120 Wörter.
 
 **Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing-Sprech. Nicht den Titel wiederholen. Was ist passiert, wer steckt dahinter, was ist konkret neu?
 
-**Warum es produktrelevant ist** (1–2 Sätze): Welche Auswirkung hat das auf Produktstrategie, Build-vs-Buy, Nutzererwartung, Kosten, Risiko oder AI-Adoption?
+**Was es für die KI-Richtung heisst** (1–2 Sätze): Welche Strömung steckt dahinter? Nicht nur den Fakt beschreiben, sondern was dieser Schritt über die Entwicklungsrichtung der KI sagt.
 
-**Projektanker** (1–2 Sätze): Eine konkrete Sache, die man selbst ausprobieren, messen oder prototypen kann. Nicht bloss ein Tool installieren – ein Erkenntnisgewinn muss sichtbar sein.
+**Build-Anker** (1–2 Sätze): Konkret genug für einen Abend mit Claude Code. Verbot: "könnte man", "liesse sich", "wäre möglich", "um zu messen ob". Gebot: ein aktiver Imperativsatz – "Baue X mit Y, der Z produziert." Der Erkenntnisgewinn muss im Satz selbst sichtbar sein, nicht als Absichtserklärung.
 
 Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.
 
 Titel: ${artikel.titel}
-Text: ${(artikel.rohtext || '').slice(0, 2500)}`;
+Text: ${(artikel.rohtext || '').slice(0, 3000)}`;
+
+const UEBERBLICK_PROMPT = (topArtikel) => `\
+Du schreibst den Einleitungstext eines täglichen KI-News-Issues für eine erfahrene Product-/PM-Person mit Hands-on-KI-Ambitionen.
+
+Aufgabe: Genau 3–4 kurze Sätze. Erkenne das übergeordnete Muster des Tages – nicht die Summe der Artikel, sondern die Strömung dahinter. Kein Marketing, keine PO-/Stakeholder-Sprache, keine Titel-Wiederholung. Direkt, nüchtern, sachlich.
+
+Halte jeden Satz unter 25 Wörtern. Zusammen maximal 100 Wörter. Kein JSON, kein Markdown, kein Aufzählung – nur Fliesstext.
+
+Artikel heute (Titel + Scoring-Begründung):
+${topArtikel.map((a, i) => `${i + 1}. ${a.titel}\n   Score ${a.score}: ${a.begründung}`).join('\n')}
+
+Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.`;
 
 const REVIEW_PROMPT = ({ selectedArticles, lowScoreSamples }) => `\
 Du bist eine unabhängige Review-Schlaufe für einen persönlichen KI-News-Aggregator.
@@ -160,11 +172,12 @@ Gib NUR valides JSON zurück:
     {
       "area": "scoring" | "ingest" | "delivery" | "source",
       "priority": "low" | "medium" | "high",
-      "recommendation": "konkrete Empfehlung",
+      "recommendation": "konkrete, umsetzbare Empfehlung – nicht 'prüfen ob', sondern 'ändere X auf Y' oder 'füge Z hinzu'",
+      "rationale": "ein Satz: warum würde das den Output konkret verbessern?",
       "auto_apply_safe": false
     }
   ],
-  "overall_assessment": "maximal zwei Sätze"
+  "overall_assessment": "maximal zwei Sätze – was war heute gut, was ist die wichtigste Verbesserungsmöglichkeit?"
 }
 
 Wichtig:
@@ -187,20 +200,24 @@ function topicLabel(article) {
 }
 
 function buildOverview(topArtikel) {
-  const articleCount = topArtikel.length;
-  const strongestSignals = topArtikel
-    .slice(0, 3)
-    .map(a => a.titel)
-    .join('; ');
-  const themes = [...new Set(topArtikel.map(topicLabel))]
-    .slice(0, 4)
-    .join(', ');
+  const themes = [...new Set(topArtikel.map(topicLabel))];
+  const topScore5 = topArtikel.filter(a => a.score === 5);
+  const score5Part = topScore5.length > 0
+    ? `Stärkstes Signal: ${topScore5.map(a => a.titel).join(' und ')}.`
+    : `Stärkstes Signal: ${topArtikel[0].titel}.`;
 
-  return [
-    `Heute haben ${articleCount} Entwicklungen den Cutoff erreicht.`,
-    `Die stärksten Signale sind: ${strongestSignals}.`,
-    `Das Muster: ${themes}.`,
-  ].join(' ');
+  // Quellen-Verteilung für Kommentar
+  const sources = [...new Set(topArtikel.map(a => a.quelle))];
+  const sourceNote = sources.length === 1
+    ? `Alle Artikel stammen heute aus derselben Quelle (${sources[0]}).`
+    : `Quellen heute: ${sources.join(', ')}.`;
+
+  // Thematische Aussage
+  const themeStr = themes.length === 1
+    ? `Thema: ${themes[0]}.`
+    : `Schwerpunkte: ${themes.slice(0, 3).join(' · ')}.`;
+
+  return [score5Part, themeStr, sourceNote].join(' ');
 }
 
 function pickLowScoreSamples(belowCutoff, limit = 2) {
@@ -448,9 +465,16 @@ async function main() {
 
   console.log(`\n${topArtikel.length} Artikel nach Dedup und Cutoff`);
 
-  // Überblick deterministisch aus Top-Titeln bauen, kein LLM-Aufruf.
-  // Bewusste Entscheidung: Kein LLM für den Überblick, um Halluzinationen zu vermeiden.
-  const ueberblick = buildOverview(topArtikel);
+  // Überblick per LLM aus Titeln und Scoring-Begründungen erzeugen.
+  // Nutzt nur Daten, die bereits im scored-*.json vorhanden sind – kein rohtext nötig.
+  let ueberblick;
+  try {
+    console.log('[deliver] Generiere Überblick per LLM...');
+    ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 300);
+  } catch (err) {
+    console.warn(`[deliver] LLM-Überblick fehlgeschlagen (${err.message}), falle auf deterministischen Fallback zurück`);
+    ueberblick = buildOverview(topArtikel);
+  }
 
   // Artikel sequenziell aufbereiten (Rate Limiting)
   const aufbereitungen = [];
