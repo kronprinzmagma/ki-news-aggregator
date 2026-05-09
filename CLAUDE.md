@@ -60,7 +60,9 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
-- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden advisory geprüft; Empfehlungen werden nur in der Run-Summary gespeichert
+- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 4 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. Bewertung der geschriebenen drei Blöcke
+- Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen
+- Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
 
 ## Schedule
