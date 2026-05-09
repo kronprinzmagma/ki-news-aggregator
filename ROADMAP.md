@@ -43,6 +43,7 @@ Ziel: Bekannte Schwachstellen aus Code Review 2026-05-08 beheben.
 - [x] WR-02: Socket-Timeout in 6 Adaptern nachgezogen (willison, latentspace, aheadofai, lastweekinai, interconnects, yannickilcher)
 - [x] WR-03: Redirect-Loop-Schutz in `venturebeat.js` und `huggingface.js`
 - [x] WR-04/05/06/07/08 + IN-01/02/03: Kleinere Fixes (env-Parser, Redirect-Codes, Retry-After, Floskel-Satz, Dedup-Konsistenz, stopWords, Actions-Versionen)
+- [x] Code Review 2026-05-09: CR-02 bis IN-04 umgesetzt (Socket-Timeouts, Redirect-Fixes, Entity-Decoding, Retry-After in deliver.js, Adapter-Robustheit)
 - [ ] Idee: API-Keys aus `.env` im Projektordner herausziehen → Shell-Profil (`~/.zprofile`) oder macOS Keychain; `.env` löschen. Hintergrund: Keys liegen aktuell als Klartext im Projektverzeichnis, auch wenn nicht in Git.
 
 ---
@@ -60,9 +61,12 @@ Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Ko
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
 - [x] Neues Output-Schema: drei Blöcke pro Artikel (Was ist neu / Produktrelevanz / Projektanker), max. 120 Wörter
+- [x] Feedback-Checkboxen pro Daily-Artikel: besonders wertvoll / später weiterverfolgen
+- [x] Claude-only Review-Schlaufe in `deliver.js`: ausgewählte Artikel + bis zu zwei ausgeschlossene Beispiele je Score 1/2/3, advisory in Run-Summary
+- [x] Latent-Space- und Simon-Willison-Adapter reichern dünne Feed-Texte aus der Artikelseite an
 - [x] Leerer Tag erzeugt kein Issue
 - [x] Issue-Titel vereinheitlicht auf `KI Daily – YYYY-MM-DD`
 - [x] Themen-Dedup über Titel-Wort-Overlap
-- [x] Schedule auf Mo–Fr 06:00 UTC begrenzt, Wochenende deaktiviert
+- [x] Daily-Schedule läuft täglich um 05:30 UTC; leere Tage erzeugen kein Issue
 - [x] Anthropic-News-Adapter vorhanden und aktiv
 - [x] Laufdatum gehärtet: Score und Deliver verwenden nur noch Dateien desselben Run-Datums, kein Fallback auf alte Artefakte
