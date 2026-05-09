@@ -22,5 +22,77 @@
     "quelle": "simonwillison",
     "rohtext": "A step-by-step walkthrough of building a Model Context Protocol server using Node.js. The tutorial covers tool registration, request handling, and connecting the server to Claude Desktop. Full source code included, under 200 lines.",
     "human_score": 5
+  },
+  {
+    "titel": "llm-gemini 0.31",
+    "url": "https://simonwillison.net/2026/May/7/llm-gemini/#atom-everything",
+    "datum": "2026-05-07T19:57:06+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Release: llm-gemini 0.31 gemini-3.1-flash-lite is no longer a preview . Here's my write-up of the Gemini 3.1 Flash-Lite Preview model back in March. I don't believe this new non-preview model has changed since then. Tags: llm-release , gemini , llm , google , generative-ai , ai , llms",
+    "human_score": 2
+  },
+  {
+    "titel": "Big Words",
+    "url": "https://simonwillison.net/2026/May/7/big-words/#atom-everything",
+    "datum": "2026-05-07T18:47:09+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Tool: Big Words I'm using my vibe coded macOS presentations tool to put together a talk, and I wanted to add a slide with some text on it. The tool only accepts URLs, so I put together a quick page that accepts query string arguments and turns them into a simple slide. Here's an example: https://tools.simonwillison.net/big-words?text=simonwillison.net&amp;gradient=1&amp;size=9.5 Double click or double tap the page to access a form for modifying the different options. Tags: vibe-coding , tools",
+    "human_score": 4
+  },
+  {
+    "titel": "Behind the Scenes Hardening Firefox with Claude Mythos Preview",
+    "url": "https://simonwillison.net/2026/May/7/firefox-claude-mythos/#atom-everything",
+    "datum": "2026-05-07T17:56:25+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Behind the Scenes Hardening Firefox with Claude Mythos Preview Fascinating, in-depth details on how Mozilla used their access to the Claude Mythos preview to locate and then fix hundreds of vulnerabilities in Firefox: Suddenly, the bugs are very good Just a few months ago, AI-generated security bug reports to open source projects were mostly known for being unwanted slop. Dealing with reports that look plausibly correct but are wrong imposes an asymmetric cost on project maintainers: it’s cheap and easy to prompt an LLM to find a “problem” in code, but slow and expensive to respond to it. It is difficult to overstate how much this dynamic changed for us over a few short months. This was due to a combination of two main factors. First, the models got a lot more capable. Second, we dramatically improved our techniques for harnessing these models — steering them, scaling them, and stacking them to generate large amounts of signal and filter out the noise. They include some detailed bug descriptions too, including a 20-year old XSLT bug and a 15-year-old bug in the element. A lot of the attempts made by the harness were blocked by Firefox's existing defense-in-depth measures, which is reassuring. Mozilla were fixing around 20-30 security bugs in Firefox per month through 2025. That jumped to 423 in April. Via Lobste.rs Tags: firefox , mozilla , security , ai , generative-ai , llms , anthropic , claude , ai-security-research",
+    "human_score": 3
+  },
+  {
+    "titel": "Notes on the xAI/Anthropic data center deal",
+    "url": "https://simonwillison.net/2026/May/7/xai-anthropic/#atom-everything",
+    "datum": "2026-05-07T17:09:28+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "There weren't a lot of big new announcements from Anthropic at yesterday's Code w/ Claude event, but the biggest by far was the deal they've struck with SpaceX/xAI to use \"all of the capacity of their Colossus data center\". As I mentioned in my live blog of the keynote , that's the one with the particularly bad environmental record . The gas turbines installed to power the facility initially ran without Clean Air Act permits or pollution control devices, which they got away with by classifying them as \"temporary\". Credible reports link it to increases in hospital admissions relating to low air quality. Andy Masley, one of the most prolific voices pushing back against misleading rhetoric about data centers (see The AI water issue is fake and Data center land issues are fake ), had this to say about Colossus: I would simply not run my computing out of this specific data center I get that Anthropic are severely compute-constrained, but in a world where the very existence of \"AI data centers\" is a red-hot political issue (see recent news out of Utah for a fresh example), signing up with this particular data center is a really bad look. There was a lot of initial chatter about how this meant xAI were clearly giving up on their own Grok models, since all of their capacity would be sold to Anthropic instead. That was a misconception - Anthropic are getting Colossus 1, but xAI are keeping their larger Colossus 2 data center for their own work. As an interesting side note, the night before the Anthropic announcement, xAI sent out a deprecation notice for Grok 4.1 Fast and several other models providing just two weeks' notice before shutdown, reported here by @xlr8harder from SpeechMap: This is terrible @xai. I just spent time and money to migrate to grok 4.1 fast, and you're disabling it with less than two weeks notice, after releasing it in November, with no migration path to a fast/cheap alternative. I will never depend on one of your products again. Here's SpeechMap's det",
+    "human_score": 4
+  },
+  {
+    "titel": "GitHub Repo Stats",
+    "url": "https://simonwillison.net/2026/May/7/github-repo-stats/#atom-everything",
+    "datum": "2026-05-07T07:25:14+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Tool: GitHub Repo Stats One of the things I always look for when evaluating a new GitHub repository is the number of commits it has... but that number isn't visible on GitHub's mobile site layout. I built this tool to fix that, using this prompt: Given a GitHub repo URL or foo/bar repo ID show information about that repo absorbed via wither REST or graphql CORS fetch() including the number of commits in the repo and other useful stats Example output for simonw/datasette and simonw/llm . Tags: github",
+    "human_score": 3
+  },
+  {
+    "titel": "Live blog: Code w/ Claude 2026",
+    "url": "https://simonwillison.net/2026/May/6/code-w-claude-2026/#atom-everything",
+    "datum": "2026-05-06T15:58:27+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "I'm at Anthropic's Code w/ Claude event today. Here's my live blog of the morning keynote sessions. Tags: ai , generative-ai , llms , anthropic , claude , claude-code , live-blog",
+    "human_score": 3
+  },
+  {
+    "titel": "Vibe coding and agentic engineering are getting closer than I'd like",
+    "url": "https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/#atom-everything",
+    "datum": "2026-05-06T14:24:08+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "I recently talked with Joseph Ruscio about AI coding tools for Heavybit's High Leverage podcast: Ep. #9, The AI Coding Paradigm Shift with Simon Willison . Here are some of my highlights, including my disturbing realization that vibe coding and agentic engineering have started to converge in my own work. One thing I really enjoy about podcasts is that they sometimes push me to think out loud in a way that exposes an idea I've not previously been able to put into words. Vibe coding and agentic engineering are starting to overlap A few weeks after vibe coding was first coined I published Not all AI-assisted programming is vibe coding (but vibe coding rocks) , where I firmly staked out my belief that \"vibe coding\" is a very different beast from responsible use of AI to write code, which I've since started to call agentic engineering . When Joseph brought up the distinction between the two I had a sudden realization that they're not nearly as distinct for me as they used to be: Weirdly though, those things have started to blur for me already, which is quite upsetting. I thought we had a very clear delineation where vibe coding is the thing where you're not looking at the code at all. You might not even know how to program. You might be a non-programmer who asks for a thing, and gets a thing, and if the thing works, then great! And if it doesn't, you tell it that it doesn't work and cross your fingers. But at no point are you really caring about the code quality or any of those additional constraints. And my take on vibe coding was that it's fantastic, provided you understand when it can be used and when it can't. A personal tool for you, where if there's a bug it hurts only you, go ahead! If you're building software for other people, vibe coding is grossly irresponsible because it's other people's information. Other people get hurt by your stupid bugs. You need to have a higher level than that. This contrasts with agentic engineering where you are a professional softwar",
+    "human_score": 4
+  },
+  {
+    "titel": "datasette-referrer-policy 0.1",
+    "url": "https://simonwillison.net/2026/May/5/datasette-referrer-policy/#atom-everything",
+    "datum": "2026-05-05T23:44:27+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Release: datasette-referrer-policy 0.1 The OpenStreetMap tiles on the Datasette global-power-plants demo weren't displaying correctly. This turned out to be caused by two bugs. The first is that the CAPTCHA I added to that site a few weeks ago was triggering for the .json fetch requests used by the map plugin, and since those weren't HTML the user was not being asked to solve them. Here's the fix . The second was that OpenStreetMap quite reasonably block tile requests from sites that use a Referrer-Policy: no-referrer header. Datasette does this by default, and I didn't want to change that default on people without warning - so I had Codex + GPT-5.5 build me a new plugin to help set that header to another value. Tags: openstreetmap , http , datasette",
+    "human_score": 1
+  },
+  {
+    "titel": "Our AI started a cafe in Stockholm",
+    "url": "https://simonwillison.net/2026/May/5/our-ai-started-a-cafe-in-stockholm/#atom-everything",
+    "datum": "2026-05-05T22:14:21+00:00",
+    "quelle": "simonwillison",
+    "rohtext": "Our AI started a cafe in Stockholm Andon Labs previously started an AI-run retail store in San Francisco. Now they're running a similar experiment in Stockholm, Sweden, only this time it's a cafe. These experiments are interesting, and often throw out amusing anecdotes: During the first week of inventory, Mona ordered 120 eggs even though the café has no stove. When the staff told her they couldn’t cook them, she suggested using the high-speed oven, until they pointed out the eggs would likely explode. She also tried to solve the problem of fresh tomatoes being spoiled too fast by ordering 22.5 kg of canned tomatoes for the fresh sandwiches. The baristas eventually started a “Hall of Shame”, a shelf visible to customers with all the weird things Mona ordered, including 6,000 napkins, 3,000 nitrile gloves, 9L coconut milk, and industrial-sized trash bags. Where they lose their shine is when these AI managers start wasting the time of human beings who have not opted into the experiment: She also successfully applied for an outdoor seating permit through the Police e-service, which didn’t require BankID. Her first submission included a sketch she had generated herself, despite having never seen the street outside the café. Unsurprisingly, the Police sent it back for revision. [...] When she makes a mistake, she often sends multiple emails to suppliers with the subject “EMERGENCY” to cancel or change the order. I don't think it's ethical to run experiments like this that affect real-world systems and steal time from people. I'm reminded of the incident last year where the AI Village experiment infuriated Rob Pike by sending him unsolicited gratitude emails as an \"act of kindness\". That was just an unwanted email - asking suppliers to correct mistakes that were made without a human-in-the-loop or wasting police time with slop diagrams feels a whole lot worse to me. I think experiments like this need to keep their own human operators in-the-loop for outbound actions that ",
+    "human_score": 3
   }
 ]

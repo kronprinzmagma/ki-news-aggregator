@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eval Review</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Eval Review</h1>
+        <p id="status">Lade Artikel...</p>
+      </div>
+      <div class="actions">
+        <button id="makeQueue" type="button">Review-Stapel erstellen</button>
+        <button id="showUnrated" type="button">Nur unbewertete</button>
+        <button id="showAll" type="button">Alle</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="filters">
+          <input id="search" type="search" placeholder="Suchen">
+          <select id="fileFilter" aria-label="Run auswählen"></select>
+          <select id="sourceFilter" aria-label="Quelle auswählen"></select>
+        </div>
+        <div id="articleList" class="article-list"></div>
+      </aside>
+
+      <section class="review">
+        <div id="empty" class="empty">
+          <h2>Wähle links einen Artikel</h2>
+          <p>Oder erstelle oben einen kleinen Review-Stapel.</p>
+        </div>
+
+        <article id="card" class="card hidden">
+          <div class="meta">
+            <span id="source"></span>
+            <span id="date"></span>
+            <span id="file"></span>
+          </div>
+          <h2 id="title"></h2>
+          <a id="url" href="#" target="_blank" rel="noreferrer">Original öffnen</a>
+          <p id="text"></p>
+
+          <div class="score-panel">
+            <div class="panel-heading">
+              <p>Daily-Score für diese Aufbereitung</p>
+              <span>Bewerte nur das, was hier sichtbar ist: Titel und Textauszug.</span>
+            </div>
+            <div class="score-buttons">
+              <button data-score="1" type="button">1<span>Kein Inhalt</span></button>
+              <button data-score="2" type="button">2<span>Dünn</span></button>
+              <button data-score="3" type="button">3<span>Signal</span></button>
+              <button data-score="4" type="button">4<span>Ins Issue</span></button>
+              <button data-score="5" type="button">5<span>Stark</span></button>
+            </div>
+          </div>
+
+          <div class="score-panel secondary-panel">
+            <div class="panel-heading">
+              <p>Problem markieren</p>
+              <span>Optional, falls die Aufbereitung den eigentlichen Artikel nicht gut abbildet.</span>
+            </div>
+            <div class="quality-buttons" role="group" aria-label="Qualität der Aufbereitung">
+              <button data-quality="good" type="button">Kein Problem</button>
+              <button data-quality="thin" type="button">Eigentlich relevant, aber zu dünn</button>
+              <button data-quality="broken" type="button">Kaputt</button>
+              <button data-quality="unknown" type="button">Nicht geprüft</button>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button id="skip" type="button">Überspringen</button>
+            <button id="remove" type="button">Bewertung entfernen</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

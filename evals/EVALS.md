@@ -89,6 +89,27 @@ Anteil der Artikel, bei denen der Model-Score **maximal einen Punkt** vom Human-
 
 Solange der Goldstandard klein ist, dient das Eval vor allem als Smoke-Test für API-Aufruf, JSON-Parsing und grobe Prompt-Richtung. Belastbare Qualitätsmetriken entstehen erst wieder mit einem breiteren Set über alle Score-Stufen und Quellentypen.
 
+## Goldstandard per Review-Oberfläche pflegen
+
+Die Datei `goldstandard.json` muss nicht von Hand editiert werden. Für die manuelle Bewertung gibt es eine lokale Browser-Oberfläche:
+
+```bash
+npm run eval:review
+```
+
+Danach im Browser `http://localhost:8787` öffnen.
+
+Empfohlener Ablauf:
+
+1. **Review-Stapel erstellen** klicken. Die Oberfläche wählt bis zu 12 noch unbewertete Artikel aus den neuesten Runs aus.
+2. Artikel lesen: Titel, Quelle, Datum, Textauszug und optional den Original-Link.
+3. **Daily-Score für diese Aufbereitung** mit den Buttons **1–5** vergeben oder direkt die Tastaturzahlen **1–5** verwenden. Dieser Score bewertet nur Titel und Textauszug, also den Input, den das Scoring-Modell wirklich sieht.
+4. Optional ein **Problem markieren**, wenn der Originalartikel eigentlich relevant wirkt, aber die Aufbereitung zu dünn oder kaputt ist.
+5. Die Bewertung wird sofort in `evals/goldstandard.json` gespeichert und der nächste Artikel wird geöffnet.
+6. Unsichere Artikel mit **Überspringen** auslassen; lieber wenige gute Urteile als viele halbherzige.
+
+Für den Start reichen 10–15 echte Artikel. Besonders wertvoll sind Grenzfälle rund um Score 3/4, weil dort entschieden wird, ob ein Artikel ins Daily-Issue kommt.
+
 ## Resultate interpretieren
 
 Die JSON-Reports in `evals/results/` enthalten neben den aggregierten Metriken auch die Einzel-Bewertungen pro Artikel (`details`-Array). Wenn der MAE schlecht ist, lohnt es sich, die Ausreisser (`diff` > 2 oder < -2) manuell anzuschauen – sie zeigen oft systematische Schwächen im Prompt (z.B. zu grosszügig bei Show-HN, zu streng bei strategischen Meldungen).
