@@ -24,11 +24,11 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Score** (`score.js`): Liest `articles-YYYY-MM-DD.json` für das aktuelle Laufdatum (`RUN_DATE` oder heutiges UTC-Datum), bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle Artikel mit Score >= 3.
 
-**Textqualität**: Dünne Feed-Einträge werden bei ausgewählten Quellen angereichert. Latent Space und Simon Willison laden bei kurzen Teasern zusätzlich die Artikelseite und extrahieren längeren Fliesstext.
+**Textqualität**: Dünne Feed-Einträge werden angereichert. Latent Space, Simon Willison, Interconnects, Last Week in AI und Ahead of AI laden bei kurzen Teasern die Artikelseite nach. Simon Willison fetcht zusätzlich externe Links wenn der Seitentext unter 2500 Zeichen bleibt.
 
-**Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, filtert auf Score >= 4, dedupliziert Themen-Cluster, wählt max. 5 Artikel (Lab-Quellen bevorzugt bei Gleichstand), bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
+**Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, filtert auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
-**Review-Schlaufe** (`deliver.js`): Nach der Aufbereitung prüft Claude advisory die ausgewählten Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3. Ergebnis landet in `run-summary-YYYY-MM-DD.json` als Qualitäts- und Prozesshinweis; Prozessänderungen werden nicht automatisch auf Code/Prompt angewendet.
+**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 4 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
@@ -39,9 +39,9 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 - **Max. 5 Artikel pro Issue** – Qualität vor Vollständigkeit
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
-  1. Was ist neu (max. 3 Sätze, nüchtern)
-  2. Warum es produktrelevant ist (1–2 Sätze)
-  3. Projektanker: eine konkrete Idee, um die Entwicklung selbst zu prüfen oder in einem Prototyp nutzbar zu machen
+  1. Was ist neu (max. 3 Sätze, nüchtern, keine Halluzinationen)
+  2. Was es für die KI-Richtung heisst (1–2 Sätze, Strömung dahinter)
+  3. Build-Anker: aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code
 - **Feedback im Issue:** Pro Artikel Checkboxen für `Besonders wertvoll` und `Später weiterverfolgen`
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
 - **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.
