@@ -48,7 +48,20 @@ Ziel: Bekannte Schwachstellen aus Code Review 2026-05-08 beheben.
 
 ---
 
-## Phase 5 – Autonomie
+## Phase 5 – Selbstoptimierung
+
+Ziel: Die Pipeline verbessert ihren Output eigenständig durch Review-gesteuerte Rewrites und Adapter-Anreicherung.
+
+- [x] Review-Schlaufe bewertet geschriebenen Output (drei Blöcke) auf 4 Ebenen und gibt `rewrite_hint`
+- [x] Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit Review-Feedback neu aufbereitet
+- [x] Artikel-Enrichment in allen relevanten Adaptern: interconnects, lastweekinai, aheadofai, willison (inkl. externer Link-Fetch)
+- [x] Prompt-Verbesserungen: Halluzinations-Schutz, Build-Anker-Validierung, Thin-Input-Markierung
+- [ ] Harter Gate: Artikel mit `"Volltext nicht verfügbar"` kommen nicht ins Issue
+- [ ] PR-Mechanismus: process_adjustments aus Run-Summary → automatischer Pull Request mit Prompt-/Parameter-Änderungen
+
+---
+
+## Phase 6 – Autonomie
 
 Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Kontext.
 
