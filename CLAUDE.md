@@ -54,15 +54,17 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
   1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
   2. **Was es für die KI-Richtung heisst** (1–2 Sätze): Strömung dahinter
   3. **Build-Anker** (1–2 Sätze): konkret, ein Abend mit Claude Code – keine Backlog/Sprint-Anwendungen
+- Jeder Artikel enthält im Issue zwei Feedback-Checkboxen: `Besonders wertvoll` und `Später weiterverfolgen`
 - Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
+- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden advisory geprüft; Empfehlungen werden nur in der Run-Summary gespeichert
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
 
 ## Schedule
 
-Mo–Fr, 06:00 UTC (= 08:00 CEST / 07:00 CET). Wochenende deaktiviert (für spätere Weekly/Monthly-Synthesis reserviert).
+Täglich, 05:30 UTC (= 07:30 CEST / 06:30 CET). Wochenend-News laufen wie normale Daily-Issues; Weekly/Monthly-Synthesis bleibt als separates Format geplant.
 
 Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.

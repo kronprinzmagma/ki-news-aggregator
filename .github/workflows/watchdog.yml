@@ -2,8 +2,8 @@ name: Watchdog – Daily KI-News
 
 on:
   schedule:
-    # 07:00 UTC = 90 Min nach Haupt-Workflow (05:30 UTC) – Mo–Fr
-    - cron: '0 7 * * 1-5'
+    # 07:00 UTC = 90 Min nach Haupt-Workflow (05:30 UTC) – täglich
+    - cron: '0 7 * * *'
 
 jobs:
   check-and-trigger:
