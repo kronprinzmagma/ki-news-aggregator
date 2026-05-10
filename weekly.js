@@ -13,6 +13,9 @@ try {
 const API_TIMEOUT_MS = 120_000;
 const GITHUB_TIMEOUT_MS = 30_000;
 const MODEL = 'claude-sonnet-4-6';
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 2000;
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504, 529]);
 
 // ─── HTTP-Hilfsfunktionen ─────────────────────────────────────────────────────
 
@@ -21,7 +24,7 @@ function httpsRequest(options, payload = null) {
     const req = https.request(options, (res) => {
       let data = '';
       res.on('data', chunk => (data += chunk));
-      res.on('end', () => resolve({ status: res.statusCode, body: data }));
+      res.on('end', () => resolve({ status: res.statusCode, body: data, headers: res.headers }));
     });
     req.setTimeout(API_TIMEOUT_MS, () => {
       req.destroy(new Error(`Timeout nach ${API_TIMEOUT_MS / 1000}s`));
@@ -64,27 +67,51 @@ function githubRequest(token, method, path, payload = null) {
 
 // ─── Claude API ───────────────────────────────────────────────────────────────
 
-async function claudeText(prompt, maxTokens = 1200) {
+function retryDelay(retries) {
+  return RETRY_DELAY_MS * (retries + 1);
+}
+
+async function claudeText(prompt, maxTokens = 1200, retries = 0) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY nicht gesetzt');
 
-  const { status, body } = await httpsRequest(
-    {
-      hostname: 'api.anthropic.com',
-      path: '/v1/messages',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
+  let response;
+  try {
+    response = await httpsRequest(
+      {
+        hostname: 'api.anthropic.com',
+        path: '/v1/messages',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
       },
-    },
-    {
-      model: MODEL,
-      max_tokens: maxTokens,
-      messages: [{ role: 'user', content: prompt }],
-    }
-  );
+      {
+        model: MODEL,
+        max_tokens: maxTokens,
+        messages: [{ role: 'user', content: prompt }],
+      }
+    );
+  } catch (err) {
+    if (retries >= MAX_RETRIES) throw err;
+    const delay = retryDelay(retries);
+    console.warn(`[weekly] Request fehlgeschlagen (${err.message}) – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+    await new Promise(r => setTimeout(r, delay));
+    return claudeText(prompt, maxTokens, retries + 1);
+  }
+
+  const { status, body, headers: responseHeaders } = response;
+
+  if (RETRYABLE_STATUSES.has(status)) {
+    if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
+    const retryAfter = parseInt((responseHeaders && responseHeaders['retry-after']) || '0', 10) * 1000;
+    const delay = Math.max(retryDelay(retries), retryAfter);
+    console.warn(`[weekly] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
+    await new Promise(r => setTimeout(r, delay));
+    return claudeText(prompt, maxTokens, retries + 1);
+  }
 
   if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status} – ${body.slice(0, 300)}`);
 
