@@ -190,6 +190,8 @@ Nicht im Scope: Backlog, Sprint-Mechanik, Stakeholder-Kommunikation, Jira-Integr
 
 Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing.
 
+Beginne NICHT mit einer Überschrift – der Titel des Issues wird extern gesetzt. Starte direkt mit dem Einleitungstext.
+
 ---
 
 **Woche KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})**
@@ -239,9 +241,15 @@ async function upsertWeeklyIssue(token, weekInfo, body) {
   if (searchStatus === 200) {
     let result;
     try { result = JSON.parse(searchBody); } catch { result = { items: [] }; }
-    const existing = result.items?.find(i => i.title === issueTitle);
+    // Nur offene Issues updaten – geschlossene werden überschrieben
+    const existing = result.items?.find(i => i.title === issueTitle && i.state === 'open');
     if (existing) {
-      console.log(`[weekly] Issue existiert bereits: ${existing.html_url}`);
+      // Body aktualisieren (z.B. bei erneutem Lauf am selben Tag)
+      await githubRequest(token, 'PATCH',
+        `/repos/kronprinzmagma/ki-news-aggregator/issues/${existing.number}`,
+        { body }
+      );
+      console.log(`[weekly] Issue aktualisiert: ${existing.html_url}`);
       return existing.html_url;
     }
   }
@@ -310,7 +318,7 @@ async function main() {
 
   // Issue-Body zusammenbauen
   const issueBody = `# KI Weekly – KW ${weekInfo.kw}
-*${weekInfo.from} – ${weekInfo.to} · ${allArticles.length} Artikel aus ${dailyIssues.length} Daily Issues*
+*${weekInfo.from} – ${weekInfo.to} · ${allArticles.length} Artikel (${dailyIssues.length} Daily Issues)*
 
 ${digestBody}
 
