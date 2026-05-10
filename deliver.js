@@ -90,6 +90,17 @@ function parseClaudeJson(text) {
   return JSON.parse(cleaned);
 }
 
+function sanitizeMarkdown(str) {
+  return (str || '').replace(/[`*_[\]()#>]/g, '\\$&').replace(/\n/g, ' ');
+}
+
+function sanitizeUrl(url) {
+  try {
+    const u = new URL(url);
+    return u.protocol === 'https:' ? url : '#ungueltige-url';
+  } catch { return '#ungueltige-url'; }
+}
+
 // Erkennt ob ein Artikel API-Features mit Pricing-Relevanz enthält.
 // Nutzt das pricing_signal_found-Flag aus dem Ingest falls vorhanden,
 // sonst Fallback auf Textsuche.
@@ -617,7 +628,7 @@ async function main() {
 
   // Duplikat-Warnung: wenn Artikel durch Themen-Dedup zusammengeführt wurden
   if (dedupedOut.length > 0) {
-    lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${a.titel}](${a.url})`).join(' · ')}`);
+    lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${sanitizeMarkdown(a.titel)}](${sanitizeUrl(a.url)})`).join(' · ')}`);
     lines.push('');
   }
 
@@ -626,9 +637,9 @@ async function main() {
 
   for (let i = 0; i < topArtikel.length; i++) {
     const a = topArtikel[i];
-    lines.push(`### ${a.titel}`);
+    lines.push(`### ${sanitizeMarkdown(a.titel)}`);
     lines.push('');
-    lines.push(`Score ${a.score}/5 · [${a.quelle}](${a.url})`);
+    lines.push(`Score ${a.score}/5 · [${sanitizeMarkdown(a.quelle)}](${sanitizeUrl(a.url)})`);
     lines.push('');
     lines.push('- [ ] Besonders wertvoll');
     lines.push('- [ ] Später weiterverfolgen');
@@ -639,7 +650,7 @@ async function main() {
     const related = relatedMap.get(a.url);
     if (related && related.length > 0) {
       lines.push('');
-      lines.push(`> **Lies auch:** ${related.map(r => `[${r.titel}](${r.url})`).join(' · ')}`);
+      lines.push(`> **Lies auch:** ${related.map(r => `[${sanitizeMarkdown(r.titel)}](${sanitizeUrl(r.url)})`).join(' · ')}`);
     }
 
     lines.push('');
