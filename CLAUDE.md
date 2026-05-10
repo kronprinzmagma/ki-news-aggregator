@@ -49,7 +49,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node deliver.js` liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum ein
 - Nur Artikel mit Score >= 4 werden verwendet
 - Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
-- Maximal 5 Artikel pro Issue; bei Gleichstand bevorzugt Lab-Quellen (anthropic, openai, deepmind)
+- Kein künstliches Mengenlimit; bei Gleichstand bevorzugt Lab-Quellen (anthropic, openai, deepmind)
 - Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 120 Wörter):
   1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
   2. **Was es für die KI-Richtung heisst** (1–2 Sätze): Strömung dahinter

@@ -38,7 +38,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 ## Was guten Output ausmacht
 
-- **Max. 5 Artikel pro Issue** – Qualität vor Vollständigkeit
+- **Kein künstliches Mengenlimit** – Relevanz gewinnt, typisch 3–5 Artikel pro Issue
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
   1. Was ist neu (max. 3 Sätze, nüchtern, keine Halluzinationen)
