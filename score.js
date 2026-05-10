@@ -254,6 +254,11 @@ function applyClusterBonus(scored) {
 }
 
 async function main() {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('ANTHROPIC_API_KEY nicht gesetzt.');
+    process.exit(1);
+  }
+
   const date = todayString();
   const articleFile = `articles-${date}.json`;
 
