@@ -211,62 +211,43 @@ function weekRange(referenceDate) {
 
 // ─── Weekly-Prompt ────────────────────────────────────────────────────────────
 
-const WEEKLY_PROMPT = (must, optional, weekInfo) => `Du schreibst den wöchentlichen KI-Digest für eine erfahrene Product Owner / Product Managerin mit technischer Hands-on-Ambition. Sie baut eigene Tools mit Claude Code und der Anthropic API. Sie will KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, Build-vs-Buy, AI-Adoption, Kosten und eigene Prototypen.
+const WEEKLY_PROMPT = (must, optional, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM mit Hands-on-Ambition (Claude Code, Anthropic API). Fokus: Produktstrategie, Build-vs-Buy, AI-Adoption, Kosten, eigene Prototypen. Nicht im Scope: Backlog, Sprint, Stakeholder.
 
-Nicht im Scope: Backlog, Sprint-Mechanik, Stakeholder-Kommunikation, Jira-Integrationen.
-
-Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing. Die Leserin hat am Wochenende Zeit – mehr Tiefe ist explizit erwünscht.
-
-Beginne NICHT mit einer Überschrift – der Titel des Issues wird extern gesetzt. Starte direkt mit dem Einleitungstext.
+Tonalität: Schweizer Hochdeutsch, direkt. Keine Überschrift am Anfang – Titel wird extern gesetzt.
 
 ---
 
-**Woche KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})**
+KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})
 
-**PFLICHTARTIKEL – alle müssen ins Issue (Score 5):**
-${must.map((a, i) => `[P${i + 1}] ${a.datum} | ${a.quelle}
-Titel: ${a.titel}
-Was ist neu: ${a.wasIstNeu}
+PFLICHTARTIKEL (Score 5, alle ins Issue):
+${must.map((a, i) => `[P${i + 1}] ${a.datum} | ${a.quelle} | ${a.titel}
+Neu: ${a.wasIstNeu}
 Richtung: ${a.richtung}
-Build-Anker: ${a.anker}
 URL: ${a.url}`).join('\n\n')}
 
-**OPTIONAL – wähle 1–2 nach strategischer Bedeutung (Score 4):**
-${optional.map((a, i) => `[O${i + 1}] ${a.datum} | ${a.quelle}
-Titel: ${a.titel}
-Was ist neu: ${a.wasIstNeu}
+OPTIONAL (Score 4, wähle 1–2 nach strategischer Bedeutung):
+${optional.map((a, i) => `[O${i + 1}] ${a.datum} | ${a.quelle} | ${a.titel}
+Neu: ${a.wasIstNeu}
 Richtung: ${a.richtung}
-Build-Anker: ${a.anker}
 URL: ${a.url}`).join('\n\n')}
 
 ---
 
-Erstelle einen wöchentlichen Digest als GitHub-Issue-Body in Markdown. Struktur:
+Markdown-Struktur:
 
-1. **Einleitung** (3–4 Sätze): Was hat die Woche geprägt? Welche Strömung war dominant? Was hat sich gegenüber der Vorwoche verschoben (soweit erkennbar)?
+1. **Einleitung** (3–4 Sätze): Dominante Strömung der Woche, was hat sich gegenüber der Vorwoche verschoben?
 
-2. **Top-Entwicklungen der Woche**: Zuerst alle Pflichtartikel (P1–P${must.length}), dann die gewählten optionalen Artikel. Keine Ausnahmen bei den Pflichtartikeln.
+2. **Top-Entwicklungen**: Alle P-Artikel zuerst, dann gewählte O-Artikel. Pro Artikel:
+   - **Was passiert ist** (2–3 Sätze, nur Fakten aus dem Input – für jemanden der die Dailies nicht gelesen hat)
+   - **Was das bedeutet** (1–2 Sätze, Implikation für Produkt/Build-vs-Buy)
+   - **Kritische Einordnung** (1–2 Sätze, was fehlt im Bericht / welche Annahme könnte falsch sein)
+   - \`- [ ] Besonders wertvoll\` und \`- [ ] Später weiterverfolgen\`
 
-   Pro Artikel diese drei Blöcke in dieser Reihenfolge:
+3. **Strömungen der Woche** (2–3 Cluster, je 2–3 Sätze): Muster benennen, keine Artikel-Aufzählung.
 
-   **Was passiert ist** (2–3 Sätze, rein faktisch): Was wurde veröffentlicht, angekündigt oder gezeigt? Wer ist beteiligt? Welche konkreten Zahlen oder Fakten gibt es? Jemand, der die Daily Issues nicht gelesen hat, muss hier verstehen, worum es geht.
+4. **Wochenimpuls** (1 konkreter Build-Anker + 1–2 Sätze Kontext): Aus der Gesamtschau der Woche, nicht aus einem Einzelartikel.
 
-   **Was das bedeutet** (1–2 Sätze): Implikation für Produktstrategie, Build-vs-Buy oder eigene Projekte. Direkt, keine Floskeln.
-
-   **Kritische Einordnung** (1–2 Sätze): Was fehlt im Bericht? Welche Annahme könnte falsch sein? Welcher Gegenwind ist absehbar? Nicht destruktiv, aber ehrlich.
-
-   Danach Feedback-Checkboxen: \`- [ ] Besonders wertvoll\` und \`- [ ] Später weiterverfolgen\`
-
-3. **Strömungen der Woche** (2–3 Themencluster, je 2–3 Sätze): Was zieht sich wie ein roter Faden durch? Keine Artikel-Aufzählung, sondern Muster und ihre Richtung benennen.
-
-4. **Wochenimpuls** (2–3 Sätze, 1 konkreter Build-Anker): Aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code. Nicht aus einem einzelnen Artikel kopieren, sondern aus der Gesamtschau der Woche ableiten. Dann 1–2 Sätze warum dieser Impuls jetzt relevant ist.
-
-Wichtig:
-- Keine Halluzinationen: Nur Fakten aus den gegebenen Artikeln
-- Jeder Artikel braucht alle drei Blöcke – "Was passiert ist" kommt immer zuerst
-- Kein PO/Stakeholder-Sprache (keine Begriffe wie "Roadmap", "Sprint", "Backlog")
-- Die Kürzel P1, P2, O1 etc. sind nur zur internen Referenz – sie erscheinen nicht in den Überschriften
-- Umfang: ca. 700–900 Wörter gesamt`;
+Regeln: Nur Fakten aus dem Input. P/O-Kürzel nicht in Überschriften. Ca. 700–900 Wörter.`;
 
 // ─── GitHub: Weekly Issue erstellen ──────────────────────────────────────────
 

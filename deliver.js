@@ -305,8 +305,7 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
     source: article.quelle,
     score: article.score,
     scoring_reason: article.begründung,
-    raw_text: (article.rohtext || '').slice(0, 400),
-    issue_summary: summaries[index],
+    issue_summary: summaries[index],  // geschriebener Output – das ist was reviewed wird
   }));
 
   const samplePayload = lowScoreSamples.map(article => ({
@@ -597,12 +596,10 @@ async function main() {
     ueberblick = buildOverview(topArtikel);
   }
 
-  // Artikel sequenziell aufbereiten (Rate Limiting)
-  const aufbereitungen = [];
-  for (let i = 0; i < topArtikel.length; i++) {
-    const text = await aufbereiten(topArtikel[i], i, topArtikel.length);
-    aufbereitungen.push(text);
-  }
+  // Artikel parallel aufbereiten (typisch 3–5 Artikel, kein Rate-Limit-Problem auf Sonnet)
+  const aufbereitungen = await Promise.all(
+    topArtikel.map((artikel, i) => aufbereiten(artikel, i, topArtikel.length))
+  );
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
