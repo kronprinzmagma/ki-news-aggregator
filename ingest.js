@@ -59,11 +59,24 @@ async function runAdapters() {
   return articles;
 }
 
+function normalizeUrl(url) {
+  try {
+    const u = new URL(url);
+    // UTM-Parameter und andere Tracking-Parameter entfernen
+    for (const key of [...u.searchParams.keys()]) {
+      if (key.startsWith('utm_')) u.searchParams.delete(key);
+    }
+    u.hash = '';
+    return u.href.replace(/\/$/, '');
+  } catch { return url; }
+}
+
 function deduplicate(articles) {
   const seen = new Set();
   return articles.filter(a => {
-    if (seen.has(a.url)) return false;
-    seen.add(a.url);
+    const normalized = normalizeUrl(a.url);
+    if (seen.has(normalized)) return false;
+    seen.add(normalized);
     return true;
   });
 }
