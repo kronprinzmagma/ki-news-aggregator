@@ -146,7 +146,7 @@ function parseDailyIssue(issueDate, body) {
     if (!scoreMatch) continue;
 
     const titel = titleMatch[1].trim();
-    const score = parseInt(scoreMatch[1], 10);
+    const score = Math.min(5, Math.max(1, parseInt(scoreMatch[1], 10) || 1));
     const quelle = scoreMatch[2].trim();
     const url = scoreMatch[3].trim();
 
