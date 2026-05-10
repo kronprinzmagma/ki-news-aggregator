@@ -277,15 +277,13 @@ async function main() {
   const scored = await runWithConcurrency(articles, CONCURRENCY);
 
   // Post-Processing: Dedup-Penalty für Event-Überschneidungen, dann Cluster-Bonus
+  const failedCount = scored.filter(a => a.score === null).length;
   const deduplicated = applyEventDedup(scored.filter(a => a.score !== null));
   const boosted = applyClusterBonus(deduplicated);
-  // Artikel ohne Score wieder hinzufügen (unveränderter Fehlerfall)
-  const failed = scored.filter(a => a.score === null);
-  const allProcessed = [...boosted, ...failed];
 
-  const relevant = allProcessed.filter(a => a.score !== null && a.score >= 3);
-  const dropped = scored.length - relevant.length;
-  console.log(`\n${relevant.length} relevante Artikel (Score >= 3), ${dropped} aussortiert`);
+  const relevant = boosted.filter(a => a.score >= 3);
+  const lowScoreCount = boosted.filter(a => a.score < 3).length;
+  console.log(`\n${relevant.length} relevante Artikel (Score >= 3), ${lowScoreCount} unter Score 3, ${failedCount} API-Fehler`);
 
   const filename = `scored-${date}.json`;
   await fs.writeFile(filename, JSON.stringify(relevant, null, 2), 'utf-8');
