@@ -184,7 +184,7 @@ function weekRange(referenceDate) {
 
 // ─── Weekly-Prompt ────────────────────────────────────────────────────────────
 
-const WEEKLY_PROMPT = (articles, weekInfo) => `Du schreibst den wöchentlichen KI-Digest für eine erfahrene Product Owner / Product Managerin mit technischer Hands-on-Ambition. Sie baut eigene Tools mit Claude Code und der Anthropic API. Sie will KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, Build-vs-Buy, AI-Adoption, Kosten und eigene Prototypen.
+const WEEKLY_PROMPT = (must, optional, weekInfo) => `Du schreibst den wöchentlichen KI-Digest für eine erfahrene Product Owner / Product Managerin mit technischer Hands-on-Ambition. Sie baut eigene Tools mit Claude Code und der Anthropic API. Sie will KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, Build-vs-Buy, AI-Adoption, Kosten und eigene Prototypen.
 
 Nicht im Scope: Backlog, Sprint-Mechanik, Stakeholder-Kommunikation, Jira-Integrationen.
 
@@ -196,9 +196,16 @@ Beginne NICHT mit einer Überschrift – der Titel des Issues wird extern gesetz
 
 **Woche KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})**
 
-Die Woche hatte ${articles.length} veröffentlichte Artikel in den Daily Issues. Hier ist der vollständige Input:
+**PFLICHTARTIKEL – alle müssen ins Issue (Score 5):**
+${must.map((a, i) => `[P${i + 1}] ${a.datum} | ${a.quelle}
+Titel: ${a.titel}
+Was ist neu: ${a.wasIstNeu}
+Richtung: ${a.richtung}
+Build-Anker: ${a.anker}
+URL: ${a.url}`).join('\n\n')}
 
-${articles.map((a, i) => `[${i + 1}] Score ${a.score}/5 | ${a.datum} | ${a.quelle}
+**OPTIONAL – wähle 1–2 nach strategischer Bedeutung (Score 4):**
+${optional.map((a, i) => `[O${i + 1}] ${a.datum} | ${a.quelle}
 Titel: ${a.titel}
 Was ist neu: ${a.wasIstNeu}
 Richtung: ${a.richtung}
@@ -211,7 +218,7 @@ Erstelle einen wöchentlichen Digest als GitHub-Issue-Body in Markdown. Struktur
 
 1. **Einleitung** (3–4 Sätze): Was hat die Woche geprägt? Welche Strömung war dominant? Was hat sich gegenüber der Vorwoche verschoben (soweit erkennbar)?
 
-2. **Top-Entwicklungen der Woche** (die 3–5 strategisch bedeutsamsten Artikel – nicht einfach die mit dem höchsten Score):
+2. **Top-Entwicklungen der Woche**: Zuerst alle Pflichtartikel (P1–P${must.length}), dann die gewählten optionalen Artikel. Keine Ausnahmen bei den Pflichtartikeln.
 
    Pro Artikel diese drei Blöcke in dieser Reihenfolge:
 
@@ -231,6 +238,7 @@ Wichtig:
 - Keine Halluzinationen: Nur Fakten aus den gegebenen Artikeln
 - Jeder Artikel braucht alle drei Blöcke – "Was passiert ist" kommt immer zuerst
 - Kein PO/Stakeholder-Sprache (keine Begriffe wie "Roadmap", "Sprint", "Backlog")
+- Die Kürzel P1, P2, O1 etc. sind nur zur internen Referenz – sie erscheinen nicht in den Überschriften
 - Umfang: ca. 700–900 Wörter gesamt`;
 
 // ─── GitHub: Weekly Issue erstellen ──────────────────────────────────────────
@@ -318,11 +326,13 @@ async function main() {
     process.exit(0);
   }
 
-  console.log(`[weekly] ${allArticles.length} unique Artikel für Synthese (URL-Duplikate entfernt)`);
+  const mustArticles = allArticles.filter(a => a.score === 5);
+  const optionalArticles = allArticles.filter(a => a.score < 5);
+  console.log(`[weekly] ${allArticles.length} unique Artikel – ${mustArticles.length} Pflicht (Score 5), ${optionalArticles.length} optional (Score < 5)`);
 
   // Wöchentlichen Digest per Claude generieren
   console.log('[weekly] Generiere Digest per Claude...');
-  const digestBody = await claudeText(WEEKLY_PROMPT(allArticles, weekInfo), 2800);
+  const digestBody = await claudeText(WEEKLY_PROMPT(mustArticles, optionalArticles, weekInfo), 2800);
 
   // Issue-Body zusammenbauen
   const issueBody = `# KI Weekly – KW ${weekInfo.kw}
