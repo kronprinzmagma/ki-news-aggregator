@@ -18,7 +18,12 @@ const API_TIMEOUT_MS = 45_000;
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504, 529]);
 
 function todayString() {
-  return process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
+  const raw = process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    console.error(`Ungültiges RUN_DATE-Format: "${raw}". Erwartet: YYYY-MM-DD`);
+    process.exit(1);
+  }
+  return raw;
 }
 
 function claudeRequest(article) {
