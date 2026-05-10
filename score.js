@@ -123,7 +123,7 @@ async function scoreArticle(article, retries = 0) {
     return scoreArticle(article, retries + 1);
   }
 
-  if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status} – ${body}`);
+  if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status} – ${body.slice(0, 150)}`);
 
   const parsed = JSON.parse(body);
   const content = parsed?.content?.[0]?.text;

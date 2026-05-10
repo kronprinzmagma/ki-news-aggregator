@@ -812,7 +812,7 @@ async function upsertGithubIssue(date, body) {
       return issue.html_url;
     }
 
-    console.error(`GitHub API Fehler beim Aktualisieren: HTTP ${status} – ${responseBody}`);
+    console.error(`GitHub API Fehler beim Aktualisieren: HTTP ${status} – ${responseBody.slice(0, 200)}`);
     return null;
   }
 
@@ -834,7 +834,7 @@ async function upsertGithubIssue(date, body) {
     return issue.html_url;
   }
 
-  console.error(`GitHub API Fehler beim Erstellen: HTTP ${status} – ${responseBody}`);
+  console.error(`GitHub API Fehler beim Erstellen: HTTP ${status} – ${responseBody.slice(0, 200)}`);
   return null;
 }
 
