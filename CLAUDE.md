@@ -81,3 +81,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 **Weekly:** 08:00 UTC sonntags (`weekly-digest.yml`), nach dem Daily.
 
 Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.
+
+## Dokumentations-Pflicht nach jeder Änderung
+
+Nach jeder Session, die Code oder Konfiguration ändert: `.context/doc-check.md` vollständig abarbeiten, bevor „alles aktualisiert" gesagt wird. Diese Checkliste definiert für jede Doku-Datei, welche Fakten mit dem Code übereinstimmen müssen.
