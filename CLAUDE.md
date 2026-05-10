@@ -58,6 +58,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
+- Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 3 Issues erschienen sind, werden vor der Selektion gefiltert
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
 - Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 4 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. Bewertung der geschriebenen drei Blöcke
@@ -65,8 +66,18 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
 
+## Weekly Digest (`weekly.js`)
+
+- CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
+- Holt die letzten 7 KI-Daily-Issues per GitHub API, parst alle Artikel, URL-Dedup über Tage
+- Score-5-Artikel kommen immer ins Issue (Pflicht); Claude wählt zusätzlich 1–2 Score-4-Artikel
+- Pro Artikel drei Blöcke: Was passiert ist (faktisch) / Was das bedeutet / Kritische Einordnung
+- Zusätzlich: Einleitung, Strömungen der Woche, Wochenimpuls
+- Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
+
 ## Schedule
 
-Täglich, 05:30 UTC (= 07:30 CEST / 06:30 CET). Wochenend-News laufen wie normale Daily-Issues; Weekly/Monthly-Synthesis bleibt als separates Format geplant.
+**Daily:** 05:30 UTC täglich (`daily-news.yml`), Wochenende eingeschlossen.
+**Weekly:** 08:00 UTC sonntags (`weekly-digest.yml`), nach dem Daily.
 
 Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.
