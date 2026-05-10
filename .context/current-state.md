@@ -47,6 +47,22 @@ Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilche
 - Gefilterte URLs werden geloggt + in `run-summary.deliver.cross_day_dedup` protokolliert
 - Fail-safe: bei API-Fehler oder fehlendem Token wird die Dedup übersprungen (kein Abbruch)
 
+## Security Review 2026-05-10 (heute gefixt)
+
+4 Criticals, 8 Warnings, 3 Infos – alle gefixt:
+- **CR-01**: NEWSAPI-Key neu als `X-Api-Key` Header (nicht mehr Query-Parameter)
+- **CR-02**: SSRF-Schutz via `isSafeUrl()` in allen Adaptern (blockiert http:, private IPs, Cloud-Metadata-Endpoints)
+- **CR-03**: Prompt-Injection-Schutz: Artikel-Titel/-Text in `<artikel_titel>`/`<artikel_text>` XML-Tags gewrappt
+- **CR-04**: `sanitizeMarkdown()` + `sanitizeUrl()` in deliver.js – alle externen Inhalte im Issue-Body sanitisiert
+- **WR-01/02**: Statuscode-Prüfung + Redirect-Handling in 5 Adaptern nachgezogen
+- **WR-03/04**: API-Error-Bodies in Logs auf 150/200 Zeichen gekürzt
+- **WR-05**: 5 MB Response-Limit in allen Adaptern
+- **WR-06**: `RUN_DATE` Regex-Validierung + `process.exit(1)` bei ungültigem Format
+- **WR-07**: `applyFeedbackStates()` nutzt jetzt Regex statt String
+- **WR-08**: Retry-Logik in `weekly.js` (max 2 Retries, exponentielles Backoff)
+- **WR-09**: URL-Normalisierung in `ingest.js` (UTM-Parameter + Hash entfernt)
+- **WR-10**: Score aus Issue-Body auf 1–5 geclampt in `weekly.js`
+
 ## Offene Punkte (nächste Session)
 
 - Harter Gate: Artikel mit "Volltext nicht verfügbar" kommen nicht ins Issue

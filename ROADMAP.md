@@ -44,6 +44,7 @@ Ziel: Bekannte Schwachstellen aus Code Review 2026-05-08 beheben.
 - [x] WR-03: Redirect-Loop-Schutz in `venturebeat.js` und `huggingface.js`
 - [x] WR-04/05/06/07/08 + IN-01/02/03: Kleinere Fixes (env-Parser, Redirect-Codes, Retry-After, Floskel-Satz, Dedup-Konsistenz, stopWords, Actions-Versionen)
 - [x] Code Review 2026-05-09: CR-02 bis IN-04 umgesetzt (Socket-Timeouts, Redirect-Fixes, Entity-Decoding, Retry-After in deliver.js, Adapter-Robustheit)
+- [x] Security Review 2026-05-10: CR-01 NEWSAPI-Key als Header, CR-02 SSRF-Schutz (`isSafeUrl()`) in allen Adaptern, CR-03 Prompt-Injection via XML-Tags, CR-04 GitHub-Issue-Sanitisierung; WR-01–10 und IN-01/03/04 vollständig gefixt
 - [ ] Idee: API-Keys aus `.env` im Projektordner herausziehen → Shell-Profil (`~/.zprofile`) oder macOS Keychain; `.env` löschen. Hintergrund: Keys liegen aktuell als Klartext im Projektverzeichnis, auch wenn nicht in Git.
 
 ---
