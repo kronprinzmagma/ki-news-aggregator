@@ -47,6 +47,12 @@ Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilche
 - Gefilterte URLs werden geloggt + in `run-summary.deliver.cross_day_dedup` protokolliert
 - Fail-safe: bei API-Fehler oder fehlendem Token wird die Dedup übersprungen (kein Abbruch)
 
+## Performance-Optimierungen 2026-05-10 (heute umgesetzt)
+
+- `deliver.js`: Artikel-Aufbereitung parallel statt sequenziell (`Promise.all`) – ~4× schneller
+- `deliver.js`: `raw_text` aus Review-Payload entfernt – ~2000 Input-Tokens/Run gespart
+- `weekly.js`: `WEEKLY_PROMPT` von 7719 auf 1757 Zeichen gekürzt (-77%) – ~1500 Tokens/Run gespart
+
 ## Security Review 2026-05-10 (heute gefixt)
 
 4 Criticals, 8 Warnings, 3 Infos – alle gefixt:
