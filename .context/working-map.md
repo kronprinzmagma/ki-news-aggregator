@@ -10,7 +10,7 @@ Diese Datei ist eine knappe Orientierung für die aktuelle Arbeit. Keine vollst�
 ## Schedule / GitHub Actions
 
 - `.github/workflows/daily-news.yml`: Hauptworkflow für Daily-News. Aktuell auf täglich `30 5 * * *` geändert.
-- `.github/workflows/watchdog.yml`: Fallback, der den Hauptworkflow nachtriggert, falls er am UTC-Tag nicht gelaufen ist. Aktuell auf täglich `0 7 * * *` geändert.
+- `.github/workflows/watchdog.yml`: Theoretischer Fallback (07:00 UTC), nutzt aber dieselbe GitHub-Schedule-Mechanik – gleich unzuverlässig wie der Hauptworkflow. Kein verlässlicher Fallback.
 
 Nicht erneut breit analysieren:
 
@@ -56,5 +56,5 @@ Nicht erneut lesen, wenn nur an Eval-UI oder Eval-Metriken gearbeitet wird, auss
 ## Bewusst nicht anfassen
 
 - `.env`: Enthält lokale Secrets. Nicht lesen, nicht zitieren, nicht committen.
-- `REVIEW.md`: Untracked; nicht Teil der aktuellen Änderungen.
+- `REVIEW.md`: Tracked; enthält Code-Review-Findings aus 2026-05-08 bis 2026-05-10 – alle als [FIXED] markiert.
 - `.git/`: Keine destruktiven Git-Befehle.

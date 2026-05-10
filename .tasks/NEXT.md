@@ -1,57 +1,45 @@
 # Next Task
 
-## Nächster sinnvoller Arbeitsschritt
+## Offene Punkte (Priorität absteigend)
 
-Die neue Claude-only Review-Schlaufe an einem echten oder lokalen Run prüfen und danach Feedback aus Daily-Issues maschinenlesbar machen.
+### 1. Harter Gate: „Volltext nicht verfügbar"
 
-## Scope
+Artikel, deren `raw_text` den String „Volltext nicht verfügbar" enthält, sollen **nicht** ins Issue kommen – unabhängig vom Score.
 
-- Prüfen, ob `run-summary-YYYY-MM-DD.json` die Review-Ergebnisse sauber enthält.
-- Sicherstellen, dass die Review-Schlaufe keine Issue-Erstellung blockiert, wenn Claude-JSON fehlschlägt.
-- Script oder Workflow-Konzept erstellen, das gesetzte Issue-Checkboxen aus Daily-Issues auslesen kann.
-- Aus `Besonders wertvoll` und `Später weiterverfolgen` strukturierte Feedbackdaten ableiten.
+**Scope:**
+- `deliver.js`: Nach Score-Filter und vor Dedup prüfen ob `raw_text` den Hinweis enthält
+- Gefilterte Artikel im `run-summary.json` protokollieren
+- Kein Issue-Abbruch, nur Ausschluss des Artikels
 
-## Out of Scope
+**Akzeptanzkriterien:**
+- Artikel mit „Volltext nicht verfügbar" erscheinen nie im GitHub Issue
+- Ausschluss wird in `run-summary-YYYY-MM-DD.json` unter `thin_content_filtered` geloggt
 
-- Keine OpenAI/ChatGPT-Anbindung ohne separate API-Key-/Kostenentscheidung.
-- Keine automatische Code-, Prompt- oder Auswahlregeländerung aus Review-Empfehlungen.
-- Keine Änderungen an `.github/workflows/daily-news.yml` oder `.github/workflows/watchdog.yml`.
-- Kein Refactoring der Adapter.
-- Kein Weekly-/Monthly-Digest implementieren.
-- Keine breite Repo-Analyse.
+---
 
-## Akzeptanzkriterien
+### 2. PR-Mechanismus: process_adjustments → Pull Request
 
-- Review-Schlaufe bewertet final ausgewählte Artikel und bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3.
-- Run-Summary enthält `review.mode = advisory`, `selected_articles`, `low_score_samples` und `process_adjustments`.
-- Fehler in der Review-Schlaufe werden als `review.error` gespeichert und brechen Delivery nicht ab.
-- Daily-Issue-Checkboxen können aus bestehenden Issues maschinenlesbar extrahiert werden.
+`process_adjustments` aus `run-summary-YYYY-MM-DD.json` automatisch als GitHub Pull Request öffnen.
 
-## Verifikation
+**Scope:**
+- `deliver.js` oder neues `pr.js`: Nach Delivery prüfen ob `process_adjustments` nicht leer
+- Pull Request mit Diff erstellen (z.B. Prompt-Anpassungen)
+- Nur wenn Änderungen vorhanden; kein leerer PR
 
-- `node --check deliver.js`
-- Falls ein API-Lauf gewünscht ist: mit einem konkreten `RUN_DATE` lokal oder via GitHub Actions ausführen.
-- Wenn GitHub-Zugriff genutzt wird: erst read-only prüfen, keine Issue-Mutation ohne ausdrücklichen Auftrag.
-- Für Checkbox-Erhaltung kann ein lokaler Markdown-Fixture-Test reichen.
+---
 
-## Maximale Dateien für diesen Schritt
+### 3. Eval-Goldstandard ausbauen
 
-Lesen:
+Aktuell 8 Einträge in `evals/goldstandard.json`, Ziel: ~40.
 
-- `.context/current-state.md`
-- `.tasks/NEXT.md`
-- `deliver.js`
-- ein konkretes `run-summary-YYYY-MM-DD.json`, falls vorhanden
+**Scope:**
+- `evals/run_eval.py` Prompt mit `score.js` synchronisieren (bekannter Drift)
+- Goldstandard-Einträge via `npm run eval:review` ergänzen
 
-Ändern:
+---
 
-- neu zu erstellendes Feedback-Auslese-Script
-- `PROJECT.md` oder `CLAUDE.md`, falls Bedienung dokumentiert werden muss
+## Bewusst zurückgestellt
 
-Optional ändern:
-
-- `deliver.js`, nur bei einem konkreten Review- oder Checkbox-Bug.
-
-## Arbeitsregel für künftige Sessions
-
-Nach maximal 5 explorativen Tool-Calls stoppen und einen knappen Plan liefern, wenn der nächste Schritt nicht eindeutig ist.
+- **API-Keys aus `.env`**: Verschiebung in `~/.zprofile` oder macOS Keychain – vom User zurückgestellt
+- **Monthly Digest**: Phase 6, noch nicht priorisiert
+- **Watchdog-Zuverlässigkeit**: GitHub-Schedule-Problem bekannt; keine zuverlässige Lösung ohne externen Cron-Dienst (z.B. cron-job.org)
