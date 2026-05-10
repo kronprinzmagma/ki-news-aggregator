@@ -1,15 +1,27 @@
 import https from 'https';
-import http from 'http';
 
 const FEED_URL = 'https://hnrss.org/frontpage';
 const REQUEST_TIMEOUT_MS = 10_000;
 const MAX_REDIRECTS = 3;
+const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB
+
+function isSafeUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return false;
+    const host = parsed.hostname;
+    if (/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.)/.test(host)) return false;
+    return true;
+  } catch { return false; }
+}
 
 function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
-    const client = parsed.protocol === 'http:' ? http : https;
-    const req = client.get(url, {
+    if (!isSafeUrl(url)) {
+      reject(new Error(`Unsichere URL blockiert: ${url}`));
+      return;
+    }
+    const req = https.get(url, {
       headers: {
         'User-Agent': 'ki-news-aggregator/1.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -22,6 +34,10 @@ function get(url, redirects = 0) {
           return;
         }
         const nextUrl = new URL(res.headers.location, url).toString();
+        if (!isSafeUrl(nextUrl)) {
+          reject(new Error(`Redirect auf unsichere URL blockiert: ${nextUrl}`));
+          return;
+        }
         resolve(get(nextUrl, redirects + 1));
         return;
       }
@@ -33,7 +49,15 @@ function get(url, redirects = 0) {
       }
 
       let data = '';
-      res.on('data', chunk => data += chunk);
+      let totalBytes = 0;
+      res.on('data', chunk => {
+        totalBytes += chunk.length;
+        if (totalBytes > MAX_RESPONSE_BYTES) {
+          req.destroy(new Error(`Response zu gross (> 5 MB) für ${url}`));
+          return;
+        }
+        data += chunk;
+      });
       res.on('end', () => resolve(data));
     });
 
@@ -98,7 +122,7 @@ function extractArticleText(html) {
 }
 
 async function enrichArticleText(article) {
-  if (article.quelle === 'hackernews-show' || (article.rohtext || '').length >= 1500 || !/^https?:\/\//.test(article.url)) {
+  if (article.quelle === 'hackernews-show' || (article.rohtext || '').length >= 1500 || !isSafeUrl(article.url)) {
     return article;
   }
 

@@ -2,17 +2,63 @@ import https from 'https';
 
 const FEED_URL = 'https://www.interconnects.ai/feed';
 const REQUEST_TIMEOUT_MS = 10_000;
+const MAX_REDIRECTS = 3;
+const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB
 
-function get(url) {
+function isSafeUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return false;
+    const host = parsed.hostname;
+    if (/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.)/.test(host)) return false;
+    return true;
+  } catch { return false; }
+}
+
+function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, (res) => {
+    if (!isSafeUrl(url)) {
+      reject(new Error(`Unsichere URL blockiert: ${url}`));
+      return;
+    }
+    const req = https.get(url, {
+      headers: { 'User-Agent': 'ki-news-aggregator/1.0' },
+    }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        res.resume();
+        if (redirects >= MAX_REDIRECTS) {
+          reject(new Error(`Zu viele Redirects für ${url}`));
+          return;
+        }
+        const nextUrl = new URL(res.headers.location, url).toString();
+        if (!isSafeUrl(nextUrl)) {
+          reject(new Error(`Redirect auf unsichere URL blockiert: ${nextUrl}`));
+          return;
+        }
+        resolve(get(nextUrl, redirects + 1));
+        return;
+      }
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.resume();
+        reject(new Error(`HTTP ${res.statusCode} für ${url}`));
+        return;
+      }
       let data = '';
-      res.on('data', chunk => data += chunk);
+      let totalBytes = 0;
+      res.on('data', chunk => {
+        totalBytes += chunk.length;
+        if (totalBytes > MAX_RESPONSE_BYTES) {
+          req.destroy(new Error(`Response zu gross (> 5 MB) für ${url}`));
+          return;
+        }
+        data += chunk;
+      });
       res.on('end', () => resolve(data));
-    }).on('error', reject);
+    });
     req.setTimeout(REQUEST_TIMEOUT_MS, () => {
       req.destroy(new Error(`Timeout nach ${REQUEST_TIMEOUT_MS / 1000}s für ${url}`));
     });
+    req.on('error', reject);
   });
 }
 
@@ -58,7 +104,7 @@ function extractArticleText(html) {
 }
 
 async function enrichArticleText(article) {
-  if ((article.rohtext || '').length >= 1500 || !/^https?:\/\//.test(article.url)) {
+  if ((article.rohtext || '').length >= 1500 || !isSafeUrl(article.url)) {
     return article;
   }
   try {

@@ -3,6 +3,17 @@ import https from 'https';
 const FEED_URL = 'https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml';
 const REQUEST_TIMEOUT_MS = 15_000;
 const MAX_REDIRECTS = 3;
+const MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB
+
+function isSafeUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return false;
+    const host = parsed.hostname;
+    if (/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.)/.test(host)) return false;
+    return true;
+  } catch { return false; }
+}
 
 function get(url, redirects = 0) {
   return new Promise((resolve, reject) => {
@@ -19,6 +30,10 @@ function get(url, redirects = 0) {
           return;
         }
         const nextUrl = new URL(res.headers.location, url).toString();
+        if (!isSafeUrl(nextUrl)) {
+          reject(new Error(`Redirect auf unsichere URL blockiert: ${nextUrl}`));
+          return;
+        }
         resolve(get(nextUrl, redirects + 1));
         return;
       }
@@ -30,7 +45,15 @@ function get(url, redirects = 0) {
       }
 
       let data = '';
-      res.on('data', chunk => data += chunk);
+      let totalBytes = 0;
+      res.on('data', chunk => {
+        totalBytes += chunk.length;
+        if (totalBytes > MAX_RESPONSE_BYTES) {
+          req.destroy(new Error(`Response zu gross (> 5 MB) für ${url}`));
+          return;
+        }
+        data += chunk;
+      });
       res.on('end', () => resolve(data));
     });
 
@@ -90,7 +113,7 @@ function extractArticleText(html) {
 }
 
 async function enrichArticleText(article) {
-  if ((article.rohtext || '').length >= 1500 || !article.url.includes('anthropic.com/news/')) {
+  if ((article.rohtext || '').length >= 1500 || !isSafeUrl(article.url) || !article.url.includes('anthropic.com/news/')) {
     return article;
   }
 
