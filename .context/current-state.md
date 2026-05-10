@@ -27,6 +27,15 @@ Alle relevanten Adapter haben Artikel-Enrichment:
 
 Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilcher, venturebeat
 
+## Weekly Digest (neu, heute implementiert)
+
+`weekly.js` + `.github/workflows/weekly-digest.yml`:
+- Läuft sonntags 08:00 UTC (nach dem Daily um 05:30 UTC)
+- Holt die letzten 7 KI-Daily-Issues per GitHub API
+- Parst alle Artikel, URL-Dedup über Tage
+- Synthetisiert per Claude Sonnet: Einleitung, Top-Entwicklungen, Strömungen, Wochenimpuls
+- Erstellt GitHub Issue `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
+
 ## Tagesübergreifende Dedup (neu, heute implementiert)
 
 `deliver.js` filtert Artikel heraus, die bereits in einem der letzten 3 Issues erschienen sind:

@@ -66,7 +66,7 @@ Ziel: Die Pipeline verbessert ihren Output eigenständig durch Review-gesteuerte
 
 Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Kontext.
 
-- [ ] Wöchentliches Meta-Issue (Sa oder Mo): Trend-Zusammenfassung über die Woche, welche Themen haben dominiert, was hat sich verschoben
+- [x] Wöchentlicher Digest (Sonntag 08:00 UTC): Top-Entwicklungen, Strömungen, Wochenimpuls – als separates GitHub Issue (`weekly.js` + `weekly-digest.yml`)
 - [ ] Monthly Digest (1. des Monats): Längerfristige Mustererkennung über 4 Wochen
 
 ---
