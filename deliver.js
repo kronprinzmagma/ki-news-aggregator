@@ -370,8 +370,8 @@ function applyFeedbackStates(markdown, states) {
       const state = url ? states.get(url) : null;
       if (!state) return section;
       return section
-        .replace('- [ ] Besonders wertvoll', `- [${state.standout ? 'x' : ' '}] Besonders wertvoll`)
-        .replace('- [ ] Später weiterverfolgen', `- [${state.followUp ? 'x' : ' '}] Später weiterverfolgen`);
+        .replace(/- \[[ xX]\] Besonders wertvoll/, `- [${state.standout ? 'x' : ' '}] Besonders wertvoll`)
+        .replace(/- \[[ xX]\] Später weiterverfolgen/, `- [${state.followUp ? 'x' : ' '}] Später weiterverfolgen`);
     })
     .join('\n');
 }
