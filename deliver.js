@@ -497,11 +497,20 @@ async function main() {
     console.warn('[summary] articles-*.json nicht gefunden – Ingest-Statistik wird übersprungen.');
   }
 
+  // Bereits in den letzten Issues veröffentlichte URLs laden (tagesübergreifende Dedup)
+  const token = process.env.GH_PAT;
+  const recentlyPublished = await fetchRecentlyPublishedUrls(token, 3);
+
   // Nur Score >= 4, nach Score absteigend, dann nach Quelle priorisieren (Lab > HN)
   const LAB_QUELLEN = new Set(['anthropic', 'openai', 'deepmind', 'latentspace', 'simonwillison']);
   const belowCutoff = articles.filter(a => a.score !== null && a.score < 4);
+  const alreadyPublished = articles.filter(a => a.score >= 4 && recentlyPublished.has(a.url));
+  if (alreadyPublished.length > 0) {
+    console.log(`[dedup] ${alreadyPublished.length} Artikel bereits in vorherigen Issues – werden übersprungen:`);
+    alreadyPublished.forEach(a => console.log(`  - ${a.titel}`));
+  }
   const sorted = [...articles]
-    .filter(a => a.score >= 4)
+    .filter(a => a.score >= 4 && !recentlyPublished.has(a.url))
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       const aLab = LAB_QUELLEN.has(a.quelle) ? 1 : 0;
@@ -532,6 +541,7 @@ async function main() {
     deliver: {
       after_cutoff: sorted.length,
       after_dedup: deduped.length,
+      cross_day_dedup: alreadyPublished.map(a => ({ titel: a.titel, url: a.url })),
       in_issue: 0,
       issue_articles: [],
       deduped_out: dedupedOut,
@@ -684,6 +694,43 @@ function githubRequest(token, method, path, payload = null) {
     if (payload) req.write(JSON.stringify(payload));
     req.end();
   });
+}
+
+/**
+ * Holt die URLs aller Hauptartikel aus den letzten N "KI Daily" Issues.
+ * Verhindert, dass Artikel mehrere Tage in Folge im Issue erscheinen.
+ */
+async function fetchRecentlyPublishedUrls(token, lookbackDays = 3) {
+  if (!token) return new Set();
+  try {
+    const { status, body } = await githubRequest(
+      token, 'GET',
+      '/repos/kronprinzmagma/ki-news-aggregator/issues?state=all&labels=&per_page=10'
+    );
+    if (status !== 200) {
+      console.warn(`[dedup] GitHub Issues nicht ladbar: HTTP ${status}`);
+      return new Set();
+    }
+    const issues = JSON.parse(body);
+    const kiDailyIssues = issues
+      .filter(i => /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title))
+      .slice(0, lookbackDays);
+
+    const seenUrls = new Set();
+    // URL-Muster für Hauptartikel-Zeilen: "Score X/5 · [quelle](url)"
+    const urlPattern = /Score \d\/5 · \[[^\]]+\]\((https?:\/\/[^)]+)\)/g;
+    for (const issue of kiDailyIssues) {
+      let match;
+      while ((match = urlPattern.exec(issue.body || '')) !== null) {
+        seenUrls.add(match[1]);
+      }
+    }
+    console.log(`[dedup] ${seenUrls.size} URLs aus ${kiDailyIssues.length} vorherigen Issues geladen`);
+    return seenUrls;
+  } catch (err) {
+    console.warn(`[dedup] Vorherige Issues nicht ladbar: ${err.message}`);
+    return new Set();
+  }
 }
 
 async function findExistingIssue(token, issueTitle) {
