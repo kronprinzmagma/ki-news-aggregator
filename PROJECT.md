@@ -59,5 +59,5 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Delivery-Channel | Ausschliesslich GitHub Issues im gleichen Repo |
 | Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI |
 | Datenhaltung | Keine Datenbank – JSON-Files im Repo-Root als Zwischenergebnisse |
-| Modellversion | `claude-haiku-4-5` für Score, `claude-sonnet-4-6` für Deliver |
+| Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |

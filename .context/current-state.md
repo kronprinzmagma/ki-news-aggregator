@@ -6,7 +6,7 @@ Stand: 2026-05-10
 
 Täglicher KI-News-Aggregator: ingest → score → deliver → GitHub Issue.
 Läuft täglich um 05:30 UTC via GitHub Actions (inkl. Wochenende).
-Watchdog-Workflow um 07:00 UTC als Fallback falls Schedule nicht feuert.
+Watchdog-Workflow um 07:00 UTC existiert, ist aber gleich unzuverlässig wie der Haupt-Schedule (gleiche GitHub-Schedule-Mechanik). Kein verlässlicher Fallback.
 
 ## Review-Schlaufe mit Rewrite-Loop (neu, heute implementiert)
 
