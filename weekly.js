@@ -188,7 +188,7 @@ const WEEKLY_PROMPT = (articles, weekInfo) => `Du schreibst den wöchentlichen K
 
 Nicht im Scope: Backlog, Sprint-Mechanik, Stakeholder-Kommunikation, Jira-Integrationen.
 
-Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing.
+Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing. Die Leserin hat am Wochenende Zeit – mehr Tiefe ist explizit erwünscht.
 
 Beginne NICHT mit einer Überschrift – der Titel des Issues wird extern gesetzt. Starte direkt mit dem Einleitungstext.
 
@@ -211,19 +211,27 @@ Erstelle einen wöchentlichen Digest als GitHub-Issue-Body in Markdown. Struktur
 
 1. **Einleitung** (3–4 Sätze): Was hat die Woche geprägt? Welche Strömung war dominant? Was hat sich gegenüber der Vorwoche verschoben (soweit erkennbar)?
 
-2. **Top-Entwicklungen der Woche** (die 3–5 wichtigsten Artikel, nicht einfach die mit dem höchsten Score, sondern die strategisch bedeutsamsten):
-   - Für jeden: Titel als Markdown-Link, kurze Neubewertung aus Wochenperspektive (2–3 Sätze), warum diese Woche wichtig
-   - Feedback-Checkboxen: \`- [ ] Besonders wertvoll\` und \`- [ ] Später weiterverfolgen\`
+2. **Top-Entwicklungen der Woche** (die 3–5 strategisch bedeutsamsten Artikel – nicht einfach die mit dem höchsten Score):
 
-3. **Strömungen der Woche** (2–3 Themencluster, je 1–2 Sätze): Was zieht sich wie ein roter Faden durch? Keine Aufzählung von Artikeln, sondern Muster benennen.
+   Pro Artikel diese drei Blöcke in dieser Reihenfolge:
 
-4. **Wochenimpuls** (1 konkreter Build-Anker für das Wochenende): Aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code. Nicht aus einem einzelnen Artikel kopieren, sondern aus der Gesamtschau der Woche ableiten.
+   **Was passiert ist** (2–3 Sätze, rein faktisch): Was wurde veröffentlicht, angekündigt oder gezeigt? Wer ist beteiligt? Welche konkreten Zahlen oder Fakten gibt es? Jemand, der die Daily Issues nicht gelesen hat, muss hier verstehen, worum es geht.
+
+   **Was das bedeutet** (1–2 Sätze): Implikation für Produktstrategie, Build-vs-Buy oder eigene Projekte. Direkt, keine Floskeln.
+
+   **Kritische Einordnung** (1–2 Sätze): Was fehlt im Bericht? Welche Annahme könnte falsch sein? Welcher Gegenwind ist absehbar? Nicht destruktiv, aber ehrlich.
+
+   Danach Feedback-Checkboxen: \`- [ ] Besonders wertvoll\` und \`- [ ] Später weiterverfolgen\`
+
+3. **Strömungen der Woche** (2–3 Themencluster, je 2–3 Sätze): Was zieht sich wie ein roter Faden durch? Keine Artikel-Aufzählung, sondern Muster und ihre Richtung benennen.
+
+4. **Wochenimpuls** (2–3 Sätze, 1 konkreter Build-Anker): Aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code. Nicht aus einem einzelnen Artikel kopieren, sondern aus der Gesamtschau der Woche ableiten. Dann 1–2 Sätze warum dieser Impuls jetzt relevant ist.
 
 Wichtig:
 - Keine Halluzinationen: Nur Fakten aus den gegebenen Artikeln
-- Keine Titel-Wiederholungen als "Zusammenfassung"
+- Jeder Artikel braucht alle drei Blöcke – "Was passiert ist" kommt immer zuerst
 - Kein PO/Stakeholder-Sprache (keine Begriffe wie "Roadmap", "Sprint", "Backlog")
-- Maximal 500 Wörter gesamt`;
+- Umfang: ca. 700–900 Wörter gesamt`;
 
 // ─── GitHub: Weekly Issue erstellen ──────────────────────────────────────────
 
@@ -314,7 +322,7 @@ async function main() {
 
   // Wöchentlichen Digest per Claude generieren
   console.log('[weekly] Generiere Digest per Claude...');
-  const digestBody = await claudeText(WEEKLY_PROMPT(allArticles, weekInfo), 1500);
+  const digestBody = await claudeText(WEEKLY_PROMPT(allArticles, weekInfo), 2800);
 
   // Issue-Body zusammenbauen
   const issueBody = `# KI Weekly – KW ${weekInfo.kw}
@@ -322,7 +330,6 @@ async function main() {
 
 ${digestBody}
 
----
 *Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=label%3A)*`;
 
   // GitHub Issue erstellen
