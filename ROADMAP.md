@@ -56,6 +56,7 @@ Ziel: Die Pipeline verbessert ihren Output eigenständig durch Review-gesteuerte
 - [x] Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit Review-Feedback neu aufbereitet
 - [x] Artikel-Enrichment in allen relevanten Adaptern: interconnects, lastweekinai, aheadofai, willison (inkl. externer Link-Fetch)
 - [x] Prompt-Verbesserungen: Halluzinations-Schutz, Build-Anker-Validierung, Thin-Input-Markierung
+- [x] Tagesübergreifende URL-Dedup: Artikel aus den letzten 3 Issues werden vor Selektion gefiltert
 - [ ] Harter Gate: Artikel mit `"Volltext nicht verfügbar"` kommen nicht ins Issue
 - [ ] PR-Mechanismus: process_adjustments aus Run-Summary → automatischer Pull Request mit Prompt-/Parameter-Änderungen
 

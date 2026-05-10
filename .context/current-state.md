@@ -1,6 +1,6 @@
 # Current State
 
-Stand: 2026-05-09 (Abend)
+Stand: 2026-05-10
 
 ## Was das System heute tut
 
@@ -26,6 +26,15 @@ Alle relevanten Adapter haben Artikel-Enrichment:
 - willison: fetcht zusätzlich externe Links wenn Seitentext < 2500 Zeichen
 
 Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilcher, venturebeat
+
+## Tagesübergreifende Dedup (neu, heute implementiert)
+
+`deliver.js` filtert Artikel heraus, die bereits in einem der letzten 3 Issues erschienen sind:
+
+- `fetchRecentlyPublishedUrls()` holt die letzten Issues via GitHub API
+- Extrahiert Haupt-Artikel-URLs per Regex: `Score X/5 · [quelle](url)`
+- Gefilterte URLs werden geloggt + in `run-summary.deliver.cross_day_dedup` protokolliert
+- Fail-safe: bei API-Fehler oder fehlendem Token wird die Dedup übersprungen (kein Abbruch)
 
 ## Offene Punkte (nächste Session)
 
