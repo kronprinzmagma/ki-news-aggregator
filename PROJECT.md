@@ -34,7 +34,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `30 5 * * *` → täglich 05:30 UTC (= 07:30 CEST / 06:30 CET). Ein Tag ohne relevante Artikel erzeugt weiterhin kein Issue.
 
-**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert alle Artikel der letzten 7 Daily-Issues, dedupliziert, und erstellt per Claude Sonnet ein wöchentliches Synthese-Issue mit Top-Entwicklungen, Strömungen und Wochenimpuls.
+**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert alle Artikel der letzten 7 Daily-Issues (URL-Dedup), teilt sie in Pflicht (Score 5, immer dabei) und Optional (Score 4, Claude wählt 1–2) auf, und erstellt per Claude Sonnet ein wöchentliches Synthese-Issue: Einleitung, Top-Entwicklungen mit dreistufiger Aufbereitung (was passiert / Implikation / kritische Einordnung), Strömungen der Woche, Wochenimpuls.
 
 ## Was guten Output ausmacht
 

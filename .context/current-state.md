@@ -33,7 +33,9 @@ Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilche
 - Läuft sonntags 08:00 UTC (nach dem Daily um 05:30 UTC)
 - Holt die letzten 7 KI-Daily-Issues per GitHub API
 - Parst alle Artikel, URL-Dedup über Tage
-- Synthetisiert per Claude Sonnet: Einleitung, Top-Entwicklungen, Strömungen, Wochenimpuls
+- Score-5-Artikel sind Pflicht – kommen immer ins Issue, keine Claude-seitige Selektion
+- Claude wählt zusätzlich 1–2 Score-4-Artikel nach strategischer Bedeutung
+- Synthetisiert per Claude Sonnet: Einleitung, Top-Entwicklungen (dreistufig: was passiert / Implikation / kritische Einordnung), Strömungen, Wochenimpuls
 - Erstellt GitHub Issue `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
 
 ## Tagesübergreifende Dedup (neu, heute implementiert)
