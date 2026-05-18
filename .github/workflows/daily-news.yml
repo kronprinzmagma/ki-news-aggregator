@@ -5,6 +5,11 @@ on:
     # 05:30 UTC = 07:30 CEST (Sommer) / 06:30 CET (Winter) – täglich
     - cron: '30 5 * * *'
   workflow_dispatch:
+    inputs:
+      run_date:
+        description: 'Laufdatum (YYYY-MM-DD) – leer lässt das heutige UTC-Datum'
+        required: false
+        default: ''
 
 jobs:
   run:
@@ -22,7 +27,12 @@ jobs:
           node-version: '22'
 
       - name: Set run date
-        run: echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV
+        run: |
+          if [ -n "${{ github.event.inputs.run_date }}" ]; then
+            echo "RUN_DATE=${{ github.event.inputs.run_date }}" >> $GITHUB_ENV
+          else
+            echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV
+          fi
 
       - name: Ingest
         run: node ingest.js
