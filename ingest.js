@@ -11,6 +11,9 @@ import { fetchArticles as fetchAheadOfAI } from './adapters/aheadofai.js';
 import { fetchArticles as fetchInterconnects } from './adapters/interconnects.js';
 import { fetchArticles as fetchTheBatch } from './adapters/thebatch.js';
 import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js';
+import { fetchArticles as fetchBenEvans } from './adapters/benevans.js';
+import { fetchArticles as fetchA16z } from './adapters/a16z.js';
+import { fetchArticles as fetchHeise } from './adapters/heise.js';
 
 // Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
 const MAX_ARTICLE_AGE_DAYS = 3;
@@ -37,6 +40,9 @@ const ADAPTERS = [
   { name: 'interconnects', fn: fetchInterconnects },
   { name: 'thebatch', fn: fetchTheBatch },
   { name: 'yannickilcher', fn: fetchYannicKilcher },
+  { name: 'benevans', fn: fetchBenEvans },
+  { name: 'a16z', fn: fetchA16z },
+  { name: 'heise', fn: fetchHeise },
 ];
 
 async function runAdapters() {

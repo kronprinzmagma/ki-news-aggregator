@@ -33,35 +33,50 @@ function claudeRequest(article) {
     messages: [
       {
         role: 'user',
-        content: `Du bewertest KI-News für eine erfahrene Product-Owner-/Product-Manager-Person mit technischer Hands-on-Ambition. Sie will wissen, welche Entwicklungen für Produktstrategie, Roadmap-Entscheidungen, Build-vs-Buy, AI-Adoption und eigene Prototypen wirklich wichtig sind.
+        content: `Du bewertest KI-News für eine erfahrene Product-Manager-/Product-Owner-Person mit technischer Hands-on-Ambition. Sie baut eigene Prototypen mit Claude Code und will KI-Entwicklungen für strategische Positionierung verstehen. Sie liest sowohl gut aufbereitete technische Tiefe als auch Produkt- und Marktperspektive.
 
-Primäre Frage: Ändert dieser Artikel, was ich als PM/PO über KI-Produkte, Plattformen, Nutzererwartungen, Kosten, Risiken oder eigene AI-Prototypen wissen sollte?
+Bewerte auf ZWEI Achsen – der Score ist das Maximum beider Achsen, wenn mindestens eine klar stark ist:
 
-Score 5 – wichtiges Signal mit Produkt- oder Strategie-Auswirkung:
-- Neue Modell- oder Plattform-Capabilities mit klarer Auswirkung auf mögliche Produktfunktionen
-- Relevante Änderungen bei API-Zugang, Pricing, Limits, Lizenzierung, Open Weights oder Distribution
-- Breite Adoption, neue Produktmuster, Sicherheits-/Regulierungsfragen oder Marktverschiebungen mit PM-Konsequenz
-- Technische Architektur-Erkenntnisse, die zeigen, wie AI-Produkte künftig gebaut oder betrieben werden
+**Achse 1 – Technische Substanz (für PM mit Builder-Mindset):**
+- Neue Modell-Capabilities, API-Änderungen, Architekturmuster, Tooling-Releases mit konkreten Details
+- Technische Erkenntnisse, die zeigen, wie AI-Produkte künftig gebaut oder betrieben werden
+- Gut erklärte technische Konzepte, die ein PM ohne Entwicklungshintergrund versteht und nutzen kann
 
-Score 4 – verwertbar, aber enger:
-- Praktische Frameworks, SDKs, Eval-Tools, Agenten-Patterns oder Case Studies mit übertragbarem Produktnutzen
-- Konkrete Tooling-Releases, wenn sie ein grösseres Muster zeigen oder eigene Prototypen deutlich erleichtern
-- Strategische Meldungen, wenn sie eine klare Entscheidung oder Beobachtung für eigene Projekte nahelegen
+**Achse 2 – Strategischer PM-Nutzwert:**
+- Enterprise-Adoption, Roll-out-Patterns, Nutzerdaten, RoI-Cases
+- Pricing, Lizenzierung, Build-vs-Buy-Entscheidungen, API-Kostenstruktur
+- UX-Patterns und Produktdesign für KI-Produkte
+- Konkurrenz-Moves (Google, Microsoft, OpenAI, Anthropic auf Produktebene)
+- Regulation, Compliance, EU AI Act, Datenschutz mit Produktkonsequenz
+- Marktverschiebungen mit klarer PM-Entscheidungskonsequenz
 
-Score 1–2 – kein relevanter PM-/Produkt-Mehrwert:
-- Reine Verwaltungs- oder Prozess-Tools (Ticket-Systeme, Sprint-Planung, Stakeholder-Reporting)
+Score 5 – starkes Signal auf mindestens einer Achse, konkret und belegt:
+- Neue Capability oder Plattformänderung mit messbarer Auswirkung auf Produktentscheidungen
+- Strategische Verschiebung (Pricing, Adoption, Regulation) mit klarer Handlungskonsequenz
+
+Score 4 – verwertbar, enger Scope:
+- Praktisches Tooling, SDK, Eval-Framework oder Agenten-Pattern mit übertragbarem Nutzen für eigene Prototypen
+- Konkrete Markt- oder Produktbeobachtung, die eine Entscheidung schärfer macht
+- Gut erklärter technischer Inhalt, der auch ohne Entwicklungstiefe verständlich und nutzbar ist
+
+Score 3 – kontextuell interessant, kein direkter Handlungsanker:
+- Reine Trend-Watch-Artikel ohne API/Code/Adoption-Evidenz (z.B. Forschungspaper ohne Produktimplikation)
+- Kleine Plugin-Releases, Bugfixes, Changelog-Posts ausserhalb eines grösseren Musters
+- Gut gemeinte Überblicksartikel ohne neue Information
+
+Score 1–2 – kein PM-Mehrwert:
 - Generische "KI verändert Branche XY"-Artikel ohne konkrete Substanz
-- Reine VC-/Funding-Meldungen ohne Produkt-, Plattform- oder Capability-Details
-- Marketing-Posts ohne neue Capability, Daten oder konkrete Produktimplikation
+- Reine VC-/Funding-Meldungen ohne Produkt- oder Capability-Details
+- Marketing-Posts ohne neue Capability, Daten oder Produktimplikation
 - Quelle "hackernews-show": Selbstpromotion ohne klare Differenzierung → maximal Score 2
 
-Wichtig: Kleine Plugin-Releases, Bugfixes, einzelne Header-/CLI-/Konfigurationsänderungen oder persönliche Changelog-Posts sind maximal Score 3, ausser sie stehen klar für ein grösseres Produkt- oder Plattformmuster. Ein Artikel ist nicht schon deshalb Score 4, weil daraus ein Abendprojekt möglich ist.
+Wichtig: Ein technischer Artikel darf Score 4–5 erreichen, wenn er gut erklärt und für einen PM ohne reinen Dev-Background nutzbar ist. Score 5 ist aber kein Freifahrtschein für Infrastruktur-Tieftaucher ohne Produktbezug. Reine Trend-Watch-Artikel (kein Code, keine API, keine Adoption) sind maximal Score 3.
 
-Wenn der Text extrem dünn ist (nur Titel, Teaser oder unter ca. 200 Zeichen), darfst du höchstens Score 2 vergeben, ausser der Text enthält selbst konkrete überprüfbare Details zu Capability, Preis, API, Limit, Lizenz oder Plattformänderung. Erfinde keine Details aus dem Titel.
+Wenn der Text extrem dünn ist (nur Titel, Teaser oder unter ca. 200 Zeichen), darfst du höchstens Score 2 vergeben, ausser der Text enthält konkrete überprüfbare Details zu Capability, Preis, API, Limit, Lizenz oder Plattformänderung. Erfinde keine Details aus dem Titel.
 
-Die Begründung ist ein einzelner Satz und benennt den konkreten PM-/Produkt-Mehrwert plus möglichen Projektanker.
+Die Begründung ist ein einzelner Satz: Akteur + konkrete Neuerung + PM-Relevanz (technisch oder strategisch). Keine Schablonen wie "Build-vs-Buy verschiebt sich", "Effizienz wird zur Differenzierung" oder "wer X nicht tut, verliert strukturell".
 
-Kennzeichne mit "strategy_only": true, wenn der Artikel ausschliesslich strategische oder kontextuelle Relevanz hat (Markt, Deal, Positionierung), aber keine konkreten technischen Implementierungs-Details enthält. Bei technisch substanziellen Artikeln setze "strategy_only": false.
+Kennzeichne mit "strategy_only": true, wenn der Artikel ausschliesslich strategische oder kontextuelle Relevanz hat (Markt, Deal, Positionierung), aber keine konkreten technischen Details enthält. Bei technisch substanziellen Artikeln setze "strategy_only": false.
 
 Antworte NUR mit JSON (kein Markdown, kein Code-Block): {"score": <1-5>, "begründung": "<ein Satz>", "strategy_only": true|false}
 
