@@ -7,3 +7,13 @@ run-summary-*.json
 
 # Generierte Eval-Resultate – nur Code und Goldstandard committen
 evals/results/
+
+# SQLite-Persistenz (lokal generiert, kein Audit-Artefakt)
+ki-news.db
+ki-news.db-journal
+ki-news.db-shm
+ki-news.db-wal
+
+node_modules/
+.DS_Store
+.claude/

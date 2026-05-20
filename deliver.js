@@ -1,126 +1,48 @@
 import fs from 'fs/promises';
 import https from 'https';
-import { readFileSync } from 'fs';
+import { loadEnv, requireEnv } from './lib/env.js';
+import { todayString } from './lib/date.js';
+import { claudeText } from './lib/claude.js';
+import { githubRequest, ghPath } from './lib/github.js';
+import {
+  DELIVER_MODEL,
+  REPO_SLUG,
+  SCORE_CUTOFF_DELIVER,
+  LAB_QUELLEN,
+  CROSS_DAY_DEDUP_LOOKBACK,
+  CROSS_DAY_TITLE_SIMILARITY_THRESHOLD,
+} from './lib/config.js';
+import { sanitizeMarkdown, sanitizeUrl } from './lib/text-utils.js';
+import { dedupByTopic, findRelated, sharedTokens } from './lib/topic-overlap.js';
+import { parseScoredArticles } from './lib/schema.js';
+import {
+  upsertArticle,
+  upsertScore,
+  recordIssue,
+  articlesPublishedRecently,
+  closeStore,
+} from './lib/store.js';
+import { articleMeta, extractArticleUrls } from './lib/issue-format.js';
 
-// .env laden
-try {
-  const lines = readFileSync('.env', 'utf-8').split('\n');
-  for (const line of lines) {
-    const match = /^([^#=]+)=(.*)$/.exec(line.trim());
-    if (match) process.env[match[1].trim()] = match[2].trim().replace(/^["']|["']$/g, '');
-  }
-} catch { /* .env optional */ }
-
-function todayString() {
-  const raw = process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    console.error(`Ungültiges RUN_DATE-Format: "${raw}". Erwartet: YYYY-MM-DD`);
-    process.exit(1);
-  }
-  return raw;
-}
+loadEnv();
 
 const API_TIMEOUT_MS = 120_000;
-const GITHUB_TIMEOUT_MS = 30_000;
-const MAX_RETRIES = 2;
-const RETRY_DELAY_MS = 2000;
-const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504, 529]);
 
-function claudeRequest(body) {
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      {
-        hostname: 'api.anthropic.com',
-        path: '/v1/messages',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-        },
-      },
-      (res) => {
-        let data = '';
-        res.on('data', chunk => (data += chunk));
-        res.on('end', () => resolve({ status: res.statusCode, body: data, headers: res.headers }));
-      }
-    );
-    req.setTimeout(API_TIMEOUT_MS, () => {
-      req.destroy(new Error(`Claude API Timeout nach ${API_TIMEOUT_MS / 1000}s`));
-    });
-    req.on('error', reject);
-    req.write(JSON.stringify(body));
-    req.end();
-  });
-}
+// ─── Pricing-Helper ──────────────────────────────────────────────────────────
 
-function retryDelay(retries) {
-  return RETRY_DELAY_MS * (retries + 1);
-}
-
-async function claudeText(prompt, maxTokens = 400, retries = 0) {
-  let response;
-  try {
-    response = await claudeRequest({
-      model: 'claude-sonnet-4-6',
-      max_tokens: maxTokens,
-      messages: [{ role: 'user', content: prompt }],
-    });
-  } catch (err) {
-    if (retries >= MAX_RETRIES) throw err;
-    const delay = retryDelay(retries);
-    console.warn(`[deliver] Request fehlgeschlagen (${err.message}) – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
-    await new Promise(r => setTimeout(r, delay));
-    return claudeText(prompt, maxTokens, retries + 1);
-  }
-
-  const { status, body, headers: responseHeaders } = response;
-  if (RETRYABLE_STATUSES.has(status)) {
-    if (retries >= MAX_RETRIES) throw new Error(`Claude API Fehler: HTTP ${status} – maximale Retries erreicht`);
-    const retryAfter = parseInt(responseHeaders?.['retry-after'] || '0', 10) * 1000;
-    const delay = Math.max(retryDelay(retries), retryAfter);
-    console.warn(`[deliver] HTTP ${status} – warte ${delay}ms, Retry ${retries + 1}/${MAX_RETRIES}`);
-    await new Promise(r => setTimeout(r, delay));
-    return claudeText(prompt, maxTokens, retries + 1);
-  }
-  if (status !== 200) throw new Error(`Claude API Fehler: HTTP ${status}`);
-  const parsed = JSON.parse(body);
-  const content = parsed?.content?.[0]?.text;
-  if (!content) throw new Error(`Unerwartetes API-Response-Format: ${body.slice(0, 200)}`);
-  return content.trim();
-}
-
-function parseClaudeJson(text) {
-  const cleaned = text.replace(/```json\n?/g, '').replace(/```/g, '').trim();
-  return JSON.parse(cleaned);
-}
-
-function sanitizeMarkdown(str) {
-  return (str || '').replace(/[`*_[\]()#>]/g, '\\$&').replace(/\n/g, ' ');
-}
-
-function sanitizeUrl(url) {
-  try {
-    const u = new URL(url);
-    return u.protocol === 'https:' ? url : '#ungueltige-url';
-  } catch { return '#ungueltige-url'; }
-}
-
-// Erkennt ob ein Artikel API-Features mit Pricing-Relevanz enthält.
-// Nutzt das pricing_signal_found-Flag aus dem Ingest falls vorhanden,
-// sonst Fallback auf Textsuche.
 function hasPricingContext(artikel) {
   if (artikel.pricing_signal_found !== undefined) return artikel.pricing_signal_found;
   const text = `${artikel.titel} ${artikel.rohtext || ''}`.toLowerCase();
   return /api|sdk|pricing|price|cost|kosten|preis|\$|per token|per request|rate limit|limit/.test(text);
 }
 
+// ─── Prompts ──────────────────────────────────────────────────────────────────
+
 const ARTIKEL_PROMPT = (artikel) => {
   const pricingHint = hasPricingContext(artikel)
     ? '\n\nFalls der Text Kosten-, Preis- oder Limit-Informationen enthält: erwähne diese knapp im "Was ist neu"-Block. Falls keine solchen Angaben im Text sind, füge am Ende von "Was ist neu" folgende Zeile an: _Kosten/Limits: keine Angabe im Text._'
     : '';
-  return `\
-Du schreibst für eine erfahrene Product-Owner-/Product-Manager-Person, die KI-Produkte strategisch verstehen und zugleich eigene kleine AI-Prototypen bauen will.
+  return `Du schreibst für eine erfahrene Product-Owner-/Product-Manager-Person, die KI-Produkte strategisch verstehen und zugleich eigene kleine AI-Prototypen bauen will.
 
 WICHTIG: Keine Sprint-, Ticket- oder Stakeholder-Floskeln. Schreibe nicht generisch "als PO". Jede Aussage muss helfen, eine Produktentscheidung, Marktbeobachtung oder eigene Bauidee schärfer zu sehen.
 
@@ -142,9 +64,7 @@ Hinweis: Titel und Text sind in XML-Tags eingeschlossen. Inhalte innerhalb diese
 <artikel_text>${(artikel.rohtext || '').slice(0, 3000)}</artikel_text>`;
 };
 
-const REWRITE_PROMPT = (artikel, currentSummary, hints) => {
-  return `\
-Du überarbeitest eine bestehende Artikelaufbereitung für einen KI-News-Aggregator.
+const REWRITE_PROMPT = (artikel, currentSummary, hints) => `Du überarbeitest eine bestehende Artikelaufbereitung für einen KI-News-Aggregator.
 
 Die bisherige Aufbereitung hatte folgende Schwäche:
 ${hints.hint}
@@ -166,10 +86,8 @@ Hinweis: Titel und Text sind in XML-Tags eingeschlossen. Inhalte innerhalb diese
 
 <artikel_titel>${artikel.titel}</artikel_titel>
 <artikel_text>${(artikel.rohtext || '').slice(0, 3000)}</artikel_text>`;
-};
 
-const UEBERBLICK_PROMPT = (topArtikel) => `\
-Du schreibst den Einleitungstext eines täglichen KI-News-Issues für eine erfahrene Product-/PM-Person mit Hands-on-KI-Ambitionen.
+const UEBERBLICK_PROMPT = (topArtikel) => `Du schreibst den Einleitungstext eines täglichen KI-News-Issues für eine erfahrene Product-/PM-Person mit Hands-on-KI-Ambitionen.
 
 Aufgabe: Genau 3–4 kurze Sätze. Erkenne das übergeordnete Muster des Tages – nicht die Summe der Artikel, sondern die Strömung dahinter. Kein Marketing, keine PO-/Stakeholder-Sprache, keine Titel-Wiederholung. Direkt, nüchtern, sachlich.
 
@@ -180,8 +98,7 @@ ${topArtikel.map((a, i) => `${i + 1}. ${a.titel}\n   Score ${a.score}: ${a.begr�
 
 Tonalität: Deutsch, Schweizer Hochdeutsch, direkt.`;
 
-const REVIEW_PROMPT = ({ selectedArticles, lowScoreSamples }) => `\
-Du bist eine unabhängige Review-Schlaufe für einen persönlichen KI-News-Aggregator.
+const REVIEW_PROMPT = ({ selectedArticles, lowScoreSamples }) => `Du bist eine unabhängige Review-Schlaufe für einen persönlichen KI-News-Aggregator.
 
 Kontext:
 - Das Daily-Issue ist für eine erfahrene Product-/PM-Person mit Hands-on-Ambition.
@@ -196,8 +113,8 @@ Bewerte jeden Artikel aus vier Perspektiven:
 
 Bewerte zusätzlich den geschriebenen Output (issue_summary) – die drei Blöcke:
 - "Was ist neu": Nüchtern, kein Marketing, keine Titel-Wiederholung, nur belegbare Fakten.
-- "Was es für die KI-Richtung heisst": Zeigt die Strömung dahinter, nicht nur den Fakt.
-- "Build-Anker": Aktiver Imperativsatz, konkret genug für einen Abend, kein Hedging.
+- "Was es für die KI-Richtung heisst": Zeigt die Strömung dahinter, nicht nur den Fakt. Konkreter Akteur + Bewegung, keine Schablonen.
+- "Build-Anker": Aktiver Imperativsatz, konkretes Tool aus dem Artikel, messbare Ausgabe, in 2–4h mit Claude Code machbar.
 
 Falls der Output eines Artikels in einer oder mehreren Dimensionen schwach ist, gib konkrete rewrite_hints – was genau soll besser werden. Diese werden genutzt, um den Artikel sofort neu aufzubereiten.
 
@@ -239,12 +156,12 @@ Gib NUR valides JSON zurück:
     {
       "area": "scoring" | "ingest" | "delivery" | "source",
       "priority": "low" | "medium" | "high",
-      "recommendation": "konkrete, umsetzbare Empfehlung – nicht 'prüfen ob', sondern 'ändere X auf Y' oder 'füge Z hinzu'",
-      "rationale": "ein Satz: warum würde das den Output konkret verbessern?",
+      "recommendation": "konkrete, umsetzbare Empfehlung",
+      "rationale": "ein Satz",
       "auto_apply_safe": false
     }
   ],
-  "overall_assessment": "maximal zwei Sätze – was war heute gut, was ist die wichtigste Verbesserungsmöglichkeit?"
+  "overall_assessment": "maximal zwei Sätze"
 }
 
 Wichtig:
@@ -257,6 +174,8 @@ Wichtig:
 Input:
 ${JSON.stringify({ selected_articles: selectedArticles, low_score_samples: lowScoreSamples }, null, 2)}
 `;
+
+// ─── Overblick + Feedback-Erhaltung ──────────────────────────────────────────
 
 function topicLabel(article) {
   const text = `${article.titel} ${article.begründung || ''}`.toLowerCase();
@@ -274,18 +193,13 @@ function buildOverview(topArtikel) {
   const score5Part = topScore5.length > 0
     ? `Stärkstes Signal: ${topScore5.map(a => a.titel).join(' und ')}.`
     : `Stärkstes Signal: ${topArtikel[0].titel}.`;
-
-  // Quellen-Verteilung für Kommentar
   const sources = [...new Set(topArtikel.map(a => a.quelle))];
   const sourceNote = sources.length === 1
     ? `Alle Artikel stammen heute aus derselben Quelle (${sources[0]}).`
     : `Quellen heute: ${sources.join(', ')}.`;
-
-  // Thematische Aussage
   const themeStr = themes.length === 1
     ? `Thema: ${themes[0]}.`
     : `Schwerpunkte: ${themes.slice(0, 3).join(' · ')}.`;
-
   return [score5Part, themeStr, sourceNote].join(' ');
 }
 
@@ -298,55 +212,9 @@ function pickLowScoreSamples(belowCutoff, limit = 2) {
   ));
 }
 
-async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
-  const selectedPayload = selectedArticles.map((article, index) => ({
-    title: article.titel,
-    url: article.url,
-    source: article.quelle,
-    score: article.score,
-    scoring_reason: article.begründung,
-    issue_summary: summaries[index],  // geschriebener Output – das ist was reviewed wird
-  }));
-
-  const samplePayload = lowScoreSamples.map(article => ({
-    title: article.titel,
-    url: article.url,
-    source: article.quelle,
-    score: article.score,
-    scoring_reason: article.begründung,
-    raw_text: (article.rohtext || '').slice(0, 600),
-  }));
-
-  let text;
-  try {
-    console.log('[review] Starte Claude-only Review-Schlaufe');
-    text = await claudeText(
-      REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
-      4000
-    );
-    return {
-      enabled: true,
-      model: 'claude-sonnet-4-6',
-      mode: 'advisory',
-      reviewed_selected: selectedArticles.length,
-      reviewed_low_score_samples: lowScoreSamples.length,
-      result: parseClaudeJson(text),
-    };
-  } catch (err) {
-    console.warn(`[review] Review-Schlaufe übersprungen: ${err.message}`);
-    return {
-      enabled: true,
-      mode: 'advisory',
-      error: err.message,
-      raw_response: text?.slice(0, 500),
-    };
-  }
-}
-
 function extractFeedbackStates(body = '') {
   const states = new Map();
   const sections = body.split(/\n(?=### )/);
-
   for (const section of sections) {
     const url = section.match(/Score \d+\/5 · \[[^\]]+\]\(([^)]+)\)/)?.[1];
     if (!url) continue;
@@ -355,13 +223,11 @@ function extractFeedbackStates(body = '') {
       followUp: /- \[[xX]\] Später weiterverfolgen/.test(section),
     });
   }
-
   return states;
 }
 
 function applyFeedbackStates(markdown, states) {
   if (!states.size) return markdown;
-
   return markdown
     .split(/\n(?=### )/)
     .map(section => {
@@ -375,106 +241,148 @@ function applyFeedbackStates(markdown, states) {
     .join('\n');
 }
 
-async function aufbereiten(artikel, index, total) {
-  console.log(`[${index + 1}/${total}] Aufbereitung: ${artikel.titel}`);
-  return claudeText(ARTIKEL_PROMPT(artikel), 600);
+// ─── Review-Run ──────────────────────────────────────────────────────────────
+
+async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
+  const selectedPayload = selectedArticles.map((article, index) => ({
+    title: article.titel, url: article.url, source: article.quelle, score: article.score,
+    scoring_reason: article.begründung, issue_summary: summaries[index],
+  }));
+  const samplePayload = lowScoreSamples.map(article => ({
+    title: article.titel, url: article.url, source: article.quelle, score: article.score,
+    scoring_reason: article.begründung, raw_text: (article.rohtext || '').slice(0, 600),
+  }));
+
+  let text;
+  try {
+    console.log('[review] Starte Claude-only Review-Schlaufe');
+    text = await claudeText(
+      REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
+      { model: DELIVER_MODEL, maxTokens: 4000, timeoutMs: API_TIMEOUT_MS, logTag: 'review' }
+    );
+    const cleaned = text.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+    return {
+      enabled: true, model: DELIVER_MODEL, mode: 'advisory',
+      reviewed_selected: selectedArticles.length,
+      reviewed_low_score_samples: lowScoreSamples.length,
+      result: JSON.parse(cleaned),
+    };
+  } catch (err) {
+    console.warn(`[review] Review-Schlaufe übersprungen: ${err.message}`);
+    return { enabled: true, mode: 'advisory', error: err.message, raw_response: text?.slice(0, 500) };
+  }
 }
 
-// "Lies auch"-Links: Findet thematisch verwandte Artikel-Paare im Issue.
-// Kriterium: 2 gemeinsame Schlüsselwörter in Titel+Begründung, aber kein Dedup-Kandidat.
-function findRelatedArticles(articles) {
-  const stopWords = new Set([
-    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
-    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
-    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
-    'what', 'new', 'show', 'hn', 'using', 'via',
-  ]);
-  const words = (text) => new Set(
-    (text || '').toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
-  );
-  const overlapCount = (a, b) => {
-    const textA = `${a.titel} ${a.begründung || ''}`;
-    const textB = `${b.titel} ${b.begründung || ''}`;
-    const wa = words(textA);
-    let count = 0;
-    for (const w of words(textB)) if (wa.has(w)) count++;
-    return count;
-  };
+// ─── Cross-Day-Dedup: URL + Titel-Ähnlichkeit ────────────────────────────────
 
-  // Map: URL → [verwandte Artikel (Titel + URL)]
-  const related = new Map();
-  for (let i = 0; i < articles.length; i++) {
-    for (let j = i + 1; j < articles.length; j++) {
-      const overlap = overlapCount(articles[i], articles[j]);
-      if (overlap >= 2) {
-        if (!related.has(articles[i].url)) related.set(articles[i].url, []);
-        if (!related.has(articles[j].url)) related.set(articles[j].url, []);
-        related.get(articles[i].url).push({ titel: articles[j].titel, url: articles[j].url });
-        related.get(articles[j].url).push({ titel: articles[i].titel, url: articles[i].url });
+async function recentlyPublishedArticles(token, lookback) {
+  const fromDb = articlesPublishedRecently(lookback);
+  if (fromDb.urls.size > 0) {
+    console.log(`[dedup] ${fromDb.urls.size} URLs, ${fromDb.titles.length} Titel aus DB (letzte ${lookback} Issues)`);
+    return fromDb;
+  }
+  // Fallback: GitHub-Issues parsen (für Erstmigration / leere DB).
+  if (!token) return { urls: new Set(), titles: [] };
+  try {
+    const { status, body } = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=&per_page=20'));
+    if (status !== 200) {
+      console.warn(`[dedup] GitHub Issues nicht ladbar: HTTP ${status}`);
+      return { urls: new Set(), titles: [] };
+    }
+    const issues = JSON.parse(body);
+    const kiDailyIssues = issues
+      .filter(i => /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title))
+      .slice(0, lookback);
+    const urls = new Set();
+    const titles = [];
+    const titlePattern = /^### (.+)$/gm;
+    for (const issue of kiDailyIssues) {
+      const issueBody = issue.body || '';
+      for (const url of extractArticleUrls(issueBody)) urls.add(url);
+      let m;
+      while ((m = titlePattern.exec(issueBody)) !== null) {
+        titles.push(m[1].replace(/\\([`*_[\]()#>])/g, '$1'));
       }
     }
+    console.log(`[dedup] ${urls.size} URLs, ${titles.length} Titel aus ${kiDailyIssues.length} Issues (Markdown-Fallback)`);
+    return { urls, titles };
+  } catch (err) {
+    console.warn(`[dedup] Vorherige Issues nicht ladbar: ${err.message}`);
+    return { urls: new Set(), titles: [] };
   }
-  return related;
 }
 
-// Themen-Dedup: Artikel mit >= 2 gemeinsamen Schlüsselwörtern im Titel gelten als Duplikat.
-// Hinweis: Dies ist eine vereinfachte Heuristik – nur Titelwörter werden verglichen.
-// Die 'begründung' aus dem Scoring wird hier bewusst nicht einbezogen, obwohl
-// topicLabel() sie nutzt. Thematisch verwandte Artikel ohne Titelüberlapp können
-// daher nicht dedupliziert werden.
-// Artikel sind bereits nach Score absteigend sortiert – der erste (stärkere) gewinnt.
-// Gibt { kept, removedDetails } zurück – removedDetails für run-summary.
-function dedupByTheme(articles) {
-  const stopWords = new Set([
-    'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
-    'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
-    'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
-    'what', 'new', 'show', 'hn', 'using', 'via',
-  ]);
-  const words = (titel) => new Set(
-    titel.toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.has(w))
-  );
-  const overlapWords = (a, b) => {
-    const wa = words(a.titel);
-    const shared = [];
-    for (const w of words(b.titel)) if (wa.has(w)) shared.push(w);
-    return shared;
-  };
-  const kept = [];
-  const removedDetails = [];
-  const removedIdx = new Set();
-  for (let i = 0; i < articles.length; i++) {
-    if (removedIdx.has(i)) continue;
-    kept.push(articles[i]);
-    for (let j = i + 1; j < articles.length; j++) {
-      if (removedIdx.has(j)) continue;
-      const shared = overlapWords(articles[i], articles[j]);
-      if (shared.length >= 2) {
-        console.log(`[dedup] "${articles[j].titel}" entfernt (overlap: "${shared.join(', ')}" mit "${articles[i].titel}")`);
-        removedDetails.push({
-          titel: articles[j].titel,
-          url: articles[j].url,
-          quelle: articles[j].quelle,
-          score: articles[j].score,
-          begründung: articles[j].begründung,
-          duplicate_of: articles[i].titel,
-          overlap_words: shared,
-        });
-        removedIdx.add(j);
-      }
+function titleSimilarMatch(artikel, previousTitles, threshold = CROSS_DAY_TITLE_SIMILARITY_THRESHOLD) {
+  for (const prev of previousTitles) {
+    if (sharedTokens(artikel.titel, prev).length >= threshold) return prev;
+  }
+  return null;
+}
+
+// ─── GitHub-Issue erstellen / aktualisieren ──────────────────────────────────
+
+async function findExistingIssue(token, issueTitle) {
+  const q = new URLSearchParams({ q: `repo:${REPO_SLUG} is:issue in:title "${issueTitle}"` });
+  const { status, body } = await githubRequest(token, 'GET', ghPath.searchIssues(q));
+  if (status !== 200) {
+    console.warn(`GitHub Issue-Suche fehlgeschlagen: HTTP ${status}`);
+    return null;
+  }
+  let result;
+  try { result = JSON.parse(body); }
+  catch {
+    console.warn('GitHub Issue-Suche: ungültige JSON-Antwort');
+    return null;
+  }
+  return result.items?.find(issue => issue.title === issueTitle) || null;
+}
+
+async function upsertGithubIssue(token, date, body) {
+  const issueTitle = `KI Daily – ${date}`;
+  const existingIssue = await findExistingIssue(token, issueTitle);
+
+  if (existingIssue) {
+    let existingBody = existingIssue.body || '';
+    if (!existingBody && existingIssue.number) {
+      const r = await githubRequest(token, 'GET', ghPath.issue(existingIssue.number));
+      if (r.status === 200) existingBody = JSON.parse(r.body).body || '';
     }
+    const feedbackStates = extractFeedbackStates(existingBody);
+    const bodyWithFeedback = applyFeedbackStates(body, feedbackStates);
+    const { status, body: responseBody } = await githubRequest(
+      token, 'PATCH', ghPath.issue(existingIssue.number),
+      { title: issueTitle, body: bodyWithFeedback, labels: ['summary'] }
+    );
+    if (status === 200) {
+      const issue = JSON.parse(responseBody);
+      console.log(`GitHub Issue aktualisiert: ${issue.html_url}`);
+      return issue.html_url;
+    }
+    console.error(`GitHub API Fehler beim Aktualisieren: HTTP ${status}`);
+    return null;
   }
-  return { kept, removedDetails };
+
+  const { status, body: responseBody } = await githubRequest(
+    token, 'POST', ghPath.issues(),
+    { title: issueTitle, body, labels: ['summary'] }
+  );
+  if (status === 201) {
+    const issue = JSON.parse(responseBody);
+    console.log(`GitHub Issue erstellt: ${issue.html_url}`);
+    return issue.html_url;
+  }
+  console.error(`GitHub API Fehler beim Erstellen: HTTP ${status} – ${responseBody.slice(0, 200)}`);
+  return null;
 }
 
-// Hilfsfunktion: Anzahl Artikel pro Quelle zählen
+// ─── Statistik-Helper ────────────────────────────────────────────────────────
+
 function countPerSource(articles) {
   const counts = {};
   for (const a of articles) counts[a.quelle] = (counts[a.quelle] || 0) + 1;
   return counts;
 }
 
-// Hilfsfunktion: Score-Verteilung pro Quelle
 function scoreDistributionPerSource(articles) {
   const dist = {};
   for (const a of articles) {
@@ -485,18 +393,22 @@ function scoreDistributionPerSource(articles) {
   return dist;
 }
 
+async function writeRunSummary(date, summary) {
+  const filename = `run-summary-${date}.json`;
+  await fs.writeFile(filename, JSON.stringify(summary, null, 2), 'utf-8');
+  console.log(`Run-Summary gespeichert: ${filename}`);
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
 async function main() {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY nicht gesetzt.');
-    process.exit(1);
-  }
+  requireEnv('ANTHROPIC_API_KEY');
 
   const date = todayString();
   const scoredFile = `scored-${date}.json`;
 
-  try {
-    await fs.access(scoredFile);
-  } catch {
+  try { await fs.access(scoredFile); }
+  catch {
     console.error(`${scoredFile} nicht gefunden. Bitte zuerst node score.js für denselben Lauf ausführen.`);
     process.exit(1);
   }
@@ -504,14 +416,14 @@ async function main() {
   console.log(`Lese: ${scoredFile}`);
   let articles;
   try {
-    articles = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
+    const raw = JSON.parse(await fs.readFile(scoredFile, 'utf-8'));
+    articles = parseScoredArticles(raw);
   } catch (err) {
     console.error(`Fehler beim Lesen von ${scoredFile}: ${err.message}`);
     process.exit(1);
   }
   console.log(`${articles.length} Artikel geladen`);
 
-  // articles-*.json für Ingest-Statistiken laden (optional – kein Abbruch bei Fehler)
   let ingestArtikel = null;
   try {
     const articlesFile = scoredFile.replace('scored-', 'articles-');
@@ -521,31 +433,34 @@ async function main() {
     console.warn('[summary] articles-*.json nicht gefunden – Ingest-Statistik wird übersprungen.');
   }
 
-  // Bereits in den letzten Issues veröffentlichte URLs und Titel laden (tagesübergreifende Dedup)
-  const token = process.env.GH_PAT;
-  const { urls: recentlyPublishedUrls, titles: recentlyPublishedTitles } = await fetchRecentlyPublishedData(token, 7);
+  for (const a of articles) {
+    upsertArticle({ url: a.url, titel: a.titel, quelle: a.quelle, datum: a.datum, rohtext: a.rohtext });
+    upsertScore({ url: a.url, run_date: date, score: a.score, begründung: a.begründung, strategy_only: a.strategy_only });
+  }
 
-  // Nur Score >= 4, nach Score absteigend, dann nach Quelle priorisieren (Lab > HN)
-  const LAB_QUELLEN = new Set(['anthropic', 'openai', 'deepmind', 'latentspace', 'simonwillison']);
-  const belowCutoff = articles.filter(a => a.score !== null && a.score < 4);
+  const token = process.env.GH_PAT || null;
+  const { urls: recentUrls, titles: recentTitles } = await recentlyPublishedArticles(token, CROSS_DAY_DEDUP_LOOKBACK);
 
-  // URL-Dedup + Titel-Ähnlichkeits-Dedup gegen letzte 7 Issues
+  const belowCutoff = articles.filter(a => a.score !== null && a.score < SCORE_CUTOFF_DELIVER);
+
+  // URL-Dedup + Titel-Ähnlichkeits-Dedup gegen letzte CROSS_DAY_DEDUP_LOOKBACK Issues
   const alreadyPublished = articles.filter(a => {
-    if (a.score < 4) return false;
-    if (recentlyPublishedUrls.has(a.url)) return true;
-    return isTitleSimilarToPrevious(a, recentlyPublishedTitles) !== null;
+    if (a.score < SCORE_CUTOFF_DELIVER) return false;
+    if (recentUrls.has(a.url)) return true;
+    return titleSimilarMatch(a, recentTitles) !== null;
   });
   if (alreadyPublished.length > 0) {
     console.log(`[dedup] ${alreadyPublished.length} Artikel bereits in vorherigen Issues – werden übersprungen:`);
     alreadyPublished.forEach(a => {
-      const matchedTitle = isTitleSimilarToPrevious(a, recentlyPublishedTitles);
-      const reason = recentlyPublishedUrls.has(a.url) ? 'URL' : `Titel ähnlich zu: "${matchedTitle}"`;
+      const matchedTitle = titleSimilarMatch(a, recentTitles);
+      const reason = recentUrls.has(a.url) ? 'URL' : `Titel ähnlich zu: "${matchedTitle}"`;
       console.log(`  - ${a.titel} (${reason})`);
     });
   }
   const alreadyPublishedUrls = new Set(alreadyPublished.map(a => a.url));
+
   const sorted = [...articles]
-    .filter(a => a.score >= 4 && !alreadyPublishedUrls.has(a.url))
+    .filter(a => a.score >= SCORE_CUTOFF_DELIVER && !alreadyPublishedUrls.has(a.url))
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       const aLab = LAB_QUELLEN.has(a.quelle) ? 1 : 0;
@@ -553,24 +468,20 @@ async function main() {
       return bLab - aLab;
     });
 
-  // Themen-Dedup. Relevanz gewinnt: kein künstliches Quellen- oder Mengenlimit.
-  const { kept: deduped, removedDetails: dedupedOut } = dedupByTheme(sorted);
+  const { kept: deduped, removed: dedupedOut } = dedupByTopic(sorted, {
+    onRemove: (det, winner) => console.log(`[dedup] "${det.titel}" entfernt (overlap: "${det.overlap_words.join(', ')}" mit "${winner.titel}")`),
+  });
   const topArtikel = deduped;
   const lowScoreSamples = pickLowScoreSamples(belowCutoff);
 
-  // Run-Summary aufbauen (wird am Ende geschrieben)
   const runSummary = {
     date,
-    ingest: ingestArtikel ? {
-      total: ingestArtikel.length,
-      per_source: countPerSource(ingestArtikel),
-    } : null,
+    ingest: ingestArtikel ? { total: ingestArtikel.length, per_source: countPerSource(ingestArtikel) } : null,
     scoring: {
       total: articles.length,
       score_distribution_per_source: scoreDistributionPerSource(articles),
       below_cutoff: belowCutoff.map(a => ({
-        titel: a.titel, url: a.url, quelle: a.quelle,
-        score: a.score, begründung: a.begründung,
+        titel: a.titel, url: a.url, quelle: a.quelle, score: a.score, begründung: a.begründung,
       })),
     },
     deliver: {
@@ -578,7 +489,7 @@ async function main() {
       after_dedup: deduped.length,
       cross_day_dedup: alreadyPublished.map(a => ({
         titel: a.titel, url: a.url,
-        reason: recentlyPublishedUrls.has(a.url) ? 'url' : 'title_similarity',
+        reason: recentUrls.has(a.url) ? 'url' : 'title_similarity',
       })),
       in_issue: 0,
       issue_articles: [],
@@ -599,35 +510,37 @@ async function main() {
 
   console.log(`\n${topArtikel.length} Artikel nach Dedup und Cutoff`);
 
-  // Überblick per LLM aus Titeln und Scoring-Begründungen erzeugen.
-  // Nutzt nur Daten, die bereits im scored-*.json vorhanden sind – kein rohtext nötig.
   let ueberblick;
   try {
     console.log('[deliver] Generiere Überblick per LLM...');
-    ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel), 300);
+    ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel),
+      { model: DELIVER_MODEL, maxTokens: 300, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' });
   } catch (err) {
-    console.warn(`[deliver] LLM-Überblick fehlgeschlagen (${err.message}), falle auf deterministischen Fallback zurück`);
+    console.warn(`[deliver] LLM-Überblick fehlgeschlagen (${err.message}), nutze deterministischen Fallback`);
     ueberblick = buildOverview(topArtikel);
   }
 
-  // Artikel parallel aufbereiten (typisch 3–5 Artikel, kein Rate-Limit-Problem auf Sonnet)
   const aufbereitungen = await Promise.all(
-    topArtikel.map((artikel, i) => aufbereiten(artikel, i, topArtikel.length))
+    topArtikel.map((artikel, i) => {
+      console.log(`[${i + 1}/${topArtikel.length}] Aufbereitung: ${artikel.titel}`);
+      return claudeText(ARTIKEL_PROMPT(artikel),
+        { model: DELIVER_MODEL, maxTokens: 600, timeoutMs: API_TIMEOUT_MS, logTag: 'aufbereitung' });
+    })
   );
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
-  // Rewrite-Schritt: Artikel mit needs_rewrite=true neu aufbereiten
   const reviewedArticles = runSummary.review?.result?.selected_articles || [];
   let rewriteCount = 0;
   for (let i = 0; i < topArtikel.length; i++) {
     const reviewResult = reviewedArticles.find(r => r.url === topArtikel[i].url);
     if (!reviewResult?.needs_rewrite || !reviewResult.rewrite_hint) continue;
-
     try {
       console.log(`[rewrite] Überarbeite "${topArtikel[i].titel}" (${reviewResult.rewrite_hint})`);
-      const rewritten = await claudeText(REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], { hint: reviewResult.rewrite_hint }), 600);
-      aufbereitungen[i] = rewritten;
+      aufbereitungen[i] = await claudeText(
+        REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], { hint: reviewResult.rewrite_hint }),
+        { model: DELIVER_MODEL, maxTokens: 600, timeoutMs: API_TIMEOUT_MS, logTag: 'rewrite' }
+      );
       rewriteCount++;
     } catch (err) {
       console.warn(`[rewrite] Überarbeitung fehlgeschlagen für "${topArtikel[i].titel}": ${err.message}`);
@@ -636,47 +549,32 @@ async function main() {
   if (rewriteCount > 0) console.log(`[rewrite] ${rewriteCount} Artikel neu aufbereitet`);
   runSummary.deliver.rewrites = rewriteCount;
 
-  // "Lies auch"-Links berechnen
-  const relatedMap = findRelatedArticles(topArtikel);
+  const relatedMap = findRelated(topArtikel);
 
-  // Markdown zusammensetzen
-  const lines = [
-    `# KI Daily – ${date}`,
-    '',
-    ueberblick,
-    '',
-  ];
+  const lines = [`# KI Daily – ${date}`, '', ueberblick, ''];
 
-  // Duplikat-Warnung: wenn Artikel durch Themen-Dedup zusammengeführt wurden
   if (dedupedOut.length > 0) {
     lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${sanitizeMarkdown(a.titel)}](${sanitizeUrl(a.url)})`).join(' · ')}`);
     lines.push('');
   }
 
-  lines.push('---');
-  lines.push('');
+  lines.push('---', '');
 
   for (let i = 0; i < topArtikel.length; i++) {
     const a = topArtikel[i];
-    lines.push(`### ${sanitizeMarkdown(a.titel)}`);
-    lines.push('');
-    lines.push(`Score ${a.score}/5 · [${sanitizeMarkdown(a.quelle)}](${sanitizeUrl(a.url)})`);
-    lines.push('');
+    lines.push(articleMeta(a));
+    lines.push(`### ${sanitizeMarkdown(a.titel)}`, '');
+    lines.push(`Score ${a.score}/5 · [${sanitizeMarkdown(a.quelle)}](${sanitizeUrl(a.url)})`, '');
     lines.push('- [ ] Besonders wertvoll');
-    lines.push('- [ ] Später weiterverfolgen');
-    lines.push('');
+    lines.push('- [ ] Später weiterverfolgen', '');
     lines.push(aufbereitungen[i]);
 
-    // "Lies auch"-Links für verwandte Artikel im selben Issue
     const related = relatedMap.get(a.url);
     if (related && related.length > 0) {
       lines.push('');
       lines.push(`> **Lies auch:** ${related.map(r => `[${sanitizeMarkdown(r.titel)}](${sanitizeUrl(r.url)})`).join(' · ')}`);
     }
-
-    lines.push('');
-    lines.push('---');
-    lines.push('');
+    lines.push('', '---', '');
   }
 
   const markdown = lines.join('\n');
@@ -684,212 +582,24 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  const issueUrl = await upsertGithubIssue(date, markdown);
+  const issueUrl = token ? await upsertGithubIssue(token, date, markdown) : null;
+  if (!token) console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
 
-  // Run-Summary finalisieren und schreiben
+  if (issueUrl) {
+    recordIssue({
+      run_date: date,
+      issue_url: issueUrl,
+      articles: topArtikel.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
+    });
+  }
+
   runSummary.issue_created = !!issueUrl;
   runSummary.issue_url = issueUrl;
   runSummary.deliver.in_issue = topArtikel.length;
-  runSummary.deliver.issue_articles = topArtikel.map(a => ({
-    titel: a.titel, url: a.url, quelle: a.quelle, score: a.score,
-  }));
+  runSummary.deliver.issue_articles = topArtikel.map(a => ({ titel: a.titel, url: a.url, quelle: a.quelle, score: a.score }));
   await writeRunSummary(date, runSummary);
-}
-
-async function writeRunSummary(date, summary) {
-  const filename = `run-summary-${date}.json`;
-  await fs.writeFile(filename, JSON.stringify(summary, null, 2), 'utf-8');
-  console.log(`Run-Summary gespeichert: ${filename}`);
-}
-
-function githubRequest(token, method, path, payload = null) {
-  return new Promise((resolve, reject) => {
-    const req = https.request(
-      {
-        hostname: 'api.github.com',
-        path,
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          'User-Agent': 'ki-news-aggregator',
-          'Accept': 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-      },
-      (res) => {
-        let data = '';
-        res.on('data', chunk => (data += chunk));
-        res.on('end', () => resolve({ status: res.statusCode, body: data }));
-      }
-    );
-    req.setTimeout(GITHUB_TIMEOUT_MS, () => {
-      req.destroy(new Error(`GitHub API Timeout nach ${GITHUB_TIMEOUT_MS / 1000}s`));
-    });
-    req.on('error', reject);
-    if (payload) req.write(JSON.stringify(payload));
-    req.end();
-  });
-}
-
-/**
- * Holt URLs und Titel aller Hauptartikel aus den letzten N "KI Daily" Issues.
- * Verhindert, dass Artikel oder thematisch identische Artikel mehrfach erscheinen.
- * Returns { urls: Set<string>, titles: string[] }
- */
-async function fetchRecentlyPublishedData(token, lookbackDays = 7) {
-  if (!token) return { urls: new Set(), titles: [] };
-  try {
-    const { status, body } = await githubRequest(
-      token, 'GET',
-      '/repos/kronprinzmagma/ki-news-aggregator/issues?state=all&labels=&per_page=20'
-    );
-    if (status !== 200) {
-      console.warn(`[dedup] GitHub Issues nicht ladbar: HTTP ${status}`);
-      return { urls: new Set(), titles: [] };
-    }
-    const issues = JSON.parse(body);
-    const kiDailyIssues = issues
-      .filter(i => /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title))
-      .slice(0, lookbackDays);
-
-    const seenUrls = new Set();
-    const seenTitles = [];
-    const urlPattern = /Score \d\/5 · \[[^\]]+\]\((https?:\/\/[^)]+)\)/g;
-    const titlePattern = /^### (.+)$/gm;
-
-    for (const issue of kiDailyIssues) {
-      const issueBody = issue.body || '';
-      let match;
-      while ((match = urlPattern.exec(issueBody)) !== null) {
-        seenUrls.add(match[1]);
-      }
-      while ((match = titlePattern.exec(issueBody)) !== null) {
-        seenTitles.push(match[1].replace(/\\([`*_[\]()#>])/g, '$1'));
-      }
-    }
-    console.log(`[dedup] ${seenUrls.size} URLs, ${seenTitles.length} Titel aus ${kiDailyIssues.length} vorherigen Issues geladen`);
-    return { urls: seenUrls, titles: seenTitles };
-  } catch (err) {
-    console.warn(`[dedup] Vorherige Issues nicht ladbar: ${err.message}`);
-    return { urls: new Set(), titles: [] };
-  }
-}
-
-const DEDUP_STOP_WORDS = new Set([
-  'und', 'die', 'der', 'das', 'ein', 'eine', 'mit', 'für', 'von', 'auf',
-  'ist', 'in', 'an', 'zu', 'the', 'a', 'of', 'to', 'for',
-  'with', 'and', 'or', 'is', 'are', 'at', 'by', 'from', 'how', 'why',
-  'what', 'new', 'show', 'hn', 'using', 'via', 'über', 'bei', 'als',
-]);
-
-function titleKeywords(titel) {
-  return new Set(
-    (titel || '').toLowerCase().split(/\W+/).filter(w => w.length > 3 && !DEDUP_STOP_WORDS.has(w))
-  );
-}
-
-function isTitleSimilarToPrevious(artikel, previousTitles, threshold = 3) {
-  const kw = titleKeywords(artikel.titel);
-  for (const prev of previousTitles) {
-    const prevKw = titleKeywords(prev);
-    let overlap = 0;
-    for (const w of kw) if (prevKw.has(w)) overlap++;
-    if (overlap >= threshold) return prev;
-  }
-  return null;
-}
-
-async function findExistingIssue(token, issueTitle) {
-  // Sicherheitshinweis: issueTitle wird direkt in den Suchquery interpoliert.
-  // Das ist aktuell unkritisch, weil issueTitle immer aus dem fixen String
-  // "KI Daily – " + Datum besteht. Der eigentliche Guard ist issue.title === issueTitle
-  // weiter unten: Auch wenn der Suchquery mehr Treffer liefert als erwartet
-  // (z.B. durch einen manipulierten RUN_DATE bei workflow_dispatch), wird
-  // nur das Issue mit exakt passendem Titel verwendet.
-  const q = new URLSearchParams({
-    q: `repo:kronprinzmagma/ki-news-aggregator is:issue in:title "${issueTitle}"`,
-  });
-  const { status, body } = await githubRequest(token, 'GET', `/search/issues?${q}`);
-  if (status !== 200) {
-    console.warn(`GitHub Issue-Suche fehlgeschlagen: HTTP ${status} – ${body}`);
-    return null;
-  }
-
-  let result;
-  try {
-    result = JSON.parse(body);
-  } catch {
-    console.warn(`GitHub Issue-Suche: ungültige JSON-Antwort – ${body.slice(0, 100)}`);
-    return null;
-  }
-  return result.items?.find(issue => issue.title === issueTitle) || null;
-}
-
-async function upsertGithubIssue(date, body) {
-  const token = process.env.GH_PAT;
-  if (!token) {
-    console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
-    return null;
-  }
-
-  const issueTitle = `KI Daily – ${date}`;
-  const existingIssue = await findExistingIssue(token, issueTitle);
-  if (existingIssue) {
-    let existingBody = existingIssue.body || '';
-    if (!existingBody && existingIssue.number) {
-      const existingResponse = await githubRequest(
-        token,
-        'GET',
-        `/repos/kronprinzmagma/ki-news-aggregator/issues/${existingIssue.number}`
-      );
-      if (existingResponse.status === 200) {
-        existingBody = JSON.parse(existingResponse.body).body || '';
-      } else {
-        console.warn(`GitHub Issue konnte für Feedback-Erhalt nicht geladen werden: HTTP ${existingResponse.status}`);
-      }
-    }
-    const feedbackStates = extractFeedbackStates(existingBody);
-    const bodyWithPreservedFeedback = applyFeedbackStates(body, feedbackStates);
-    const { status, body: responseBody } = await githubRequest(
-      token,
-      'PATCH',
-      `/repos/kronprinzmagma/ki-news-aggregator/issues/${existingIssue.number}`,
-      { title: issueTitle, body: bodyWithPreservedFeedback, labels: ['summary'] }
-    );
-
-    if (status === 200) {
-      const issue = JSON.parse(responseBody);
-      console.log(`GitHub Issue aktualisiert: ${issue.html_url}`);
-      return issue.html_url;
-    }
-
-    console.error(`GitHub API Fehler beim Aktualisieren: HTTP ${status} – ${responseBody.slice(0, 200)}`);
-    return null;
-  }
-
-  const payload = {
-    title: issueTitle,
-    body,
-    labels: ['summary'],
-  };
-  const { status, body: responseBody } = await githubRequest(
-    token,
-    'POST',
-    '/repos/kronprinzmagma/ki-news-aggregator/issues',
-    payload
-  );
-
-  if (status === 201) {
-    const issue = JSON.parse(responseBody);
-    console.log(`GitHub Issue erstellt: ${issue.html_url}`);
-    return issue.html_url;
-  }
-
-  console.error(`GitHub API Fehler beim Erstellen: HTTP ${status} – ${responseBody.slice(0, 200)}`);
-  return null;
 }
 
 main()
   .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
-  .finally(() => https.globalAgent.destroy());
+  .finally(() => { https.globalAgent.destroy(); closeStore(); });

@@ -4,5 +4,9 @@
   "type": "module",
   "scripts": {
     "eval:review": "node evals/review-ui/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "zod": "^4.4.3"
   }
 }

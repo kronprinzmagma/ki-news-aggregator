@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
-import https from 'https'; // nur für globalAgent.destroy() am Ende
+import https from 'https';
+import { todayString } from './lib/date.js';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
@@ -15,7 +16,6 @@ import { fetchArticles as fetchBenEvans } from './adapters/benevans.js';
 import { fetchArticles as fetchA16z } from './adapters/a16z.js';
 import { fetchArticles as fetchHeise } from './adapters/heise.js';
 
-// Nur Artikel der letzten N Tage behalten – verhindert, dass täglich dieselben RSS-Einträge erscheinen
 const MAX_ARTICLE_AGE_DAYS = 3;
 const ADAPTER_TIMEOUT_MS = 30_000;
 
@@ -24,8 +24,7 @@ function withTimeout(promise, ms, name) {
   const timeout = new Promise((_, reject) => {
     timeoutId = setTimeout(() => reject(new Error(`Timeout nach ${ms / 1000}s`)), ms);
   });
-  return Promise.race([promise, timeout])
-    .finally(() => clearTimeout(timeoutId));
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timeoutId));
 }
 
 const ADAPTERS = [
@@ -50,7 +49,6 @@ async function runAdapters() {
     ADAPTERS.map(a => withTimeout(a.fn(), ADAPTER_TIMEOUT_MS, a.name))
   );
   const articles = [];
-
   for (let i = 0; i < ADAPTERS.length; i++) {
     const { name } = ADAPTERS[i];
     const result = results[i];
@@ -61,14 +59,12 @@ async function runAdapters() {
       console.error(`[${name}] Fehler: ${result.reason.message}`);
     }
   }
-
   return articles;
 }
 
 function normalizeUrl(url) {
   try {
     const u = new URL(url);
-    // UTM-Parameter und andere Tracking-Parameter entfernen
     for (const key of [...u.searchParams.keys()]) {
       if (key.startsWith('utm_')) u.searchParams.delete(key);
     }
@@ -90,28 +86,16 @@ function deduplicate(articles) {
 function filterByAge(articles) {
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - MAX_ARTICLE_AGE_DAYS);
-
   const filtered = articles.filter(a => {
-    if (!a.datum) return true; // kein Datum → behalten
+    if (!a.datum) return true;
     const date = new Date(a.datum);
     return isNaN(date.getTime()) || date >= cutoff;
   });
-
   const dropped = articles.length - filtered.length;
   if (dropped > 0) console.log(`${dropped} Artikel als zu alt gefiltert (> ${MAX_ARTICLE_AGE_DAYS} Tage)`);
   return filtered;
 }
 
-function todayString() {
-  const raw = process.env.RUN_DATE || new Date().toISOString().slice(0, 10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    console.error(`Ungültiges RUN_DATE-Format: "${raw}". Erwartet: YYYY-MM-DD`);
-    process.exit(1);
-  }
-  return raw;
-}
-
-// Artikel mit raw_text < 300 Zeichen werden als truncated geflakt und gewarnt
 function flagTruncated(articles) {
   let truncatedCount = 0;
   const flagged = articles.map(a => {
@@ -128,7 +112,6 @@ function flagTruncated(articles) {
   return flagged;
 }
 
-// Artikel auf Pricing-Signale prüfen und pricing_signal_found-Flag setzen
 function flagPricingSignals(articles) {
   const PRICING_PATTERN = /\$[\d.,]+|\bpricing\b|\bprice\b|\bkosten\b|\bpreis\b|\bper token\b|\bper request\b|\brate limit\b|\bfree tier\b|\bpaid plan\b|\bcost\b|\bgebühr\b|\btier\b/i;
   return articles.map(a => {
