@@ -72,6 +72,20 @@ Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Ko
 
 ---
 
+## Phase 7 – Architektur-Refactor
+
+Ziel: Code-Duplikation eliminieren, Re-Parsing der Issue-Markdowns durch persistente Datenbasis ersetzen, neue Adapter in ~10 Zeilen umsetzbar machen, Scoring-Kosten via Prompt Caching senken. Verhalten der Daily-/Weekly-Pipeline bleibt identisch.
+
+- [ ] `lib/`-Module: env, date, config, claude, github, text-utils, topic-overlap – eliminiert Triplet-Duplikate aus score/deliver/weekly
+- [ ] Adapter-Basis (`adapters/_base.js`) mit gemeinsamem HTTP/SSRF-Schutz, RSS-/Atom-Parser, Entity-Decoding und Content-Extraktion; alle 11 aktiven Adapter darauf umgestellt
+- [ ] Topic-Overlap-Heuristik vereinheitlicht (vier fast-identische Token-Overlap-Funktionen → eine konfigurierbare `topicOverlap()`-Funktion)
+- [ ] Migration auf `@anthropic-ai/sdk` mit Prompt Caching auf dem Score-System-Prompt
+- [ ] SQLite-Store (`lib/store.js`, `better-sqlite3`) mit `articles`, `scores`, `issues`; Cross-Day-Dedup liest aus DB statt aus Issue-Markdown
+- [ ] Versioniertes Issue-Format: pro Artikel HTML-Kommentar mit strukturierten Metadaten; Weekly liest primär daraus, Regex bleibt Fallback
+- [ ] Zod-Schema-Validierung beim Lesen von `articles-*.json` und `scored-*.json`
+
+---
+
 ## Erledigte Punkte
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
