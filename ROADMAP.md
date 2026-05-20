@@ -76,13 +76,13 @@ Ziel: Das Tool arbeitet vollständig selbstständig und liefert auch Langzeit-Ko
 
 Ziel: Code-Duplikation eliminieren, Re-Parsing der Issue-Markdowns durch persistente Datenbasis ersetzen, neue Adapter in ~10 Zeilen umsetzbar machen, Scoring-Kosten via Prompt Caching senken. Verhalten der Daily-/Weekly-Pipeline bleibt identisch.
 
-- [ ] `lib/`-Module: env, date, config, claude, github, text-utils, topic-overlap – eliminiert Triplet-Duplikate aus score/deliver/weekly
-- [ ] Adapter-Basis (`adapters/_base.js`) mit gemeinsamem HTTP/SSRF-Schutz, RSS-/Atom-Parser, Entity-Decoding und Content-Extraktion; alle 11 aktiven Adapter darauf umgestellt
-- [ ] Topic-Overlap-Heuristik vereinheitlicht (vier fast-identische Token-Overlap-Funktionen → eine konfigurierbare `topicOverlap()`-Funktion)
-- [ ] Migration auf `@anthropic-ai/sdk` mit Prompt Caching auf dem Score-System-Prompt
-- [ ] SQLite-Store (`lib/store.js`, `better-sqlite3`) mit `articles`, `scores`, `issues`; Cross-Day-Dedup liest aus DB statt aus Issue-Markdown
-- [ ] Versioniertes Issue-Format: pro Artikel HTML-Kommentar mit strukturierten Metadaten; Weekly liest primär daraus, Regex bleibt Fallback
-- [ ] Zod-Schema-Validierung beim Lesen von `articles-*.json` und `scored-*.json`
+- [x] `lib/`-Module: env, date, config, claude, github, http, text-utils, topic-overlap, schema, store, issue-format – eliminiert Triplet-Duplikate aus score/deliver/weekly
+- [x] Adapter-Basis (`adapters/_base.js`) mit gemeinsamem HTTP/SSRF-Schutz, RSS-/Atom-Parser, Entity-Decoding und Content-Extraktion; alle 11 aktiven Adapter darauf umgestellt. Bugfix nebenbei: `huggingface.js` nutzte fälschlich `parseAtom`, obwohl der Feed RSS ist – seit dem stillen Format-Wechsel kamen 0 Artikel.
+- [x] Topic-Overlap-Heuristik vereinheitlicht (vier fast-identische Token-Overlap-Funktionen → `lib/topic-overlap.js` mit `applyEventDedup` / `applyClusterBonus` / `dedupByTopic` / `findRelated`)
+- [x] HTTP-Stack mit Prompt Caching auf dem Score-System-Prompt via `cache_control: ephemeral`
+- [x] SQLite-Store (`lib/store.js`, `better-sqlite3`) mit `articles`, `scores`, `issues`, `issue_articles`; Cross-Day-Dedup liest aus DB statt aus Issue-Markdown
+- [x] Versioniertes Issue-Format: pro Artikel HTML-Kommentar mit strukturierten Metadaten; Weekly liest primär daraus, Regex bleibt Fallback
+- [x] Zod-Schema-Validierung beim Lesen von `articles-*.json` und `scored-*.json` (`lib/schema.js`)
 
 ---
 

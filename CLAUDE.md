@@ -13,8 +13,10 @@ Drei Bausteine, sequenziell:
 ## Stack
 
 - Node.js, keine Frameworks
-- Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring, `claude-sonnet-4-6` fürs Delivering
-- Keine Datenbank – JSON-Files für Zwischenergebnisse
+- Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring (System-Prompt mit Prompt Caching), `claude-sonnet-4-6` fürs Delivering und Weekly
+- Geteilte Module in `lib/`: `claude` (Retry, Caching), `github`, `http` (SSRF-Schutz), `config` (Modelle, Schwellwerte, Stopwords), `text-utils`, `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten), `env`, `date`
+- Adapter-Basis in `adapters/_base.js`: HTTP-GET, RSS-/Atom-Parsing, Content-Extraktion, Enrichment
+- SQLite-Persistenz (`better-sqlite3`, lokale `ki-news.db`) für Cross-Day-Dedup und Run-Historie; JSON-Files (`articles-*.json`, `scored-*.json`, `run-summary-*.json`) bleiben als Audit-Artefakte
 
 ## Quellen (Baustein 1)
 
@@ -58,7 +60,8 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
-- Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 3 Issues erschienen sind, werden vor der Selektion gefiltert
+- Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 3 Issues erschienen sind, werden vor der Selektion gefiltert. Quelle ist primär die SQLite-DB (`ki-news.db`, Tabelle `issue_articles`); fällt zurück auf das Parsen der letzten GitHub-Issues, wenn die DB leer ist.
+- Issue-Body enthält pro Artikel einen versionierten HTML-Kommentar-Marker `<!-- ki-news-meta: {...} -->`. Weekly und Cross-Day-Dedup lesen primär aus diesen Markern, fallen auf das `Score X/5 · [...](...)`-Regex zurück (Backwards Compatibility).
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
 - Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 4 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. Bewertung der geschriebenen drei Blöcke

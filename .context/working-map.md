@@ -19,14 +19,24 @@ Nicht erneut breit analysieren:
 
 ## Scoring / Delivery
 
-- `score.js`: Produktionsprompt und Scoring-Logik. Wichtig für Prompt-Sync mit `evals/run_eval.py`.
-- `deliver.js`: Issue-Format, Score-Schwelle, Dedup, GitHub-Issue-Erstellung und Claude-only Review-Schlaufe. Enthält Feedback-Checkboxen pro Artikel, Erhaltungslogik für bereits gesetzte Häkchen bei Issue-Updates und advisory Review-Ergebnisse in der Run-Summary.
+- `score.js`: Produktionsprompt und Scoring-Logik. Wichtig für Prompt-Sync mit `evals/run_eval.py`. System-Prompt mit `cache_control` markiert (Prompt Caching).
+- `deliver.js`: Issue-Format mit versionierten HTML-Kommentar-Metadaten pro Artikel, Score-Schwelle, Dedup, GitHub-Issue-Erstellung, Claude-only Review-Schlaufe inkl. Rewrite-Loop, Feedback-Checkboxen mit Erhalt der Häkchen bei Issue-Updates.
+
+## Lib (Phase 7 – Architektur-Refactor)
+
+- `lib/config.js`: Modelle, Repo-Slug, Score-Schwellen, Lab-Quellen, Stopwords. Zentrale Konstanten – nicht im Code verteilen.
+- `lib/claude.js`: Anthropic-API-Helper mit Retry, Prompt Caching, `callClaude/claudeText/claudeJson`. Wird von score/deliver/weekly genutzt.
+- `lib/github.js`: GitHub-API-Helper + `ghPath` für REPO_SLUG-relative Routen.
+- `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.
+- `lib/topic-overlap.js`: Eine Token-Overlap-Implementierung für Event-Dedup, Cluster-Bonus, Themen-Dedup, Related-Links.
+- `lib/store.js`: SQLite-Persistenz (`better-sqlite3`, DB-Datei `ki-news.db`, lokal generiert, nicht im Repo). Cross-Day-Dedup liest aus `issue_articles`.
+- `lib/issue-format.js`: HTML-Kommentar-Metadaten (`<!-- ki-news-meta: {...} -->`) für robustes Re-Parsing. Weekly nutzt das zuerst, Regex-Fallback bleibt.
+- `lib/schema.js`: Zod-Schemas; Validierung beim Lesen von `articles-*.json`/`scored-*.json`.
+- `adapters/_base.js`: Gemeinsame Adapter-Basis (`httpGet`, `parseRss`, `parseAtom`, `extractArticleText`, `enrichFromUrl`). Neue Adapter brauchen ~10 LOC.
 
 Nicht erneut vollständig lesen:
 
-- Adapter in `adapters/`: Nur lesen, wenn Quellenlogik, Feed-Probleme oder Artikelqualität untersucht werden.
-- `adapters/latentspace.js`: Relevant bei dünnen Latent-Space-Teasern; lädt jetzt bei kurzen Feed-Texten die Artikelseite nach.
-- `adapters/willison.js`: Relevant bei dünnen Simon-Willison-Teasern; lädt jetzt bei kurzen Feed-Texten die Artikelseite nach.
+- Adapter in `adapters/`: Nur lesen, wenn Quellenlogik, Feed-Probleme oder Artikelqualität untersucht werden. Alle Adapter sind dünn (10–40 LOC) und delegieren an `_base.js`.
 
 ## Evals
 

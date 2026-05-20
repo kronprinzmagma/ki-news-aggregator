@@ -1,6 +1,20 @@
 # Current State
 
-Stand: 2026-05-10
+Stand: 2026-05-20
+
+## Phase 7 – Architektur-Refactor (2026-05-20)
+
+Grosser Aufräum-Pass: ~3000 LOC der Pipeline auf ~1800 LOC reduziert, ohne das Output-Verhalten zu ändern.
+
+- Neues `lib/`-Verzeichnis mit `config`, `env`, `date`, `http` (SSRF-Schutz), `claude` (Retry + Prompt Caching), `github`, `text-utils`, `topic-overlap` (vereinheitlichte Token-Overlap-Heuristik), `schema` (Zod-Validierung), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten).
+- Adapter-Basis `adapters/_base.js` ersetzt 12× Copy-Paste-HTTP-/Parser-Code. Neue Quelle = ~10 LOC.
+- Bug nebenbei gefixt: `huggingface.js` nutzte `parseAtom`, der Feed ist aber RSS – seit dem Format-Wechsel kamen 0 Artikel.
+- Cross-Day-Dedup liest jetzt aus SQLite (`ki-news.db`, Tabelle `issue_articles`), Issue-Markdown nur noch als Fallback.
+- Daily-Issue enthält pro Artikel `<!-- ki-news-meta: {...} -->`-Marker für robustes Re-Parsing durch Weekly + Dedup.
+- Score-System-Prompt mit `cache_control: ephemeral` → Prompt Caching reduziert Token-Kosten bei mehreren Artikeln pro Lauf.
+- Zod validiert `articles-*.json` und `scored-*.json` beim Lesen.
+
+Dependencies neu: `better-sqlite3@12.10`, `zod@4.4`. Lokale DB `ki-news.db` ist gitignored.
 
 ## Was das System heute tut
 
