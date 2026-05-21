@@ -86,6 +86,21 @@ Ziel: Code-Duplikation eliminieren, Re-Parsing der Issue-Markdowns durch persist
 
 ---
 
+## Phase 8 – Portfolio-Härtung
+
+Ziel: Das Projekt für externe Leser (Recruiter, Hiring Manager, Builder-Community) sichtbar und lesbar machen, dabei zwei echte Engineering-Verbesserungen mitnehmen (Structured Outputs, Cost-Log) und EU-AI-Act-Disclosure-Pflicht ab 02.08.2026 erfüllen.
+
+- [ ] AI-Disclaimer im Issue-Header (EU AI Act Art. 50(4)): sichtbarer "🤖 KI-generiert"-Hinweis
+- [ ] "Warum diese 14 Quellen"-Block im README: bewusste Kuratierung als Statement, nicht Quellen-Maximierung
+- [ ] Mermaid-Architekturdiagramm im README: Pipeline-Flow von Ingest → Score → Deliver inkl. Review-Loop
+- [ ] Sample-Issue als `samples/example-daily.md` committen + im README verlinken
+- [ ] Cost-Log pro Run: `lib/claude.js` aggregiert `usage` (inkl. `cache_read_input_tokens`), persistiert in `run-summary-*.json` mit Kostenrechnung
+- [ ] Structured Outputs in `score.js`: Migration auf Anthropic-natives JSON-Schema via `tool_use` (eliminiert Regex-Strip + JSON.parse-Defensive)
+- [ ] Structured Outputs im Review-Pass von `deliver.js`: analog `tool_use` für das Review-JSON
+- [ ] Deliver-Eval: neues Eval in `evals/` mit LLM-as-Judge auf Faithfulness der 3-Block-Writeups + Marketing-Sprech-Detection
+
+---
+
 ## Erledigte Punkte
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
