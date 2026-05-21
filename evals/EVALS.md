@@ -1,6 +1,15 @@
 # Eval-System – Dokumentation
 
-## Was gemessen wird und warum
+Zwei Evals laufen unabhängig voneinander auf unterschiedlichen Pipeline-Stufen:
+
+| Eval | Datei | Pipeline-Stufe | Frage |
+|---|---|---|---|
+| Scoring-Eval | `run_eval.py` | Score-Stufe | Stimmen Modell-Scores mit menschlich vergebenen Goldstandard-Scores überein? |
+| Deliver-Eval | `deliver_eval.js` | Deliver-Stufe | Sind die geschriebenen 3-Block-Aufbereitungen faktentreu zum Source-Text und stilistisch sauber? |
+
+---
+
+## Scoring-Eval (`run_eval.py`)
 
 Der Aggregator bewertet täglich KI-News-Artikel mit einem Score von 1–5. Dieser Score entscheidet, welche Artikel im täglichen GitHub-Issue landen. Wenn der Scoring-Prompt schlecht kalibriert ist, entstehen zwei Probleme:
 
@@ -113,3 +122,38 @@ Für den Start reichen 10–15 echte Artikel. Besonders wertvoll sind Grenzfäll
 ## Resultate interpretieren
 
 Die JSON-Reports in `evals/results/` enthalten neben den aggregierten Metriken auch die Einzel-Bewertungen pro Artikel (`details`-Array). Wenn der MAE schlecht ist, lohnt es sich, die Ausreisser (`diff` > 2 oder < -2) manuell anzuschauen – sie zeigen oft systematische Schwächen im Prompt (z.B. zu grosszügig bei Show-HN, zu streng bei strategischen Meldungen).
+
+---
+
+## Deliver-Eval (`deliver_eval.js`)
+
+Während das Scoring-Eval prüft, ob die richtigen Artikel ausgewählt werden, prüft das Deliver-Eval, ob die *geschriebenen* 3-Block-Aufbereitungen die Qualitätsmessdaten halten, die der Deliver-Prompt verlangt.
+
+### Was es misst
+
+**1. Faithfulness (LLM-as-Judge, Claude Haiku 4.5).** Für jeden Artikel-Writeup im letzten Daily-Issue wird der Source-Text aus der SQLite-Datenbank geladen und beides an einen Judge geschickt. Der Judge sucht nach Behauptungen im Writeup, die im Source-Text nicht belegbar sind — erfundene Modellnamen, Zahlen, Partnerschaften, behauptete Benchmarks ohne Beleg. Output: `faithfulness_score` (1–5) + Liste der konkreten Halluzinationen.
+
+**2. Stil (LLM-as-Judge, gleiche Call).** Der Judge prüft, ob der Writeup PO-/Sprint-/Stakeholder-Sprache, generische "KI verändert X"-Sätze oder Hedging-Phrasen ("könnte man", "liesse sich") enthält. Output: `style_score` (1–5) + Liste konkreter Stil-Verstösse.
+
+**3. Banned Phrases (deterministische Regex, kein LLM).** Der Deliver-Prompt verbietet explizit eine kurze Liste von Schablonen ("Build-vs-Buy verschiebt sich", "Effizienz wird zur Differenzierung", "der Engpass verschiebt sich") und Marketing-Anglizismen ("Headroom", "Harness", "Mikroturn", "Distributions-Engineering", "class-leading"). Diese werden regex-basiert in jedem Writeup gesucht — ein Hit ist immer ein Bug.
+
+### Verwendung
+
+```bash
+ANTHROPIC_API_KEY=sk-... node evals/deliver_eval.js [--last N]
+```
+
+Default: letzte 3 `summary-*.md`-Files. Output:
+- Konsolen-Aggregat (Faithfulness Ø + Floor, Style Ø + Floor, Counts mit Halluzinationen / Stil-Problemen / Banned-Phrases)
+- Detail-Report in `evals/results/deliver-eval-YYYY-MM-DD.json`
+
+### Wann der Eval läuft
+
+Aktuell on-demand. Sinnvolle Trigger:
+- Nach jeder Änderung am Deliver- oder Rewrite-Prompt (Regression-Check)
+- Vor jedem grösseren Release zur Doku der Output-Qualität
+- Wenn der Banned-Phrase-Count über mehrere Tage > 0 ist (Prompt-Lücke)
+
+### Grenzen
+
+Der Judge nutzt dasselbe Modell-Familie (Claude) wie der Writer — das ist kein Cross-Provider-Setup wie bei richtigen RAG-Evals. Faithfulness-Scores sind also Indikator, nicht Beweis. Banned-Phrases sind dagegen deterministisch und damit verlässlich.
