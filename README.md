@@ -93,7 +93,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 ## Engineering notes
 
-**Structured LLM output with schema validation.** Every Claude response that feeds downstream code is validated with Zod before use. Schema definitions live in `lib/schema.js`; malformed responses are caught at the boundary and logged, not silently dropped.
+**Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback — the API guarantees a schema-conformant object or fails the call. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
 
 **Prompt caching for cost efficiency.** The scoring stage sends the system prompt — including the full relevance rubric — as an Anthropic `cache_control: ephemeral` prefix. Only the per-article content varies across calls. This significantly reduces token cost on days with high article volume.
 

@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
-import { claudeText, getUsageSummary } from './lib/claude.js';
+import { claudeText, claudeStructured, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import {
   DELIVER_MODEL,
@@ -123,47 +123,7 @@ Analysiere:
 - selected_articles: Artikel, die ins Issue kommen (inkl. issue_summary = geschriebener Output).
 - low_score_samples: Bis zu zwei Beispiele je niedriger Score-Stufe 1, 2 und 3. Prüfe nur, ob der Ausschluss plausibel war oder ob möglicherweise Relevanz verloren ging.
 
-Gib NUR valides JSON zurück:
-{
-  "selected_articles": [
-    {
-      "url": "...",
-      "title": "...",
-      "product_relevance": 1-5,
-      "technical_substance": 1-5,
-      "learning_value": 1-5,
-      "input_quality": "good" | "thin" | "broken",
-      "issue_fit": "strong" | "ok" | "weak",
-      "needs_rewrite": true | false,
-      "rewrite_hint": "Ein Satz: Was genau soll besser werden? Nur ausfüllen wenn needs_rewrite=true, sonst null.",
-      "suggested_feedback": {
-        "besonders_wertvoll": true | false,
-        "spaeter_weiterverfolgen": true | false
-      },
-      "reason": "ein kurzer Satz"
-    }
-  ],
-  "low_score_samples": [
-    {
-      "url": "...",
-      "title": "...",
-      "score_seems_right": true | false,
-      "missed_opportunity": true | false,
-      "input_quality": "good" | "thin" | "broken",
-      "reason": "ein kurzer Satz"
-    }
-  ],
-  "process_adjustments": [
-    {
-      "area": "scoring" | "ingest" | "delivery" | "source",
-      "priority": "low" | "medium" | "high",
-      "recommendation": "konkrete, umsetzbare Empfehlung",
-      "rationale": "ein Satz",
-      "auto_apply_safe": false
-    }
-  ],
-  "overall_assessment": "maximal zwei Sätze"
-}
+Gib die strukturierte Review über das submit_review-Tool zurück.
 
 Wichtig:
 - needs_rewrite: true wenn issue_fit != "strong" ODER wenn einer der drei Blöcke klar verbesserungswürdig ist.
@@ -175,6 +135,73 @@ Wichtig:
 Input:
 ${JSON.stringify({ selected_articles: selectedArticles, low_score_samples: lowScoreSamples }, null, 2)}
 `;
+
+const REVIEW_TOOL_SCHEMA = {
+  type: 'object',
+  properties: {
+    selected_articles: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          url: { type: 'string' },
+          title: { type: 'string' },
+          product_relevance: { type: 'integer', minimum: 1, maximum: 5 },
+          technical_substance: { type: 'integer', minimum: 1, maximum: 5 },
+          learning_value: { type: 'integer', minimum: 1, maximum: 5 },
+          input_quality: { type: 'string', enum: ['good', 'thin', 'broken'] },
+          issue_fit: { type: 'string', enum: ['strong', 'ok', 'weak'] },
+          needs_rewrite: { type: 'boolean' },
+          rewrite_hint: {
+            type: ['string', 'null'],
+            description: 'Ein Satz: Was genau soll besser werden? Nur wenn needs_rewrite=true.',
+          },
+          suggested_feedback: {
+            type: 'object',
+            properties: {
+              besonders_wertvoll: { type: 'boolean' },
+              spaeter_weiterverfolgen: { type: 'boolean' },
+            },
+            required: ['besonders_wertvoll', 'spaeter_weiterverfolgen'],
+          },
+          reason: { type: 'string' },
+        },
+        required: ['url', 'title', 'product_relevance', 'technical_substance', 'learning_value', 'input_quality', 'issue_fit', 'needs_rewrite', 'suggested_feedback', 'reason'],
+      },
+    },
+    low_score_samples: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          url: { type: 'string' },
+          title: { type: 'string' },
+          score_seems_right: { type: 'boolean' },
+          missed_opportunity: { type: 'boolean' },
+          input_quality: { type: 'string', enum: ['good', 'thin', 'broken'] },
+          reason: { type: 'string' },
+        },
+        required: ['url', 'title', 'score_seems_right', 'missed_opportunity', 'input_quality', 'reason'],
+      },
+    },
+    process_adjustments: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          area: { type: 'string', enum: ['scoring', 'ingest', 'delivery', 'source'] },
+          priority: { type: 'string', enum: ['low', 'medium', 'high'] },
+          recommendation: { type: 'string' },
+          rationale: { type: 'string' },
+          auto_apply_safe: { type: 'boolean' },
+        },
+        required: ['area', 'priority', 'recommendation', 'rationale', 'auto_apply_safe'],
+      },
+    },
+    overall_assessment: { type: 'string', description: 'Maximal zwei Sätze.' },
+  },
+  required: ['selected_articles', 'low_score_samples', 'process_adjustments', 'overall_assessment'],
+};
 
 // ─── Overblick + Feedback-Erhaltung ──────────────────────────────────────────
 
@@ -254,23 +281,30 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
     scoring_reason: article.begründung, raw_text: (article.rohtext || '').slice(0, 600),
   }));
 
-  let text;
   try {
     console.log('[review] Starte Claude-only Review-Schlaufe');
-    text = await claudeText(
-      REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
-      { model: DELIVER_MODEL, maxTokens: 4000, timeoutMs: API_TIMEOUT_MS, logTag: 'review' }
-    );
-    const cleaned = text.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+    const result = await claudeStructured({
+      model: DELIVER_MODEL,
+      messages: [{
+        role: 'user',
+        content: REVIEW_PROMPT({ selectedArticles: selectedPayload, lowScoreSamples: samplePayload }),
+      }],
+      toolName: 'submit_review',
+      toolDescription: 'Reicht die strukturierte Review der ausgewählten und ausgeschlossenen Artikel ein.',
+      schema: REVIEW_TOOL_SCHEMA,
+      maxTokens: 4000,
+      timeoutMs: API_TIMEOUT_MS,
+      logTag: 'review',
+    });
     return {
       enabled: true, model: DELIVER_MODEL, mode: 'advisory',
       reviewed_selected: selectedArticles.length,
       reviewed_low_score_samples: lowScoreSamples.length,
-      result: JSON.parse(cleaned),
+      result,
     };
   } catch (err) {
     console.warn(`[review] Review-Schlaufe übersprungen: ${err.message}`);
-    return { enabled: true, mode: 'advisory', error: err.message, raw_response: text?.slice(0, 500) };
+    return { enabled: true, mode: 'advisory', error: err.message };
   }
 }
 
