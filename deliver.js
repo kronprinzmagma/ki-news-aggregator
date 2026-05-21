@@ -565,7 +565,11 @@ async function main() {
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
-  const reviewedArticles = runSummary.review?.result?.selected_articles || [];
+  const rawReviewed = runSummary.review?.result?.selected_articles;
+  const reviewedArticles = Array.isArray(rawReviewed) ? rawReviewed : [];
+  if (rawReviewed !== undefined && !Array.isArray(rawReviewed)) {
+    console.warn(`[review] selected_articles ist kein Array (type=${typeof rawReviewed}). Rewrites werden übersprungen. Preview: ${JSON.stringify(rawReviewed).slice(0, 200)}`);
+  }
   let rewriteCount = 0;
   for (let i = 0; i < topArtikel.length; i++) {
     const reviewResult = reviewedArticles.find(r => r.url === topArtikel[i].url);
