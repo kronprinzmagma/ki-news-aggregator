@@ -1,7 +1,8 @@
 import { loadEnv, requireEnv } from './lib/env.js';
-import { claudeText } from './lib/claude.js';
+import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import { WEEKLY_MODEL } from './lib/config.js';
+import { recordUsage, closeStore } from './lib/store.js';
 
 loadEnv();
 
@@ -199,9 +200,14 @@ ${digestBody}
 
   const issueUrl = await upsertWeeklyIssue(token, weekInfo, issueBody);
   console.log(`[weekly] Fertig: ${issueUrl}`);
+
+  const usage = getUsageSummary();
+  if (usage.totals.calls > 0) {
+    console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cached ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
+    recordUsage({ run_date: weekInfo.to, stage: 'weekly', by_log_tag: usage.by_log_tag });
+  }
 }
 
-main().catch(err => {
-  console.error('[weekly] Fehler:', err.message);
-  process.exit(1);
-});
+main()
+  .catch(err => { console.error('[weekly] Fehler:', err.message); process.exit(1); })
+  .finally(() => closeStore());

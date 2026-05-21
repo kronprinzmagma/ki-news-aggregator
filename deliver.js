@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
-import { claudeText } from './lib/claude.js';
+import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import {
   DELIVER_MODEL,
@@ -19,6 +19,7 @@ import {
   upsertArticle,
   upsertScore,
   recordIssue,
+  recordUsage,
   articlesPublishedRecently,
   closeStore,
 } from './lib/store.js';
@@ -604,6 +605,14 @@ async function main() {
   runSummary.issue_url = issueUrl;
   runSummary.deliver.in_issue = topArtikel.length;
   runSummary.deliver.issue_articles = topArtikel.map(a => ({ titel: a.titel, url: a.url, quelle: a.quelle, score: a.score }));
+
+  const usage = getUsageSummary();
+  runSummary.usage = usage;
+  if (usage.totals.calls > 0) {
+    console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cached ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
+    recordUsage({ run_date: date, stage: 'deliver', by_log_tag: usage.by_log_tag });
+  }
+
   await writeRunSummary(date, runSummary);
 }
 

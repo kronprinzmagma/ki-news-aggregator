@@ -2,9 +2,10 @@ import fs from 'fs/promises';
 import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
-import { callClaude } from './lib/claude.js';
+import { callClaude, getUsageSummary } from './lib/claude.js';
 import { SCORE_MODEL, SCORE_CUTOFF_PERSIST } from './lib/config.js';
 import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
+import { recordUsage, closeStore } from './lib/store.js';
 
 loadEnv();
 
@@ -145,8 +146,14 @@ async function main() {
   const filename = `scored-${date}.json`;
   await fs.writeFile(filename, JSON.stringify(relevant, null, 2), 'utf-8');
   console.log(`Gespeichert: ${filename}`);
+
+  const usage = getUsageSummary();
+  if (usage.totals.calls > 0) {
+    console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cached ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
+    recordUsage({ run_date: date, stage: 'score', by_log_tag: usage.by_log_tag });
+  }
 }
 
 main()
   .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
-  .finally(() => https.globalAgent.destroy());
+  .finally(() => { https.globalAgent.destroy(); closeStore(); });

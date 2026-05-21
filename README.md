@@ -111,6 +111,8 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Shared config layer.** All model names, score thresholds, dedup parameters, and rate limits are defined once in `lib/config.js`. No magic numbers in application code.
 
+**Cost tracking with cache visibility.** Every Claude API call is accumulated in `lib/claude.js` with full breakdown (input / output / `cache_read_input_tokens` / `cache_creation_input_tokens`), priced against current Anthropic rates and written to a `usage_log` table in SQLite per run. The per-run total — including cache hit rate — is logged to the console at the end of each stage and persisted in `run-summary-*.json` for the deliver stage. Makes both cost regressions and cache invalidation visible.
+
 ---
 
 ## Repository layout
