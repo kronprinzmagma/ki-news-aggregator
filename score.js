@@ -161,7 +161,7 @@ async function main() {
 
   const usage = getUsageSummary();
   if (usage.totals.calls > 0) {
-    console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cached ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
+    console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cache_create ${usage.totals.cache_creation_input_tokens} · cache_read ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
     recordUsage({ run_date: date, stage: 'score', by_log_tag: usage.by_log_tag });
   }
 }

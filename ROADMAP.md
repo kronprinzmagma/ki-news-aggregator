@@ -98,6 +98,7 @@ Ziel: Das Projekt für externe Leser (Recruiter, Hiring Manager, Builder-Communi
 - [x] Structured Outputs in `score.js`: Migration auf Anthropic-natives JSON-Schema via `tool_use` (eliminiert Regex-Strip + JSON.parse-Defensive)
 - [x] Structured Outputs im Review-Pass von `deliver.js`: analog `tool_use` für das Review-JSON
 - [x] Deliver-Eval: neues Eval in `evals/` mit LLM-as-Judge auf Faithfulness der 3-Block-Writeups + Marketing-Sprech-Detection
+- [ ] Followup: Cache-Hit-Regression nach Structured-Outputs-Migration analysieren (vorher ~90%, jetzt 0%). Vermutung: Tool-Definition als zusätzlicher Cache-Breakpoint interagiert mit Min-Token-Schwelle (Haiku: 2048). Erste Annäherung `cache_control: ephemeral` auf Tool-Definition hat nichts gebracht – braucht Logging von `cache_creation_input_tokens` zur Diagnose und ggf. Anpassung der Breakpoint-Strategie.
 
 ---
 
