@@ -10,6 +10,8 @@ Keeping up with AI developments as a practitioner is noisy. Most newsletters eit
 
 This pipeline runs every morning at 05:30 UTC and produces exactly that — one GitHub Issue per day, written in a fixed three-block format per article, with a weekly synthesis on Sundays.
 
+**See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
+
 ---
 
 ## What the pipeline does
