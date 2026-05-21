@@ -37,6 +37,58 @@ A Watchdog workflow monitors the daily run and retriggers if the issue was not c
 
 ---
 
+## Pipeline architecture
+
+```mermaid
+flowchart TD
+    subgraph Sources["14 sources (RSS / Atom)"]
+        S1["Labs<br/>Anthropic · HuggingFace"]
+        S2["Practitioners<br/>Willison · Latent Space · Interconnects<br/>Ahead of AI · The Batch · Last Week in AI<br/>Yannic Kilcher"]
+        S3["Community<br/>Hacker News"]
+        S4["Industry / Strategy<br/>VentureBeat · Ben Evans<br/>a16z (AI-filtered) · Heise (AI-filtered)"]
+    end
+
+    Ingest["ingest.js<br/>14 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
+    Score["score.js<br/>Claude Haiku 4.5<br/>+ prompt caching<br/>parallel × 5 · retry"]
+    Filter{"Score ≥ 4?"}
+    XDay["Cross-day dedup<br/>SQLite · 7-day lookback<br/>URL + title similarity"]
+    Topic["Within-day topic dedup<br/>shared-token heuristic"]
+    Write["deliver.js<br/>Claude Sonnet 4.6<br/>3-block format per article"]
+    Review["Review loop<br/>4-dim quality check<br/>→ rewrite if weak"]
+    Issue["GitHub Issue<br/>'KI Daily – YYYY-MM-DD'"]
+    Store[("SQLite<br/>articles · scores<br/>issues · history")]
+    Weekly["weekly.js<br/>Sunday synthesis<br/>last 7 daily issues"]
+
+    Sources --> Ingest --> Score --> Filter
+    Filter -- yes --> XDay --> Topic --> Write --> Review --> Issue
+    Filter -- no --> Store
+    Issue --> Store
+    Store -.7 days.-> Weekly --> Issue
+```
+
+---
+
+## Why these 14 sources (and not 50)
+
+Most aggregators in this space sell source count as a feature. This one deliberately stays small and asymmetric. Each source earns its slot by covering a specific angle for a single reader — a senior PM moving towards hands-on AI building.
+
+| Layer | Sources | Why this slot exists |
+|---|---|---|
+| **Labs** | Anthropic, Hugging Face | First-party capability shifts. Anything filtered through a third party loses context. |
+| **Practitioners** | Simon Willison, Latent Space, Interconnects (Nathan Lambert), Ahead of AI (Sebastian Raschka), The Batch, Last Week in AI, Yannic Kilcher | People who *build* with the models and explain trade-offs. Highest signal-to-noise on what actually works. |
+| **Community** | Hacker News (front + Show HN, depriorised) | Captures release reactions and tooling discoveries the curated sources miss. Show HN is explicitly downscored to filter self-promotion. |
+| **Industry + strategy** | VentureBeat, Ben Evans, a16z (AI-filtered), Heise (AI-filtered, DACH lens) | Market and adoption context, not capability — kept separate from labs/practitioners so it doesn't dominate. |
+
+Sources that were considered and rejected:
+- **Generic tech news** (TechCrunch, The Verge, Wired AI sections) — high volume, low signal density. Marketing rewrites of press releases.
+- **Pure paper feeds** (arXiv direct, papers-with-code firehose) — too much noise without a practitioner-side filter. Curated practitioner sources catch the relevant papers anyway.
+- **Twitter/X scraping** — operationally hostile, terms-of-service grey zone, signal is already redistributed by the curated practitioners.
+- **VC newsletters** — funding announcements are explicitly down-scored in the relevance rubric.
+
+The aggregator scores everything that comes in. A source that consistently drops below score 4 is a candidate for removal, not a reason to add three more sources to compensate.
+
+---
+
 ## Engineering notes
 
 **Structured LLM output with schema validation.** Every Claude response that feeds downstream code is validated with Zod before use. Schema definitions live in `lib/schema.js`; malformed responses are caught at the boundary and logged, not silently dropped.
