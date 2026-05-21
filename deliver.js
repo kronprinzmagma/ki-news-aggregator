@@ -551,7 +551,14 @@ async function main() {
 
   const relatedMap = findRelated(topArtikel);
 
-  const lines = [`# KI Daily – ${date}`, '', ueberblick, ''];
+  const lines = [
+    `# KI Daily – ${date}`,
+    '',
+    '> 🤖 **KI-generierter Inhalt.** Zusammenfassungen und Einleitung sind von Claude (Anthropic) verfasst, kuratiert aus den verlinkten Originalquellen. Hinweis nach EU AI Act Art. 50(4).',
+    '',
+    ueberblick,
+    '',
+  ];
 
   if (dedupedOut.length > 0) {
     lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${sanitizeMarkdown(a.titel)}](${sanitizeUrl(a.url)})`).join(' · ')}`);

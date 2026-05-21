@@ -60,6 +60,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Jeder Artikel enthält im Issue zwei Feedback-Checkboxen: `Besonders wertvoll` und `Später weiterverfolgen`
 - Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
+- Issue-Body startet mit AI-Disclaimer als Blockzitat (EU AI Act Art. 50(4)): kennzeichnet maschinengenerierten Inhalt
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
 - Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 7 Issues erschienen sind (URL-Match oder Titel-Ähnlichkeit ≥ 3 gemeinsame Schlüsselwörter), werden vor der Selektion gefiltert. Quelle ist primär die SQLite-DB (`ki-news.db`, Tabelle `issue_articles`); fällt zurück auf das Parsen der letzten GitHub-Issues, wenn die DB leer ist. Lookback-Tage und Schwellwert sind in `lib/config.js` (`CROSS_DAY_DEDUP_LOOKBACK`, `CROSS_DAY_TITLE_SIMILARITY_THRESHOLD`) konfigurierbar.
 - Issue-Body enthält pro Artikel einen versionierten HTML-Kommentar-Marker `<!-- ki-news-meta: {...} -->`. Weekly und Cross-Day-Dedup lesen primär aus diesen Markern, fallen auf das `Score X/5 · [...](...)`-Regex zurück (Backwards Compatibility).
