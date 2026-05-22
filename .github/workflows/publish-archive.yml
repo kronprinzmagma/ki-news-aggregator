@@ -1,0 +1,57 @@
+name: Publish Archive
+
+# Baut das statische Pages-Archiv aus allen KI-Daily-/Weekly-Issues
+# und deployed nach GitHub Pages.
+
+on:
+  # Manuell triggerbar.
+  workflow_dispatch:
+  # Nach jedem erfolgreichen Daily-Run.
+  workflow_run:
+    workflows: ['Daily KI-News', 'Weekly KI-Digest']
+    types: [completed]
+  # Fallback: täglich 09:00 UTC, falls workflow_run aussetzt.
+  schedule:
+    - cron: '0 9 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # Skippe wenn der Trigger ein fehlgeschlagener Daily-Run war.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v6.4.0
+        with:
+          node-version: '22'
+
+      - name: Build archive
+        env:
+          GH_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-archive.js
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

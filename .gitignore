@@ -17,3 +17,6 @@ ki-news.db-wal
 node_modules/
 .DS_Store
 .claude/
+
+# GitHub-Pages-Build (vom publish-archive.yml-Workflow erzeugt)
+_site/

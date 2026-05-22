@@ -12,6 +12,8 @@ This pipeline runs every morning at 05:30 UTC and produces exactly that — one 
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
 
+**Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
+
 ---
 
 ## What the pipeline does
