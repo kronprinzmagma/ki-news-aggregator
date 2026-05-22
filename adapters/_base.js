@@ -124,6 +124,7 @@ export async function enrichFromUrl(article, {
   logTag = 'enrich',
   fetchOptions = {},
   useMetaDescription = false,
+  extractOptions = {},
   shouldEnrich,
 } = {}) {
   if ((article.rohtext || '').length >= minLength) return article;
@@ -133,7 +134,7 @@ export async function enrichFromUrl(article, {
   try {
     const html = await httpGet(article.url, fetchOptions);
     const meta = useMetaDescription ? extractMetaDescription(html) : '';
-    const body = extractArticleText(html, { maxLength });
+    const body = extractArticleText(html, { maxLength, ...extractOptions });
     const enriched = [meta, body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
     if (enriched.length > (article.rohtext || '').length) {
       return { ...article, rohtext: enriched.slice(0, maxLength) };

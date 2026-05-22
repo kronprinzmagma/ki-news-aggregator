@@ -24,7 +24,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Score** (`score.js`): Liest `articles-YYYY-MM-DD.json` für das aktuelle Laufdatum (`RUN_DATE` oder heutiges UTC-Datum), bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle erfolgreich bewerteten Artikel, damit Score-1/2/3-Ausschlüsse im Review sichtbar bleiben.
 
-**Textqualität**: Dünne Feed-Einträge werden angereichert. Latent Space, Simon Willison, Interconnects, Last Week in AI und Ahead of AI laden bei kurzen Teasern die Artikelseite nach. Simon Willison fetcht zusätzlich externe Links wenn der Seitentext unter 2500 Zeichen bleibt.
+**Textqualität**: Dünne Feed-Einträge werden angereichert. Latent Space, Simon Willison, Interconnects, Last Week in AI, Ahead of AI und Heise laden bei kurzen Teasern die Artikelseite nach. Heise nutzt dafür Vollseiten-Extraktion, weil vor dem echten Beitrag Teaser-Templates stehen. Simon Willison fetcht zusätzlich externe Links wenn der Seitentext unter 2500 Zeichen bleibt.
 
 **Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, nutzt Score-1/2/3-Samples fuer die Review-Schlaufe, filtert fuer die Ausgabe auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
