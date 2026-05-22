@@ -8,7 +8,7 @@ article_title: "Brüssel ordnet Algorithmen: EU-Kommission konkretisiert die Hoc
 
 # Build-Anker
 
-Baue mit Claude Code ein Formular mit fünf Feldern (Anwendungsbereich, Nutzergruppe, Automatisierungsgrad, Datenquelle, Entscheidungsfolge), das eine Annex-III-Vorprüfung ausgibt – zähle, wie viele deiner Prototypen dabei als potenziell hochriskant markiert werden.
+Lies den Anhang III des AI Acts (EUR-Lex, Dokument 32024R1689) und erstelle mit Claude Code ein strukturiertes JSON-Schema mit den acht Produktkategorien daraus – Ausgabe: eine ausfüllbare Selbstauskunft mit Ja/Nein-Feldern pro Kategorie.
 
 ---
 

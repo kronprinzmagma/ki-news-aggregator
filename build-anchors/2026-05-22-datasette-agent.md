@@ -8,7 +8,7 @@ article_title: "Datasette Agent"
 
 # Build-Anker
 
-Installiere datasette-agent-charts und richte es gegen eine eigene SQLite-Datenbank ein; miss, ob Observable Plot-Charts korrekt aus drei unterschiedlichen Abfragetypen gerendert werden und welche Abfragen das Modell ohne manuelle Korrektur besteht.
+Installiere `datasette-agent-charts` in einer lokalen Datasette-Instanz, lass Claude Code ein Plugin schreiben, das eine eigene SQLite-Tabelle abfragt, und prüfe, ob drei formulierte Datenfragen korrekt beantwortet und als Observable-Plot-Diagramm ausgegeben werden.
 
 ---
 
