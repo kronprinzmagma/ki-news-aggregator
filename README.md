@@ -39,7 +39,7 @@ Three stages run sequentially:
 08:00 UTC Sunday    →  weekly.js → GitHub Issue
 ```
 
-A Watchdog workflow monitors the daily run and retriggers if the issue was not created. A Close-Old-Issues workflow archives stale issues automatically.
+A Watchdog workflow monitors the daily run and retriggers after failed publishes or other failed runs. A Close-Old-Issues workflow archives stale issues automatically.
 
 ---
 
@@ -109,7 +109,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Versioned metadata in GitHub Issues.** Each article block in a published issue contains an HTML comment marker `<!-- ki-news-meta: {...} -->` with structured metadata (url, score, source, date). The weekly digest and cross-day dedup read from these markers; a regex fallback handles issues predating the marker format.
 
-**SSRF protection.** All outbound HTTP in `lib/http.js` validates target IPs against private ranges before connecting. Adapters cannot be pointed at internal network addresses.
+**SSRF protection.** All outbound HTTP in `lib/http.js` resolves HTTPS targets before connecting, rejects private/reserved IPv4 and IPv6 addresses, pins the approved lookup into the request, and repeats the check on redirects. Adapters cannot be pointed at internal network addresses.
 
 **Adapter base class.** `adapters/_base.js` provides HTTP fetch, RSS/Atom parsing, content extraction, and enrichment. Source-specific adapters extend this base; adding a new source requires only the feed URL and any source-specific filter logic.
 
@@ -123,7 +123,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Build anchors as a growing catalog.** The third block of each writeup is a concrete *build anchor* — an evening project doable in 2–4 hours with Claude Code. Each is extracted by `lib/build-anchors.js` into a separate `build-anchors/YYYY-MM-DD-slug.md` with frontmatter, auto-committed by the daily workflow. Over months this becomes a browseable catalog of evening-project ideas linked back to source articles. See [build-anchors/](build-anchors/).
 
-**Adapter health monitoring.** Every ingest run records per-adapter stats (articles fetched, truncated count, error message) into an `adapter_health` table. If any adapter delivers zero articles over three consecutive runs, ingest files an auto-issue with label `adapter-stale` — idempotent, no duplicates. Catches silent feed breakage (URL moved, format changed, filter too strict) before it shows up as a thin daily issue.
+**Adapter health monitoring.** Every ingest run records per-adapter stats (articles fetched, truncated count, error message) into an `adapter_health` table. The daily workflow restores and saves the SQLite run history between GitHub Actions runs, so three consecutive zero-article runs can file an idempotent `adapter-stale` issue. Catches silent feed breakage (URL moved, format changed, filter too strict) before it shows up as a thin daily issue.
 
 **Static archive via GitHub Pages.** `scripts/build-archive.js` fetches all daily and weekly issues via the GitHub API (with pre-rendered HTML body) and generates a polished landing site. Auto-rebuilt after each daily/weekly run by `publish-archive.yml`. Live: [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/).
 

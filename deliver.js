@@ -696,6 +696,7 @@ async function main() {
   console.log(`\nGespeichert: ${filename}`);
 
   const issueUrl = token ? await upsertGithubIssue(token, date, markdown) : null;
+  const publishFailed = !!token && !issueUrl;
   if (!token) console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
 
   if (issueUrl) {
@@ -719,6 +720,10 @@ async function main() {
   }
 
   await writeRunSummary(date, runSummary);
+
+  if (publishFailed) {
+    throw new Error('GitHub Issue konnte nicht erstellt oder aktualisiert werden.');
+  }
 }
 
 main()

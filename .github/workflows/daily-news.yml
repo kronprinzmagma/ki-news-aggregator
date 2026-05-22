@@ -46,6 +46,14 @@ jobs:
             echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV
           fi
 
+      - name: Restore SQLite run history
+        uses: actions/cache/restore@v4
+        with:
+          path: ki-news.db*
+          key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            ki-news-db-${{ runner.os }}-
+
       - name: Ingest
         run: node ingest.js
 
@@ -79,3 +87,10 @@ jobs:
             scored-*.json
             summary-*.md
             run-summary-*.json
+
+      - name: Save SQLite run history
+        if: always() && hashFiles('ki-news.db') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: ki-news.db*
+          key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
