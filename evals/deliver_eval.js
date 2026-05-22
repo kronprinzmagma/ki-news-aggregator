@@ -32,6 +32,7 @@ import { claudeStructured, getUsageSummary } from '../lib/claude.js';
 import { SCORE_MODEL } from '../lib/config.js';
 import { parseArticleMetas } from '../lib/issue-format.js';
 import { closeStore } from '../lib/store.js';
+import { detectBannedPhrases } from '../lib/text-quality.js';
 import Database from 'better-sqlite3';
 
 loadEnv();
@@ -44,36 +45,6 @@ const DB_FILE = process.env.KI_NEWS_DB || path.join(REPO_ROOT, 'ki-news.db');
 const DEFAULT_LAST = 3;
 const CONCURRENCY = 3;
 const API_TIMEOUT_MS = 60_000;
-
-// ─── Banned Phrases (aus deliver.js-Prompt extrahiert) ───────────────────────
-
-const BANNED_TEMPLATE_PHRASES = [
-  /build[-\s]?vs[-\s]?buy verschiebt sich/i,
-  /effizienz wird zur differenzierung/i,
-  /wer .* nicht tut,? verliert strukturell/i,
-  /der engpass verschiebt sich/i,
-];
-
-const BANNED_MARKETING_ANGLICISMS = [
-  /\bheadroom\b/i,
-  /\bharness\b/i,
-  /\bmikroturn\b/i,
-  /\bdistributions-?engineering\b/i,
-  /\bclass-leading\b/i,
-];
-
-function detectBannedPhrases(text) {
-  const hits = [];
-  for (const re of BANNED_TEMPLATE_PHRASES) {
-    const m = text.match(re);
-    if (m) hits.push({ kind: 'template', match: m[0] });
-  }
-  for (const re of BANNED_MARKETING_ANGLICISMS) {
-    const m = text.match(re);
-    if (m) hits.push({ kind: 'marketing_anglicism', match: m[0] });
-  }
-  return hits;
-}
 
 // ─── Judge-Prompt + Schema ───────────────────────────────────────────────────
 

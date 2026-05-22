@@ -13,6 +13,7 @@ import {
   CROSS_DAY_TITLE_SIMILARITY_THRESHOLD,
 } from './lib/config.js';
 import { sanitizeMarkdown, sanitizeUrl } from './lib/text-utils.js';
+import { detectBannedPhrasesBatch } from './lib/text-quality.js';
 import { dedupByTopic, findRelated, sharedTokens } from './lib/topic-overlap.js';
 import { parseScoredArticles } from './lib/schema.js';
 import {
@@ -587,6 +588,24 @@ async function main() {
   }
   if (rewriteCount > 0) console.log(`[rewrite] ${rewriteCount} Artikel neu aufbereitet`);
   runSummary.deliver.rewrites = rewriteCount;
+
+  // Banned-Phrases-Check auf den finalen Aufbereitungen (nach Rewrite-Loop).
+  const banned = detectBannedPhrasesBatch(aufbereitungen);
+  runSummary.deliver.banned_phrases = {
+    total_hits: banned.total_hits,
+    articles_with_hits: banned.articles_with_hits,
+    per_article: topArtikel.map((a, i) => banned.per_text[i].length > 0
+      ? { titel: a.titel, url: a.url, hits: banned.per_text[i] }
+      : null).filter(Boolean),
+  };
+  if (banned.total_hits > 0) {
+    console.warn(`[banned] ${banned.total_hits} Banned-Phrase-Treffer in ${banned.articles_with_hits}/${topArtikel.length} Artikeln:`);
+    runSummary.deliver.banned_phrases.per_article.forEach(entry => {
+      console.warn(`  - "${entry.titel}": ${entry.hits.map(h => `${h.kind}:${h.match}`).join(', ')}`);
+    });
+  } else {
+    console.log(`[banned] 0 Banned-Phrase-Treffer (${topArtikel.length} Artikel geprüft)`);
+  }
 
   const relatedMap = findRelated(topArtikel);
 
