@@ -127,6 +127,12 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Static archive via GitHub Pages.** `scripts/build-archive.js` fetches all daily and weekly issues via the GitHub API (with pre-rendered HTML body) and generates a polished landing site. Auto-rebuilt after each daily/weekly run by `publish-archive.yml`. Live: [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/).
 
+**Deterministic pre-filter + cross-day pre-dedup.** Before any article reaches the LLM, two cheap filters run: `lib/cross-day-dedup.js` drops articles that were already published in the last 7 daily issues (URL or title similarity), and a deterministic auto-score sets `score=2` for sources/formats that are structurally weak (`hackernews-show`, articles with `truncated=true`). On a typical run this drops ~60% of articles before the LLM ever sees them. Pure cost optimisation, zero quality risk — these articles would have been filtered out anyway downstream.
+
+**Anthropic Batch API for scoring (50% cost reduction).** `lib/claude.js` exposes a `claudeBatch()` helper that submits all remaining score calls in one batch, polls until done, and parses the JSONL results. Async (typically <30 min), perfectly fine for a daily cron with no SLA. Cost tracking respects the 50% discount automatically. Together with the pre-filters: score-stage cost dropped from ~$0.23 to ~$0.05 per run (-78%).
+
+**Feedback loop into the goldstandard.** Every article in the daily issue has four checkboxes (`besonders wertvoll`, `später weiterverfolgen`, `schlecht aufbereitet`, `irrelevanter Inhalt`). `scripts/promote-feedback.js` reads them across all issues, applies clear promotion logic (`wertvoll AND NOT schlecht_aufbereitet → human_score=5`; `irrelevant AND NOT schlecht_aufbereitet → human_score=1`), and grows `evals/goldstandard.json` passively from 3-second-clicks while reading. No dedicated evaluation sessions.
+
 ---
 
 ## Repository layout

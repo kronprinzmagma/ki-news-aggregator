@@ -114,6 +114,19 @@ Ziel: Über reine Funktionalität hinaus die Eigenarten dieses Projekts sichtbar
 
 ---
 
+## Phase 10 – Cost-Optimierung
+
+Ziel: Tageskosten von ~$0.36 auf ~$0.25 senken, ohne Qualitätsverlust. Strukturelles Defizit angreifen: bislang gingen alle Artikel ans LLM, auch die mit strukturell feststehender Bewertung oder bereits publizierte.
+
+- [x] Pre-Filter: `quelle=hackernews-show` und `truncated=true` bekommen Auto-Score 2 ohne LLM-Call (Show-HN ist im Prompt eh deprioritisiert, truncated-Artikel sind zu dünn für sinnvolle Bewertung)
+- [x] Pre-Dedup: Cross-Day-Dedup vor dem Scoring statt erst vor Deliver – bereits publizierte URLs gehen gar nicht ans LLM
+- [x] Anthropic Batch API für Score: 50% Rabatt, asynchron (typisch <30min für 30-80 Calls). Default ON, `SCORE_USE_BATCH=false` als Escape-Hatch.
+- [x] Feedback-Loop: vier Checkboxen pro Artikel (wertvoll/weiterverfolgen/schlecht-aufbereitet/irrelevant) + `scripts/promote-feedback.js` baut Goldstandard passiv aus Lese-Klicks auf
+
+Effektive Cost-Reduktion (Smoke-Test 2026-05-22): Score von $0.23 auf $0.05 (-78%), Total von $0.36 auf $0.25 pro Run → ~CHF 7.50/Monat statt CHF 11.
+
+---
+
 ## Erledigte Punkte
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
