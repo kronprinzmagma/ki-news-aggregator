@@ -13,7 +13,7 @@ Drei Bausteine, sequenziell:
 ## Stack
 
 - Node.js, keine Frameworks
-- Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring (System-Prompt mit Prompt Caching), `claude-sonnet-4-6` fürs Delivering und Weekly
+- Claude API via REST: `claude-sonnet-4-6` für alle Stages (Scoring mit System-Prompt + Tool-Definition gecached, Delivering, Review, Weekly)
 - Geteilte Module in `lib/`: `claude` (Retry, Caching), `github`, `http` (SSRF-Schutz), `config` (Modelle, Schwellwerte, Stopwords), `text-utils`, `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten), `env`, `date`
 - Adapter-Basis in `adapters/_base.js`: HTTP-GET, RSS-/Atom-Parsing, Content-Extraktion, Enrichment
 - SQLite-Persistenz (`better-sqlite3`, lokale `ki-news.db`) für Cross-Day-Dedup und Run-Historie; JSON-Files (`articles-*.json`, `scored-*.json`, `run-summary-*.json`) bleiben als Audit-Artefakte
@@ -40,7 +40,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 ## Akzeptanzkriterien Baustein 2 (Score)
 
 - CLI-Befehl `node score.js` liest `articles-YYYY-MM-DD.json` für `RUN_DATE` oder das heutige UTC-Datum ein
-- Jeder Artikel wird per Claude API (`claude-haiku-4-5-20251001`) bewertet
+- Jeder Artikel wird per Claude API (`claude-sonnet-4-6`) bewertet
 - Relevanzprofil: Capability-Sprünge bei Modellen, hands-on Tooling/Pattern (SDKs, MCP, Eval, Prompting), Architektur-Erkenntnisse zu agentischen Systemen, strategische Marktverschiebungen
 - Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
