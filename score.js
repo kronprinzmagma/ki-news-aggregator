@@ -98,6 +98,23 @@ async function scoreArticle(article) {
   };
 }
 
+// Deterministische Vorab-Bewertung: Artikel, bei denen der Score
+// strukturell feststeht, brauchen keinen LLM-Call.
+//
+// - quelle "hackernews-show": Selbstpromotion, im Scoring-Prompt eh auf max
+//   Score 2 gedeckelt. Auto-Score 2.
+// - truncated=true (Rohtext < 300 Zeichen): per Definition zu dünn für
+//   substanzielle Bewertung. Auto-Score 2.
+function preFilterArticle(article) {
+  if (article.quelle === 'hackernews-show') {
+    return { score: 2, begründung: 'Auto-Score: Show-HN-Eintrag, im Scoring-Prompt eh deprioritisiert.', strategy_only: false, pre_filtered: 'show-hn' };
+  }
+  if (article.truncated) {
+    return { score: 2, begründung: 'Auto-Score: Rohtext zu kurz (truncated), nicht substanziell bewertbar.', strategy_only: false, pre_filtered: 'truncated' };
+  }
+  return null;
+}
+
 async function runWithConcurrency(articles, limit) {
   const results = new Array(articles.length);
   let index = 0;
@@ -140,7 +157,23 @@ async function main() {
   }
   console.log(`${articles.length} Artikel geladen`);
 
-  const scored = await runWithConcurrency(articles, CONCURRENCY);
+  // Pre-Filter: deterministische Vorab-Bewertung ohne LLM-Call.
+  const preFiltered = [];
+  const toScore = [];
+  for (const article of articles) {
+    const rating = preFilterArticle(article);
+    if (rating) preFiltered.push({ ...article, ...rating });
+    else toScore.push(article);
+  }
+  if (preFiltered.length > 0) {
+    const breakdown = {};
+    for (const a of preFiltered) breakdown[a.pre_filtered] = (breakdown[a.pre_filtered] || 0) + 1;
+    const summary = Object.entries(breakdown).map(([k, v]) => `${v}× ${k}`).join(', ');
+    console.log(`[pre-filter] ${preFiltered.length} Artikel auto-bewertet ohne LLM-Call: ${summary}`);
+  }
+
+  const scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+  const scored = [...preFiltered, ...scoredFromLlm];
 
   const failedCount = scored.filter(a => a.score === null).length;
   const deduplicated = applyEventDedup(
