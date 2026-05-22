@@ -98,7 +98,19 @@ Ziel: Das Projekt für externe Leser (Recruiter, Hiring Manager, Builder-Communi
 - [x] Structured Outputs in `score.js`: Migration auf Anthropic-natives JSON-Schema via `tool_use` (eliminiert Regex-Strip + JSON.parse-Defensive)
 - [x] Structured Outputs im Review-Pass von `deliver.js`: analog `tool_use` für das Review-JSON
 - [x] Deliver-Eval: neues Eval in `evals/` mit LLM-as-Judge auf Faithfulness der 3-Block-Writeups + Marketing-Sprech-Detection
-- [ ] Followup: Cache-Hit-Regression nach Structured-Outputs-Migration analysieren (vorher ~90%, jetzt 0%). Vermutung: Tool-Definition als zusätzlicher Cache-Breakpoint interagiert mit Min-Token-Schwelle (Haiku: 2048). Erste Annäherung `cache_control: ephemeral` auf Tool-Definition hat nichts gebracht – braucht Logging von `cache_creation_input_tokens` zur Diagnose und ggf. Anpassung der Breakpoint-Strategie.
+- [ ] Followup: Cache-Hit-Regression nach Structured-Outputs-Migration analysieren (vorher ~90%, jetzt 0%). Bisher probiert: cache_control auf System, cache_control auf Tools, Beta-Header entfernt, System auf >2300 Tokens erweitert – cache_create bleibt 0. Isolierter Test wegen Anthropic 529 nicht aussagekräftig. Nächster Schritt wenn API stabil: minimal-script ohne Tools, mit/ohne cache_control vergleichen.
+
+---
+
+## Phase 9 – Differenzierung
+
+Ziel: Über reine Funktionalität hinaus die Eigenarten dieses Projekts sichtbar machen – kuratierte Quellen, Review-Schlaufe als Asset, Build-Anker-Sammlung über Monate, operative Hygiene bei wachsender Quellenzahl.
+
+- [ ] A6: GitHub Pages-Archiv aller `summary-*.md`-Dateien (durchsuchbares Output-Archiv ohne Issue-API-Limits)
+- [ ] B4: Banned-Phrases-Detektion inline in Daily-Pipeline (deterministischer Regex aus Deliver-Prompt-Verboten, Treffer in `run-summary-*.json`)
+- [ ] B3: Review-Schlaufe sichtbar im Issue-Footer (`<details>` mit Rewrite-Count und Top-Prozess-Empfehlungen)
+- [ ] B1: Build-Anker als separate Markdown-Files unter `build-anchors/YYYY-MM-DD-slug.md` mit Frontmatter (durchsuchbarer Katalog von Abend-Projekten mit Claude Code)
+- [ ] A7: Adapter-Health-Metriken in SQLite + Auto-Issue bei stillen Adaptern (3 Tage 0 Artikel)
 
 ---
 
