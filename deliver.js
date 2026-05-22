@@ -14,6 +14,7 @@ import {
 } from './lib/config.js';
 import { sanitizeMarkdown, sanitizeUrl } from './lib/text-utils.js';
 import { detectBannedPhrasesBatch } from './lib/text-quality.js';
+import { writeBuildAnchor, writeBuildAnchorIndex } from './lib/build-anchors.js';
 import { dedupByTopic, findRelated, sharedTokens } from './lib/topic-overlap.js';
 import { parseScoredArticles } from './lib/schema.js';
 import {
@@ -644,6 +645,23 @@ async function main() {
     });
   } else {
     console.log(`[banned] 0 Banned-Phrase-Treffer (${topArtikel.length} Artikel geprüft)`);
+  }
+
+  // Build-Anker als separate Markdown-Files extrahieren – wachsende
+  // Sammlung in build-anchors/ über die Zeit.
+  const writtenAnchors = [];
+  for (let i = 0; i < topArtikel.length; i++) {
+    try {
+      const written = await writeBuildAnchor({ article: topArtikel[i], writeup: aufbereitungen[i], date });
+      if (written) writtenAnchors.push(written);
+    } catch (err) {
+      console.warn(`[anchors] Build-Anker für "${topArtikel[i].titel}" nicht gespeichert: ${err.message}`);
+    }
+  }
+  if (writtenAnchors.length > 0) {
+    const indexFile = await writeBuildAnchorIndex();
+    console.log(`[anchors] ${writtenAnchors.length} Build-Anker geschrieben, Index aktualisiert (${indexFile})`);
+    runSummary.deliver.build_anchors = writtenAnchors;
   }
 
   const relatedMap = findRelated(topArtikel);

@@ -14,6 +14,8 @@ This pipeline runs every morning at 05:30 UTC and produces exactly that — one 
 
 **Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
 
+**Build-anchor catalog:** [build-anchors/](build-anchors/) — every daily issue extracts a concrete *build anchor* (a 2–4h project doable with Claude Code) per article. Auto-committed by the daily run, growing over time into a browseable evening-project collection.
+
 ---
 
 ## What the pipeline does
