@@ -106,11 +106,11 @@ Ziel: Das Projekt für externe Leser (Recruiter, Hiring Manager, Builder-Communi
 
 Ziel: Über reine Funktionalität hinaus die Eigenarten dieses Projekts sichtbar machen – kuratierte Quellen, Review-Schlaufe als Asset, Build-Anker-Sammlung über Monate, operative Hygiene bei wachsender Quellenzahl.
 
-- [ ] A6: GitHub Pages-Archiv aller `summary-*.md`-Dateien (durchsuchbares Output-Archiv ohne Issue-API-Limits)
-- [ ] B4: Banned-Phrases-Detektion inline in Daily-Pipeline (deterministischer Regex aus Deliver-Prompt-Verboten, Treffer in `run-summary-*.json`)
-- [ ] B3: Review-Schlaufe sichtbar im Issue-Footer (`<details>` mit Rewrite-Count und Top-Prozess-Empfehlungen)
-- [ ] B1: Build-Anker als separate Markdown-Files unter `build-anchors/YYYY-MM-DD-slug.md` mit Frontmatter (durchsuchbarer Katalog von Abend-Projekten mit Claude Code)
-- [ ] A7: Adapter-Health-Metriken in SQLite + Auto-Issue bei stillen Adaptern (3 Tage 0 Artikel)
+- [x] A6: GitHub Pages-Archiv aller `summary-*.md`-Dateien (durchsuchbares Output-Archiv ohne Issue-API-Limits)
+- [x] B4: Banned-Phrases-Detektion inline in Daily-Pipeline (deterministischer Regex aus Deliver-Prompt-Verboten, Treffer in `run-summary-*.json`)
+- [x] B3: Review-Schlaufe sichtbar im Issue-Footer (`<details>` mit Rewrite-Count und Top-Prozess-Empfehlungen)
+- [x] B1: Build-Anker als separate Markdown-Files unter `build-anchors/YYYY-MM-DD-slug.md` mit Frontmatter (durchsuchbarer Katalog von Abend-Projekten mit Claude Code)
+- [x] A7: Adapter-Health-Metriken in SQLite + Auto-Issue bei stillen Adaptern (3 Tage 0 Artikel)
 
 ---
 
