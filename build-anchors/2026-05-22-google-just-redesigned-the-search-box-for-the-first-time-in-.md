@@ -8,7 +8,7 @@ article_title: "Google just redesigned the search box for the first time in 25 y
 
 # Build-Anker
 
-Baue mit Claude Code ein Eingabeformular, das Freitext und PDF-Upload kombiniert und daraus drei konkrete Antwortvorschläge generiert – miss die Antwortlänge im Vergleich zur reinen Texteingabe in fünf Testdurchläufen.
+Baue mit der Gemini API einen Endpunkt, der eine hochgeladene PDF-Datei entgegennimmt und daraus fünf konversationelle Folgefragen generiert; zähle, wie viele davon Begriffe aus dem Originaldokument wörtlich wiederholen versus neu einführen.
 
 ---
 

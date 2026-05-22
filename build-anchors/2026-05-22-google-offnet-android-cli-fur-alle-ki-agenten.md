@@ -8,7 +8,7 @@ article_title: "Google öffnet Android CLI für alle KI-Agenten"
 
 # Build-Anker
 
-Installiere Android CLI 1.0 und führe mit Claude Code einen definierten Aufgabenpfad aus – etwa «Erstelle ein leeres Projekt, starte den Emulator» – und zähle, wie viele Schritte ohne manuellen Eingriff abgeschlossen werden.
+Ruf die Android CLI aus einem Claude-Code-Skript auf und protokolliere, welche Studio-Aktionen sich damit ohne manuelle Eingabe ausführen lassen – Ziel: mindestens drei automatisierte Schritte dokumentiert.
 
 ---
 

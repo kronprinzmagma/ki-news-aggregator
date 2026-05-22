@@ -8,7 +8,7 @@ article_title: "[AINews] OpenAI GPT-next disproves 80 year old Erdős planar uni
 
 # Build-Anker
 
-Ruf das o3-API-Modell mit einem offenen Kombinatorik-Problem auf, lass Claude Code die zurückgegebene Reasoning-Ausgabe in Abschnitte segmentieren und gib aus, bei welchem Abschnitt die erste Hypothesenänderung auftritt.
+Gib GPT-o3 einen kurzen Beweis-Sketch aus einem arXiv-Paper und zähle die verifizierbaren Zwischenschritte im Output bei drei verschiedenen Reasoning-Budget-Stufen – so siehst du direkt, ab welcher Stufe der Kosten-Nutzen-Kipppunkt für längere Reasoning-Läufe bei deinem Anwendungsfall liegt.
 
 ---
 

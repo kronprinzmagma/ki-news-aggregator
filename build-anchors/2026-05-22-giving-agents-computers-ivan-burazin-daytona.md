@@ -8,7 +8,7 @@ article_title: "Giving Agents Computers — Ivan Burazin, Daytona"
 
 # Build-Anker
 
-Starte mit der Daytona-API einen einfachen Agenten-Loop, der eine Aufgabe in einer Sandbox ausführt, und miss die tatsächliche Startzeit sowie die Anzahl paralleler Sandbox-Instanzen, die dein Testszenario braucht �� so siehst du konkret, wo Latenz oder Parallelitätsgrenzen deinen Workflow limitieren.
+Ruf die Daytona-API auf und starte zehn Sandboxes nacheinander; miss die jeweilige Startzeit per Zeitstempel und vergleiche, ob deine gewählte Sandbox-Lösung die ~60-ms-Marke aus dem Text annähernd erreicht.
 
 ---
 

@@ -8,7 +8,7 @@ article_title: "Railway: The Agent-Native Cloud — Jake Cooper"
 
 # Build-Anker
 
-Deploye eine bestehende Python-App via Railway CLI mit `railway up` ohne Dockerfile und dokumentiere, welche Build-Schritte Railpack automatisch erkennt – Ziel: eine laufende URL in unter 10 Minuten ohne manuelle Konfiguration.
+Deploye einen minimalen Agenten-Loop (z. B. mit Temporal für Aufgaben-Orchestrierung) auf Railway und miss, wie viele automatische Deployments pro Stunde ohne manuelle PR-Freigabe durchlaufen – siehst du dabei Engpässe im Approval-Flow, hast du eine konkrete Entscheidungsgrundlage für oder gegen PR-basierte Gates.
 
 ---
 

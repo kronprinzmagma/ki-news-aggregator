@@ -8,7 +8,7 @@ article_title: "How fast is 10 tokens per second really?"
 
 # Build-Anker
 
-Starte die HTML-App, wechsle bei fixierten 60 tok/s zwischen Code- und Textmodus, und miss, ab welcher Rate du beim jeweiligen Inhaltstyp nicht mehr mitliest – das gibt dir einen konkreten Schwellenwert für deine eigene Latenz-Anforderung im Produktdesign.
+Öffne die App, stelle denselben tok/s-Wert ein und wechsle mit den Tasten c (Code) und t (Text): Miss, bei welcher Geschwindigkeit du den Code-Modus nicht mehr fehlerfrei mitlesen kannst – dieser Schwellenwert ist dein konkreter UX-Grenzwert für eigene Streaming-Interfaces.
 
 ---
 
