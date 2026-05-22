@@ -8,7 +8,7 @@ article_title: "Giving Agents Computers — Ivan Burazin, Daytona"
 
 # Build-Anker
 
-Ruf die Daytona-API auf und starte zehn Sandboxes nacheinander; miss die jeweilige Startzeit per Zeitstempel und vergleiche, ob deine gewählte Sandbox-Lösung die ~60-ms-Marke aus dem Text annähernd erreicht.
+Starte mit der Daytona-API eine Sandbox, führe darin einen definierten Agenten-Task aus und miss die tatsächliche Kaltstart-Latenz – siehst du Abweichungen vom beworbenen ~60-ms-Wert, hast du ein konkretes Verhandlungsargument für Make-or-Buy.
 
 ---
 

@@ -8,7 +8,7 @@ article_title: "Railway: The Agent-Native Cloud — Jake Cooper"
 
 # Build-Anker
 
-Deploye einen minimalen Agenten-Loop (z. B. mit Temporal für Aufgaben-Orchestrierung) auf Railway und miss, wie viele automatische Deployments pro Stunde ohne manuelle PR-Freigabe durchlaufen – siehst du dabei Engpässe im Approval-Flow, hast du eine konkrete Entscheidungsgrundlage für oder gegen PR-basierte Gates.
+Deploye mit Nixpacks eine Python-App auf Railway per CLI und miss, wie viele Befehle bis zur laufenden URL nötig sind – Ziel: maximal drei Schritte ohne manuelle Konfigurationsdatei.
 
 ---
 

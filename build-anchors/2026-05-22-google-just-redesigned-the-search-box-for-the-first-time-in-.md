@@ -8,7 +8,7 @@ article_title: "Google just redesigned the search box for the first time in 25 y
 
 # Build-Anker
 
-Baue mit der Gemini API einen Endpunkt, der eine hochgeladene PDF-Datei entgegennimmt und daraus fünf konversationelle Folgefragen generiert; zähle, wie viele davon Begriffe aus dem Originaldokument wörtlich wiederholen versus neu einführen.
+Exportiere mit der Google Search Console die Top-50-Seiten nach Impressionen, segmentiere sie nach Query-Typ (informational vs. navigational) und miss, welcher Anteil bereits heute eine AI Overview auslöst – das ergibt eine messbare Risikoverteilung deines Search-Traffics.
 
 ---
 

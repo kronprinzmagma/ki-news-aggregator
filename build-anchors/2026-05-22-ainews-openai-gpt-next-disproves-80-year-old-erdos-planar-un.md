@@ -8,7 +8,7 @@ article_title: "[AINews] OpenAI GPT-next disproves 80 year old Erdős planar uni
 
 # Build-Anker
 
-Gib GPT-o3 einen kurzen Beweis-Sketch aus einem arXiv-Paper und zähle die verifizierbaren Zwischenschritte im Output bei drei verschiedenen Reasoning-Budget-Stufen – so siehst du direkt, ab welcher Stufe der Kosten-Nutzen-Kipppunkt für längere Reasoning-Läufe bei deinem Anwendungsfall liegt.
+Lade die 125-seitige Reasoning-Zusammenfassung herunter und lass Claude Code die Hypothesen-Wendepunkte automatisch extrahieren – Ausgabe: eine nummerierte Liste mit Seitenzahl, Hypothese und Status (aufgestellt / verworfen / bestätigt).
 
 ---
 

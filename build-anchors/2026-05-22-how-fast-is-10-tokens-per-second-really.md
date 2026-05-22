@@ -8,7 +8,7 @@ article_title: "How fast is 10 tokens per second really?"
 
 # Build-Anker
 
-Öffne die App, stelle denselben tok/s-Wert ein und wechsle mit den Tasten c (Code) und t (Text): Miss, bei welcher Geschwindigkeit du den Code-Modus nicht mehr fehlerfrei mitlesen kannst – dieser Schwellenwert ist dein konkreter UX-Grenzwert für eigene Streaming-Interfaces.
+Lade Veermans Quellcode herunter, ersetze den Simulationstext durch echte Ausgaben deiner API-Anbindung und miss, bei welchem tok/s-Wert Testpersonen „flüssig" empfinden – du siehst, ob dein tatsächlicher Hosting-Tier die Wahrnehmungsschwelle erreicht.
 
 ---
 

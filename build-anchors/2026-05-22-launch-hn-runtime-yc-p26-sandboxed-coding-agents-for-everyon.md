@@ -8,7 +8,7 @@ article_title: "Launch HN: Runtime (YC P26) – Sandboxed coding agents for ever
 
 # Build-Anker
 
-Richte mit dem Runtime-CLI eine Sandbox mit gescoptem Secrets-Proxy ein, übergib ihr einen definierten Prompt via Claude Code und zähle, wie viele der generierten Pull-Requests ohne manuelle Korrekturen direkt mergbar sind.
+Richte einen E2B-Sandbox-Aufruf mit Claude Code ein und lass einen PM-Prompt gegen eine Testdatenbank laufen – miss, wie viele der erzeugten Änderungen ohne manuelle Korrektur commitfähig sind.
 
 ---
 

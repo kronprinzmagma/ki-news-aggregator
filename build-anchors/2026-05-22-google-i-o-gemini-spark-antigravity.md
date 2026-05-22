@@ -8,7 +8,7 @@ article_title: "Google I/O, Gemini Spark, Antigravity"
 
 # Build-Anker
 
-Richte das Antigravity Python-SDK lokal ein und baue einen Agenten, der eine Gmail-Zusammenfassung ausgibt – dann schick eine E-Mail mit injiziertem Sonderbefehl und dokumentiere, ob der Agent davon abweicht.
+Richte den bestehenden Gemini-CLI-Agenten so ein, dass er eine Gmail-Abfrage ausführt, und protokolliere jeden API-Aufruf mit Zeitstempel und Payload-Grösse in eine CSV-Datei – so hast du eine messbare Baseline vor der erzwungenen Migration.
 
 ---
 
