@@ -14,7 +14,9 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Batch API kann bis ~30min dauern für Scoring; ingest + deliver + commit
+    # brauchen nochmal ~5min. 45min gibt Puffer ohne grenzwertig zu sein.
+    timeout-minutes: 45
     permissions:
       # build-anchors/ wird vom Daily-Run auto-committed
       contents: write

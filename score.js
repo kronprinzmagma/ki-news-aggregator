@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
-import { claudeStructured, getUsageSummary } from './lib/claude.js';
+import { claudeStructured, claudeBatch, getUsageSummary } from './lib/claude.js';
 import { SCORE_MODEL, SCORE_CUTOFF_PERSIST, CROSS_DAY_DEDUP_LOOKBACK } from './lib/config.js';
 import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
 import { recordUsage, closeStore } from './lib/store.js';
@@ -80,23 +80,46 @@ const SCORE_USER = (article) => `<artikel_titel>${article.titel}</artikel_titel>
 Quelle: ${article.quelle}
 <artikel_text>${(article.rohtext || '').slice(0, 2500)}</artikel_text>`;
 
-async function scoreArticle(article) {
-  const result = await claudeStructured({
-    model: SCORE_MODEL,
+// Shared Tool-Definition für Score-Calls (sync + batch).
+const SCORE_TOOL_DEF = {
+  name: 'submit_score',
+  description: 'Reicht die Bewertung eines KI-News-Artikels strukturiert ein.',
+  input_schema: SCORE_TOOL_SCHEMA,
+  cache_control: { type: 'ephemeral' },
+};
+
+function buildScoreRequestParams(article) {
+  return {
     system: [{ type: 'text', text: SCORE_SYSTEM, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: SCORE_USER(article) }],
-    toolName: 'submit_score',
-    toolDescription: 'Reicht die Bewertung eines KI-News-Artikels strukturiert ein.',
-    schema: SCORE_TOOL_SCHEMA,
+    tools: [SCORE_TOOL_DEF],
+    toolChoice: { type: 'tool', name: 'submit_score' },
     maxTokens: 300,
-    timeoutMs: API_TIMEOUT_MS,
-    logTag: 'score',
-  });
+  };
+}
+
+function mapToolInputToScore(result) {
   return {
     score: result.score,
     begründung: result.reasoning,
     strategy_only: result.strategy_only,
   };
+}
+
+async function scoreArticle(article) {
+  const params = buildScoreRequestParams(article);
+  const result = await claudeStructured({
+    model: SCORE_MODEL,
+    system: params.system,
+    messages: params.messages,
+    toolName: 'submit_score',
+    toolDescription: SCORE_TOOL_DEF.description,
+    schema: SCORE_TOOL_SCHEMA,
+    maxTokens: params.maxTokens,
+    timeoutMs: API_TIMEOUT_MS,
+    logTag: 'score',
+  });
+  return mapToolInputToScore(result);
 }
 
 // Deterministische Vorab-Bewertung: Artikel, bei denen der Score
@@ -114,6 +137,47 @@ function preFilterArticle(article) {
     return { score: 2, begründung: 'Auto-Score: Rohtext zu kurz (truncated), nicht substanziell bewertbar.', strategy_only: false, pre_filtered: 'truncated' };
   }
   return null;
+}
+
+// Batch-Variante: alle Artikel in einem Anthropic-Batch-Submit → 50% Rabatt.
+// Async (typisch <10 min), aber für Cron-Workload akzeptabel.
+async function runViaBatch(articles) {
+  if (articles.length === 0) return [];
+
+  const requests = articles.map((article, i) => {
+    const params = buildScoreRequestParams(article);
+    return {
+      custom_id: `score_${i}`,
+      model: SCORE_MODEL,
+      ...params,
+    };
+  });
+
+  const resultsMap = await claudeBatch(requests, { logTag: 'score-batch' });
+
+  const out = new Array(articles.length);
+  let succeeded = 0;
+  let failed = 0;
+  for (let i = 0; i < articles.length; i++) {
+    const r = resultsMap.get(`score_${i}`);
+    if (!r) {
+      out[i] = { ...articles[i], score: null, begründung: null };
+      failed++;
+      continue;
+    }
+    if (r.error || !r.tool_input) {
+      console.error(`[score-batch] Fehler bei "${articles[i].titel}": ${r.error || 'kein tool_input'}`);
+      out[i] = { ...articles[i], score: null, begründung: null };
+      failed++;
+      continue;
+    }
+    const rating = mapToolInputToScore(r.tool_input);
+    out[i] = { ...articles[i], ...rating };
+    succeeded++;
+    console.log(`[${i + 1}/${articles.length}] Score ${rating.score} – ${articles[i].titel}`);
+  }
+  console.log(`[score-batch] ${succeeded} erfolgreich, ${failed} fehlgeschlagen`);
+  return out;
 }
 
 async function runWithConcurrency(articles, limit) {
@@ -189,8 +253,11 @@ async function main() {
     console.log(`[pre-filter] ${preFiltered.length} Artikel auto-bewertet ohne LLM-Call: ${summary}`);
   }
 
-  console.log(`[score] ${toScore.length} Artikel gehen ans LLM (${articles.length} - ${beforeDedup - articlesAfterDedup.length} dedup - ${preFiltered.length} pre-filter)`);
-  const scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+  const useBatch = process.env.SCORE_USE_BATCH !== 'false';
+  console.log(`[score] ${toScore.length} Artikel gehen ans LLM (${articles.length} - ${beforeDedup - articlesAfterDedup.length} dedup - ${preFiltered.length} pre-filter) – Modus: ${useBatch ? 'BATCH (50% Rabatt)' : 'SYNC'}`);
+  const scoredFromLlm = useBatch
+    ? await runViaBatch(toScore)
+    : await runWithConcurrency(toScore, CONCURRENCY);
   const scored = [...preFiltered, ...scoredFromLlm];
 
   const failedCount = scored.filter(a => a.score === null).length;
