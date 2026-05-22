@@ -3,9 +3,10 @@ import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
 import { claudeStructured, getUsageSummary } from './lib/claude.js';
-import { SCORE_MODEL, SCORE_CUTOFF_PERSIST } from './lib/config.js';
+import { SCORE_MODEL, SCORE_CUTOFF_PERSIST, CROSS_DAY_DEDUP_LOOKBACK } from './lib/config.js';
 import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
 import { recordUsage, closeStore } from './lib/store.js';
+import { loadRecentlyPublished, detectCrossDayDuplicate } from './lib/cross-day-dedup.js';
 
 loadEnv();
 
@@ -157,10 +158,26 @@ async function main() {
   }
   console.log(`${articles.length} Artikel geladen`);
 
+  // Pre-Dedup: Artikel, die bereits in den letzten Daily-Issues waren, gehen
+  // gar nicht erst ans LLM. Spart Score-Calls und damit Tokens.
+  const recent = await loadRecentlyPublished(process.env.GH_PAT, CROSS_DAY_DEDUP_LOOKBACK);
+  const beforeDedup = articles.length;
+  const articlesAfterDedup = articles.filter(article => {
+    const dup = detectCrossDayDuplicate(article, recent);
+    if (dup) {
+      console.log(`[pre-dedup] "${article.titel}" übersprungen (${dup.reason}${dup.matched_title ? `: "${dup.matched_title}"` : ''})`);
+      return false;
+    }
+    return true;
+  });
+  if (beforeDedup !== articlesAfterDedup.length) {
+    console.log(`[pre-dedup] ${beforeDedup - articlesAfterDedup.length} Artikel vor Scoring rausgefiltert (Quelle: ${recent.source})`);
+  }
+
   // Pre-Filter: deterministische Vorab-Bewertung ohne LLM-Call.
   const preFiltered = [];
   const toScore = [];
-  for (const article of articles) {
+  for (const article of articlesAfterDedup) {
     const rating = preFilterArticle(article);
     if (rating) preFiltered.push({ ...article, ...rating });
     else toScore.push(article);
@@ -172,6 +189,7 @@ async function main() {
     console.log(`[pre-filter] ${preFiltered.length} Artikel auto-bewertet ohne LLM-Call: ${summary}`);
   }
 
+  console.log(`[score] ${toScore.length} Artikel gehen ans LLM (${articles.length} - ${beforeDedup - articlesAfterDedup.length} dedup - ${preFiltered.length} pre-filter)`);
   const scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
   const scored = [...preFiltered, ...scoredFromLlm];
 

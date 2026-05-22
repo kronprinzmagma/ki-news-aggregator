@@ -10,22 +10,21 @@ import {
   SCORE_CUTOFF_DELIVER,
   LAB_QUELLEN,
   CROSS_DAY_DEDUP_LOOKBACK,
-  CROSS_DAY_TITLE_SIMILARITY_THRESHOLD,
 } from './lib/config.js';
 import { sanitizeMarkdown, sanitizeUrl } from './lib/text-utils.js';
 import { detectBannedPhrasesBatch } from './lib/text-quality.js';
 import { writeBuildAnchor, writeBuildAnchorIndex } from './lib/build-anchors.js';
-import { dedupByTopic, findRelated, sharedTokens } from './lib/topic-overlap.js';
+import { dedupByTopic, findRelated } from './lib/topic-overlap.js';
+import { loadRecentlyPublished, detectCrossDayDuplicate } from './lib/cross-day-dedup.js';
 import { parseScoredArticles } from './lib/schema.js';
 import {
   upsertArticle,
   upsertScore,
   recordIssue,
   recordUsage,
-  articlesPublishedRecently,
   closeStore,
 } from './lib/store.js';
-import { articleMeta, extractArticleUrls } from './lib/issue-format.js';
+import { articleMeta } from './lib/issue-format.js';
 
 loadEnv();
 
@@ -330,51 +329,10 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
   }
 }
 
-// ─── Cross-Day-Dedup: URL + Titel-Ähnlichkeit ────────────────────────────────
-
-async function recentlyPublishedArticles(token, lookback) {
-  const fromDb = articlesPublishedRecently(lookback);
-  if (fromDb.urls.size > 0) {
-    console.log(`[dedup] ${fromDb.urls.size} URLs, ${fromDb.titles.length} Titel aus DB (letzte ${lookback} Issues)`);
-    return fromDb;
-  }
-  // Fallback: GitHub-Issues parsen (für Erstmigration / leere DB).
-  if (!token) return { urls: new Set(), titles: [] };
-  try {
-    const { status, body } = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=&per_page=20'));
-    if (status !== 200) {
-      console.warn(`[dedup] GitHub Issues nicht ladbar: HTTP ${status}`);
-      return { urls: new Set(), titles: [] };
-    }
-    const issues = JSON.parse(body);
-    const kiDailyIssues = issues
-      .filter(i => /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title))
-      .slice(0, lookback);
-    const urls = new Set();
-    const titles = [];
-    const titlePattern = /^### (.+)$/gm;
-    for (const issue of kiDailyIssues) {
-      const issueBody = issue.body || '';
-      for (const url of extractArticleUrls(issueBody)) urls.add(url);
-      let m;
-      while ((m = titlePattern.exec(issueBody)) !== null) {
-        titles.push(m[1].replace(/\\([`*_[\]()#>])/g, '$1'));
-      }
-    }
-    console.log(`[dedup] ${urls.size} URLs, ${titles.length} Titel aus ${kiDailyIssues.length} Issues (Markdown-Fallback)`);
-    return { urls, titles };
-  } catch (err) {
-    console.warn(`[dedup] Vorherige Issues nicht ladbar: ${err.message}`);
-    return { urls: new Set(), titles: [] };
-  }
-}
-
-function titleSimilarMatch(artikel, previousTitles, threshold = CROSS_DAY_TITLE_SIMILARITY_THRESHOLD) {
-  for (const prev of previousTitles) {
-    if (sharedTokens(artikel.titel, prev).length >= threshold) return prev;
-  }
-  return null;
-}
+// Cross-Day-Dedup-Hilfen wurden nach lib/cross-day-dedup.js ausgelagert
+// (gemeinsam mit score.js, das jetzt den Pre-Dedup-Pass macht). Hier nur
+// noch als Sicherheitsnetz – wenn score.js sauber lief, findet deliver
+// nichts mehr zu skippen.
 
 // ─── GitHub-Issue erstellen / aktualisieren ──────────────────────────────────
 
@@ -535,21 +493,23 @@ async function main() {
   }
 
   const token = process.env.GH_PAT || null;
-  const { urls: recentUrls, titles: recentTitles } = await recentlyPublishedArticles(token, CROSS_DAY_DEDUP_LOOKBACK);
+  const recent = await loadRecentlyPublished(token, CROSS_DAY_DEDUP_LOOKBACK);
 
   const belowCutoff = articles.filter(a => a.score !== null && a.score < SCORE_CUTOFF_DELIVER);
 
-  // URL-Dedup + Titel-Ähnlichkeits-Dedup gegen letzte CROSS_DAY_DEDUP_LOOKBACK Issues
-  const alreadyPublished = articles.filter(a => {
-    if (a.score < SCORE_CUTOFF_DELIVER) return false;
-    if (recentUrls.has(a.url)) return true;
-    return titleSimilarMatch(a, recentTitles) !== null;
-  });
+  // Sicherheitsnetz: score.js hat den Pre-Dedup schon gemacht, aber falls
+  // ein Artikel doch durchgerutscht ist (z.B. anderer Lauf der DB-State
+  // geändert hat), hier nochmal filtern.
+  const alreadyPublished = [];
+  for (const a of articles) {
+    if (a.score < SCORE_CUTOFF_DELIVER) continue;
+    const dup = detectCrossDayDuplicate(a, recent);
+    if (dup) alreadyPublished.push({ ...a, _dup: dup });
+  }
   if (alreadyPublished.length > 0) {
-    console.log(`[dedup] ${alreadyPublished.length} Artikel bereits in vorherigen Issues – werden übersprungen:`);
+    console.log(`[dedup] ${alreadyPublished.length} Artikel bereits in vorherigen Issues (Sicherheitsnetz nach score.js-Pre-Dedup):`);
     alreadyPublished.forEach(a => {
-      const matchedTitle = titleSimilarMatch(a, recentTitles);
-      const reason = recentUrls.has(a.url) ? 'URL' : `Titel ähnlich zu: "${matchedTitle}"`;
+      const reason = a._dup.reason === 'url' ? 'URL' : `Titel ähnlich zu: "${a._dup.matched_title}"`;
       console.log(`  - ${a.titel} (${reason})`);
     });
   }
@@ -585,7 +545,7 @@ async function main() {
       after_dedup: deduped.length,
       cross_day_dedup: alreadyPublished.map(a => ({
         titel: a.titel, url: a.url,
-        reason: recentUrls.has(a.url) ? 'url' : 'title_similarity',
+        reason: a._dup?.reason || 'unknown',
       })),
       in_issue: 0,
       issue_articles: [],
