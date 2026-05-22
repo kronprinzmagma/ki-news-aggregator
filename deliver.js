@@ -435,6 +435,45 @@ async function writeRunSummary(date, summary) {
   console.log(`Run-Summary gespeichert: ${filename}`);
 }
 
+// ─── Review-Footer für das Issue ─────────────────────────────────────────────
+
+/**
+ * Macht die Selbst-Kritik der Pipeline im Issue-Footer sichtbar:
+ * - wie viele Aufbereitungen wurden auf Review-Hint neu geschrieben
+ * - wie viele Banned-Phrases-Treffer (Stil-Verstösse) blieben übrig
+ * - bis zu 2 Top-Prozess-Empfehlungen aus der Review-Schlaufe
+ *
+ * Bewusst als <details>-Block, damit der primäre Inhalt nicht überlagert wird.
+ */
+function buildReviewFooter({ rewriteCount, banned, review, articleCount }) {
+  const adjustments = (review?.result?.process_adjustments || [])
+    .filter(a => a && a.priority !== 'low')
+    .slice(0, 2);
+
+  const bannedLine = banned.total_hits === 0
+    ? `0 von ${articleCount} Aufbereitungen verletzen die Banned-Phrases-Liste.`
+    : `**${banned.total_hits} Banned-Phrase-Treffer** in ${banned.articles_with_hits}/${articleCount} Aufbereitungen.`;
+
+  const rewriteLine = rewriteCount === 0
+    ? 'Keine Aufbereitung wurde von der Review-Schlaufe als überarbeitungsbedürftig markiert.'
+    : `**${rewriteCount} von ${articleCount}** Aufbereitungen wurden von der Review-Schlaufe als überarbeitungsbedürftig markiert und sofort neu geschrieben.`;
+
+  const adjustmentsBlock = adjustments.length > 0
+    ? `\n\n**Heutige Prozess-Hinweise:**\n${adjustments.map(a => `- *${a.area} (${a.priority}):* ${a.recommendation}`).join('\n')}`
+    : '';
+
+  return `<details>
+<summary>🔍 Review-Schlaufe – was die Pipeline an sich selbst kritisiert hat</summary>
+
+${rewriteLine}
+
+${bannedLine}${adjustmentsBlock}
+
+*Die Review-Schlaufe ist ein zweiter Claude-Pass nach den Aufbereitungen: bewertet jeden Artikel auf Produkt-Relevanz, technische Substanz, Lernwert und Aufbereitungsqualität und triggert bei Bedarf ein Rewrite. Banned-Phrases ist ein deterministischer Regex-Check gegen Schablonen, die der Deliver-Prompt verbietet.*
+</details>
+`;
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -641,6 +680,15 @@ async function main() {
     }
     lines.push('', '---', '');
   }
+
+  // Review-Schlaufe sichtbar machen: Self-Critique-Pattern transparent
+  // im Footer, statt im run-summary-JSON zu verstecken.
+  lines.push(buildReviewFooter({
+    rewriteCount,
+    banned: runSummary.deliver.banned_phrases,
+    review: runSummary.review,
+    articleCount: topArtikel.length,
+  }));
 
   const markdown = lines.join('\n');
   const filename = `summary-${date}.md`;
