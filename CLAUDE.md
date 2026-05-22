@@ -45,7 +45,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
 - Rate Limiting: maximal 5 parallele Requests, Retry bei 429
-- Ergebnis wird als scored-YYYY-MM-DD.json gespeichert (alle Artikel >= 3 gespeichert)
+- Ergebnis wird als scored-YYYY-MM-DD.json gespeichert (alle erfolgreich bewerteten Artikel; Score 1/2/3 bleibt fuer Review sichtbar)
 
 ## Akzeptanzkriterien Baustein 3 (Deliver)
 

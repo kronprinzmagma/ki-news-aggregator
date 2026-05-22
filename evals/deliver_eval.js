@@ -106,7 +106,7 @@ const JUDGE_TOOL_SCHEMA = {
  * Splittet pro HTML-Comment-Marker und extrahiert den Text bis zum nächsten
  * `---`-Separator oder Marker.
  */
-function splitSummary(markdown) {
+export function splitSummary(markdown) {
   const blocks = [];
   const metaRe = /<!-- ki-news-meta: (.*?) -->/g;
   const matches = [...markdown.matchAll(metaRe)];
@@ -224,7 +224,13 @@ async function findRecentSummaries(n) {
     .map(f => path.join(REPO_ROOT, f));
 }
 
-async function main() {
+export function assertExtractedBlocks(blocks, summaryFiles) {
+  if (blocks.length > 0) return;
+  const names = summaryFiles.map(file => path.basename(file)).join(', ');
+  throw new Error(`Keine Artikel-Writeups aus ${names} extrahiert. Summary-Format oder ki-news-meta-Marker prüfen.`);
+}
+
+export async function main() {
   requireEnv('ANTHROPIC_API_KEY');
 
   const argIdx = process.argv.indexOf('--last');
@@ -246,6 +252,7 @@ async function main() {
     allBlocks.push(...blocks);
   }
   console.log(`[eval] ${allBlocks.length} Artikel-Writeups extrahiert`);
+  assertExtractedBlocks(allBlocks, summaryFiles);
 
   const urls = allBlocks.map(b => b.url);
   const sourceTexts = fetchSourceTexts(urls);
@@ -283,6 +290,10 @@ async function main() {
   console.log(`\nDetailbericht: ${outFile}`);
 }
 
-main()
-  .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
-  .finally(() => { https.globalAgent.destroy(); closeStore(); });
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isDirectRun) {
+  main()
+    .catch(err => { console.error('[fatal]', err.message); process.exit(1); })
+    .finally(() => { https.globalAgent.destroy(); closeStore(); });
+}

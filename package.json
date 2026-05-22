@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "eval:review": "node evals/review-ui/server.js"
+    "eval:review": "node evals/review-ui/server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

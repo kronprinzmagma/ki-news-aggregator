@@ -22,11 +22,11 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Ingest** (`ingest.js`): Lädt Artikel aus allen aktiven Adaptern parallel, normalisiert auf einheitliches Schema, dedupliziert per URL, filtert Artikel älter als 3 Tage.
 
-**Score** (`score.js`): Liest `articles-YYYY-MM-DD.json` für das aktuelle Laufdatum (`RUN_DATE` oder heutiges UTC-Datum), bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle Artikel mit Score >= 3.
+**Score** (`score.js`): Liest `articles-YYYY-MM-DD.json` für das aktuelle Laufdatum (`RUN_DATE` oder heutiges UTC-Datum), bewertet jeden Artikel via Claude API mit Score 1–5 und einer Begründung. Maximal 5 parallele Requests, Retry bei 429. Speichert alle erfolgreich bewerteten Artikel, damit Score-1/2/3-Ausschlüsse im Review sichtbar bleiben.
 
 **Textqualität**: Dünne Feed-Einträge werden angereichert. Latent Space, Simon Willison, Interconnects, Last Week in AI und Ahead of AI laden bei kurzen Teasern die Artikelseite nach. Simon Willison fetcht zusätzlich externe Links wenn der Seitentext unter 2500 Zeichen bleibt.
 
-**Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, filtert auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
+**Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, nutzt Score-1/2/3-Samples fuer die Review-Schlaufe, filtert fuer die Ausgabe auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
 **Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 4 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
 

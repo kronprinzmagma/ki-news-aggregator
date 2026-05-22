@@ -4,12 +4,12 @@ Zwei Evals laufen unabhängig voneinander auf unterschiedlichen Pipeline-Stufen:
 
 | Eval | Datei | Pipeline-Stufe | Frage |
 |---|---|---|---|
-| Scoring-Eval | `run_eval.py` | Score-Stufe | Stimmen Modell-Scores mit menschlich vergebenen Goldstandard-Scores überein? |
+| Scoring-Eval | `run_eval.js` | Score-Stufe | Stimmen Modell-Scores mit menschlich vergebenen Goldstandard-Scores überein? |
 | Deliver-Eval | `deliver_eval.js` | Deliver-Stufe | Sind die geschriebenen 3-Block-Aufbereitungen faktentreu zum Source-Text und stilistisch sauber? |
 
 ---
 
-## Scoring-Eval (`run_eval.py`)
+## Scoring-Eval (`run_eval.js`)
 
 Der Aggregator bewertet täglich KI-News-Artikel mit einem Score von 1–5. Dieser Score entscheidet, welche Artikel im täglichen GitHub-Issue landen. Wenn der Scoring-Prompt schlecht kalibriert ist, entstehen zwei Probleme:
 
@@ -17,6 +17,8 @@ Der Aggregator bewertet täglich KI-News-Artikel mit einem Score von 1–5. Dies
 - **False negatives:** Gute technische Artikel werden aussortiert
 
 Das Eval misst, wie gut das Modell mit den eigenen Urteilen übereinstimmt, die manuell auf einem Goldstandard vergeben wurden.
+
+`run_eval.js` importiert denselben Scoring-Pfad aus `lib/scoring.js` wie `score.js`: Prompt, Tool-Schema, Input-Truncation und deterministische Prefilter bleiben dadurch gekoppelt. `run_eval.py` existiert nur noch als Kompatibilitaets-Wrapper fuer alte lokale Befehle.
 
 ---
 
@@ -178,6 +180,8 @@ ANTHROPIC_API_KEY=sk-... node evals/deliver_eval.js [--last N]
 Default: letzte 3 `summary-*.md`-Files. Output:
 - Konsolen-Aggregat (Faithfulness Ø + Floor, Style Ø + Floor, Counts mit Halluzinationen / Stil-Problemen / Banned-Phrases)
 - Detail-Report in `evals/results/deliver-eval-YYYY-MM-DD.json`
+
+Wenn die ausgewaehlten Summaries keine `ki-news-meta`-Writeups liefern, bricht das Eval ab. Ein gruener Lauf mit null Coverage waere sonst kein Qualitaetssignal.
 
 ### Wann der Eval läuft
 
