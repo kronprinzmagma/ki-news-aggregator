@@ -38,8 +38,10 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const GOLD_FILE = path.join(REPO_ROOT, 'evals', 'goldstandard.json');
 const DB_FILE = process.env.KI_NEWS_DB || path.join(REPO_ROOT, 'ki-news.db');
 
-const REPO_OWNER = 'kronprinzmagma';
-const REPO_NAME = 'ki-news-aggregator';
+// Forkbar: siehe lib/config.js für dasselbe Pattern.
+const [DEFAULT_OWNER, DEFAULT_NAME] = (process.env.GITHUB_REPOSITORY || 'kronprinzmagma/ki-news-aggregator').split('/');
+const REPO_OWNER = process.env.REPO_OWNER || DEFAULT_OWNER;
+const REPO_NAME = process.env.REPO_NAME || DEFAULT_NAME;
 const TOKEN = process.env.GH_PAT || process.env.GITHUB_TOKEN;
 
 const DRY_RUN = process.argv.includes('--dry-run');

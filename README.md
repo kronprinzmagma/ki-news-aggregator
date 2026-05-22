@@ -157,6 +157,30 @@ Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured ou
 
 ---
 
+## Run your own instance
+
+The whole pipeline is repo-agnostic. `REPO_OWNER`/`REPO_NAME` derive from the standard `GITHUB_REPOSITORY` env var that GitHub Actions sets automatically — fork and it just works, no code changes.
+
+**Five steps to your own daily KI briefing:**
+
+1. **Fork this repo** to your own account.
+2. **Add two repository secrets** under *Settings → Secrets and variables → Actions*:
+   - `ANTHROPIC_API_KEY` — your Anthropic API key
+   - `GH_PAT` — a personal access token with `repo` scope (used to create/update issues; the default `GITHUB_TOKEN` doesn't have enough permissions for cross-workflow issue access)
+3. **Enable GitHub Pages**: *Settings → Pages → Source: GitHub Actions*. The static archive site builds automatically after each daily run.
+4. **Enable workflow runs**: *Actions* tab → enable workflows for the fork.
+5. **Trigger the first run manually**: *Actions → Daily KI-News → Run workflow*. Subsequent runs happen automatically at 05:30 UTC daily.
+
+**Customise the editorial direction:**
+- `score.js` `SCORE_SYSTEM` — what you find relevant (default: senior PM/PO moving towards AI builder)
+- `deliver.js` `ARTIKEL_PROMPT` — the writing style and three-block structure
+- `ingest.js` `ADAPTERS` array — which 14 sources to fetch (or replace entirely)
+- `lib/config.js` — score thresholds, dedup parameters, model choice
+
+**Cost budget:** ~CHF 8/month at the default settings (Haiku for scoring with Batch API, Sonnet for writing). Toggle off Batch API with `SCORE_USE_BATCH=false` if you need synchronous behaviour.
+
+---
+
 ## License
 
 MIT.

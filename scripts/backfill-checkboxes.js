@@ -16,8 +16,9 @@ import { loadEnv } from '../lib/env.js';
 
 loadEnv();
 
-const REPO_OWNER = 'kronprinzmagma';
-const REPO_NAME = 'ki-news-aggregator';
+const [DEFAULT_OWNER, DEFAULT_NAME] = (process.env.GITHUB_REPOSITORY || 'kronprinzmagma/ki-news-aggregator').split('/');
+const REPO_OWNER = process.env.REPO_OWNER || DEFAULT_OWNER;
+const REPO_NAME = process.env.REPO_NAME || DEFAULT_NAME;
 const TOKEN = process.env.GH_PAT || process.env.GITHUB_TOKEN;
 const DRY_RUN = process.argv.includes('--dry-run');
 

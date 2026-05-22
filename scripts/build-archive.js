@@ -21,8 +21,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(REPO_ROOT, '_site');
 
-const REPO_OWNER = 'kronprinzmagma';
-const REPO_NAME = 'ki-news-aggregator';
+// Forkbar: REPO_OWNER/REPO_NAME entweder explizit via Env oder aus dem
+// GITHUB_REPOSITORY-Default (auf GH-Actions automatisch gesetzt).
+const [DEFAULT_OWNER, DEFAULT_NAME] = (process.env.GITHUB_REPOSITORY || 'kronprinzmagma/ki-news-aggregator').split('/');
+const REPO_OWNER = process.env.REPO_OWNER || DEFAULT_OWNER;
+const REPO_NAME = process.env.REPO_NAME || DEFAULT_NAME;
 const TOKEN = process.env.GH_PAT || process.env.GITHUB_TOKEN;
 if (!TOKEN) {
   console.error('GH_PAT oder GITHUB_TOKEN nicht gesetzt');

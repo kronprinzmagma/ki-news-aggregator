@@ -1,7 +1,7 @@
 import { loadEnv, requireEnv } from './lib/env.js';
 import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
-import { WEEKLY_MODEL } from './lib/config.js';
+import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
 
 loadEnv();
@@ -118,7 +118,7 @@ Regeln: Nur Fakten aus dem Input. P/O-Kürzel nicht in Überschriften. Ca. 700�
 async function upsertWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;
   const q = new URLSearchParams({
-    q: `repo:kronprinzmagma/ki-news-aggregator is:issue in:title "KI Weekly – KW ${weekInfo.kw}"`,
+    q: `repo:${REPO_SLUG} is:issue in:title "KI Weekly – KW ${weekInfo.kw}"`,
   });
   const { status: searchStatus, body: searchBody } = await githubRequest(token, 'GET', ghPath.searchIssues(q));
 
@@ -196,7 +196,7 @@ async function main() {
 
 ${digestBody}
 
-*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=label%3A)*`;
+*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3A)*`;
 
   const issueUrl = await upsertWeeklyIssue(token, weekInfo, issueBody);
   console.log(`[weekly] Fertig: ${issueUrl}`);

@@ -19,7 +19,7 @@ jobs:
           echo "Schliesse Issues älter als: $CUTOFF"
 
           gh issue list \
-            --repo kronprinzmagma/ki-news-aggregator \
+            --repo "$GITHUB_REPOSITORY" \
             --label summary \
             --state open \
             --json number,createdAt \
@@ -28,6 +28,6 @@ jobs:
             | while read -r num; do
                 echo "Schliesse Issue #$num"
                 gh issue close "$num" \
-                  --repo kronprinzmagma/ki-news-aggregator \
+                  --repo "$GITHUB_REPOSITORY" \
                   --comment "Automatisch geschlossen nach 7 Tagen."
               done
