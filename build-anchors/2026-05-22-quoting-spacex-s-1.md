@@ -8,7 +8,7 @@ article_title: "Quoting SpaceX S-1"
 
 # Build-Anker
 
-Lies den verlinkten SpaceX-S-1-Abschnitt und extrahiere mit Claude Code alle Vertragskonditionen (Betrag, Laufzeit, Kündigungsfristen, Parteien) in eine strukturierte JSON-Datei – Ziel: ein maschinenlesbares Vertragsblatt mit mindestens fünf belegten Feldern.
+Nimm den S-1-Vertragsabschnitt, berechne mit Claude Code den impliziten USD/GPU-h bei drei realistischen Cluster-Grössen (100k, 200k, 400k H100) und stelle das Ergebnis den aktuellen AWS- und Azure-Listenpreisen als Vergleichstabelle gegenüber.
 
 ---
 

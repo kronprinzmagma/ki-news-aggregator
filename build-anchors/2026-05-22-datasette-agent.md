@@ -8,7 +8,7 @@ article_title: "Datasette Agent"
 
 # Build-Anker
 
-Lass Claude Code ein Datasette-Agent-Plugin schreiben, das Observable Plot-Charts erzeugt, und dokumentiere, wie viele der generierten SQL-Abfragen gegen eine lokale SQLite-Testdatenbank fehlerfrei ausgeführt werden.
+Installiere datasette-agent-charts und richte es gegen eine eigene SQLite-Datenbank ein; miss, ob Observable Plot-Charts korrekt aus drei unterschiedlichen Abfragetypen gerendert werden und welche Abfragen das Modell ohne manuelle Korrektur besteht.
 
 ---
 

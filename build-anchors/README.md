@@ -2,7 +2,7 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**13 Einträge** · Top-Quellen: simonwillison (5) · latentspace (4) · hackernews (1) · lastweekinai (1) · heise (1) · venturebeat (1)
+**14 Einträge** · Top-Quellen: simonwillison (5) · latentspace (4) · heise (2) · hackernews (1) · lastweekinai (1) · venturebeat (1)
 
 ## Liste
 
@@ -17,5 +17,6 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 - **2026-05-22** — [FTC to Require Cox Media Group, Two Other Firms to Pay Nearly $1 Million to Settle Charges They Deceived Customers About “Active Listening” AI-Powered Marketing Service](2026-05-22-ftc-to-require-cox-media-group-two-other-firms-to-pay-nearly.md) · *simonwillison · Score 4*
 - **2026-05-22** — [Datasette Agent](2026-05-22-datasette-agent.md) · *simonwillison · Score 4*
 - **2026-05-22** — [datasette-agent-sprites 0.1a0](2026-05-22-datasette-agent-sprites-0-1a0.md) · *simonwillison · Score 4*
+- **2026-05-22** — [Brüssel ordnet Algorithmen: EU-Kommission konkretisiert die Hochrisiko-KI](2026-05-22-brussel-ordnet-algorithmen-eu-kommission-konkretisiert-die-h.md) · *heise · Score 4*
 - **2026-05-22** — [[AINews] OpenAI GPT-next disproves 80 year old Erdős planar unit distance problem for under $1000](2026-05-22-ainews-openai-gpt-next-disproves-80-year-old-erdos-planar-un.md) · *latentspace · Score 4*
 - **2026-05-22** — [[AINews] How to land a job at a frontier lab (on Pretraining)](2026-05-22-ainews-how-to-land-a-job-at-a-frontier-lab-on-pretraining.md) · *latentspace · Score 4*
