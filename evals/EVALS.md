@@ -20,9 +20,41 @@ Das Eval misst, wie gut das Modell mit den eigenen Urteilen übereinstimmt, die 
 
 ---
 
-## Wie der Goldstandard entstanden ist
+## Wie der Goldstandard wächst
 
-`goldstandard.json` enthält aktuell nur einen kleinen Seed-Satz. Der frühere Zielwert von 40 Artikeln ist bewusst noch offen, weil der Prozess und die Bewertungslogik nochmals grundlegend angepasst wurden. Der Goldstandard sollte erst wieder ausgebaut werden, wenn ein paar Daily-Runs mit dem neuen Maker-Fokus stabil sind.
+Der Goldstandard wird **nicht manuell gepflegt**. Er wächst passiv aus den Feedback-Häkchen, die der Leser beim normalen Lesen der Daily-Issues setzt:
+
+```
+Lesen → 3-Sekunden-Klick im Issue → wöchentlich Promote-Script → goldstandard.json wächst
+```
+
+Jeder Artikel im Daily-Issue hat vier Feedback-Checkboxen:
+- **Besonders wertvoll** — positives Signal zur Relevanz
+- **Später weiterverfolgen** — schwaches positives Signal (wird NICHT promoted)
+- **Schlecht aufbereitet** — Signal für die Deliver-Stufe (Writeup-Qualität)
+- **Irrelevanter Inhalt** — negatives Signal zur Relevanz
+
+`scripts/promote-feedback.js` liest alle Daily-Issues via GitHub-API, extrahiert die Checkbox-Zustände pro Artikel und wendet folgende Promote-Logik an:
+
+| Gesetzte Häkchen | Aktion |
+|---|---|
+| `wertvoll` UND nicht `schlecht_aufbereitet` | → Goldstandard `human_score = 5` |
+| `irrelevant` UND nicht `schlecht_aufbereitet` | → Goldstandard `human_score = 1` |
+| `schlecht_aufbereitet` setzt aus | Blockiert das Promote, weil die Lesebewertung dann nicht sauber dem Artikel zugeordnet werden kann (war's der Inhalt oder die Aufbereitung?) |
+| `weiterverfolgen` allein | Kein Promote (zu weiches Signal) |
+| `wertvoll` UND `irrelevant` | Kein Promote (widersprüchlich) |
+
+Dedupliziert wird per URL gegen bestehende Goldstandard-Einträge. Idempotent — das Script kann jederzeit erneut laufen.
+
+```bash
+GH_PAT=ghp_... node scripts/promote-feedback.js [--dry-run]
+```
+
+**Bewertungs-Aufwand: ~3 Sekunden pro markiertem Artikel beim normalen Lesen.** Keine Goldstandard-Pflege-Sessions.
+
+## Aktueller Goldstandard-Stand
+
+`goldstandard.json` enthält die bisher promoteten Einträge plus den ursprünglichen Seed-Satz. Schema eines Eintrags:
 
 **Bewertungskriterium:** Liefert dieser Artikel eine konkrete Idee, die ich als Einzelperson an einem Abend mit Claude Code technisch umsetzen oder ausprobieren kann?
 
