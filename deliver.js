@@ -242,16 +242,33 @@ function pickLowScoreSamples(belowCutoff, limit = 2) {
   ));
 }
 
+// Vier Feedback-Boxen pro Artikel: zwei positive (wertvoll, weiterverfolgen),
+// zwei negative (schlecht_aufbereitet, irrelevant). Negative Häkchen sind
+// das spätere Trainingssignal für Prompt-Iteration: wo greift die Aufbereitung
+// nicht, wo lässt der Score Müll durch.
+const FEEDBACK_BOXES = [
+  { key: 'standout',     label: 'Besonders wertvoll' },
+  { key: 'followUp',     label: 'Später weiterverfolgen' },
+  { key: 'poorWriteup',  label: 'Schlecht aufbereitet' },
+  { key: 'irrelevant',   label: 'Irrelevanter Inhalt' },
+];
+
+function escapeForRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function extractFeedbackStates(body = '') {
   const states = new Map();
   const sections = body.split(/\n(?=### )/);
   for (const section of sections) {
     const url = section.match(/Score \d+\/5 · \[[^\]]+\]\(([^)]+)\)/)?.[1];
     if (!url) continue;
-    states.set(url, {
-      standout: /- \[[xX]\] Besonders wertvoll/.test(section),
-      followUp: /- \[[xX]\] Später weiterverfolgen/.test(section),
-    });
+    const state = {};
+    for (const box of FEEDBACK_BOXES) {
+      const re = new RegExp(`- \\[[xX]\\] ${escapeForRegex(box.label)}`);
+      state[box.key] = re.test(section);
+    }
+    states.set(url, state);
   }
   return states;
 }
@@ -264,9 +281,12 @@ function applyFeedbackStates(markdown, states) {
       const url = section.match(/Score \d+\/5 · \[[^\]]+\]\(([^)]+)\)/)?.[1];
       const state = url ? states.get(url) : null;
       if (!state) return section;
-      return section
-        .replace(/- \[[ xX]\] Besonders wertvoll/, `- [${state.standout ? 'x' : ' '}] Besonders wertvoll`)
-        .replace(/- \[[ xX]\] Später weiterverfolgen/, `- [${state.followUp ? 'x' : ' '}] Später weiterverfolgen`);
+      let out = section;
+      for (const box of FEEDBACK_BOXES) {
+        const re = new RegExp(`- \\[[ xX]\\] ${escapeForRegex(box.label)}`);
+        out = out.replace(re, `- [${state[box.key] ? 'x' : ' '}] ${box.label}`);
+      }
+      return out;
     })
     .join('\n');
 }
@@ -687,8 +707,10 @@ async function main() {
     lines.push(articleMeta(a));
     lines.push(`### ${sanitizeMarkdown(a.titel)}`, '');
     lines.push(`Score ${a.score}/5 · [${sanitizeMarkdown(a.quelle)}](${sanitizeUrl(a.url)})`, '');
-    lines.push('- [ ] Besonders wertvoll');
-    lines.push('- [ ] Später weiterverfolgen', '');
+    for (const box of FEEDBACK_BOXES) {
+      lines.push(`- [ ] ${box.label}`);
+    }
+    lines.push('');
     lines.push(aufbereitungen[i]);
 
     const related = relatedMap.get(a.url);

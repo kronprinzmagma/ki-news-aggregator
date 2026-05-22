@@ -24,7 +24,7 @@ Three stages run sequentially:
 
 **1. Ingest** — 14 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z and Heise Online apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
 
-**2. Score** — Each article is sent to `claude-sonnet-4-6` with a relevance rubric. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Articles scoring ≥ 3 are persisted.
+**2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Articles scoring ≥ 3 are persisted.
 
 **3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into a fixed three-block format (what's new / what it means for AI direction / a concrete build anchor for an evening with Claude Code). A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk.
 
@@ -55,7 +55,7 @@ flowchart TD
     end
 
     Ingest["ingest.js<br/>14 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
-    Score["score.js<br/>Claude Sonnet 4.6<br/>+ prompt caching<br/>parallel × 5 · retry"]
+    Score["score.js<br/>Claude Haiku 4.5<br/>parallel × 5 · retry"]
     Filter{"Score ≥ 4?"}
     XDay["Cross-day dedup<br/>SQLite · 7-day lookback<br/>URL + title similarity"]
     Topic["Within-day topic dedup<br/>shared-token heuristic"]
@@ -133,7 +133,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 ```
 ingest.js              — Stage 1: fetch and normalise articles
-score.js               — Stage 2: relevance scoring via Claude Sonnet
+score.js               — Stage 2: relevance scoring via Claude Haiku
 deliver.js             — Stage 3: write-up, review loop, GitHub Issue
 weekly.js              — Sunday synthesis digest
 adapters/              — One adapter per source (15 files incl. base)
@@ -147,7 +147,7 @@ lib/                   — Shared modules: claude, github, http, store,
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Sonnet 4.6, structured outputs via tool-use) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues API
+Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured outputs via tool-use) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues API
 
 ---
 

@@ -131,7 +131,7 @@ Während das Scoring-Eval prüft, ob die richtigen Artikel ausgewählt werden, p
 
 ### Was es misst
 
-**1. Faithfulness (LLM-as-Judge, Claude Sonnet 4.6).** Für jeden Artikel-Writeup im letzten Daily-Issue wird der Source-Text aus der SQLite-Datenbank geladen und beides an einen Judge geschickt. Der Judge sucht nach Behauptungen im Writeup, die im Source-Text nicht belegbar sind — erfundene Modellnamen, Zahlen, Partnerschaften, behauptete Benchmarks ohne Beleg. Output: `faithfulness_score` (1–5) + Liste der konkreten Halluzinationen.
+**1. Faithfulness (LLM-as-Judge, Claude Haiku 4.5).** Für jeden Artikel-Writeup im letzten Daily-Issue wird der Source-Text aus der SQLite-Datenbank geladen und beides an einen Judge geschickt. Der Judge sucht nach Behauptungen im Writeup, die im Source-Text nicht belegbar sind — erfundene Modellnamen, Zahlen, Partnerschaften, behauptete Benchmarks ohne Beleg. Output: `faithfulness_score` (1–5) + Liste der konkreten Halluzinationen.
 
 **2. Stil (LLM-as-Judge, gleiche Call).** Der Judge prüft, ob der Writeup PO-/Sprint-/Stakeholder-Sprache, generische "KI verändert X"-Sätze oder Hedging-Phrasen ("könnte man", "liesse sich") enthält. Output: `style_score` (1–5) + Liste konkreter Stil-Verstösse.
 
