@@ -2,16 +2,30 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**26 Einträge** · Top-Quellen: simonwillison (9) · hackernews (7) · latentspace (5) · heise (3) · lastweekinai (1) · venturebeat (1)
+**40 Einträge** · Top-Quellen: heise (16) · simonwillison (9) · hackernews (8) · latentspace (5) · lastweekinai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-23** — [Zusammenfassen und Übersetzen: GMX bringt KI-Funktionen im Gratis-Postfach](2026-05-23-zusammenfassen-und-ubersetzen-gmx-bringt-ki-funktionen-im-gr.md) · *heise · Score 4*
 - **2026-05-23** — [The memory shortage is causing a repricing of consumer electronics](2026-05-23-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
+- **2026-05-23** — [Staged publishing and new install-time controls for npm](2026-05-23-staged-publishing-and-new-install-time-controls-for-npm.md) · *hackernews · Score 4*
+- **2026-05-23** — [Spotify kündigt KI-generierte Remixe und Podcasts an](2026-05-23-spotify-kundigt-ki-generierte-remixe-und-podcasts-an.md) · *heise · Score 4*
 - **2026-05-23** — [Quoting SpaceX S-1](2026-05-23-quoting-spacex-s-1.md) · *simonwillison · Score 5*
+- **2026-05-23** — [Privacy Guardrail: Chrome-Erweiterung will sensible Daten vor Chatbots schützen](2026-05-23-privacy-guardrail-chrome-erweiterung-will-sensible-daten-vor.md) · *heise · Score 4*
 - **2026-05-23** — [Microsoft starts canceling Claude Code licenses](2026-05-23-microsoft-starts-canceling-claude-code-licenses.md) · *hackernews · Score 4*
+- **2026-05-23** — [Metas KI-Brillen helfen Blinden im Alltag – und werfen neue Fragen auf](2026-05-23-metas-ki-brillen-helfen-blinden-im-alltag-und-werfen-neue-fr.md) · *heise · Score 4*
 - **2026-05-23** — [Launch HN: Superset (YC P26) – IDE for the agents era](2026-05-23-launch-hn-superset-yc-p26-ide-for-the-agents-era.md) · *hackernews · Score 4*
+- **2026-05-23** — [Google öffnet Android CLI für alle KI-Agenten](2026-05-23-google-offnet-android-cli-fur-alle-ki-agenten.md) · *heise · Score 4*
+- **2026-05-23** — [„Gemini built in“: Google bietet Referenzdesigns für Smart-Home-Geräte an](2026-05-23-gemini-built-in-google-bietet-referenzdesigns-fur-smart-home.md) · *heise · Score 4*
+- **2026-05-23** — [Fitbit-App bekommt großes Update auf Version 5.0 und heißt jetzt Google Health](2026-05-23-fitbit-app-bekommt-grosses-update-auf-version-5-0-und-heisst.md) · *heise · Score 4*
+- **2026-05-23** — [Figma erweitert Screendesign-App um KI-Agenten](2026-05-23-figma-erweitert-screendesign-app-um-ki-agenten.md) · *heise · Score 4*
+- **2026-05-23** — [Endlich einheitliche KI-Kennzeichnung? Gemeinsame Sache bei OpenAI und Google](2026-05-23-endlich-einheitliche-ki-kennzeichnung-gemeinsame-sache-bei-o.md) · *heise · Score 4*
+- **2026-05-23** — [Drei Fragen und Antworten: Wann sich KI-Coding wirklich rechnet](2026-05-23-drei-fragen-und-antworten-wann-sich-ki-coding-wirklich-rechn.md) · *heise · Score 4*
+- **2026-05-23** — [Digitale Souveränität: Bund vergibt 250-Millionen-KI-Cloud-Auftrag](2026-05-23-digitale-souveranitat-bund-vergibt-250-millionen-ki-cloud-au.md) · *heise · Score 4*
 - **2026-05-23** — [DeepSeek makes the V4 Pro price discount permanent](2026-05-23-deepseek-makes-the-v4-pro-price-discount-permanent.md) · *hackernews · Score 4*
 - **2026-05-23** — [Datasette Agent](2026-05-23-datasette-agent.md) · *simonwillison · Score 4*
+- **2026-05-23** — [Camunda: ProcessOS optimiert Geschäftsprozesse mit KI](2026-05-23-camunda-processos-optimiert-geschaftsprozesse-mit-ki.md) · *heise · Score 4*
+- **2026-05-23** — [c't-Podcast: „KI kann allein keine Cyberangriffe entwickeln“](2026-05-23-c-t-podcast-ki-kann-allein-keine-cyberangriffe-entwickeln.md) · *heise · Score 4*
 - **2026-05-23** — [[AINews] All Model Labs are now Agent Labs](2026-05-23-ainews-all-model-labs-are-now-agent-labs.md) · *latentspace · Score 4*
 - **2026-05-23** — [A blueprint for formal verification of Apple corecrypto](2026-05-23-a-blueprint-for-formal-verification-of-apple-corecrypto.md) · *hackernews · Score 4*
 - **2026-05-22** — [Uv is fantastic, but its package management UX is a mess](2026-05-22-uv-is-fantastic-but-its-package-management-ux-is-a-mess.md) · *hackernews · Score 4*
