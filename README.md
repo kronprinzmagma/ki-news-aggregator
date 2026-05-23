@@ -1,40 +1,34 @@
 # KI-News Aggregator
 
-A daily AI briefing built for **product people who build agentically** — not developers. Every morning, 14 curated sources are scored for relevance, and the signal that matters gets written up in a fixed format: what changed, what it means for where AI is heading, and a concrete evening project you can actually try tonight with Claude Code.
+A daily AI briefing for product managers and POs who are starting to build things themselves — with Claude Code, the Anthropic API, tools like that. Not aimed at developers.
 
 ---
 
 ## Who this is for
 
-**The gap this fills:** You're a senior PM or PO moving hands-on into AI building. You use Claude Code. You're interested in what's architecturally possible — not in backlog management or sprint ceremonies. You want to stay current with AI without drowning in developer-focused newsletters, paper digests, or VC hype.
+You're a senior PM or PO who's moved past just speccing things out for engineers. You're building stuff yourself, or seriously considering it. You want to know what's actually happening in AI — not for a roadmap presentation, but because you're trying to figure out what to experiment with next.
 
-Most AI newsletters are written by developers for developers, or optimised for breadth over relevance. Neither helps a product person understand *what to build next* or *how to position their work* given where AI is actually heading.
+Most AI newsletters assume you either work at a lab or want to fine-tune a model. The ones aimed at business audiences are all market trends and funding rounds. Neither is useful when what you actually want to know is: what just became possible, and is there something worth trying with it this weekend?
 
-This pipeline runs every morning at 05:30 UTC and answers three questions per article:
-
-1. **What actually changed?** — No hype, no marketing, no restating the headline.
-2. **What does it mean for the direction AI is taking?** — The underlying shift, not the press release.
-3. **What can I build with this tonight?** — A concrete 2–4 hour project with Claude Code. No "set up a Kubernetes cluster", no model training, no hardware. Something a product person can actually execute.
+Every morning at 05:30 UTC the pipeline fetches 14 sources, scores them for relevance, and writes up the articles that made the cut. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a concrete project to try tonight with Claude Code — no server setup, no ML background required.
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
 
 **Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
 
-**Build-anchor catalog:** [build-anchors/](build-anchors/) — every daily issue extracts one concrete *build anchor* per article. Grows automatically into a browseable collection of evening-project ideas.
+**Build-anchor catalog:** [build-anchors/](build-anchors/) — one concrete evening project extracted per article, auto-committed daily. Grows into a browseable collection over time.
 
 ---
 
-## The editorial stance
+## What the write-ups look like
 
-The content is written for someone who makes product decisions and increasingly executes them directly with AI tools. That shapes everything:
+The briefing is in German (Swiss standard). Each article gets three blocks, capped at around 120 words total.
 
-**No developer jargon without context.** When an article is about a new SDK feature or eval pattern, the write-up explains the *product implication* — not the implementation detail. A product person needs to know *what this unlocks*, not *how to configure it*.
+The first block covers what's new — factually, without hype, without repeating the headline. The second block ("Was es für die KI-Richtung heisst") is supposed to be an actual opinion: given this development, where is the field moving, and what should you be paying attention to? Not a summary of the article, more of a positioning take.
 
-**Impact-first framing.** Block 2 ("Was es für die KI-Richtung heisst") is not a summary. It's a positioning statement: given this development, which direction is the field moving, and what does that mean for someone building products on top of AI?
+The third block is the build anchor. Every article has to produce one concrete project — something doable in an evening, alone, without infrastructure setup and without any ML background. The scope constraint (2–4 hours with Claude Code) is deliberate. Not "you could build a platform around this" but "here's the smallest thing you could make tonight that would actually teach you something."
 
-**Build anchors are the point, not a bonus.** Block 3 ("Build-Anker") is the most deliberate part of the format. Every article must yield a concrete, scoped experiment — something doable in one evening without a team, without infrastructure setup, and without deep ML knowledge. The constraint ("2–4h with Claude Code") is intentional: it keeps the ideas actionable for a product person, not aspirational for an engineer.
-
-**What gets filtered out:** Generic "AI transforms industry" pieces, VC funding announcements, undifferentiated Show HN posts, and anything that would require a developer background to understand the relevance. The scoring rubric is explicit about this.
+Things that get filtered out before any of this: funding announcements, "AI is transforming industry X" pieces, and anything where the relevance only makes sense if you already have an engineering background.
 
 ---
 
