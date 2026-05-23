@@ -1,20 +1,40 @@
 # KI-News Aggregator
 
-A fully automated pipeline that ingests AI-relevant articles from 14 sources daily, scores them with Claude, and publishes a curated briefing as a GitHub Issue — tailored for a senior product person moving towards building with AI.
+A daily AI briefing built for **product people who build agentically** — not developers. Every morning, 14 curated sources are scored for relevance, and the signal that matters gets written up in a fixed format: what changed, what it means for where AI is heading, and a concrete evening project you can actually try tonight with Claude Code.
 
 ---
 
-## The problem this solves
+## Who this is for
 
-Keeping up with AI developments as a practitioner is noisy. Most newsletters either bury signal in volume, or optimise for breadth over relevance. What's actually useful is a daily signal that answers three specific questions: *what capability shifted, what does it mean for where AI is heading, and what can I build with it tonight?*
+**The gap this fills:** You're a senior PM or PO moving hands-on into AI building. You use Claude Code. You're interested in what's architecturally possible — not in backlog management or sprint ceremonies. You want to stay current with AI without drowning in developer-focused newsletters, paper digests, or VC hype.
 
-This pipeline runs every morning at 05:30 UTC and produces exactly that — one GitHub Issue per day, written in a fixed three-block format per article, with a weekly synthesis on Sundays.
+Most AI newsletters are written by developers for developers, or optimised for breadth over relevance. Neither helps a product person understand *what to build next* or *how to position their work* given where AI is actually heading.
+
+This pipeline runs every morning at 05:30 UTC and answers three questions per article:
+
+1. **What actually changed?** — No hype, no marketing, no restating the headline.
+2. **What does it mean for the direction AI is taking?** — The underlying shift, not the press release.
+3. **What can I build with this tonight?** — A concrete 2–4 hour project with Claude Code. No "set up a Kubernetes cluster", no model training, no hardware. Something a product person can actually execute.
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
 
 **Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
 
-**Build-anchor catalog:** [build-anchors/](build-anchors/) — every daily issue extracts a concrete *build anchor* (a 2–4h project doable with Claude Code) per article. Auto-committed by the daily run, growing over time into a browseable evening-project collection.
+**Build-anchor catalog:** [build-anchors/](build-anchors/) — every daily issue extracts one concrete *build anchor* per article. Grows automatically into a browseable collection of evening-project ideas.
+
+---
+
+## The editorial stance
+
+The content is written for someone who makes product decisions and increasingly executes them directly with AI tools. That shapes everything:
+
+**No developer jargon without context.** When an article is about a new SDK feature or eval pattern, the write-up explains the *product implication* — not the implementation detail. A product person needs to know *what this unlocks*, not *how to configure it*.
+
+**Impact-first framing.** Block 2 ("Was es für die KI-Richtung heisst") is not a summary. It's a positioning statement: given this development, which direction is the field moving, and what does that mean for someone building products on top of AI?
+
+**Build anchors are the point, not a bonus.** Block 3 ("Build-Anker") is the most deliberate part of the format. Every article must yield a concrete, scoped experiment — something doable in one evening without a team, without infrastructure setup, and without deep ML knowledge. The constraint ("2–4h with Claude Code") is intentional: it keeps the ideas actionable for a product person, not aspirational for an engineer.
+
+**What gets filtered out:** Generic "AI transforms industry" pieces, VC funding announcements, undifferentiated Show HN posts, and anything that would require a developer background to understand the relevance. The scoring rubric is explicit about this.
 
 ---
 
@@ -24,9 +44,9 @@ Three stages run sequentially:
 
 **1. Ingest** — 14 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z and Heise Online apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
 
-**2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Successful scores are persisted so the deliver review loop can inspect excluded Score-1/2/3 samples; only Score ≥ 4 reaches publication.
+**2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric calibrated to the product-builder persona. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Only Score ≥ 4 reaches publication.
 
-**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into a fixed three-block format (what's new / what it means for AI direction / a concrete build anchor for an evening with Claude Code). A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk.
+**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk.
 
 **Weekly** — A Sunday digest fetches the last 7 daily issues, deduplicates across days, and synthesises the week's Score-5 articles (plus 1–2 Score-4 picks) into a narrative: what happened, what it means, a critical framing.
 
