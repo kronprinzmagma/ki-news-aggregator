@@ -90,6 +90,10 @@ Zwei zusammenhängende Bugs in `weekly.js` behoben:
 1. **Upsert entfernt**: `weekly.js` hat bisher ein bestehendes Issue für dieselbe KW überschrieben statt ein neues zu erstellen. Ein manueller Trigger am Montag hat das Issue vom Sonntag 7 Tage später überschrieben. Jetzt wird immer ein neues Issue erstellt.
 2. **weekRange() korrigiert**: Bei Aufruf an einem Nicht-Sonntag (manueller Trigger, Retry) wurde die laufende Woche berechnet. Neu: Rücksprung auf die letzte abgeschlossene Woche (letzter Sonntag als Ankerpunkt).
 
+## Weekly-Format angeglichen 2026-05-24
+
+`weekly.js` Prompt überarbeitet: Pro Artikel jetzt dieselbe Struktur wie Daily — `### Titel`, `Score X/5 · [quelle](url)`, alle 4 Feedback-Checkboxen, **Was ist neu** / **Was es für die KI-Richtung heisst** / **Build-Anker**. Einleitung, Strömungen der Woche und Wochenimpuls bleiben als wöchentliche Ergänzung erhalten. `maxTokens` 2800 → 4000.
+
 ## README-Überarbeitung 2026-05-24
 
 README in zwei Schritten umgeschrieben:

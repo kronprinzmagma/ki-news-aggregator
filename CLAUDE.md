@@ -76,9 +76,10 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
 - Holt die letzten 7 KI-Daily-Issues per GitHub API, parst alle Artikel, URL-Dedup über Tage
 - Score-5-Artikel kommen immer ins Issue (Pflicht); Claude wählt zusätzlich 1–2 Score-4-Artikel
-- Pro Artikel drei Blöcke: Was passiert ist (faktisch) / Was das bedeutet / Kritische Einordnung
+- Pro Artikel dieselben drei Blöcke wie Daily: Was ist neu / Was es für die KI-Richtung heisst / Build-Anker – plus alle 4 Feedback-Checkboxen
 - Zusätzlich: Einleitung, Strömungen der Woche, Wochenimpuls
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
+- Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet
 
 ## Schedule
 
