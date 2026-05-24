@@ -85,43 +85,57 @@ function weekRange(referenceDate) {
 
 // ─── Weekly-Prompt ────────────────────────────────────────────────────────────
 
-const WEEKLY_PROMPT = (must, optional, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM mit Hands-on-Ambition (Claude Code, Anthropic API). Fokus: Produktstrategie, Build-vs-Buy, AI-Adoption, Kosten, eigene Prototypen. Nicht im Scope: Backlog, Sprint, Stakeholder.
+const WEEKLY_PROMPT = (must, optional, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM mit Hands-on-Ambition (Claude Code, Anthropic API). Nicht im Scope: Backlog, Sprint, Stakeholder.
 
-Tonalität: Schweizer Hochdeutsch, direkt. Keine Überschrift am Anfang – Titel wird extern gesetzt.
+Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing-Sprech. Keine Überschrift am Anfang – Titel wird extern gesetzt.
 
 ---
 
 KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})
 
 PFLICHTARTIKEL (Score 5, alle ins Issue):
-${must.map((a, i) => `[P${i + 1}] ${a.datum} | ${a.quelle} | ${a.titel}
+${must.length > 0 ? must.map(a => `Score: ${a.score} | Quelle: ${a.quelle} | URL: ${a.url}
+Titel: ${a.titel}
 Neu: ${a.wasIstNeu}
 Richtung: ${a.richtung}
-URL: ${a.url}`).join('\n\n')}
+Anker: ${a.anker}`).join('\n\n') : '(keine Score-5-Artikel diese Woche)'}
 
 OPTIONAL (Score 4, wähle 1–2 nach strategischer Bedeutung):
-${optional.map((a, i) => `[O${i + 1}] ${a.datum} | ${a.quelle} | ${a.titel}
+${optional.slice(0, 10).map(a => `Score: ${a.score} | Quelle: ${a.quelle} | URL: ${a.url}
+Titel: ${a.titel}
 Neu: ${a.wasIstNeu}
 Richtung: ${a.richtung}
-URL: ${a.url}`).join('\n\n')}
+Anker: ${a.anker}`).join('\n\n')}
 
 ---
 
-Markdown-Struktur:
+Struktur der Ausgabe:
 
-1. **Einleitung** (3–4 Sätze): Dominante Strömung der Woche, was hat sich gegenüber der Vorwoche verschoben?
+**Einleitung** (3–4 Sätze): Dominante Strömung der Woche, was hat sich gegenüber der Vorwoche verschoben?
 
-2. **Top-Entwicklungen**: Alle P-Artikel zuerst, dann gewählte O-Artikel. Pro Artikel:
-   - **Was passiert ist** (2–3 Sätze, nur Fakten aus dem Input – für jemanden der die Dailies nicht gelesen hat)
-   - **Was das bedeutet** (1–2 Sätze, Implikation für Produkt/Build-vs-Buy)
-   - **Kritische Einordnung** (1–2 Sätze, was fehlt im Bericht / welche Annahme könnte falsch sein)
-   - \`- [ ] Besonders wertvoll\` und \`- [ ] Später weiterverfolgen\`
+Dann pro Artikel (alle Pflicht, dann 1–2 gewählte Optionale), durch eine Leerzeile getrennt. Jeder Artikel exakt so formatiert:
 
-3. **Strömungen der Woche** (2–3 Cluster, je 2–3 Sätze): Muster benennen, keine Artikel-Aufzählung.
+### [Titel]
 
-4. **Wochenimpuls** (1 konkreter Build-Anker + 1–2 Sätze Kontext): Aus der Gesamtschau der Woche, nicht aus einem Einzelartikel.
+Score [X]/5 · [[quelle]]([url])
+- [ ] Besonders wertvoll
+- [ ] Später weiterverfolgen
+- [ ] Schlecht aufbereitet
+- [ ] Irrelevanter Inhalt
 
-Regeln: Nur Fakten aus dem Input. P/O-Kürzel nicht in Überschriften. Ca. 700–900 Wörter.`;
+**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing. Nur belegbare Fakten aus dem Input. Nicht den Titel wiederholen.
+
+**Was es für die KI-Richtung heisst** (1–2 Sätze): Konkreter Akteur + Bewegung. Verboten: "Build-vs-Buy verschiebt sich", "Effizienz wird zur Differenzierung", "der Engpass verschiebt sich".
+
+**Build-Anker** (1–2 Sätze): Imperativsatz, konkretes Tool aus dem Artikel, messbare Ausgabe, in 2–4h mit Claude Code umsetzbar. Kein Hedging ("könnte man", "liesse sich"). Kein Kernel-Build, kein Modelltraining.
+
+---
+
+**Strömungen der Woche** (2–3 Cluster, je 2–3 Sätze): Übergreifende Muster benennen, keine Artikel-Aufzählung.
+
+**Wochenimpuls** (1–2 Sätze): Ein konkreter Build-Anker aus der Gesamtschau der Woche.
+
+Regeln: Nur Fakten aus dem Input. Kürzel wie P1/O2 nicht in der Ausgabe. Ca. 800–1000 Wörter gesamt.`;
 
 async function createWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;
@@ -179,7 +193,7 @@ async function main() {
   console.log('[weekly] Generiere Digest per Claude...');
   const digestBody = await claudeText(
     WEEKLY_PROMPT(mustArticles, optionalArticles, weekInfo),
-    { model: WEEKLY_MODEL, maxTokens: 2800, timeoutMs: 120_000, logTag: 'weekly' }
+    { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly' }
   );
 
   const issueBody = `# KI Weekly – KW ${weekInfo.kw}
