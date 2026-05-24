@@ -98,7 +98,7 @@ Ziel: Das Projekt für externe Leser (Recruiter, Hiring Manager, Builder-Communi
 - [x] Structured Outputs in `score.js`: Migration auf Anthropic-natives JSON-Schema via `tool_use` (eliminiert Regex-Strip + JSON.parse-Defensive)
 - [x] Structured Outputs im Review-Pass von `deliver.js`: analog `tool_use` für das Review-JSON
 - [x] Deliver-Eval: neues Eval in `evals/` mit LLM-as-Judge auf Faithfulness der 3-Block-Writeups + Marketing-Sprech-Detection
-- [ ] Followup: Cache-Hit-Regression nach Structured-Outputs-Migration analysieren (vorher ~90%, jetzt 0%). Bisher probiert: cache_control auf System, cache_control auf Tools, Beta-Header entfernt, System auf >2300 Tokens erweitert – cache_create bleibt 0. Isolierter Test wegen Anthropic 529 nicht aussagekräftig. Nächster Schritt wenn API stabil: minimal-script ohne Tools, mit/ohne cache_control vergleichen.
+- [x] Cache-Hit-Regression untersucht: Haiku 4.5 hat ein Cache-Minimum von >2226 Tokens; Score-System-Prompt liegt knapp darunter. Akzeptiert – Batch API (-50%) kompensiert fehlende Cache-Hits mehr als ausreichend.
 
 ---
 
@@ -140,3 +140,4 @@ Effektive Cost-Reduktion (Smoke-Test 2026-05-22): Score von $0.23 auf $0.05 (-78
 - [x] Daily-Schedule läuft täglich um 05:30 UTC; leere Tage erzeugen kein Issue
 - [x] Anthropic-News-Adapter vorhanden und aktiv
 - [x] Laufdatum gehärtet: Score und Deliver verwenden nur noch Dateien desselben Run-Datums, kein Fallback auf alte Artefakte
+- [x] Weekly-Bugfix (2026-05-24): Upsert-Logik entfernt – jeder Lauf erstellt ein neues Issue. `weekRange()` berechnet bei Nicht-Sonntag die letzte abgeschlossene Woche, damit manuelle Trigger am Montag nicht die laufende Woche beschreiben.

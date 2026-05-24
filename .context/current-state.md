@@ -1,6 +1,6 @@
 # Current State
 
-Stand: 2026-05-20
+Stand: 2026-05-24
 
 ## Phase 7 – Architektur-Refactor (2026-05-20)
 
@@ -82,6 +82,19 @@ Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilche
 - **WR-08**: Retry-Logik in `weekly.js` (max 2 Retries, exponentielles Backoff)
 - **WR-09**: URL-Normalisierung in `ingest.js` (UTM-Parameter + Hash entfernt)
 - **WR-10**: Score aus Issue-Body auf 1–5 geclampt in `weekly.js`
+
+## Weekly-Bugfix 2026-05-24
+
+Zwei zusammenhängende Bugs in `weekly.js` behoben:
+
+1. **Upsert entfernt**: `weekly.js` hat bisher ein bestehendes Issue für dieselbe KW überschrieben statt ein neues zu erstellen. Ein manueller Trigger am Montag hat das Issue vom Sonntag 7 Tage später überschrieben. Jetzt wird immer ein neues Issue erstellt.
+2. **weekRange() korrigiert**: Bei Aufruf an einem Nicht-Sonntag (manueller Trigger, Retry) wurde die laufende Woche berechnet. Neu: Rücksprung auf die letzte abgeschlossene Woche (letzter Sonntag als Ankerpunkt).
+
+## README-Überarbeitung 2026-05-24
+
+README in zwei Schritten umgeschrieben:
+- Zielgruppe (PM/PO, nicht Entwickler) und Editorial-Haltung (Build-Anker als Kern, Impact-First) deutlicher herausgestellt
+- Sprache danach natürlicher gefasst: Labels wie "The gap this fills:" entfernt, Bullet-Listen in Fliesstext aufgelöst, symmetrische Satzpaare gebrochen
 
 ## Offene Punkte (nächste Session)
 
