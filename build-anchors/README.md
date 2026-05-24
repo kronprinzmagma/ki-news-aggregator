@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**40 Einträge** · Top-Quellen: heise (16) · simonwillison (9) · hackernews (8) · latentspace (5) · lastweekinai (1) · venturebeat (1)
+**51 Einträge** · Top-Quellen: heise (22) · simonwillison (11) · latentspace (8) · hackernews (8) · lastweekinai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-24** — [Volvo integriert Google Gemini und immersive Navigation in neue Fahrzeuge](2026-05-24-volvo-integriert-google-gemini-und-immersive-navigation-in-n.md) · *heise · Score 4*
+- **2026-05-24** — [The memory shortage is causing a repricing of consumer electronics](2026-05-24-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
+- **2026-05-24** — [Spotify: Neue Desktop-App erstellt personalisierte KI-Podcasts](2026-05-24-spotify-neue-desktop-app-erstellt-personalisierte-ki-podcast.md) · *heise · Score 4*
+- **2026-05-24** — [KI-Update: Google I/O-Fazit, Anthropic, Nvidia, Gehirn und KI-Parallelen](2026-05-24-ki-update-google-i-o-fazit-anthropic-nvidia-gehirn-und-ki-pa.md) · *heise · Score 4*
+- **2026-05-24** — [heise+ | GMX bringt KI ins Postfach: Wir haben den Assistenten ausprobiert](2026-05-24-heise-gmx-bringt-ki-ins-postfach-wir-haben-den-assistenten-a.md) · *heise · Score 4*
+- **2026-05-24** — [Google Pics und Tiger-Selfies – die Fotonews der Woche 21/2025](2026-05-24-google-pics-und-tiger-selfies-die-fotonews-der-woche-21-2025.md) · *heise · Score 4*
+- **2026-05-24** — [Giving Agents Computers — Ivan Burazin, Daytona](2026-05-24-giving-agents-computers-ivan-burazin-daytona.md) · *latentspace · Score 5*
+- **2026-05-24** — [Datasette Agent](2026-05-24-datasette-agent.md) · *simonwillison · Score 4*
+- **2026-05-24** — [Airbnb personalisiert App mit KI](2026-05-24-airbnb-personalisiert-app-mit-ki.md) · *heise · Score 4*
+- **2026-05-24** — [[AINews] OpenAI GPT-next disproves 80 year old Erdős planar unit distance problem for under $1000](2026-05-24-ainews-openai-gpt-next-disproves-80-year-old-erdos-planar-un.md) · *latentspace · Score 4*
+- **2026-05-24** — [[AINews] All Model Labs are now Agent Labs](2026-05-24-ainews-all-model-labs-are-now-agent-labs.md) · *latentspace · Score 4*
 - **2026-05-23** — [Zusammenfassen und Übersetzen: GMX bringt KI-Funktionen im Gratis-Postfach](2026-05-23-zusammenfassen-und-ubersetzen-gmx-bringt-ki-funktionen-im-gr.md) · *heise · Score 4*
 - **2026-05-23** — [The memory shortage is causing a repricing of consumer electronics](2026-05-23-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
 - **2026-05-23** — [Staged publishing and new install-time controls for npm](2026-05-23-staged-publishing-and-new-install-time-controls-for-npm.md) · *hackernews · Score 4*
