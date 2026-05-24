@@ -65,12 +65,20 @@ function isoWeek(date) {
 
 function weekRange(referenceDate) {
   const d = new Date(referenceDate);
-  const day = d.getDay();
-  const diffToMonday = (day === 0 ? -6 : 1 - day);
-  const monday = new Date(d);
-  monday.setDate(d.getDate() + diffToMonday);
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
+  const day = d.getDay(); // 0 = Sonntag, 1 = Montag, …
+
+  // Wenn nicht Sonntag: letzte abgeschlossene Woche verwenden.
+  // Sonst: aktuelle Woche (endet heute).
+  const anchor = day === 0 ? d : (() => {
+    const prev = new Date(d);
+    prev.setDate(d.getDate() - day); // zurück zum letzten Sonntag
+    return prev;
+  })();
+
+  const diffToMonday = -6;
+  const monday = new Date(anchor);
+  monday.setDate(anchor.getDate() + diffToMonday);
+  const sunday = new Date(anchor);
   const fmt = dt => dt.toISOString().slice(0, 10);
   return { from: fmt(monday), to: fmt(sunday), kw: isoWeek(monday) };
 }
@@ -115,23 +123,8 @@ Markdown-Struktur:
 
 Regeln: Nur Fakten aus dem Input. P/O-Kürzel nicht in Überschriften. Ca. 700–900 Wörter.`;
 
-async function upsertWeeklyIssue(token, weekInfo, body) {
+async function createWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;
-  const q = new URLSearchParams({
-    q: `repo:${REPO_SLUG} is:issue in:title "KI Weekly – KW ${weekInfo.kw}"`,
-  });
-  const { status: searchStatus, body: searchBody } = await githubRequest(token, 'GET', ghPath.searchIssues(q));
-
-  if (searchStatus === 200) {
-    let result;
-    try { result = JSON.parse(searchBody); } catch { result = { items: [] }; }
-    const existing = result.items?.find(i => i.title === issueTitle && i.state === 'open');
-    if (existing) {
-      await githubRequest(token, 'PATCH', ghPath.issue(existing.number), { body });
-      console.log(`[weekly] Issue aktualisiert: ${existing.html_url}`);
-      return existing.html_url;
-    }
-  }
 
   const { status, body: responseBody } = await githubRequest(token, 'POST', ghPath.issues(),
     { title: issueTitle, body, labels: ['weekly-digest'] });
@@ -198,7 +191,7 @@ ${digestBody}
 
 *Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3A)*`;
 
-  const issueUrl = await upsertWeeklyIssue(token, weekInfo, issueBody);
+  const issueUrl = await createWeeklyIssue(token, weekInfo, issueBody);
   console.log(`[weekly] Fertig: ${issueUrl}`);
 
   const usage = getUsageSummary();
