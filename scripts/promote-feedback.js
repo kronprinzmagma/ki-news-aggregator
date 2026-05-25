@@ -132,11 +132,15 @@ function decidePromotion({ checks }) {
   if (checks.wertvoll && checks.irrelevant) return null; // widersprüchlich, ignorieren
   if (checks.wertvoll) return {
     human_score: 5,
-    reason: checks.schlecht_aufbereitet ? 'wertvoll (Aufbereitung schwach)' : 'wertvoll',
+    poor_writeup: checks.schlecht_aufbereitet || false,
+    reason: checks.schlecht_aufbereitet
+      ? 'wertvoll + schlecht aufbereitet (wichtiges Thema, Aufbereitung ungenügend)'
+      : 'wertvoll',
   };
   if (checks.irrelevant) return {
     human_score: 1,
-    reason: checks.schlecht_aufbereitet ? 'irrelevant (Aufbereitung schwach)' : 'irrelevant',
+    poor_writeup: false,
+    reason: 'irrelevant',
   };
   return null;
 }
@@ -268,6 +272,7 @@ async function main() {
       quelle,
       rohtext,
       human_score: c.human_score,
+      ...(c.poor_writeup ? { poor_writeup: true } : {}),
       promoted_from: { run_date: c.run_date, reason: c.reason, model_score: c.score },
     });
   }
@@ -277,7 +282,19 @@ async function main() {
 
   console.log(`\n[promote] ${promoted.length} neue Einträge:`);
   for (const p of promoted) {
-    console.log(`  ${p.human_score}/5 — ${p.titel.slice(0, 60)} (${p.quelle})`);
+    const flag = p.poor_writeup ? ' ⚠ wichtig, Aufbereitung ungenügend' : '';
+    console.log(`  ${p.human_score}/5 — ${p.titel.slice(0, 60)} (${p.quelle})${flag}`);
+  }
+
+  const poorWriteupCases = promoted.filter(p => p.poor_writeup);
+  if (poorWriteupCases.length > 0) {
+    console.log('\n[promote] ⚠ ACHTUNG – wichtige Themen mit schlechter Aufbereitung:');
+    console.log('[promote] Diese Artikel zeigen, wo der Deliver-Prompt versagt hat:');
+    for (const p of poorWriteupCases) {
+      console.log(`  → ${p.titel.slice(0, 70)}`);
+      console.log(`     ${p.url}`);
+    }
+    console.log('[promote] Tipp: deliver_eval.js auf diese Artikel laufen lassen.');
   }
 
   if (DRY_RUN) {
