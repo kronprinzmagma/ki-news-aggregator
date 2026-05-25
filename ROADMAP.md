@@ -141,3 +141,4 @@ Effektive Cost-Reduktion (Smoke-Test 2026-05-22): Score von $0.23 auf $0.05 (-78
 - [x] Anthropic-News-Adapter vorhanden und aktiv
 - [x] Laufdatum gehärtet: Score und Deliver verwenden nur noch Dateien desselben Run-Datums, kein Fallback auf alte Artefakte
 - [x] Weekly-Bugfix (2026-05-24): Upsert-Logik entfernt – jeder Lauf erstellt ein neues Issue. `weekRange()` berechnet bei Nicht-Sonntag die letzte abgeschlossene Woche, damit manuelle Trigger am Montag nicht die laufende Woche beschreiben.
+- [x] Datengetriebene Pipeline-Verbesserungen (2026-05-25): Adapter-Enrichment für Anthropic/HuggingFace/TheBatch, Golem als 15. Quelle, Unicode-Tokenizer-Fix in Topic-Dedup, Stopwords gegen Buzzword-Overlap, Score-Anker im Prompt. MAE gegen Goldstandard 1.18 → 0.77 (-35%).

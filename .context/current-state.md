@@ -90,6 +90,27 @@ Zwei zusammenhängende Bugs in `weekly.js` behoben:
 1. **Upsert entfernt**: `weekly.js` hat bisher ein bestehendes Issue für dieselbe KW überschrieben statt ein neues zu erstellen. Ein manueller Trigger am Montag hat das Issue vom Sonntag 7 Tage später überschrieben. Jetzt wird immer ein neues Issue erstellt.
 2. **weekRange() korrigiert**: Bei Aufruf an einem Nicht-Sonntag (manueller Trigger, Retry) wurde die laufende Woche berechnet. Neu: Rücksprung auf die letzte abgeschlossene Woche (letzter Sonntag als Ankerpunkt).
 
+## Datengetriebene Pipeline-Verbesserungen 2026-05-25
+
+Auswertung der letzten 15 Tage (342 bewertete Artikel, 14 Tage Artefakte):
+
+**Adapter-Fixes** (truncated-Pre-Filter blockte strukturell):
+- `anthropic.js`: Enrichment-Filter `/news/` → `/` damit `/glasswing`, `/81k-interviews` etc. nicht mehr truncated abgewiesen werden.
+- `huggingface.js` + `thebatch.js`: `enrichFromUrl` aktiviert. Beide Feeds liefern nur Teaser.
+
+**Neuer Adapter Golem.de** (15. Quelle): KI-gefilterter Adapter analog Heise, DACH-Perspektive mit Developer-Fokus.
+
+**Topic-Dedup-Bugs**:
+- Unicode-Tokenizer: `\W+` → `[^\p{L}\p{N}]+/u` damit deutsche Umlaute Wörter nicht splitten ("kündigt" war ["k","ndigt"]).
+- Stopwords erweitert (google, ainews, heise, quoting, 2026, more, than, this, time, open, source, neue, nach): empirisch auf 15 Tagen 13 → 5 Dedups, dabei alle False-Positives entfernt (Adobe/Volvo/Smart-Home blieben fälschlich verschmolzen).
+
+**Score-Kalibrierung**: Drei konkrete Anker-Beispiele aus Goldstandard in den Score-Prompt + explizite Negativ-Liste gegen Plugin-Bugfix-Overgeneralisierung.
+- MAE 1.176 → 0.765 (-35%)
+- Pearson 0.60 → 0.76 (+27%)
+- Acc ±1: 76.5% → 88.2% (+11.7pp)
+
+**Verworfen** (nicht ohne Evidenz umsetzen): Heise-Filter einengen war überflüssig — Heise-Artikel sind grossteils inhaltlich relevant; die 54%-Dominanz reflektiert echte DACH-KI-Coverage. Score-5-Kriterium "ausprobierbar" war eine Massstab-Anpassung. Score-1-Negativliste war Symptomdoktrin.
+
 ## Weekly-Format angeglichen 2026-05-24
 
 `weekly.js` Prompt überarbeitet: Pro Artikel jetzt dieselbe Struktur wie Daily — `### Titel`, `Score X/5 · [quelle](url)`, alle 4 Feedback-Checkboxen, **Was ist neu** / **Was es für die KI-Richtung heisst** / **Build-Anker**. Einleitung, Strömungen der Woche und Wochenimpuls bleiben als wöchentliche Ergänzung erhalten. `maxTokens` 2800 → 4000.
