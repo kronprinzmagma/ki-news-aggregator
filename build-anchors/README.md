@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**53 Einträge** · Top-Quellen: heise (23) · simonwillison (12) · latentspace (8) · hackernews (8) · lastweekinai (1) · venturebeat (1)
+**60 Einträge** · Top-Quellen: heise (27) · simonwillison (13) · hackernews (9) · latentspace (9) · lastweekinai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-25** — [Wie 2021 bei LLMs: Google-Forscher über die Zukunft der Weltmodelle](2026-05-25-wie-2021-bei-llms-google-forscher-uber-die-zukunft-der-weltm.md) · *heise · Score 4*
+- **2026-05-25** — [The memory shortage is causing a repricing of consumer electronics](2026-05-25-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
+- **2026-05-25** — [Musik-Business: Universal schließt Tech-Pakt mit TikTok gegen unautorisierte KI](2026-05-25-musik-business-universal-schliesst-tech-pakt-mit-tiktok-gege.md) · *heise · Score 4*
+- **2026-05-25** — [Memory has grown to nearly two-thirds of AI chip component costs](2026-05-25-memory-has-grown-to-nearly-two-thirds-of-ai-chip-component-c.md) · *hackernews · Score 4*
+- **2026-05-25** — [KI-Update: Google I/O-Fazit, Anthropic, Nvidia, Gehirn und KI-Parallelen](2026-05-25-ki-update-google-i-o-fazit-anthropic-nvidia-gehirn-und-ki-pa.md) · *heise · Score 4*
+- **2026-05-25** — [Google Pics und Tiger-Selfies – die Fotonews der Woche 21/2025](2026-05-25-google-pics-und-tiger-selfies-die-fotonews-der-woche-21-2025.md) · *heise · Score 4*
+- **2026-05-25** — [[AINews] All Model Labs are now Agent Labs](2026-05-25-ainews-all-model-labs-are-now-agent-labs.md) · *latentspace · Score 4*
 - **2026-05-24** — [Volvo integriert Google Gemini und immersive Navigation in neue Fahrzeuge](2026-05-24-volvo-integriert-google-gemini-und-immersive-navigation-in-n.md) · *heise · Score 4*
 - **2026-05-24** — [The memory shortage is causing a repricing of consumer electronics](2026-05-24-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
 - **2026-05-24** — [Spotify: Neue Desktop-App erstellt personalisierte KI-Podcasts](2026-05-24-spotify-neue-desktop-app-erstellt-personalisierte-ki-podcast.md) · *heise · Score 4*
