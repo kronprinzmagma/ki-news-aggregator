@@ -10,7 +10,7 @@ You're a senior PM or PO who's moved past just speccing things out for engineers
 
 Most AI newsletters assume you either work at a lab or want to fine-tune a model. The ones aimed at business audiences are all market trends and funding rounds. Neither is useful when what you actually want to know is: what just became possible, and is there something worth trying with it this weekend?
 
-Every morning at 05:30 UTC the pipeline fetches 14 sources, scores them for relevance, and writes up the articles that made the cut. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a concrete project to try tonight with Claude Code — no server setup, no ML background required.
+Every morning at 05:30 UTC the pipeline fetches 15 sources, scores them for relevance, and writes up the articles that made the cut. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a concrete project to try tonight with Claude Code — no server setup, no ML background required.
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
 
@@ -36,7 +36,7 @@ Things that get filtered out before any of this: funding announcements, "AI is t
 
 Three stages run sequentially:
 
-**1. Ingest** — 14 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z and Heise Online apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
+**1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z and Heise Online apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
 
 **2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric calibrated to the product-builder persona. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Only Score ≥ 4 reaches publication.
 
@@ -61,14 +61,14 @@ A Watchdog workflow monitors the daily run and retriggers after failed publishes
 
 ```mermaid
 flowchart TD
-    subgraph Sources["14 sources (RSS / Atom)"]
+    subgraph Sources["15 sources (RSS / Atom)"]
         S1["Labs<br/>Anthropic · HuggingFace"]
         S2["Practitioners<br/>Willison · Latent Space · Interconnects<br/>Ahead of AI · The Batch · Last Week in AI<br/>Yannic Kilcher"]
         S3["Community<br/>Hacker News"]
-        S4["Industry / Strategy<br/>VentureBeat · Ben Evans<br/>a16z (AI-filtered) · Heise (AI-filtered)"]
+        S4["Industry / Strategy<br/>VentureBeat · Ben Evans<br/>a16z (AI-filtered) · Heise (AI-filtered)<br/>Golem (AI-filtered)"]
     end
 
-    Ingest["ingest.js<br/>14 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
+    Ingest["ingest.js<br/>15 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
     Score["score.js<br/>Claude Haiku 4.5<br/>parallel × 5 · retry"]
     Filter{"Score ≥ 4?"}
     XDay["Cross-day dedup<br/>SQLite · 7-day lookback<br/>URL + title similarity"]
@@ -88,7 +88,7 @@ flowchart TD
 
 ---
 
-## Why these 14 sources (and not 50)
+## Why these 15 sources (and not 50)
 
 Most aggregators in this space sell source count as a feature. This one deliberately stays small and asymmetric. Each source earns its slot by covering a specific angle for a single reader — a senior PM moving towards hands-on AI building.
 
@@ -97,7 +97,7 @@ Most aggregators in this space sell source count as a feature. This one delibera
 | **Labs** | Anthropic, Hugging Face | First-party capability shifts. Anything filtered through a third party loses context. |
 | **Practitioners** | Simon Willison, Latent Space, Interconnects (Nathan Lambert), Ahead of AI (Sebastian Raschka), The Batch, Last Week in AI, Yannic Kilcher | People who *build* with the models and explain trade-offs. Highest signal-to-noise on what actually works. |
 | **Community** | Hacker News (front + Show HN, depriorised) | Captures release reactions and tooling discoveries the curated sources miss. Show HN is explicitly downscored to filter self-promotion. |
-| **Industry + strategy** | VentureBeat, Ben Evans, a16z (AI-filtered), Heise (AI-filtered, DACH lens) | Market and adoption context, not capability — kept separate from labs/practitioners so it doesn't dominate. |
+| **Industry + strategy** | VentureBeat, Ben Evans, a16z (AI-filtered), Heise (AI-filtered, DACH lens), Golem (AI-filtered, DACH lens with developer focus) | Market and adoption context, not capability — kept separate from labs/practitioners so it doesn't dominate. |
 
 Sources that were considered and rejected:
 - **Generic tech news** (TechCrunch, The Verge, Wired AI sections) — high volume, low signal density. Marketing rewrites of press releases.
@@ -188,7 +188,7 @@ The whole pipeline is repo-agnostic. `REPO_OWNER`/`REPO_NAME` derive from the st
 **Customise the editorial direction:**
 - `score.js` `SCORE_SYSTEM` — what you find relevant (default: senior PM/PO moving towards AI builder)
 - `deliver.js` `ARTIKEL_PROMPT` — the writing style and three-block structure
-- `ingest.js` `ADAPTERS` array — which 14 sources to fetch (or replace entirely)
+- `ingest.js` `ADAPTERS` array — which 15 sources to fetch (or replace entirely)
 - `lib/config.js` — score thresholds, dedup parameters, model choice
 
 **Cost budget:** ~CHF 8/month at the default settings (Haiku for scoring with Batch API, Sonnet for writing). Toggle off Batch API with `SCORE_USE_BATCH=false` if you need synchronous behaviour.

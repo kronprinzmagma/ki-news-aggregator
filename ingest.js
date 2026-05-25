@@ -18,6 +18,7 @@ import { fetchArticles as fetchYannicKilcher } from './adapters/yannickilcher.js
 import { fetchArticles as fetchBenEvans } from './adapters/benevans.js';
 import { fetchArticles as fetchA16z } from './adapters/a16z.js';
 import { fetchArticles as fetchHeise } from './adapters/heise.js';
+import { fetchArticles as fetchGolem } from './adapters/golem.js';
 
 const MAX_ARTICLE_AGE_DAYS = 3;
 const ADAPTER_TIMEOUT_MS = 30_000;
@@ -45,6 +46,7 @@ const ADAPTERS = [
   { name: 'benevans', fn: fetchBenEvans },
   { name: 'a16z', fn: fetchA16z },
   { name: 'heise', fn: fetchHeise },
+  { name: 'golem', fn: fetchGolem },
 ];
 
 async function runAdapters(runDate) {

@@ -3,7 +3,10 @@ import { httpGet, parseRss, enrichFromUrl, extractArticleText, extractMetaDescri
 const FEED_URL = 'https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml';
 
 async function enrich(article) {
-  if ((article.rohtext || '').length >= 1500 || !article.url.includes('anthropic.com/news/')) {
+  // Vorher nur /news/-URLs angereichert – Anthropic publiziert aber auch
+  // Standalone-Pages (z.B. /glasswing, /81k-interviews). Diese hatten dünne
+  // Feeds und wurden per truncated-Pre-Filter rausgeworfen.
+  if ((article.rohtext || '').length >= 1500 || !article.url.includes('anthropic.com/')) {
     return article;
   }
   if (!isSafeUrl(article.url)) return article;

@@ -20,9 +20,9 @@ Drei Bausteine, sequenziell:
 
 ## Quellen (Baustein 1)
 
-- RSS/Atom-Feeds: Simon Willison, Latent Space, Anthropic News, Hacker News, Last Week in AI, VentureBeat, Hugging Face, Ahead of AI, Interconnects, The Batch, Yannic Kilcher, Ben Evans (Strategie/Markt), a16z Substack (KI-gefiltert), Heise Online (DACH-Perspektive, KI-gefiltert)
+- RSS/Atom-Feeds: Simon Willison, Latent Space, Anthropic News, Hacker News, Last Week in AI, VentureBeat, Hugging Face, Ahead of AI, Interconnects, The Batch, Yannic Kilcher, Ben Evans (Strategie/Markt), a16z Substack (KI-gefiltert), Heise Online (DACH-Perspektive, KI-gefiltert), Golem (DACH-Perspektive mit Developer-Fokus, KI-gefiltert)
 - NewsAPI-Adapter existiert, ist aber aktuell nicht im Haupt-Ingest aktiviert
-- KI-Pattern-Filter bei a16z und Heise: nur Artikel mit AI-/KI-Keywords im Titel oder Rohtext kommen durch
+- KI-Pattern-Filter bei a16z, Heise und Golem: nur Artikel mit AI-/KI-Keywords im Titel oder Rohtext kommen durch
 
 ## Akzeptanzkriterien Baustein 1 (Ingest)
 
