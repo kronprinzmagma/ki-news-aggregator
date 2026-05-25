@@ -4,15 +4,17 @@
  * Daily-Issues in Goldstandard-Einträge.
  *
  * Logik:
- *   "Besonders wertvoll" UND NICHT "Schlecht aufbereitet"
- *      → human_score = 5  (starkes Positiv-Signal)
- *   "Irrelevanter Inhalt" UND NICHT "Schlecht aufbereitet"
- *      → human_score = 1  (starkes Negativ-Signal)
+ *   "Besonders wertvoll" UND NICHT "Irrelevanter Inhalt"
+ *      → human_score = 5  (Inhalt relevant, unabhängig von Aufbereitungsqualität)
+ *   "Irrelevanter Inhalt" UND NICHT "Besonders wertvoll"
+ *      → human_score = 1  (Inhalt irrelevant, unabhängig von Aufbereitungsqualität)
  *
- *   "Schlecht aufbereitet" allein wird NICHT promoted – es ist ein Signal
- *   für die Deliver-Stufe, nicht für die Score-Stufe. Wenn es zusammen mit
- *   wertvoll/irrelevant kommt, blockiert es das Promote, weil der Writeup
- *   die Lesebewertung verzerrt haben könnte.
+ *   "Schlecht aufbereitet" ist ein separates Signal für die Deliver-Stufe
+ *   (Writeup-Qualität) und blockiert die Goldstandard-Promotion NICHT mehr.
+ *   Ein Artikel kann inhaltlich wertvoll sein und trotzdem schlecht aufbereitet.
+ *
+ *   "Besonders wertvoll" UND "Irrelevanter Inhalt" gleichzeitig → kein Promote
+ *   (widersprüchlich).
  *
  *   "Später weiterverfolgen" allein wird NICHT promoted (zu weiches Signal).
  *
@@ -127,12 +129,15 @@ function parseIssueArticles(body, runDate) {
 // ─── Promote-Logik ───────────────────────────────────────────────────────────
 
 function decidePromotion({ checks }) {
-  // schlecht_aufbereitet blockiert Promotes, weil die Lesebewertung dann nicht
-  // sauber dem Artikel-Inhalt zugeordnet werden kann.
-  if (checks.schlecht_aufbereitet) return null;
   if (checks.wertvoll && checks.irrelevant) return null; // widersprüchlich, ignorieren
-  if (checks.wertvoll) return { human_score: 5, reason: 'wertvoll-Häkchen ohne Aufbereitungs-Bias' };
-  if (checks.irrelevant) return { human_score: 1, reason: 'irrelevant-Häkchen ohne Aufbereitungs-Bias' };
+  if (checks.wertvoll) return {
+    human_score: 5,
+    reason: checks.schlecht_aufbereitet ? 'wertvoll (Aufbereitung schwach)' : 'wertvoll',
+  };
+  if (checks.irrelevant) return {
+    human_score: 1,
+    reason: checks.schlecht_aufbereitet ? 'irrelevant (Aufbereitung schwach)' : 'irrelevant',
+  };
   return null;
 }
 
@@ -216,20 +221,21 @@ async function main() {
 
   // Promote-Entscheidung pro Artikel
   const candidates = [];
-  let blockedByWriteup = 0;
   let blockedByConflict = 0;
+  let withPoorWriteup = 0;
   for (const a of allChecked) {
     const decision = decidePromotion(a);
     if (!decision) {
-      if (a.checks.schlecht_aufbereitet) blockedByWriteup++;
-      else if (a.checks.wertvoll && a.checks.irrelevant) blockedByConflict++;
+      if (a.checks.wertvoll && a.checks.irrelevant) blockedByConflict++;
       continue;
     }
+    if (a.checks.schlecht_aufbereitet) withPoorWriteup++;
     if (existingUrls.has(a.url)) continue; // bereits im Goldstandard
     candidates.push({ ...a, ...decision });
   }
   console.log(`[promote] ${candidates.length} neue Promotion-Kandidaten`);
-  console.log(`[promote]   davon blockiert: ${blockedByWriteup} durch "Schlecht aufbereitet", ${blockedByConflict} durch wertvoll+irrelevant`);
+  if (blockedByConflict) console.log(`[promote]   blockiert: ${blockedByConflict} wegen wertvoll+irrelevant (widersprüchlich)`);
+  if (withPoorWriteup) console.log(`[promote]   davon ${withPoorWriteup} mit "Schlecht aufbereitet" → trotzdem promoted, reason vermerkt`);
 
   if (candidates.length === 0) {
     console.log('[promote] Nichts zu promoten – fertig.');
