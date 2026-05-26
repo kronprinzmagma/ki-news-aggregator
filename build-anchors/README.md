@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**60 Einträge** · Top-Quellen: heise (27) · simonwillison (13) · hackernews (9) · latentspace (9) · lastweekinai (1) · venturebeat (1)
+**68 Einträge** · Top-Quellen: heise (28) · simonwillison (15) · hackernews (13) · latentspace (9) · huggingface (1) · lastweekinai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-26** — [Using AI to write better code more slowly](2026-05-26-using-ai-to-write-better-code-more-slowly.md) · *hackernews · Score 4*
+- **2026-05-26** — [The User Is Visibly Frustrated](2026-05-26-the-user-is-visibly-frustrated.md) · *hackernews · Score 4*
+- **2026-05-26** — [Norway's 2 petabytes of Huawei flash storage and LLM training](2026-05-26-norway-s-2-petabytes-of-huawei-flash-storage-and-llm-trainin.md) · *hackernews · Score 4*
+- **2026-05-26** — [Logseq Doctor: heal your flat old Markdown files before importing to Logseq](2026-05-26-logseq-doctor-heal-your-flat-old-markdown-files-before-impor.md) · *hackernews · Score 4*
+- **2026-05-26** — [Intelligente Überwachung verlängert Lebensdauer von Brücken](2026-05-26-intelligente-uberwachung-verlangert-lebensdauer-von-brucken.md) · *heise · Score 4*
+- **2026-05-26** — [Harness, Scaffold, and the AI Agent Terms Worth Getting Right](2026-05-26-harness-scaffold-and-the-ai-agent-terms-worth-getting-right.md) · *huggingface · Score 4*
+- **2026-05-26** — [datasette-agent 0.1a4](2026-05-26-datasette-agent-0-1a4.md) · *simonwillison · Score 4*
+- **2026-05-26** — [datasette 1.0a30](2026-05-26-datasette-1-0a30.md) · *simonwillison · Score 4*
 - **2026-05-25** — [Wie 2021 bei LLMs: Google-Forscher über die Zukunft der Weltmodelle](2026-05-25-wie-2021-bei-llms-google-forscher-uber-die-zukunft-der-weltm.md) · *heise · Score 4*
 - **2026-05-25** — [The memory shortage is causing a repricing of consumer electronics](2026-05-25-the-memory-shortage-is-causing-a-repricing-of-consumer-elect.md) · *simonwillison · Score 4*
 - **2026-05-25** — [Musik-Business: Universal schließt Tech-Pakt mit TikTok gegen unautorisierte KI](2026-05-25-musik-business-universal-schliesst-tech-pakt-mit-tiktok-gege.md) · *heise · Score 4*
