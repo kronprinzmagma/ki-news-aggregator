@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**68 Einträge** · Top-Quellen: heise (28) · simonwillison (15) · hackernews (13) · latentspace (9) · huggingface (1) · lastweekinai (1) · venturebeat (1)
+**78 Einträge** · Top-Quellen: heise (28) · simonwillison (19) · hackernews (13) · latentspace (10) · huggingface (3) · lastweekinai (2) · interconnects (1) · anthropic (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-28** — [The pressure](2026-05-28-the-pressure.md) · *simonwillison · Score 4*
+- **2026-05-28** — [sqlite AGENTS.md](2026-05-28-sqlite-agents-md.md) · *simonwillison · Score 4*
+- **2026-05-28** — [Some ideas for what comes next, May 2026](2026-05-28-some-ideas-for-what-comes-next-may-2026.md) · *interconnects · Score 4*
+- **2026-05-28** — [Reachy Mini goes fully local](2026-05-28-reachy-mini-goes-fully-local.md) · *huggingface · Score 4*
+- **2026-05-28** — [Microsoft Copilot Cowork Exfiltrates Files](2026-05-28-microsoft-copilot-cowork-exfiltrates-files.md) · *simonwillison · Score 5*
+- **2026-05-28** — [LWiAI Podcast #246 - Gemini 3.5 + Omni, Musk Loses, OpenAI vs Erdős](2026-05-28-lwiai-podcast-246-gemini-3-5-omni-musk-loses-openai-vs-erdos.md) · *lastweekinai · Score 4*
+- **2026-05-28** — [ITBench-AA: Frontier Models Score Below 50% on the First Benchmark for Agentic Enterprise IT Tasks — by Artificial Analysis and IBM](2026-05-28-itbench-aa-frontier-models-score-below-50-on-the-first-bench.md) · *huggingface · Score 4*
+- **2026-05-28** — [I think Anthropic and OpenAI have found product-market fit](2026-05-28-i-think-anthropic-and-openai-have-found-product-market-fit.md) · *simonwillison · Score 4*
+- **2026-05-28** — [🔬ESMFold2: The Bitter Lesson is Coming for Proteins - Alex Rives, BioHub](2026-05-28-esmfold2-the-bitter-lesson-is-coming-for-proteins-alex-rives.md) · *latentspace · Score 4*
+- **2026-05-28** — [Anthropic appoints KiYoung Choi as Representative Director of Korea ahead of Seoul office opening](2026-05-28-anthropic-appoints-kiyoung-choi-as-representative-director-o.md) · *anthropic · Score 4*
 - **2026-05-26** — [Using AI to write better code more slowly](2026-05-26-using-ai-to-write-better-code-more-slowly.md) · *hackernews · Score 4*
 - **2026-05-26** — [The User Is Visibly Frustrated](2026-05-26-the-user-is-visibly-frustrated.md) · *hackernews · Score 4*
 - **2026-05-26** — [Norway's 2 petabytes of Huawei flash storage and LLM training](2026-05-26-norway-s-2-petabytes-of-huawei-flash-storage-and-llm-trainin.md) · *hackernews · Score 4*
