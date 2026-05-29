@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**78 Einträge** · Top-Quellen: heise (28) · simonwillison (19) · hackernews (13) · latentspace (10) · huggingface (3) · lastweekinai (2) · interconnects (1) · anthropic (1) · venturebeat (1)
+**91 Einträge** · Top-Quellen: heise (29) · simonwillison (22) · hackernews (18) · latentspace (13) · huggingface (3) · anthropic (2) · lastweekinai (2) · interconnects (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-05-29** — [The mysterious Hy3 LLM is topping OpenRouter Model Rankings by a large margin](2026-05-29-the-mysterious-hy3-llm-is-topping-openrouter-model-rankings-.md) · *hackernews · Score 4*
+- **2026-05-29** — [The Age of Async Agents — Cognition's Walden Yan & OpenInspect's Cole Murray](2026-05-29-the-age-of-async-agents-cognition-s-walden-yan-openinspect-s.md) · *latentspace · Score 4*
+- **2026-05-29** — [Real-time LLM Inference on Standard GPUs: 3k tokens/s per request](2026-05-29-real-time-llm-inference-on-standard-gpus-3k-tokens-s-per-req.md) · *hackernews · Score 4*
+- **2026-05-29** — [llm-anthropic 0.25.1](2026-05-29-llm-anthropic-0-25-1.md) · *simonwillison · Score 4*
+- **2026-05-29** — [Introducing Claude Opus 4.8](2026-05-29-introducing-claude-opus-4-8.md) · *anthropic · Score 5*
+- **2026-05-29** — [Endive: A JVM native WebAssembly runtime](2026-05-29-endive-a-jvm-native-webassembly-runtime.md) · *hackernews · Score 4*
+- **2026-05-29** — [datasette 1.0a31](2026-05-29-datasette-1-0a31.md) · *simonwillison · Score 4*
+- **2026-05-29** — [CNN verklagt KI-Suchmaschine Perplexity wegen Urheberrechtsverletzung](2026-05-29-cnn-verklagt-ki-suchmaschine-perplexity-wegen-urheberrechtsv.md) · *heise · Score 4*
+- **2026-05-29** — [Claude Code – Everything You Can Configure That the Docs Don't Tell You](2026-05-29-claude-code-everything-you-can-configure-that-the-docs-don-t.md) · *hackernews · Score 5*
+- **2026-05-29** — [Building durable workflows on Postgres](2026-05-29-building-durable-workflows-on-postgres.md) · *hackernews · Score 4*
+- **2026-05-29** — [Anthropic's run-rate revenue hits $47 billion](2026-05-29-anthropic-s-run-rate-revenue-hits-47-billion.md) · *simonwillison · Score 4*
+- **2026-05-29** — [[AINews] New AI Infra decacorns: Fireworks, Baseten (with OpenRouter on the way)](2026-05-29-ainews-new-ai-infra-decacorns-fireworks-baseten-with-openrou.md) · *latentspace · Score 4*
+- **2026-05-29** — [[AINews] Anthropic raises $965B Series H, releases Opus 4.8 and Dynamic Workflows/ultracode](2026-05-29-ainews-anthropic-raises-965b-series-h-releases-opus-4-8-and-.md) · *latentspace · Score 5*
 - **2026-05-28** — [The pressure](2026-05-28-the-pressure.md) · *simonwillison · Score 4*
 - **2026-05-28** — [sqlite AGENTS.md](2026-05-28-sqlite-agents-md.md) · *simonwillison · Score 4*
 - **2026-05-28** — [Some ideas for what comes next, May 2026](2026-05-28-some-ideas-for-what-comes-next-may-2026.md) · *interconnects · Score 4*
