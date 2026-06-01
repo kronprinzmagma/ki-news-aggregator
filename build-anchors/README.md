@@ -2,10 +2,31 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**91 Einträge** · Top-Quellen: heise (29) · simonwillison (22) · hackernews (18) · latentspace (13) · huggingface (3) · anthropic (2) · lastweekinai (2) · interconnects (1) · venturebeat (1)
+**112 Einträge** · Top-Quellen: heise (40) · simonwillison (25) · hackernews (24) · latentspace (14) · huggingface (3) · anthropic (2) · lastweekinai (2) · interconnects (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-01** — [Zu viel Tokenmaxxing? Amazon stoppt internes KI-Ranking](2026-06-01-zu-viel-tokenmaxxing-amazon-stoppt-internes-ki-ranking.md) · *heise · Score 4*
+- **2026-06-01** — [The solution might be cancelling my AI subscription](2026-06-01-the-solution-might-be-cancelling-my-ai-subscription.md) · *simonwillison · Score 4*
+- **2026-06-01** — [SoftBank investiert Milliarden in KI-Rechenzentren in Frankreich](2026-06-01-softbank-investiert-milliarden-in-ki-rechenzentren-in-frankr.md) · *heise · Score 4*
+- **2026-06-01** — [Running Python ASGI apps in the browser via Pyodide + a service worker](2026-06-01-running-python-asgi-apps-in-the-browser-via-pyodide-a-servic.md) · *simonwillison · Score 4*
+- **2026-06-01** — [Nvidia announces new AI chip for personal computers](2026-06-01-nvidia-announces-new-ai-chip-for-personal-computers.md) · *hackernews · Score 4*
+- **2026-06-01** — [Mistral Vibe: Die neuen agentischen Oberflächen Work und Code ausprobiert](2026-06-01-mistral-vibe-die-neuen-agentischen-oberflachen-work-und-code.md) · *heise · Score 4*
+- **2026-06-01** — [Meta launches Instagram, Facebook, and WhatsApp subscriptions](2026-06-01-meta-launches-instagram-facebook-and-whatsapp-subscriptions.md) · *hackernews · Score 4*
+- **2026-06-01** — [Meta entwickelt einen KI-Anhänger](2026-06-01-meta-entwickelt-einen-ki-anhanger.md) · *heise · Score 4*
+- **2026-06-01** — [KI-Update Deep-Dive: Künstliche Intelligenz als Security-Albtraum](2026-06-01-ki-update-deep-dive-kunstliche-intelligenz-als-security-albt.md) · *heise · Score 4*
+- **2026-06-01** — [KI-Agent im Browser: „Let's Build K.I.T.T. With JavaScript“](2026-06-01-ki-agent-im-browser-let-s-build-k-i-t-t-with-javascript.md) · *heise · Score 4*
+- **2026-06-01** — [How we contain Claude across products](2026-06-01-how-we-contain-claude-across-products.md) · *simonwillison · Score 5*
+- **2026-06-01** — [Googles KI-Chip-Boss: „Wir sind uns der Inflation natürlich bewusst“](2026-06-01-googles-ki-chip-boss-wir-sind-uns-der-inflation-naturlich-be.md) · *heise · Score 4*
+- **2026-06-01** — [Finanzamt 2.0: Steuerbehörden sollen KI mit echten Bürgerdaten trainieren](2026-06-01-finanzamt-2-0-steuerbehorden-sollen-ki-mit-echten-burgerdate.md) · *heise · Score 4*
+- **2026-06-01** — [DNS-AID: Agenten veröffentlichen wie Webseiten](2026-06-01-dns-aid-agenten-veroffentlichen-wie-webseiten.md) · *heise · Score 4*
+- **2026-06-01** — [Dav2d](2026-06-01-dav2d.md) · *hackernews · Score 4*
+- **2026-06-01** — [Chip-Exporte nach China: US-Regierung verschärft die Exportbeschränkungen](2026-06-01-chip-exporte-nach-china-us-regierung-verscharft-die-exportbe.md) · *heise · Score 4*
+- **2026-06-01** — [ChatGPT for Google Sheets exfiltrates workbooks](2026-06-01-chatgpt-for-google-sheets-exfiltrates-workbooks.md) · *hackernews · Score 5*
+- **2026-06-01** — [AWS Sovereign Cloud: KI-Ausbau und neue Agenten-Tools](2026-06-01-aws-sovereign-cloud-ki-ausbau-und-neue-agenten-tools.md) · *heise · Score 4*
+- **2026-06-01** — [[AINews] Founders and Forward Deployed Engineers](2026-06-01-ainews-founders-and-forward-deployed-engineers.md) · *latentspace · Score 4*
+- **2026-06-01** — [A 10 year old Xeon is all you need](2026-06-01-a-10-year-old-xeon-is-all-you-need.md) · *hackernews · Score 4*
+- **2026-06-01** — [1-Bit Bonsai Image 4B Image Generation for Local Devices](2026-06-01-1-bit-bonsai-image-4b-image-generation-for-local-devices.md) · *hackernews · Score 5*
 - **2026-05-29** — [The mysterious Hy3 LLM is topping OpenRouter Model Rankings by a large margin](2026-05-29-the-mysterious-hy3-llm-is-topping-openrouter-model-rankings-.md) · *hackernews · Score 4*
 - **2026-05-29** — [The Age of Async Agents — Cognition's Walden Yan & OpenInspect's Cole Murray](2026-05-29-the-age-of-async-agents-cognition-s-walden-yan-openinspect-s.md) · *latentspace · Score 4*
 - **2026-05-29** — [Real-time LLM Inference on Standard GPUs: 3k tokens/s per request](2026-05-29-real-time-llm-inference-on-standard-gpus-3k-tokens-s-per-req.md) · *hackernews · Score 4*
