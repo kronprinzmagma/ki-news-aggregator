@@ -1,6 +1,13 @@
 # Current State
 
-Stand: 2026-05-24
+Stand: 2026-06-02
+
+## Reliability-Fixes (2026-06-02)
+
+Zwei intermittente Failures behoben, die seit Ende Mai mehrfach auftraten:
+
+- **Batch-Hang-Fallback**: `claudeBatch` in `lib/claude.js` erkennt hängende Batches (0 Requests verarbeitet nach 10 min). Bricht den Batch per Cancel-API ab und wirft `BatchStuckError`. `score.js` fängt den Fehler und startet Sync-Fallback (`runWithConcurrency`, 5 parallele Requests) — kein Run-Abbruch mehr.
+- **GitHub Issue 422**: `deliver.js` prüft Body-Länge vor dem API-Call. Überschreitet der Body 65.000 Zeichen, wird am letzten vollständigen Artikel-Trenner (`---`) abgeschnitten und ein Hinweis angehängt. Die lokale `summary-*.md` bleibt vollständig.
 
 ## Phase 7 – Architektur-Refactor (2026-05-20)
 

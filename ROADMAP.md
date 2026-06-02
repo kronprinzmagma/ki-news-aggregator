@@ -142,3 +142,5 @@ Effektive Cost-Reduktion (Smoke-Test 2026-05-22): Score von $0.23 auf $0.05 (-78
 - [x] Laufdatum gehärtet: Score und Deliver verwenden nur noch Dateien desselben Run-Datums, kein Fallback auf alte Artefakte
 - [x] Weekly-Bugfix (2026-05-24): Upsert-Logik entfernt – jeder Lauf erstellt ein neues Issue. `weekRange()` berechnet bei Nicht-Sonntag die letzte abgeschlossene Woche, damit manuelle Trigger am Montag nicht die laufende Woche beschreiben.
 - [x] Datengetriebene Pipeline-Verbesserungen (2026-05-25): Adapter-Enrichment für Anthropic/HuggingFace/TheBatch, Golem als 15. Quelle, Unicode-Tokenizer-Fix in Topic-Dedup, Stopwords gegen Buzzword-Overlap, Score-Anker im Prompt. MAE gegen Goldstandard 1.18 → 0.77 (-35%).
+- [x] Batch-Hang-Fallback (2026-06-02): `claudeBatch` erkennt hängende Batches (succeeded=0 nach 10 min) via `BatchStuckError`, bricht serverseitig ab und fällt auf Sync-Modus (5 parallele Requests) zurück statt zu failen.
+- [x] GitHub Issue Body-Limit (2026-06-02): `deliver.js` kürzt Issue-Body vor API-Call auf max. 65.000 Zeichen (letzter vollständiger Artikel-Trenner) — verhindert HTTP 422 bei Tagen mit vielen Score-4-Artikeln.
