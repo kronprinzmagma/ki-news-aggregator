@@ -695,7 +695,18 @@ async function main() {
   await fs.writeFile(filename, markdown, 'utf-8');
   console.log(`\nGespeichert: ${filename}`);
 
-  const issueUrl = token ? await upsertGithubIssue(token, date, markdown) : null;
+  // GitHub Issues sind auf 65.536 Zeichen begrenzt. Ist der Body länger,
+  // wird beim letzten vollständigen Artikel-Trenner (---) abgeschnitten.
+  const GITHUB_ISSUE_MAX = 65_000;
+  let issueBody = markdown;
+  if (issueBody.length > GITHUB_ISSUE_MAX) {
+    const cutAt = issueBody.lastIndexOf('\n---\n', GITHUB_ISSUE_MAX);
+    issueBody = (cutAt > 0 ? issueBody.slice(0, cutAt) : issueBody.slice(0, GITHUB_ISSUE_MAX))
+      + '\n\n_(Weitere Artikel wegen GitHub Issue-Limit nicht dargestellt.)_\n';
+    console.warn(`[deliver] Issue-Body gekürzt: ${markdown.length} → ${issueBody.length} Zeichen`);
+  }
+
+  const issueUrl = token ? await upsertGithubIssue(token, date, issueBody) : null;
   const publishFailed = !!token && !issueUrl;
   if (!token) console.warn('GH_PAT nicht gesetzt – GitHub Issue wird übersprungen.');
 

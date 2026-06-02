@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import https from 'https';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
-import { claudeBatch, getUsageSummary } from './lib/claude.js';
+import { claudeBatch, BatchStuckError, getUsageSummary } from './lib/claude.js';
 import { SCORE_MODEL, SCORE_CUTOFF_DELIVER, CROSS_DAY_DEDUP_LOOKBACK } from './lib/config.js';
 import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
 import { recordUsage, closeStore } from './lib/store.js';
@@ -134,9 +134,21 @@ async function main() {
 
   const useBatch = process.env.SCORE_USE_BATCH !== 'false';
   console.log(`[score] ${toScore.length} Artikel gehen ans LLM (${articles.length} - ${beforeDedup - articlesAfterDedup.length} dedup - ${preFiltered.length} pre-filter) – Modus: ${useBatch ? 'BATCH (50% Rabatt)' : 'SYNC'}`);
-  const scoredFromLlm = useBatch
-    ? await runViaBatch(toScore)
-    : await runWithConcurrency(toScore, CONCURRENCY);
+  let scoredFromLlm;
+  if (useBatch) {
+    try {
+      scoredFromLlm = await runViaBatch(toScore);
+    } catch (err) {
+      if (err instanceof BatchStuckError) {
+        console.warn(`[score] ${err.message} – starte Sync-Fallback …`);
+        scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+      } else {
+        throw err;
+      }
+    }
+  } else {
+    scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+  }
   const scored = [...preFiltered, ...scoredFromLlm];
 
   const failedCount = scored.filter(a => a.score === null).length;
