@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**112 Einträge** · Top-Quellen: heise (40) · simonwillison (25) · hackernews (24) · latentspace (14) · huggingface (3) · anthropic (2) · lastweekinai (2) · interconnects (1) · venturebeat (1)
+**118 Einträge** · Top-Quellen: heise (40) · hackernews (26) · simonwillison (26) · latentspace (16) · huggingface (3) · interconnects (2) · anthropic (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-02** — [Why Video Agent models are next — Ethan He, xAI Grok Imagine](2026-06-02-why-video-agent-models-are-next-ethan-he-xai-grok-imagine.md) · *latentspace · Score 4*
+- **2026-06-02** — [Open and closed models are on different exponentials](2026-06-02-open-and-closed-models-are-on-different-exponentials.md) · *interconnects · Score 4*
+- **2026-06-02** — [How is Groq raising more money?](2026-06-02-how-is-groq-raising-more-money.md) · *hackernews · Score 4*
+- **2026-06-02** — [Hackers Simply Asked Meta AI to Give Them Access to High-Profile Instagram Accounts. It Worked](2026-06-02-hackers-simply-asked-meta-ai-to-give-them-access-to-high-pro.md) · *simonwillison · Score 4*
+- **2026-06-02** — [[AINews] NVIDIA Cosmos 3, Nemotron 3 Ultra, and RTX Spark](2026-06-02-ainews-nvidia-cosmos-3-nemotron-3-ultra-and-rtx-spark.md) · *latentspace · Score 4*
+- **2026-06-02** — [Age verification for social media, the beginning of the end for a free internet?](2026-06-02-age-verification-for-social-media-the-beginning-of-the-end-f.md) · *hackernews · Score 4*
 - **2026-06-01** — [Zu viel Tokenmaxxing? Amazon stoppt internes KI-Ranking](2026-06-01-zu-viel-tokenmaxxing-amazon-stoppt-internes-ki-ranking.md) · *heise · Score 4*
 - **2026-06-01** — [The solution might be cancelling my AI subscription](2026-06-01-the-solution-might-be-cancelling-my-ai-subscription.md) · *simonwillison · Score 4*
 - **2026-06-01** — [SoftBank investiert Milliarden in KI-Rechenzentren in Frankreich](2026-06-01-softbank-investiert-milliarden-in-ki-rechenzentren-in-frankr.md) · *heise · Score 4*
