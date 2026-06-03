@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**118 Einträge** · Top-Quellen: heise (40) · hackernews (26) · simonwillison (26) · latentspace (16) · huggingface (3) · interconnects (2) · anthropic (2) · lastweekinai (2) · venturebeat (1)
+**127 Einträge** · Top-Quellen: heise (40) · hackernews (30) · simonwillison (28) · latentspace (17) · anthropic (4) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-03** — [Use your Nvidia GPU's VRAM as swap space on Linux](2026-06-03-use-your-nvidia-gpu-s-vram-as-swap-space-on-linux.md) · *hackernews · Score 4*
+- **2026-06-03** — [Microsoft's new MAI models](2026-06-03-microsoft-s-new-mai-models.md) · *simonwillison · Score 4*
+- **2026-06-03** — [micropython-wasm 0.1a0](2026-06-03-micropython-wasm-0-1a0.md) · *simonwillison · Score 4*
+- **2026-06-03** — [MAI-Code-1-Flash](2026-06-03-mai-code-1-flash.md) · *hackernews · Score 5*
+- **2026-06-03** — [How we index images for RAG](2026-06-03-how-we-index-images-for-rag.md) · *hackernews · Score 4*
+- **2026-06-03** — [GitHub's plan for Agents — Kyle Daigle, GitHub](2026-06-03-github-s-plan-for-agents-kyle-daigle-github.md) · *latentspace · Score 4*
+- **2026-06-03** — [Expanding Project Glasswing](2026-06-03-expanding-project-glasswing.md) · *anthropic · Score 4*
+- **2026-06-03** — [Anthropic confidentially submits draft S-1 to the SEC](2026-06-03-anthropic-confidentially-submits-draft-s-1-to-the-sec.md) · *anthropic · Score 4*
+- **2026-06-03** — [AI outperforms law professors in Stanford Law study](2026-06-03-ai-outperforms-law-professors-in-stanford-law-study.md) · *hackernews · Score 4*
 - **2026-06-02** — [Why Video Agent models are next — Ethan He, xAI Grok Imagine](2026-06-02-why-video-agent-models-are-next-ethan-he-xai-grok-imagine.md) · *latentspace · Score 4*
 - **2026-06-02** — [Open and closed models are on different exponentials](2026-06-02-open-and-closed-models-are-on-different-exponentials.md) · *interconnects · Score 4*
 - **2026-06-02** — [How is Groq raising more money?](2026-06-02-how-is-groq-raising-more-money.md) · *hackernews · Score 4*
