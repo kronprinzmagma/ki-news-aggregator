@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**127 Einträge** · Top-Quellen: heise (40) · hackernews (30) · simonwillison (28) · latentspace (17) · anthropic (4) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**140 Einträge** · Top-Quellen: heise (40) · hackernews (37) · simonwillison (29) · latentspace (20) · anthropic (6) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-04** — [What we learned mapping a year’s worth of AI-enabled cyber threats](2026-06-04-what-we-learned-mapping-a-year-s-worth-of-ai-enabled-cyber-t.md) · *anthropic · Score 4*
+- **2026-06-04** — [Uber Caps Usage of AI Tools Like Claude Code to Manage Costs](2026-06-04-uber-caps-usage-of-ai-tools-like-claude-code-to-manage-costs.md) · *simonwillison · Score 4*
+- **2026-06-04** — [Self-hosted dev sandboxes with preview URLs (Docker, Go, no K8s)](2026-06-04-self-hosted-dev-sandboxes-with-preview-urls-docker-go-no-k8s.md) · *hackernews · Score 4*
+- **2026-06-04** — [🔬Scaling Past Informal AI - Carina Hong, Axiom Math](2026-06-04-scaling-past-informal-ai-carina-hong-axiom-math.md) · *latentspace · Score 4*
+- **2026-06-04** — [Launch HN: Hyper (YC P26) – Company brain to power agentic development](2026-06-04-launch-hn-hyper-yc-p26-company-brain-to-power-agentic-develo.md) · *hackernews · Score 4*
+- **2026-06-04** — [Introducing the Services Track and Partner Hub of the Claude Partner Network](2026-06-04-introducing-the-services-track-and-partner-hub-of-the-claude.md) · *anthropic · Score 4*
+- **2026-06-04** — [I built a vulnerable app and spent $1,500 seeing if LLMs could hack it](2026-06-04-i-built-a-vulnerable-app-and-spent-1-500-seeing-if-llms-coul.md) · *hackernews · Score 4*
+- **2026-06-04** — [Gemma 4 12B: A unified, encoder-free multimodal model](2026-06-04-gemma-4-12b-a-unified-encoder-free-multimodal-model.md) · *hackernews · Score 4*
+- **2026-06-04** — [Elixir v1.20: Now a gradually typed language](2026-06-04-elixir-v1-20-now-a-gradually-typed-language.md) · *hackernews · Score 4*
+- **2026-06-04** — [[AINews] Reve 2 and Ideogram 4: Layouts in Imagegen](2026-06-04-ainews-reve-2-and-ideogram-4-layouts-in-imagegen.md) · *latentspace · Score 4*
+- **2026-06-04** — [[AINews] Microsoft Build: MAI-Thinking-1 and MAI Family models](2026-06-04-ainews-microsoft-build-mai-thinking-1-and-mai-family-models.md) · *latentspace · Score 4*
+- **2026-06-04** — [Ableton Extensions SDK](2026-06-04-ableton-extensions-sdk.md) · *hackernews · Score 4*
+- **2026-06-04** — [A Post-Quantum Future for Let's Encrypt](2026-06-04-a-post-quantum-future-for-let-s-encrypt.md) · *hackernews · Score 4*
 - **2026-06-03** — [Use your Nvidia GPU's VRAM as swap space on Linux](2026-06-03-use-your-nvidia-gpu-s-vram-as-swap-space-on-linux.md) · *hackernews · Score 4*
 - **2026-06-03** — [Microsoft's new MAI models](2026-06-03-microsoft-s-new-mai-models.md) · *simonwillison · Score 4*
 - **2026-06-03** — [micropython-wasm 0.1a0](2026-06-03-micropython-wasm-0-1a0.md) · *simonwillison · Score 4*
