@@ -2,10 +2,42 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**140 Einträge** · Top-Quellen: heise (40) · hackernews (37) · simonwillison (29) · latentspace (20) · anthropic (6) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**172 Einträge** · Top-Quellen: heise (62) · hackernews (44) · simonwillison (30) · latentspace (22) · anthropic (6) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-05** — [WSL 2 is getting faster Windows file system access](2026-06-05-wsl-2-is-getting-faster-windows-file-system-access.md) · *hackernews · Score 4*
+- **2026-06-05** — [Wie Gödel und Turing die Grenzen von KI vorgezeichnet haben](2026-06-05-wie-godel-und-turing-die-grenzen-von-ki-vorgezeichnet-haben.md) · *heise · Score 4*
+- **2026-06-05** — [When AI Builds Itself: Our progress toward recursive self-improvement](2026-06-05-when-ai-builds-itself-our-progress-toward-recursive-self-imp.md) · *hackernews · Score 4*
+- **2026-06-05** — [Visual Studio Code 1.123 synchronisiert Agenten-Sessions über Geräte hinweg](2026-06-05-visual-studio-code-1-123-synchronisiert-agenten-sessions-ube.md) · *heise · Score 4*
+- **2026-06-05** — [Verborgenes Wissen: Wie KI dabei hilft, historische Chiffren zu knacken](2026-06-05-verborgenes-wissen-wie-ki-dabei-hilft-historische-chiffren-z.md) · *heise · Score 4*
+- **2026-06-05** — [Reality: The Final Eval — Lukas Petersson and Axel Backlund of Andon Labs](2026-06-05-reality-the-final-eval-lukas-petersson-and-axel-backlund-of-.md) · *latentspace · Score 4*
+- **2026-06-05** — [Perplexity verteilt automatisiert KI-Rechenbedarf zwischen Gerät und Cloud](2026-06-05-perplexity-verteilt-automatisiert-ki-rechenbedarf-zwischen-g.md) · *heise · Score 4*
+- **2026-06-05** — [Perplexity bringt KI-Agenten „Personal Computer“ auf Windows](2026-06-05-perplexity-bringt-ki-agenten-personal-computer-auf-windows.md) · *heise · Score 4*
+- **2026-06-05** — [Open Code Review – An AI-powered code review CLI tool](2026-06-05-open-code-review-an-ai-powered-code-review-cli-tool.md) · *hackernews · Score 4*
+- **2026-06-05** — [Nach Protesten: Meta schränkt Mitarbeiter-Tracking für KI-Training ein](2026-06-05-nach-protesten-meta-schrankt-mitarbeiter-tracking-fur-ki-tra.md) · *heise · Score 4*
+- **2026-06-05** — [Microsofts MAI-Modelle: Eigene KI-Offensive gestartet](2026-06-05-microsofts-mai-modelle-eigene-ki-offensive-gestartet.md) · *heise · Score 4*
+- **2026-06-05** — [Microsoft will Googles KI-Assistenten Spark Konkurrenz machen](2026-06-05-microsoft-will-googles-ki-assistenten-spark-konkurrenz-mache.md) · *heise · Score 4*
+- **2026-06-05** — [Microsoft forkt sein eigenes Windows Terminal – für KI](2026-06-05-microsoft-forkt-sein-eigenes-windows-terminal-fur-ki.md) · *heise · Score 4*
+- **2026-06-05** — [Meta wittert das nächste Milliardengeschäft in KI-Agenten](2026-06-05-meta-wittert-das-nachste-milliardengeschaft-in-ki-agenten.md) · *heise · Score 4*
+- **2026-06-05** — [Malware: KI erzeugt kaum aufhaltbaren Wurm](2026-06-05-malware-ki-erzeugt-kaum-aufhaltbaren-wurm.md) · *heise · Score 4*
+- **2026-06-05** — [Magenta RealTime 2: Open and Local Live Music Models](2026-06-05-magenta-realtime-2-open-and-local-live-music-models.md) · *hackernews · Score 4*
+- **2026-06-05** — [Lokale Spracherkennung für Windows – ohne Cloud](2026-06-05-lokale-spracherkennung-fur-windows-ohne-cloud.md) · *heise · Score 4*
+- **2026-06-05** — [KI-Update: Mythos, OpenAI, Meta-KI hilft Hackern, KI-Modelle regieren die Welt](2026-06-05-ki-update-mythos-openai-meta-ki-hilft-hackern-ki-modelle-reg.md) · *heise · Score 4*
+- **2026-06-05** — [KI-Chatbots bewerten KI-Lebensläufe: Claude findet sich besser als GPT](2026-06-05-ki-chatbots-bewerten-ki-lebenslaufe-claude-findet-sich-besse.md) · *heise · Score 4*
+- **2026-06-05** — [iOS: Meta-KI schnappt sich auf Wunsch demnächst Files vom iPhone](2026-06-05-ios-meta-ki-schnappt-sich-auf-wunsch-demnachst-files-vom-iph.md) · *heise · Score 4*
+- **2026-06-05** — [Großbritannien erzwingt mehr Kontrolle bei Googles KI-Suche](2026-06-05-grossbritannien-erzwingt-mehr-kontrolle-bei-googles-ki-suche.md) · *heise · Score 4*
+- **2026-06-05** — [Gemini for Home: KI-Assistent startet in Deutschland als Early Access](2026-06-05-gemini-for-home-ki-assistent-startet-in-deutschland-als-earl.md) · *heise · Score 4*
+- **2026-06-05** — [Fine-tuning an LLM to write docs like it's 1995](2026-06-05-fine-tuning-an-llm-to-write-docs-like-it-s-1995.md) · *hackernews · Score 4*
+- **2026-06-05** — [DuckDuckGo: KI-freie Suche boomt – jetzt als Standard](2026-06-05-duckduckgo-ki-freie-suche-boomt-jetzt-als-standard.md) · *heise · Score 4*
+- **2026-06-05** — [Cisco Cloud Control: Eine Managementebene für Netzwerk, Security und Compute](2026-06-05-cisco-cloud-control-eine-managementebene-fur-netzwerk-securi.md) · *heise · Score 4*
+- **2026-06-05** — [Azure Linux 4.0 is Microsoft's first general-purpose Linux](2026-06-05-azure-linux-4-0-is-microsoft-s-first-general-purpose-linux.md) · *hackernews · Score 4*
+- **2026-06-05** — [Auf ins „Zeitalter der Agenten“: GitLab feuert 14 Prozent der Angestellten](2026-06-05-auf-ins-zeitalter-der-agenten-gitlab-feuert-14-prozent-der-a.md) · *heise · Score 4*
+- **2026-06-05** — [Anthropics KI-Modell Mythos: Zugriff soll deutlich ausgeweitet werden](2026-06-05-anthropics-ki-modell-mythos-zugriff-soll-deutlich-ausgeweite.md) · *heise · Score 4*
+- **2026-06-05** — [Anthropic's open-source framework for AI-powered vulnerability discovery](2026-06-05-anthropic-s-open-source-framework-for-ai-powered-vulnerabili.md) · *hackernews · Score 4*
+- **2026-06-05** — [Amazon-App zeigt KI-generierte Produkte, die es so nicht gibt](2026-06-05-amazon-app-zeigt-ki-generierte-produkte-die-es-so-nicht-gibt.md) · *heise · Score 4*
+- **2026-06-05** — [[AINews] not much happened today](2026-06-05-ainews-not-much-happened-today.md) · *latentspace · Score 4*
+- **2026-06-05** — [AI enthusiasts are in a race against time, AI skeptics are in a race against entropy](2026-06-05-ai-enthusiasts-are-in-a-race-against-time-ai-skeptics-are-in.md) · *simonwillison · Score 4*
 - **2026-06-04** — [What we learned mapping a year’s worth of AI-enabled cyber threats](2026-06-04-what-we-learned-mapping-a-year-s-worth-of-ai-enabled-cyber-t.md) · *anthropic · Score 4*
 - **2026-06-04** — [Uber Caps Usage of AI Tools Like Claude Code to Manage Costs](2026-06-04-uber-caps-usage-of-ai-tools-like-claude-code-to-manage-costs.md) · *simonwillison · Score 4*
 - **2026-06-04** — [Self-hosted dev sandboxes with preview URLs (Docker, Go, no K8s)](2026-06-04-self-hosted-dev-sandboxes-with-preview-urls-docker-go-no-k8s.md) · *hackernews · Score 4*
