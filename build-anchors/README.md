@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**172 Einträge** · Top-Quellen: heise (62) · hackernews (44) · simonwillison (30) · latentspace (22) · anthropic (6) · huggingface (3) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**180 Einträge** · Top-Quellen: heise (62) · hackernews (46) · simonwillison (32) · latentspace (23) · anthropic (6) · huggingface (4) · golem (2) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-06** — [Running Python code in a sandbox with MicroPython and WASM](2026-06-06-running-python-code-in-a-sandbox-with-micropython-and-wasm.md) · *simonwillison · Score 4*
+- **2026-06-06** — [pg_durable: Microsoft open sources in-database durable execution](2026-06-06-pg-durable-microsoft-open-sources-in-database-durable-execut.md) · *hackernews · Score 5*
+- **2026-06-06** — [OpenAI Help: Lockdown Mode](2026-06-06-openai-help-lockdown-mode.md) · *simonwillison · Score 4*
+- **2026-06-06** — [How to Stop Shipping Low-Quality RL Environments (with Examples)](2026-06-06-how-to-stop-shipping-low-quality-rl-environments-with-exampl.md) · *latentspace · Score 4*
+- **2026-06-06** — [Gemma 4 QAT models: Optimizing compression for mobile and laptop efficiency](2026-06-06-gemma-4-qat-models-optimizing-compression-for-mobile-and-lap.md) · *hackernews · Score 4*
+- **2026-06-06** — [(g+) KI-Programmierung: Claude Code, Codex und Cursor im Realit�tscheck](2026-06-06-g-ki-programmierung-claude-code-codex-und-cursor-im-realit-t.md) · *golem · Score 4*
+- **2026-06-06** — [Forenmanipulation: Firmen manipulieren Reddit f�r KI-Bots](2026-06-06-forenmanipulation-firmen-manipulieren-reddit-f-r-ki-bots.md) · *golem · Score 4*
+- **2026-06-06** — [Designing the hf CLI as an agent-optimized way to work with the Hub](2026-06-06-designing-the-hf-cli-as-an-agent-optimized-way-to-work-with-.md) · *huggingface · Score 5*
 - **2026-06-05** — [WSL 2 is getting faster Windows file system access](2026-06-05-wsl-2-is-getting-faster-windows-file-system-access.md) · *hackernews · Score 4*
 - **2026-06-05** — [Wie Gödel und Turing die Grenzen von KI vorgezeichnet haben](2026-06-05-wie-godel-und-turing-die-grenzen-von-ki-vorgezeichnet-haben.md) · *heise · Score 4*
 - **2026-06-05** — [When AI Builds Itself: Our progress toward recursive self-improvement](2026-06-05-when-ai-builds-itself-our-progress-toward-recursive-self-imp.md) · *hackernews · Score 4*
