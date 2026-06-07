@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**180 Einträge** · Top-Quellen: heise (62) · hackernews (46) · simonwillison (32) · latentspace (23) · anthropic (6) · huggingface (4) · golem (2) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**184 Einträge** · Top-Quellen: heise (62) · hackernews (47) · simonwillison (32) · latentspace (23) · anthropic (6) · huggingface (5) · golem (4) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-07** — [Soll viele GPUs ersetzen: Start-up plant KI-Server mit 128 TByte Speicher](2026-06-07-soll-viele-gpus-ersetzen-start-up-plant-ki-server-mit-128-tb.md) · *golem · Score 4*
+- **2026-06-07** — [Sem: New primitive for code understanding – not LSPs, but entities on top of Git](2026-06-07-sem-new-primitive-for-code-understanding-not-lsps-but-entiti.md) · *hackernews · Score 4*
+- **2026-06-07** — [Five labs, five minds: building a multi-model finance drama on small models](2026-06-07-five-labs-five-minds-building-a-multi-model-finance-drama-on.md) · *huggingface · Score 4*
+- **2026-06-07** — [F�r KI-Rechenleistung: Google zahlt monatlich 920 Millionen US-Dollar an SpaceX](2026-06-07-f-r-ki-rechenleistung-google-zahlt-monatlich-920-millionen-u.md) · *golem · Score 4*
 - **2026-06-06** — [Running Python code in a sandbox with MicroPython and WASM](2026-06-06-running-python-code-in-a-sandbox-with-micropython-and-wasm.md) · *simonwillison · Score 4*
 - **2026-06-06** — [pg_durable: Microsoft open sources in-database durable execution](2026-06-06-pg-durable-microsoft-open-sources-in-database-durable-execut.md) · *hackernews · Score 5*
 - **2026-06-06** — [OpenAI Help: Lockdown Mode](2026-06-06-openai-help-lockdown-mode.md) · *simonwillison · Score 4*
