@@ -119,7 +119,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Cross-day deduplication via SQLite.** `better-sqlite3` backs a local `ki-news.db`. Articles published in a GitHub Issue are recorded in `issue_articles`; the deliver stage queries the last 7 days before selection. Title similarity (≥ 3 shared keywords, computed by `lib/topic-overlap.js`) catches repackaged articles that share no URL. Lookback window and threshold are configurable in `lib/config.js`.
 
-**Topic-based deduplication within a day.** `lib/topic-overlap.js` implements a shared-token heuristic to detect thematically overlapping articles on the same day. When two articles cover the same topic, only the higher-scoring one proceeds; Lab sources (Anthropic, OpenAI, DeepMind) win ties.
+**Topic-based deduplication within a day.** `lib/topic-overlap.js` implements a shared-token heuristic to detect thematically overlapping articles on the same day. When two articles cover the same topic, only the higher-scoring one proceeds; Lab sources (Anthropic, OpenAI, DeepMind, Latent Space, Simon Willison) win ties.
 
 **Versioned metadata in GitHub Issues.** Each article block in a published issue contains an HTML comment marker `<!-- ki-news-meta: {...} -->` with structured metadata (url, score, source, date). The weekly digest and cross-day dedup read from these markers; a regex fallback handles issues predating the marker format.
 
@@ -156,11 +156,12 @@ ingest.js              — Stage 1: fetch and normalise articles
 score.js               — Stage 2: relevance scoring via Claude Haiku
 deliver.js             — Stage 3: write-up, review loop, GitHub Issue
 weekly.js              — Sunday synthesis digest
-adapters/              — One adapter per source (15 files incl. base)
+adapters/              — One adapter per source (16 source files + _base.js;
+                         15 davon aktiv verdrahtet, newsapi.js inaktiv)
 lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
-                         close-old-issues
+                         close-old-issues, eval.yml, publish-archive.yml
 ```
 
 ---

@@ -24,7 +24,7 @@ import {
   recordUsage,
   closeStore,
 } from './lib/store.js';
-import { articleMeta } from './lib/issue-format.js';
+import { articleMeta, parseArticleMetas } from './lib/issue-format.js';
 
 loadEnv();
 
@@ -719,11 +719,23 @@ async function main() {
   // wird beim letzten vollständigen Artikel-Trenner (---) abgeschnitten.
   const GITHUB_ISSUE_MAX = 65_000;
   let issueBody = markdown;
+  let bodyTruncated = false;
   if (issueBody.length > GITHUB_ISSUE_MAX) {
     const cutAt = issueBody.lastIndexOf('\n---\n', GITHUB_ISSUE_MAX);
     issueBody = (cutAt > 0 ? issueBody.slice(0, cutAt) : issueBody.slice(0, GITHUB_ISSUE_MAX))
       + '\n\n_(Weitere Artikel wegen GitHub Issue-Limit nicht dargestellt.)_\n';
+    bodyTruncated = true;
     console.warn(`[deliver] Issue-Body gekürzt: ${markdown.length} → ${issueBody.length} Zeichen`);
+  }
+
+  // Nur die tatsächlich im (ggf. gekürzten) Issue-Body enthaltenen Artikel
+  // gelten als veröffentlicht. Sonst würden weggeschnittene Artikel via
+  // Cross-Day-Dedup am Folgetag fälschlich als bereits geliefert gefiltert.
+  // Die vollständige lokale summary-*.md bleibt davon unberührt.
+  let deliveredArtikel = topArtikel;
+  if (bodyTruncated) {
+    const deliveredUrls = new Set(parseArticleMetas(issueBody).map(m => m.url));
+    deliveredArtikel = topArtikel.filter(a => deliveredUrls.has(a.url));
   }
 
   const issueUrl = token ? await upsertGithubIssue(token, date, issueBody) : null;
@@ -734,14 +746,14 @@ async function main() {
     recordIssue({
       run_date: date,
       issue_url: issueUrl,
-      articles: topArtikel.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
+      articles: deliveredArtikel.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
     });
   }
 
   runSummary.issue_created = !!issueUrl;
   runSummary.issue_url = issueUrl;
-  runSummary.deliver.in_issue = topArtikel.length;
-  runSummary.deliver.issue_articles = topArtikel.map(a => ({ titel: a.titel, url: a.url, quelle: a.quelle, score: a.score }));
+  runSummary.deliver.in_issue = deliveredArtikel.length;
+  runSummary.deliver.issue_articles = deliveredArtikel.map(a => ({ titel: a.titel, url: a.url, quelle: a.quelle, score: a.score }));
 
   const usage = getUsageSummary();
   runSummary.usage = usage;

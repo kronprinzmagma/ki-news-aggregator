@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import https from 'https';
 import { todayString } from './lib/date.js';
-import { recordAdapterHealth, getStaleAdapters, closeStore } from './lib/store.js';
+import { recordAdapterHealth, recordAdapterTruncated, getStaleAdapters, closeStore } from './lib/store.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import { REPO_SLUG } from './lib/config.js';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
@@ -137,14 +137,13 @@ function backfillTruncatedPerAdapter(articles, runDate) {
     if (a.truncated) counts[a.quelle] = (counts[a.quelle] || 0) + 1;
   }
   for (const [adapter, truncated_count] of Object.entries(counts)) {
-    recordAdapterHealth({
+    // Nur truncated_count nachreichen. articles_fetched bleibt der
+    // ursprüngliche Fetch-Count aus runAdapters – er darf hier nicht mit dem
+    // kleineren Post-Dedup/Post-Age-Count überschrieben werden, sonst würde
+    // die Stale-Detection einen Adapter fälschlich als abgedriftet werten.
+    recordAdapterTruncated({
       run_date: runDate,
       adapter,
-      // articles_fetched darf nicht überschrieben werden – wir holen den
-      // ursprünglichen Wert per Re-Insert nicht; SQLite ON CONFLICT updated
-      // alle Felder. Damit das funktioniert, müssen wir den fetched-Wert
-      // mitliefern. Wir nehmen den Article-Count nach Quelle.
-      articles_fetched: articles.filter(a => a.quelle === adapter).length,
       truncated_count,
     });
   }
