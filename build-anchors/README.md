@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**184 Einträge** · Top-Quellen: heise (62) · hackernews (47) · simonwillison (32) · latentspace (23) · anthropic (6) · huggingface (5) · golem (4) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**191 Einträge** · Top-Quellen: heise (66) · hackernews (49) · simonwillison (33) · latentspace (23) · anthropic (6) · huggingface (5) · golem (4) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-08** — [Neue Siri: Apple bleibt bei Datenschutzstrategie](2026-06-08-neue-siri-apple-bleibt-bei-datenschutzstrategie.md) · *heise · Score 4*
+- **2026-06-08** — [How's Linear so fast? A technical breakdown](2026-06-08-how-s-linear-so-fast-a-technical-breakdown.md) · *hackernews · Score 4*
+- **2026-06-08** — [Google mietet für viel Geld Rechenleistung bei Musks SpaceX](2026-06-08-google-mietet-fur-viel-geld-rechenleistung-bei-musks-spacex.md) · *heise · Score 4*
+- **2026-06-08** — [Gemini Go: Google ersetzt Assistant auf günstigen Android-Go-Geräten](2026-06-08-gemini-go-google-ersetzt-assistant-auf-gunstigen-android-go-.md) · *heise · Score 4*
+- **2026-06-08** — [datasette-agent-edit 0.1a0](2026-06-08-datasette-agent-edit-0-1a0.md) · *simonwillison · Score 4*
+- **2026-06-08** — [ChatGPT soll zur integrierten „Superapp“ werden](2026-06-08-chatgpt-soll-zur-integrierten-superapp-werden.md) · *heise · Score 4*
+- **2026-06-08** — [Algorithmic Monocultures in Hiring](2026-06-08-algorithmic-monocultures-in-hiring.md) · *hackernews · Score 4*
 - **2026-06-07** — [Soll viele GPUs ersetzen: Start-up plant KI-Server mit 128 TByte Speicher](2026-06-07-soll-viele-gpus-ersetzen-start-up-plant-ki-server-mit-128-tb.md) · *golem · Score 4*
 - **2026-06-07** — [Sem: New primitive for code understanding – not LSPs, but entities on top of Git](2026-06-07-sem-new-primitive-for-code-understanding-not-lsps-but-entiti.md) · *hackernews · Score 4*
 - **2026-06-07** — [Five labs, five minds: building a multi-model finance drama on small models](2026-06-07-five-labs-five-minds-building-a-multi-model-finance-drama-on.md) · *huggingface · Score 4*
