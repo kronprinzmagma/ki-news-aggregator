@@ -85,57 +85,49 @@ function weekRange(referenceDate) {
 
 // ─── Weekly-Prompt ────────────────────────────────────────────────────────────
 
-const WEEKLY_PROMPT = (must, optional, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM mit Hands-on-Ambition (Claude Code, Anthropic API). Nicht im Scope: Backlog, Sprint, Stakeholder.
+const WEEKLY_PROMPT = (articles, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM OHNE tiefes Engineering-Wissen, mit Hands-on-Ambition (Claude Code, Anthropic API). Nicht im Scope: Backlog, Sprint, Stakeholder.
+
+Das Weekly ist KEINE Wiederholung der Daily-Artikel. Es ist ein redaktioneller Wochenrückblick: Du identifizierst die WICHTIGSTEN ÜBERGREIFENDEN THEMEN der Woche und bereitest sie ausführlicher und verständlicher auf als die einzelnen Daily-Einträge. Die Leserin hat die Daily-Artikel schon gesehen – Mehrwert entsteht NUR durch Synthese und Einordnung, nicht durch erneutes Nacherzählen.
 
 Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing-Sprech. Keine Überschrift am Anfang – Titel wird extern gesetzt.
+
+VERSTÄNDLICHKEIT IST PFLICHT: Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die ein Produktmensch ohne Engineering-Hintergrund nicht sofort einordnet, wird in einem Halbsatz erklärt oder weggelassen – deutsch wie englisch, auch Zahlen (nicht "550B Parameter, 55B aktiv" oder "SWE-Bench 51,2 %" ohne Einordnung). Würde der Satz einen Nicht-Techniker stocken lassen, formuliere ihn um.
 
 ---
 
 KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})
 
-PFLICHTARTIKEL (Score 5, alle ins Issue):
-${must.length > 0 ? must.map(a => `Score: ${a.score} | Quelle: ${a.quelle} | URL: ${a.url}
+ARTIKEL-POOL DER WOCHE (nach Score sortiert, Score 5 = stärkstes Signal):
+${articles.map(a => `Score: ${a.score} | Quelle: ${a.quelle} | URL: ${a.url}
 Titel: ${a.titel}
 Neu: ${a.wasIstNeu}
-Richtung: ${a.richtung}
-Anker: ${a.anker}`).join('\n\n') : '(keine Score-5-Artikel diese Woche)'}
-
-OPTIONAL (Score 4, wähle 1–2 nach strategischer Bedeutung):
-${optional.slice(0, 10).map(a => `Score: ${a.score} | Quelle: ${a.quelle} | URL: ${a.url}
-Titel: ${a.titel}
-Neu: ${a.wasIstNeu}
-Richtung: ${a.richtung}
-Anker: ${a.anker}`).join('\n\n')}
+Richtung: ${a.richtung}`).join('\n\n')}
 
 ---
 
-Struktur der Ausgabe:
+Struktur der Ausgabe (Markdown):
 
-**Einleitung** (3–4 Sätze): Dominante Strömung der Woche, was hat sich gegenüber der Vorwoche verschoben?
+**Einleitung** (3–4 Sätze): Dominante Strömung der Woche. Was hat sich gegenüber der Vorwoche verschoben? Direkt, verständlich, kein Jargon.
 
-Dann pro Artikel (alle Pflicht, dann 1–2 gewählte Optionale), durch eine Leerzeile getrennt. Jeder Artikel exakt so formatiert:
+Dann GENAU 3 Themen der Woche. Wähle die drei wichtigsten übergreifenden Themen aus dem Pool (nicht zwingend die drei höchsten Scores – sondern die, die zusammen die Story der Woche ergeben). Score-5-Artikel sind starke Kandidaten, aber keine Pflicht. Jedes Thema exakt so:
 
-### [Titel]
-
-Score [X]/5 · [[quelle]]([url])
+### [Thema-Titel: prägnant, kein Artikel-Titel]
 - [ ] Besonders wertvoll
 - [ ] Später weiterverfolgen
-- [ ] Schlecht aufbereitet
-- [ ] Irrelevanter Inhalt
+- [ ] Zu kompliziert erklärt
+- [ ] Thema nicht relevant
 
-**Was ist neu** (max. 3 Sätze): Nüchtern, kein Marketing. Nur belegbare Fakten aus dem Input. Nicht den Titel wiederholen.
+[Ein ausführlicher Absatz, 4–6 Sätze: Was ist diese Woche zu diesem Thema passiert (verständlich zusammengefasst, mehrere Artikel zu einem Bild verbunden)? Warum hängen diese Entwicklungen zusammen? Was bedeutet das für die KI-Richtung und für konkrete Produktentscheidungen? Konkreter Akteur + Bewegung, keine Schablonen wie "der Engpass verschiebt sich".]
 
-**Was es für die KI-Richtung heisst** (1–2 Sätze): Konkreter Akteur + Bewegung. Verboten: "Build-vs-Buy verschiebt sich", "Effizienz wird zur Differenzierung", "der Engpass verschiebt sich".
+**Dran bleiben:** [Ein Beobachtungs- oder Build-Anker für das Thema: im Browser oder mit Claude in unter 1–2h machbar, mit messbarer/vergleichender Erkenntnis. Kein Entwickler-Setup, kein Kernel-Build, kein Modelltraining.]
 
-**Build-Anker** (1–2 Sätze): Imperativsatz, konkretes Tool aus dem Artikel, messbare Ausgabe, in 2–4h mit Claude Code umsetzbar. Kein Hedging ("könnte man", "liesse sich"). Kein Kernel-Build, kein Modelltraining.
+_Belege:_ [2–4 stützende Artikel als kompakte Liste, je eine Zeile: [Titel](url) (Quelle, Score X) – ein Halbsatz, warum er zum Thema gehört.]
 
 ---
 
-**Strömungen der Woche** (2–3 Cluster, je 2–3 Sätze): Übergreifende Muster benennen, keine Artikel-Aufzählung.
+**Wochenimpuls** (1–2 Sätze): Ein konkreter Anker aus der Gesamtschau der Woche.
 
-**Wochenimpuls** (1–2 Sätze): Ein konkreter Build-Anker aus der Gesamtschau der Woche.
-
-Regeln: Nur Fakten aus dem Input. Kürzel wie P1/O2 nicht in der Ausgabe. Ca. 800–1000 Wörter gesamt.`;
+Regeln: Nur Fakten aus dem Input. Keine Artikel-Volltextwiederholung – Artikel erscheinen nur in den Belegen-Listen. Kürzel wie P1/O2 nicht in der Ausgabe. Ziel ca. 600–800 Wörter – die Themen-Absätze sind der Kern, nicht eine lange Artikelliste.`;
 
 async function createWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;
@@ -186,13 +178,15 @@ async function main() {
     process.exit(0);
   }
 
-  const mustArticles = allArticles.filter(a => a.score === 5);
-  const optionalArticles = allArticles.filter(a => a.score < 5);
-  console.log(`[weekly] ${allArticles.length} unique Artikel – ${mustArticles.length} Pflicht (Score 5), ${optionalArticles.length} optional (Score < 5)`);
+  // Themen-zentriert: Claude wählt die 3 wichtigsten Themen aus dem ganzen Pool.
+  // Score 5 zuerst (stärkstes Signal), dann Score 4 – keine Pflicht-Ausbreitung mehr.
+  const articlePool = [...allArticles].sort((a, b) => b.score - a.score).slice(0, 20);
+  const score5Count = articlePool.filter(a => a.score === 5).length;
+  console.log(`[weekly] ${allArticles.length} unique Artikel – Pool für Themenwahl: ${articlePool.length} (davon ${score5Count} Score 5)`);
 
-  console.log('[weekly] Generiere Digest per Claude...');
+  console.log('[weekly] Generiere themen-zentrierten Digest per Claude...');
   const digestBody = await claudeText(
-    WEEKLY_PROMPT(mustArticles, optionalArticles, weekInfo),
+    WEEKLY_PROMPT(articlePool, weekInfo),
     { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly' }
   );
 

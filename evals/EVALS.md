@@ -33,8 +33,10 @@ Lesen → 3-Sekunden-Klick im Issue → wöchentlich Promote-Script → goldstan
 Jeder Artikel im Daily-Issue hat vier Feedback-Checkboxen:
 - **Besonders wertvoll** — positives Signal zur Relevanz
 - **Später weiterverfolgen** — schwaches positives Signal (wird NICHT promoted)
-- **Schlecht aufbereitet** — Signal für die Deliver-Stufe (Writeup-Qualität)
-- **Irrelevanter Inhalt** — negatives Signal zur Relevanz
+- **Zu kompliziert erklärt** (früher „Schlecht aufbereitet") — Signal für die Deliver-Stufe (Verständlichkeit/Writeup-Qualität)
+- **Thema nicht relevant** (früher „Irrelevanter Inhalt") — negatives Signal zur Relevanz
+
+> Hinweis: Die negativen Labels wurden trennscharf umbenannt, damit „Aufbereitung schlecht" und „Thema irrelevant" sauber getrennte Signale sind. `scripts/promote-feedback.js` matcht beide Varianten (alt + neu), historische Issues bleiben gültig.
 
 `scripts/promote-feedback.js` liest alle Daily-Issues via GitHub-API, extrahiert die Checkbox-Zustände pro Artikel und wendet folgende Promote-Logik an:
 

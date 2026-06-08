@@ -56,8 +56,9 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 120 Wörter):
   1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
   2. **Was es für die KI-Richtung heisst** (1–2 Sätze): Strömung dahinter
-  3. **Build-Anker** (1–2 Sätze): konkret, ein Abend mit Claude Code – keine Backlog/Sprint-Anwendungen
-- Jeder Artikel enthält im Issue vier Feedback-Checkboxen: zwei positive (`Besonders wertvoll`, `Später weiterverfolgen`) und zwei negative (`Schlecht aufbereitet`, `Irrelevanter Inhalt`). Negative Häkchen sind das spätere Trainingssignal für Prompt-Iteration und Goldstandard-Erweiterung. Häkchen persistieren über Issue-Rewrites via `extractFeedbackStates` / `applyFeedbackStates`.
+  3. **Build-Anker** (1–2 Sätze): zwei zugelassene Stile unter derselben Block-Überschrift – *Bau-Stil* (in 2–4h mit Claude Code + gängigem Stack umsetzbar) oder *Beobachtungs-Stil* (im Browser/mit Claude in <1h, für Themen ohne sinnvollen Bau-Abend). Verboten: Entwickler-Setup wie `cargo install`, `wasmtime`-Builds, eigene GPU, Kompilieren, Modelltraining. Keine Backlog/Sprint-Anwendungen.
+- Verständlichkeit ist Pflicht: Zielperson ist eine Produktperson OHNE tiefes Engineering-Wissen. Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die nicht sofort einzuordnen ist, wird in einem Halbsatz erklärt oder weggelassen (deutsch wie englisch, auch Zahlen). Gilt für alle drei Blöcke und die Einleitung.
+- Jeder Artikel enthält im Issue vier Feedback-Checkboxen: zwei positive (`Besonders wertvoll`, `Später weiterverfolgen`) und zwei negative (`Zu kompliziert erklärt`, `Thema nicht relevant`). Die negativen Labels sind bewusst trennscharf: `Zu kompliziert erklärt` misst die Aufbereitung (Verständlichkeit), `Thema nicht relevant` misst die Auswahl – vorher als `Schlecht aufbereitet`/`Irrelevanter Inhalt` vermischt. Negative Häkchen sind das spätere Trainingssignal für Prompt-Iteration und Goldstandard-Erweiterung. Häkchen persistieren über Issue-Rewrites via `extractFeedbackStates` / `applyFeedbackStates` (Match per Label; alte Labels werden bei offenen Issues nicht über den Rename hinweg übernommen). `scripts/promote-feedback.js` matcht beide Label-Varianten.
 - Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Issue-Body startet mit AI-Disclaimer als Blockzitat (EU AI Act Art. 50(4)): kennzeichnet maschinengenerierten Inhalt
@@ -66,7 +67,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Issue-Body enthält pro Artikel einen versionierten HTML-Kommentar-Marker `<!-- ki-news-meta: {...} -->`. Weekly und Cross-Day-Dedup lesen primär aus diesen Markern, fallen auf das `Score X/5 · [...](...)`-Regex zurück (Backwards Compatibility).
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
-- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 4 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. Bewertung der geschriebenen drei Blöcke
+- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 5 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technischen Produktleser `comprehension_nontechnical` 1–5) – inkl. Bewertung der geschriebenen drei Blöcke. `comprehension_nontechnical <= 3` triggert ein Rewrite.
 - Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen
 - Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
@@ -75,9 +76,9 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 
 - CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
 - Holt die letzten 7 KI-Daily-Issues per GitHub API, parst alle Artikel, URL-Dedup über Tage
-- Score-5-Artikel kommen immer ins Issue (Pflicht); Claude wählt zusätzlich 1–2 Score-4-Artikel
-- Pro Artikel dieselben drei Blöcke wie Daily: Was ist neu / Was es für die KI-Richtung heisst / Build-Anker – plus alle 4 Feedback-Checkboxen
-- Zusätzlich: Einleitung, Strömungen der Woche, Wochenimpuls
+- **Themen-zentriert (kein Artikel-Re-Run):** Claude wählt aus dem Artikel-Pool (Score 4+5, nach Score sortiert) die 3 wichtigsten übergreifenden **Themen der Woche**. Score-5-Artikel sind starke Kandidaten, aber keine Pflicht-Ausbreitung mehr.
+- Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), ein ausführlicher Synthese-Absatz (4–6 Sätze, verständlich), ein „Dran bleiben"-Anker (Beobachtungs-/Build-Stil) und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
+- Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Ziel ca. 600–800 Wörter, dadurch body-limit-sicher
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
 - Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet
 

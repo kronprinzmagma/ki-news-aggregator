@@ -93,11 +93,14 @@ async function listDailyIssues() {
 
 // ─── Checkbox-Parser ─────────────────────────────────────────────────────────
 
+// Negative Labels wurden umbenannt (poorWriteup: "Schlecht aufbereitet" →
+// "Zu kompliziert erklärt"; irrelevant: "Irrelevanter Inhalt" → "Thema nicht
+// relevant"). Beide Varianten matchen, damit historische und neue Issues laufen.
 const CHECKBOX_PATTERNS = {
   wertvoll:           /- \[[xX]\] Besonders wertvoll/,
   weiterverfolgen:    /- \[[xX]\] Später weiterverfolgen/,
-  schlecht_aufbereitet: /- \[[xX]\] Schlecht aufbereitet/,
-  irrelevant:         /- \[[xX]\] Irrelevanter Inhalt/,
+  schlecht_aufbereitet: /- \[[xX]\] (?:Schlecht aufbereitet|Zu kompliziert erklärt)/,
+  irrelevant:         /- \[[xX]\] (?:Irrelevanter Inhalt|Thema nicht relevant)/,
 };
 
 /**
