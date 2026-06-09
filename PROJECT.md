@@ -57,7 +57,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | LLM-Modell Scoring | Claude Haiku (kostensensitiv, viele Artikel pro Tag) |
 | LLM-Modell Deliver | Claude Sonnet (höhere Qualität, wenige Aufrufe) |
 | Delivery-Channel | Ausschliesslich GitHub Issues im gleichen Repo |
-| Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI |
+| Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI; optional `OPENAI_API_KEY` für die Audio-Hörfassung des Daily (TTS) |
 | Datenhaltung | Keine Datenbank – JSON-Files im Repo-Root als Zwischenergebnisse |
 | Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |

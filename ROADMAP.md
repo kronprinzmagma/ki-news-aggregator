@@ -127,6 +127,20 @@ Effektive Cost-Reduktion (Smoke-Test 2026-05-22): Score von $0.23 auf $0.05 (-78
 
 ---
 
+## Phase 11 – Audio-Ausgabe (Konsum-Kanal)
+
+Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review-Schlaufe ab), sondern der Konsum – ein Textblock wird morgens übersprungen, Audio unterwegs ist oft der einzige Slot, der durchkommt. Daher die fertigen Inhalte zusätzlich als Audio anhörbar machen.
+
+- [x] Daily-Audio: `lib/tts.js` (OpenAI `gpt-4o-mini-tts`, Chunking, Retry) + `lib/audio.js` (Claude-Sprechfassung → TTS → Release-Asset). Optional via `OPENAI_API_KEY`, fehlertolerant (No-Op ohne Key).
+- [x] Hosting via GitHub Release-Asset (`podcast`-Tag, `daily-YYYY-MM-DD.mp3`); `lib/github.js` mit `getOrCreateRelease` / `uploadReleaseAsset` / `deleteReleaseAsset`.
+- [x] Podcast-RSS-Feed (`_site/feed-daily.xml`) + `<audio>`-Player auf den Daily-Detailseiten in `scripts/build-archive.js`; Feed im Index verlinkt.
+- [x] `🎧 Audio-Version`-Link im Daily-Issue; Audio-Metadaten in `run-summary-*.json`.
+- [ ] Weekly-Audio nach gleichem Muster (eigener Feed `feed-weekly.xml`)
+- [ ] Stimmen-Samples vergleichen und Default-Stimme final wählen (aktuell `onyx`)
+- [ ] Optional: Dialog-Stil (zwei Stimmen, NotebookLM-artig) evaluieren, falls Vorlese-Stil zu trocken
+
+---
+
 ## Erledigte Punkte
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen

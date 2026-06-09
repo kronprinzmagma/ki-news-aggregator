@@ -1,6 +1,19 @@
 # Current State
 
-Stand: 2026-06-02
+Stand: 2026-06-09
+
+## Audio-Ausgabe für Daily (2026-06-09, neu)
+
+Konsum-Kanal ergänzt: das fertige Daily kann jetzt als Audio angehört werden (Input: ein Textblock wird morgens übersprungen, Audio unterwegs kommt durch).
+
+- `lib/tts.js`: OpenAI `gpt-4o-mini-tts` via REST, Retry, Chunking (4096-Zeichen-Limit der Speech-API), MP3-Buffer-Concat.
+- `lib/audio.js`: `generateDailyAudio()` – Claude (`AUDIO_SCRIPT_MODEL`) schreibt Sprech-Skript aus Überblick + finalen Aufbereitungen, TTS synthetisiert, Upload als Release-Asset.
+- `lib/github.js`: `getOrCreateRelease` / `uploadReleaseAsset` (uploads.github.com, Binär) / `deleteReleaseAsset`. Rollierende Release `podcast`, Asset `daily-YYYY-MM-DD.mp3`.
+- `deliver.js`: ruft Audio nach dem Rewrite-Loop, fügt `🎧 Audio-Version`-Link ins Issue, `run-summary.deliver.audio`.
+- `scripts/build-archive.js`: liest Release-Assets, baut `_site/feed-daily.xml` (Podcast-RSS) + `<audio>`-Player auf Daily-Seiten, Feed im Index verlinkt.
+- `.github/workflows/daily-news.yml`: `OPENAI_API_KEY`-Env ergänzt.
+- Vollständig optional und fehlertolerant: ohne `OPENAI_API_KEY` exakt wie zuvor. Stimme `onyx` (Default, in `lib/config.js` `AUDIO_*`).
+- Offen: GitHub-Secret `OPENAI_API_KEY` setzen + erster Live-Test; Weekly-Audio; ggf. Stimmen-Samples.
 
 ## Reliability-Fixes (2026-06-02)
 

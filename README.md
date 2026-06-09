@@ -40,7 +40,7 @@ Three stages run sequentially:
 
 **2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric calibrated to the product-builder persona. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Only Score ≥ 4 reaches publication.
 
-**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk.
+**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk. Optionally — if `OPENAI_API_KEY` is set — a spoken-word version of the daily is generated (`gpt-4o-mini-tts`), hosted as a GitHub Release asset, linked in the issue, and exposed as a podcast RSS feed.
 
 **Weekly** — A Sunday digest fetches the last 7 daily issues, deduplicates across days, and synthesises the week's Score-5 articles (plus 1–2 Score-4 picks) into a narrative: what happened, what it means, a critical framing.
 
@@ -141,6 +141,8 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Static archive via GitHub Pages.** `scripts/build-archive.js` fetches all daily and weekly issues via the GitHub API (with pre-rendered HTML body) and generates a polished landing site. Auto-rebuilt after each daily/weekly run by `publish-archive.yml`. Live: [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/).
 
+**Audio version as a private podcast (optional).** When `OPENAI_API_KEY` is set, the deliver stage turns the finished daily into a spoken-word episode: `claude-sonnet-4-6` rewrites the issue text into a clean speaking script (no markdown, no URLs, intro with AI disclaimer), `gpt-4o-mini-tts` synthesises it to MP3 (`lib/tts.js` chunks long scripts within the 4096-char API limit), and the file is uploaded as an asset of a rolling GitHub Release (`lib/audio.js`, `lib/github.js`). The archive build then generates a podcast RSS feed (`_site/feed-daily.xml`) and embeds an audio player on each daily page — subscribe in any podcast app so the morning briefing lands in the slot that actually gets through. Fully optional and fault-tolerant: without the key, or on any error, the daily run behaves exactly as before. ~$0.10/day. Voice is configurable in `lib/config.js` (`AUDIO_*`, default `onyx`).
+
 **Deterministic pre-filter + cross-day pre-dedup.** Before any article reaches the LLM, two cheap filters run: `lib/cross-day-dedup.js` drops articles that were already published in the last 7 daily issues (URL or title similarity), and a deterministic auto-score sets `score=2` for sources/formats that are structurally weak (`hackernews-show`, articles with `truncated=true`). On a typical run this drops ~60% of articles before the LLM ever sees them. Pure cost optimisation, zero quality risk — these articles would have been filtered out anyway downstream.
 
 **Anthropic Batch API for scoring (50% cost reduction).** `lib/claude.js` exposes a `claudeBatch()` helper that submits all remaining score calls in one batch, polls until done, and parses the JSONL results. Async (typically <30 min), perfectly fine for a daily cron with no SLA. Cost tracking respects the 50% discount automatically. Together with the pre-filters: score-stage cost dropped from ~$0.23 to ~$0.05 per run (-78%).
@@ -168,7 +170,7 @@ lib/                   — Shared modules: claude, github, http, store,
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured outputs via tool-use) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues API
+Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI TTS (`gpt-4o-mini-tts`, optional audio) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
 
 ---
 
@@ -179,9 +181,10 @@ The whole pipeline is repo-agnostic. `REPO_OWNER`/`REPO_NAME` derive from the st
 **Five steps to your own daily KI briefing:**
 
 1. **Fork this repo** to your own account.
-2. **Add two repository secrets** under *Settings → Secrets and variables → Actions*:
+2. **Add repository secrets** under *Settings → Secrets and variables → Actions*:
    - `ANTHROPIC_API_KEY` — your Anthropic API key
-   - `GH_PAT` — a personal access token with `repo` scope (used to create/update issues; the default `GITHUB_TOKEN` doesn't have enough permissions for cross-workflow issue access)
+   - `GH_PAT` — a personal access token with `repo` scope (used to create/update issues and upload audio release assets; the default `GITHUB_TOKEN` doesn't have enough permissions for cross-workflow issue access)
+   - `OPENAI_API_KEY` *(optional)* — enables the audio podcast version. Leave it unset and everything else works unchanged.
 3. **Enable GitHub Pages**: *Settings → Pages → Source: GitHub Actions*. The static archive site builds automatically after each daily run.
 4. **Enable workflow runs**: *Actions* tab → enable workflows for the fork.
 5. **Trigger the first run manually**: *Actions → Daily KI-News → Run workflow*. Subsequent runs happen automatically at 05:30 UTC daily.

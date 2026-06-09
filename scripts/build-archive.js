@@ -82,6 +82,71 @@ async function getIssueHtmlBody(issueNumber) {
   return parsed.body_html || '';
 }
 
+// ─── Audio-Assets (Podcast) ────────────────────────────────────────────────────
+// MP3s liegen als Assets der "podcast"-Release. Mapt Datum → { url, size }.
+const AUDIO_RELEASE_TAG = 'podcast';
+
+async function getAudioByDate() {
+  const map = new Map();
+  try {
+    const { body } = await ghRequest(`/repos/${REPO_OWNER}/${REPO_NAME}/releases/tags/${AUDIO_RELEASE_TAG}`);
+    const release = JSON.parse(body);
+    for (const asset of release.assets || []) {
+      const m = asset.name.match(/^daily-(\d{4}-\d{2}-\d{2})\.mp3$/);
+      if (m) map.set(m[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
+    }
+    console.log(`[archive] ${map.size} Audio-Folgen gefunden`);
+  } catch (err) {
+    console.log(`[archive] Keine Audio-Assets (${err.message})`);
+  }
+  return map;
+}
+
+// GitHub-Pages-Basis-URL für absolute Links im RSS-Feed. Override via PAGES_URL
+// (z.B. bei Custom-Domain), sonst Projekt-Pages-Default.
+const PAGES_URL = (process.env.PAGES_URL || `https://${REPO_OWNER}.github.io/${REPO_NAME}`).replace(/\/$/, '');
+
+function rfc822(dateStr) {
+  // dateStr: YYYY-MM-DD → 06:00 UTC (nach dem Daily-Lauf).
+  return new Date(`${dateStr}T06:00:00Z`).toUTCString();
+}
+
+function buildPodcastFeed(dailies, audioByDate, teasers) {
+  const episodes = dailies
+    .filter((d) => audioByDate.has(d.date))
+    .map((d) => {
+      const audio = audioByDate.get(d.date);
+      const desc = teasers.get(d.issue.number) || `KI Daily vom ${d.date}.`;
+      return `    <item>
+      <title>${escapeHtml(d.issue.title)}</title>
+      <link>${PAGES_URL}/daily/${d.date}.html</link>
+      <guid isPermaLink="false">ki-daily-${d.date}</guid>
+      <pubDate>${rfc822(d.date)}</pubDate>
+      <description>${escapeHtml(desc)}</description>
+      <itunes:summary>${escapeHtml(desc)}</itunes:summary>
+      <enclosure url="${audio.url}" length="${audio.size}" type="audio/mpeg"/>
+      <itunes:explicit>false</itunes:explicit>
+    </item>`;
+    })
+    .join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KI Daily – Audio</title>
+    <link>${PAGES_URL}/</link>
+    <atom:link href="${PAGES_URL}/feed-daily.xml" rel="self" type="application/rss+xml"/>
+    <language>de</language>
+    <description>Tägliches KI-News-Briefing als Audio. KI-generiert (Claude/Anthropic, OpenAI TTS). Hinweis nach EU AI Act Art. 50(4).</description>
+    <itunes:author>ki-news-aggregator</itunes:author>
+    <itunes:summary>Tägliches KI-News-Briefing als Audio, automatisch kuratiert.</itunes:summary>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:category text="Technology"/>
+${episodes}
+  </channel>
+</rss>`;
+}
+
 // ─── Klassifizierung ─────────────────────────────────────────────────────────
 
 function classify(issue) {
@@ -169,6 +234,18 @@ article.entry code {
   font-size: .9em;
 }
 article.entry .task-list-item input { margin-right: .5rem; }
+.audio {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  background: #f4f7ff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.audio audio { width: 100%; }
+.audio .dl { font-size: .85rem; color: var(--muted); }
 .list-grid {
   display: grid;
   gap: .8rem;
@@ -289,6 +366,8 @@ async function main() {
   weeklies.sort((a, b) => parseInt(b.week, 10) - parseInt(a.week, 10));
   console.log(`[archive] ${dailies.length} Daily-Issues, ${weeklies.length} Weekly-Issues`);
 
+  const audioByDate = await getAudioByDate();
+
   await fs.rm(OUT_DIR, { recursive: true, force: true });
   await fs.mkdir(path.join(OUT_DIR, 'daily'), { recursive: true });
   await fs.mkdir(path.join(OUT_DIR, 'weekly'), { recursive: true });
@@ -311,7 +390,11 @@ async function main() {
           { href: `./`, label: item.kind === 'daily' ? 'Daily' : 'Weekly' },
           { label: item.issue.title },
         ];
-        const content = `<article class="entry">${html}</article>`;
+        const audio = item.kind === 'daily' ? audioByDate.get(item.slug) : null;
+        const player = audio
+          ? `<div class="audio"><strong>🎧 Audio-Version</strong><audio controls preload="none" src="${audio.url}"></audio><a class="dl" href="${audio.url}">herunterladen</a></div>`
+          : '';
+        const content = `<article class="entry">${player}${html}</article>`;
         await fs.writeFile(file, layout({ title: item.issue.title, content, crumbs }), 'utf-8');
         teasers.set(item.issue.number, extractTeaser(html));
         console.log(`  ✓ ${item.kind}/${item.slug}.html`);
@@ -350,6 +433,7 @@ ${weeklies.length > 0 ? `<section class="section">
 
 <section class="section">
   <h2>Daily Briefings (${dailies.length})</h2>
+  ${audioByDate.size > 0 ? `<p>🎧 <a href="feed-daily.xml">Audio-Podcast-Feed abonnieren</a> – in Apple Podcasts, Overcast, Pocket Casts u. a. einfügen.</p>` : ''}
   <div class="list-grid">${dailyList}</div>
 </section>`;
 
@@ -359,6 +443,12 @@ ${weeklies.length > 0 ? `<section class="section">
     'utf-8',
   );
   console.log(`  ✓ index.html`);
+
+  // Podcast-RSS-Feed (nur wenn Audio existiert).
+  if (audioByDate.size > 0) {
+    await fs.writeFile(path.join(OUT_DIR, 'feed-daily.xml'), buildPodcastFeed(dailies, audioByDate, teasers), 'utf-8');
+    console.log(`  ✓ feed-daily.xml (${[...audioByDate.keys()].length} Folgen)`);
+  }
 
   // Disable Jekyll-Processing (sonst kollidieren _site und Markdown-Conventions).
   await fs.writeFile(path.join(OUT_DIR, '.nojekyll'), '', 'utf-8');

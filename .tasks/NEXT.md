@@ -38,6 +38,17 @@ Aktuell 8 Einträge in `evals/goldstandard.json`, Ziel: ~40.
 
 ---
 
+### 4. Audio: Secret setzen + Live-Test, dann Weekly-Audio
+
+Daily-Audio ist implementiert (`lib/tts.js`, `lib/audio.js`), aber noch nicht live: `OPENAI_API_KEY` als GitHub-Secret fehlt. Ohne Key No-Op.
+
+**Scope:**
+- `OPENAI_API_KEY` als Repo-Secret setzen, einen Daily-Lauf prüfen (MP3 als `podcast`-Release-Asset, `🎧`-Link im Issue, `feed-daily.xml` im Pages-Build).
+- Danach: Weekly-Audio nach gleichem Muster (`weekly.js` + eigener Feed `feed-weekly.xml`).
+- Optional: Stimmen-Samples vergleichen, Default-Stimme (`AUDIO_VOICE`, aktuell `onyx`) final wählen.
+
+---
+
 ## Bewusst zurückgestellt
 
 - **API-Keys aus `.env`**: Verschiebung in `~/.zprofile` oder macOS Keychain – vom User zurückgestellt

@@ -14,7 +14,8 @@ Drei Bausteine, sequenziell:
 
 - Node.js, keine Frameworks
 - Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring, `claude-sonnet-4-6` für Delivering, Review und Weekly. Strukturierte Outputs via Tool-Use.
-- Geteilte Module in `lib/`: `claude` (Retry, Caching), `github`, `http` (SSRF-Schutz), `config` (Modelle, Schwellwerte, Stopwords), `text-utils`, `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten), `env`, `date`
+- OpenAI API via REST: `gpt-4o-mini-tts` für die optionale Audio-Hörfassung des Daily (TTS). Nur aktiv, wenn `OPENAI_API_KEY` gesetzt ist – sonst No-Op.
+- Geteilte Module in `lib/`: `claude` (Retry, Caching), `github` (inkl. Release-Asset-Upload), `http` (SSRF-Schutz), `config` (Modelle, Schwellwerte, Stopwords), `text-utils`, `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten), `tts` (OpenAI TTS, Chunking), `audio` (Daily-Hörfassung: Skript → TTS → Release-Asset), `env`, `date`
 - Adapter-Basis in `adapters/_base.js`: HTTP-GET, RSS-/Atom-Parsing, Content-Extraktion, Enrichment
 - SQLite-Persistenz (`better-sqlite3`, lokale `ki-news.db`) für Cross-Day-Dedup und Run-Historie; JSON-Files (`articles-*.json`, `scored-*.json`, `run-summary-*.json`) bleiben als Audit-Artefakte
 
@@ -67,6 +68,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Issue-Body enthält pro Artikel einen versionierten HTML-Kommentar-Marker `<!-- ki-news-meta: {...} -->`. Weekly und Cross-Day-Dedup lesen primär aus diesen Markern, fallen auf das `Score X/5 · [...](...)`-Regex zurück (Backwards Compatibility).
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
+- **Audio-Hörfassung (optional, Konsum-Kanal):** Ist `OPENAI_API_KEY` gesetzt, wird nach dem Rewrite-Loop eine gesprochene Fassung erzeugt (`lib/audio.js`): Claude (`AUDIO_SCRIPT_MODEL`) schreibt aus Überblick + finalen Aufbereitungen ein Sprech-Skript (Markdown/Links raus, Überschriften als Übergänge, Intro mit KI-Disclaimer), OpenAI `gpt-4o-mini-tts` (Stimme `AUDIO_VOICE`, Default `onyx`) synthetisiert MP3, das als Asset der rollierenden Release `AUDIO_RELEASE_TAG` (`podcast`) hochgeladen wird (`daily-YYYY-MM-DD.mp3`). Das Issue erhält einen `🎧 Audio-Version`-Link, die Metadaten landen in `run-summary`. Fehlt der Key oder schlägt ein Schritt fehl, ist es ein No-Op – der Daily-Lauf bricht nie daran ab. `scripts/build-archive.js` baut daraus einen Podcast-RSS-Feed (`_site/feed-daily.xml`) und bettet einen Player auf den Daily-Detailseiten ein. Konfiguration in `lib/config.js` (`AUDIO_*`). Weekly hat (noch) keine Audio-Ausgabe.
 - Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 5 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technischen Produktleser `comprehension_nontechnical` 1–5) – inkl. Bewertung der geschriebenen drei Blöcke. `comprehension_nontechnical <= 3` triggert ein Rewrite.
 - Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen
 - Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`

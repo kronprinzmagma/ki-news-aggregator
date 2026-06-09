@@ -25,6 +25,7 @@ import {
   closeStore,
 } from './lib/store.js';
 import { articleMeta, parseArticleMetas } from './lib/issue-format.js';
+import { generateDailyAudio } from './lib/audio.js';
 
 loadEnv();
 
@@ -664,6 +665,11 @@ async function main() {
     runSummary.deliver.build_anchors = writtenAnchors;
   }
 
+  // Audio-Hörfassung erzeugen (optional, fehlertolerant): nutzt die finalen
+  // Aufbereitungen nach dem Rewrite-Loop. Ohne OPENAI_API_KEY ein No-Op.
+  const audio = await generateDailyAudio({ date, ueberblick, aufbereitungen, topArtikel, token });
+  runSummary.deliver.audio = audio;
+
   const relatedMap = findRelated(topArtikel);
 
   const lines = [
@@ -671,9 +677,13 @@ async function main() {
     '',
     '> 🤖 **KI-generierter Inhalt.** Zusammenfassungen und Einleitung sind von Claude (Anthropic) verfasst, kuratiert aus den verlinkten Originalquellen. Hinweis nach EU AI Act Art. 50(4).',
     '',
-    ueberblick,
-    '',
   ];
+
+  if (audio?.audio_url) {
+    lines.push(`🎧 **Audio-Version:** [anhören / herunterladen](${audio.audio_url})${audio.est_duration_sec ? ` · ~${Math.round(audio.est_duration_sec / 60)} Min.` : ''}`, '');
+  }
+
+  lines.push(ueberblick, '');
 
   if (dedupedOut.length > 0) {
     lines.push(`> **${dedupedOut.length} Artikel zum gleichen Event zusammengeführt:** ${dedupedOut.map(a => `[${sanitizeMarkdown(a.titel)}](${sanitizeUrl(a.url)})`).join(' · ')}`);

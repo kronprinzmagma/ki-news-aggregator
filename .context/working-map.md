@@ -26,7 +26,9 @@ Nicht erneut breit analysieren:
 
 - `lib/config.js`: Modelle, Repo-Slug, Score-Schwellen, Lab-Quellen, Stopwords. Zentrale Konstanten – nicht im Code verteilen.
 - `lib/claude.js`: Anthropic-API-Helper mit Retry, Prompt Caching, `callClaude/claudeText/claudeJson`. Wird von score/deliver/weekly genutzt.
-- `lib/github.js`: GitHub-API-Helper + `ghPath` für REPO_SLUG-relative Routen.
+- `lib/github.js`: GitHub-API-Helper + `ghPath` für REPO_SLUG-relative Routen; zusätzlich Release-Asset-Helper (`getOrCreateRelease`, `uploadReleaseAsset` über uploads.github.com, `deleteReleaseAsset`) fürs Audio-Hosting.
+- `lib/tts.js`: OpenAI-`gpt-4o-mini-tts`-Helper (`synthesizeSpeech`, `chunkForTts`), Retry + Chunking. Nur aktiv mit `OPENAI_API_KEY`.
+- `lib/audio.js`: `generateDailyAudio()` – Sprech-Skript (Claude) → TTS → Release-Asset. Fehlertolerant, von `deliver.js` aufgerufen.
 - `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.
 - `lib/topic-overlap.js`: Eine Token-Overlap-Implementierung für Event-Dedup, Cluster-Bonus, Themen-Dedup, Related-Links.
 - `lib/store.js`: SQLite-Persistenz (`better-sqlite3`, DB-Datei `ki-news.db`, lokal generiert, nicht im Repo). Cross-Day-Dedup liest aus `issue_articles`.
