@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**191 Einträge** · Top-Quellen: heise (66) · hackernews (49) · simonwillison (33) · latentspace (23) · anthropic (6) · huggingface (5) · golem (4) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**202 Einträge** · Top-Quellen: heise (67) · hackernews (55) · simonwillison (34) · latentspace (24) · huggingface (6) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-09** — [The Open Source Community is backing OpenEnv for Agentic RL](2026-06-09-the-open-source-community-is-backing-openenv-for-agentic-rl.md) · *huggingface · Score 4*
+- **2026-06-09** — [Siri AI at WWDC 2026](2026-06-09-siri-ai-at-wwdc-2026.md) · *simonwillison · Score 4*
+- **2026-06-09** — [Porting the ThinkPad X61 to Coreboot](2026-06-09-porting-the-thinkpad-x61-to-coreboot.md) · *hackernews · Score 4*
+- **2026-06-09** — [Microsoft's open source tools were hacked to steal passwords of AI developers](2026-06-09-microsoft-s-open-source-tools-were-hacked-to-steal-passwords.md) · *hackernews · Score 4*
+- **2026-06-09** — [FrontierCode](2026-06-09-frontiercode.md) · *hackernews · Score 4*
+- **2026-06-09** — [CRDTs merge concurrent edits. Why not concurrent creation?](2026-06-09-crdts-merge-concurrent-edits-why-not-concurrent-creation.md) · *hackernews · Score 4*
+- **2026-06-09** — [Apple reveals new AI architecture built around Google Gemini models](2026-06-09-apple-reveals-new-ai-architecture-built-around-google-gemini.md) · *hackernews · Score 4*
+- **2026-06-09** — [Apple Intelligence: Siri AI auf dem iPhone und iPad nicht in der EU](2026-06-09-apple-intelligence-siri-ai-auf-dem-iphone-und-ipad-nicht-in-.md) · *golem · Score 4*
+- **2026-06-09** — [Apple bets cheaper AI will woo small developers](2026-06-09-apple-bets-cheaper-ai-will-woo-small-developers.md) · *hackernews · Score 4*
+- **2026-06-09** — [Angular 22 legt neuen Fokus auf KI-Coding](2026-06-09-angular-22-legt-neuen-fokus-auf-ki-coding.md) · *heise · Score 4*
+- **2026-06-09** — [[AINews] FrontierCode: Benchmarking for Code Quality over Slop](2026-06-09-ainews-frontiercode-benchmarking-for-code-quality-over-slop.md) · *latentspace · Score 4*
 - **2026-06-08** — [Neue Siri: Apple bleibt bei Datenschutzstrategie](2026-06-08-neue-siri-apple-bleibt-bei-datenschutzstrategie.md) · *heise · Score 4*
 - **2026-06-08** — [How's Linear so fast? A technical breakdown](2026-06-08-how-s-linear-so-fast-a-technical-breakdown.md) · *hackernews · Score 4*
 - **2026-06-08** — [Google mietet für viel Geld Rechenleistung bei Musks SpaceX](2026-06-08-google-mietet-fur-viel-geld-rechenleistung-bei-musks-spacex.md) · *heise · Score 4*
