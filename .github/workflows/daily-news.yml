@@ -49,7 +49,7 @@ jobs:
           fi
 
       - name: Restore SQLite run history
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
@@ -92,7 +92,7 @@ jobs:
 
       - name: Save SQLite run history
         if: always() && hashFiles('ki-news.db') != ''
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
