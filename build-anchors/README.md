@@ -2,10 +2,39 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**202 Einträge** · Top-Quellen: heise (67) · hackernews (55) · simonwillison (34) · latentspace (24) · huggingface (6) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**231 Einträge** · Top-Quellen: heise (88) · hackernews (62) · simonwillison (35) · latentspace (24) · huggingface (6) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-10** — [WTF: Metas KI-Chatbot half beim Knacken zehntausender Instagram-Accounts](2026-06-10-wtf-metas-ki-chatbot-half-beim-knacken-zehntausender-instagr.md) · *heise · Score 4*
+- **2026-06-10** — [Video: So installiert und nutzt ihr lokale KI-Modelle](2026-06-10-video-so-installiert-und-nutzt-ihr-lokale-ki-modelle.md) · *heise · Score 4*
+- **2026-06-10** — [Upcoming breaking changes for npm v12](2026-06-10-upcoming-breaking-changes-for-npm-v12.md) · *hackernews · Score 4*
+- **2026-06-10** — [Surprise, Pay $1000](2026-06-10-surprise-pay-1000.md) · *hackernews · Score 4*
+- **2026-06-10** — [Setting a custom price for a model in AgentsView](2026-06-10-setting-a-custom-price-for-a-model-in-agentsview.md) · *simonwillison · Score 4*
+- **2026-06-10** — [RIP software hackathons. Long live the hardware hackathon](2026-06-10-rip-software-hackathons-long-live-the-hardware-hackathon.md) · *hackernews · Score 4*
+- **2026-06-10** — [Pixel Studio: Google beendet KI-Bildbearbeitung auf Pixel-Smartphones](2026-06-10-pixel-studio-google-beendet-ki-bildbearbeitung-auf-pixel-sma.md) · *heise · Score 4*
+- **2026-06-10** — [OpenCV 5.0 bringt LLMs in die Computer-Vision-Bibliothek](2026-06-10-opencv-5-0-bringt-llms-in-die-computer-vision-bibliothek.md) · *heise · Score 4*
+- **2026-06-10** — [NotebookLM kann jetzt Excel-Tabellen und Präsentationen erzeugen](2026-06-10-notebooklm-kann-jetzt-excel-tabellen-und-prasentationen-erze.md) · *heise · Score 4*
+- **2026-06-10** — [No Fakes Act: US-Spielebranche warnt vor Deepfake-Gesetzgebung](2026-06-10-no-fakes-act-us-spielebranche-warnt-vor-deepfake-gesetzgebun.md) · *heise · Score 4*
+- **2026-06-10** — [Nextcloud Hub 26 Spring: Euro-Office fordert Collabora heraus](2026-06-10-nextcloud-hub-26-spring-euro-office-fordert-collabora-heraus.md) · *heise · Score 4*
+- **2026-06-10** — [Nach Entlassungswelle: Meta investiert in Handwerker für KI-Rechenzentren](2026-06-10-nach-entlassungswelle-meta-investiert-in-handwerker-fur-ki-r.md) · *heise · Score 4*
+- **2026-06-10** — [macOS Container Machines](2026-06-10-macos-container-machines.md) · *hackernews · Score 4*
+- **2026-06-10** — [KIs, die sich selbst programmieren: Sakana AI gründet Forschungslabor](2026-06-10-kis-die-sich-selbst-programmieren-sakana-ai-grundet-forschun.md) · *heise · Score 4*
+- **2026-06-10** — [KI-Update: DeepSeek erobert USA, KI schafft KI, Umbau von ChatGPT, KI-Bot-Liebe](2026-06-10-ki-update-deepseek-erobert-usa-ki-schafft-ki-umbau-von-chatg.md) · *heise · Score 4*
+- **2026-06-10** — [KI-Startup gewinnt Hollywood-Legende: Martin Scorsese berät Black Forest Labs](2026-06-10-ki-startup-gewinnt-hollywood-legende-martin-scorsese-berat-b.md) · *heise · Score 4*
+- **2026-06-10** — [KI-Kettenbrief ist fake - aber es gibt trotzdem ein WhatsApp-Problem](2026-06-10-ki-kettenbrief-ist-fake-aber-es-gibt-trotzdem-ein-whatsapp-p.md) · *heise · Score 4*
+- **2026-06-10** — [Intel und Foxconn arbeiten zusammen an der nächsten Generation von KI-Systemen](2026-06-10-intel-und-foxconn-arbeiten-zusammen-an-der-nachsten-generati.md) · *heise · Score 4*
+- **2026-06-10** — [Humanoider Roboter für extreme Umgebungen: „Pemba“ besteigt Vulkan Chimborazo](2026-06-10-humanoider-roboter-fur-extreme-umgebungen-pemba-besteigt-vul.md) · *heise · Score 4*
+- **2026-06-10** — [heise+ | Justitia auf Irrwegen: Die Rechtsprechung und der Kampf mit dem KI-Müll](2026-06-10-heise-justitia-auf-irrwegen-die-rechtsprechung-und-der-kampf.md) · *heise · Score 4*
+- **2026-06-10** — [Google reduziert Preis für AI-Plus-Abo und verdoppelt Speicher](2026-06-10-google-reduziert-preis-fur-ai-plus-abo-und-verdoppelt-speich.md) · *heise · Score 4*
+- **2026-06-10** — [German ruling declares Google liable for false answers in AI Overviews](2026-06-10-german-ruling-declares-google-liable-for-false-answers-in-ai.md) · *hackernews · Score 5*
+- **2026-06-10** — [EU: WhatsApp muss andere KI-Chatbots kostenfrei zulassen, sonst droht Zwangsgeld](2026-06-10-eu-whatsapp-muss-andere-ki-chatbots-kostenfrei-zulassen-sons.md) · *heise · Score 4*
+- **2026-06-10** — [EU reagiert auf Apples Siri-AI-Blockade, weist DMA-Vorwürfe zurück](2026-06-10-eu-reagiert-auf-apples-siri-ai-blockade-weist-dma-vorwurfe-z.md) · *heise · Score 4*
+- **2026-06-10** — [Datadog baut Observability-Plattform zum autonomen KI-Teamkollegen aus](2026-06-10-datadog-baut-observability-plattform-zum-autonomen-ki-teamko.md) · *heise · Score 4*
+- **2026-06-10** — [Claude Fable 5](2026-06-10-claude-fable-5.md) · *hackernews · Score 5*
+- **2026-06-10** — [ChatGPT sichert Nutzer: Was der Lockdown-Mode bringt und wovor er nicht schützt](2026-06-10-chatgpt-sichert-nutzer-was-der-lockdown-mode-bringt-und-wovo.md) · *heise · Score 4*
+- **2026-06-10** — [AWS Bedrock to require sharing data with Anthropic for Mythos and future models](2026-06-10-aws-bedrock-to-require-sharing-data-with-anthropic-for-mytho.md) · *hackernews · Score 4*
+- **2026-06-10** — [Analyst zu Gemini auf dem iPhone: Rettet Google Apples KI-Ambitionen?](2026-06-10-analyst-zu-gemini-auf-dem-iphone-rettet-google-apples-ki-amb.md) · *heise · Score 4*
 - **2026-06-09** — [The Open Source Community is backing OpenEnv for Agentic RL](2026-06-09-the-open-source-community-is-backing-openenv-for-agentic-rl.md) · *huggingface · Score 4*
 - **2026-06-09** — [Siri AI at WWDC 2026](2026-06-09-siri-ai-at-wwdc-2026.md) · *simonwillison · Score 4*
 - **2026-06-09** — [Porting the ThinkPad X61 to Coreboot](2026-06-09-porting-the-thinkpad-x61-to-coreboot.md) · *hackernews · Score 4*
