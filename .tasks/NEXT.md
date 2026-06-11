@@ -2,13 +2,13 @@
 
 ## Offene Punkte (Priorität absteigend)
 
-### 1. Embeddings-Dedup-Eval auswerten
+### 1. Eval-Goldstandard weiter wachsen lassen
 
-`evals/embedding_dedup_eval.js` existiert (A/B Heuristik vs. OpenAI-Embeddings über lokale `articles-*.json`). Einmal lokal laufen lassen (`OPENAI_API_KEY` nötig), Disagreements von Hand labeln. Nur bei klarem Embeddings-Vorteil Produktions-Umbau erwägen.
+Stand 11.06.: 34 Einträge (17 via erstem feedback-loop-Lauf promotet). Ziel: ~50 mit breiterer Score-Verteilung (aktuell 21× Score 5, nur 1× Score 2 – Mittelfeld-Urteile fehlen). Wächst automatisch über `feedback-loop.yml` (sonntags); beim Lesen auch mal „Thema nicht relevant" bei Mittelmass setzen, nicht nur Extreme markieren.
 
-### 2. Eval-Goldstandard wachsen lassen
+### 2. Scoring-Prompt-Kalibrierung beobachten
 
-Aktuell ~17 Einträge, Ziel: ~40. Wächst jetzt automatisch über `feedback-loop.yml` (sonntags) – es braucht nur fleissiges Häkchen-Setzen beim Lesen. Die MAE-1.5-Schwelle erst ab ~30 Einträgen als hartes Gate ernst nehmen (bei n=17 statistisch instabil).
+Prompt am 11.06. gegen die Feedback-Outlier kalibriert (Pearson 0.48 → 0.75, Acc@±1 91%). Nach den nächsten ~10 Goldstandard-Zugängen prüfen, ob die Werte halten (kein Overfitting auf das 34er-Set). Bekannter Rest-Ausreisser: CRDT-Artikel (Dev-Tool ohne KI-Kern wird trotz Regel mit 4 bewertet).
 
 ### 3. Audio-Stimme final wählen
 
@@ -27,6 +27,8 @@ Bewusst zurückgestellt: Auto-PRs mit Prompt-Änderungen ohne Eval-Gate riskiere
 - ✅ Feedback-Loop automatisiert (`feedback-loop.yml` + `eval-regression`-Issue)
 - ✅ Stats-Seite im Pages-Archiv (`scripts/export-stats.js` → `stats.html`)
 - ✅ `run_eval.py`-Drift obsolet: `run_eval.js` nutzt denselben Pfad wie `score.js`
+- ✅ Embeddings-Dedup-Eval ausgewertet (CI-Lauf 11.06.): Heuristik gewinnt klar, kein Umbau – Details in `evals/EVALS.md`
+- ✅ Scoring-Prompt gegen Feedback-Goldstandard kalibriert (Pearson 0.48 → 0.75)
 
 ## Bewusst zurückgestellt
 
