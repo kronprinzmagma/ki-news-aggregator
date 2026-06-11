@@ -8,8 +8,9 @@ on:
 jobs:
   check-and-trigger:
     runs-on: ubuntu-latest
-    env:
-      GH_PAT: ${{ secrets.GH_PAT }}
+    # Arbeitet ausschliesslich mit GH_PAT – das Workflow-Token braucht nichts.
+    permissions: {}
+    timeout-minutes: 10
 
     steps:
       - name: Prüfe ob Haupt-Workflow heute bereits gelaufen ist

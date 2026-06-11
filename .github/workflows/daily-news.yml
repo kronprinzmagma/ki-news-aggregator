@@ -11,6 +11,12 @@ on:
         required: false
         default: ''
 
+# Parallele Läufe (Schedule + manueller Dispatch + Watchdog) würden sich
+# gegenseitig den SQLite-Cache überschreiben (Last-Write-Wins).
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -27,13 +33,13 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           # Wir wollen pushen können
           persist-credentials: true
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6.4.0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: '24'
 
@@ -41,15 +47,19 @@ jobs:
         run: npm ci
 
       - name: Set run date
+        # Input via env statt direkter ${{ }}-Interpolation im Skript
+        # (Actions-Script-Injection-Härtung).
+        env:
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
-          if [ -n "${{ github.event.inputs.run_date }}" ]; then
-            echo "RUN_DATE=${{ github.event.inputs.run_date }}" >> $GITHUB_ENV
+          if [ -n "$RUN_DATE_INPUT" ]; then
+            echo "RUN_DATE=$RUN_DATE_INPUT" >> $GITHUB_ENV
           else
             echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV
           fi
 
       - name: Restore SQLite run history
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
@@ -80,7 +90,7 @@ jobs:
 
       - name: Upload Run Artifacts
         if: always()
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: run-${{ env.RUN_DATE }}
           retention-days: 30
@@ -92,7 +102,7 @@ jobs:
 
       - name: Save SQLite run history
         if: always() && hashFiles('ki-news.db') != ''
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}

@@ -9,11 +9,14 @@ on:
 jobs:
   close-old-issues:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GH_PAT }}
+    # Arbeitet ausschliesslich mit GH_PAT – das Workflow-Token braucht nichts.
+    permissions: {}
+    timeout-minutes: 10
 
     steps:
       - name: Issues mit Label 'summary' schliessen, die älter als 7 Tage sind
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           CUTOFF=$(date -d '7 days ago' --iso-8601=seconds)
           echo "Schliesse Issues älter als: $CUTOFF"
