@@ -1,14 +1,13 @@
 import { httpGet, parseAtom, enrichFromUrl } from './_base.js';
+import { DACH_AI_PATTERN } from '../lib/config.js';
 
 // Heise Online – allgemeiner Atom-Feed, gefiltert auf KI-Relevanz (DACH-Perspektive).
 const FEED_URL = 'https://www.heise.de/rss/heise-atom.xml';
 
-const AI_PATTERN = /\b(ki\b|k\.i\.|künstlich|artificial intelligence|machine learning|llm|sprachmodell|chatgpt|gpt|claude|gemini|mistral|openai|anthropic|deepmind|copilot|assistent|chatbot|deep learning|neural|neuronale|automation|automat|roboter|robotik|inferenz|generativ|transformer)\b/i;
-
 export async function fetchArticles() {
   const xml = await httpGet(FEED_URL);
   const all = parseAtom(xml, 'heise');
-  const aiArticles = all.filter(a => AI_PATTERN.test(`${a.titel} ${a.rohtext || ''}`));
+  const aiArticles = all.filter(a => DACH_AI_PATTERN.test(`${a.titel} ${a.rohtext || ''}`));
   return Promise.all(aiArticles.map(a => enrichFromUrl(a, {
     logTag: 'heise',
     useMetaDescription: true,

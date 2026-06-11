@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
- * One-Off-Migration: ergänzt die zwei neuen Feedback-Checkboxen
- * ("Schlecht aufbereitet", "Irrelevanter Inhalt") in allen bestehenden
- * KI-Daily-Issues, die noch das alte 2-Box-Format haben.
+ * DEPRECATED – einmalige Migration, gelaufen im Mai 2026. Nicht erneut
+ * ausführen: das Script fügt die inzwischen UMBENANNTEN alten Checkbox-Labels
+ * ("Schlecht aufbereitet", "Irrelevanter Inhalt") ein; aktuelle Issues nutzen
+ * "Zu kompliziert erklärt" / "Thema nicht relevant". Nur mit --force lauffähig.
  *
- * Idempotent: Issues, in denen "Schlecht aufbereitet" bereits vorkommt,
- * werden übersprungen.
+ * Ursprünglicher Zweck: ergänzt die zwei (damals neuen) Feedback-Checkboxen
+ * in allen bestehenden KI-Daily-Issues mit altem 2-Box-Format.
  *
- * Verwendung:
+ * Verwendung (historisch):
  *   GH_PAT=ghp_... node scripts/backfill-checkboxes.js [--dry-run]
  */
 
@@ -15,6 +16,12 @@ import https from 'https';
 import { loadEnv } from '../lib/env.js';
 
 loadEnv();
+
+if (!process.argv.includes('--force')) {
+  console.error('[backfill] DEPRECATED: einmalige Migration (Mai 2026), würde die ALTEN Checkbox-Labels einfügen.');
+  console.error('[backfill] Falls du sicher bist, mit --force ausführen.');
+  process.exit(1);
+}
 
 const [DEFAULT_OWNER, DEFAULT_NAME] = (process.env.GITHUB_REPOSITORY || 'kronprinzmagma/ki-news-aggregator').split('/');
 const REPO_OWNER = process.env.REPO_OWNER || DEFAULT_OWNER;

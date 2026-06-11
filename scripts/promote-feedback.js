@@ -27,11 +27,12 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import https from 'https';
 import { fileURLToPath } from 'url';
 import Database from 'better-sqlite3';
 import { loadEnv } from '../lib/env.js';
-import { parseArticleMetas } from '../lib/issue-format.js';
+import { parseArticleSections } from '../lib/issue-format.js';
+import { httpGet } from '../lib/http.js';
+import { listDailyIssues } from './_shared.js';
 
 loadEnv();
 
@@ -40,10 +41,6 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const GOLD_FILE = path.join(REPO_ROOT, 'evals', 'goldstandard.json');
 const DB_FILE = process.env.KI_NEWS_DB || path.join(REPO_ROOT, 'ki-news.db');
 
-// Forkbar: siehe lib/config.js für dasselbe Pattern.
-const [DEFAULT_OWNER, DEFAULT_NAME] = (process.env.GITHUB_REPOSITORY || 'kronprinzmagma/ki-news-aggregator').split('/');
-const REPO_OWNER = process.env.REPO_OWNER || DEFAULT_OWNER;
-const REPO_NAME = process.env.REPO_NAME || DEFAULT_NAME;
 const TOKEN = process.env.GH_PAT || process.env.GITHUB_TOKEN;
 
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -51,44 +48,6 @@ const DRY_RUN = process.argv.includes('--dry-run');
 if (!TOKEN) {
   console.error('GH_PAT oder GITHUB_TOKEN nicht gesetzt');
   process.exit(1);
-}
-
-// ─── GitHub-Helpers ──────────────────────────────────────────────────────────
-
-function ghRequest(pathSuffix) {
-  return new Promise((resolve, reject) => {
-    const req = https.request({
-      hostname: 'api.github.com', path: pathSuffix, method: 'GET',
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'ki-news-promote-feedback',
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-    }, res => {
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => {
-        if (res.statusCode >= 400) return reject(new Error(`GitHub API ${res.statusCode}: ${data.slice(0, 200)}`));
-        resolve(JSON.parse(data));
-      });
-    });
-    req.on('error', reject);
-    req.end();
-  });
-}
-
-async function listDailyIssues() {
-  const all = [];
-  let page = 1;
-  while (true) {
-    const batch = await ghRequest(`/repos/${REPO_OWNER}/${REPO_NAME}/issues?state=all&per_page=100&page=${page}`);
-    if (batch.length === 0) break;
-    all.push(...batch.filter(i => !i.pull_request && /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title)));
-    if (batch.length < 100) break;
-    page++;
-  }
-  return all;
 }
 
 // ─── Checkbox-Parser ─────────────────────────────────────────────────────────
@@ -108,23 +67,17 @@ const CHECKBOX_PATTERNS = {
  * (aus HTML-Comment) plus den Checkbox-Zustand aus.
  */
 function parseIssueArticles(body, runDate) {
+  // parseArticleSections ordnet Block↔Meta positionssicher zu – ein defekter
+  // Marker (meta=null) verschiebt keine Indizes und wird einfach übersprungen.
   const articles = [];
-  const metas = parseArticleMetas(body);
-  if (metas.length === 0) return articles;
-
-  // Zwischen den Metadaten-Markern liegen jeweils die Artikel-Blöcke (incl.
-  // Checkboxen). Wir splitten nochmal am Marker selbst.
-  const sections = body.split(/<!-- ki-news-meta: .*? -->/);
-  // sections[0] = Header, sections[i+1] = Block nach i-tem Marker
-  for (let i = 0; i < metas.length; i++) {
-    const block = sections[i + 1] || '';
+  for (const { meta, block } of parseArticleSections(body)) {
+    if (!meta) continue;
     const checks = {};
     for (const [key, re] of Object.entries(CHECKBOX_PATTERNS)) {
       checks[key] = re.test(block);
     }
-    const anyChecked = Object.values(checks).some(Boolean);
-    if (!anyChecked) continue; // Performance: ungecheckte Artikel direkt skippen
-    articles.push({ ...metas[i], run_date: runDate, checks });
+    if (!Object.values(checks).some(Boolean)) continue; // ungecheckte Artikel skippen
+    articles.push({ ...meta, run_date: runDate, checks });
   }
   return articles;
 }
@@ -167,44 +120,31 @@ function fetchSourceTextsFromDb(urls) {
   }
 }
 
-// Fallback: holt einen rudimentären Source-Text via plain HTTP-GET (kein
-// HTML-Parsing). Für News-Sites mit RSS-vollem Content reicht es nicht, aber
-// für Goldstandard ist es OK – das Modell kriegt zumindest minimal Kontext.
-// Wer mehr will, lässt vorher `node ingest.js` lokal laufen.
-function fetchUrlText(url, timeoutMs = 10_000) {
-  return new Promise((resolve) => {
-    const req = https.request(url, { method: 'GET', headers: { 'User-Agent': 'ki-news-promote-feedback' } }, res => {
-      // Redirect tolerant: bis zu 2 Hops.
-      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && !url._redirect2) {
-        return fetchUrlText(res.headers.location.startsWith('http') ? res.headers.location : new URL(res.headers.location, url).href).then(resolve);
-      }
-      if (res.statusCode !== 200) return resolve(null);
-      let body = '';
-      res.on('data', c => body += c);
-      res.on('end', () => {
-        // Sehr simples Text-Extracting: Tags raus, multiple Whitespace zusammen.
-        const text = body
-          .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-          .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-          .replace(/<[^>]+>/g, ' ')
-          .replace(/&nbsp;/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
-          .slice(0, 4000);
-        resolve(text);
-      });
-    });
-    req.setTimeout(timeoutMs, () => { req.destroy(); resolve(null); });
-    req.on('error', () => resolve(null));
-    req.end();
-  });
+// Fallback: holt einen rudimentären Source-Text über lib/http.js – damit gelten
+// SSRF-Schutz und Redirect-Limit auch hier (URLs stammen aus editierbaren
+// Issue-Bodies eines öffentlichen Repos). Für Goldstandard reicht das simple
+// Text-Extracting; wer mehr will, lässt vorher `node ingest.js` lokal laufen.
+async function fetchUrlText(url, timeoutMs = 10_000) {
+  try {
+    const body = await httpGet(url, { timeoutMs });
+    return body
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 4000);
+  } catch {
+    return null;
+  }
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
   console.log(`[promote] ${DRY_RUN ? 'DRY-RUN — ' : ''}Lade Daily-Issues …`);
-  const issues = await listDailyIssues();
+  const issues = await listDailyIssues(TOKEN);
   console.log(`[promote] ${issues.length} Daily-Issues gefunden`);
 
   // Aktuellen Goldstandard laden

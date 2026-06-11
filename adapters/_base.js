@@ -56,14 +56,17 @@ function parseDate(raw) {
   const trimmed = raw.trim();
   try {
     const d = new Date(trimmed);
-    return isNaN(d.getTime()) ? trimmed : d.toISOString();
-  } catch { return trimmed; }
+    // Unparsebares Datum → null statt Rohstring, damit das datum-Feld
+    // konsistent ISO-String oder null ist (filterByAge behält null-Artikel).
+    return isNaN(d.getTime()) ? null : d.toISOString();
+  } catch { return null; }
 }
 
 /** RSS-Feed parsen, einheitliches Article-Schema zurückgeben. */
 export function parseRss(xml, quelle, { decodeTitle = true } = {}) {
   const articles = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+  // \b[^>]*: matcht auch <item rdf:about="..."> (RDF/RSS 1.0).
+  const itemRegex = /<item\b[^>]*>([\s\S]*?)<\/item>/g;
   let match;
 
   while ((match = itemRegex.exec(xml)) !== null) {
@@ -83,33 +86,62 @@ export function parseRss(xml, quelle, { decodeTitle = true } = {}) {
     const article = { titel, url, datum, quelle: typeof quelle === 'function' ? quelle({ titel, url }) : quelle, rohtext };
     articles.push(article);
   }
+  if (articles.length === 0) {
+    // Stumme Degradation sichtbar machen: nicht jeder Adapter prüft selbst auf 0.
+    console.warn(`[parseRss] 0 Artikel geparst (${typeof quelle === 'function' ? 'dynamische Quelle' : quelle}) – Feed-Format geändert?`);
+  }
   return articles;
+}
+
+/**
+ * Atom-Link-Auswahl: explizit rel="alternate" bevorzugen (beide Attribut-
+ * Reihenfolgen), dann Links ohne rel-Attribut, erst dann der erste Link –
+ * sonst gewinnt z.B. ein vorangestelltes rel="self" und liefert Feed- statt
+ * Artikel-URLs.
+ */
+function extractAtomLink(entry) {
+  const relFirst = /<link\b[^>]*rel="alternate"[^>]*href="([^"]+)"/i.exec(entry);
+  if (relFirst) return relFirst[1];
+  const hrefFirst = /<link\b[^>]*href="([^"]+)"[^>]*rel="alternate"/i.exec(entry);
+  if (hrefFirst) return hrefFirst[1];
+  // Links ohne rel-Attribut gelten in Atom als alternate.
+  const linkTags = entry.match(/<link\b[^>]*>/gi) || [];
+  for (const tag of linkTags) {
+    if (/\brel=/i.test(tag)) continue;
+    const href = /href="([^"]+)"/i.exec(tag);
+    if (href) return href[1];
+  }
+  const any = /<link\b[^>]*href="([^"]+)"/i.exec(entry);
+  return any ? any[1] : null;
 }
 
 /** Atom-Feed parsen, einheitliches Article-Schema zurückgeben. */
 export function parseAtom(xml, quelle) {
   const articles = [];
-  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  // \b[^>]*: matcht auch <entry xml:lang="..."> u.ä.
+  const entryRegex = /<entry\b[^>]*>([\s\S]*?)<\/entry>/g;
   let match;
 
   while ((match = entryRegex.exec(xml)) !== null) {
     const entry = match[1];
     const titleMatch = /<title[^>]*>([\s\S]*?)<\/title>/.exec(entry);
-    const linkMatch = /<link[^>]*href="([^"]+)"(?:[^>]*rel="alternate")?/i.exec(entry)
-      || /<link href="([^"]+)" rel="alternate"/i.exec(entry);
+    const link = extractAtomLink(entry);
     const publishedMatch = /<published>([\s\S]*?)<\/published>/.exec(entry)
       || /<updated>([\s\S]*?)<\/updated>/.exec(entry);
     const summaryMatch = /<summary[^>]*>([\s\S]*?)<\/summary>/.exec(entry)
       || /<content[^>]*>([\s\S]*?)<\/content>/.exec(entry);
 
-    if (!titleMatch || !linkMatch) continue;
+    if (!titleMatch || !link) continue;
 
     const titel = decodeHtmlEntities(extractCdata(titleMatch[1]));
-    const url = linkMatch[1].trim();
+    const url = link.trim();
     const datum = publishedMatch ? parseDate(publishedMatch[1]) : null;
     const rohtext = summaryMatch ? stripTags(decodeHtmlEntities(extractCdata(summaryMatch[1]))).slice(0, 2000) : '';
 
     articles.push({ titel, url, datum, quelle: typeof quelle === 'function' ? quelle({ titel, url }) : quelle, rohtext });
+  }
+  if (articles.length === 0) {
+    console.warn(`[parseAtom] 0 Artikel geparst (${typeof quelle === 'function' ? 'dynamische Quelle' : quelle}) – Feed-Format geändert?`);
   }
   return articles;
 }

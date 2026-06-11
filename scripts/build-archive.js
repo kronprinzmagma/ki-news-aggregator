@@ -16,6 +16,10 @@ import fs from 'fs/promises';
 import path from 'path';
 import https from 'https';
 import { fileURLToPath } from 'url';
+import { listDailyIssues, listWeeklyIssues } from './_shared.js';
+import { loadEnv } from '../lib/env.js';
+
+loadEnv();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -60,17 +64,12 @@ function ghRequest(pathSuffix, accept = 'application/vnd.github+json') {
 }
 
 async function listAllIssues() {
-  const all = [];
-  let page = 1;
-  while (true) {
-    const { body } = await ghRequest(`/repos/${REPO_OWNER}/${REPO_NAME}/issues?state=all&per_page=100&page=${page}`);
-    const batch = JSON.parse(body);
-    if (batch.length === 0) break;
-    all.push(...batch);
-    if (batch.length < 100) break;
-    page++;
-  }
-  return all.filter(i => !i.pull_request);
+  // Konsolidiert auf scripts/_shared.js (lib/github.js) statt eigener Paginierung.
+  const [dailies, weeklies] = await Promise.all([
+    listDailyIssues(TOKEN),
+    listWeeklyIssues(TOKEN),
+  ]);
+  return [...dailies, ...weeklies];
 }
 
 async function getIssueHtmlBody(issueNumber) {
@@ -124,7 +123,7 @@ function buildPodcastFeed(dailies, audioByDate, teasers) {
       <pubDate>${rfc822(d.date)}</pubDate>
       <description>${escapeHtml(desc)}</description>
       <itunes:summary>${escapeHtml(desc)}</itunes:summary>
-      <enclosure url="${audio.url}" length="${audio.size}" type="audio/mpeg"/>
+      <enclosure url="${escapeHtml(audio.url)}" length="${audio.size}" type="audio/mpeg"/>
       <itunes:explicit>false</itunes:explicit>
     </item>`;
     })
@@ -142,6 +141,7 @@ function buildPodcastFeed(dailies, audioByDate, teasers) {
     <itunes:summary>Tägliches KI-News-Briefing als Audio, automatisch kuratiert.</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="Technology"/>
+    <itunes:image href="${PAGES_URL}/cover.png"/>
 ${episodes}
   </channel>
 </rss>`;
@@ -332,6 +332,13 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+// "…" nur anhängen, wenn tatsächlich gekürzt wurde.
+function teaserPreview(teaser, maxChars = 80) {
+  if (!teaser) return '';
+  if (teaser.length <= maxChars) return escapeHtml(teaser);
+  return escapeHtml(teaser.slice(0, maxChars)) + '…';
+}
+
 // Erste 2–3 Sätze aus dem Issue-HTML-Body als Teaser.
 function extractTeaser(html, maxChars = 280) {
   if (!html) return '';
@@ -363,7 +370,10 @@ async function main() {
     if (cls.kind === 'weekly') weeklies.push({ issue, ...cls });
   }
   dailies.sort((a, b) => b.date.localeCompare(a.date));
-  weeklies.sort((a, b) => parseInt(b.week, 10) - parseInt(a.week, 10));
+  // Nach Startdatum aus dem Range sortieren, nicht nach KW-Nummer – sonst
+  // steht nach dem Jahreswechsel KW 52 über KW 01.
+  const weekStart = w => (w.range.match(/\d{4}-\d{2}-\d{2}/) || [''])[0];
+  weeklies.sort((a, b) => weekStart(b).localeCompare(weekStart(a)));
   console.log(`[archive] ${dailies.length} Daily-Issues, ${weeklies.length} Weekly-Issues`);
 
   const audioByDate = await getAudioByDate();
@@ -392,7 +402,7 @@ async function main() {
         ];
         const audio = item.kind === 'daily' ? audioByDate.get(item.slug) : null;
         const player = audio
-          ? `<div class="audio"><strong>🎧 Audio-Version</strong><audio controls preload="none" src="${audio.url}"></audio><a class="dl" href="${audio.url}">herunterladen</a></div>`
+          ? `<div class="audio"><strong>🎧 Audio-Version</strong><audio controls preload="none" src="${escapeHtml(audio.url)}"></audio><a class="dl" href="${escapeHtml(audio.url)}">herunterladen</a></div>`
           : '';
         const content = `<article class="entry">${player}${html}</article>`;
         await fs.writeFile(file, layout({ title: item.issue.title, content, crumbs }), 'utf-8');
@@ -409,7 +419,7 @@ async function main() {
   const dailyList = dailies.map(d => `
     <div class="list-entry">
       <a href="daily/${d.date}.html">${escapeHtml(d.issue.title)}</a>
-      <span class="meta">${teasers.get(d.issue.number) ? escapeHtml(teasers.get(d.issue.number).slice(0, 80)) + '…' : ''}</span>
+      <span class="meta">${teaserPreview(teasers.get(d.issue.number))}</span>
     </div>`).join('');
   const weeklyList = weeklies.map(w => `
     <div class="list-entry">
@@ -448,6 +458,14 @@ ${weeklies.length > 0 ? `<section class="section">
   if (audioByDate.size > 0) {
     await fs.writeFile(path.join(OUT_DIR, 'feed-daily.xml'), buildPodcastFeed(dailies, audioByDate, teasers), 'utf-8');
     console.log(`  ✓ feed-daily.xml (${[...audioByDate.keys()].length} Folgen)`);
+  }
+
+  // Podcast-Cover (Pflicht für Apple/Spotify-Verzeichnisse, itunes:image im Feed).
+  try {
+    await fs.copyFile(path.join(REPO_ROOT, 'assets', 'cover.png'), path.join(OUT_DIR, 'cover.png'));
+    console.log('  ✓ cover.png');
+  } catch (err) {
+    console.warn(`  ✗ cover.png nicht kopiert (${err.message}) – assets/cover.png via scripts/make-cover.js erzeugen`);
   }
 
   // Disable Jekyll-Processing (sonst kollidieren _site und Markdown-Conventions).
