@@ -14,8 +14,8 @@ Drei Bausteine, sequenziell:
 
 - Node.js, keine Frameworks
 - Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring, `claude-sonnet-4-6` für Delivering, Review und Weekly. Strukturierte Outputs via Tool-Use.
-- OpenAI API via REST: `gpt-4o-mini-tts` für die optionale Audio-Hörfassung des Daily (TTS). Nur aktiv, wenn `OPENAI_API_KEY` gesetzt ist – sonst No-Op.
-- Geteilte Module in `lib/`: `claude` (Retry, Caching), `github` (inkl. Release-Asset-Upload), `http` (SSRF-Schutz), `config` (Modelle, Schwellwerte, Stopwords), `text-utils`, `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten), `tts` (OpenAI TTS, Chunking), `audio` (Daily-Hörfassung: Skript → TTS → Release-Asset), `env`, `date`
+- OpenAI API via REST: `gpt-4o-mini-tts` für die optionale Audio-Hörfassung von Daily und Weekly (TTS). Nur aktiv, wenn `OPENAI_API_KEY` gesetzt ist – sonst No-Op.
+- Geteilte Module in `lib/`: `claude` (Retry mit exponentiellem Backoff + Jitter, Caching), `github` (inkl. Release-Asset-Upload), `http` (SSRF-Schutz, Header-Drop bei Cross-Host-Redirects), `config` (Modelle, Schwellwerte, Stopwords, `DACH_AI_PATTERN`), `text-utils`, `url` (`normalizeUrl` für Dedup), `concurrency` (`runWithConcurrency`, geteilt von score + deliver), `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten, `parseArticleSections`), `tts` (OpenAI TTS, Chunking), `audio` (Daily-/Weekly-Hörfassung: Skript → TTS → Release-Asset), `env`, `date`
 - Adapter-Basis in `adapters/_base.js`: HTTP-GET, RSS-/Atom-Parsing, Content-Extraktion, Enrichment
 - SQLite-Persistenz (`better-sqlite3`, lokale `ki-news.db`) für Cross-Day-Dedup und Run-Historie; JSON-Files (`articles-*.json`, `scored-*.json`, `run-summary-*.json`) bleiben als Audit-Artefakte
 
@@ -64,11 +64,13 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Issue-Body startet mit AI-Disclaimer als Blockzitat (EU AI Act Art. 50(4)): kennzeichnet maschinengenerierten Inhalt
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
-- Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 7 Issues erschienen sind (URL-Match oder Titel-Ähnlichkeit ≥ 3 gemeinsame Schlüsselwörter), werden vor der Selektion gefiltert. Quelle ist primär die SQLite-DB (`ki-news.db`, Tabelle `issue_articles`); fällt zurück auf das Parsen der letzten GitHub-Issues, wenn die DB leer ist. Lookback-Tage und Schwellwert sind in `lib/config.js` (`CROSS_DAY_DEDUP_LOOKBACK`, `CROSS_DAY_TITLE_SIMILARITY_THRESHOLD`) konfigurierbar.
+- Tagesübergreifende Dedup: Artikel, die bereits in einem der letzten 7 Issues erschienen sind (URL-Match auf normalisierten URLs oder Titel-Ähnlichkeit ≥ 3 gemeinsame Schlüsselwörter), werden vor der Selektion gefiltert. Das Issue des laufenden Tages ist ausgeschlossen – ein Rerun am selben Tag aktualisiert so das bestehende Issue (Upsert + Feedback-Erhalt) statt leer auszugehen. Quelle ist primär die SQLite-DB (`ki-news.db`, Tabelle `issue_articles`); fällt zurück auf das Parsen der letzten GitHub-Issues (Label `summary`), wenn die DB leer ist. Lookback-Tage und Schwellwert sind in `lib/config.js` (`CROSS_DAY_DEDUP_LOOKBACK`, `CROSS_DAY_TITLE_SIMILARITY_THRESHOLD`) konfigurierbar.
+- **Volltext-Gate:** Artikel, deren finale Aufbereitung oder Rohtext „Volltext nicht verfügbar" enthält, kommen unabhängig vom Score nie ins Issue; Ausschlüsse landen im run-summary unter `thin_content_filtered`.
+- Robustheit: Aufbereitungen laufen mit Concurrency-Limit 5 und Fehlertoleranz (ein fehlgeschlagener Call verwirft nur diesen Artikel); schlagen in score.js >50% der LLM-Calls fehl, bricht der Lauf mit Exit 1 ab (API-Ausfall ≠ leerer Tag); der LLM-Score wird clientseitig geclampt (1–5), bevor er in scored-*.json landet.
 - Issue-Body enthält pro Artikel einen versionierten HTML-Kommentar-Marker `<!-- ki-news-meta: {...} -->`. Weekly und Cross-Day-Dedup lesen primär aus diesen Markern, fallen auf das `Score X/5 · [...](...)`-Regex zurück (Backwards Compatibility).
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
-- **Audio-Hörfassung (optional, Konsum-Kanal):** Ist `OPENAI_API_KEY` gesetzt, wird nach dem Rewrite-Loop eine gesprochene Fassung erzeugt (`lib/audio.js`): Claude (`AUDIO_SCRIPT_MODEL`) schreibt aus Überblick + finalen Aufbereitungen ein Sprech-Skript (Markdown/Links raus, Überschriften als Übergänge, Intro mit KI-Disclaimer), OpenAI `gpt-4o-mini-tts` (Stimme `AUDIO_VOICE`, Default `onyx`) synthetisiert MP3, das als Asset der rollierenden Release `AUDIO_RELEASE_TAG` (`podcast`) hochgeladen wird (`daily-YYYY-MM-DD.mp3`). Das Issue erhält einen `🎧 Audio-Version`-Link, die Metadaten landen in `run-summary`. Fehlt der Key oder schlägt ein Schritt fehl, ist es ein No-Op – der Daily-Lauf bricht nie daran ab. `scripts/build-archive.js` baut daraus einen Podcast-RSS-Feed (`_site/feed-daily.xml`) und bettet einen Player auf den Daily-Detailseiten ein. Konfiguration in `lib/config.js` (`AUDIO_*`). Weekly hat (noch) keine Audio-Ausgabe.
+- **Audio-Hörfassung (optional, Konsum-Kanal):** Ist `OPENAI_API_KEY` gesetzt, wird nach dem Rewrite-Loop eine gesprochene Fassung erzeugt (`lib/audio.js`): Claude (`AUDIO_SCRIPT_MODEL`) schreibt aus Überblick + finalen Aufbereitungen ein Sprech-Skript (Markdown/Links raus, Überschriften als Übergänge, Intro mit KI-Disclaimer), OpenAI `gpt-4o-mini-tts` (Stimme `AUDIO_VOICE`, Default `onyx`) synthetisiert MP3, das als Asset der rollierenden Release `AUDIO_RELEASE_TAG` (`podcast`) hochgeladen wird (`daily-YYYY-MM-DD.mp3`). Das Issue erhält einen `🎧 Audio-Version`-Link, die Metadaten landen in `run-summary`. Fehlt der Key oder schlägt ein Schritt fehl, ist es ein No-Op – der Daily-Lauf bricht nie daran ab. `scripts/build-archive.js` baut daraus einen Podcast-RSS-Feed (`_site/feed-daily.xml`) und bettet einen Player auf den Daily-Detailseiten ein. Konfiguration in `lib/config.js` (`AUDIO_*`). Das Weekly hat eine analoge Hörfassung (`generateWeeklyAudio`, Asset `weekly-YYYY-MM-DD.mp3` mit dem Sonntags-Datum, Feed `_site/feed-weekly.xml`).
 - Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 5 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technischen Produktleser `comprehension_nontechnical` 1–5) – inkl. Bewertung der geschriebenen drei Blöcke. `comprehension_nontechnical <= 3` triggert ein Rewrite.
 - Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen
 - Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`
@@ -77,17 +79,26 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 ## Weekly Digest (`weekly.js`)
 
 - CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
-- Holt die letzten 7 KI-Daily-Issues per GitHub API, parst alle Artikel, URL-Dedup über Tage
+- Holt die Daily-Issues der ausgewiesenen Woche per GitHub API (Label-Filter `summary`, Wochenbereichs-Filter aus dem Issue-Titel), parst die Artikel primär aus den `ki-news-meta`-Markern (Regex nur als Fallback), URL-Dedup über Tage
 - **Themen-zentriert (kein Artikel-Re-Run):** Claude wählt aus dem Artikel-Pool (Score 4+5, nach Score sortiert) die 3 wichtigsten übergreifenden **Themen der Woche**. Score-5-Artikel sind starke Kandidaten, aber keine Pflicht-Ausbreitung mehr.
 - Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), ein ausführlicher Synthese-Absatz (4–6 Sätze, verständlich), ein „Dran bleiben"-Anker (Beobachtungs-/Build-Stil) und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
 - Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Ziel ca. 600–800 Wörter, dadurch body-limit-sicher
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
-- Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet
+- Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet (UTC-Datumslogik)
+- Optionale Audio-Hörfassung wie beim Daily (`OPENAI_API_KEY` nötig), 🎧-Link im Issue-Body
+
+## Feedback-Loop & Statistik
+
+- **`feedback-loop.yml`** (sonntags 10:00 UTC): führt `scripts/promote-feedback.js` aus, committet Goldstandard-Wachstum (der Push triggert `eval.yml` via Pfad-Trigger) und schreibt die Quellen-Feedback-Statistik (`scripts/feedback-stats.js`) in die Job-Summary. Eval-Regression (MAE > 1.5) öffnet automatisch ein `eval-regression`-Issue.
+- **Stats-Seite:** Der Daily-Lauf exportiert `usage_log`/`adapter_health` via `scripts/export-stats.js` nach `assets/stats.json` (auto-committet); `scripts/build-archive.js` rendert daraus `stats.html` im Pages-Archiv (Kosten/Tag, Cache-Hit-Rate, Quellen, Adapter-Health).
+- **Embeddings-Dedup-Eval** (`evals/embedding_dedup_eval.js`): manuelles A/B-Experiment Heuristik vs. Embeddings, siehe `evals/EVALS.md`.
 
 ## Schedule
 
 **Daily:** 05:30 UTC täglich (`daily-news.yml`), Wochenende eingeschlossen.
 **Weekly:** 08:00 UTC sonntags (`weekly-digest.yml`), nach dem Daily.
+**Feedback-Loop:** 10:00 UTC sonntags (`feedback-loop.yml`), nach dem Weekly.
+**Tests:** `test.yml` führt `npm test` bei jedem Push/PR aus.
 
 Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.
 

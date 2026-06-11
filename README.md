@@ -36,13 +36,13 @@ Things that get filtered out before any of this: funding announcements, "AI is t
 
 Three stages run sequentially:
 
-**1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z and Heise Online apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
+**1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
 
 **2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric calibrated to the product-builder persona. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Only Score ≥ 4 reaches publication.
 
-**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on four dimensions — product relevance, technical substance, learning value, write-up quality — and rewrites any article flagged `needs_rewrite` before it enters the issue. The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk. Optionally — if `OPENAI_API_KEY` is set — a spoken-word version of the daily is generated (`gpt-4o-mini-tts`), hosted as a GitHub Release asset, linked in the issue, and exposed as a podcast RSS feed.
+**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on five dimensions — product relevance, technical substance, learning value, write-up quality, and comprehension for a non-technical product reader — and rewrites any article flagged `needs_rewrite` before it enters the issue. A hard gate excludes articles whose write-up had to fall back to "Volltext nicht verfügbar". The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk. Optionally — if `OPENAI_API_KEY` is set — a spoken-word version of the daily is generated (`gpt-4o-mini-tts`), hosted as a GitHub Release asset, linked in the issue, and exposed as a podcast RSS feed.
 
-**Weekly** — A Sunday digest fetches the last 7 daily issues, deduplicates across days, and synthesises the week's Score-5 articles (plus 1–2 Score-4 picks) into a narrative: what happened, what it means, a critical framing.
+**Weekly** — A Sunday digest fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each with a synthesis paragraph, a "stay on it" anchor and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
 
 ---
 
@@ -74,7 +74,7 @@ flowchart TD
     XDay["Cross-day dedup<br/>SQLite · 7-day lookback<br/>URL + title similarity"]
     Topic["Within-day topic dedup<br/>shared-token heuristic"]
     Write["deliver.js<br/>Claude Sonnet 4.6<br/>3-block format per article"]
-    Review["Review loop<br/>4-dim quality check<br/>→ rewrite if weak"]
+    Review["Review loop<br/>5-dim quality check<br/>→ rewrite if weak"]
     Issue["GitHub Issue<br/>'KI Daily – YYYY-MM-DD'"]
     Store[("SQLite<br/>articles · scores<br/>issues · history")]
     Weekly["weekly.js<br/>Sunday synthesis<br/>last 7 daily issues"]
@@ -133,7 +133,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Banned-phrases enforcement.** The deliver prompt explicitly forbids a short list of templates ("Build-vs-Buy verschiebt sich", "Effizienz wird zur Differenzierung", "der Engpass verschiebt sich") and marketing anglicisms ("Headroom", "Harness", "Mikroturn", "class-leading"). These are detected post-rewrite with a regex check in `lib/text-quality.js` and persisted into `run-summary-*.json`. Style consistency becomes auditable — any template that lands in the issue is logged.
 
-**Self-critique visible in the output.** The review loop (a second Claude pass that scores each writeup on four dimensions and triggers a rewrite if weak) used to live only in the run-summary JSON. It now surfaces in each daily issue as a `<details>` footer: rewrite count, banned-phrase count, top process recommendations. Showing the self-critique is more honest than hiding it.
+**Self-critique visible in the output.** The review loop (a second Claude pass that scores each writeup on five dimensions — the fifth, `comprehension_nontechnical`, triggers a rewrite at ≤ 3 — and rewrites if weak) used to live only in the run-summary JSON. It now surfaces in each daily issue as a `<details>` footer: rewrite count, banned-phrase count, top process recommendations. Showing the self-critique is more honest than hiding it.
 
 **Build anchors as a growing catalog.** The third block of each writeup is a concrete *build anchor* — an evening project doable in 2–4 hours with Claude Code. Each is extracted by `lib/build-anchors.js` into a separate `build-anchors/YYYY-MM-DD-slug.md` with frontmatter, auto-committed by the daily workflow. Over months this becomes a browseable catalog of evening-project ideas linked back to source articles. See [build-anchors/](build-anchors/).
 
@@ -141,13 +141,15 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Static archive via GitHub Pages.** `scripts/build-archive.js` fetches all daily and weekly issues via the GitHub API (with pre-rendered HTML body) and generates a polished landing site. Auto-rebuilt after each daily/weekly run by `publish-archive.yml`. Live: [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/).
 
-**Audio version as a private podcast (optional).** When `OPENAI_API_KEY` is set, the deliver stage turns the finished daily into a spoken-word episode: `claude-sonnet-4-6` rewrites the issue text into a clean speaking script (no markdown, no URLs, intro with AI disclaimer), `gpt-4o-mini-tts` synthesises it to MP3 (`lib/tts.js` chunks long scripts within the 4096-char API limit), and the file is uploaded as an asset of a rolling GitHub Release (`lib/audio.js`, `lib/github.js`). The archive build then generates a podcast RSS feed (`_site/feed-daily.xml`) and embeds an audio player on each daily page — subscribe in any podcast app so the morning briefing lands in the slot that actually gets through. Fully optional and fault-tolerant: without the key, or on any error, the daily run behaves exactly as before. ~$0.10/day. Voice is configurable in `lib/config.js` (`AUDIO_*`, default `onyx`).
+**Audio version as a private podcast (optional).** When `OPENAI_API_KEY` is set, the deliver stage turns the finished daily into a spoken-word episode: `claude-sonnet-4-6` rewrites the issue text into a clean speaking script (no markdown, no URLs, intro with AI disclaimer), `gpt-4o-mini-tts` synthesises it to MP3 (`lib/tts.js` chunks long scripts within the 4096-char API limit), and the file is uploaded as an asset of a rolling GitHub Release (`lib/audio.js`, `lib/github.js`). The archive build then generates podcast RSS feeds (`feed-daily.xml`, `feed-weekly.xml` — the weekly digest gets its own spoken-word version) with channel artwork (`cover.png`, generated by `scripts/make-cover.js`) and embeds an audio player on each daily and weekly page — subscribe in any podcast app so the morning briefing lands in the slot that actually gets through. Fully optional and fault-tolerant: without the key, or on any error, the daily run behaves exactly as before. ~$0.10/day. Voice is configurable in `lib/config.js` (`AUDIO_*`, default `onyx`).
 
 **Deterministic pre-filter + cross-day pre-dedup.** Before any article reaches the LLM, two cheap filters run: `lib/cross-day-dedup.js` drops articles that were already published in the last 7 daily issues (URL or title similarity), and a deterministic auto-score sets `score=2` for sources/formats that are structurally weak (`hackernews-show`, articles with `truncated=true`). On a typical run this drops ~60% of articles before the LLM ever sees them. Pure cost optimisation, zero quality risk — these articles would have been filtered out anyway downstream.
 
 **Anthropic Batch API for scoring (50% cost reduction).** `lib/claude.js` exposes a `claudeBatch()` helper that submits all remaining score calls in one batch, polls until done, and parses the JSONL results. Async (typically <30 min), perfectly fine for a daily cron with no SLA. Cost tracking respects the 50% discount automatically. Together with the pre-filters: score-stage cost dropped from ~$0.23 to ~$0.05 per run (-78%).
 
-**Feedback loop into the goldstandard.** Every article in the daily issue has four checkboxes (`besonders wertvoll`, `später weiterverfolgen`, `schlecht aufbereitet`, `irrelevanter Inhalt`). `scripts/promote-feedback.js` reads them across all issues, applies clear promotion logic (`wertvoll AND NOT schlecht_aufbereitet → human_score=5`; `irrelevant AND NOT schlecht_aufbereitet → human_score=1`), and grows `evals/goldstandard.json` passively from 3-second-clicks while reading. No dedicated evaluation sessions.
+**Feedback loop into the goldstandard — fully automated.** Every article in the daily issue has four checkboxes (`Besonders wertvoll`, `Später weiterverfolgen`, `Zu kompliziert erklärt`, `Thema nicht relevant`). `scripts/promote-feedback.js` reads them across all issues and applies the promotion logic: `wertvoll AND NOT irrelevant → human_score=5` (a simultaneous `zu kompliziert` no longer blocks promotion — it is recorded as a `poor_writeup` flag for the deliver stage instead); `irrelevant AND NOT wertvoll → human_score=1`. A weekly workflow (`feedback-loop.yml`, Sundays 10:00 UTC) runs the promotion, commits goldstandard growth (which auto-triggers the scoring eval via path trigger), and posts a per-source feedback statistic (`scripts/feedback-stats.js`) into the job summary. An eval regression (MAE > 1.5) automatically opens an `eval-regression` issue.
+
+**Pipeline statistics page.** The daily run exports aggregated `usage_log`/`adapter_health` data to `assets/stats.json` (`scripts/export-stats.js`, auto-committed); the archive build renders it as a stats page — cost per day, cache hit rate, articles per source, adapter health — at `/stats.html`.
 
 ---
 
@@ -163,8 +165,11 @@ adapters/              — One adapter per source (16 source files + _base.js;
 lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
-                         close-old-issues, eval.yml, publish-archive.yml
+                         close-old-issues, eval.yml, publish-archive.yml,
+                         test.yml, feedback-loop.yml, audio-backfill.yml
 ```
+
+**Environment variables** (beyond the secrets above): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain), `NEWSAPI_KEY` activates the dormant NewsAPI adapter, `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run.
 
 ---
 

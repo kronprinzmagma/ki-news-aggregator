@@ -58,7 +58,7 @@ Ziel: Die Pipeline verbessert ihren Output eigenständig durch Review-gesteuerte
 - [x] Artikel-Enrichment in allen relevanten Adaptern: interconnects, lastweekinai, aheadofai, willison (inkl. externer Link-Fetch)
 - [x] Prompt-Verbesserungen: Halluzinations-Schutz, Build-Anker-Validierung, Thin-Input-Markierung
 - [x] Tagesübergreifende URL-Dedup: Artikel aus den letzten 3 Issues werden vor Selektion gefiltert
-- [ ] Harter Gate: Artikel mit `"Volltext nicht verfügbar"` kommen nicht ins Issue
+- [x] Harter Gate: Artikel mit `"Volltext nicht verfügbar"` kommen nicht ins Issue (`thin_content_filtered` im run-summary)
 - [ ] PR-Mechanismus: process_adjustments aus Run-Summary → automatischer Pull Request mit Prompt-/Parameter-Änderungen
 
 ---
@@ -135,7 +135,7 @@ Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review
 - [x] Hosting via GitHub Release-Asset (`podcast`-Tag, `daily-YYYY-MM-DD.mp3`); `lib/github.js` mit `getOrCreateRelease` / `uploadReleaseAsset` / `deleteReleaseAsset`.
 - [x] Podcast-RSS-Feed (`_site/feed-daily.xml`) + `<audio>`-Player auf den Daily-Detailseiten in `scripts/build-archive.js`; Feed im Index verlinkt.
 - [x] `🎧 Audio-Version`-Link im Daily-Issue; Audio-Metadaten in `run-summary-*.json`.
-- [ ] Weekly-Audio nach gleichem Muster (eigener Feed `feed-weekly.xml`)
+- [x] Weekly-Audio nach gleichem Muster (`generateWeeklyAudio`, eigener Feed `feed-weekly.xml`, Player auf Weekly-Seiten)
 - [ ] Stimmen-Samples vergleichen und Default-Stimme final wählen (aktuell `onyx`)
 - [ ] Optional: Dialog-Stil (zwei Stimmen, NotebookLM-artig) evaluieren, falls Vorlese-Stil zu trocken
 
@@ -158,3 +158,18 @@ Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review
 - [x] Datengetriebene Pipeline-Verbesserungen (2026-05-25): Adapter-Enrichment für Anthropic/HuggingFace/TheBatch, Golem als 15. Quelle, Unicode-Tokenizer-Fix in Topic-Dedup, Stopwords gegen Buzzword-Overlap, Score-Anker im Prompt. MAE gegen Goldstandard 1.18 → 0.77 (-35%).
 - [x] Batch-Hang-Fallback (2026-06-02): `claudeBatch` erkennt hängende Batches (succeeded=0 nach 10 min) via `BatchStuckError`, bricht serverseitig ab und fällt auf Sync-Modus (5 parallele Requests) zurück statt zu failen.
 - [x] GitHub Issue Body-Limit (2026-06-02): `deliver.js` kürzt Issue-Body vor API-Call auf max. 65.000 Zeichen (letzter vollständiger Artikel-Trenner) — verhindert HTTP 422 bei Tagen mit vielen Score-4-Artikeln.
+
+---
+
+## Phase 12 – Review-Härtung & Feedback-Automatisierung (2026-06-11)
+
+Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und den Feedback-Kreis schliessen.
+
+- [x] Hochprio-Fixes: Rerun-Dedup (Issue des Lauftags ausgeschlossen), Score-Clamping, Unhandled Rejection im Asset-Upload, Entity-Decoding-Reihenfolge, Endlos-Redirect in promote-feedback
+- [x] Robustheit: fehlertolerante Aufbereitungen mit Concurrency-Limit, Exit 1 bei Score-Totalausfall, Injection-Härtung (Markdown, Meta-Marker, URLs, Workflow-Inputs)
+- [x] CI: test.yml (npm test bei Push/PR), Actions SHA-gepinnt, Concurrency-Gruppen, permissions-Baseline
+- [x] Feedback-Loop automatisiert: feedback-loop.yml (promote → Goldstandard-Commit → Scoring-Eval), eval-regression-Issue bei MAE > 1.5, Quellen-Feedback-Statistik (scripts/feedback-stats.js)
+- [x] Stats-Seite im Pages-Archiv: scripts/export-stats.js → assets/stats.json → stats.html (Kosten/Tag, Cache-Hit-Rate, Quellen, Adapter-Health)
+- [x] Podcast verzeichnis-tauglich: itunes:image + generiertes Cover (scripts/make-cover.js)
+- [x] Embeddings-Dedup-Eval als manuelles A/B-Experiment (evals/embedding_dedup_eval.js)
+- [ ] Embeddings-Eval auswerten und Disagreements labeln (nur bei klarem Vorteil Produktions-Umbau)

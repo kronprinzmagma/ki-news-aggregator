@@ -153,3 +153,19 @@ README in zwei Schritten umgeschrieben:
 - `"AI is breaking two vulnerability cultures"` (jefftk.com): raw_text dünn, Artikel kommt trotzdem ins Issue mit Disclaimer
 - Review-Schlaufe kostet ~1 Sonnet-Call extra pro Run (~$0.02)
 - Cluster-Bonus in score.js kann gelegentlich schwache Artikel hochheben
+
+## Tiefgreifender Review + Komplettumsetzung 2026-06-11
+
+Vier parallele Review-Agenten (Pipeline, Security/Infra, Adapter/Tests/Scripts, Hygiene/Doku) – alle Befunde umgesetzt, in 5 Commits gepusht:
+
+**Hochprio-Fixes:** Rerun am selben Tag blockierte via Cross-Day-Dedup (Issue des Lauftags jetzt ausgeschlossen → Upsert/Feedback-Erhalt funktioniert); Unhandled Rejection in `uploadReleaseAsset`; LLM-Score-Clamping in `mapScoreToolInput`; `decodeHtmlEntities`-Reihenfolge (Double-Decoding); Tests laufen jetzt in CI (`test.yml`); Endlos-Redirect + fehlender SSRF-Schutz in `promote-feedback.js` (nutzt jetzt `lib/http.js`).
+
+**Weitere Fixes:** Aufbereitungen fehlertolerant mit Concurrency-Limit 5 (`lib/concurrency.js`); Score-Totalausfall → Exit 1; Markdown-/Kommentar-Injection-Härtung (`sanitizeMarkdown` escaped `<`, Meta-Marker escaped `<>`, `sanitizeUrl` Klammern); Label-Filter + per_page=50 für Issue-Listen; Weekly liest primär Meta-Marker, filtert Wochenbereich, UTC-Datumslogik; RSS/RDF-Attribut-Items + rel=alternate-Linkwahl in `_base.js`; anthropic-Adapter nutzt `enrichFromUrl`; `DACH_AI_PATTERN` zentral; Workflows SHA-gepinnt, Input-Injection-Fix, Concurrency-Gruppen, permissions-Baseline; `normalizeUrl` → `lib/url.js`; busy_timeout; .env überschreibt keine Shell-Variablen mehr; itunes:image + generiertes Cover (`scripts/make-cover.js`); Weekly-Archiv-Sortierung jahreswechselfest.
+
+**Neue Features:** Volltext-Gate (`thin_content_filtered`); `feedback-loop.yml` (sonntags 10:00 UTC: promote → Goldstandard-Commit → triggert eval.yml; Regression öffnet `eval-regression`-Issue); `scripts/feedback-stats.js` (Quellen-Statistik, Personalisierung light als Report); Weekly-Audio (`generateWeeklyAudio`, `feed-weekly.xml`); Stats-Seite (`scripts/export-stats.js` → `assets/stats.json` → `stats.html`); `evals/embedding_dedup_eval.js` (manuelles A/B Heuristik vs. Embeddings).
+
+**Hinweis:** Abschnitte oben mit „Dedup letzte 3 Issues" und altem Weekly-Format sind überholt (historisches Log). TASK.md (Altlast) entfernt; doc-check.md korrigiert (15 Adapter, 7-Tage-Lookback, README/EVALS als Prüfpunkte ergänzt).
+
+## Offene Punkte (nächste Session)
+
+Siehe `.tasks/NEXT.md`: Embeddings-Eval auswerten, Goldstandard Richtung 40, Audio-Stimme bestätigen, PR-Mechanismus (zurückgestellt bis Goldstandard belastbar).

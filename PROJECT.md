@@ -28,13 +28,13 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, nutzt Score-1/2/3-Samples fuer die Review-Schlaufe, filtert fuer die Ausgabe auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
-**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 4 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
+**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 5 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technische Produktleser) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
 **GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `30 5 * * *` → täglich 05:30 UTC (= 07:30 CEST / 06:30 CET). Ein Tag ohne relevante Artikel erzeugt weiterhin kein Issue.
 
-**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert alle Artikel der letzten 7 Daily-Issues (URL-Dedup), teilt sie in Pflicht (Score 5, immer dabei) und Optional (Score 4, Claude wählt 1–2) auf, und erstellt per Claude Sonnet ein wöchentliches Synthese-Issue: Einleitung, Top-Entwicklungen mit dreistufiger Aufbereitung (was passiert / Implikation / kritische Einordnung), Strömungen der Woche, Wochenimpuls.
+**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert die Artikel der Daily-Issues der abgeschlossenen Woche (URL-Dedup, Wochenbereichs-Filter) und erstellt per Claude Sonnet ein themen-zentriertes Synthese-Issue: Claude wählt die 3 wichtigsten übergreifenden Themen der Woche aus dem Pool (Score 4+5), je mit Synthese-Absatz, „Dran bleiben"-Anker und Belege-Liste; dazu Einleitung und Wochenimpuls. Optional mit Audio-Hörfassung (`feed-weekly.xml`).
 
 ## Was guten Output ausmacht
 
@@ -44,7 +44,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
   1. Was ist neu (max. 3 Sätze, nüchtern, keine Halluzinationen)
   2. Was es für die KI-Richtung heisst (1–2 Sätze, Strömung dahinter)
   3. Build-Anker: aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code
-- **Feedback im Issue:** Pro Artikel Checkboxen für `Besonders wertvoll` und `Später weiterverfolgen`
+- **Feedback im Issue:** Pro Artikel vier Checkboxen – `Besonders wertvoll`, `Später weiterverfolgen`, `Zu kompliziert erklärt`, `Thema nicht relevant` (die negativen sind das Trainingssignal für den Feedback-Loop)
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
 - **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.
 - **Leerer Tag = kein Issue** – ein Tag ohne relevante News ist kein Fehler
@@ -58,6 +58,6 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | LLM-Modell Deliver | Claude Sonnet (höhere Qualität, wenige Aufrufe) |
 | Delivery-Channel | Ausschliesslich GitHub Issues im gleichen Repo |
 | Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI; optional `OPENAI_API_KEY` für die Audio-Hörfassung des Daily (TTS) |
-| Datenhaltung | Keine Datenbank – JSON-Files im Repo-Root als Zwischenergebnisse |
+| Datenhaltung | SQLite (`better-sqlite3`, lokale `ki-news.db`, gitignored, in CI via Actions-Cache persistiert) für Cross-Day-Dedup, Usage-Log und Run-Historie; JSON-Files im Repo-Root bleiben als Audit-Artefakte (ebenfalls gitignored) |
 | Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |

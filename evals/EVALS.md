@@ -42,9 +42,8 @@ Jeder Artikel im Daily-Issue hat vier Feedback-Checkboxen:
 
 | Gesetzte Häkchen | Aktion |
 |---|---|
-| `wertvoll` UND nicht `schlecht_aufbereitet` | → Goldstandard `human_score = 5` |
-| `irrelevant` UND nicht `schlecht_aufbereitet` | → Goldstandard `human_score = 1` |
-| `schlecht_aufbereitet` setzt aus | Blockiert das Promote, weil die Lesebewertung dann nicht sauber dem Artikel zugeordnet werden kann (war's der Inhalt oder die Aufbereitung?) |
+| `wertvoll` (unabhängig von `zu_kompliziert`) | → Goldstandard `human_score = 5`; ein gleichzeitiges `zu_kompliziert` blockiert NICHT mehr, sondern wird als `poor_writeup`-Flag vermerkt (Signal für die Deliver-Stufe) |
+| `irrelevant` UND nicht `wertvoll` | → Goldstandard `human_score = 1` |
 | `weiterverfolgen` allein | Kein Promote (zu weiches Signal) |
 | `wertvoll` UND `irrelevant` | Kein Promote (widersprüchlich) |
 
@@ -55,6 +54,10 @@ GH_PAT=ghp_... node scripts/promote-feedback.js [--dry-run]
 ```
 
 **Bewertungs-Aufwand: ~3 Sekunden pro markiertem Artikel beim normalen Lesen.** Keine Goldstandard-Pflege-Sessions.
+
+### Automatisierter Feedback-Loop (`feedback-loop.yml`)
+
+Seit Juni 2026 läuft das Promote-Script automatisch: sonntags 10:00 UTC führt `feedback-loop.yml` `promote-feedback.js` aus, committet einen gewachsenen Goldstandard (der Push triggert via Pfad-Trigger automatisch das Scoring-Eval in `eval.yml`) und schreibt die Quellen-Feedback-Statistik (`scripts/feedback-stats.js`) in die Job-Summary. Fällt das Eval unter den Schwellwert (MAE > 1.5, Exit 1), öffnet `eval.yml` automatisch ein Issue mit Label `eval-regression`.
 
 ## Aktueller Goldstandard-Stand
 
@@ -195,3 +198,17 @@ Aktuell on-demand. Sinnvolle Trigger:
 ### Grenzen
 
 Der Judge nutzt dasselbe Modell-Familie (Claude) wie der Writer — das ist kein Cross-Provider-Setup wie bei richtigen RAG-Evals. Faithfulness-Scores sind also Indikator, nicht Beweis. Banned-Phrases sind dagegen deterministisch und damit verlässlich.
+
+Das Deliver-Eval läuft bewusst **nicht** in CI: es braucht die lokale SQLite-DB (`ki-news.db`) für die Source-Texte, die in den CI-Runnern nur als Cache des Daily-Workflows existiert. On-demand lokal ausführen.
+
+---
+
+## Embeddings-Dedup-Eval (`embedding_dedup_eval.js`)
+
+Experiment, kein Produktions-Pfad: lässt die Token-Overlap-Heuristik aus `lib/topic-overlap.js` (Schwelle 3 gemeinsame Schlüsselwörter) gegen Embeddings-Cosine-Similarity (OpenAI `text-embedding-3-small`) antreten — als A/B über alle lokalen `articles-*.json`-Tagesdateien.
+
+```bash
+OPENAI_API_KEY=sk-... node evals/embedding_dedup_eval.js [--threshold 0.82]
+```
+
+Output: Übereinstimmungs-Zählung plus die Disagreement-Paare mit Titeln (nur-Heuristik = mögliche False Positives, nur-Embeddings = mögliche Misses), als Konsole und `evals/results/embedding-dedup-*.json`. Es gibt bewusst kein automatisches Gewinner-Urteil — die Disagreements werden von Hand gelabelt. Erst bei klarem Embeddings-Vorteil lohnt sich ein Produktions-Umbau. Kosten pro Lauf: unter einem Rappen.
