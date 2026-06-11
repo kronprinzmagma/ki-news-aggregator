@@ -7,6 +7,8 @@ import { SCORE_MODEL, SCORE_CUTOFF_DELIVER, CROSS_DAY_DEDUP_LOOKBACK } from './l
 import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
 import { recordUsage, closeStore } from './lib/store.js';
 import { loadRecentlyPublished, detectCrossDayDuplicate } from './lib/cross-day-dedup.js';
+import { runWithConcurrency } from './lib/concurrency.js';
+import { parseArticles } from './lib/schema.js';
 import {
   buildScoreRequestParams,
   mapScoreToolInput,
@@ -59,25 +61,18 @@ async function runViaBatch(articles) {
   return out;
 }
 
-async function runWithConcurrency(articles, limit) {
-  const results = new Array(articles.length);
-  let index = 0;
-  async function worker() {
-    while (index < articles.length) {
-      const i = index++;
-      const article = articles[i];
-      try {
-        const rating = await scoreArticle(article);
-        results[i] = { ...article, ...rating };
-        console.log(`[${i + 1}/${articles.length}] Score ${rating.score} – ${article.titel}`);
-      } catch (err) {
-        console.error(`[${i + 1}/${articles.length}] Fehler bei "${article.titel}": ${err.message}`);
-        results[i] = { ...article, score: null, begründung: null };
-      }
+// Sync-Variante: nutzt den geteilten Concurrency-Helper aus lib/concurrency.js.
+function scoreWithConcurrency(articles, limit) {
+  return runWithConcurrency(articles, limit, async (article, i) => {
+    try {
+      const rating = await scoreArticle(article);
+      console.log(`[${i + 1}/${articles.length}] Score ${rating.score} – ${article.titel}`);
+      return { ...article, ...rating };
+    } catch (err) {
+      console.error(`[${i + 1}/${articles.length}] Fehler bei "${article.titel}": ${err.message}`);
+      return { ...article, score: null, begründung: null };
     }
-  }
-  await Promise.all(Array.from({ length: limit }, worker));
-  return results;
+  });
 }
 
 async function main() {
@@ -94,8 +89,10 @@ async function main() {
 
   console.log(`Lese: ${articleFile}`);
   let articles;
-  try { articles = JSON.parse(await fs.readFile(articleFile, 'utf-8')); }
-  catch (err) {
+  try {
+    // Schema-Validierung am Phasen-Übergang Ingest → Score (lib/schema.js).
+    articles = parseArticles(JSON.parse(await fs.readFile(articleFile, 'utf-8')));
+  } catch (err) {
     console.error(`Fehler beim Lesen von ${articleFile}: ${err.message}`);
     process.exit(1);
   }
@@ -103,7 +100,7 @@ async function main() {
 
   // Pre-Dedup: Artikel, die bereits in den letzten Daily-Issues waren, gehen
   // gar nicht erst ans LLM. Spart Score-Calls und damit Tokens.
-  const recent = await loadRecentlyPublished(process.env.GH_PAT, CROSS_DAY_DEDUP_LOOKBACK);
+  const recent = await loadRecentlyPublished(process.env.GH_PAT, CROSS_DAY_DEDUP_LOOKBACK, date);
   const beforeDedup = articles.length;
   const articlesAfterDedup = articles.filter(article => {
     const dup = detectCrossDayDuplicate(article, recent);
@@ -141,13 +138,13 @@ async function main() {
     } catch (err) {
       if (err instanceof BatchStuckError) {
         console.warn(`[score] ${err.message} – starte Sync-Fallback …`);
-        scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+        scoredFromLlm = await scoreWithConcurrency(toScore, CONCURRENCY);
       } else {
         throw err;
       }
     }
   } else {
-    scoredFromLlm = await runWithConcurrency(toScore, CONCURRENCY);
+    scoredFromLlm = await scoreWithConcurrency(toScore, CONCURRENCY);
   }
   const scored = [...preFiltered, ...scoredFromLlm];
 
@@ -172,6 +169,14 @@ async function main() {
   if (usage.totals.calls > 0) {
     console.log(`[usage] ${usage.totals.calls} Calls · in ${usage.totals.input_tokens} · cache_create ${usage.totals.cache_creation_input_tokens} · cache_read ${usage.totals.cache_read_input_tokens} (Hit ${(usage.cache_hit_rate * 100).toFixed(1)}%) · out ${usage.totals.output_tokens} · $${usage.totals.usd.toFixed(4)}`);
     recordUsage({ run_date: date, stage: 'score', by_log_tag: usage.by_log_tag });
+  }
+
+  // Schlägt mehr als die Hälfte der LLM-Calls fehl, ist das ein API-Ausfall
+  // und kein ruhiger Nachrichtentag – Workflow soll rot werden statt still
+  // "kein Issue" zu liefern. Datei + Usage sind zu dem Zeitpunkt geschrieben.
+  if (toScore.length > 0 && failedCount / toScore.length > 0.5) {
+    console.error(`[score] ${failedCount}/${toScore.length} LLM-Calls fehlgeschlagen (>50%) – breche mit Fehler ab.`);
+    process.exit(1);
   }
 }
 

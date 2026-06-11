@@ -3,49 +3,82 @@ import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
+import { parseArticleSections } from './lib/issue-format.js';
 
 loadEnv();
 
 // ─── Issue-Parsing ────────────────────────────────────────────────────────────
 
-function parseDailyIssue(issueDate, body) {
-  const articles = [];
-  const sections = body.split(/\n---\n/);
+// Titel im Issue sind sanitizeMarkdown-escapt – fürs Weekly (Prompt + Belege-Links)
+// wieder entescapen, sonst landen \[ \* etc. in der Ausgabe.
+function unescapeMarkdown(s) {
+  return (s || '').replace(/\\([`*_[\]()#><])/g, '$1');
+}
 
-  for (const section of sections) {
+function extractBlocks(section) {
+  const neuMatch = /\*\*Was ist neu\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
+  const richtungMatch = /\*\*Was es für die KI-Richtung heisst\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section)
+    || /\*\*Warum es produktrelevant ist\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
+  const ankerMatch = /\*\*Build-Anker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
+    || /\*\*Projektanker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section);
+  return {
+    wasIstNeu: neuMatch ? neuMatch[1].replace(/\n+/g, ' ').trim() : '',
+    richtung: richtungMatch ? richtungMatch[1].replace(/\n+/g, ' ').trim() : '',
+    anker: ankerMatch ? ankerMatch[1].replace(/\n+/g, ' ').trim() : '',
+  };
+}
+
+function parseDailyIssue(issueDate, body) {
+  // Primärquelle: versionierte ki-news-meta-Marker (url/score/quelle/titel
+  // robust, Blöcke positionssicher zugeordnet). Regex nur als Fallback für
+  // Issues vor Einführung der Marker.
+  const sections = parseArticleSections(body);
+  if (sections.some(s => s.meta)) {
+    return sections
+      .filter(s => s.meta)
+      .map(({ meta, block }) => ({
+        datum: issueDate,
+        titel: unescapeMarkdown(meta.titel),
+        score: Math.min(5, Math.max(1, Number(meta.score) || 1)),
+        quelle: meta.quelle,
+        url: meta.url,
+        ...extractBlocks(block),
+      }))
+      .filter(a => a.wasIstNeu || a.richtung);
+  }
+
+  // Fallback: altes Regex-Parsing über "Score X/5 · [quelle](url)".
+  const articles = [];
+  for (const section of body.split(/\n---\n/)) {
     const titleMatch = /^###\s+(.+)$/m.exec(section);
     if (!titleMatch) continue;
     const scoreMatch = /Score (\d)\/5 · \[([^\]]+)\]\((https?:\/\/[^)]+)\)/.exec(section);
     if (!scoreMatch) continue;
 
-    const titel = titleMatch[1].trim();
-    const score = Math.min(5, Math.max(1, parseInt(scoreMatch[1], 10) || 1));
-    const quelle = scoreMatch[2].trim();
-    const url = scoreMatch[3].trim();
-
-    const neuMatch = /\*\*Was ist neu\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
-    const richtungMatch = /\*\*Was es für die KI-Richtung heisst\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section)
-      || /\*\*Warum es produktrelevant ist\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
-    const ankerMatch = /\*\*Build-Anker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
-      || /\*\*Projektanker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section);
-
-    const wasIstNeu = neuMatch ? neuMatch[1].replace(/\n+/g, ' ').trim() : '';
-    const richtung = richtungMatch ? richtungMatch[1].replace(/\n+/g, ' ').trim() : '';
-    const anker = ankerMatch ? ankerMatch[1].replace(/\n+/g, ' ').trim() : '';
-
-    if (wasIstNeu || richtung) {
-      articles.push({ datum: issueDate, titel, score, quelle, url, wasIstNeu, richtung, anker });
+    const blocks = extractBlocks(section);
+    if (blocks.wasIstNeu || blocks.richtung) {
+      articles.push({
+        datum: issueDate,
+        titel: unescapeMarkdown(titleMatch[1].trim()),
+        score: Math.min(5, Math.max(1, parseInt(scoreMatch[1], 10) || 1)),
+        quelle: scoreMatch[2].trim(),
+        url: scoreMatch[3].trim(),
+        ...blocks,
+      });
     }
   }
   return articles;
 }
 
 async function fetchDailyIssues(token, lookbackDays = 7) {
-  const { status, body } = await githubRequest(token, 'GET', ghPath.issues('?state=all&per_page=20'));
+  // Label-Filter + grosszügiges per_page: der ungefilterte Issues-Endpoint
+  // liefert Weeklies/PRs mit, wodurch der Lookback stillschweigend schrumpft.
+  const { status, body } = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=summary&per_page=50'));
   if (status !== 200) throw new Error(`GitHub Issues nicht ladbar: HTTP ${status}`);
 
   const issues = JSON.parse(body);
   const kiDailyIssues = issues
+    .filter(i => !i.pull_request)
     .filter(i => /^KI Daily – \d{4}-\d{2}-\d{2}$/.test(i.title))
     .slice(0, lookbackDays);
 
@@ -55,29 +88,30 @@ async function fetchDailyIssues(token, lookbackDays = 7) {
 
 // ─── Woche berechnen ─────────────────────────────────────────────────────────
 
+// Durchgängig UTC: "YYYY-MM-DD" parst als UTC-Mitternacht – lokale
+// Date-Methoden würden westlich von UTC einen Off-by-one-Tag erzeugen.
 function isoWeek(date) {
   const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
-  const week1 = new Date(d.getFullYear(), 0, 4);
-  return Math.round(((d - week1) / 86400000 + ((week1.getDay() + 6) % 7)) / 7) + 1;
+  d.setUTCHours(0, 0, 0, 0);
+  d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7));
+  const week1 = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  return Math.round(((d - week1) / 86400000 + ((week1.getUTCDay() + 6) % 7)) / 7) + 1;
 }
 
 function weekRange(referenceDate) {
   const d = new Date(referenceDate);
-  const day = d.getDay(); // 0 = Sonntag, 1 = Montag, …
+  const day = d.getUTCDay(); // 0 = Sonntag, 1 = Montag, …
 
   // Wenn nicht Sonntag: letzte abgeschlossene Woche verwenden.
   // Sonst: aktuelle Woche (endet heute).
   const anchor = day === 0 ? d : (() => {
     const prev = new Date(d);
-    prev.setDate(d.getDate() - day); // zurück zum letzten Sonntag
+    prev.setUTCDate(d.getUTCDate() - day); // zurück zum letzten Sonntag
     return prev;
   })();
 
-  const diffToMonday = -6;
   const monday = new Date(anchor);
-  monday.setDate(anchor.getDate() + diffToMonday);
+  monday.setUTCDate(anchor.getUTCDate() - 6);
   const sunday = new Date(anchor);
   const fmt = dt => dt.toISOString().slice(0, 10);
   return { from: fmt(monday), to: fmt(sunday), kw: isoWeek(monday) };
@@ -152,7 +186,17 @@ async function main() {
   const weekInfo = weekRange(today);
   console.log(`[weekly] Digest für KW ${weekInfo.kw}: ${weekInfo.from} – ${weekInfo.to}`);
 
-  const dailyIssues = await fetchDailyIssues(token, 7);
+  const fetched = await fetchDailyIssues(token, 7);
+
+  // Nur Dailies aus dem im Titel ausgewiesenen Wochenbereich: bei leeren
+  // Tagen würden sonst ältere Issues von ausserhalb der Woche einfliessen.
+  const dailyIssues = fetched.filter(issue => {
+    const issueDate = issue.title.replace('KI Daily – ', '');
+    return issueDate >= weekInfo.from && issueDate <= weekInfo.to;
+  });
+  if (fetched.length !== dailyIssues.length) {
+    console.log(`[weekly] ${fetched.length - dailyIssues.length} Daily-Issues ausserhalb ${weekInfo.from} – ${weekInfo.to} ignoriert`);
+  }
 
   if (dailyIssues.length === 0) {
     console.log('[weekly] Keine Daily Issues gefunden – kein Weekly Digest erstellt.');
@@ -197,7 +241,7 @@ async function main() {
 
 ${digestBody}
 
-*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3A)*`;
+*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3Asummary)*`;
 
   const issueUrl = await createWeeklyIssue(token, weekInfo, issueBody);
   console.log(`[weekly] Fertig: ${issueUrl}`);

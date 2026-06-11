@@ -12,6 +12,8 @@ import {
   CROSS_DAY_DEDUP_LOOKBACK,
 } from './lib/config.js';
 import { sanitizeMarkdown, sanitizeUrl } from './lib/text-utils.js';
+import { runWithConcurrency } from './lib/concurrency.js';
+import { normalizeUrl } from './lib/url.js';
 import { detectBannedPhrasesBatch } from './lib/text-quality.js';
 import { writeBuildAnchor, writeBuildAnchorIndex } from './lib/build-anchors.js';
 import { dedupByTopic, findRelated } from './lib/topic-overlap.js';
@@ -30,6 +32,8 @@ import { generateDailyAudio } from './lib/audio.js';
 loadEnv();
 
 const API_TIMEOUT_MS = 120_000;
+// Maximal 5 parallele Aufbereitungs-Calls – gleiche Rate-Limit-Disziplin wie score.js.
+const AUFBEREITUNG_CONCURRENCY = 5;
 
 // ─── Pricing-Helper ──────────────────────────────────────────────────────────
 
@@ -360,17 +364,28 @@ async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
 async function findExistingIssue(token, issueTitle) {
   const q = new URLSearchParams({ q: `repo:${REPO_SLUG} is:issue in:title "${issueTitle}"` });
   const { status, body } = await githubRequest(token, 'GET', ghPath.searchIssues(q));
-  if (status !== 200) {
+  if (status === 200) {
+    try {
+      const result = JSON.parse(body);
+      const hit = result.items?.find(issue => issue.title === issueTitle);
+      if (hit) return hit;
+    } catch {
+      console.warn('GitHub Issue-Suche: ungültige JSON-Antwort');
+    }
+  } else {
     console.warn(`GitHub Issue-Suche fehlgeschlagen: HTTP ${status}`);
+  }
+
+  // Fallback über den List-Endpoint: die Search-API indexiert verzögert –
+  // bei einem schnellen Rerun würde sonst ein zweites Daily-Issue entstehen.
+  try {
+    const r = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=summary&per_page=20'));
+    if (r.status !== 200) return null;
+    const issues = JSON.parse(r.body);
+    return issues.filter(i => !i.pull_request).find(i => i.title === issueTitle) || null;
+  } catch {
     return null;
   }
-  let result;
-  try { result = JSON.parse(body); }
-  catch {
-    console.warn('GitHub Issue-Suche: ungültige JSON-Antwort');
-    return null;
-  }
-  return result.items?.find(issue => issue.title === issueTitle) || null;
 }
 
 async function upsertGithubIssue(token, date, body) {
@@ -514,7 +529,9 @@ async function main() {
   }
 
   const token = process.env.GH_PAT || null;
-  const recent = await loadRecentlyPublished(token, CROSS_DAY_DEDUP_LOOKBACK);
+  // date als runDate durchreichen: schliesst das Issue des laufenden Tages aus,
+  // sonst würde ein Rerun am selben Tag jeden Artikel als Duplikat filtern.
+  const recent = await loadRecentlyPublished(token, CROSS_DAY_DEDUP_LOOKBACK, date);
 
   const belowCutoff = articles.filter(a => a.score !== null && a.score < SCORE_CUTOFF_DELIVER);
 
@@ -597,13 +614,36 @@ async function main() {
     ueberblick = buildOverview(topArtikel);
   }
 
-  const aufbereitungen = await Promise.all(
-    topArtikel.map((artikel, i) => {
-      console.log(`[${i + 1}/${topArtikel.length}] Aufbereitung: ${artikel.titel}`);
-      return claudeText(ARTIKEL_PROMPT(artikel),
+  // Aufbereitungen mit Concurrency-Limit und Fehlertoleranz: ein einzelner
+  // fehlgeschlagener Call (nach allen Retries) verwirft nur diesen Artikel,
+  // nicht den ganzen Lauf.
+  const aufbereitungen = await runWithConcurrency(topArtikel, AUFBEREITUNG_CONCURRENCY, async (artikel, i) => {
+    console.log(`[${i + 1}/${topArtikel.length}] Aufbereitung: ${artikel.titel}`);
+    try {
+      return await claudeText(ARTIKEL_PROMPT(artikel),
         { model: DELIVER_MODEL, maxTokens: 600, timeoutMs: API_TIMEOUT_MS, logTag: 'aufbereitung' });
-    })
-  );
+    } catch (err) {
+      console.warn(`[deliver] Aufbereitung fehlgeschlagen für "${artikel.titel}": ${err.message} – Artikel wird übersprungen.`);
+      return null;
+    }
+  });
+
+  const aufbereitungFehler = [];
+  for (let i = topArtikel.length - 1; i >= 0; i--) {
+    if (aufbereitungen[i] !== null) continue;
+    aufbereitungFehler.push({ titel: topArtikel[i].titel, url: topArtikel[i].url });
+    topArtikel.splice(i, 1);
+    aufbereitungen.splice(i, 1);
+  }
+  if (aufbereitungFehler.length > 0) {
+    runSummary.deliver.aufbereitung_failed = aufbereitungFehler;
+    console.warn(`[deliver] ${aufbereitungFehler.length} Artikel ohne Aufbereitung übersprungen.`);
+  }
+  if (topArtikel.length === 0) {
+    console.error('[deliver] Alle Aufbereitungen fehlgeschlagen – das ist ein API-Ausfall, kein leerer Tag.');
+    await writeRunSummary(date, runSummary);
+    process.exit(1);
+  }
 
   runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
 
@@ -614,7 +654,10 @@ async function main() {
   }
   let rewriteCount = 0;
   for (let i = 0; i < topArtikel.length; i++) {
-    const reviewResult = reviewedArticles.find(r => r.url === topArtikel[i].url);
+    // URL-tolerant matchen: das Modell echot die URL manchmal minimal
+    // normalisiert (z.B. ohne Trailing-Slash) – exakter Stringvergleich
+    // würde den Rewrite dann stillschweigend überspringen.
+    const reviewResult = reviewedArticles.find(r => normalizeUrl(r.url || '') === normalizeUrl(topArtikel[i].url));
     if (!reviewResult?.needs_rewrite || !reviewResult.rewrite_hint) continue;
     try {
       console.log(`[rewrite] Überarbeite "${topArtikel[i].titel}" (${reviewResult.rewrite_hint})`);
@@ -629,6 +672,34 @@ async function main() {
   }
   if (rewriteCount > 0) console.log(`[rewrite] ${rewriteCount} Artikel neu aufbereitet`);
   runSummary.deliver.rewrites = rewriteCount;
+
+  // Harter Gate "Volltext nicht verfügbar" (.tasks/NEXT.md #1): Artikel, deren
+  // finale Aufbereitung oder Rohtext den Marker enthält, kommen nie ins Issue –
+  // unabhängig vom Score. Der Marker entsteht, wenn Claude laut Prompt-Vorgabe
+  // bei dünnem Eingangstext kennzeichnen muss, dass nur der Teaser vorlag.
+  const thinContentFiltered = [];
+  for (let i = topArtikel.length - 1; i >= 0; i--) {
+    const hasMarker = (aufbereitungen[i] || '').includes('Volltext nicht verfügbar')
+      || (topArtikel[i].rohtext || '').includes('Volltext nicht verfügbar');
+    if (!hasMarker) continue;
+    thinContentFiltered.push({
+      titel: topArtikel[i].titel, url: topArtikel[i].url,
+      quelle: topArtikel[i].quelle, score: topArtikel[i].score,
+    });
+    topArtikel.splice(i, 1);
+    aufbereitungen.splice(i, 1);
+  }
+  runSummary.deliver.thin_content_filtered = thinContentFiltered;
+  if (thinContentFiltered.length > 0) {
+    console.log(`[thin-gate] ${thinContentFiltered.length} Artikel ohne Volltext aus dem Issue ausgeschlossen:`);
+    thinContentFiltered.forEach(a => console.log(`  - ${a.titel} (Score ${a.score})`));
+  }
+  if (topArtikel.length === 0) {
+    console.log('Nach Volltext-Gate kein Artikel übrig – kein Issue erstellt.');
+    runSummary.deliver.reason = 'Alle Kandidaten ohne Volltext (thin_content_filtered)';
+    await writeRunSummary(date, runSummary);
+    process.exit(0);
+  }
 
   // Banned-Phrases-Check auf den finalen Aufbereitungen (nach Rewrite-Loop).
   const banned = detectBannedPhrasesBatch(aufbereitungen);
@@ -731,7 +802,12 @@ async function main() {
   let issueBody = markdown;
   let bodyTruncated = false;
   if (issueBody.length > GITHUB_ISSUE_MAX) {
-    const cutAt = issueBody.lastIndexOf('\n---\n', GITHUB_ISSUE_MAX);
+    // Bevorzugt am Artikel-Trenner schneiden; sonst am letzten Meta-Marker
+    // (damit kein halber Artikel sichtbar bleibt, der nicht als publiziert
+    // gezählt würde); als letzte Option am letzten Zeilenumbruch.
+    let cutAt = issueBody.lastIndexOf('\n---\n', GITHUB_ISSUE_MAX);
+    if (cutAt <= 0) cutAt = issueBody.lastIndexOf('<!-- ki-news-meta', GITHUB_ISSUE_MAX);
+    if (cutAt <= 0) cutAt = issueBody.lastIndexOf('\n', GITHUB_ISSUE_MAX);
     issueBody = (cutAt > 0 ? issueBody.slice(0, cutAt) : issueBody.slice(0, GITHUB_ISSUE_MAX))
       + '\n\n_(Weitere Artikel wegen GitHub Issue-Limit nicht dargestellt.)_\n';
     bodyTruncated = true;

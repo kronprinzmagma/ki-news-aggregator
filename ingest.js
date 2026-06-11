@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import https from 'https';
 import { todayString } from './lib/date.js';
+import { normalizeUrl } from './lib/url.js';
 import { recordAdapterHealth, recordAdapterTruncated, getStaleAdapters, closeStore } from './lib/store.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import { REPO_SLUG } from './lib/config.js';
@@ -79,17 +80,6 @@ async function runAdapters(runDate) {
   return articles;
 }
 
-function normalizeUrl(url) {
-  try {
-    const u = new URL(url);
-    for (const key of [...u.searchParams.keys()]) {
-      if (key.startsWith('utm_')) u.searchParams.delete(key);
-    }
-    u.hash = '';
-    return u.href.replace(/\/$/, '');
-  } catch { return url; }
-}
-
 function deduplicate(articles) {
   const seen = new Set();
   return articles.filter(a => {
@@ -100,9 +90,11 @@ function deduplicate(articles) {
   });
 }
 
-function filterByAge(articles) {
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - MAX_ARTICLE_AGE_DAYS);
+function filterByAge(articles, runDate) {
+  // Cutoff vom Laufdatum ableiten (respektiert RUN_DATE), nicht von der
+  // Wall-Clock – sonst filtert ein nachträglicher Lauf falsche Artikel.
+  const cutoff = new Date(`${runDate}T00:00:00Z`);
+  cutoff.setUTCDate(cutoff.getUTCDate() - MAX_ARTICLE_AGE_DAYS);
   const filtered = articles.filter(a => {
     if (!a.datum) return true;
     const date = new Date(a.datum);
@@ -199,7 +191,7 @@ async function main() {
   const runDate = todayString();
   const raw = await runAdapters(runDate);
   const deduped = deduplicate(raw);
-  const aged = filterByAge(deduped);
+  const aged = filterByAge(deduped, runDate);
   const truncated = flagTruncated(aged);
   const articles = flagPricingSignals(truncated);
   backfillTruncatedPerAdapter(articles, runDate);
