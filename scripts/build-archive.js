@@ -93,15 +93,70 @@ async function getAudioByDate() {
     const release = JSON.parse(body);
     for (const asset of release.assets || []) {
       const d = asset.name.match(/^daily-(\d{4}-\d{2}-\d{2})\.mp3$/);
-      if (d) daily.set(d[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
+      if (d) daily.set(d[1], { url: asset.browser_download_url, downloadUrl: asset.browser_download_url, name: asset.name, size: asset.size, updated: asset.updated_at });
       const w = asset.name.match(/^weekly-(\d{4}-\d{2}-\d{2})\.mp3$/);
-      if (w) weekly.set(w[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
+      if (w) weekly.set(w[1], { url: asset.browser_download_url, downloadUrl: asset.browser_download_url, name: asset.name, size: asset.size, updated: asset.updated_at });
     }
     console.log(`[archive] ${daily.size} Daily- und ${weekly.size} Weekly-Audio-Folgen gefunden`);
   } catch (err) {
     console.log(`[archive] Keine Audio-Assets (${err.message})`);
   }
   return { daily, weekly };
+}
+
+// Lädt MP3-Dateien von GitHub Releases in _site/audio/ und setzt audio.url auf
+// die GitHub-Pages-URL. GitHub Pages serviert .mp3 mit Content-Type: audio/mpeg,
+// GitHub Releases dagegen mit application/octet-stream – Apple Podcasts lehnt
+// letzteres ab ("Diese Folge kann auf diesem Gerät nicht wiedergegeben werden").
+// Schlägt der Download einer Datei fehl, bleibt die Releases-URL als Fallback.
+async function localizeAudioFiles(...maps) {
+  const audioDir = path.join(OUT_DIR, 'audio');
+  await fs.mkdir(audioDir, { recursive: true });
+
+  const allEntries = maps.flatMap(m => [...m.entries()]);
+  await Promise.all(allEntries.map(async ([, audio]) => {
+    const destPath = path.join(audioDir, audio.name);
+    const pagesUrl = `${PAGES_URL}/audio/${audio.name}`;
+    try {
+      // Nur herunterladen, wenn Datei noch nicht vorhanden (idempotent bei Retry).
+      try { await fs.access(destPath); }
+      catch { await downloadFile(audio.downloadUrl, destPath); }
+      audio.url = pagesUrl;
+      console.log(`  ✓ audio/${audio.name} → Pages`);
+    } catch (err) {
+      console.warn(`  ✗ audio/${audio.name} Download fehlgeschlagen (${err.message}) – Releases-URL als Fallback`);
+    }
+  }));
+}
+
+// Lädt eine URL (folgt Redirects) und schreibt das Ergebnis als Binary-Datei.
+function downloadFile(url, destPath) {
+  return new Promise((resolve, reject) => {
+    function doGet(currentUrl, redirectsLeft) {
+      if (redirectsLeft <= 0) return reject(new Error(`Zu viele Redirects: ${url}`));
+      const urlObj = new URL(currentUrl);
+      https.get({
+        hostname: urlObj.hostname,
+        path: urlObj.pathname + urlObj.search,
+        headers: { 'User-Agent': 'ki-news-aggregator-archive-builder' },
+      }, res => {
+        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          res.resume();
+          doGet(res.headers.location, redirectsLeft - 1);
+          return;
+        }
+        if (res.statusCode !== 200) {
+          res.resume();
+          return reject(new Error(`HTTP ${res.statusCode} beim Download von ${currentUrl}`));
+        }
+        const chunks = [];
+        res.on('data', c => chunks.push(c));
+        res.on('end', () => fs.writeFile(destPath, Buffer.concat(chunks)).then(resolve).catch(reject));
+        res.on('error', reject);
+      }).on('error', reject);
+    }
+    doGet(url, 5);
+  });
 }
 
 // GitHub-Pages-Basis-URL für absolute Links im RSS-Feed. Override via PAGES_URL
@@ -440,6 +495,11 @@ async function main() {
   await fs.rm(OUT_DIR, { recursive: true, force: true });
   await fs.mkdir(path.join(OUT_DIR, 'daily'), { recursive: true });
   await fs.mkdir(path.join(OUT_DIR, 'weekly'), { recursive: true });
+
+  // MP3s von GitHub Releases nach _site/audio/ spiegeln, damit GitHub Pages
+  // sie mit Content-Type: audio/mpeg serviert (Releases liefern octet-stream,
+  // was Apple Podcasts ablehnt). audio.url wird dabei auf die Pages-URL gesetzt.
+  await localizeAudioFiles(audioByDate, weeklyAudioByDate);
 
   // Detail-Pages parallel rendern (sanft, max 5 gleichzeitig).
   const all = [...dailies.map(d => ({ ...d, kind: 'daily', slug: d.date })),
