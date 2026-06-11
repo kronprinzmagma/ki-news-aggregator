@@ -1,0 +1,568 @@
+{
+  "generated_at": "2026-06-11T09:54:58.043Z",
+  "lookback_days": 60,
+  "issues": 17,
+  "usage_daily": [
+    {
+      "run_date": "2026-05-23",
+      "stage": "deliver",
+      "calls": 16,
+      "input_tokens": 41936,
+      "output_tokens": 9443,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2675
+    },
+    {
+      "run_date": "2026-05-23",
+      "stage": "score",
+      "calls": 56,
+      "input_tokens": 156407,
+      "output_tokens": 9037,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1008
+    },
+    {
+      "run_date": "2026-05-24",
+      "stage": "deliver",
+      "calls": 26,
+      "input_tokens": 59549,
+      "output_tokens": 14454,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.3955
+    },
+    {
+      "run_date": "2026-05-24",
+      "stage": "score",
+      "calls": 75,
+      "input_tokens": 203047,
+      "output_tokens": 11192,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1295
+    },
+    {
+      "run_date": "2026-05-25",
+      "stage": "deliver",
+      "calls": 14,
+      "input_tokens": 31676,
+      "output_tokens": 8261,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2189
+    },
+    {
+      "run_date": "2026-05-25",
+      "stage": "score",
+      "calls": 39,
+      "input_tokens": 104538,
+      "output_tokens": 5936,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0671
+    },
+    {
+      "run_date": "2026-05-26",
+      "stage": "deliver",
+      "calls": 15,
+      "input_tokens": 30684,
+      "output_tokens": 8623,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2214
+    },
+    {
+      "run_date": "2026-05-26",
+      "stage": "score",
+      "calls": 24,
+      "input_tokens": 69694,
+      "output_tokens": 3712,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0441
+    },
+    {
+      "run_date": "2026-05-27",
+      "stage": "deliver",
+      "calls": 24,
+      "input_tokens": 58347,
+      "output_tokens": 12165,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.3575
+    },
+    {
+      "run_date": "2026-05-27",
+      "stage": "score",
+      "calls": 61,
+      "input_tokens": 181583,
+      "output_tokens": 9360,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1142
+    },
+    {
+      "run_date": "2026-05-28",
+      "stage": "deliver",
+      "calls": 20,
+      "input_tokens": 42283,
+      "output_tokens": 11001,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2919
+    },
+    {
+      "run_date": "2026-05-28",
+      "stage": "score",
+      "calls": 24,
+      "input_tokens": 70139,
+      "output_tokens": 3701,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0443
+    },
+    {
+      "run_date": "2026-05-29",
+      "stage": "deliver",
+      "calls": 50,
+      "input_tokens": 115617,
+      "output_tokens": 24768,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.7184
+    },
+    {
+      "run_date": "2026-05-29",
+      "stage": "score",
+      "calls": 106,
+      "input_tokens": 317697,
+      "output_tokens": 16460,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2
+    },
+    {
+      "run_date": "2026-05-30",
+      "stage": "deliver",
+      "calls": 66,
+      "input_tokens": 166663,
+      "output_tokens": 30923,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.9638
+    },
+    {
+      "run_date": "2026-05-30",
+      "stage": "score",
+      "calls": 129,
+      "input_tokens": 398839,
+      "output_tokens": 20094,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2497
+    },
+    {
+      "run_date": "2026-05-31",
+      "stage": "deliver",
+      "calls": 52,
+      "input_tokens": 131071,
+      "output_tokens": 25708,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.7788
+    },
+    {
+      "run_date": "2026-05-31",
+      "stage": "score",
+      "calls": 125,
+      "input_tokens": 381147,
+      "output_tokens": 19001,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2381
+    },
+    {
+      "run_date": "2026-06-01",
+      "stage": "deliver",
+      "calls": 48,
+      "input_tokens": 118168,
+      "output_tokens": 24459,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.7214
+    },
+    {
+      "run_date": "2026-06-01",
+      "stage": "score",
+      "calls": 110,
+      "input_tokens": 334310,
+      "output_tokens": 17285,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2104
+    },
+    {
+      "run_date": "2026-06-02",
+      "stage": "deliver",
+      "calls": 15,
+      "input_tokens": 28780,
+      "output_tokens": 8819,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2186
+    },
+    {
+      "run_date": "2026-06-02",
+      "stage": "score",
+      "calls": 32,
+      "input_tokens": 92916,
+      "output_tokens": 4837,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1171
+    },
+    {
+      "run_date": "2026-06-03",
+      "stage": "deliver",
+      "calls": 17,
+      "input_tokens": 34498,
+      "output_tokens": 9591,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2474
+    },
+    {
+      "run_date": "2026-06-03",
+      "stage": "score",
+      "calls": 36,
+      "input_tokens": 103724,
+      "output_tokens": 5140,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0647
+    },
+    {
+      "run_date": "2026-06-04",
+      "stage": "deliver",
+      "calls": 15,
+      "input_tokens": 34268,
+      "output_tokens": 8951,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2371
+    },
+    {
+      "run_date": "2026-06-04",
+      "stage": "score",
+      "calls": 28,
+      "input_tokens": 82186,
+      "output_tokens": 4512,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0524
+    },
+    {
+      "run_date": "2026-06-05",
+      "stage": "deliver",
+      "calls": 34,
+      "input_tokens": 85750,
+      "output_tokens": 16064,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.4982
+    },
+    {
+      "run_date": "2026-06-05",
+      "stage": "score",
+      "calls": 61,
+      "input_tokens": 189865,
+      "output_tokens": 9890,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1197
+    },
+    {
+      "run_date": "2026-06-06",
+      "stage": "deliver",
+      "calls": 16,
+      "input_tokens": 29584,
+      "output_tokens": 8769,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2203
+    },
+    {
+      "run_date": "2026-06-06",
+      "stage": "score",
+      "calls": 34,
+      "input_tokens": 94562,
+      "output_tokens": 5040,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0599
+    },
+    {
+      "run_date": "2026-06-07",
+      "stage": "deliver",
+      "calls": 8,
+      "input_tokens": 13999,
+      "output_tokens": 5393,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1229
+    },
+    {
+      "run_date": "2026-06-07",
+      "stage": "score",
+      "calls": 30,
+      "input_tokens": 84314,
+      "output_tokens": 4489,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0534
+    },
+    {
+      "run_date": "2026-06-08",
+      "stage": "deliver",
+      "calls": 9,
+      "input_tokens": 25397,
+      "output_tokens": 6579,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1749
+    },
+    {
+      "run_date": "2026-06-08",
+      "stage": "score",
+      "calls": 39,
+      "input_tokens": 119604,
+      "output_tokens": 6079,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.075
+    },
+    {
+      "run_date": "2026-06-09",
+      "stage": "deliver",
+      "calls": 19,
+      "input_tokens": 44089,
+      "output_tokens": 10470,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2893
+    },
+    {
+      "run_date": "2026-06-09",
+      "stage": "score",
+      "calls": 24,
+      "input_tokens": 69034,
+      "output_tokens": 3663,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0437
+    },
+    {
+      "run_date": "2026-06-10",
+      "stage": "deliver",
+      "calls": 31,
+      "input_tokens": 91188,
+      "output_tokens": 14827,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.496
+    },
+    {
+      "run_date": "2026-06-10",
+      "stage": "score",
+      "calls": 68,
+      "input_tokens": 209256,
+      "output_tokens": 10940,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.264
+    },
+    {
+      "run_date": "2026-06-11",
+      "stage": "deliver",
+      "calls": 15,
+      "input_tokens": 39797,
+      "output_tokens": 11346,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2896
+    },
+    {
+      "run_date": "2026-06-11",
+      "stage": "score",
+      "calls": 39,
+      "input_tokens": 110241,
+      "output_tokens": 5906,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0699
+    }
+  ],
+  "issue_sources": [
+    {
+      "quelle": "heise",
+      "articles": 67,
+      "avg_score": 4
+    },
+    {
+      "quelle": "hackernews",
+      "articles": 58,
+      "avg_score": 4.12
+    },
+    {
+      "quelle": "simonwillison",
+      "articles": 30,
+      "avg_score": 4.07
+    },
+    {
+      "quelle": "latentspace",
+      "articles": 16,
+      "avg_score": 4.13
+    },
+    {
+      "quelle": "huggingface",
+      "articles": 8,
+      "avg_score": 4.13
+    },
+    {
+      "quelle": "anthropic",
+      "articles": 6,
+      "avg_score": 4.17
+    },
+    {
+      "quelle": "golem",
+      "articles": 5,
+      "avg_score": 4
+    },
+    {
+      "quelle": "interconnects",
+      "articles": 2,
+      "avg_score": 4
+    },
+    {
+      "quelle": "lastweekinai",
+      "articles": 1,
+      "avg_score": 4
+    }
+  ],
+  "adapter_health": [
+    {
+      "adapter": "thebatch",
+      "runs": 14,
+      "total_fetched": 5207,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "huggingface",
+      "runs": 14,
+      "total_fetched": 2423,
+      "total_truncated": 37,
+      "error_runs": 0
+    },
+    {
+      "adapter": "simonwillison",
+      "runs": 14,
+      "total_fetched": 420,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "heise",
+      "runs": 14,
+      "total_fetched": 364,
+      "total_truncated": 125,
+      "error_runs": 3
+    },
+    {
+      "adapter": "latentspace",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "lastweekinai",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "interconnects",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "benevans",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "aheadofai",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "hackernews",
+      "runs": 14,
+      "total_fetched": 250,
+      "total_truncated": 56,
+      "error_runs": 1
+    },
+    {
+      "adapter": "yannickilcher",
+      "runs": 14,
+      "total_fetched": 210,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "anthropic",
+      "runs": 14,
+      "total_fetched": 192,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "venturebeat",
+      "runs": 14,
+      "total_fetched": 98,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "golem",
+      "runs": 14,
+      "total_fetched": 96,
+      "total_truncated": 0,
+      "error_runs": 3
+    },
+    {
+      "adapter": "hackernews-show",
+      "runs": 4,
+      "total_fetched": 7,
+      "total_truncated": 5,
+      "error_runs": 0
+    },
+    {
+      "adapter": "a16z",
+      "runs": 14,
+      "total_fetched": 0,
+      "total_truncated": 0,
+      "error_runs": 14
+    }
+  ]
+}

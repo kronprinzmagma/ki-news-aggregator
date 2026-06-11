@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**231 Einträge** · Top-Quellen: heise (88) · hackernews (62) · simonwillison (35) · latentspace (24) · huggingface (6) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**240 Einträge** · Top-Quellen: heise (88) · hackernews (66) · simonwillison (39) · latentspace (24) · huggingface (7) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-11** — [If Claude Fable stops helping you, you'll never know](2026-06-11-if-claude-fable-stops-helping-you-you-ll-never-know.md) · *simonwillison · Score 4*
+- **2026-06-11** — [GeoLibre 1.0](2026-06-11-geolibre-1-0.md) · *hackernews · Score 4*
+- **2026-06-11** — [DiffusionGemma](2026-06-11-diffusiongemma.md) · *simonwillison · Score 4*
+- **2026-06-11** — [datasette-agent 0.2a0](2026-06-11-datasette-agent-0-2a0.md) · *simonwillison · Score 4*
+- **2026-06-11** — [Can Voice Agents Handle Bilingual Customers? Benchmarking Frontier ASR on Code-Switched Speech](2026-06-11-can-voice-agents-handle-bilingual-customers-benchmarking-fro.md) · *huggingface · Score 4*
+- **2026-06-11** — [Are insecure code completions in PyCharm a vulnerability?](2026-06-11-are-insecure-code-completions-in-pycharm-a-vulnerability.md) · *hackernews · Score 4*
+- **2026-06-11** — [Apache Burr: Build reliable AI agents and applications](2026-06-11-apache-burr-build-reliable-ai-agents-and-applications.md) · *hackernews · Score 4*
+- **2026-06-11** — [Anthropic Walks Back Policy That Could Have ‘Sabotaged’ AI Researchers Using Claude](2026-06-11-anthropic-walks-back-policy-that-could-have-sabotaged-ai-res.md) · *simonwillison · Score 4*
+- **2026-06-11** — [AI agent runs amok in Fedora and elsewhere](2026-06-11-ai-agent-runs-amok-in-fedora-and-elsewhere.md) · *hackernews · Score 4*
 - **2026-06-10** — [WTF: Metas KI-Chatbot half beim Knacken zehntausender Instagram-Accounts](2026-06-10-wtf-metas-ki-chatbot-half-beim-knacken-zehntausender-instagr.md) · *heise · Score 4*
 - **2026-06-10** — [Video: So installiert und nutzt ihr lokale KI-Modelle](2026-06-10-video-so-installiert-und-nutzt-ihr-lokale-ki-modelle.md) · *heise · Score 4*
 - **2026-06-10** — [Upcoming breaking changes for npm v12](2026-06-10-upcoming-breaking-changes-for-npm-v12.md) · *hackernews · Score 4*
