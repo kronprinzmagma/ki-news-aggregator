@@ -777,7 +777,9 @@ async function main() {
     const related = relatedMap.get(a.url);
     if (related && related.length > 0) {
       lines.push('');
-      lines.push(`> **Lies auch:** ${related.map(r => `[${sanitizeMarkdown(r.titel)}](${sanitizeUrl(r.url)})`).join(' · ')}`);
+      // Max. 3 Links: an dichten Tagen wurden daraus 15+-Link-Listen, die den
+      // eigentlichen Inhalt erdrücken (beobachtet am 2026-06-10 mit 17 Links).
+      lines.push(`> **Lies auch:** ${related.slice(0, 3).map(r => `[${sanitizeMarkdown(r.titel)}](${sanitizeUrl(r.url)})`).join(' · ')}`);
     }
     lines.push('', '---', '');
   }
@@ -832,7 +834,14 @@ async function main() {
     recordIssue({
       run_date: date,
       issue_url: issueUrl,
-      articles: deliveredArtikel.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
+      articles: [
+        ...deliveredArtikel.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
+        // Event-gemergte Artikel zählen ebenfalls als publiziert: sie sind in
+        // der Merge-Note verlinkt und sollen am Folgetag nicht als eigen-
+        // ständiger Artikel wiederkehren (beobachtet: "If Claude Fable stops…"
+        // am 10.06. gemergt, am 11.06. erneut als Vollartikel erschienen).
+        ...dedupedOut.map(a => ({ url: a.url, score: a.score, quelle: a.quelle, titel: a.titel })),
+      ],
     });
   }
 
