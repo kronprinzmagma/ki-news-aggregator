@@ -86,19 +86,22 @@ async function getIssueHtmlBody(issueNumber) {
 const AUDIO_RELEASE_TAG = 'podcast';
 
 async function getAudioByDate() {
-  const map = new Map();
+  const daily = new Map();
+  const weekly = new Map(); // Key: Sonntags-Datum der Woche (weekly-YYYY-MM-DD.mp3)
   try {
     const { body } = await ghRequest(`/repos/${REPO_OWNER}/${REPO_NAME}/releases/tags/${AUDIO_RELEASE_TAG}`);
     const release = JSON.parse(body);
     for (const asset of release.assets || []) {
-      const m = asset.name.match(/^daily-(\d{4}-\d{2}-\d{2})\.mp3$/);
-      if (m) map.set(m[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
+      const d = asset.name.match(/^daily-(\d{4}-\d{2}-\d{2})\.mp3$/);
+      if (d) daily.set(d[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
+      const w = asset.name.match(/^weekly-(\d{4}-\d{2}-\d{2})\.mp3$/);
+      if (w) weekly.set(w[1], { url: asset.browser_download_url, size: asset.size, updated: asset.updated_at });
     }
-    console.log(`[archive] ${map.size} Audio-Folgen gefunden`);
+    console.log(`[archive] ${daily.size} Daily- und ${weekly.size} Weekly-Audio-Folgen gefunden`);
   } catch (err) {
     console.log(`[archive] Keine Audio-Assets (${err.message})`);
   }
-  return map;
+  return { daily, weekly };
 }
 
 // GitHub-Pages-Basis-URL für absolute Links im RSS-Feed. Override via PAGES_URL
@@ -110,39 +113,36 @@ function rfc822(dateStr) {
   return new Date(`${dateStr}T06:00:00Z`).toUTCString();
 }
 
-function buildPodcastFeed(dailies, audioByDate, teasers) {
-  const episodes = dailies
-    .filter((d) => audioByDate.has(d.date))
-    .map((d) => {
-      const audio = audioByDate.get(d.date);
-      const desc = teasers.get(d.issue.number) || `KI Daily vom ${d.date}.`;
-      return `    <item>
-      <title>${escapeHtml(d.issue.title)}</title>
-      <link>${PAGES_URL}/daily/${d.date}.html</link>
-      <guid isPermaLink="false">ki-daily-${d.date}</guid>
-      <pubDate>${rfc822(d.date)}</pubDate>
-      <description>${escapeHtml(desc)}</description>
-      <itunes:summary>${escapeHtml(desc)}</itunes:summary>
-      <enclosure url="${escapeHtml(audio.url)}" length="${audio.size}" type="audio/mpeg"/>
+/**
+ * Generischer Podcast-Feed-Builder für Daily- und Weekly-Feed.
+ * episodes: [{ title, pageUrl, guid, date (YYYY-MM-DD für pubDate), desc, audio }]
+ */
+function buildPodcastFeed({ title, summary, feedFile, episodes }) {
+  const items = episodes.map((e) => `    <item>
+      <title>${escapeHtml(e.title)}</title>
+      <link>${e.pageUrl}</link>
+      <guid isPermaLink="false">${e.guid}</guid>
+      <pubDate>${rfc822(e.date)}</pubDate>
+      <description>${escapeHtml(e.desc)}</description>
+      <itunes:summary>${escapeHtml(e.desc)}</itunes:summary>
+      <enclosure url="${escapeHtml(e.audio.url)}" length="${e.audio.size}" type="audio/mpeg"/>
       <itunes:explicit>false</itunes:explicit>
-    </item>`;
-    })
-    .join('\n');
+    </item>`).join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>KI Daily – Audio</title>
+    <title>${escapeHtml(title)}</title>
     <link>${PAGES_URL}/</link>
-    <atom:link href="${PAGES_URL}/feed-daily.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${PAGES_URL}/${feedFile}" rel="self" type="application/rss+xml"/>
     <language>de</language>
-    <description>Tägliches KI-News-Briefing als Audio. KI-generiert (Claude/Anthropic, OpenAI TTS). Hinweis nach EU AI Act Art. 50(4).</description>
+    <description>${escapeHtml(summary)} KI-generiert (Claude/Anthropic, OpenAI TTS). Hinweis nach EU AI Act Art. 50(4).</description>
     <itunes:author>ki-news-aggregator</itunes:author>
-    <itunes:summary>Tägliches KI-News-Briefing als Audio, automatisch kuratiert.</itunes:summary>
+    <itunes:summary>${escapeHtml(summary)}</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="Technology"/>
     <itunes:image href="${PAGES_URL}/cover.png"/>
-${episodes}
+${items}
   </channel>
 </rss>`;
 }
@@ -354,6 +354,63 @@ function extractTeaser(html, maxChars = 280) {
   return truncated.slice(0, lastSpace) + '…';
 }
 
+// ─── Stats-Seite ─────────────────────────────────────────────────────────────
+// Rendert assets/stats.json (vom Daily-Lauf via scripts/export-stats.js
+// committet) als Kosten-/Qualitäts-Übersicht. Fehlt die Datei, wird die
+// Seite einfach weggelassen.
+
+function bar(value, max, color = 'var(--accent)') {
+  const pct = max > 0 ? Math.max(1, Math.round((value / max) * 100)) : 0;
+  return `<div style="background:#eef;border-radius:3px;height:10px;width:100%"><div style="background:${color};border-radius:3px;height:10px;width:${pct}%"></div></div>`;
+}
+
+function buildStatsPage(stats) {
+  // Kosten pro Tag (Stages aufsummiert)
+  const byDay = new Map();
+  for (const r of stats.usage_daily) {
+    const d = byDay.get(r.run_date) || { usd: 0, cache_read: 0, input: 0 };
+    d.usd += r.usd;
+    d.cache_read += r.cache_read;
+    d.input += r.input_tokens;
+    byDay.set(r.run_date, d);
+  }
+  const days = [...byDay.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-30);
+  const maxUsd = Math.max(...days.map(([, d]) => d.usd), 0.01);
+  const totalUsd = [...byDay.values()].reduce((s, d) => s + d.usd, 0);
+  const totalCacheRead = stats.usage_daily.reduce((s, r) => s + r.cache_read, 0);
+  const totalInput = stats.usage_daily.reduce((s, r) => s + r.input_tokens, 0);
+  const cacheRate = totalInput + totalCacheRead > 0 ? totalCacheRead / (totalInput + totalCacheRead) : 0;
+
+  const costRows = days.map(([date, d]) => `
+    <tr><td style="white-space:nowrap">${date}</td><td style="width:55%">${bar(d.usd, maxUsd)}</td><td style="text-align:right">$${d.usd.toFixed(3)}</td></tr>`).join('');
+
+  const maxSource = Math.max(...stats.issue_sources.map(s => s.articles), 1);
+  const sourceRows = stats.issue_sources.map(s => `
+    <tr><td style="white-space:nowrap">${escapeHtml(s.quelle)}</td><td style="width:45%">${bar(s.articles, maxSource, '#7c3aed')}</td><td style="text-align:right">${s.articles}</td><td style="text-align:right">Ø ${s.avg_score}</td></tr>`).join('');
+
+  const adapterRows = stats.adapter_health.map(a => `
+    <tr><td>${escapeHtml(a.adapter)}</td><td style="text-align:right">${a.total_fetched}</td><td style="text-align:right">${a.total_truncated}</td><td style="text-align:right">${a.error_runs > 0 ? `⚠ ${a.error_runs}` : '–'}</td></tr>`).join('');
+
+  return `
+<section class="section">
+  <h2>Pipeline-Statistik (letzte ${stats.lookback_days} Tage)</h2>
+  <article class="entry">
+    <p><strong>${stats.issues}</strong> publizierte Issues · <strong>$${totalUsd.toFixed(2)}</strong> API-Kosten gesamt · Cache-Hit-Rate <strong>${(cacheRate * 100).toFixed(1)} %</strong></p>
+    <h3>Kosten pro Tag (letzte 30 Lauftage)</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">${costRows}</table>
+    <h3>Artikel pro Quelle in den Issues</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      <tr><th style="text-align:left">Quelle</th><th></th><th style="text-align:right">Artikel</th><th style="text-align:right">Score</th></tr>${sourceRows}
+    </table>
+    <h3>Adapter-Health (letzte 14 Läufe)</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      <tr><th style="text-align:left">Adapter</th><th style="text-align:right">Artikel</th><th style="text-align:right">Truncated</th><th style="text-align:right">Fehler-Läufe</th></tr>${adapterRows}
+    </table>
+    <p style="color:var(--muted);font-size:.85rem">Stand: ${escapeHtml(stats.generated_at.slice(0, 16).replace('T', ' '))} UTC – Quelle: usage_log/adapter_health (SQLite), exportiert vom Daily-Lauf.</p>
+  </article>
+</section>`;
+}
+
 // ─── Build ───────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -376,7 +433,9 @@ async function main() {
   weeklies.sort((a, b) => weekStart(b).localeCompare(weekStart(a)));
   console.log(`[archive] ${dailies.length} Daily-Issues, ${weeklies.length} Weekly-Issues`);
 
-  const audioByDate = await getAudioByDate();
+  const { daily: audioByDate, weekly: weeklyAudioByDate } = await getAudioByDate();
+  // Weekly → Audio-Mapping über das Wochenend-Datum (zweites Datum im Range).
+  const weekEnd = w => { const ds = w.range.match(/\d{4}-\d{2}-\d{2}/g) || []; return ds[1] || ds[0] || null; };
 
   await fs.rm(OUT_DIR, { recursive: true, force: true });
   await fs.mkdir(path.join(OUT_DIR, 'daily'), { recursive: true });
@@ -400,7 +459,9 @@ async function main() {
           { href: `./`, label: item.kind === 'daily' ? 'Daily' : 'Weekly' },
           { label: item.issue.title },
         ];
-        const audio = item.kind === 'daily' ? audioByDate.get(item.slug) : null;
+        const audio = item.kind === 'daily'
+          ? audioByDate.get(item.slug)
+          : weeklyAudioByDate.get(weekEnd(item));
         const player = audio
           ? `<div class="audio"><strong>🎧 Audio-Version</strong><audio controls preload="none" src="${escapeHtml(audio.url)}"></audio><a class="dl" href="${escapeHtml(audio.url)}">herunterladen</a></div>`
           : '';
@@ -438,6 +499,7 @@ async function main() {
 
 ${weeklies.length > 0 ? `<section class="section">
   <h2>Weekly Digests</h2>
+  ${weeklyAudioByDate.size > 0 ? `<p>🎧 <a href="feed-weekly.xml">Weekly-Podcast-Feed abonnieren</a></p>` : ''}
   <div class="list-grid">${weeklyList}</div>
 </section>` : ''}
 
@@ -447,17 +509,66 @@ ${weeklies.length > 0 ? `<section class="section">
   <div class="list-grid">${dailyList}</div>
 </section>`;
 
+  // Stats-Seite aus assets/stats.json (falls vom Daily-Lauf exportiert).
+  let statsLink = '';
+  try {
+    const stats = JSON.parse(await fs.readFile(path.join(REPO_ROOT, 'assets', 'stats.json'), 'utf-8'));
+    await fs.writeFile(
+      path.join(OUT_DIR, 'stats.html'),
+      layout({ title: 'Pipeline-Statistik', content: buildStatsPage(stats), crumbs: [{ href: './', label: 'Archiv' }, { label: 'Statistik' }] }),
+      'utf-8',
+    );
+    statsLink = `<p>📊 <a href="stats.html">Pipeline-Statistik</a> – Kosten, Cache-Hit-Rate, Quellen, Adapter-Health.</p>`;
+    console.log('  ✓ stats.html');
+  } catch {
+    console.log('  – stats.html übersprungen (assets/stats.json fehlt)');
+  }
+
   await fs.writeFile(
     path.join(OUT_DIR, 'index.html'),
-    layout({ title: 'KI-News Archiv', content: indexContent }),
+    layout({ title: 'KI-News Archiv', content: indexContent.replace('</section>\n', `${statsLink}</section>\n`) }),
     'utf-8',
   );
   console.log(`  ✓ index.html`);
 
-  // Podcast-RSS-Feed (nur wenn Audio existiert).
+  // Podcast-RSS-Feeds (nur wenn Audio existiert).
   if (audioByDate.size > 0) {
-    await fs.writeFile(path.join(OUT_DIR, 'feed-daily.xml'), buildPodcastFeed(dailies, audioByDate, teasers), 'utf-8');
-    console.log(`  ✓ feed-daily.xml (${[...audioByDate.keys()].length} Folgen)`);
+    const episodes = dailies
+      .filter(d => audioByDate.has(d.date))
+      .map(d => ({
+        title: d.issue.title,
+        pageUrl: `${PAGES_URL}/daily/${d.date}.html`,
+        guid: `ki-daily-${d.date}`,
+        date: d.date,
+        desc: teasers.get(d.issue.number) || `KI Daily vom ${d.date}.`,
+        audio: audioByDate.get(d.date),
+      }));
+    await fs.writeFile(path.join(OUT_DIR, 'feed-daily.xml'), buildPodcastFeed({
+      title: 'KI Daily – Audio',
+      summary: 'Tägliches KI-News-Briefing als Audio, automatisch kuratiert.',
+      feedFile: 'feed-daily.xml',
+      episodes,
+    }), 'utf-8');
+    console.log(`  ✓ feed-daily.xml (${episodes.length} Folgen)`);
+  }
+  if (weeklyAudioByDate.size > 0) {
+    const episodes = weeklies
+      .filter(w => weeklyAudioByDate.has(weekEnd(w)))
+      .map(w => ({
+        title: w.issue.title,
+        pageUrl: `${PAGES_URL}/weekly/kw-${w.week.padStart(2, '0')}.html`,
+        guid: `ki-weekly-${weekEnd(w)}`,
+        date: weekEnd(w),
+        desc: teasers.get(w.issue.number) || w.issue.title,
+        audio: weeklyAudioByDate.get(weekEnd(w)),
+      }));
+    await fs.writeFile(path.join(OUT_DIR, 'feed-weekly.xml'), buildPodcastFeed({
+      title: 'KI Weekly – Audio',
+      summary: 'Wöchentlicher KI-Digest als Audio, Synthese der Daily-Briefings.',
+      feedFile: 'feed-weekly.xml',
+      episodes,
+    }), 'utf-8');
+    console.log(`  ✓ feed-weekly.xml (${episodes.length} Folgen)`);
   }
 
   // Podcast-Cover (Pflicht für Apple/Spotify-Verzeichnisse, itunes:image im Feed).

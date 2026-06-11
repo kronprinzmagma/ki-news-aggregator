@@ -75,17 +75,24 @@ jobs:
       - name: Deliver
         run: node deliver.js
 
-      - name: Commit new build-anchors (if any)
+      - name: Export stats
+        # Schreibt assets/stats.json aus der SQLite-DB – Datenquelle für die
+        # Stats-Seite im Pages-Archiv (der Pages-Build hat keine DB).
+        if: success()
+        run: node scripts/export-stats.js
+
+      - name: Commit new build-anchors + stats (if any)
         if: success()
         run: |
-          if [ -d build-anchors ] && [ -n "$(git status --porcelain build-anchors/)" ]; then
+          if [ -n "$(git status --porcelain build-anchors/ assets/stats.json 2>/dev/null)" ]; then
             git config user.name "ki-news-bot"
             git config user.email "noreply@github.com"
             git add build-anchors/
+            [ -f assets/stats.json ] && git add assets/stats.json
             git commit -m "chore(build-anchors): tageslauf ${RUN_DATE}"
             git push
           else
-            echo "Keine neuen Build-Anker zu committen."
+            echo "Keine neuen Build-Anker/Stats zu committen."
           fi
 
       - name: Upload Run Artifacts

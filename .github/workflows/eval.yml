@@ -36,3 +36,22 @@ jobs:
           name: eval-results-${{ github.sha }}
           path: evals/results/
           retention-days: 90
+
+      - name: Open issue on eval regression
+        # run_eval.js endet mit Exit 1, wenn MAE > 1.5 – das ist eine
+        # Scoring-Regression, kein Infrastruktur-Fehler. Sichtbar machen,
+        # statt nur einen roten Workflow-Haken zu hinterlassen.
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --label eval-regression --state open --json number --jq length)
+          if [ "$EXISTING" -gt 0 ]; then
+            echo "Offenes eval-regression-Issue existiert bereits – kein Duplikat."
+            exit 0
+          fi
+          gh label create eval-regression --repo "$GITHUB_REPOSITORY" --color D93F0B --description "Scoring-Eval unter Schwellwert" 2>/dev/null || true
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --label eval-regression \
+            --title "Scoring-Eval-Regression ($(date -u +%Y-%m-%d))" \
+            --body "Der Scoring-Eval ist unter den Schwellwert gefallen (MAE > 1.5). Details: [Workflow-Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) – Artefakt \`eval-results-${GITHUB_SHA}\`. Nächste Schritte: Prompt-Drift in lib/scoring.js prüfen, neue Goldstandard-Einträge auf Plausibilität checken."

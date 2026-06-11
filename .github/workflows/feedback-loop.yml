@@ -1,0 +1,78 @@
+name: Feedback Loop
+
+# Schliesst den Feedback-Kreis automatisch:
+# 1. promote-feedback.js liest die Checkbox-Häkchen aus den Daily-Issues und
+#    erweitert evals/goldstandard.json (idempotent, URL-dedupliziert).
+# 2. Hat sich der Goldstandard geändert, wird er committet – der Push triggert
+#    automatisch eval.yml (Pfad-Trigger auf evals/**), das den Scoring-Eval
+#    fährt und bei MAE-Regression ein Issue öffnet.
+# 3. feedback-stats.js schreibt die Quellen-Statistik in die Job-Summary
+#    (Personalisierungs-Hinweise, rein beratend).
+
+on:
+  schedule:
+    # Sonntags 10:00 UTC – nach Daily (05:30) und Weekly (08:00), damit die
+    # Häkchen der ganzen Woche eingesammelt sind.
+    - cron: '0 10 * * 0'
+  workflow_dispatch:
+
+concurrency:
+  group: feedback-loop
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      # goldstandard.json wird bei Änderungen committet
+      contents: write
+
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore SQLite run history (read-only)
+        # Liefert die Rohtexte für neue Goldstandard-Einträge. Kein Save:
+        # dieser Workflow schreibt nicht in die DB.
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
+        with:
+          path: ki-news.db*
+          key: ki-news-db-${{ runner.os }}-feedback-${{ github.run_id }}
+          restore-keys: |
+            ki-news-db-${{ runner.os }}-
+
+      - name: Promote feedback to goldstandard
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: node scripts/promote-feedback.js
+
+      - name: Commit goldstandard (if changed)
+        run: |
+          if [ -n "$(git status --porcelain evals/goldstandard.json)" ]; then
+            git config user.name "ki-news-bot"
+            git config user.email "noreply@github.com"
+            git add evals/goldstandard.json
+            git commit -m "chore(eval): goldstandard aus Issue-Feedback erweitert"
+            git push
+            echo "Goldstandard erweitert – eval.yml läuft automatisch (Pfad-Trigger)."
+          else
+            echo "Keine neuen Goldstandard-Einträge."
+          fi
+
+      - name: Feedback stats (Job-Summary)
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          echo '## Feedback-Statistik pro Quelle' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          node scripts/feedback-stats.js | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"

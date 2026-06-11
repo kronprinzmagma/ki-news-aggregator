@@ -20,6 +20,8 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       GH_PAT: ${{ secrets.GH_PAT }}
+      # Optional: ohne diesen Secret wird die Weekly-Audio-Ausgabe übersprungen.
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6

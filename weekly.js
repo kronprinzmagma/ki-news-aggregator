@@ -4,6 +4,7 @@ import { githubRequest, ghPath } from './lib/github.js';
 import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
 import { parseArticleSections } from './lib/issue-format.js';
+import { generateWeeklyAudio } from './lib/audio.js';
 
 loadEnv();
 
@@ -234,11 +235,18 @@ async function main() {
     { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly' }
   );
 
+  // Audio-Hörfassung (optional, No-Op ohne OPENAI_API_KEY) – vor der
+  // Issue-Erstellung, damit der 🎧-Link direkt in den Body kann.
+  const audio = await generateWeeklyAudio({ weekInfo, digestBody, token });
+  const audioLine = audio?.audio_url
+    ? `\n🎧 **Audio-Version:** [anhören / herunterladen](${audio.audio_url})${audio.est_duration_sec ? ` · ~${Math.round(audio.est_duration_sec / 60)} Min.` : ''}\n`
+    : '';
+
   const issueBody = `# KI Weekly – KW ${weekInfo.kw}
 *${weekInfo.from} – ${weekInfo.to} · ${allArticles.length} Artikel (${dailyIssues.length} Daily Issues)*
 
 > 🤖 **KI-generierter Inhalt.** Synthese und Einordnung sind von Claude (Anthropic) verfasst, aggregiert aus den Daily Issues der Woche. Hinweis nach EU AI Act Art. 50(4).
-
+${audioLine}
 ${digestBody}
 
 *Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3Asummary)*`;
