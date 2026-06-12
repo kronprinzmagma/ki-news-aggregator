@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-11T09:54:58.043Z",
+  "generated_at": "2026-06-12T09:47:44.449Z",
   "lookback_days": 60,
-  "issues": 17,
+  "issues": 18,
   "usage_daily": [
     {
       "run_date": "2026-05-23",
@@ -402,6 +402,26 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.0699
+    },
+    {
+      "run_date": "2026-06-12",
+      "stage": "deliver",
+      "calls": 20,
+      "input_tokens": 49141,
+      "output_tokens": 12486,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.3347
+    },
+    {
+      "run_date": "2026-06-12",
+      "stage": "score",
+      "calls": 31,
+      "input_tokens": 105297,
+      "output_tokens": 5152,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0655
     }
   ],
   "issue_sources": [
@@ -412,18 +432,18 @@
     },
     {
       "quelle": "hackernews",
-      "articles": 58,
-      "avg_score": 4.12
+      "articles": 64,
+      "avg_score": 4.14
     },
     {
       "quelle": "simonwillison",
-      "articles": 30,
-      "avg_score": 4.07
+      "articles": 32,
+      "avg_score": 4.13
     },
     {
       "quelle": "latentspace",
-      "articles": 16,
-      "avg_score": 4.13
+      "articles": 18,
+      "avg_score": 4.11
     },
     {
       "quelle": "huggingface",
@@ -442,7 +462,7 @@
     },
     {
       "quelle": "interconnects",
-      "articles": 2,
+      "articles": 3,
       "avg_score": 4
     },
     {
@@ -455,15 +475,15 @@
     {
       "adapter": "thebatch",
       "runs": 14,
-      "total_fetched": 5207,
+      "total_fetched": 5208,
       "total_truncated": 0,
       "error_runs": 0
     },
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 2423,
-      "total_truncated": 37,
+      "total_fetched": 3216,
+      "total_truncated": 39,
       "error_runs": 0
     },
     {
@@ -476,8 +496,8 @@
     {
       "adapter": "heise",
       "runs": 14,
-      "total_fetched": 364,
-      "total_truncated": 125,
+      "total_fetched": 375,
+      "total_truncated": 136,
       "error_runs": 3
     },
     {
@@ -518,8 +538,8 @@
     {
       "adapter": "hackernews",
       "runs": 14,
-      "total_fetched": 250,
-      "total_truncated": 56,
+      "total_fetched": 252,
+      "total_truncated": 58,
       "error_runs": 1
     },
     {
@@ -532,7 +552,7 @@
     {
       "adapter": "anthropic",
       "runs": 14,
-      "total_fetched": 192,
+      "total_fetched": 190,
       "total_truncated": 0,
       "error_runs": 0
     },
@@ -546,15 +566,15 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 96,
+      "total_fetched": 94,
       "total_truncated": 0,
       "error_runs": 3
     },
     {
       "adapter": "hackernews-show",
-      "runs": 4,
-      "total_fetched": 7,
-      "total_truncated": 5,
+      "runs": 5,
+      "total_fetched": 8,
+      "total_truncated": 6,
       "error_runs": 0
     },
     {

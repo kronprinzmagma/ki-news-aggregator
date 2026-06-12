@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**240 Einträge** · Top-Quellen: heise (88) · hackernews (66) · simonwillison (39) · latentspace (24) · huggingface (7) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**248 Einträge** · Top-Quellen: heise (88) · hackernews (72) · simonwillison (40) · latentspace (25) · huggingface (7) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-12** — [Software is made between commits](2026-06-12-software-is-made-between-commits.md) · *hackernews · Score 5*
+- **2026-06-12** — [Removing 'um' from a recording is harder than it sounds](2026-06-12-removing-um-from-a-recording-is-harder-than-it-sounds.md) · *hackernews · Score 4*
+- **2026-06-12** — [Lines of code got a better publicist](2026-06-12-lines-of-code-got-a-better-publicist.md) · *hackernews · Score 5*
+- **2026-06-12** — [If you are asking for human attention, demonstrate human effort](2026-06-12-if-you-are-asking-for-human-attention-demonstrate-human-effo.md) · *hackernews · Score 4*
+- **2026-06-12** — [Finding Optimal Tokenizers](2026-06-12-finding-optimal-tokenizers.md) · *hackernews · Score 4*
+- **2026-06-12** — [Digital Sovereignty Becomes an Imperative as the US Reads Dutch Emails](2026-06-12-digital-sovereignty-becomes-an-imperative-as-the-us-reads-du.md) · *hackernews · Score 4*
+- **2026-06-12** — [Claude Fable is relentlessly proactive](2026-06-12-claude-fable-is-relentlessly-proactive.md) · *simonwillison · Score 5*
+- **2026-06-12** — [[AINews] Loopcraft: The Art of Stacking Loops](2026-06-12-ainews-loopcraft-the-art-of-stacking-loops.md) · *latentspace · Score 4*
 - **2026-06-11** — [If Claude Fable stops helping you, you'll never know](2026-06-11-if-claude-fable-stops-helping-you-you-ll-never-know.md) · *simonwillison · Score 4*
 - **2026-06-11** — [GeoLibre 1.0](2026-06-11-geolibre-1-0.md) · *hackernews · Score 4*
 - **2026-06-11** — [DiffusionGemma](2026-06-11-diffusiongemma.md) · *simonwillison · Score 4*
