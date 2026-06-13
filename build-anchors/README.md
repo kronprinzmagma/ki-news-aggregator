@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**248 Einträge** · Top-Quellen: heise (88) · hackernews (72) · simonwillison (40) · latentspace (25) · huggingface (7) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**257 Einträge** · Top-Quellen: heise (88) · hackernews (78) · simonwillison (42) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-13** — [TycoonLE: A Jax reinforcement learning environment for long-horizon planning](2026-06-13-tycoonle-a-jax-reinforcement-learning-environment-for-long-h.md) · *hackernews · Score 4*
+- **2026-06-13** — [Twenty One Zero-Days in FFmpeg](2026-06-13-twenty-one-zero-days-in-ffmpeg.md) · *hackernews · Score 4*
+- **2026-06-13** — [There is a shadow hanging over this Fable thing](2026-06-13-there-is-a-shadow-hanging-over-this-fable-thing.md) · *hackernews · Score 5*
+- **2026-06-13** — [Statement on the US government directive to suspend access to Fable 5 and Mythos 5](2026-06-13-statement-on-the-us-government-directive-to-suspend-access-t.md) · *simonwillison · Score 5*
+- **2026-06-13** — [SkillSpector](2026-06-13-skillspector.md) · *hackernews · Score 5*
+- **2026-06-13** — [OpenAI WebRTC Audio Session, now with document context](2026-06-13-openai-webrtc-audio-session-now-with-document-context.md) · *simonwillison · Score 4*
+- **2026-06-13** — [olmo-eval: An evaluation workbench for the model development loop](2026-06-13-olmo-eval-an-evaluation-workbench-for-the-model-development-.md) · *huggingface · Score 5*
+- **2026-06-13** — [Launch HN: BitBoard (YC P25) – Analytics Workspace for Agents](2026-06-13-launch-hn-bitboard-yc-p25-analytics-workspace-for-agents.md) · *hackernews · Score 4*
+- **2026-06-13** — [How to setup a local coding agent on macOS](2026-06-13-how-to-setup-a-local-coding-agent-on-macos.md) · *hackernews · Score 4*
 - **2026-06-12** — [Software is made between commits](2026-06-12-software-is-made-between-commits.md) · *hackernews · Score 5*
 - **2026-06-12** — [Removing 'um' from a recording is harder than it sounds](2026-06-12-removing-um-from-a-recording-is-harder-than-it-sounds.md) · *hackernews · Score 4*
 - **2026-06-12** — [Lines of code got a better publicist](2026-06-12-lines-of-code-got-a-better-publicist.md) · *hackernews · Score 5*
