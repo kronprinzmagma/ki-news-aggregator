@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**257 Einträge** · Top-Quellen: heise (88) · hackernews (78) · simonwillison (42) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**272 Einträge** · Top-Quellen: heise (99) · hackernews (80) · simonwillison (44) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-14** — [Wirklich zu gefährlich? |  c't 3003](2026-06-14-wirklich-zu-gefahrlich-c-t-3003.md) · *heise · Score 4*
+- **2026-06-14** — [Weave: Merging based on language structure and not lines](2026-06-14-weave-merging-based-on-language-structure-and-not-lines.md) · *hackernews · Score 4*
+- **2026-06-14** — [US-Regierung erzwingt Abschaltung von Anthropics KI Fable 5 und Mythos 5](2026-06-14-us-regierung-erzwingt-abschaltung-von-anthropics-ki-fable-5-.md) · *heise · Score 4*
+- **2026-06-14** — [Publishing WASM wheels to PyPI for use with Pyodide](2026-06-14-publishing-wasm-wheels-to-pypi-for-use-with-pyodide.md) · *simonwillison · Score 4*
+- **2026-06-14** — [OpenSharing soll proprietäre Datensilos in der KI-Welt aufbrechen](2026-06-14-opensharing-soll-proprietare-datensilos-in-der-ki-welt-aufbr.md) · *heise · Score 4*
+- **2026-06-14** — [Mapping SQLite result columns back to their source `table.column`](2026-06-14-mapping-sqlite-result-columns-back-to-their-source-table-col.md) · *simonwillison · Score 4*
+- **2026-06-14** — [KI-Update Deep-Dive: Vibecoding als Sicherheitsrisiko - feat. TTT](2026-06-14-ki-update-deep-dive-vibecoding-als-sicherheitsrisiko-feat-tt.md) · *heise · Score 4*
+- **2026-06-14** — [Googles Home Speaker mit Gemini: Marktstart steht offenbar bevor](2026-06-14-googles-home-speaker-mit-gemini-marktstart-steht-offenbar-be.md) · *heise · Score 4*
+- **2026-06-14** — [Fable 5: Anthropic stoppt verdeckte Eingriffe](2026-06-14-fable-5-anthropic-stoppt-verdeckte-eingriffe.md) · *heise · Score 4*
+- **2026-06-14** — [Don't trust large context windows](2026-06-14-don-t-trust-large-context-windows.md) · *hackernews · Score 5*
+- **2026-06-14** — [Dieses KI-Gadget musst du selbst ankurbeln: Was die Macher damit zeigen wollen](2026-06-14-dieses-ki-gadget-musst-du-selbst-ankurbeln-was-die-macher-da.md) · *heise · Score 4*
+- **2026-06-14** — [Deezer: Gratis-Tool prüft Playlists auf KI-generierte Musik](2026-06-14-deezer-gratis-tool-pruft-playlists-auf-ki-generierte-musik.md) · *heise · Score 4*
+- **2026-06-14** — [China plant landesweites KI-Rechenzentrum-Netz für 295 Milliarden US-Dollar](2026-06-14-china-plant-landesweites-ki-rechenzentrum-netz-fur-295-milli.md) · *heise · Score 4*
+- **2026-06-14** — [Bundestag beschließt KI-Gesetz: Bundesnetzagentur wird zentrale Aufsicht](2026-06-14-bundestag-beschliesst-ki-gesetz-bundesnetzagentur-wird-zentr.md) · *heise · Score 4*
+- **2026-06-14** — [Apple gibt Cloud-Modell für kleinere Entwickler kostenlos frei](2026-06-14-apple-gibt-cloud-modell-fur-kleinere-entwickler-kostenlos-fr.md) · *heise · Score 4*
 - **2026-06-13** — [TycoonLE: A Jax reinforcement learning environment for long-horizon planning](2026-06-13-tycoonle-a-jax-reinforcement-learning-environment-for-long-h.md) · *hackernews · Score 4*
 - **2026-06-13** — [Twenty One Zero-Days in FFmpeg](2026-06-13-twenty-one-zero-days-in-ffmpeg.md) · *hackernews · Score 4*
 - **2026-06-13** — [There is a shadow hanging over this Fable thing](2026-06-13-there-is-a-shadow-hanging-over-this-fable-thing.md) · *hackernews · Score 5*
