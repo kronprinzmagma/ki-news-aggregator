@@ -166,7 +166,8 @@ lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
                          close-old-issues, eval.yml, publish-archive.yml,
-                         test.yml, feedback-loop.yml, audio-backfill.yml
+                         test.yml, feedback-loop.yml, audio-backfill.yml,
+                         embedding-dedup-eval.yml
 ```
 
 **Environment variables** (beyond the secrets above): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain), `NEWSAPI_KEY` activates the dormant NewsAPI adapter, `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run.
