@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-14T09:05:02.130Z",
+  "generated_at": "2026-06-15T11:36:01.971Z",
   "lookback_days": 60,
-  "issues": 20,
+  "issues": 21,
   "usage_daily": [
     {
       "run_date": "2026-05-23",
@@ -462,18 +462,38 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.1016
+    },
+    {
+      "run_date": "2026-06-15",
+      "stage": "deliver",
+      "calls": 9,
+      "input_tokens": 22662,
+      "output_tokens": 7464,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1799
+    },
+    {
+      "run_date": "2026-06-15",
+      "stage": "score",
+      "calls": 39,
+      "input_tokens": 139181,
+      "output_tokens": 5835,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0842
     }
   ],
   "issue_sources": [
     {
       "quelle": "heise",
-      "articles": 79,
+      "articles": 82,
       "avg_score": 4
     },
     {
       "quelle": "hackernews",
-      "articles": 72,
-      "avg_score": 4.17
+      "articles": 73,
+      "avg_score": 4.16
     },
     {
       "quelle": "simonwillison",
@@ -522,9 +542,9 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 4809,
-      "total_truncated": 39,
-      "error_runs": 0
+      "total_fetched": 4808,
+      "total_truncated": 38,
+      "error_runs": 1
     },
     {
       "adapter": "simonwillison",
@@ -579,7 +599,7 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 256,
-      "total_truncated": 65,
+      "total_truncated": 68,
       "error_runs": 1
     },
     {
@@ -592,7 +612,7 @@
     {
       "adapter": "anthropic",
       "runs": 14,
-      "total_fetched": 186,
+      "total_fetched": 184,
       "total_truncated": 0,
       "error_runs": 0
     },
@@ -612,9 +632,9 @@
     },
     {
       "adapter": "hackernews-show",
-      "runs": 4,
-      "total_fetched": 6,
-      "total_truncated": 6,
+      "runs": 5,
+      "total_fetched": 7,
+      "total_truncated": 7,
       "error_runs": 0
     },
     {
