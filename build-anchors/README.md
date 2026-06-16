@@ -2,10 +2,12 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**276 Einträge** · Top-Quellen: heise (102) · hackernews (81) · simonwillison (44) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**278 Einträge** · Top-Quellen: heise (102) · hackernews (81) · simonwillison (46) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-16** — [The Fable 5 Export Controls Harm US Cyber Defense](2026-06-16-the-fable-5-export-controls-harm-us-cyber-defense.md) · *simonwillison · Score 4*
+- **2026-06-16** — [datasette-agent 0.3a0](2026-06-16-datasette-agent-0-3a0.md) · *simonwillison · Score 5*
 - **2026-06-15** — [Schutzrechteallianz: Die fünf größten Patentämter forcieren den KI-Einsatz](2026-06-15-schutzrechteallianz-die-funf-grossten-patentamter-forcieren-.md) · *heise · Score 4*
 - **2026-06-15** — [Rio de Janeiro's \"homegrown\" LLM appears to be a merge of an existing model](2026-06-15-rio-de-janeiro-s-homegrown-llm-appears-to-be-a-merge-of-an-e.md) · *hackernews · Score 4*
 - **2026-06-15** — [Open Knowledge Format: KI-Wissen als Markdown-Dateien](2026-06-15-open-knowledge-format-ki-wissen-als-markdown-dateien.md) · *heise · Score 4*
