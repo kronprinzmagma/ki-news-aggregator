@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**278 Einträge** · Top-Quellen: heise (102) · hackernews (81) · simonwillison (46) · latentspace (25) · huggingface (8) · anthropic (6) · golem (5) · interconnects (2) · lastweekinai (2) · venturebeat (1)
+**285 Einträge** · Top-Quellen: heise (102) · hackernews (84) · simonwillison (48) · latentspace (26) · huggingface (8) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-17** — [Why AI hasn’t replaced software engineers, and won’t](2026-06-17-why-ai-hasn-t-replaced-software-engineers-and-won-t.md) · *simonwillison · Score 4*
+- **2026-06-17** — [Running local models is good now](2026-06-17-running-local-models-is-good-now.md) · *hackernews · Score 4*
+- **2026-06-17** — [Most of the CVE-2026-4020 attackers are the same client](2026-06-17-most-of-the-cve-2026-4020-attackers-are-the-same-client.md) · *hackernews · Score 4*
+- **2026-06-17** — [Has AI already killed self-help nonfiction books?](2026-06-17-has-ai-already-killed-self-help-nonfiction-books.md) · *hackernews · Score 4*
+- **2026-06-17** — [Frontier post-training recipe review with Finbarr Timbers](2026-06-17-frontier-post-training-recipe-review-with-finbarr-timbers.md) · *interconnects · Score 4*
+- **2026-06-17** — [Cloudflare CAPTCHA on at least one ampersand](2026-06-17-cloudflare-captcha-on-at-least-one-ampersand.md) · *simonwillison · Score 4*
+- **2026-06-17** — [[AINews] GLM-5.2: the top Frontend Coding model in the world, IndexShare for Speculative Decoding](2026-06-17-ainews-glm-5-2-the-top-frontend-coding-model-in-the-world-in.md) · *latentspace · Score 4*
 - **2026-06-16** — [The Fable 5 Export Controls Harm US Cyber Defense](2026-06-16-the-fable-5-export-controls-harm-us-cyber-defense.md) · *simonwillison · Score 4*
 - **2026-06-16** — [datasette-agent 0.3a0](2026-06-16-datasette-agent-0-3a0.md) · *simonwillison · Score 5*
 - **2026-06-15** — [Schutzrechteallianz: Die fünf größten Patentämter forcieren den KI-Einsatz](2026-06-15-schutzrechteallianz-die-funf-grossten-patentamter-forcieren-.md) · *heise · Score 4*

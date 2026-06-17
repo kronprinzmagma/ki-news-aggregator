@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-16T10:27:11.293Z",
+  "generated_at": "2026-06-17T10:19:07.069Z",
   "lookback_days": 60,
-  "issues": 22,
+  "issues": 23,
   "usage_daily": [
     {
       "run_date": "2026-05-23",
@@ -502,6 +502,26 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.0605
+    },
+    {
+      "run_date": "2026-06-17",
+      "stage": "deliver",
+      "calls": 15,
+      "input_tokens": 39077,
+      "output_tokens": 10930,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2812
+    },
+    {
+      "run_date": "2026-06-17",
+      "stage": "score",
+      "calls": 36,
+      "input_tokens": 122975,
+      "output_tokens": 5528,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0753
     }
   ],
   "issue_sources": [
@@ -512,18 +532,18 @@
     },
     {
       "quelle": "hackernews",
-      "articles": 73,
+      "articles": 76,
       "avg_score": 4.16
     },
     {
       "quelle": "simonwillison",
-      "articles": 38,
-      "avg_score": 4.16
+      "articles": 40,
+      "avg_score": 4.15
     },
     {
       "quelle": "latentspace",
-      "articles": 19,
-      "avg_score": 4.11
+      "articles": 20,
+      "avg_score": 4.1
     },
     {
       "quelle": "huggingface",
@@ -542,7 +562,7 @@
     },
     {
       "quelle": "interconnects",
-      "articles": 3,
+      "articles": 4,
       "avg_score": 4
     },
     {
@@ -555,8 +575,8 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 5602,
-      "total_truncated": 35,
+      "total_fetched": 6396,
+      "total_truncated": 32,
       "error_runs": 1
     },
     {
@@ -576,9 +596,9 @@
     {
       "adapter": "heise",
       "runs": 14,
-      "total_fetched": 348,
-      "total_truncated": 142,
-      "error_runs": 4
+      "total_fetched": 386,
+      "total_truncated": 179,
+      "error_runs": 3
     },
     {
       "adapter": "latentspace",
@@ -618,8 +638,8 @@
     {
       "adapter": "hackernews",
       "runs": 14,
-      "total_fetched": 276,
-      "total_truncated": 74,
+      "total_fetched": 277,
+      "total_truncated": 73,
       "error_runs": 0
     },
     {
@@ -632,7 +652,7 @@
     {
       "adapter": "anthropic",
       "runs": 14,
-      "total_fetched": 182,
+      "total_fetched": 180,
       "total_truncated": 0,
       "error_runs": 0
     },
@@ -646,7 +666,7 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 80,
+      "total_fetched": 78,
       "total_truncated": 0,
       "error_runs": 4
     },
