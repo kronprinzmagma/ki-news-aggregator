@@ -1,6 +1,19 @@
 # KI-News Aggregator
 
+[![Tests](https://github.com/kronprinzmagma/ki-news-aggregator/actions/workflows/test.yml/badge.svg)](https://github.com/kronprinzmagma/ki-news-aggregator/actions/workflows/test.yml)
+![Schedule](https://img.shields.io/badge/runs-daily%2005%3A30%20UTC-informational?style=flat)
+[![Live archive](https://img.shields.io/badge/live-archive-2ea44f?style=flat)](https://kronprinzmagma.github.io/ki-news-aggregator/)
+
 A daily AI briefing for product managers and POs who are starting to build things themselves — with Claude Code, the Anthropic API, tools like that. Not aimed at developers.
+
+<!-- HERO-VISUAL — bitte hier ein Bild einfügen (stärkster visueller Hebel):
+     Screenshot einer echten, gerenderten Tagesausgabe (statt nur des Links) —
+     zeigt die Drei-Block-Struktur pro Artikel auf einen Blick. Für nicht-
+     technische Leser das greifbarste Signal.
+     1. Bild ablegen unter  docs/daily-issue-screenshot.png
+     2. Folgende Zeile einkommentieren:
+![Beispiel einer Tagesausgabe](docs/daily-issue-screenshot.png)
+-->
 
 ---
 
