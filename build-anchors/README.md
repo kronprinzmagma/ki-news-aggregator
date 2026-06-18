@@ -2,10 +2,31 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**285 Einträge** · Top-Quellen: heise (102) · hackernews (84) · simonwillison (48) · latentspace (26) · huggingface (8) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**306 Einträge** · Top-Quellen: heise (119) · hackernews (86) · simonwillison (49) · latentspace (27) · huggingface (8) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-18** — [Vom Chat zum Agenten: Copilot Cowork für Microsoft 365 ist da](2026-06-18-vom-chat-zum-agenten-copilot-cowork-fur-microsoft-365-ist-da.md) · *heise · Score 5*
+- **2026-06-18** — [Servermarkt im Umbruch: KI-Infrastruktur verdrängt klassische Systeme](2026-06-18-servermarkt-im-umbruch-ki-infrastruktur-verdrangt-klassische.md) · *heise · Score 4*
+- **2026-06-18** — [Schluss mit Sidecar-Files: AWS führt S3 Annotations ein](2026-06-18-schluss-mit-sidecar-files-aws-fuhrt-s3-annotations-ein.md) · *heise · Score 4*
+- **2026-06-18** — [Qwen-Robot Suite: Alibabas neue KI lässt Roboter simulieren, bevor sie handeln](2026-06-18-qwen-robot-suite-alibabas-neue-ki-lasst-roboter-simulieren-b.md) · *heise · Score 4*
+- **2026-06-18** — [Milliardendeal: Salesforce übernimmt KI-Kundenservice-Plattform Fin](2026-06-18-milliardendeal-salesforce-ubernimmt-ki-kundenservice-plattfo.md) · *heise · Score 4*
+- **2026-06-18** — [Mehrere Plug-ins für JetBrains-IDEs stehlen API-Keys für OpenAI, DeepSeek & Co.](2026-06-18-mehrere-plug-ins-fur-jetbrains-ides-stehlen-api-keys-fur-ope.md) · *heise · Score 5*
+- **2026-06-18** — [Launch HN: Adam (YC W25) – Open-Source AI CAD](2026-06-18-launch-hn-adam-yc-w25-open-source-ai-cad.md) · *hackernews · Score 5*
+- **2026-06-18** — [KI-Wearables: Qualcomm positioniert sich als zentraler Technologiepartner](2026-06-18-ki-wearables-qualcomm-positioniert-sich-als-zentraler-techno.md) · *heise · Score 4*
+- **2026-06-18** — [KI-Inferencing: US-deutsches Start-up will Nvidia ausstechen](2026-06-18-ki-inferencing-us-deutsches-start-up-will-nvidia-ausstechen.md) · *heise · Score 4*
+- **2026-06-18** — [KI in Suchmaschine: Google siegt im ersten Markenstreit über KI-Ergebnisse](2026-06-18-ki-in-suchmaschine-google-siegt-im-ersten-markenstreit-uber-.md) · *heise · Score 4*
+- **2026-06-18** — [KI-Einsatz: Warum menschliche Expertise wichtiger ist als Automatisierung](2026-06-18-ki-einsatz-warum-menschliche-expertise-wichtiger-ist-als-aut.md) · *heise · Score 4*
+- **2026-06-18** — [heise+ | Zulassung KI-basierter Assistenzsysteme: Suggestion des autonomen Fahrens](2026-06-18-heise-zulassung-ki-basierter-assistenzsysteme-suggestion-des.md) · *heise · Score 4*
+- **2026-06-18** — [Google Brazos: Flüssigkeitskühlung für luftgekühlte Rechenzentren](2026-06-18-google-brazos-flussigkeitskuhlung-fur-luftgekuhlte-rechenzen.md) · *heise · Score 4*
+- **2026-06-18** — [GLM-5.2 is probably the most powerful text-only open weights LLM](2026-06-18-glm-5-2-is-probably-the-most-powerful-text-only-open-weights.md) · *simonwillison · Score 4*
+- **2026-06-18** — [EU-Parlament stimmt zu: Verbot für sexualisierte Deepfake-KI](2026-06-18-eu-parlament-stimmt-zu-verbot-fur-sexualisierte-deepfake-ki.md) · *heise · Score 4*
+- **2026-06-18** — [Donnerstag: Kritik an fehlenden Tauchboot-Regeln, Ausweispflicht für KI-Agenten](2026-06-18-donnerstag-kritik-an-fehlenden-tauchboot-regeln-ausweispflic.md) · *heise · Score 4*
+- **2026-06-18** — [Databricks Genie One: KI-Agent soll Antworten aus Unternehmensdaten ableiten](2026-06-18-databricks-genie-one-ki-agent-soll-antworten-aus-unternehmen.md) · *heise · Score 4*
+- **2026-06-18** — [Apples KI-Trick: Wie ein 20-Milliarden-Parameter-Modell aufs iPhone passt](2026-06-18-apples-ki-trick-wie-ein-20-milliarden-parameter-modell-aufs-.md) · *heise · Score 5*
+- **2026-06-18** — [Analysefirma zu KI-Nutzung: Marktanteil von ChatGPT unter 50 Prozent gefallen](2026-06-18-analysefirma-zu-ki-nutzung-marktanteil-von-chatgpt-unter-50-.md) · *heise · Score 4*
+- **2026-06-18** — [AMD silently removes memory encryption from consumer Ryzen CPUs](2026-06-18-amd-silently-removes-memory-encryption-from-consumer-ryzen-c.md) · *hackernews · Score 4*
+- **2026-06-18** — [[AINews] Satya on Loopcraft: Building Frontier Ecosystems](2026-06-18-ainews-satya-on-loopcraft-building-frontier-ecosystems.md) · *latentspace · Score 4*
 - **2026-06-17** — [Why AI hasn’t replaced software engineers, and won’t](2026-06-17-why-ai-hasn-t-replaced-software-engineers-and-won-t.md) · *simonwillison · Score 4*
 - **2026-06-17** — [Running local models is good now](2026-06-17-running-local-models-is-good-now.md) · *hackernews · Score 4*
 - **2026-06-17** — [Most of the CVE-2026-4020 attackers are the same client](2026-06-17-most-of-the-cve-2026-4020-attackers-are-the-same-client.md) · *hackernews · Score 4*
