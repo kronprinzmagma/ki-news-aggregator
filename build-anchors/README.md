@@ -2,10 +2,24 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**306 Einträge** · Top-Quellen: heise (119) · hackernews (86) · simonwillison (49) · latentspace (27) · huggingface (8) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**320 Einträge** · Top-Quellen: heise (124) · hackernews (90) · simonwillison (50) · latentspace (30) · huggingface (9) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-19** — [Zero-Touch OAuth for MCP](2026-06-19-zero-touch-oauth-for-mcp.md) · *hackernews · Score 5*
+- **2026-06-19** — [The Professor of Outputmaxxing — Anjney Midha, AMP](2026-06-19-the-professor-of-outputmaxxing-anjney-midha-amp.md) · *latentspace · Score 4*
+- **2026-06-19** — [software-architektur.tv: KI-Einsatz im Alltag – zwischen KI-Hype und KI-Vampir](2026-06-19-software-architektur-tv-ki-einsatz-im-alltag-zwischen-ki-hyp.md) · *heise · Score 4*
+- **2026-06-19** — [Nvidias KI-Agenten-Plattform NeMo ist über drei Sicherheitslücken angreifbar](2026-06-19-nvidias-ki-agenten-plattform-nemo-ist-uber-drei-sicherheitsl.md) · *heise · Score 4*
+- **2026-06-19** — [MosaicLeaks: Can your research agent keep a secret?](2026-06-19-mosaicleaks-can-your-research-agent-keep-a-secret.md) · *huggingface · Score 5*
+- **2026-06-19** — [Launch HN: TesterArmy (YC P26) – Agents that test web and mobile apps](2026-06-19-launch-hn-testerarmy-yc-p26-agents-that-test-web-and-mobile-.md) · *hackernews · Score 4*
+- **2026-06-19** — [I told them forced consent was unlawful. 5 years later it cost Elkjop €1.8M](2026-06-19-i-told-them-forced-consent-was-unlawful-5-years-later-it-cos.md) · *hackernews · Score 4*
+- **2026-06-19** — [GitLab 19.1: Admins erhalten Hoheit über GitLab-Duo-Aktivierung](2026-06-19-gitlab-19-1-admins-erhalten-hoheit-uber-gitlab-duo-aktivieru.md) · *heise · Score 4*
+- **2026-06-19** — [Firmen unterschätzen ihre KI-Abhängigkeiten massiv](2026-06-19-firmen-unterschatzen-ihre-ki-abhangigkeiten-massiv.md) · *heise · Score 4*
+- **2026-06-19** — [Deutsche Bank: Künstliche Intelligenz steigert die Produktivität](2026-06-19-deutsche-bank-kunstliche-intelligenz-steigert-die-produktivi.md) · *heise · Score 4*
+- **2026-06-19** — [Datasette Apps: Host custom HTML applications inside Datasette](2026-06-19-datasette-apps-host-custom-html-applications-inside-datasett.md) · *simonwillison · Score 4*
+- **2026-06-19** — [Building a robotics research setup that lives next to my desk](2026-06-19-building-a-robotics-research-setup-that-lives-next-to-my-des.md) · *hackernews · Score 4*
+- **2026-06-19** — [[AINews] Midjourney Medical: scan your organs like you step on a scale](2026-06-19-ainews-midjourney-medical-scan-your-organs-like-you-step-on-.md) · *latentspace · Score 4*
+- **2026-06-19** — [[AINews] GLM > GPT? GLM-5.2 passes vibe check; Z.ai forecasts Open Fable by December](2026-06-19-ainews-glm-gpt-glm-5-2-passes-vibe-check-z-ai-forecasts-open.md) · *latentspace · Score 4*
 - **2026-06-18** — [Vom Chat zum Agenten: Copilot Cowork für Microsoft 365 ist da](2026-06-18-vom-chat-zum-agenten-copilot-cowork-fur-microsoft-365-ist-da.md) · *heise · Score 5*
 - **2026-06-18** — [Servermarkt im Umbruch: KI-Infrastruktur verdrängt klassische Systeme](2026-06-18-servermarkt-im-umbruch-ki-infrastruktur-verdrangt-klassische.md) · *heise · Score 4*
 - **2026-06-18** — [Schluss mit Sidecar-Files: AWS führt S3 Annotations ein](2026-06-18-schluss-mit-sidecar-files-aws-fuhrt-s3-annotations-ein.md) · *heise · Score 4*
