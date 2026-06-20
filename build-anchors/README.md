@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**320 Einträge** · Top-Quellen: heise (124) · hackernews (90) · simonwillison (50) · latentspace (30) · huggingface (9) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**326 Einträge** · Top-Quellen: heise (127) · hackernews (91) · simonwillison (50) · latentspace (30) · huggingface (11) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-20** — [Samsung fertigt künftig angeblich mehr Chips von AMD, BYD, Google und Tesla](2026-06-20-samsung-fertigt-kunftig-angeblich-mehr-chips-von-amd-byd-goo.md) · *heise · Score 4*
+- **2026-06-20** — [MIT entwickelt räumliches Langzeitgedächtnis-Framework für KI-Roboter](2026-06-20-mit-entwickelt-raumliches-langzeitgedachtnis-framework-fur-k.md) · *heise · Score 4*
+- **2026-06-20** — [Is it agentic enough? Benchmarking open models on your own tooling](2026-06-20-is-it-agentic-enough-benchmarking-open-models-on-your-own-to.md) · *huggingface · Score 4*
+- **2026-06-20** — [Hyundai buys Boston Dynamics](2026-06-20-hyundai-buys-boston-dynamics.md) · *hackernews · Score 4*
+- **2026-06-20** — [AMD und Intel spezifizieren KI-Befehlssatz „ACE“ für x86-Prozessorkerne](2026-06-20-amd-und-intel-spezifizieren-ki-befehlssatz-ace-fur-x86-proze.md) · *heise · Score 4*
+- **2026-06-20** — [Agentic Resource Discovery: Let agents search](2026-06-20-agentic-resource-discovery-let-agents-search.md) · *huggingface · Score 5*
 - **2026-06-19** — [Zero-Touch OAuth for MCP](2026-06-19-zero-touch-oauth-for-mcp.md) · *hackernews · Score 5*
 - **2026-06-19** — [The Professor of Outputmaxxing — Anjney Midha, AMP](2026-06-19-the-professor-of-outputmaxxing-anjney-midha-amp.md) · *latentspace · Score 4*
 - **2026-06-19** — [software-architektur.tv: KI-Einsatz im Alltag – zwischen KI-Hype und KI-Vampir](2026-06-19-software-architektur-tv-ki-einsatz-im-alltag-zwischen-ki-hyp.md) · *heise · Score 4*
