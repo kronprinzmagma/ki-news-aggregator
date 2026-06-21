@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**326 Einträge** · Top-Quellen: heise (127) · hackernews (91) · simonwillison (50) · latentspace (30) · huggingface (11) · anthropic (6) · golem (5) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**330 Einträge** · Top-Quellen: heise (127) · hackernews (93) · simonwillison (50) · latentspace (30) · huggingface (11) · golem (7) · anthropic (6) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-21** — [When I reject AI code even if it works](2026-06-21-when-i-reject-ai-code-even-if-it-works.md) · *hackernews · Score 5*
+- **2026-06-21** — [Project Fetch: Phase Two](2026-06-21-project-fetch-phase-two.md) · *hackernews · Score 5*
+- **2026-06-21** — [(g+) Auggie CLI: Wenn der KI-Coding-Agent ins Terminal zieht](2026-06-21-g-auggie-cli-wenn-der-ki-coding-agent-ins-terminal-zieht.md) · *golem · Score 4*
+- **2026-06-21** — [(g+) Artificial Intelligence: 'We created a monster': companies rein in AI usage as costs ...](2026-06-21-g-artificial-intelligence-we-created-a-monster-companies-rei.md) · *golem · Score 4*
 - **2026-06-20** — [Samsung fertigt künftig angeblich mehr Chips von AMD, BYD, Google und Tesla](2026-06-20-samsung-fertigt-kunftig-angeblich-mehr-chips-von-amd-byd-goo.md) · *heise · Score 4*
 - **2026-06-20** — [MIT entwickelt räumliches Langzeitgedächtnis-Framework für KI-Roboter](2026-06-20-mit-entwickelt-raumliches-langzeitgedachtnis-framework-fur-k.md) · *heise · Score 4*
 - **2026-06-20** — [Is it agentic enough? Benchmarking open models on your own tooling](2026-06-20-is-it-agentic-enough-benchmarking-open-models-on-your-own-to.md) · *huggingface · Score 4*
