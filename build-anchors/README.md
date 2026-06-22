@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**330 Einträge** · Top-Quellen: heise (127) · hackernews (93) · simonwillison (50) · latentspace (30) · huggingface (11) · golem (7) · anthropic (6) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**343 Einträge** · Top-Quellen: heise (132) · hackernews (99) · simonwillison (52) · latentspace (30) · huggingface (11) · golem (7) · anthropic (6) · interconnects (3) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-22** — [The minimum viable unit of saleable software](2026-06-22-the-minimum-viable-unit-of-saleable-software.md) · *hackernews · Score 4*
+- **2026-06-22** — [Temporary Cloudflare Accounts for AI agents](2026-06-22-temporary-cloudflare-accounts-for-ai-agents.md) · *simonwillison · Score 5*
+- **2026-06-22** — [sqlite-utils 4.0rc1 adds migrations and nested transactions](2026-06-22-sqlite-utils-4-0rc1-adds-migrations-and-nested-transactions.md) · *simonwillison · Score 4*
+- **2026-06-22** — [Sakana Fugu](2026-06-22-sakana-fugu.md) · *hackernews · Score 4*
+- **2026-06-22** — [Playstation-Studios: Sony bestätigt KI-Einsatz in der Spieleentwicklung](2026-06-22-playstation-studios-sony-bestatigt-ki-einsatz-in-der-spielee.md) · *heise · Score 4*
+- **2026-06-22** — [KI-Update: DeepMind, LLMs in der Medizin, Expertise statt KI, Körperscanner](2026-06-22-ki-update-deepmind-llms-in-der-medizin-expertise-statt-ki-ko.md) · *heise · Score 4*
+- **2026-06-22** — [Kestra: Ops-Automation jenseits von CI/CD](2026-06-22-kestra-ops-automation-jenseits-von-ci-cd.md) · *heise · Score 4*
+- **2026-06-22** — [Good results fine tuning a local LLM like Qwen 3:0.6B to categorize questions](2026-06-22-good-results-fine-tuning-a-local-llm-like-qwen-3-0-6b-to-cat.md) · *hackernews · Score 4*
+- **2026-06-22** — [GLM 5.2 vs. Opus](2026-06-22-glm-5-2-vs-opus.md) · *hackernews · Score 4*
+- **2026-06-22** — [Deno Desktop](2026-06-22-deno-desktop.md) · *hackernews · Score 4*
+- **2026-06-22** — [Codex logging bug may write TBs to local SSDs](2026-06-22-codex-logging-bug-may-write-tbs-to-local-ssds.md) · *hackernews · Score 4*
+- **2026-06-22** — [Anthropics KI Mythos: Unternehmen haben weiter Zugriff auf Preview-Version](2026-06-22-anthropics-ki-mythos-unternehmen-haben-weiter-zugriff-auf-pr.md) · *heise · Score 4*
+- **2026-06-22** — [Anthropic: Angst vor China-Spionage soll Auslöser für KI-Lockdown sein](2026-06-22-anthropic-angst-vor-china-spionage-soll-ausloser-fur-ki-lock.md) · *heise · Score 4*
 - **2026-06-21** — [When I reject AI code even if it works](2026-06-21-when-i-reject-ai-code-even-if-it-works.md) · *hackernews · Score 5*
 - **2026-06-21** — [Project Fetch: Phase Two](2026-06-21-project-fetch-phase-two.md) · *hackernews · Score 5*
 - **2026-06-21** — [(g+) Auggie CLI: Wenn der KI-Coding-Agent ins Terminal zieht](2026-06-21-g-auggie-cli-wenn-der-ki-coding-agent-ins-terminal-zieht.md) · *golem · Score 4*
