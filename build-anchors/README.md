@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**343 Einträge** · Top-Quellen: heise (132) · hackernews (99) · simonwillison (52) · latentspace (30) · huggingface (11) · golem (7) · anthropic (6) · interconnects (3) · lastweekinai (2) · venturebeat (1)
+**351 Einträge** · Top-Quellen: heise (132) · hackernews (103) · simonwillison (54) · latentspace (31) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-23** — [Will It Mythos?](2026-06-23-will-it-mythos.md) · *hackernews · Score 4*
+- **2026-06-23** — [VibeThinker: 3B param model that beats Opus 4.5 on reasoning with novel SFT+GRPO](2026-06-23-vibethinker-3b-param-model-that-beats-opus-4-5-on-reasoning-.md) · *hackernews · Score 4*
+- **2026-06-23** — [Red-Teaming after Mythos — Zico Kolter & Matt Fredrikson, Gray Swan](2026-06-23-red-teaming-after-mythos-zico-kolter-matt-fredrikson-gray-sw.md) · *latentspace · Score 4*
+- **2026-06-23** — [Prompt Injection as Role Confusion](2026-06-23-prompt-injection-as-role-confusion.md) · *simonwillison · Score 4*
+- **2026-06-23** — [Porting the Moebius 0.2B image inpainting model to run in the browser with Claude Code](2026-06-23-porting-the-moebius-0-2b-image-inpainting-model-to-run-in-th.md) · *simonwillison · Score 5*
+- **2026-06-23** — [GLM-5.2 is the step change for open agents](2026-06-23-glm-5-2-is-the-step-change-for-open-agents.md) · *interconnects · Score 4*
+- **2026-06-23** — [GLM-5.2 – How to Run Locally](2026-06-23-glm-5-2-how-to-run-locally.md) · *hackernews · Score 4*
+- **2026-06-23** — [Flock-Powered Police Chiefs Stalking Women Shows Why Warrants Are Needed](2026-06-23-flock-powered-police-chiefs-stalking-women-shows-why-warrant.md) · *hackernews · Score 4*
 - **2026-06-22** — [The minimum viable unit of saleable software](2026-06-22-the-minimum-viable-unit-of-saleable-software.md) · *hackernews · Score 4*
 - **2026-06-22** — [Temporary Cloudflare Accounts for AI agents](2026-06-22-temporary-cloudflare-accounts-for-ai-agents.md) · *simonwillison · Score 5*
 - **2026-06-22** — [sqlite-utils 4.0rc1 adds migrations and nested transactions](2026-06-22-sqlite-utils-4-0rc1-adds-migrations-and-nested-transactions.md) · *simonwillison · Score 4*
