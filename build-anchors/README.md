@@ -2,10 +2,13 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**351 Einträge** · Top-Quellen: heise (132) · hackernews (103) · simonwillison (54) · latentspace (31) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
+**354 Einträge** · Top-Quellen: heise (132) · hackernews (104) · simonwillison (55) · latentspace (32) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-24** — [OPFS + Pyodide test harness](2026-06-24-opfs-pyodide-test-harness.md) · *simonwillison · Score 4*
+- **2026-06-24** — [FUTO Swipe – A new swipe typing model](2026-06-24-futo-swipe-a-new-swipe-typing-model.md) · *hackernews · Score 4*
+- **2026-06-24** — [[AINews] Claude Tag: Multiplayer, Proactive, Persistent Agents in Slack](2026-06-24-ainews-claude-tag-multiplayer-proactive-persistent-agents-in.md) · *latentspace · Score 5*
 - **2026-06-23** — [Will It Mythos?](2026-06-23-will-it-mythos.md) · *hackernews · Score 4*
 - **2026-06-23** — [VibeThinker: 3B param model that beats Opus 4.5 on reasoning with novel SFT+GRPO](2026-06-23-vibethinker-3b-param-model-that-beats-opus-4-5-on-reasoning-.md) · *hackernews · Score 4*
 - **2026-06-23** — [Red-Teaming after Mythos — Zico Kolter & Matt Fredrikson, Gray Swan](2026-06-23-red-teaming-after-mythos-zico-kolter-matt-fredrikson-gray-sw.md) · *latentspace · Score 4*
