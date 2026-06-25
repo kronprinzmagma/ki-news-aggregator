@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**354 Einträge** · Top-Quellen: heise (132) · hackernews (104) · simonwillison (55) · latentspace (32) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
+**363 Einträge** · Top-Quellen: heise (132) · hackernews (110) · simonwillison (56) · latentspace (34) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-25** — [Why the Frontier Ecosystem must be Open — Matei Zaharia and Reynold Xin, Databricks](2026-06-25-why-the-frontier-ecosystem-must-be-open-matei-zaharia-and-re.md) · *latentspace · Score 4*
+- **2026-06-25** — [simonw/browser-compat-db](2026-06-25-simonw-browser-compat-db.md) · *simonwillison · Score 4*
+- **2026-06-25** — [RubyLLM: A Ruby framework for all major AI providers](2026-06-25-rubyllm-a-ruby-framework-for-all-major-ai-providers.md) · *hackernews · Score 4*
+- **2026-06-25** — [PR spam today looks like email spam in the early 2000s](2026-06-25-pr-spam-today-looks-like-email-spam-in-the-early-2000s.md) · *hackernews · Score 4*
+- **2026-06-25** — [OpenAI unveils its first custom chip, built by Broadcom](2026-06-25-openai-unveils-its-first-custom-chip-built-by-broadcom.md) · *hackernews · Score 4*
+- **2026-06-25** — [Computer use in Gemini 3.5 Flash](2026-06-25-computer-use-in-gemini-3-5-flash.md) · *hackernews · Score 5*
+- **2026-06-25** — [Cloudflare launched self-managed OAuth for all](2026-06-25-cloudflare-launched-self-managed-oauth-for-all.md) · *hackernews · Score 4*
+- **2026-06-25** — [[AINews] It's Meta-Harness Summer](2026-06-25-ainews-it-s-meta-harness-summer.md) · *latentspace · Score 4*
+- **2026-06-25** — [45°C cooling design cuts data center water use to near zero](2026-06-25-45-c-cooling-design-cuts-data-center-water-use-to-near-zero.md) · *hackernews · Score 4*
 - **2026-06-24** — [OPFS + Pyodide test harness](2026-06-24-opfs-pyodide-test-harness.md) · *simonwillison · Score 4*
 - **2026-06-24** — [FUTO Swipe – A new swipe typing model](2026-06-24-futo-swipe-a-new-swipe-typing-model.md) · *hackernews · Score 4*
 - **2026-06-24** — [[AINews] Claude Tag: Multiplayer, Proactive, Persistent Agents in Slack](2026-06-24-ainews-claude-tag-multiplayer-proactive-persistent-agents-in.md) · *latentspace · Score 5*
