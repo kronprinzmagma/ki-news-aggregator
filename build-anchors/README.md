@@ -2,10 +2,31 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**363 Einträge** · Top-Quellen: heise (132) · hackernews (110) · simonwillison (56) · latentspace (34) · huggingface (11) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
+**384 Einträge** · Top-Quellen: heise (145) · hackernews (113) · simonwillison (58) · latentspace (35) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-26** — [Which tokens does a hybrid model predict better?](2026-06-26-which-tokens-does-a-hybrid-model-predict-better.md) · *huggingface · Score 4*
+- **2026-06-26** — [Video-KI: ByteDance gibt Vorschau auf Seedance 2.5 mit 30-Sekunden-Clips](2026-06-26-video-ki-bytedance-gibt-vorschau-auf-seedance-2-5-mit-30-sek.md) · *heise · Score 4*
+- **2026-06-26** — [Un-0: Generating Images with Coupled Oscillators](2026-06-26-un-0-generating-images-with-coupled-oscillators.md) · *hackernews · Score 4*
+- **2026-06-26** — [Run a vLLM Server on HF Jobs in One Command](2026-06-26-run-a-vllm-server-on-hf-jobs-in-one-command.md) · *huggingface · Score 4*
+- **2026-06-26** — [Quoting Tom MacWright](2026-06-26-quoting-tom-macwright.md) · *simonwillison · Score 4*
+- **2026-06-26** — [Prognosemärkte: Meta entwickelt offenbar eigene Plattform](2026-06-26-prognosemarkte-meta-entwickelt-offenbar-eigene-plattform.md) · *heise · Score 4*
+- **2026-06-26** — [Prognose: 2028 wird KI-Coding teurer als Entwicklergehälter](2026-06-26-prognose-2028-wird-ki-coding-teurer-als-entwicklergehalter.md) · *heise · Score 4*
+- **2026-06-26** — [Mistral OCR 4: Dokumentenanalyse für 170 Sprachen](2026-06-26-mistral-ocr-4-dokumentenanalyse-fur-170-sprachen.md) · *heise · Score 4*
+- **2026-06-26** — [Micron locks in historically high memory prices for five years](2026-06-26-micron-locks-in-historically-high-memory-prices-for-five-yea.md) · *hackernews · Score 4*
+- **2026-06-26** — [Meta setzt verstärkt auf KI-Moderation statt menschlicher Prüfer](2026-06-26-meta-setzt-verstarkt-auf-ki-moderation-statt-menschlicher-pr.md) · *heise · Score 4*
+- **2026-06-26** — [heise+ | Effiziente KI: Wie neue Modelle die Token-Kosten und RAM-Preise senken könnten](2026-06-26-heise-effiziente-ki-wie-neue-modelle-die-token-kosten-und-ra.md) · *heise · Score 4*
+- **2026-06-26** — [Google investiert 75 Millionen US-Dollar in Filmstudio A24](2026-06-26-google-investiert-75-millionen-us-dollar-in-filmstudio-a24.md) · *heise · Score 4*
+- **2026-06-26** — [Figma: KI-Werkzeuge für Design, Code und Zusammenarbeit](2026-06-26-figma-ki-werkzeuge-fur-design-code-und-zusammenarbeit.md) · *heise · Score 4*
+- **2026-06-26** — [Ergebnis ohne Erkenntnis: Was uns AlphaGo über GenAI lehrt](2026-06-26-ergebnis-ohne-erkenntnis-was-uns-alphago-uber-genai-lehrt.md) · *heise · Score 4*
+- **2026-06-26** — [Claude mischt sich ein: Der neue proaktive KI-Kollege für Slack](2026-06-26-claude-mischt-sich-ein-der-neue-proaktive-ki-kollege-fur-sla.md) · *heise · Score 4*
+- **2026-06-26** — [ChatGPT und Copilot: US-Verlage reichen nächste Klage wegen KI-Training ein](2026-06-26-chatgpt-und-copilot-us-verlage-reichen-nachste-klage-wegen-k.md) · *heise · Score 4*
+- **2026-06-26** — [Apple to skip high-end M6 Mac chips in favor of AI-focused M7 line](2026-06-26-apple-to-skip-high-end-m6-mac-chips-in-favor-of-ai-focused-m.md) · *hackernews · Score 4*
+- **2026-06-26** — [Anthropic darf für die Nutzung von Claude künftig einen Ausweis verlangen](2026-06-26-anthropic-darf-fur-die-nutzung-von-claude-kunftig-einen-ausw.md) · *heise · Score 4*
+- **2026-06-26** — [Anthropic beschuldigt Alibaba des KI-Modell-Diebstahls](2026-06-26-anthropic-beschuldigt-alibaba-des-ki-modell-diebstahls.md) · *heise · Score 4*
+- **2026-06-26** — [[AINews] OpenAI reports median internal Codex output tokens grew 56x in Research, 32x in Customer Support, 27x in Engineering, and 13x in Legal since November 2025.](2026-06-26-ainews-openai-reports-median-internal-codex-output-tokens-gr.md) · *latentspace · Score 4*
+- **2026-06-26** — [AI and Liability](2026-06-26-ai-and-liability.md) · *simonwillison · Score 4*
 - **2026-06-25** — [Why the Frontier Ecosystem must be Open — Matei Zaharia and Reynold Xin, Databricks](2026-06-25-why-the-frontier-ecosystem-must-be-open-matei-zaharia-and-re.md) · *latentspace · Score 4*
 - **2026-06-25** — [simonw/browser-compat-db](2026-06-25-simonw-browser-compat-db.md) · *simonwillison · Score 4*
 - **2026-06-25** — [RubyLLM: A Ruby framework for all major AI providers](2026-06-25-rubyllm-a-ruby-framework-for-all-major-ai-providers.md) · *hackernews · Score 4*
