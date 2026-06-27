@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**384 Einträge** · Top-Quellen: heise (145) · hackernews (113) · simonwillison (58) · latentspace (35) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
+**391 Einträge** · Top-Quellen: heise (146) · hackernews (115) · simonwillison (61) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-27** — [What happened after 2,000 people tried to hack my AI assistant](2026-06-27-what-happened-after-2-000-people-tried-to-hack-my-ai-assista.md) · *simonwillison · Score 4*
+- **2026-06-27** — [The gap between open weights LLMs and closed source LLMs](2026-06-27-the-gap-between-open-weights-llms-and-closed-source-llms.md) · *hackernews · Score 4*
+- **2026-06-27** — [Quoting OpenAI](2026-06-27-quoting-openai.md) · *simonwillison · Score 4*
+- **2026-06-27** — [KI-Hype vs. Realität: Warum Technologie allein nicht reicht](2026-06-27-ki-hype-vs-realitat-warum-technologie-allein-nicht-reicht.md) · *heise · Score 4*
+- **2026-06-27** — [Incident Report: CVE-2026-LGTM](2026-06-27-incident-report-cve-2026-lgtm.md) · *simonwillison · Score 4*
+- **2026-06-27** — [Anatomy of a Failed (Nation-State?) Attack](2026-06-27-anatomy-of-a-failed-nation-state-attack.md) · *hackernews · Score 4*
+- **2026-06-27** — [[AINews] OpenAI GPT-5.6 Sol / Terra / Luna — restricted to trusted partners](2026-06-27-ainews-openai-gpt-5-6-sol-terra-luna-restricted-to-trusted-p.md) · *latentspace · Score 4*
 - **2026-06-26** — [Which tokens does a hybrid model predict better?](2026-06-26-which-tokens-does-a-hybrid-model-predict-better.md) · *huggingface · Score 4*
 - **2026-06-26** — [Video-KI: ByteDance gibt Vorschau auf Seedance 2.5 mit 30-Sekunden-Clips](2026-06-26-video-ki-bytedance-gibt-vorschau-auf-seedance-2-5-mit-30-sek.md) · *heise · Score 4*
 - **2026-06-26** — [Un-0: Generating Images with Coupled Oscillators](2026-06-26-un-0-generating-images-with-coupled-oscillators.md) · *hackernews · Score 4*
