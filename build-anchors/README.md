@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**391 Einträge** · Top-Quellen: heise (146) · hackernews (115) · simonwillison (61) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · venturebeat (1)
+**395 Einträge** · Top-Quellen: heise (146) · hackernews (118) · simonwillison (61) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-28** — [Wayfinder Router: deterministic routing of queries between local and hosted LLM](2026-06-28-wayfinder-router-deterministic-routing-of-queries-between-lo.md) · *hackernews · Score 4*
+- **2026-06-28** — [Using Local Coding Agents](2026-06-28-using-local-coding-agents.md) · *aheadofai · Score 4*
+- **2026-06-28** — [Ford hired AI and sacked humans. It backfired badly](2026-06-28-ford-hired-ai-and-sacked-humans-it-backfired-badly.md) · *hackernews · Score 4*
+- **2026-06-28** — [AMD Strix Halo RDMA Cluster Setup Guide](2026-06-28-amd-strix-halo-rdma-cluster-setup-guide.md) · *hackernews · Score 4*
 - **2026-06-27** — [What happened after 2,000 people tried to hack my AI assistant](2026-06-27-what-happened-after-2-000-people-tried-to-hack-my-ai-assista.md) · *simonwillison · Score 4*
 - **2026-06-27** — [The gap between open weights LLMs and closed source LLMs](2026-06-27-the-gap-between-open-weights-llms-and-closed-source-llms.md) · *hackernews · Score 4*
 - **2026-06-27** — [Quoting OpenAI](2026-06-27-quoting-openai.md) · *simonwillison · Score 4*
