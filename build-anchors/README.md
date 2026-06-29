@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**395 Einträge** · Top-Quellen: heise (146) · hackernews (118) · simonwillison (61) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (4) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**402 Einträge** · Top-Quellen: heise (147) · hackernews (122) · simonwillison (62) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-29** — [Quoting Jon Udell](2026-06-29-quoting-jon-udell.md) · *simonwillison · Score 4*
+- **2026-06-29** — [Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem](2026-06-29-latest-open-artifacts-22-zyphra-cohere-and-poolside-are-expa.md) · *interconnects · Score 4*
+- **2026-06-29** — [I used Claude Code to get a second opinion on my MRI](2026-06-29-i-used-claude-code-to-get-a-second-opinion-on-my-mri.md) · *hackernews · Score 4*
+- **2026-06-29** — [HackerRank open sourced its ATS. My resume scored 90/100. Oh wait 74. No – 88](2026-06-29-hackerrank-open-sourced-its-ats-my-resume-scored-90-100-oh-w.md) · *hackernews · Score 4*
+- **2026-06-29** — [GLM 5.2 beats Claude in our benchmarks](2026-06-29-glm-5-2-beats-claude-in-our-benchmarks.md) · *hackernews · Score 5*
+- **2026-06-29** — [BMW schickt neuen humanoiden Figure-03-Roboter zur Arbeit](2026-06-29-bmw-schickt-neuen-humanoiden-figure-03-roboter-zur-arbeit.md) · *heise · Score 4*
+- **2026-06-29** — [A way to exclude sensitive files issue still open for OpenAI Codex](2026-06-29-a-way-to-exclude-sensitive-files-issue-still-open-for-openai.md) · *hackernews · Score 4*
 - **2026-06-28** — [Wayfinder Router: deterministic routing of queries between local and hosted LLM](2026-06-28-wayfinder-router-deterministic-routing-of-queries-between-lo.md) · *hackernews · Score 4*
 - **2026-06-28** — [Using Local Coding Agents](2026-06-28-using-local-coding-agents.md) · *aheadofai · Score 4*
 - **2026-06-28** — [Ford hired AI and sacked humans. It backfired badly](2026-06-28-ford-hired-ai-and-sacked-humans-it-backfired-badly.md) · *hackernews · Score 4*
