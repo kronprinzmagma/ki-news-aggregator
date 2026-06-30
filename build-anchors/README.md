@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**402 Einträge** · Top-Quellen: heise (147) · hackernews (122) · simonwillison (62) · latentspace (36) · huggingface (13) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**417 Einträge** · Top-Quellen: heise (154) · hackernews (126) · simonwillison (64) · latentspace (37) · huggingface (14) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-06-30** — [US Supreme Court Just Blew Up EU-US Data Transfers](2026-06-30-us-supreme-court-just-blew-up-eu-us-data-transfers.md) · *hackernews · Score 5*
+- **2026-06-30** — [US-Regierung lässt Zugang zu neuer KI von OpenAI beschränken](2026-06-30-us-regierung-lasst-zugang-zu-neuer-ki-von-openai-beschranken.md) · *heise · Score 4*
+- **2026-06-30** — [Tidal: KI-Musik bleibt erlaubt, verdient aber kein Geld mehr](2026-06-30-tidal-ki-musik-bleibt-erlaubt-verdient-aber-kein-geld-mehr.md) · *heise · Score 4*
+- **2026-06-30** — [So würde eine KI als Start-up-Chef abschneiden](2026-06-30-so-wurde-eine-ki-als-start-up-chef-abschneiden.md) · *heise · Score 4*
+- **2026-06-30** — [Qwen 3.6 27B is the sweet spot for local development](2026-06-30-qwen-3-6-27b-is-the-sweet-spot-for-local-development.md) · *hackernews · Score 4*
+- **2026-06-30** — [Popping the GPU Bubble](2026-06-30-popping-the-gpu-bubble.md) · *hackernews · Score 4*
+- **2026-06-30** — [Per Brief: US-Regierung hebt Sperre von Claude Mythos auf](2026-06-30-per-brief-us-regierung-hebt-sperre-von-claude-mythos-auf.md) · *heise · Score 4*
+- **2026-06-30** — [Ornith-1.0: Self-Scaffolding LLMs for Agentic Coding](2026-06-30-ornith-1-0-self-scaffolding-llms-for-agentic-coding.md) · *simonwillison · Score 4*
+- **2026-06-30** — [HTML table extractor](2026-06-30-html-table-extractor.md) · *simonwillison · Score 4*
+- **2026-06-30** — [GPT-5.6: OpenAI verspricht mehr Leistung bei weniger Token-Verbrauch](2026-06-30-gpt-5-6-openai-verspricht-mehr-leistung-bei-weniger-token-ve.md) · *heise · Score 4*
+- **2026-06-30** — [Git grafisch mit KI sortieren und verwalten – GitBrowser](2026-06-30-git-grafisch-mit-ki-sortieren-und-verwalten-gitbrowser.md) · *heise · Score 4*
+- **2026-06-30** — [Getty kuschelt mit OpenAI – die Fotonews der Woche 26/2026](2026-06-30-getty-kuschelt-mit-openai-die-fotonews-der-woche-26-2026.md) · *heise · Score 4*
+- **2026-06-30** — [DiScoFormer: One transformer for density and score, across distributions](2026-06-30-discoformer-one-transformer-for-density-and-score-across-dis.md) · *huggingface · Score 4*
+- **2026-06-30** — [[AINews] not much happened today](2026-06-30-ainews-not-much-happened-today.md) · *latentspace · Score 4*
+- **2026-06-30** — [A native graphical shell for SSH](2026-06-30-a-native-graphical-shell-for-ssh.md) · *hackernews · Score 4*
 - **2026-06-29** — [Quoting Jon Udell](2026-06-29-quoting-jon-udell.md) · *simonwillison · Score 4*
 - **2026-06-29** — [Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem](2026-06-29-latest-open-artifacts-22-zyphra-cohere-and-poolside-are-expa.md) · *interconnects · Score 4*
 - **2026-06-29** — [I used Claude Code to get a second opinion on my MRI](2026-06-29-i-used-claude-code-to-get-a-second-opinion-on-my-mri.md) · *hackernews · Score 4*
