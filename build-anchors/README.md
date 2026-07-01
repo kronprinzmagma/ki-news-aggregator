@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**417 Einträge** · Top-Quellen: heise (154) · hackernews (126) · simonwillison (64) · latentspace (37) · huggingface (14) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**430 Einträge** · Top-Quellen: heise (158) · hackernews (129) · simonwillison (67) · latentspace (39) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-01** — [Why Specialization Is Inevitable](2026-07-01-why-specialization-is-inevitable.md) · *huggingface · Score 4*
+- **2026-07-01** — [What's new in Claude Sonnet 5](2026-07-01-what-s-new-in-claude-sonnet-5.md) · *simonwillison · Score 5*
+- **2026-07-01** — [Nano Banana 2 Lite](2026-07-01-nano-banana-2-lite.md) · *simonwillison · Score 4*
+- **2026-07-01** — [Lumo 2.0 verfügbar: Proton erweitert Chatbot um neue Funktionen](2026-07-01-lumo-2-0-verfugbar-proton-erweitert-chatbot-um-neue-funktion.md) · *heise · Score 4*
+- **2026-07-01** — [KI-Update kompakt: KI-Moderation, Finanzmarkt, Datenschutz, GPT-Images](2026-07-01-ki-update-kompakt-ki-moderation-finanzmarkt-datenschutz-gpt-.md) · *heise · Score 4*
+- **2026-07-01** — [heise-Angebot: Claude Code in der Praxis – eigenen KI-Chat-Agenten in fünf Sessions entwickeln](2026-07-01-heise-angebot-claude-code-in-der-praxis-eigenen-ki-chat-agen.md) · *heise · Score 4*
+- **2026-07-01** — [Have your agent record video demos of its work with shot-scraper video](2026-07-01-have-your-agent-record-video-demos-of-its-work-with-shot-scr.md) · *simonwillison · Score 4*
+- **2026-07-01** — [Godot will no longer accept AI-authored code contributions](2026-07-01-godot-will-no-longer-accept-ai-authored-code-contributions.md) · *hackernews · Score 4*
+- **2026-07-01** — [From brain waves to words: a new path to communication without surgery](2026-07-01-from-brain-waves-to-words-a-new-path-to-communication-withou.md) · *hackernews · Score 4*
+- **2026-07-01** — [Deutschland-App: KI soll Anträge vereinfachen](2026-07-01-deutschland-app-ki-soll-antrage-vereinfachen.md) · *heise · Score 4*
+- **2026-07-01** — [Claude Science](2026-07-01-claude-science.md) · *hackernews · Score 4*
+- **2026-07-01** — [[AINews] Sonnet 5 today, and Fable 5 tomorrow](2026-07-01-ainews-sonnet-5-today-and-fable-5-tomorrow.md) · *latentspace · Score 5*
+- **2026-07-01** — [Ahmad Osman on why local AI is catching up](2026-07-01-ahmad-osman-on-why-local-ai-is-catching-up.md) · *latentspace · Score 4*
 - **2026-06-30** — [US Supreme Court Just Blew Up EU-US Data Transfers](2026-06-30-us-supreme-court-just-blew-up-eu-us-data-transfers.md) · *hackernews · Score 5*
 - **2026-06-30** — [US-Regierung lässt Zugang zu neuer KI von OpenAI beschränken](2026-06-30-us-regierung-lasst-zugang-zu-neuer-ki-von-openai-beschranken.md) · *heise · Score 4*
 - **2026-06-30** — [Tidal: KI-Musik bleibt erlaubt, verdient aber kein Geld mehr](2026-06-30-tidal-ki-musik-bleibt-erlaubt-verdient-aber-kein-geld-mehr.md) · *heise · Score 4*
