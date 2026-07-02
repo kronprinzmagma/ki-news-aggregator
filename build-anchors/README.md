@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**430 Einträge** · Top-Quellen: heise (158) · hackernews (129) · simonwillison (67) · latentspace (39) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**445 Einträge** · Top-Quellen: heise (165) · hackernews (132) · simonwillison (67) · latentspace (44) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-02** — [Weil sie denken, sie wären in einem Spiel: KI-Browser geben Passwörter heraus](2026-07-02-weil-sie-denken-sie-waren-in-einem-spiel-ki-browser-geben-pa.md) · *heise · Score 5*
+- **2026-07-02** — [Warp CEO Zach Lloyd on why software factories are the next phase of coding](2026-07-02-warp-ceo-zach-lloyd-on-why-software-factories-are-the-next-p.md) · *latentspace · Score 4*
+- **2026-07-02** — [🔬 The Coolest Diffusion Research Isn't in LLMs — Evan Feinberg & Sergey Edunov, Genesis Molecular AI](2026-07-02-the-coolest-diffusion-research-isn-t-in-llms-evan-feinberg-s.md) · *latentspace · Score 4*
+- **2026-07-02** — [Senior SWE-Bench: open-source benchmark that assesses agents as senior engineers](2026-07-02-senior-swe-bench-open-source-benchmark-that-assesses-agents-.md) · *hackernews · Score 5*
+- **2026-07-02** — [OpenAI halbiert offenbar Inferenzkosten durch interne Optimierungen](2026-07-02-openai-halbiert-offenbar-inferenzkosten-durch-interne-optimi.md) · *heise · Score 4*
+- **2026-07-02** — [Kimi K2.7 Code is generally available in GitHub Copilot](2026-07-02-kimi-k2-7-code-is-generally-available-in-github-copilot.md) · *hackernews · Score 4*
+- **2026-07-02** — [KI-Update: Chinas Aufholjagd, Clickworker, Anthropic, Apple-Updates, KI-Git-Tool](2026-07-02-ki-update-chinas-aufholjagd-clickworker-anthropic-apple-upda.md) · *heise · Score 4*
+- **2026-07-02** — [KI-Agenten: Bis zu 234 Milliarden US-Dollar Softwareumsatz in Gefahr](2026-07-02-ki-agenten-bis-zu-234-milliarden-us-dollar-softwareumsatz-in.md) · *heise · Score 4*
+- **2026-07-02** — [How Cursor deploys AI inside the enterprise](2026-07-02-how-cursor-deploys-ai-inside-the-enterprise.md) · *latentspace · Score 4*
+- **2026-07-02** — [Drei Stunden gratis, dann zahlen: Meta schränkt lokales KI-Brillen-Feature ein](2026-07-02-drei-stunden-gratis-dann-zahlen-meta-schrankt-lokales-ki-bri.md) · *heise · Score 4*
+- **2026-07-02** — [CursorBench 3.1](2026-07-02-cursorbench-3-1.md) · *hackernews · Score 4*
+- **2026-07-02** — [Autoresearch: The feedback loop behind self-improving agents](2026-07-02-autoresearch-the-feedback-loop-behind-self-improving-agents.md) · *latentspace · Score 4*
+- **2026-07-02** — [Anthropic gibt Sonnet 5 frei, Fable 5 und Mythos 5 sollen wieder nutzbar werden](2026-07-02-anthropic-gibt-sonnet-5-frei-fable-5-und-mythos-5-sollen-wie.md) · *heise · Score 5*
+- **2026-07-02** — [Amazons KI-ler machen Hausbesuche: Forward Deployed Engineering](2026-07-02-amazons-ki-ler-machen-hausbesuche-forward-deployed-engineeri.md) · *heise · Score 4*
+- **2026-07-02** — [AIEWF Daily Dispatch: Autoresearch and the tension between AI and human agency](2026-07-02-aiewf-daily-dispatch-autoresearch-and-the-tension-between-ai.md) · *latentspace · Score 4*
 - **2026-07-01** — [Why Specialization Is Inevitable](2026-07-01-why-specialization-is-inevitable.md) · *huggingface · Score 4*
 - **2026-07-01** — [What's new in Claude Sonnet 5](2026-07-01-what-s-new-in-claude-sonnet-5.md) · *simonwillison · Score 5*
 - **2026-07-01** — [Nano Banana 2 Lite](2026-07-01-nano-banana-2-lite.md) · *simonwillison · Score 4*
