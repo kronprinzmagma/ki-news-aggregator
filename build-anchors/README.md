@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**445 Einträge** · Top-Quellen: heise (165) · hackernews (132) · simonwillison (67) · latentspace (44) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**456 Einträge** · Top-Quellen: heise (166) · hackernews (137) · simonwillison (70) · latentspace (46) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-03** — [Using DSPy to evaluate and improve Datasette Agent's SQL system prompts](2026-07-03-using-dspy-to-evaluate-and-improve-datasette-agent-s-sql-sys.md) · *simonwillison · Score 5*
+- **2026-07-03** — [Understand to participate](2026-07-03-understand-to-participate.md) · *simonwillison · Score 4*
+- **2026-07-03** — [The website of the future may assemble itself for every visitor](2026-07-03-the-website-of-the-future-may-assemble-itself-for-every-visi.md) · *latentspace · Score 4*
+- **2026-07-03** — [The Safari MCP server for web developers](2026-07-03-the-safari-mcp-server-for-web-developers.md) · *hackernews · Score 5*
+- **2026-07-03** — [Skill engineering and the case against one-shot AI design](2026-07-03-skill-engineering-and-the-case-against-one-shot-ai-design.md) · *latentspace · Score 4*
+- **2026-07-03** — [Since Linux 6.9, LUKS suspend stopped wiping disk-encryption keys from memory](2026-07-03-since-linux-6-9-luks-suspend-stopped-wiping-disk-encryption-.md) · *hackernews · Score 4*
+- **2026-07-03** — [Postgres transactions are a distributed systems superpower](2026-07-03-postgres-transactions-are-a-distributed-systems-superpower.md) · *hackernews · Score 4*
+- **2026-07-03** — [Meta testet Social-App für KI-generierte Minispiele](2026-07-03-meta-testet-social-app-fur-ki-generierte-minispiele.md) · *heise · Score 4*
+- **2026-07-03** — [llm-coding-agent 0.1a0](2026-07-03-llm-coding-agent-0-1a0.md) · *simonwillison · Score 5*
+- **2026-07-03** — [Claude-real-video － any LLM can watch a video](2026-07-03-claude-real-video-any-llm-can-watch-a-video.md) · *hackernews · Score 5*
+- **2026-07-03** — [14× faster embeddings: how we rebuilt the ONNX path in Manticore](2026-07-03-14-faster-embeddings-how-we-rebuilt-the-onnx-path-in-mantico.md) · *hackernews · Score 4*
 - **2026-07-02** — [Weil sie denken, sie wären in einem Spiel: KI-Browser geben Passwörter heraus](2026-07-02-weil-sie-denken-sie-waren-in-einem-spiel-ki-browser-geben-pa.md) · *heise · Score 5*
 - **2026-07-02** — [Warp CEO Zach Lloyd on why software factories are the next phase of coding](2026-07-02-warp-ceo-zach-lloyd-on-why-software-factories-are-the-next-p.md) · *latentspace · Score 4*
 - **2026-07-02** — [🔬 The Coolest Diffusion Research Isn't in LLMs — Evan Feinberg & Sergey Edunov, Genesis Molecular AI](2026-07-02-the-coolest-diffusion-research-isn-t-in-llms-evan-feinberg-s.md) · *latentspace · Score 4*
