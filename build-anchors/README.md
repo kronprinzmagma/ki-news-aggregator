@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**456 Einträge** · Top-Quellen: heise (166) · hackernews (137) · simonwillison (70) · latentspace (46) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**464 Einträge** · Top-Quellen: heise (167) · hackernews (141) · simonwillison (72) · latentspace (47) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-04** — [Vercel's Andrew Qu on why agents are a new kind of software](2026-07-04-vercel-s-andrew-qu-on-why-agents-are-a-new-kind-of-software.md) · *latentspace · Score 4*
+- **2026-07-04** — [Projekt Aion: Video-Leak zeigt Konzept, wie Microsoft Windows auf KI trimmt](2026-07-04-projekt-aion-video-leak-zeigt-konzept-wie-microsoft-windows-.md) · *heise · Score 4*
+- **2026-07-04** — [Performance per dollar is getting faster and cheaper](2026-07-04-performance-per-dollar-is-getting-faster-and-cheaper.md) · *hackernews · Score 4*
+- **2026-07-04** — [Open Source AI Gap Map](2026-07-04-open-source-ai-gap-map.md) · *simonwillison · Score 4*
+- **2026-07-04** — [New serious vulnerabilities spiked around release of Claude Mythos Preview](2026-07-04-new-serious-vulnerabilities-spiked-around-release-of-claude-.md) · *hackernews · Score 4*
+- **2026-07-04** — [Leanstral 1.5: Proof abundance for all](2026-07-04-leanstral-1-5-proof-abundance-for-all.md) · *hackernews · Score 4*
+- **2026-07-04** — [Fable's judgement](2026-07-04-fable-s-judgement.md) · *simonwillison · Score 5*
+- **2026-07-04** — [Agentic coding notes from Galapagos Island](2026-07-04-agentic-coding-notes-from-galapagos-island.md) · *hackernews · Score 4*
 - **2026-07-03** — [Using DSPy to evaluate and improve Datasette Agent's SQL system prompts](2026-07-03-using-dspy-to-evaluate-and-improve-datasette-agent-s-sql-sys.md) · *simonwillison · Score 5*
 - **2026-07-03** — [Understand to participate](2026-07-03-understand-to-participate.md) · *simonwillison · Score 4*
 - **2026-07-03** — [The website of the future may assemble itself for every visitor](2026-07-03-the-website-of-the-future-may-assemble-itself-for-every-visi.md) · *latentspace · Score 4*
