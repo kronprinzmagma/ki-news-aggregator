@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**464 Einträge** · Top-Quellen: heise (167) · hackernews (141) · simonwillison (72) · latentspace (47) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**468 Einträge** · Top-Quellen: heise (167) · hackernews (144) · simonwillison (73) · latentspace (47) · huggingface (15) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-05** — [sqlite-utils 4.0rc2, mostly written by Claude Fable (for about $149.25)](2026-07-05-sqlite-utils-4-0rc2-mostly-written-by-claude-fable-for-about.md) · *simonwillison · Score 5*
+- **2026-07-05** — [Mouse: Precision Editing Tools for AI Coding Agents](2026-07-05-mouse-precision-editing-tools-for-ai-coding-agents.md) · *hackernews · Score 4*
+- **2026-07-05** — [GPT-5.5 Codex reasoning-token clustering may be leading to degraded performance](2026-07-05-gpt-5-5-codex-reasoning-token-clustering-may-be-leading-to-d.md) · *hackernews · Score 4*
+- **2026-07-05** — [Better Models: Worse Tools](2026-07-05-better-models-worse-tools.md) · *hackernews · Score 5*
 - **2026-07-04** — [Vercel's Andrew Qu on why agents are a new kind of software](2026-07-04-vercel-s-andrew-qu-on-why-agents-are-a-new-kind-of-software.md) · *latentspace · Score 4*
 - **2026-07-04** — [Projekt Aion: Video-Leak zeigt Konzept, wie Microsoft Windows auf KI trimmt](2026-07-04-projekt-aion-video-leak-zeigt-konzept-wie-microsoft-windows-.md) · *heise · Score 4*
 - **2026-07-04** — [Performance per dollar is getting faster and cheaper](2026-07-04-performance-per-dollar-is-getting-faster-and-cheaper.md) · *hackernews · Score 4*
