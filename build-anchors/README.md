@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**471 Einträge** · Top-Quellen: heise (167) · hackernews (145) · simonwillison (74) · latentspace (47) · huggingface (16) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**484 Einträge** · Top-Quellen: heise (174) · hackernews (150) · simonwillison (75) · latentspace (47) · huggingface (16) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-07** — [Wie KI ihre eigenen Deepfakes entlarvt](2026-07-07-wie-ki-ihre-eigenen-deepfakes-entlarvt.md) · *heise · Score 4*
+- **2026-07-07** — [tencent/Hy3](2026-07-07-tencent-hy3.md) · *simonwillison · Score 4*
+- **2026-07-07** — [Stargate UK: 20-Milliarden-Pfund-Investment war nicht mehr als ein PR-Stunt](2026-07-07-stargate-uk-20-milliarden-pfund-investment-war-nicht-mehr-al.md) · *heise · Score 4*
+- **2026-07-07** — [Pruning RAG context down to what the answer actually needs](2026-07-07-pruning-rag-context-down-to-what-the-answer-actually-needs.md) · *hackernews · Score 5*
+- **2026-07-07** — [OfficeCLI: Office suite for AI agents to read and edit Microsoft Office files](2026-07-07-officecli-office-suite-for-ai-agents-to-read-and-edit-micros.md) · *hackernews · Score 4*
+- **2026-07-07** — [Nvidia verkauft KI-Beschleuniger jetzt gegen Umsatzbeteiligung](2026-07-07-nvidia-verkauft-ki-beschleuniger-jetzt-gegen-umsatzbeteiligu.md) · *heise · Score 5*
+- **2026-07-07** — [Node.js kämpft mit Flut an automatisierten Sicherheitsreports](2026-07-07-node-js-kampft-mit-flut-an-automatisierten-sicherheitsreport.md) · *heise · Score 4*
+- **2026-07-07** — [Leanstral 1.5: Formale Beweise für 4 Dollar statt 300 Dollar pro Aufgabe](2026-07-07-leanstral-1-5-formale-beweise-fur-4-dollar-statt-300-dollar-.md) · *heise · Score 5*
+- **2026-07-07** — [GLM 5.2 and the coming AI margin collapse](2026-07-07-glm-5-2-and-the-coming-ai-margin-collapse.md) · *hackernews · Score 4*
+- **2026-07-07** — [Fable turned reMarkable into Tom Riddle's diary from Harry Potter](2026-07-07-fable-turned-remarkable-into-tom-riddle-s-diary-from-harry-p.md) · *hackernews · Score 4*
+- **2026-07-07** — [China verschärft KI-Regeln: ByteDance und Alibaba entfernen menschenähnliche KI](2026-07-07-china-verscharft-ki-regeln-bytedance-und-alibaba-entfernen-m.md) · *heise · Score 4*
+- **2026-07-07** — [Apple: KI-Framework „Trust Insights“ soll vor Social Engineering schützen](2026-07-07-apple-ki-framework-trust-insights-soll-vor-social-engineerin.md) · *heise · Score 4*
+- **2026-07-07** — [A global workspace in language models](2026-07-07-a-global-workspace-in-language-models.md) · *hackernews · Score 5*
 - **2026-07-06** — [When AI Costs More Than the Engineer](2026-07-06-when-ai-costs-more-than-the-engineer.md) · *hackernews · Score 4*
 - **2026-07-06** — [sqlite-utils 4.0rc3](2026-07-06-sqlite-utils-4-0rc3.md) · *simonwillison · Score 4*
 - **2026-07-06** — [🤗 Kernels: Major Updates](2026-07-06-kernels-major-updates.md) · *huggingface · Score 4*
