@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**484 Einträge** · Top-Quellen: heise (174) · hackernews (150) · simonwillison (75) · latentspace (47) · huggingface (16) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**490 Einträge** · Top-Quellen: heise (175) · hackernews (151) · simonwillison (77) · latentspace (48) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-08** — [sqlite-utils 4.0rc4](2026-07-08-sqlite-utils-4-0rc4.md) · *simonwillison · Score 4*
+- **2026-07-08** — [github-code Web Component](2026-07-08-github-code-web-component.md) · *simonwillison · Score 4*
+- **2026-07-08** — [From Hugging Face to Amazon SageMaker Studio in one click](2026-07-08-from-hugging-face-to-amazon-sagemaker-studio-in-one-click.md) · *huggingface · Score 4*
+- **2026-07-08** — [Claude Cowork kommt ins Web und aufs Smartphone](2026-07-08-claude-cowork-kommt-ins-web-und-aufs-smartphone.md) · *heise · Score 5*
+- **2026-07-08** — [Chat Control 1.0 and 2.0 Explained](2026-07-08-chat-control-1-0-and-2-0-explained.md) · *hackernews · Score 4*
+- **2026-07-08** — [[AINews] The Field Guide to Fable](2026-07-08-ainews-the-field-guide-to-fable.md) · *latentspace · Score 4*
 - **2026-07-07** — [Wie KI ihre eigenen Deepfakes entlarvt](2026-07-07-wie-ki-ihre-eigenen-deepfakes-entlarvt.md) · *heise · Score 4*
 - **2026-07-07** — [tencent/Hy3](2026-07-07-tencent-hy3.md) · *simonwillison · Score 4*
 - **2026-07-07** — [Stargate UK: 20-Milliarden-Pfund-Investment war nicht mehr als ein PR-Stunt](2026-07-07-stargate-uk-20-milliarden-pfund-investment-war-nicht-mehr-al.md) · *heise · Score 4*
