@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**490 Einträge** · Top-Quellen: heise (175) · hackernews (151) · simonwillison (77) · latentspace (48) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**498 Einträge** · Top-Quellen: heise (176) · hackernews (154) · simonwillison (79) · latentspace (50) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-09** — [Why AI Infrastructure must evolve for Agent Experience — Akshat Bubna, Modal CTO](2026-07-09-why-ai-infrastructure-must-evolve-for-agent-experience-aksha.md) · *latentspace · Score 4*
+- **2026-07-09** — [Turning a pile of documents into a searchable useable knowledge base](2026-07-09-turning-a-pile-of-documents-into-a-searchable-useable-knowle.md) · *hackernews · Score 4*
+- **2026-07-09** — [Rewriting Bun in Rust](2026-07-09-rewriting-bun-in-rust.md) · *simonwillison · Score 4*
+- **2026-07-09** — [Remote Attestation](2026-07-09-remote-attestation.md) · *hackernews · Score 4*
+- **2026-07-09** — [Introducing GPT‑Live](2026-07-09-introducing-gpt-live.md) · *simonwillison · Score 4*
+- **2026-07-09** — [heise+ | Anleitung: Lokale KI mit Llama.cpp nutzen](2026-07-09-heise-anleitung-lokale-ki-mit-llama-cpp-nutzen.md) · *heise · Score 4*
+- **2026-07-09** — [Benchmarking coding agents on Databricks' multi-million line codebase](2026-07-09-benchmarking-coding-agents-on-databricks-multi-million-line-.md) · *hackernews · Score 5*
+- **2026-07-09** — [[AINews] Lilian Weng summarizes 35 papers on Harness Engineering for RSI](2026-07-09-ainews-lilian-weng-summarizes-35-papers-on-harness-engineeri.md) · *latentspace · Score 4*
 - **2026-07-08** — [sqlite-utils 4.0rc4](2026-07-08-sqlite-utils-4-0rc4.md) · *simonwillison · Score 4*
 - **2026-07-08** — [github-code Web Component](2026-07-08-github-code-web-component.md) · *simonwillison · Score 4*
 - **2026-07-08** — [From Hugging Face to Amazon SageMaker Studio in one click](2026-07-08-from-hugging-face-to-amazon-sagemaker-studio-in-one-click.md) · *huggingface · Score 4*
