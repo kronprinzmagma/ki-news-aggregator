@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**498 Einträge** · Top-Quellen: heise (176) · hackernews (154) · simonwillison (79) · latentspace (50) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**504 Einträge** · Top-Quellen: heise (176) · hackernews (156) · simonwillison (83) · latentspace (50) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-10** — [The new GPT-5.6 family: Luna, Terra, Sol](2026-07-10-the-new-gpt-5-6-family-luna-terra-sol.md) · *simonwillison · Score 5*
+- **2026-07-10** — [llm-meta-ai 0.1](2026-07-10-llm-meta-ai-0-1.md) · *simonwillison · Score 4*
+- **2026-07-10** — [llm 0.31.1](2026-07-10-llm-0-31-1.md) · *simonwillison · Score 4*
+- **2026-07-10** — [Introducing Muse Spark 1.1](2026-07-10-introducing-muse-spark-1-1.md) · *simonwillison · Score 4*
+- **2026-07-10** — [EU Parliament greenlights Chat Control 1.0](2026-07-10-eu-parliament-greenlights-chat-control-1-0.md) · *hackernews · Score 4*
+- **2026-07-10** — [Building a real-time AI tutor for 5-year-olds](2026-07-10-building-a-real-time-ai-tutor-for-5-year-olds.md) · *hackernews · Score 4*
 - **2026-07-09** — [Why AI Infrastructure must evolve for Agent Experience — Akshat Bubna, Modal CTO](2026-07-09-why-ai-infrastructure-must-evolve-for-agent-experience-aksha.md) · *latentspace · Score 4*
 - **2026-07-09** — [Turning a pile of documents into a searchable useable knowledge base](2026-07-09-turning-a-pile-of-documents-into-a-searchable-useable-knowle.md) · *hackernews · Score 4*
 - **2026-07-09** — [Rewriting Bun in Rust](2026-07-09-rewriting-bun-in-rust.md) · *simonwillison · Score 4*
