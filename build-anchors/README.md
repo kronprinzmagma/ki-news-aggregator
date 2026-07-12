@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**504 Einträge** · Top-Quellen: heise (176) · hackernews (156) · simonwillison (83) · latentspace (50) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**510 Einträge** · Top-Quellen: heise (176) · hackernews (160) · simonwillison (84) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-12** — [Why Write Code in 2026](2026-07-12-why-write-code-in-2026.md) · *hackernews · Score 4*
+- **2026-07-12** — [sqlite-utils 4.1](2026-07-12-sqlite-utils-4-1.md) · *simonwillison · Score 4*
+- **2026-07-12** — [Nvidia, CoreWeave, and Nebius: Inside the Circular Financing of the GPU Boom](2026-07-12-nvidia-coreweave-and-nebius-inside-the-circular-financing-of.md) · *hackernews · Score 4*
+- **2026-07-12** — [Mesh LLM: distributed AI computing on iroh](2026-07-12-mesh-llm-distributed-ai-computing-on-iroh.md) · *hackernews · Score 5*
+- **2026-07-12** — [Fixed three bugs that made Qwen3.5-122B a daily driver on Mac Studio](2026-07-12-fixed-three-bugs-that-made-qwen3-5-122b-a-daily-driver-on-ma.md) · *hackernews · Score 4*
+- **2026-07-12** — [[AINews] not much happened today](2026-07-12-ainews-not-much-happened-today.md) · *latentspace · Score 4*
 - **2026-07-10** — [The new GPT-5.6 family: Luna, Terra, Sol](2026-07-10-the-new-gpt-5-6-family-luna-terra-sol.md) · *simonwillison · Score 5*
 - **2026-07-10** — [llm-meta-ai 0.1](2026-07-10-llm-meta-ai-0-1.md) · *simonwillison · Score 4*
 - **2026-07-10** — [llm 0.31.1](2026-07-10-llm-0-31-1.md) · *simonwillison · Score 4*
