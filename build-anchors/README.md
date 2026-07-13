@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**510 Einträge** · Top-Quellen: heise (176) · hackernews (160) · simonwillison (84) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**525 Einträge** · Top-Quellen: heise (187) · hackernews (163) · simonwillison (85) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-13** — [Wirklich alles lokal: Hermes-Agent und Qwen 3.6](2026-07-13-wirklich-alles-lokal-hermes-agent-und-qwen-3-6.md) · *heise · Score 4*
+- **2026-07-13** — [What xAI's Grok build CLI sends to xAI: A wire-level analysis](2026-07-13-what-xai-s-grok-build-cli-sends-to-xai-a-wire-level-analysis.md) · *hackernews · Score 5*
+- **2026-07-13** — [Warum es ausgerechnet bei LinkedIn so viel KI-Slop gibt](2026-07-13-warum-es-ausgerechnet-bei-linkedin-so-viel-ki-slop-gibt.md) · *heise · Score 4*
+- **2026-07-13** — [Musikindustrie beschließt abgestufte Kennzeichnung von KI-Inhalten](2026-07-13-musikindustrie-beschliesst-abgestufte-kennzeichnung-von-ki-i.md) · *heise · Score 4*
+- **2026-07-13** — [Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper](2026-07-13-migrating-a-production-ai-agent-to-gpt-5-6-2-2x-faster-27-ch.md) · *hackernews · Score 5*
+- **2026-07-13** — [Microsoft nutzt in manchen Apps offenbar eigene KI statt OpenAI und Anthropic](2026-07-13-microsoft-nutzt-in-manchen-apps-offenbar-eigene-ki-statt-ope.md) · *heise · Score 4*
+- **2026-07-13** — [Meta schaltet KI-Generierung aus Instagram-Stilen ab](2026-07-13-meta-schaltet-ki-generierung-aus-instagram-stilen-ab.md) · *heise · Score 4*
+- **2026-07-13** — [Lückenflut durch KI-Funde – Software-Hersteller schrauben an Patch-Strategien](2026-07-13-luckenflut-durch-ki-funde-software-hersteller-schrauben-an-p.md) · *heise · Score 4*
+- **2026-07-13** — [Humanoide Roboter führen chirurgische OPs an Säugetieren durch](2026-07-13-humanoide-roboter-fuhren-chirurgische-ops-an-saugetieren-dur.md) · *heise · Score 4*
+- **2026-07-13** — [Größtes lokales KI-Modell: PrismML schafft 27 Milliarden Parameter auf iPhones](2026-07-13-grosstes-lokales-ki-modell-prismml-schafft-27-milliarden-par.md) · *heise · Score 4*
+- **2026-07-13** — [GPT-5.6 jetzt allgemein verfügbar – samt App-Umbau und Namensverwirrung](2026-07-13-gpt-5-6-jetzt-allgemein-verfugbar-samt-app-umbau-und-namensv.md) · *heise · Score 4*
+- **2026-07-13** — [Google kennzeichnet KI-generierte Werbung](2026-07-13-google-kennzeichnet-ki-generierte-werbung.md) · *heise · Score 4*
+- **2026-07-13** — [Forscher entdecken geheime Gedanken von Claude – und wie es lügt und betrügt](2026-07-13-forscher-entdecken-geheime-gedanken-von-claude-und-wie-es-lu.md) · *heise · Score 4*
+- **2026-07-13** — [Fable gets another bump](2026-07-13-fable-gets-another-bump.md) · *simonwillison · Score 4*
+- **2026-07-13** — [Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k](2026-07-13-claude-code-sends-33k-tokens-before-reading-the-prompt-openc.md) · *hackernews · Score 5*
 - **2026-07-12** — [Why Write Code in 2026](2026-07-12-why-write-code-in-2026.md) · *hackernews · Score 4*
 - **2026-07-12** — [sqlite-utils 4.1](2026-07-12-sqlite-utils-4-1.md) · *simonwillison · Score 4*
 - **2026-07-12** — [Nvidia, CoreWeave, and Nebius: Inside the Circular Financing of the GPU Boom](2026-07-12-nvidia-coreweave-and-nebius-inside-the-circular-financing-of.md) · *hackernews · Score 4*
