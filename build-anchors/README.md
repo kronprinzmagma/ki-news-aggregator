@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**525 Einträge** · Top-Quellen: heise (187) · hackernews (163) · simonwillison (85) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**534 Einträge** · Top-Quellen: heise (190) · hackernews (165) · simonwillison (89) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-14** — [What will be left for us to work on?](2026-07-14-what-will-be-left-for-us-to-work-on.md) · *hackernews · Score 4*
+- **2026-07-14** — [Using uvx in GitHub Actions in a cache-friendly way](2026-07-14-using-uvx-in-github-actions-in-a-cache-friendly-way.md) · *simonwillison · Score 4*
+- **2026-07-14** — [The Git history command deserves more attention](2026-07-14-the-git-history-command-deserves-more-attention.md) · *hackernews · Score 4*
+- **2026-07-14** — [Software Testing: Dokumentation mit KI-Personas automatisch prüfen](2026-07-14-software-testing-dokumentation-mit-ki-personas-automatisch-p.md) · *heise · Score 4*
+- **2026-07-14** — [S&P stuft Oracle auf BBB- herab – nur noch eine Stufe über Ramschniveau](2026-07-14-s-p-stuft-oracle-auf-bbb-herab-nur-noch-eine-stufe-uber-rams.md) · *heise · Score 4*
+- **2026-07-14** — [KI-Brillen: So stellt sich Meta Gesichtserkennung vor](2026-07-14-ki-brillen-so-stellt-sich-meta-gesichtserkennung-vor.md) · *heise · Score 4*
+- **2026-07-14** — [DOOMQL](2026-07-14-doomql.md) · *simonwillison · Score 4*
+- **2026-07-14** — [Directly Responsible Individuals (DRI)](2026-07-14-directly-responsible-individuals-dri.md) · *simonwillison · Score 4*
+- **2026-07-14** — [datasette code-frequency chart on GitHub](2026-07-14-datasette-code-frequency-chart-on-github.md) · *simonwillison · Score 4*
 - **2026-07-13** — [Wirklich alles lokal: Hermes-Agent und Qwen 3.6](2026-07-13-wirklich-alles-lokal-hermes-agent-und-qwen-3-6.md) · *heise · Score 4*
 - **2026-07-13** — [What xAI's Grok build CLI sends to xAI: A wire-level analysis](2026-07-13-what-xai-s-grok-build-cli-sends-to-xai-a-wire-level-analysis.md) · *hackernews · Score 5*
 - **2026-07-13** — [Warum es ausgerechnet bei LinkedIn so viel KI-Slop gibt](2026-07-13-warum-es-ausgerechnet-bei-linkedin-so-viel-ki-slop-gibt.md) · *heise · Score 4*
