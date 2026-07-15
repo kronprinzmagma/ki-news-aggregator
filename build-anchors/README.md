@@ -2,10 +2,24 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**534 Einträge** · Top-Quellen: heise (190) · hackernews (165) · simonwillison (89) · latentspace (51) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**548 Einträge** · Top-Quellen: heise (196) · hackernews (170) · simonwillison (91) · latentspace (52) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
 
 ## Liste
 
+- **2026-07-15** — [The Tower Keeps Rising](2026-07-15-the-tower-keeps-rising.md) · *hackernews · Score 4*
+- **2026-07-15** — [Spotify testet KI-Chatbot „Talk to Spotify“](2026-07-15-spotify-testet-ki-chatbot-talk-to-spotify.md) · *heise · Score 4*
+- **2026-07-15** — [simonw/pedalican](2026-07-15-simonw-pedalican.md) · *simonwillison · Score 4*
+- **2026-07-15** — [Quoting Armin Ronacher](2026-07-15-quoting-armin-ronacher.md) · *simonwillison · Score 4*
+- **2026-07-15** — [OpenAIs erstes KI-Gerät soll ein Smart Speaker mit „mechanischen Elementen“ sein](2026-07-15-openais-erstes-ki-gerat-soll-ein-smart-speaker-mit-mechanisc.md) · *heise · Score 4*
+- **2026-07-15** — [Oak Lab: Turing-Preisträger Sutton gründet Startup für lernende KI](2026-07-15-oak-lab-turing-preistrager-sutton-grundet-startup-fur-lernen.md) · *heise · Score 4*
+- **2026-07-15** — [Mozilla: Open-Source-KI fast so gut wie ChatGPT & Co.](2026-07-15-mozilla-open-source-ki-fast-so-gut-wie-chatgpt-co.md) · *heise · Score 4*
+- **2026-07-15** — [Lenovo verlagert Fokus von XR-Brillen auf KI-Wearables](2026-07-15-lenovo-verlagert-fokus-von-xr-brillen-auf-ki-wearables.md) · *heise · Score 4*
+- **2026-07-15** — [LeMario: Training a JEPA World Model on Super Mario Bros](2026-07-15-lemario-training-a-jepa-world-model-on-super-mario-bros.md) · *hackernews · Score 5*
+- **2026-07-15** — [Launch HN: Agnost AI (YC S26) – Extract user feedback from agent conversations](2026-07-15-launch-hn-agnost-ai-yc-s26-extract-user-feedback-from-agent-.md) · *hackernews · Score 4*
+- **2026-07-15** — [KI-Zusammenfassungen: Google und Perplexity unterliegen gegen Medienanstalten](2026-07-15-ki-zusammenfassungen-google-und-perplexity-unterliegen-gegen.md) · *heise · Score 4*
+- **2026-07-15** — [Cursor 0day: When Full Disclosure Becomes the Only Protection Left](2026-07-15-cursor-0day-when-full-disclosure-becomes-the-only-protection.md) · *hackernews · Score 4*
+- **2026-07-15** — [Bonsai 27B: A 27B-Class model that runs on a phone](2026-07-15-bonsai-27b-a-27b-class-model-that-runs-on-a-phone.md) · *hackernews · Score 5*
+- **2026-07-15** — [[AINews] Codex usage up >10x in 6 months to 7M users, +1M in the past ~day; did Codex overtake Claude Code??](2026-07-15-ainews-codex-usage-up-10x-in-6-months-to-7m-users-1m-in-the-.md) · *latentspace · Score 4*
 - **2026-07-14** — [What will be left for us to work on?](2026-07-14-what-will-be-left-for-us-to-work-on.md) · *hackernews · Score 4*
 - **2026-07-14** — [Using uvx in GitHub Actions in a cache-friendly way](2026-07-14-using-uvx-in-github-actions-in-a-cache-friendly-way.md) · *simonwillison · Score 4*
 - **2026-07-14** — [The Git history command deserves more attention](2026-07-14-the-git-history-command-deserves-more-attention.md) · *hackernews · Score 4*
