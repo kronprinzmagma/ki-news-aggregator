@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**548 Einträge** · Top-Quellen: heise (196) · hackernews (170) · simonwillison (91) · latentspace (52) · huggingface (17) · golem (7) · anthropic (6) · interconnects (5) · lastweekinai (2) · aheadofai (1) · venturebeat (1)
+**555 Einträge** · Top-Quellen: heise (196) · hackernews (171) · simonwillison (93) · latentspace (53) · huggingface (19) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (2) · lastweekinai (2) · aheadofai (1)
 
 ## Liste
 
+- **2026-07-16** — [What building Shippy taught us about building agents](2026-07-16-what-building-shippy-taught-us-about-building-agents.md) · *huggingface · Score 5*
+- **2026-07-16** — [Model Routing Is Simple. Until It Isn’t.](2026-07-16-model-routing-is-simple-until-it-isn-t.md) · *huggingface · Score 4*
+- **2026-07-16** — [Mermaid to Unicode box art (grok-mermaid)](2026-07-16-mermaid-to-unicode-box-art-grok-mermaid.md) · *simonwillison · Score 4*
+- **2026-07-16** — [How I tricked Claude into leaking your deepest, darkest secrets](2026-07-16-how-i-tricked-claude-into-leaking-your-deepest-darkest-secre.md) · *simonwillison · Score 5*
+- **2026-07-16** — [Grok Build is open source](2026-07-16-grok-build-is-open-source.md) · *hackernews · Score 4*
+- **2026-07-16** — [[AINews] Thinky's Inkling: 975B-A41B multimodal, new best American Apache 2.0 open model (with Inkling-Small, 276B-A12B)](2026-07-16-ainews-thinky-s-inkling-975b-a41b-multimodal-new-best-americ.md) · *latentspace · Score 4*
+- **2026-07-16** — [Agentic orchestration: Enterprise AI organizations have a deployment problem, not a platform problem — and most are calling chatbots agents](2026-07-16-agentic-orchestration-enterprise-ai-organizations-have-a-dep.md) · *venturebeat · Score 4*
 - **2026-07-15** — [The Tower Keeps Rising](2026-07-15-the-tower-keeps-rising.md) · *hackernews · Score 4*
 - **2026-07-15** — [Spotify testet KI-Chatbot „Talk to Spotify“](2026-07-15-spotify-testet-ki-chatbot-talk-to-spotify.md) · *heise · Score 4*
 - **2026-07-15** — [simonw/pedalican](2026-07-15-simonw-pedalican.md) · *simonwillison · Score 4*
