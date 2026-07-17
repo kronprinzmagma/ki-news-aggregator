@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**555 Einträge** · Top-Quellen: heise (196) · hackernews (171) · simonwillison (93) · latentspace (53) · huggingface (19) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (2) · lastweekinai (2) · aheadofai (1)
+**566 Einträge** · Top-Quellen: heise (196) · hackernews (176) · simonwillison (95) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
 
 ## Liste
 
+- **2026-07-17** — [UIUC AI Teaching Assistant](2026-07-17-uiuc-ai-teaching-assistant.md) · *hackernews · Score 4*
+- **2026-07-17** — [🔬 The Lab of the Future Should Feel Like a Data Center — Andy Beam & Rafa Gómez-Bombarelli, Lila Sciences](2026-07-17-the-lab-of-the-future-should-feel-like-a-data-center-andy-be.md) · *latentspace · Score 4*
+- **2026-07-17** — [The AI compute gap: Enterprises are buying infrastructure faster than they can measure what it costs](2026-07-17-the-ai-compute-gap-enterprises-are-buying-infrastructure-fas.md) · *venturebeat · Score 4*
+- **2026-07-17** — [Security incident disclosure — July 2026](2026-07-17-security-incident-disclosure-july-2026.md) · *huggingface · Score 5*
+- **2026-07-17** — [NotebookLM is now Gemini Notebook](2026-07-17-notebooklm-is-now-gemini-notebook.md) · *hackernews · Score 4*
+- **2026-07-17** — [Mermaid to ASCII art (mermaid-ascii)](2026-07-17-mermaid-to-ascii-art-mermaid-ascii.md) · *simonwillison · Score 4*
+- **2026-07-17** — [LM Studio Bionic: the AI agent for open models](2026-07-17-lm-studio-bionic-the-ai-agent-for-open-models.md) · *hackernews · Score 4*
+- **2026-07-17** — [Kimi K3, and what we can still learn from the pelican benchmark](2026-07-17-kimi-k3-and-what-we-can-still-learn-from-the-pelican-benchma.md) · *simonwillison · Score 4*
+- **2026-07-17** — [Decoy Font](2026-07-17-decoy-font.md) · *hackernews · Score 4*
+- **2026-07-17** — [[AINews] Kimi K3 2.8T-A50B: the largest open model ever released; Opus 4.8-class at Sonnet 5 pricing](2026-07-17-ainews-kimi-k3-2-8t-a50b-the-largest-open-model-ever-release.md) · *latentspace · Score 5*
+- **2026-07-17** — [$100 AI Music Video: Claude Fable 5 vs. GPT-5.6 Sol](2026-07-17-100-ai-music-video-claude-fable-5-vs-gpt-5-6-sol.md) · *hackernews · Score 5*
 - **2026-07-16** — [What building Shippy taught us about building agents](2026-07-16-what-building-shippy-taught-us-about-building-agents.md) · *huggingface · Score 5*
 - **2026-07-16** — [Model Routing Is Simple. Until It Isn’t.](2026-07-16-model-routing-is-simple-until-it-isn-t.md) · *huggingface · Score 4*
 - **2026-07-16** — [Mermaid to Unicode box art (grok-mermaid)](2026-07-16-mermaid-to-unicode-box-art-grok-mermaid.md) · *simonwillison · Score 4*
