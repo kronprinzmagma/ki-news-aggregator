@@ -2,10 +2,27 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**566 Einträge** · Top-Quellen: heise (196) · hackernews (176) · simonwillison (95) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
+**583 Einträge** · Top-Quellen: heise (210) · hackernews (178) · simonwillison (96) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
 
 ## Liste
 
+- **2026-07-18** — [TP-Link Kasa cameras leaked home GPS via unauthenticated UDP for 6 years](2026-07-18-tp-link-kasa-cameras-leaked-home-gps-via-unauthenticated-udp.md) · *hackernews · Score 4*
+- **2026-07-18** — [The state of open source AI](2026-07-18-the-state-of-open-source-ai.md) · *hackernews · Score 4*
+- **2026-07-18** — [Suno-Leak: KI-Modelle offenbar mit Musik von YouTube und Deezer trainiert](2026-07-18-suno-leak-ki-modelle-offenbar-mit-musik-von-youtube-und-deez.md) · *heise · Score 4*
+- **2026-07-18** — [Selbstverletzung, Suizid: Meta meldet riskante KI-Chats den Eltern](2026-07-18-selbstverletzung-suizid-meta-meldet-riskante-ki-chats-den-el.md) · *heise · Score 4*
+- **2026-07-18** — [OpenAI: Erstes Hardware-Gerät ist ein Makro-Pad für 230 US-Dollar](2026-07-18-openai-erstes-hardware-gerat-ist-ein-makro-pad-fur-230-us-do.md) · *heise · Score 4*
+- **2026-07-18** — [Netflix hat rund 300 seiner Titel mithilfe generativer KI produziert](2026-07-18-netflix-hat-rund-300-seiner-titel-mithilfe-generativer-ki-pr.md) · *heise · Score 4*
+- **2026-07-18** — [Manuelle Kontrollen von KI-Output kosten Finanzteams jede Woche wertvolle Zeit](2026-07-18-manuelle-kontrollen-von-ki-output-kosten-finanzteams-jede-wo.md) · *heise · Score 4*
+- **2026-07-18** — [KI in Unternehmen: Rendite steigt, Kontrolle hinkt hinterher](2026-07-18-ki-in-unternehmen-rendite-steigt-kontrolle-hinkt-hinterher.md) · *heise · Score 4*
+- **2026-07-18** — [KI-Assistent Bob 2.0 modernisiert IBM Z und Power-Systeme](2026-07-18-ki-assistent-bob-2-0-modernisiert-ibm-z-und-power-systeme.md) · *heise · Score 4*
+- **2026-07-18** — [Kaufbegierden: Apple sucht nach KI-Chip-Firmen](2026-07-18-kaufbegierden-apple-sucht-nach-ki-chip-firmen.md) · *heise · Score 4*
+- **2026-07-18** — [IntelliJ IDEA 2026.2 integriert Copilot und bietet Support für TypeScript 7.0](2026-07-18-intellij-idea-2026-2-integriert-copilot-und-bietet-support-f.md) · *heise · Score 4*
+- **2026-07-18** — [EU-Vorgaben: Google muss Android für fremde KI-Assistenten komplett öffnen](2026-07-18-eu-vorgaben-google-muss-android-fur-fremde-ki-assistenten-ko.md) · *heise · Score 4*
+- **2026-07-18** — [Energieversorger enercity öffnet Kundenverwaltung für ChatGPT](2026-07-18-energieversorger-enercity-offnet-kundenverwaltung-fur-chatgp.md) · *heise · Score 4*
+- **2026-07-18** — [DMA: EU-Kommission zwingt Google zur Freigabe von Suchdaten](2026-07-18-dma-eu-kommission-zwingt-google-zur-freigabe-von-suchdaten.md) · *heise · Score 4*
+- **2026-07-18** — [Claude make Fable 5 permanent](2026-07-18-claude-make-fable-5-permanent.md) · *simonwillison · Score 4*
+- **2026-07-18** — [Apple Intelligence: Erlaubnis für China soll vorliegen](2026-07-18-apple-intelligence-erlaubnis-fur-china-soll-vorliegen.md) · *heise · Score 4*
+- **2026-07-18** — [Android Studio Quail 2 mit parallelen Agentenchats und LeakCanary-Integration](2026-07-18-android-studio-quail-2-mit-parallelen-agentenchats-und-leakc.md) · *heise · Score 4*
 - **2026-07-17** — [UIUC AI Teaching Assistant](2026-07-17-uiuc-ai-teaching-assistant.md) · *hackernews · Score 4*
 - **2026-07-17** — [🔬 The Lab of the Future Should Feel Like a Data Center — Andy Beam & Rafa Gómez-Bombarelli, Lila Sciences](2026-07-17-the-lab-of-the-future-should-feel-like-a-data-center-andy-be.md) · *latentspace · Score 4*
 - **2026-07-17** — [The AI compute gap: Enterprises are buying infrastructure faster than they can measure what it costs](2026-07-17-the-ai-compute-gap-enterprises-are-buying-infrastructure-fas.md) · *venturebeat · Score 4*
