@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-18T07:29:39.504Z",
+  "generated_at": "2026-07-19T07:52:54.907Z",
   "lookback_days": 60,
-  "issues": 53,
+  "issues": 54,
   "usage_daily": [
     {
       "run_date": "2026-05-23",
@@ -1132,6 +1132,26 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.2128
+    },
+    {
+      "run_date": "2026-07-19",
+      "stage": "deliver",
+      "calls": 13,
+      "input_tokens": 31632,
+      "output_tokens": 9577,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2386
+    },
+    {
+      "run_date": "2026-07-19",
+      "stage": "score",
+      "calls": 48,
+      "input_tokens": 168832,
+      "output_tokens": 7223,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.2049
     }
   ],
   "issue_sources": [
@@ -1142,12 +1162,12 @@
     },
     {
       "quelle": "hackernews",
-      "articles": 172,
+      "articles": 176,
       "avg_score": 4.2
     },
     {
       "quelle": "simonwillison",
-      "articles": 91,
+      "articles": 93,
       "avg_score": 4.16
     },
     {
@@ -1195,8 +1215,8 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 11511,
-      "total_truncated": 33,
+      "total_fetched": 11526,
+      "total_truncated": 36,
       "error_runs": 0
     },
     {
@@ -1212,6 +1232,13 @@
       "total_fetched": 420,
       "total_truncated": 0,
       "error_runs": 0
+    },
+    {
+      "adapter": "heise",
+      "runs": 14,
+      "total_fetched": 306,
+      "total_truncated": 105,
+      "error_runs": 5
     },
     {
       "adapter": "latentspace",
@@ -1238,7 +1265,7 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 280,
-      "total_truncated": 72,
+      "total_truncated": 68,
       "error_runs": 0
     },
     {
@@ -1256,13 +1283,6 @@
       "error_runs": 0
     },
     {
-      "adapter": "heise",
-      "runs": 14,
-      "total_fetched": 274,
-      "total_truncated": 105,
-      "error_runs": 6
-    },
-    {
       "adapter": "yannickilcher",
       "runs": 14,
       "total_fetched": 210,
@@ -1272,7 +1292,7 @@
     {
       "adapter": "anthropic",
       "runs": 14,
-      "total_fetched": 156,
+      "total_fetched": 154,
       "total_truncated": 0,
       "error_runs": 0
     },
@@ -1286,9 +1306,9 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 44,
+      "total_fetched": 48,
       "total_truncated": 0,
-      "error_runs": 6
+      "error_runs": 5
     },
     {
       "adapter": "hackernews-show",

@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**583 Einträge** · Top-Quellen: heise (210) · hackernews (178) · simonwillison (96) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
+**588 Einträge** · Top-Quellen: heise (210) · hackernews (182) · simonwillison (97) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
 
 ## Liste
 
+- **2026-07-19** — [The Kimi K3 Moment](2026-07-19-the-kimi-k3-moment.md) · *hackernews · Score 4*
+- **2026-07-19** — [Setting up your spare Mac for Claude Code to control, a step-by-step guide](2026-07-19-setting-up-your-spare-mac-for-claude-code-to-control-a-step-.md) · *hackernews · Score 5*
+- **2026-07-19** — [Mayor Mamdani Says Landlords Can't Use AI Images to Advertise](2026-07-19-mayor-mamdani-says-landlords-can-t-use-ai-images-to-advertis.md) · *hackernews · Score 4*
+- **2026-07-19** — [Deepsec](2026-07-19-deepsec.md) · *hackernews · Score 4*
+- **2026-07-19** — [AI Mania Is Eviscerating Global Decision-Making](2026-07-19-ai-mania-is-eviscerating-global-decision-making.md) · *simonwillison · Score 4*
 - **2026-07-18** — [TP-Link Kasa cameras leaked home GPS via unauthenticated UDP for 6 years](2026-07-18-tp-link-kasa-cameras-leaked-home-gps-via-unauthenticated-udp.md) · *hackernews · Score 4*
 - **2026-07-18** — [The state of open source AI](2026-07-18-the-state-of-open-source-ai.md) · *hackernews · Score 4*
 - **2026-07-18** — [Suno-Leak: KI-Modelle offenbar mit Musik von YouTube und Deezer trainiert](2026-07-18-suno-leak-ki-modelle-offenbar-mit-musik-von-youtube-und-deez.md) · *heise · Score 4*
