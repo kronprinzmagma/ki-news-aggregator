@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-19T07:52:54.907Z",
+  "generated_at": "2026-07-20T08:32:20.706Z",
   "lookback_days": 60,
-  "issues": 54,
+  "issues": 55,
   "usage_daily": [
     {
       "run_date": "2026-05-23",
@@ -1152,6 +1152,26 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.2049
+    },
+    {
+      "run_date": "2026-07-20",
+      "stage": "deliver",
+      "calls": 10,
+      "input_tokens": 22816,
+      "output_tokens": 7692,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1838
+    },
+    {
+      "run_date": "2026-07-20",
+      "stage": "score",
+      "calls": 25,
+      "input_tokens": 84506,
+      "output_tokens": 3727,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0516
     }
   ],
   "issue_sources": [
@@ -1162,8 +1182,8 @@
     },
     {
       "quelle": "hackernews",
-      "articles": 176,
-      "avg_score": 4.2
+      "articles": 179,
+      "avg_score": 4.21
     },
     {
       "quelle": "simonwillison",
@@ -1201,12 +1221,12 @@
       "avg_score": 4
     },
     {
-      "quelle": "lastweekinai",
-      "articles": 1,
+      "quelle": "aheadofai",
+      "articles": 2,
       "avg_score": 4
     },
     {
-      "quelle": "aheadofai",
+      "quelle": "lastweekinai",
       "articles": 1,
       "avg_score": 4
     }
@@ -1215,8 +1235,8 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 11526,
-      "total_truncated": 36,
+      "total_fetched": 11540,
+      "total_truncated": 37,
       "error_runs": 0
     },
     {
@@ -1265,7 +1285,7 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 280,
-      "total_truncated": 68,
+      "total_truncated": 66,
       "error_runs": 0
     },
     {
@@ -1306,7 +1326,7 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 48,
+      "total_fetched": 49,
       "total_truncated": 0,
       "error_runs": 5
     },

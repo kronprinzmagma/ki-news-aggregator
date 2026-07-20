@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**588 Einträge** · Top-Quellen: heise (210) · hackernews (182) · simonwillison (97) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · lastweekinai (2) · aheadofai (1)
+**592 Einträge** · Top-Quellen: heise (210) · hackernews (185) · simonwillison (97) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · aheadofai (2) · lastweekinai (2)
 
 ## Liste
 
+- **2026-07-20** — [Xiaomi-Robotics-1](2026-07-20-xiaomi-robotics-1.md) · *hackernews · Score 5*
+- **2026-07-20** — [LoRA Speedrun – a public wall-clock leaderboard for fine-tuning techniques](2026-07-20-lora-speedrun-a-public-wall-clock-leaderboard-for-fine-tunin.md) · *hackernews · Score 5*
+- **2026-07-20** — [Grok-iOS – remote Grok Build from your iPhone over ACP](2026-07-20-grok-ios-remote-grok-build-from-your-iphone-over-acp.md) · *hackernews · Score 4*
+- **2026-07-20** — [Controlling Reasoning Effort in LLMs](2026-07-20-controlling-reasoning-effort-in-llms.md) · *aheadofai · Score 4*
 - **2026-07-19** — [The Kimi K3 Moment](2026-07-19-the-kimi-k3-moment.md) · *hackernews · Score 4*
 - **2026-07-19** — [Setting up your spare Mac for Claude Code to control, a step-by-step guide](2026-07-19-setting-up-your-spare-mac-for-claude-code-to-control-a-step-.md) · *hackernews · Score 5*
 - **2026-07-19** — [Mayor Mamdani Says Landlords Can't Use AI Images to Advertise](2026-07-19-mayor-mamdani-says-landlords-can-t-use-ai-images-to-advertis.md) · *hackernews · Score 4*
