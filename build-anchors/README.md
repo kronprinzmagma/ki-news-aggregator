@@ -2,10 +2,26 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**592 Einträge** · Top-Quellen: heise (210) · hackernews (185) · simonwillison (97) · latentspace (55) · huggingface (20) · golem (7) · anthropic (6) · interconnects (5) · venturebeat (3) · aheadofai (2) · lastweekinai (2)
+**608 Einträge** · Top-Quellen: heise (219) · hackernews (188) · simonwillison (100) · latentspace (55) · huggingface (20) · golem (7) · interconnects (6) · anthropic (6) · venturebeat (3) · aheadofai (2) · lastweekinai (2)
 
 ## Liste
 
+- **2026-07-21** — [Who’s Afraid of Chinese Models?](2026-07-21-who-s-afraid-of-chinese-models.md) · *simonwillison · Score 4*
+- **2026-07-21** — [SQLite Query Explainer](2026-07-21-sqlite-query-explainer.md) · *simonwillison · Score 4*
+- **2026-07-21** — [Reverse-engineering is cheap now](2026-07-21-reverse-engineering-is-cheap-now.md) · *simonwillison · Score 4*
+- **2026-07-21** — [Neue Version von ChatGPT löscht selbständig Dateien](2026-07-21-neue-version-von-chatgpt-loscht-selbstandig-dateien.md) · *heise · Score 4*
+- **2026-07-21** — [Microsoft setzt AMDs Helios-Server mit Next-Gen-Hardware ein](2026-07-21-microsoft-setzt-amds-helios-server-mit-next-gen-hardware-ein.md) · *heise · Score 4*
+- **2026-07-21** — [Mehr Sicherheit im Amt: Wie das Bundesdruckerei-Projekt Möve Behörden-KI zähmt](2026-07-21-mehr-sicherheit-im-amt-wie-das-bundesdruckerei-projekt-move-.md) · *heise · Score 4*
+- **2026-07-21** — [Kimi K3: The open-weights escalation](2026-07-21-kimi-k3-the-open-weights-escalation.md) · *interconnects · Score 4*
+- **2026-07-21** — [Kimi K3: Moonshot AI stoppt neue Abonnements wegen GPU-Engpass](2026-07-21-kimi-k3-moonshot-ai-stoppt-neue-abonnements-wegen-gpu-engpas.md) · *heise · Score 4*
+- **2026-07-21** — [Human mathematicians are being outcounterexampled](2026-07-21-human-mathematicians-are-being-outcounterexampled.md) · *hackernews · Score 5*
+- **2026-07-21** — [How we measured AI writing across arXiv, and where the measurement breaks](2026-07-21-how-we-measured-ai-writing-across-arxiv-and-where-the-measur.md) · *hackernews · Score 4*
+- **2026-07-21** — [„Höchste Entschädigungssumme“: Anthropic zahlt an Autoren Milliardenstrafe](2026-07-21-hochste-entschadigungssumme-anthropic-zahlt-an-autoren-milli.md) · *heise · Score 4*
+- **2026-07-21** — [EU-Parlament baut eigene KI-Plattform für Abgeordnete auf](2026-07-21-eu-parlament-baut-eigene-ki-plattform-fur-abgeordnete-auf.md) · *heise · Score 4*
+- **2026-07-21** — [EU-Leitlinien für KI-Kennzeichnungspflichten ab August wirksam](2026-07-21-eu-leitlinien-fur-ki-kennzeichnungspflichten-ab-august-wirks.md) · *heise · Score 4*
+- **2026-07-21** — [Anthropic: Fable 5 bleibt nur in teuren Abos ohne Aufpreis nutzbar](2026-07-21-anthropic-fable-5-bleibt-nur-in-teuren-abos-ohne-aufpreis-nu.md) · *heise · Score 4*
+- **2026-07-21** — [Agent swarms and the new model economics](2026-07-21-agent-swarms-and-the-new-model-economics.md) · *hackernews · Score 5*
+- **2026-07-21** — [Adieu Palantir: Berlin und Paris planen eigenes digitales Rückgrat](2026-07-21-adieu-palantir-berlin-und-paris-planen-eigenes-digitales-ruc.md) · *heise · Score 4*
 - **2026-07-20** — [Xiaomi-Robotics-1](2026-07-20-xiaomi-robotics-1.md) · *hackernews · Score 5*
 - **2026-07-20** — [LoRA Speedrun – a public wall-clock leaderboard for fine-tuning techniques](2026-07-20-lora-speedrun-a-public-wall-clock-leaderboard-for-fine-tunin.md) · *hackernews · Score 5*
 - **2026-07-20** — [Grok-iOS – remote Grok Build from your iPhone over ACP](2026-07-20-grok-ios-remote-grok-build-from-your-iphone-over-acp.md) · *hackernews · Score 4*
