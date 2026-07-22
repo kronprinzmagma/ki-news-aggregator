@@ -2,10 +2,26 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**608 Einträge** · Top-Quellen: heise (219) · hackernews (188) · simonwillison (100) · latentspace (55) · huggingface (20) · golem (7) · interconnects (6) · anthropic (6) · venturebeat (3) · aheadofai (2) · lastweekinai (2)
+**624 Einträge** · Top-Quellen: heise (225) · hackernews (193) · simonwillison (102) · latentspace (56) · huggingface (21) · golem (7) · interconnects (6) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-22** — [The State of Simulation for Physical AI: An Overview](2026-07-22-the-state-of-simulation-for-physical-ai-an-overview.md) · *huggingface · Score 4*
+- **2026-07-22** — [Nativ: Run AI models locally on your Mac](2026-07-22-nativ-run-ai-models-locally-on-your-mac.md) · *simonwillison · Score 4*
+- **2026-07-22** — [Mittwoch: Googles neue Lite-KI ohne Pro, Rechenzentren als zu hohe Stromfresser](2026-07-22-mittwoch-googles-neue-lite-ki-ohne-pro-rechenzentren-als-zu-.md) · *heise · Score 4*
+- **2026-07-22** — [„Milliarden-Abkommen“: Microsoft und Mistral vertiefen KI-Partnerschaft](2026-07-22-milliarden-abkommen-microsoft-und-mistral-vertiefen-ki-partn.md) · *heise · Score 4*
+- **2026-07-22** — [Microsoft baut Outlook um: Copilot rein, Insights raus](2026-07-22-microsoft-baut-outlook-um-copilot-rein-insights-raus.md) · *heise · Score 4*
+- **2026-07-22** — [LG to ban residential proxies from smart TV apps](2026-07-22-lg-to-ban-residential-proxies-from-smart-tv-apps.md) · *hackernews · Score 4*
+- **2026-07-22** — [Last Week in AI #251 - Mythos Back, Sonnet 5, Etched, LongCat](2026-07-22-last-week-in-ai-251-mythos-back-sonnet-5-etched-longcat.md) · *lastweekinai · Score 4*
+- **2026-07-22** — [Laguna S 2.1](2026-07-22-laguna-s-2-1.md) · *hackernews · Score 5*
+- **2026-07-22** — [Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA](2026-07-22-kimi-k3-is-competitive-with-fable-kimi-k3-and-fable-is-sota.md) · *hackernews · Score 4*
+- **2026-07-22** — [\"KI-Kommunismus\": Washington ringt um den Umgang mit chinesischer KI](2026-07-22-ki-kommunismus-washington-ringt-um-den-umgang-mit-chinesisch.md) · *heise · Score 4*
+- **2026-07-22** — [KI bricht aus Sandbox aus: OpenAI schlägt neue Art von Sicherheitsregeln vor](2026-07-22-ki-bricht-aus-sandbox-aus-openai-schlagt-neue-art-von-sicher.md) · *heise · Score 4*
+- **2026-07-22** — [Judge approves $1.5B Anthropic settlement for pirated books used to train Claude](2026-07-22-judge-approves-1-5b-anthropic-settlement-for-pirated-books-u.md) · *hackernews · Score 4*
+- **2026-07-22** — [Erstmals ist mehr als die Hälfte neu hochgeladener Songs auf Deezer KI](2026-07-22-erstmals-ist-mehr-als-die-halfte-neu-hochgeladener-songs-auf.md) · *heise · Score 4*
+- **2026-07-22** — [Apple Private Cloud Compute SoC 3 audit reports](2026-07-22-apple-private-cloud-compute-soc-3-audit-reports.md) · *hackernews · Score 4*
+- **2026-07-22** — [[AINews] AI Cybersecurity becomes top of mind](2026-07-22-ainews-ai-cybersecurity-becomes-top-of-mind.md) · *latentspace · Score 4*
+- **2026-07-22** — [A Fireside Chat with Cat and Thariq from the Claude Code team](2026-07-22-a-fireside-chat-with-cat-and-thariq-from-the-claude-code-tea.md) · *simonwillison · Score 4*
 - **2026-07-21** — [Who’s Afraid of Chinese Models?](2026-07-21-who-s-afraid-of-chinese-models.md) · *simonwillison · Score 4*
 - **2026-07-21** — [SQLite Query Explainer](2026-07-21-sqlite-query-explainer.md) · *simonwillison · Score 4*
 - **2026-07-21** — [Reverse-engineering is cheap now](2026-07-21-reverse-engineering-is-cheap-now.md) · *simonwillison · Score 4*
