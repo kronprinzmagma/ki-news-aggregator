@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**624 Einträge** · Top-Quellen: heise (225) · hackernews (193) · simonwillison (102) · latentspace (56) · huggingface (21) · golem (7) · interconnects (6) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**629 Einträge** · Top-Quellen: heise (225) · hackernews (196) · simonwillison (103) · latentspace (57) · huggingface (21) · golem (7) · interconnects (6) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-23** — [Petals: Run LLMs at home, BitTorrent-style](2026-07-23-petals-run-llms-at-home-bittorrent-style.md) · *hackernews · Score 4*
+- **2026-07-23** — [OpenAI’s accidental cyberattack against Hugging Face is science fiction that happened](2026-07-23-openai-s-accidental-cyberattack-against-hugging-face-is-scie.md) · *simonwillison · Score 5*
+- **2026-07-23** — [Inside the Model Factory — Eiso Kant, Poolside AI](2026-07-23-inside-the-model-factory-eiso-kant-poolside-ai.md) · *latentspace · Score 4*
+- **2026-07-23** — [GigaToken: ~1000x faster Language model tokenization](2026-07-23-gigatoken-1000x-faster-language-model-tokenization.md) · *hackernews · Score 4*
+- **2026-07-23** — [Are AI labs pelicanmaxxing?](2026-07-23-are-ai-labs-pelicanmaxxing.md) · *hackernews · Score 4*
 - **2026-07-22** — [The State of Simulation for Physical AI: An Overview](2026-07-22-the-state-of-simulation-for-physical-ai-an-overview.md) · *huggingface · Score 4*
 - **2026-07-22** — [Nativ: Run AI models locally on your Mac](2026-07-22-nativ-run-ai-models-locally-on-your-mac.md) · *simonwillison · Score 4*
 - **2026-07-22** — [Mittwoch: Googles neue Lite-KI ohne Pro, Rechenzentren als zu hohe Stromfresser](2026-07-22-mittwoch-googles-neue-lite-ki-ohne-pro-rechenzentren-als-zu-.md) · *heise · Score 4*
