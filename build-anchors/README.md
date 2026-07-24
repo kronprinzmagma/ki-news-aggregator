@@ -2,10 +2,22 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**629 Einträge** · Top-Quellen: heise (225) · hackernews (196) · simonwillison (103) · latentspace (57) · huggingface (21) · golem (7) · interconnects (6) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**641 Einträge** · Top-Quellen: heise (233) · hackernews (198) · simonwillison (104) · latentspace (57) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-24** — [The first known runaway AI agent - or a very bad marketing stunt?](2026-07-24-the-first-known-runaway-ai-agent-or-a-very-bad-marketing-stu.md) · *simonwillison · Score 4*
+- **2026-07-24** — [Open models recap: more on Kimi K3, Qwen 3.8, Xi's WAIC speech, distillation, the open-closed gap, and what's next](2026-07-24-open-models-recap-more-on-kimi-k3-qwen-3-8-xi-s-waic-speech-.md) · *interconnects · Score 4*
+- **2026-07-24** — [Milliarden-Deal: Anthropic setzt auf AMD-GPUs für KI-Rechenzentren](2026-07-24-milliarden-deal-anthropic-setzt-auf-amd-gpus-fur-ki-rechenze.md) · *heise · Score 4*
+- **2026-07-24** — [„Live Notes“: Apple will von Support-Gesprächen im Store lernen](2026-07-24-live-notes-apple-will-von-support-gesprachen-im-store-lernen.md) · *heise · Score 4*
+- **2026-07-24** — [Launch HN: Screenpipe (YC S26) – Record how you work and turn that into agents](2026-07-24-launch-hn-screenpipe-yc-s26-record-how-you-work-and-turn-tha.md) · *hackernews · Score 5*
+- **2026-07-24** — [Helios-Server: AMD greift Nvidia mit Instinct MI455X an](2026-07-24-helios-server-amd-greift-nvidia-mit-instinct-mi455x-an.md) · *heise · Score 4*
+- **2026-07-24** — [Flux 3](2026-07-24-flux-3.md) · *hackernews · Score 4*
+- **2026-07-24** — [Diese Quellen nutzen KI-Tools am häufigsten – und das ist ein Problem](2026-07-24-diese-quellen-nutzen-ki-tools-am-haufigsten-und-das-ist-ein-.md) · *heise · Score 4*
+- **2026-07-24** — [Datenschutzvorfall bei uniVersa: Crawler von OpenAI griff Daten ab](2026-07-24-datenschutzvorfall-bei-universa-crawler-von-openai-griff-dat.md) · *heise · Score 4*
+- **2026-07-24** — [Collabora Online: lokale oder Cloud-KI nach Nutzerwunsch](2026-07-24-collabora-online-lokale-oder-cloud-ki-nach-nutzerwunsch.md) · *heise · Score 4*
+- **2026-07-24** — [Codeberg verbietet KI-Training und KI-Massenprojekte](2026-07-24-codeberg-verbietet-ki-training-und-ki-massenprojekte.md) · *heise · Score 4*
+- **2026-07-24** — [Claude Code erhält Zugriff auf iPhone-Simulator](2026-07-24-claude-code-erhalt-zugriff-auf-iphone-simulator.md) · *heise · Score 5*
 - **2026-07-23** — [Petals: Run LLMs at home, BitTorrent-style](2026-07-23-petals-run-llms-at-home-bittorrent-style.md) · *hackernews · Score 4*
 - **2026-07-23** — [OpenAI’s accidental cyberattack against Hugging Face is science fiction that happened](2026-07-23-openai-s-accidental-cyberattack-against-hugging-face-is-scie.md) · *simonwillison · Score 5*
 - **2026-07-23** — [Inside the Model Factory — Eiso Kant, Poolside AI](2026-07-23-inside-the-model-factory-eiso-kant-poolside-ai.md) · *latentspace · Score 4*
