@@ -1,28 +1,8 @@
 {
-  "generated_at": "2026-07-24T09:30:47.642Z",
+  "generated_at": "2026-07-25T07:37:36.340Z",
   "lookback_days": 60,
   "issues": 57,
   "usage_daily": [
-    {
-      "run_date": "2026-05-25",
-      "stage": "deliver",
-      "calls": 14,
-      "input_tokens": 31676,
-      "output_tokens": 8261,
-      "cache_read": 0,
-      "cache_creation": 0,
-      "usd": 0.2189
-    },
-    {
-      "run_date": "2026-05-25",
-      "stage": "score",
-      "calls": 39,
-      "input_tokens": 104538,
-      "output_tokens": 5936,
-      "cache_read": 0,
-      "cache_creation": 0,
-      "usd": 0.0671
-    },
     {
       "run_date": "2026-05-26",
       "stage": "deliver",
@@ -1212,27 +1192,47 @@
       "cache_read": 0,
       "cache_creation": 0,
       "usd": 0.175
+    },
+    {
+      "run_date": "2026-07-25",
+      "stage": "deliver",
+      "calls": 10,
+      "input_tokens": 23845,
+      "output_tokens": 7437,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.1831
+    },
+    {
+      "run_date": "2026-07-25",
+      "stage": "score",
+      "calls": 25,
+      "input_tokens": 85400,
+      "output_tokens": 3820,
+      "cache_read": 0,
+      "cache_creation": 0,
+      "usd": 0.0522
     }
   ],
   "issue_sources": [
     {
       "quelle": "heise",
-      "articles": 230,
+      "articles": 226,
       "avg_score": 4.04
     },
     {
       "quelle": "hackernews",
-      "articles": 192,
+      "articles": 193,
       "avg_score": 4.21
     },
     {
       "quelle": "simonwillison",
       "articles": 99,
-      "avg_score": 4.16
+      "avg_score": 4.17
     },
     {
       "quelle": "latentspace",
-      "articles": 53,
+      "articles": 54,
       "avg_score": 4.09
     },
     {
@@ -1275,8 +1275,8 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 11579,
-      "total_truncated": 28,
+      "total_fetched": 11587,
+      "total_truncated": 26,
       "error_runs": 0
     },
     {
@@ -1325,14 +1325,14 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 280,
-      "total_truncated": 66,
+      "total_truncated": 73,
       "error_runs": 0
     },
     {
       "adapter": "benevans",
       "runs": 14,
       "total_fetched": 280,
-      "total_truncated": 2,
+      "total_truncated": 1,
       "error_runs": 0
     },
     {

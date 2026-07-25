@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**641 Einträge** · Top-Quellen: heise (233) · hackernews (198) · simonwillison (104) · latentspace (57) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**645 Einträge** · Top-Quellen: heise (233) · hackernews (200) · simonwillison (105) · latentspace (58) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-25** — [UK AISI / Caisi Preliminary Assessment of Kimi K3's Cyber Capabilities](2026-07-25-uk-aisi-caisi-preliminary-assessment-of-kimi-k3-s-cyber-capa.md) · *hackernews · Score 4*
+- **2026-07-25** — [Introducing Claude Opus 5](2026-07-25-introducing-claude-opus-5.md) · *simonwillison · Score 5*
+- **2026-07-25** — [ARC-AGI Leaderboard](2026-07-25-arc-agi-leaderboard.md) · *hackernews · Score 4*
+- **2026-07-25** — [[AINews] Black Forest Labs FLUX 3 - Multimodal Flow Models that beat Seedance 2.0, Gemini Omni and Grok Imagine, and FLUX-mimic video-action robotics model](2026-07-25-ainews-black-forest-labs-flux-3-multimodal-flow-models-that-.md) · *latentspace · Score 4*
 - **2026-07-24** — [The first known runaway AI agent - or a very bad marketing stunt?](2026-07-24-the-first-known-runaway-ai-agent-or-a-very-bad-marketing-stu.md) · *simonwillison · Score 4*
 - **2026-07-24** — [Open models recap: more on Kimi K3, Qwen 3.8, Xi's WAIC speech, distillation, the open-closed gap, and what's next](2026-07-24-open-models-recap-more-on-kimi-k3-qwen-3-8-xi-s-waic-speech-.md) · *interconnects · Score 4*
 - **2026-07-24** — [Milliarden-Deal: Anthropic setzt auf AMD-GPUs für KI-Rechenzentren](2026-07-24-milliarden-deal-anthropic-setzt-auf-amd-gpus-fur-ki-rechenze.md) · *heise · Score 4*
