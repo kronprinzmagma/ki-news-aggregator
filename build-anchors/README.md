@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**649 Einträge** · Top-Quellen: heise (234) · hackernews (203) · simonwillison (105) · latentspace (58) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**654 Einträge** · Top-Quellen: heise (237) · hackernews (204) · simonwillison (106) · latentspace (58) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-27** — [Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary](2026-07-27-scriptc-by-vercel-typescript-to-native-compiler-no-javascrip.md) · *hackernews · Score 4*
+- **2026-07-27** — [Microsoft setzt auf eigene KI-Modelle: MAI statt OpenAI](2026-07-27-microsoft-setzt-auf-eigene-ki-modelle-mai-statt-openai.md) · *heise · Score 4*
+- **2026-07-27** — [Kimi K3: Chinesische KI findet mehrere Zero-Day-Lücken in redis-Datenbank](2026-07-27-kimi-k3-chinesische-ki-findet-mehrere-zero-day-lucken-in-red.md) · *heise · Score 4*
+- **2026-07-27** — [Drei Fragen und Antworten: Wie KI wirklich bei der Schwachstellensuche hilft](2026-07-27-drei-fragen-und-antworten-wie-ki-wirklich-bei-der-schwachste.md) · *heise · Score 4*
+- **2026-07-27** — [An Inside Look at the Relay Market Powering Token Resellers and Fraud](2026-07-27-an-inside-look-at-the-relay-market-powering-token-resellers-.md) · *simonwillison · Score 4*
 - **2026-07-26** — [The new rules of context engineering for Claude 5 generation models](2026-07-26-the-new-rules-of-context-engineering-for-claude-5-generation.md) · *hackernews · Score 5*
 - **2026-07-26** — [Running a 28.9M parameter LLM on an $8 microcontroller](2026-07-26-running-a-28-9m-parameter-llm-on-an-8-microcontroller.md) · *hackernews · Score 4*
 - **2026-07-26** — [DeepSeek pause fundraise after comments on compute gap to US leaked (transcript) [pdf]](2026-07-26-deepseek-pause-fundraise-after-comments-on-compute-gap-to-us.md) · *hackernews · Score 4*
