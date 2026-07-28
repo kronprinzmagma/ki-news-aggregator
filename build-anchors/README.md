@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**654 Einträge** · Top-Quellen: heise (237) · hackernews (204) · simonwillison (106) · latentspace (58) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**664 Einträge** · Top-Quellen: heise (240) · hackernews (208) · simonwillison (108) · latentspace (59) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-28** — [The age of token efficiency, the age of libraries](2026-07-28-the-age-of-token-efficiency-the-age-of-libraries.md) · *hackernews · Score 4*
+- **2026-07-28** — [PyTorch: A Reference Language](2026-07-28-pytorch-a-reference-language.md) · *hackernews · Score 4*
+- **2026-07-28** — [OpenAI startet Apple-Health-Anbindung für ChatGPT](2026-07-28-openai-startet-apple-health-anbindung-fur-chatgpt.md) · *heise · Score 4*
+- **2026-07-28** — [Nvidia versammelt Tech-Schwergewichte für neue KI-Allianz](2026-07-28-nvidia-versammelt-tech-schwergewichte-fur-neue-ki-allianz.md) · *heise · Score 4*
+- **2026-07-28** — [moonshotai/Kimi-K3](2026-07-28-moonshotai-kimi-k3.md) · *simonwillison · Score 4*
+- **2026-07-28** — [Kimi K3 Now Available via Telnyx Inference API](2026-07-28-kimi-k3-now-available-via-telnyx-inference-api.md) · *hackernews · Score 4*
+- **2026-07-28** — [Joule läuft, die Compliance nicht: Was SAP-Kunden jetzt tun müssen](2026-07-28-joule-lauft-die-compliance-nicht-was-sap-kunden-jetzt-tun-mu.md) · *heise · Score 4*
+- **2026-07-28** — [Benchmarking Opus 5 on SlopCodeBench](2026-07-28-benchmarking-opus-5-on-slopcodebench.md) · *hackernews · Score 5*
+- **2026-07-28** — [An opinionated guide to which AI to use to do stuff](2026-07-28-an-opinionated-guide-to-which-ai-to-use-to-do-stuff.md) · *simonwillison · Score 4*
+- **2026-07-28** — [[AINews] Much ado about Open Weights](2026-07-28-ainews-much-ado-about-open-weights.md) · *latentspace · Score 4*
 - **2026-07-27** — [Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary](2026-07-27-scriptc-by-vercel-typescript-to-native-compiler-no-javascrip.md) · *hackernews · Score 4*
 - **2026-07-27** — [Microsoft setzt auf eigene KI-Modelle: MAI statt OpenAI](2026-07-27-microsoft-setzt-auf-eigene-ki-modelle-mai-statt-openai.md) · *heise · Score 4*
 - **2026-07-27** — [Kimi K3: Chinesische KI findet mehrere Zero-Day-Lücken in redis-Datenbank](2026-07-27-kimi-k3-chinesische-ki-findet-mehrere-zero-day-lucken-in-red.md) · *heise · Score 4*
