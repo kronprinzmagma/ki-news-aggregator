@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**664 Einträge** · Top-Quellen: heise (240) · hackernews (208) · simonwillison (108) · latentspace (59) · huggingface (21) · interconnects (7) · golem (7) · anthropic (6) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**679 Einträge** · Top-Quellen: heise (248) · hackernews (209) · simonwillison (110) · latentspace (60) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-29** — [The OlmoEarth Platform: Geospatial inference at planetary scale](2026-07-29-the-olmoearth-platform-geospatial-inference-at-planetary-sca.md) · *huggingface · Score 4*
+- **2026-07-29** — [SO2: Keine US-Grenzwerte für fossile Kraftwerke, die nur Datenzentren versorgen](2026-07-29-so2-keine-us-grenzwerte-fur-fossile-kraftwerke-die-nur-daten.md) · *heise · Score 4*
+- **2026-07-29** — [Our position on open-weights models](2026-07-29-our-position-on-open-weights-models.md) · *anthropic · Score 4*
+- **2026-07-29** — [Nvidia verhandelt über 250-Milliarden-Dollar-Bürgschaft für OpenAI](2026-07-29-nvidia-verhandelt-uber-250-milliarden-dollar-burgschaft-fur-.md) · *heise · Score 4*
+- **2026-07-29** — [Microsoft stellt eigenes KI-Modell für Cybersecurity vor](2026-07-29-microsoft-stellt-eigenes-ki-modell-fur-cybersecurity-vor.md) · *heise · Score 4*
+- **2026-07-29** — [Lücke: Claude Cowork entkommt macOS-Sandbox](2026-07-29-lucke-claude-cowork-entkommt-macos-sandbox.md) · *heise · Score 4*
+- **2026-07-29** — [Kimi K3 Architecture Overview and Notes](2026-07-29-kimi-k3-architecture-overview-and-notes.md) · *hackernews · Score 4*
+- **2026-07-29** — [KI-Update kompakt: KI-Kill-Switch, Kimi 3, Smart Glasses, Flux 3](2026-07-29-ki-update-kompakt-ki-kill-switch-kimi-3-smart-glasses-flux-3.md) · *heise · Score 4*
+- **2026-07-29** — [Googles KI-Suche verändert das Suchverhalten](2026-07-29-googles-ki-suche-verandert-das-suchverhalten.md) · *heise · Score 4*
+- **2026-07-29** — [Facebook Verified: Neues Abzeichen für menschliche Profile](2026-07-29-facebook-verified-neues-abzeichen-fur-menschliche-profile.md) · *heise · Score 4*
+- **2026-07-29** — [Discovering cryptographic weaknesses with Claude](2026-07-29-discovering-cryptographic-weaknesses-with-claude.md) · *simonwillison · Score 4*
+- **2026-07-29** — [Cognizant and Anthropic expand their partnership to bring Claude to enterprise clients](2026-07-29-cognizant-and-anthropic-expand-their-partnership-to-bring-cl.md) · *anthropic · Score 4*
+- **2026-07-29** — [Codex from 0 to 10M Users: Building ChatGPT Work — Akshay Nathan, OpenAI](2026-07-29-codex-from-0-to-10m-users-building-chatgpt-work-akshay-natha.md) · *latentspace · Score 4*
+- **2026-07-29** — [Claude-Datenleck: Tausende Chats in Suchmaschinen gelandet](2026-07-29-claude-datenleck-tausende-chats-in-suchmaschinen-gelandet.md) · *heise · Score 4*
+- **2026-07-29** — [Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident](2026-07-29-anatomy-of-a-frontier-lab-agent-intrusion-a-technical-timeli.md) · *simonwillison · Score 5*
 - **2026-07-28** — [The age of token efficiency, the age of libraries](2026-07-28-the-age-of-token-efficiency-the-age-of-libraries.md) · *hackernews · Score 4*
 - **2026-07-28** — [PyTorch: A Reference Language](2026-07-28-pytorch-a-reference-language.md) · *hackernews · Score 4*
 - **2026-07-28** — [OpenAI startet Apple-Health-Anbindung für ChatGPT](2026-07-28-openai-startet-apple-health-anbindung-fur-chatgpt.md) · *heise · Score 4*
