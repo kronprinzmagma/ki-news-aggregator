@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**679 Einträge** · Top-Quellen: heise (248) · hackernews (209) · simonwillison (110) · latentspace (60) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**689 Einträge** · Top-Quellen: heise (254) · hackernews (212) · simonwillison (111) · latentspace (60) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-30** — [Some thoughts about Anthropic's new cryptanalysis results](2026-07-30-some-thoughts-about-anthropic-s-new-cryptanalysis-results.md) · *hackernews · Score 4*
+- **2026-07-30** — [Proxmox und Nvidia kooperieren für KI-Rechenzentren](2026-07-30-proxmox-und-nvidia-kooperieren-fur-ki-rechenzentren.md) · *heise · Score 4*
+- **2026-07-30** — [OpenSpec bringt Ordnung in KI-gestützte Entwicklung](2026-07-30-openspec-bringt-ordnung-in-ki-gestutzte-entwicklung.md) · *heise · Score 4*
+- **2026-07-30** — [OpenAIs KI-Agent knackte nicht nur Hugging Face – was genau passierte](2026-07-30-openais-ki-agent-knackte-nicht-nur-hugging-face-was-genau-pa.md) · *heise · Score 4*
+- **2026-07-30** — [Musikcharts: Labels wollen KI-Songs aus den Charts fernhalten](2026-07-30-musikcharts-labels-wollen-ki-songs-aus-den-charts-fernhalten.md) · *heise · Score 4*
+- **2026-07-30** — [Launch HN: Tokenless (YC S26) – Automatic model switching to save money](2026-07-30-launch-hn-tokenless-yc-s26-automatic-model-switching-to-save.md) · *hackernews · Score 4*
+- **2026-07-30** — [Kuna: Decompiler Development in the Age of Coding Agents](2026-07-30-kuna-decompiler-development-in-the-age-of-coding-agents.md) · *hackernews · Score 5*
+- **2026-07-30** — [heise+ | Talk-to-Database im Praxistest: Sprachmodell statt Reporting-Engpass?](2026-07-30-heise-talk-to-database-im-praxistest-sprachmodell-statt-repo.md) · *heise · Score 4*
+- **2026-07-30** — [Amazon fährt die meisten hauseigenen Nova-KI-Modelle zurück](2026-07-30-amazon-fahrt-die-meisten-hauseigenen-nova-ki-modelle-zuruck.md) · *heise · Score 4*
+- **2026-07-30** — [AI Worming through Word](2026-07-30-ai-worming-through-word.md) · *simonwillison · Score 5*
 - **2026-07-29** — [The OlmoEarth Platform: Geospatial inference at planetary scale](2026-07-29-the-olmoearth-platform-geospatial-inference-at-planetary-sca.md) · *huggingface · Score 4*
 - **2026-07-29** — [SO2: Keine US-Grenzwerte für fossile Kraftwerke, die nur Datenzentren versorgen](2026-07-29-so2-keine-us-grenzwerte-fur-fossile-kraftwerke-die-nur-daten.md) · *heise · Score 4*
 - **2026-07-29** — [Our position on open-weights models](2026-07-29-our-position-on-open-weights-models.md) · *anthropic · Score 4*
