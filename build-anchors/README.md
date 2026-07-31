@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**689 Einträge** · Top-Quellen: heise (254) · hackernews (212) · simonwillison (111) · latentspace (60) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**699 Einträge** · Top-Quellen: heise (254) · hackernews (216) · simonwillison (116) · latentspace (61) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-07-31** — [The session you cannot take with you](2026-07-31-the-session-you-cannot-take-with-you.md) · *hackernews · Score 4*
+- **2026-07-31** — [Stacked PRs are now live on GitHub](2026-07-31-stacked-prs-are-now-live-on-github.md) · *hackernews · Score 4*
+- **2026-07-31** — [Ontologies Are So Back: Why AI Agents Are Reviving the Semantic Web](2026-07-31-ontologies-are-so-back-why-ai-agents-are-reviving-the-semant.md) · *latentspace · Score 4*
+- **2026-07-31** — [llm-chat-completions-server 0.1a0](2026-07-31-llm-chat-completions-server-0-1a0.md) · *simonwillison · Score 4*
+- **2026-07-31** — [llm 0.32rc2](2026-07-31-llm-0-32rc2.md) · *simonwillison · Score 4*
+- **2026-07-31** — [llm 0.32rc1](2026-07-31-llm-0-32rc1.md) · *simonwillison · Score 4*
+- **2026-07-31** — [Investigating three real-world incidents in our cybersecurity evaluations](2026-07-31-investigating-three-real-world-incidents-in-our-cybersecurit.md) · *simonwillison · Score 5*
+- **2026-07-31** — [I flagged two research papers for fake authors and both were accepted as orals](2026-07-31-i-flagged-two-research-papers-for-fake-authors-and-both-were.md) · *hackernews · Score 4*
+- **2026-07-31** — [DeepSeek-V4-Flash Update](2026-07-31-deepseek-v4-flash-update.md) · *hackernews · Score 4*
+- **2026-07-31** — [Advancing the price-performance frontier with GPT‑5.6](2026-07-31-advancing-the-price-performance-frontier-with-gpt-5-6.md) · *simonwillison · Score 5*
 - **2026-07-30** — [Some thoughts about Anthropic's new cryptanalysis results](2026-07-30-some-thoughts-about-anthropic-s-new-cryptanalysis-results.md) · *hackernews · Score 4*
 - **2026-07-30** — [Proxmox und Nvidia kooperieren für KI-Rechenzentren](2026-07-30-proxmox-und-nvidia-kooperieren-fur-ki-rechenzentren.md) · *heise · Score 4*
 - **2026-07-30** — [OpenSpec bringt Ordnung in KI-gestützte Entwicklung](2026-07-30-openspec-bringt-ordnung-in-ki-gestutzte-entwicklung.md) · *heise · Score 4*
