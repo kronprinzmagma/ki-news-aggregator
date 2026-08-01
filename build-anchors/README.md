@@ -2,10 +2,31 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**699 Einträge** · Top-Quellen: heise (254) · hackernews (216) · simonwillison (116) · latentspace (61) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**720 Einträge** · Top-Quellen: heise (268) · hackernews (216) · simonwillison (121) · latentspace (63) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-01** — [Zu hohe KI-Nutzung: Apple erwägt Aufpreise für iCloud+](2026-08-01-zu-hohe-ki-nutzung-apple-erwagt-aufpreise-fur-icloud.md) · *heise · Score 4*
+- **2026-08-01** — [Stateless MCP has recaptured my interest (and inspired mcp-explorer and datasette-mcp)](2026-08-01-stateless-mcp-has-recaptured-my-interest-and-inspired-mcp-ex.md) · *simonwillison · Score 5*
+- **2026-08-01** — [smevals - a small eval suite for evaluating models, prompts, and harnesses](2026-08-01-smevals-a-small-eval-suite-for-evaluating-models-prompts-and.md) · *simonwillison · Score 4*
+- **2026-08-01** — [Reddit-Chef: „Die Menschen wollen Reddit, keine Zusammenfassung“](2026-08-01-reddit-chef-die-menschen-wollen-reddit-keine-zusammenfassung.md) · *heise · Score 4*
+- **2026-08-01** — [Pro & Contra: Gehen Apples Foto-Tools mit KI zu weit?](2026-08-01-pro-contra-gehen-apples-foto-tools-mit-ki-zu-weit.md) · *heise · Score 4*
+- **2026-08-01** — [Oxide and Friends: The Open Weight Revolution with Simon Willison](2026-08-01-oxide-and-friends-the-open-weight-revolution-with-simon-will.md) · *simonwillison · Score 4*
+- **2026-08-01** — [Nvidias KI-Security-Bündnis: Sicherheit open source, Verantwortung closed shop](2026-08-01-nvidias-ki-security-bundnis-sicherheit-open-source-verantwor.md) · *heise · Score 4*
+- **2026-08-01** — [Neue Befugnisse: Bundesnetzagentur übernimmt KI-Aufsicht in Deutschland](2026-08-01-neue-befugnisse-bundesnetzagentur-ubernimmt-ki-aufsicht-in-d.md) · *heise · Score 4*
+- **2026-08-01** — [Linkedin-Beiträge „als KI-Slop melden‟](2026-08-01-linkedin-beitrage-als-ki-slop-melden.md) · *heise · Score 4*
+- **2026-08-01** — [Kommentar: Was sollen KI-Verbote in Open-Source-Projekten?](2026-08-01-kommentar-was-sollen-ki-verbote-in-open-source-projekten.md) · *heise · Score 4*
+- **2026-08-01** — [KI-Musik: Suno unterliegt im Rechtsstreit gegen GEMA](2026-08-01-ki-musik-suno-unterliegt-im-rechtsstreit-gegen-gema.md) · *heise · Score 4*
+- **2026-08-01** — [KI-„Gigafactorys“: EU-Kommission startet Ausschreibung](2026-08-01-ki-gigafactorys-eu-kommission-startet-ausschreibung.md) · *heise · Score 4*
+- **2026-08-01** — [KI-Attacke: Auch Anthropic-Modelle griffen echte Unternehmen an](2026-08-01-ki-attacke-auch-anthropic-modelle-griffen-echte-unternehmen-.md) · *heise · Score 4*
+- **2026-08-01** — [„Katastrophal teuer“: KI ließ bei Amazon Projekt-Kosten aus dem Ruder laufen](2026-08-01-katastrophal-teuer-ki-liess-bei-amazon-projekt-kosten-aus-de.md) · *heise · Score 4*
+- **2026-08-01** — [Gemini für macOS: Bildschirmüberwachung und systemweites Diktat](2026-08-01-gemini-fur-macos-bildschirmuberwachung-und-systemweites-dikt.md) · *heise · Score 4*
+- **2026-08-01** — [Digital Services Act: EU will offenbar ChatGPT und Roblox strenger kontrollieren](2026-08-01-digital-services-act-eu-will-offenbar-chatgpt-und-roblox-str.md) · *heise · Score 4*
+- **2026-08-01** — [deepseek-ai/DeepSeek-V4-Flash-0731](2026-08-01-deepseek-ai-deepseek-v4-flash-0731.md) · *simonwillison · Score 4*
+- **2026-08-01** — [datasette-agent 0.4a0](2026-08-01-datasette-agent-0-4a0.md) · *simonwillison · Score 4*
+- **2026-08-01** — [Anthropics Claude entdeckt Schwachstelle in Krypto-Algorithmus](2026-08-01-anthropics-claude-entdeckt-schwachstelle-in-krypto-algorithm.md) · *heise · Score 4*
+- **2026-08-01** — [[AINews] not much happened today](2026-08-01-ainews-not-much-happened-today.md) · *latentspace · Score 4*
+- **2026-08-01** — [[AINews] Fearing RSI: OpenAI, Anthropic, GDM, Meta, Thinky cosign letter to \"Pace\" AI development, as HuggingFace details Machine-Speed Offensive Cyberattack](2026-08-01-ainews-fearing-rsi-openai-anthropic-gdm-meta-thinky-cosign-l.md) · *latentspace · Score 4*
 - **2026-07-31** — [The session you cannot take with you](2026-07-31-the-session-you-cannot-take-with-you.md) · *hackernews · Score 4*
 - **2026-07-31** — [Stacked PRs are now live on GitHub](2026-07-31-stacked-prs-are-now-live-on-github.md) · *hackernews · Score 4*
 - **2026-07-31** — [Ontologies Are So Back: Why AI Agents Are Reviving the Semantic Web](2026-07-31-ontologies-are-so-back-why-ai-agents-are-reviving-the-semant.md) · *latentspace · Score 4*
