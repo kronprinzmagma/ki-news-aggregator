@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**720 Einträge** · Top-Quellen: heise (268) · hackernews (216) · simonwillison (121) · latentspace (63) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**726 Einträge** · Top-Quellen: heise (268) · hackernews (219) · simonwillison (124) · latentspace (63) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-02** — [Ten advances in mathematics and theoretical computer science](2026-08-02-ten-advances-in-mathematics-and-theoretical-computer-science.md) · *simonwillison · Score 4*
+- **2026-08-02** — [Slack Emoji Maker](2026-08-02-slack-emoji-maker.md) · *simonwillison · Score 4*
+- **2026-08-02** — [Seedance 2.5](2026-08-02-seedance-2-5.md) · *hackernews · Score 4*
+- **2026-08-02** — [Running Kimi K3 on MI355X at Better Performance per Dollar Than B300](2026-08-02-running-kimi-k3-on-mi355x-at-better-performance-per-dollar-t.md) · *hackernews · Score 4*
+- **2026-08-02** — [Four Time Scales for Technology Development and Deployment](2026-08-02-four-time-scales-for-technology-development-and-deployment.md) · *hackernews · Score 4*
+- **2026-08-02** — [datasette-apps 0.2a0](2026-08-02-datasette-apps-0-2a0.md) · *simonwillison · Score 4*
 - **2026-08-01** — [Zu hohe KI-Nutzung: Apple erwägt Aufpreise für iCloud+](2026-08-01-zu-hohe-ki-nutzung-apple-erwagt-aufpreise-fur-icloud.md) · *heise · Score 4*
 - **2026-08-01** — [Stateless MCP has recaptured my interest (and inspired mcp-explorer and datasette-mcp)](2026-08-01-stateless-mcp-has-recaptured-my-interest-and-inspired-mcp-ex.md) · *simonwillison · Score 5*
 - **2026-08-01** — [smevals - a small eval suite for evaluating models, prompts, and harnesses](2026-08-01-smevals-a-small-eval-suite-for-evaluating-models-prompts-and.md) · *simonwillison · Score 4*
