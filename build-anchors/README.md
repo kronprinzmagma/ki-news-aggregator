@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**726 Einträge** · Top-Quellen: heise (268) · hackernews (219) · simonwillison (124) · latentspace (63) · huggingface (22) · anthropic (8) · interconnects (7) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**730 Einträge** · Top-Quellen: heise (268) · hackernews (220) · simonwillison (126) · latentspace (63) · huggingface (22) · interconnects (8) · anthropic (8) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-03** — [Latest open artifacts (#23): Laguna S2.1, Inkling, & Kimi K3 show the utility of open models on the Pareto frontier](2026-08-03-latest-open-artifacts-23-laguna-s2-1-inkling-kimi-k3-show-th.md) · *interconnects · Score 4*
+- **2026-08-03** — [July 2026 newsletter](2026-08-03-july-2026-newsletter.md) · *simonwillison · Score 4*
+- **2026-08-03** — [Don't be a meat proxy](2026-08-03-don-t-be-a-meat-proxy.md) · *hackernews · Score 4*
+- **2026-08-03** — [condense-json 1.0](2026-08-03-condense-json-1-0.md) · *simonwillison · Score 4*
 - **2026-08-02** — [Ten advances in mathematics and theoretical computer science](2026-08-02-ten-advances-in-mathematics-and-theoretical-computer-science.md) · *simonwillison · Score 4*
 - **2026-08-02** — [Slack Emoji Maker](2026-08-02-slack-emoji-maker.md) · *simonwillison · Score 4*
 - **2026-08-02** — [Seedance 2.5](2026-08-02-seedance-2-5.md) · *hackernews · Score 4*
