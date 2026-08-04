@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**730 Einträge** · Top-Quellen: heise (268) · hackernews (220) · simonwillison (126) · latentspace (63) · huggingface (22) · interconnects (8) · anthropic (8) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**740 Einträge** · Top-Quellen: heise (268) · hackernews (224) · simonwillison (129) · latentspace (65) · huggingface (22) · interconnects (9) · anthropic (8) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-04** — [The Inference Engineering Masterclass — Philip Kiely & Ali Taha, Baseten](2026-08-04-the-inference-engineering-masterclass-philip-kiely-ali-taha-.md) · *latentspace · Score 5*
+- **2026-08-04** — [Smaller, faster, safer: running Kimi and GLM at scale](2026-08-04-smaller-faster-safer-running-kimi-and-glm-at-scale.md) · *hackernews · Score 5*
+- **2026-08-04** — [Quoting Steve Yegge](2026-08-04-quoting-steve-yegge.md) · *simonwillison · Score 4*
+- **2026-08-04** — [Quoting David Crawshaw's prompt](2026-08-04-quoting-david-crawshaw-s-prompt.md) · *simonwillison · Score 4*
+- **2026-08-04** — [LLMs reward expertise](2026-08-04-llms-reward-expertise.md) · *hackernews · Score 4*
+- **2026-08-04** — [Launch HN: Hoplite (YC S26) – Effortlessly deploy cloud coding agents](2026-08-04-launch-hn-hoplite-yc-s26-effortlessly-deploy-cloud-coding-ag.md) · *hackernews · Score 4*
+- **2026-08-04** — [Introducing our Artifacts Hub and Adoption Dashboard](2026-08-04-introducing-our-artifacts-hub-and-adoption-dashboard.md) · *interconnects · Score 4*
+- **2026-08-04** — [Devtools must be open source (exe.dev)](2026-08-04-devtools-must-be-open-source-exe-dev.md) · *simonwillison · Score 4*
+- **2026-08-04** — [AirLLM 70B inference with single 4GB GPU](2026-08-04-airllm-70b-inference-with-single-4gb-gpu.md) · *hackernews · Score 4*
+- **2026-08-04** — [[AINews] Qwen 3.8 Max(2.4T) and 27B, new open weights models for Coding and Cowork](2026-08-04-ainews-qwen-3-8-max-2-4t-and-27b-new-open-weights-models-for.md) · *latentspace · Score 5*
 - **2026-08-03** — [Latest open artifacts (#23): Laguna S2.1, Inkling, & Kimi K3 show the utility of open models on the Pareto frontier](2026-08-03-latest-open-artifacts-23-laguna-s2-1-inkling-kimi-k3-show-th.md) · *interconnects · Score 4*
 - **2026-08-03** — [July 2026 newsletter](2026-08-03-july-2026-newsletter.md) · *simonwillison · Score 4*
 - **2026-08-03** — [Don't be a meat proxy](2026-08-03-don-t-be-a-meat-proxy.md) · *hackernews · Score 4*
