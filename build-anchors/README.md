@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**740 Einträge** · Top-Quellen: heise (268) · hackernews (224) · simonwillison (129) · latentspace (65) · huggingface (22) · interconnects (9) · anthropic (8) · golem (7) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**750 Einträge** · Top-Quellen: heise (268) · hackernews (228) · simonwillison (133) · latentspace (66) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-05** — [Rust-lang/rust is adopting an LLM policy](2026-08-05-rust-lang-rust-is-adopting-an-llm-policy.md) · *hackernews · Score 4*
+- **2026-08-05** — [PipeNetwork/minimax-h3-mlx](2026-08-05-pipenetwork-minimax-h3-mlx.md) · *simonwillison · Score 4*
+- **2026-08-05** — [Pi's Minimalism Is Its Advantage](2026-08-05-pi-s-minimalism-is-its-advantage.md) · *hackernews · Score 4*
+- **2026-08-05** — [New release of LLM adds support for reasoning traces, OpenAI Responses, server-side tools, and smarter logging](2026-08-05-new-release-of-llm-adds-support-for-reasoning-traces-openai-.md) · *simonwillison · Score 5*
+- **2026-08-05** — [llm-anthropic 0.26](2026-08-05-llm-anthropic-0-26.md) · *simonwillison · Score 5*
+- **2026-08-05** — [llm 0.32](2026-08-05-llm-0-32.md) · *simonwillison · Score 4*
+- **2026-08-05** — [(g+) Artificial Intelligence: Inside Google's $200bn Wall Street finance machine for Anthropic](2026-08-05-g-artificial-intelligence-inside-google-s-200bn-wall-street-.md) · *golem · Score 4*
+- **2026-08-05** — [Flowise is shutting down](2026-08-05-flowise-is-shutting-down.md) · *hackernews · Score 4*
+- **2026-08-05** — [An SLM trained on $8 ESP32-S3](2026-08-05-an-slm-trained-on-8-esp32-s3.md) · *hackernews · Score 4*
+- **2026-08-05** — [[AINews] Megakernels are so dead and so back](2026-08-05-ainews-megakernels-are-so-dead-and-so-back.md) · *latentspace · Score 4*
 - **2026-08-04** — [The Inference Engineering Masterclass — Philip Kiely & Ali Taha, Baseten](2026-08-04-the-inference-engineering-masterclass-philip-kiely-ali-taha-.md) · *latentspace · Score 5*
 - **2026-08-04** — [Smaller, faster, safer: running Kimi and GLM at scale](2026-08-04-smaller-faster-safer-running-kimi-and-glm-at-scale.md) · *hackernews · Score 5*
 - **2026-08-04** — [Quoting Steve Yegge](2026-08-04-quoting-steve-yegge.md) · *simonwillison · Score 4*
