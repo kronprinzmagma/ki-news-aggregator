@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**750 Einträge** · Top-Quellen: heise (268) · hackernews (228) · simonwillison (133) · latentspace (66) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**756 Einträge** · Top-Quellen: heise (268) · hackernews (228) · simonwillison (137) · latentspace (68) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-06** — [Unpacking ChatGPT Work: the Agent for a Billion Users](2026-08-06-unpacking-chatgpt-work-the-agent-for-a-billion-users.md) · *latentspace · Score 4*
+- **2026-08-06** — [One-shotting a Raccoon Heist game using Claude Fable 5](2026-08-06-one-shotting-a-raccoon-heist-game-using-claude-fable-5.md) · *simonwillison · Score 4*
+- **2026-08-06** — [Introducing Muse Code and Muse Spark 1.2](2026-08-06-introducing-muse-code-and-muse-spark-1-2.md) · *simonwillison · Score 4*
+- **2026-08-06** — [Incident Report: unsanctioned agent behaviour during cyber testing](2026-08-06-incident-report-unsanctioned-agent-behaviour-during-cyber-te.md) · *simonwillison · Score 5*
+- **2026-08-06** — [condense-json 1.1](2026-08-06-condense-json-1-1.md) · *simonwillison · Score 4*
+- **2026-08-06** — [[AINews] Jeff, Sanjay, Oriol, and Quoc depart DeepMind; Demis to Chair; Koray to SVP — what is going on at GDM???](2026-08-06-ainews-jeff-sanjay-oriol-and-quoc-depart-deepmind-demis-to-c.md) · *latentspace · Score 4*
 - **2026-08-05** — [Rust-lang/rust is adopting an LLM policy](2026-08-05-rust-lang-rust-is-adopting-an-llm-policy.md) · *hackernews · Score 4*
 - **2026-08-05** — [PipeNetwork/minimax-h3-mlx](2026-08-05-pipenetwork-minimax-h3-mlx.md) · *simonwillison · Score 4*
 - **2026-08-05** — [Pi's Minimalism Is Its Advantage](2026-08-05-pi-s-minimalism-is-its-advantage.md) · *hackernews · Score 4*
