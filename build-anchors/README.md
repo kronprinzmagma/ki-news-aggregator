@@ -2,10 +2,40 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**756 Einträge** · Top-Quellen: heise (268) · hackernews (228) · simonwillison (137) · latentspace (68) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**786 Einträge** · Top-Quellen: heise (288) · hackernews (231) · simonwillison (142) · latentspace (70) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-08** — [X-62A-Kampfjet erledigt autonom 27 KI-gesteuerte Abfangmanöver](2026-08-08-x-62a-kampfjet-erledigt-autonom-27-ki-gesteuerte-abfangmanov.md) · *heise · Score 4*
+- **2026-08-08** — [Weitere KI-Attacke: Modell schleust Schwachstelle ein und manipuliert Menschen](2026-08-08-weitere-ki-attacke-modell-schleust-schwachstelle-ein-und-man.md) · *heise · Score 4*
+- **2026-08-08** — [Trumps neuer KI-Prüfrahmen: Offene Modelle bleiben verschont](2026-08-08-trumps-neuer-ki-prufrahmen-offene-modelle-bleiben-verschont.md) · *heise · Score 4*
+- **2026-08-08** — [Third-party cyber evaluations involving OpenAI models](2026-08-08-third-party-cyber-evaluations-involving-openai-models.md) · *simonwillison · Score 4*
+- **2026-08-08** — [The Tokenpocalypse Is Here: Companies Are Scrambling To Stop Spending So Much on AI](2026-08-08-the-tokenpocalypse-is-here-companies-are-scrambling-to-stop-.md) · *simonwillison · Score 4*
+- **2026-08-08** — [Suno: KI-Musikdienst will erzeugte Songs mit Wasserzeichen kennzeichnen](2026-08-08-suno-ki-musikdienst-will-erzeugte-songs-mit-wasserzeichen-ke.md) · *heise · Score 4*
+- **2026-08-08** — [Stanford und Arc Institute: KI entwirft lebensfähige Bakteriophagen](2026-08-08-stanford-und-arc-institute-ki-entwirft-lebensfahige-bakterio.md) · *heise · Score 4*
+- **2026-08-08** — [Snap verbannt KI-Videos aus Snapchat Spotlight](2026-08-08-snap-verbannt-ki-videos-aus-snapchat-spotlight.md) · *heise · Score 4*
+- **2026-08-08** — [Oracle bans AI-generated code from OpenJDK](2026-08-08-oracle-bans-ai-generated-code-from-openjdk.md) · *hackernews · Score 4*
+- **2026-08-08** — [Now we have a timeline of the OpenAI accidental attack against Hugging Face](2026-08-08-now-we-have-a-timeline-of-the-openai-accidental-attack-again.md) · *simonwillison · Score 5*
+- **2026-08-08** — [Nächste große China-KI: TikTok-Mutter ByteDance trainiert Riesenmodell](2026-08-08-nachste-grosse-china-ki-tiktok-mutter-bytedance-trainiert-ri.md) · *heise · Score 4*
+- **2026-08-08** — [Muse Code: Metas Antwort auf Coding-Agenten von OpenAI und Anthropic](2026-08-08-muse-code-metas-antwort-auf-coding-agenten-von-openai-und-an.md) · *heise · Score 4*
+- **2026-08-08** — [Moonlight & Mayhem (Raccoon Heist by Codex + GPT-5.6 Sol Ultra)](2026-08-08-moonlight-mayhem-raccoon-heist-by-codex-gpt-5-6-sol-ultra.md) · *simonwillison · Score 4*
+- **2026-08-08** — [Mistral veröffentlicht Modell mit neuer Technik für Sicherheitsklassifikationen](2026-08-08-mistral-veroffentlicht-modell-mit-neuer-technik-fur-sicherhe.md) · *heise · Score 4*
+- **2026-08-08** — [Mehr als COBOL zu Java: Googles KI-Plan für Mainframes](2026-08-08-mehr-als-cobol-zu-java-googles-ki-plan-fur-mainframes.md) · *heise · Score 4*
+- **2026-08-08** — [Managing AI Coding Costs at Scale](2026-08-08-managing-ai-coding-costs-at-scale.md) · *hackernews · Score 5*
+- **2026-08-08** — [M365 Copilot: Domain Exclusion angekündigt – und sofort zurückgezogen](2026-08-08-m365-copilot-domain-exclusion-angekundigt-und-sofort-zuruckg.md) · *heise · Score 4*
+- **2026-08-08** — [Kitesurf: Agent-first browser that runs in V8 isolates](2026-08-08-kitesurf-agent-first-browser-that-runs-in-v8-isolates.md) · *hackernews · Score 5*
+- **2026-08-08** — [Jetzt offiziell: Anthropic entwickelt eigene KI-Chips](2026-08-08-jetzt-offiziell-anthropic-entwickelt-eigene-ki-chips.md) · *heise · Score 4*
+- **2026-08-08** — [In zweiter Instanz: Perplexitys Agenten dürfen vorerst weiter auf Amazon shoppen](2026-08-08-in-zweiter-instanz-perplexitys-agenten-durfen-vorerst-weiter.md) · *heise · Score 4*
+- **2026-08-08** — [heise+ | KI-Detektor im Praxistest: Warum auf Pangram 4.0 kein Verlass ist](2026-08-08-heise-ki-detektor-im-praxistest-warum-auf-pangram-4-0-kein-v.md) · *heise · Score 4*
+- **2026-08-08** — [Der Google Assistant auf Mobilgeräten wird im September endgültig abgeschaltet](2026-08-08-der-google-assistant-auf-mobilgeraten-wird-im-september-endg.md) · *heise · Score 4*
+- **2026-08-08** — [Das Internet gehört bald den Bots – meint Cloudflare](2026-08-08-das-internet-gehort-bald-den-bots-meint-cloudflare.md) · *heise · Score 4*
+- **2026-08-08** — [Cloudflare OS: Arbeitsumgebung für KI-Agenten in Unternehmen](2026-08-08-cloudflare-os-arbeitsumgebung-fur-ki-agenten-in-unternehmen.md) · *heise · Score 4*
+- **2026-08-08** — [ChatGPT knackt Milliardenmarke und hebt Chat-Limit für Gratisnutzer auf](2026-08-08-chatgpt-knackt-milliardenmarke-und-hebt-chat-limit-fur-grati.md) · *heise · Score 4*
+- **2026-08-08** — [Bericht: USA planen Importverbot für chinesische Technik in KI-Rechenzentren](2026-08-08-bericht-usa-planen-importverbot-fur-chinesische-technik-in-k.md) · *heise · Score 4*
+- **2026-08-08** — [Auch KI von Meta hackte sich in eine andere Firma](2026-08-08-auch-ki-von-meta-hackte-sich-in-eine-andere-firma.md) · *heise · Score 4*
+- **2026-08-08** — [An AI model from Meta also hacked another company during testing](2026-08-08-an-ai-model-from-meta-also-hacked-another-company-during-tes.md) · *simonwillison · Score 4*
+- **2026-08-08** — [[AINews] Zawinski's Law of MultiAgents](2026-08-08-ainews-zawinski-s-law-of-multiagents.md) · *latentspace · Score 4*
+- **2026-08-08** — [[AINews] AMD buys Taalas](2026-08-08-ainews-amd-buys-taalas.md) · *latentspace · Score 4*
 - **2026-08-06** — [Unpacking ChatGPT Work: the Agent for a Billion Users](2026-08-06-unpacking-chatgpt-work-the-agent-for-a-billion-users.md) · *latentspace · Score 4*
 - **2026-08-06** — [One-shotting a Raccoon Heist game using Claude Fable 5](2026-08-06-one-shotting-a-raccoon-heist-game-using-claude-fable-5.md) · *simonwillison · Score 4*
 - **2026-08-06** — [Introducing Muse Code and Muse Spark 1.2](2026-08-06-introducing-muse-code-and-muse-spark-1-2.md) · *simonwillison · Score 4*
