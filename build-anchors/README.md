@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**786 Einträge** · Top-Quellen: heise (288) · hackernews (231) · simonwillison (142) · latentspace (70) · huggingface (22) · interconnects (9) · golem (8) · anthropic (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**794 Einträge** · Top-Quellen: heise (290) · hackernews (235) · simonwillison (143) · latentspace (70) · huggingface (22) · anthropic (9) · interconnects (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-09** — [Shopify replaced Redis with MySQL for inventory reservations–and it scaled](2026-08-09-shopify-replaced-redis-with-mysql-for-inventory-reservations.md) · *hackernews · Score 4*
+- **2026-08-09** — [OpenAI tritt bei Arbeit an neuem KI-Modell auf die Bremse](2026-08-09-openai-tritt-bei-arbeit-an-neuem-ki-modell-auf-die-bremse.md) · *heise · Score 4*
+- **2026-08-09** — [Improving Fable 5's biology safeguards](2026-08-09-improving-fable-5-s-biology-safeguards.md) · *anthropic · Score 4*
+- **2026-08-09** — [Illinois Just Told Every Operating System to Start Reporting Your Kid's Age](2026-08-09-illinois-just-told-every-operating-system-to-start-reporting.md) · *hackernews · Score 4*
+- **2026-08-09** — [Fastmail offers EU data region](2026-08-09-fastmail-offers-eu-data-region.md) · *hackernews · Score 4*
+- **2026-08-09** — [ChatGPT starts blocking direct requests to copy an author's style](2026-08-09-chatgpt-starts-blocking-direct-requests-to-copy-an-author-s-.md) · *hackernews · Score 4*
+- **2026-08-09** — [Auto mode is now the default in Claude Code for Pro, Max, and Team plans](2026-08-09-auto-mode-is-now-the-default-in-claude-code-for-pro-max-and-.md) · *simonwillison · Score 4*
+- **2026-08-09** — [Amazon plant gigantisches Gaskraftwerk für neues KI-Rechenzentrum](2026-08-09-amazon-plant-gigantisches-gaskraftwerk-fur-neues-ki-rechenze.md) · *heise · Score 4*
 - **2026-08-08** — [X-62A-Kampfjet erledigt autonom 27 KI-gesteuerte Abfangmanöver](2026-08-08-x-62a-kampfjet-erledigt-autonom-27-ki-gesteuerte-abfangmanov.md) · *heise · Score 4*
 - **2026-08-08** — [Weitere KI-Attacke: Modell schleust Schwachstelle ein und manipuliert Menschen](2026-08-08-weitere-ki-attacke-modell-schleust-schwachstelle-ein-und-man.md) · *heise · Score 4*
 - **2026-08-08** — [Trumps neuer KI-Prüfrahmen: Offene Modelle bleiben verschont](2026-08-08-trumps-neuer-ki-prufrahmen-offene-modelle-bleiben-verschont.md) · *heise · Score 4*
