@@ -2,10 +2,11 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**794 Einträge** · Top-Quellen: heise (290) · hackernews (235) · simonwillison (143) · latentspace (70) · huggingface (22) · anthropic (9) · interconnects (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**795 Einträge** · Top-Quellen: heise (290) · hackernews (236) · simonwillison (143) · latentspace (70) · huggingface (22) · anthropic (9) · interconnects (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-10** — [OpenChamber: An Agentic Development Environment](2026-08-10-openchamber-an-agentic-development-environment.md) · *hackernews · Score 4*
 - **2026-08-09** — [Shopify replaced Redis with MySQL for inventory reservations–and it scaled](2026-08-09-shopify-replaced-redis-with-mysql-for-inventory-reservations.md) · *hackernews · Score 4*
 - **2026-08-09** — [OpenAI tritt bei Arbeit an neuem KI-Modell auf die Bremse](2026-08-09-openai-tritt-bei-arbeit-an-neuem-ki-modell-auf-die-bremse.md) · *heise · Score 4*
 - **2026-08-09** — [Improving Fable 5's biology safeguards](2026-08-09-improving-fable-5-s-biology-safeguards.md) · *anthropic · Score 4*
