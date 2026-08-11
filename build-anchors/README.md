@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**795 Einträge** · Top-Quellen: heise (290) · hackernews (236) · simonwillison (143) · latentspace (70) · huggingface (22) · anthropic (9) · interconnects (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**802 Einträge** · Top-Quellen: heise (290) · hackernews (239) · simonwillison (146) · latentspace (70) · huggingface (22) · interconnects (10) · anthropic (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-11** — [SQLite compressed text-history prototypes](2026-08-11-sqlite-compressed-text-history-prototypes.md) · *simonwillison · Score 4*
+- **2026-08-11** — [Rust SIMD on the GPU](2026-08-11-rust-simd-on-the-gpu.md) · *hackernews · Score 4*
+- **2026-08-11** — [Launch HN: Stoa Markets (YC S26) – A Marketplace for GPUs and AI Servers](2026-08-11-launch-hn-stoa-markets-yc-s26-a-marketplace-for-gpus-and-ai-.md) · *hackernews · Score 4*
+- **2026-08-11** — [Introducing Muse Glimmer](2026-08-11-introducing-muse-glimmer.md) · *simonwillison · Score 4*
+- **2026-08-11** — [H3-metal – Native MiniMax-H3 inference for Apple Silicon](2026-08-11-h3-metal-native-minimax-h3-inference-for-apple-silicon.md) · *hackernews · Score 4*
+- **2026-08-11** — [GitHub Models is now retired](2026-08-11-github-models-is-now-retired.md) · *simonwillison · Score 4*
+- **2026-08-11** — [5 useful things you'll learn in my new post-training textbook (shipping now!)](2026-08-11-5-useful-things-you-ll-learn-in-my-new-post-training-textboo.md) · *interconnects · Score 4*
 - **2026-08-10** — [OpenChamber: An Agentic Development Environment](2026-08-10-openchamber-an-agentic-development-environment.md) · *hackernews · Score 4*
 - **2026-08-09** — [Shopify replaced Redis with MySQL for inventory reservations–and it scaled](2026-08-09-shopify-replaced-redis-with-mysql-for-inventory-reservations.md) · *hackernews · Score 4*
 - **2026-08-09** — [OpenAI tritt bei Arbeit an neuem KI-Modell auf die Bremse](2026-08-09-openai-tritt-bei-arbeit-an-neuem-ki-modell-auf-die-bremse.md) · *heise · Score 4*
