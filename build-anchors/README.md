@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**802 Einträge** · Top-Quellen: heise (290) · hackernews (239) · simonwillison (146) · latentspace (70) · huggingface (22) · interconnects (10) · anthropic (9) · golem (8) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**810 Einträge** · Top-Quellen: heise (291) · hackernews (242) · simonwillison (147) · latentspace (72) · huggingface (22) · interconnects (10) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-12** — [Time Magazine zeigt KI-Bots separate Markdown-Seiten mit eingebetteten Anzeigen](2026-08-12-time-magazine-zeigt-ki-bots-separate-markdown-seiten-mit-ein.md) · *heise · Score 4*
+- **2026-08-12** — [There are no lossless transformations of natural-language text](2026-08-12-there-are-no-lossless-transformations-of-natural-language-te.md) · *simonwillison · Score 4*
+- **2026-08-12** — [The Human Is the Loop](2026-08-12-the-human-is-the-loop.md) · *hackernews · Score 4*
+- **2026-08-12** — [🔬The BioAI Phase Shift - Matthew McPartlon & Neil Patil, Chai Discovery](2026-08-12-the-bioai-phase-shift-matthew-mcpartlon-neil-patil-chai-disc.md) · *latentspace · Score 4*
+- **2026-08-12** — [Nvidia Nemotron 3.5 Lightning and NeMo Switchyard](2026-08-12-nvidia-nemotron-3-5-lightning-and-nemo-switchyard.md) · *hackernews · Score 4*
+- **2026-08-12** — [Musik-Streaming: Spotify markiert KI-Ersteller mit neuem Persona-Label](2026-08-12-musik-streaming-spotify-markiert-ki-ersteller-mit-neuem-pers.md) · *golem · Score 4*
+- **2026-08-12** — [Go is an ideal language for AI-assisted software engineering](2026-08-12-go-is-an-ideal-language-for-ai-assisted-software-engineering.md) · *hackernews · Score 4*
+- **2026-08-12** — [[AINews] Muse Glimmer and Spark: Open Weights return Personal Superintelligence promise](2026-08-12-ainews-muse-glimmer-and-spark-open-weights-return-personal-s.md) · *latentspace · Score 4*
 - **2026-08-11** — [SQLite compressed text-history prototypes](2026-08-11-sqlite-compressed-text-history-prototypes.md) · *simonwillison · Score 4*
 - **2026-08-11** — [Rust SIMD on the GPU](2026-08-11-rust-simd-on-the-gpu.md) · *hackernews · Score 4*
 - **2026-08-11** — [Launch HN: Stoa Markets (YC S26) – A Marketplace for GPUs and AI Servers](2026-08-11-launch-hn-stoa-markets-yc-s26-a-marketplace-for-gpus-and-ai-.md) · *hackernews · Score 4*
