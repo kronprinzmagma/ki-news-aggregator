@@ -2,10 +2,42 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**810 Einträge** · Top-Quellen: heise (291) · hackernews (242) · simonwillison (147) · latentspace (72) · huggingface (22) · interconnects (10) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**842 Einträge** · Top-Quellen: heise (310) · hackernews (248) · simonwillison (150) · latentspace (74) · huggingface (23) · interconnects (11) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-13** — [Twitch-Streams trainieren KI: \"Wenn das Opt-in wäre, würde es niemand machen\"](2026-08-13-twitch-streams-trainieren-ki-wenn-das-opt-in-ware-wurde-es-n.md) · *heise · Score 4*
+- **2026-08-13** — [Thinking of ACE? We Can Do It with Fewer Tokens](2026-08-13-thinking-of-ace-we-can-do-it-with-fewer-tokens.md) · *huggingface · Score 4*
+- **2026-08-13** — [Tailscale traces database corruption to 16y/O SQLite WAL-reset bug](2026-08-13-tailscale-traces-database-corruption-to-16y-o-sqlite-wal-res.md) · *hackernews · Score 4*
+- **2026-08-13** — [Spotify: Wer nicht existiert, wird nicht mehr empfohlen](2026-08-13-spotify-wer-nicht-existiert-wird-nicht-mehr-empfohlen.md) · *heise · Score 4*
+- **2026-08-13** — [Rekord für Google-Dienst: Gemini erreicht eine Milliarde monatliche Nutzer](2026-08-13-rekord-fur-google-dienst-gemini-erreicht-eine-milliarde-mona.md) · *heise · Score 4*
+- **2026-08-13** — [Qwen-KI für Apple Intelligence: Leak stellt Anbindung in Aussicht](2026-08-13-qwen-ki-fur-apple-intelligence-leak-stellt-anbindung-in-auss.md) · *heise · Score 4*
+- **2026-08-13** — [Quoting Florian Herrengt](2026-08-13-quoting-florian-herrengt.md) · *simonwillison · Score 4*
+- **2026-08-13** — [OpenAI führt GPT-5.6-Cyber ein und weitet Cybersecurity-Programm aus](2026-08-13-openai-fuhrt-gpt-5-6-cyber-ein-und-weitet-cybersecurity-prog.md) · *heise · Score 4*
+- **2026-08-13** — [Nemotron 3.5 Lightning: Nvidias offenes 30B-MoE-Modell für KI-Agenten](2026-08-13-nemotron-3-5-lightning-nvidias-offenes-30b-moe-modell-fur-ki.md) · *heise · Score 4*
+- **2026-08-13** — [MIT-Studenten konstruieren Jet-Triebwerk mit KI innerhalb eines Monats](2026-08-13-mit-studenten-konstruieren-jet-triebwerk-mit-ki-innerhalb-ei.md) · *heise · Score 4*
+- **2026-08-13** — [Mistrals große Wette auf Europas KI-Infrastruktur](2026-08-13-mistrals-grosse-wette-auf-europas-ki-infrastruktur.md) · *heise · Score 4*
+- **2026-08-13** — [KI-Update kompakt: Muse Glimmer, Zero-Days, KI-Denkprozesse, Jarvis-Wettbewerb](2026-08-13-ki-update-kompakt-muse-glimmer-zero-days-ki-denkprozesse-jar.md) · *heise · Score 4*
+- **2026-08-13** — [KI-Einsatz: Viele Start-ups verzichten auf Neueinstellungen](2026-08-13-ki-einsatz-viele-start-ups-verzichten-auf-neueinstellungen.md) · *heise · Score 4*
+- **2026-08-13** — [KI-Brillen: Strafanzeige gegen Meta, Ray-Ban und Optiker](2026-08-13-ki-brillen-strafanzeige-gegen-meta-ray-ban-und-optiker.md) · *heise · Score 4*
+- **2026-08-13** — [KI-Agent hackt Fitnessstudio: Wie sich Claude Zugang zu Kursen verschaffte](2026-08-13-ki-agent-hackt-fitnessstudio-wie-sich-claude-zugang-zu-kurse.md) · *heise · Score 4*
+- **2026-08-13** — [Keine Chance für Schummler: Claude bekommt jetzt ein unsichtbares Wasserzeichen](2026-08-13-keine-chance-fur-schummler-claude-bekommt-jetzt-ein-unsichtb.md) · *heise · Score 4*
+- **2026-08-13** — [Indiens Notenbank: Kreditunwürdige Menschen sollen Dank KI doch Geld bekommen](2026-08-13-indiens-notenbank-kreditunwurdige-menschen-sollen-dank-ki-do.md) · *heise · Score 4*
+- **2026-08-13** — [I wrote an AI textbook — how long until AI can do it better?](2026-08-13-i-wrote-an-ai-textbook-how-long-until-ai-can-do-it-better.md) · *interconnects · Score 4*
+- **2026-08-13** — [HTML over WebSockets: real-time SPAs with barely any JavaScript](2026-08-13-html-over-websockets-real-time-spas-with-barely-any-javascri.md) · *hackernews · Score 4*
+- **2026-08-13** — [Grok 4.6](2026-08-13-grok-4-6.md) · *hackernews · Score 4*
+- **2026-08-13** — [Donnerstag: FlightAware-Absage der Kalshi-Klage, Mistral als KI- & Server-Dienst](2026-08-13-donnerstag-flightaware-absage-der-kalshi-klage-mistral-als-k.md) · *heise · Score 4*
+- **2026-08-13** — [Delta](2026-08-13-delta.md) · *hackernews · Score 4*
+- **2026-08-13** — [DeepSeek V4 Pro 0813 (on OpenRouter)](2026-08-13-deepseek-v4-pro-0813-on-openrouter.md) · *simonwillison · Score 4*
+- **2026-08-13** — [Claude Code fragt künftig seltener: „Darf ich das?“](2026-08-13-claude-code-fragt-kunftig-seltener-darf-ich-das.md) · *heise · Score 5*
+- **2026-08-13** — [ChatGPT im Gerichtssaal: Hessische Richter kopieren erkennbar KI-Quellen](2026-08-13-chatgpt-im-gerichtssaal-hessische-richter-kopieren-erkennbar.md) · *heise · Score 4*
+- **2026-08-13** — [Celld: Self-hosted, distributed Durable Objects](2026-08-13-celld-self-hosted-distributed-durable-objects.md) · *hackernews · Score 4*
+- **2026-08-13** — [Bundesregierung nutzt KI als Arbeitswerkzeug ohne Kennzeichnungspflicht](2026-08-13-bundesregierung-nutzt-ki-als-arbeitswerkzeug-ohne-kennzeichn.md) · *heise · Score 4*
+- **2026-08-13** — [Build Wide, Ship Narrow](2026-08-13-build-wide-ship-narrow.md) · *hackernews · Score 4*
+- **2026-08-13** — [Architektur-Schwachstelle bei GPT-5, Claude und Gemini aufgedeckt](2026-08-13-architektur-schwachstelle-bei-gpt-5-claude-und-gemini-aufged.md) · *heise · Score 5*
+- **2026-08-13** — [alchemy-utils 0.1a0](2026-08-13-alchemy-utils-0-1a0.md) · *simonwillison · Score 4*
+- **2026-08-13** — [[AINews] SpaceXAI Grok 4.6 and Grok @Bot](2026-08-13-ainews-spacexai-grok-4-6-and-grok-bot.md) · *latentspace · Score 4*
+- **2026-08-13** — [[AINews] How to steal a Reasoning Trace](2026-08-13-ainews-how-to-steal-a-reasoning-trace.md) · *latentspace · Score 5*
 - **2026-08-12** — [Time Magazine zeigt KI-Bots separate Markdown-Seiten mit eingebetteten Anzeigen](2026-08-12-time-magazine-zeigt-ki-bots-separate-markdown-seiten-mit-ein.md) · *heise · Score 4*
 - **2026-08-12** — [There are no lossless transformations of natural-language text](2026-08-12-there-are-no-lossless-transformations-of-natural-language-te.md) · *simonwillison · Score 4*
 - **2026-08-12** — [The Human Is the Loop](2026-08-12-the-human-is-the-loop.md) · *hackernews · Score 4*
