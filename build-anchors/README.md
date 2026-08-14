@@ -2,10 +2,12 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**842 Einträge** · Top-Quellen: heise (310) · hackernews (248) · simonwillison (150) · latentspace (74) · huggingface (23) · interconnects (11) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**844 Einträge** · Top-Quellen: heise (310) · hackernews (248) · simonwillison (152) · latentspace (74) · huggingface (23) · interconnects (11) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-14** — [Stealing Reasoning Traces from Proprietary LLM APIs](2026-08-14-stealing-reasoning-traces-from-proprietary-llm-apis.md) · *simonwillison · Score 4*
+- **2026-08-14** — [llm-gemini 0.33](2026-08-14-llm-gemini-0-33.md) · *simonwillison · Score 4*
 - **2026-08-13** — [Twitch-Streams trainieren KI: \"Wenn das Opt-in wäre, würde es niemand machen\"](2026-08-13-twitch-streams-trainieren-ki-wenn-das-opt-in-ware-wurde-es-n.md) · *heise · Score 4*
 - **2026-08-13** — [Thinking of ACE? We Can Do It with Fewer Tokens](2026-08-13-thinking-of-ace-we-can-do-it-with-fewer-tokens.md) · *huggingface · Score 4*
 - **2026-08-13** — [Tailscale traces database corruption to 16y/O SQLite WAL-reset bug](2026-08-13-tailscale-traces-database-corruption-to-16y-o-sqlite-wal-res.md) · *hackernews · Score 4*
