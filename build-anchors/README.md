@@ -2,10 +2,23 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**844 Einträge** · Top-Quellen: heise (310) · hackernews (248) · simonwillison (152) · latentspace (74) · huggingface (23) · interconnects (11) · golem (9) · anthropic (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**857 Einträge** · Top-Quellen: heise (317) · hackernews (251) · simonwillison (153) · latentspace (74) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
 
 ## Liste
 
+- **2026-08-15** — [Why does Opus 5 feel worse to work with?](2026-08-15-why-does-opus-5-feel-worse-to-work-with.md) · *hackernews · Score 5*
+- **2026-08-15** — [Taiwan bestätigt KI-gestützten Cyberangriff auf Behörden](2026-08-15-taiwan-bestatigt-ki-gestutzten-cyberangriff-auf-behorden.md) · *heise · Score 4*
+- **2026-08-15** — [Neue KI-Modelle: Gemini 3.7 Flash und DeepSeek V4-Pro im Vergleich](2026-08-15-neue-ki-modelle-gemini-3-7-flash-und-deepseek-v4-pro-im-verg.md) · *heise · Score 4*
+- **2026-08-15** — [KI treibt IT-Transformation an, doch Projekte scheitern oft](2026-08-15-ki-treibt-it-transformation-an-doch-projekte-scheitern-oft.md) · *heise · Score 4*
+- **2026-08-15** — [Introducing Toast 1](2026-08-15-introducing-toast-1.md) · *hackernews · Score 4*
+- **2026-08-15** — [Ich bin jetzt KI-Musiker (und hasse es) | c't 3003](2026-08-15-ich-bin-jetzt-ki-musiker-und-hasse-es-c-t-3003.md) · *heise · Score 4*
+- **2026-08-15** — [How Claude’s text watermark works](2026-08-15-how-claude-s-text-watermark-works.md) · *anthropic · Score 4*
+- **2026-08-15** — [Google is making private AI practical with homomorphic encryption](2026-08-15-google-is-making-private-ai-practical-with-homomorphic-encry.md) · *hackernews · Score 4*
+- **2026-08-15** — [GLM-5.3: How Chinese labs keep stride with the frontier](2026-08-15-glm-5-3-how-chinese-labs-keep-stride-with-the-frontier.md) · *interconnects · Score 4*
+- **2026-08-15** — [Eigenes KI-Modell für China von Apple mit Hilfe von Alibaba](2026-08-15-eigenes-ki-modell-fur-china-von-apple-mit-hilfe-von-alibaba.md) · *heise · Score 4*
+- **2026-08-15** — [Don't classify. Hallucinate!](2026-08-15-don-t-classify-hallucinate.md) · *simonwillison · Score 4*
+- **2026-08-15** — [Claude: Nutzer äußern wegen des neuen Wasserzeichens Kritik an Anthropic](2026-08-15-claude-nutzer-aussern-wegen-des-neuen-wasserzeichens-kritik-.md) · *heise · Score 4*
+- **2026-08-15** — [Apple erwägt, Verlagen Inhalte für Siri AI abzukaufen](2026-08-15-apple-erwagt-verlagen-inhalte-fur-siri-ai-abzukaufen.md) · *heise · Score 4*
 - **2026-08-14** — [Stealing Reasoning Traces from Proprietary LLM APIs](2026-08-14-stealing-reasoning-traces-from-proprietary-llm-apis.md) · *simonwillison · Score 4*
 - **2026-08-14** — [llm-gemini 0.33](2026-08-14-llm-gemini-0-33.md) · *simonwillison · Score 4*
 - **2026-08-13** — [Twitch-Streams trainieren KI: \"Wenn das Opt-in wäre, würde es niemand machen\"](2026-08-13-twitch-streams-trainieren-ki-wenn-das-opt-in-ware-wurde-es-n.md) · *heise · Score 4*
