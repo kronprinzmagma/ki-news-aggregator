@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**857 Einträge** · Top-Quellen: heise (317) · hackernews (251) · simonwillison (153) · latentspace (74) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · lastweekinai (3) · venturebeat (3) · aheadofai (2)
+**865 Einträge** · Top-Quellen: heise (317) · hackernews (256) · simonwillison (154) · latentspace (75) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-16** — [Software Engineering fundamentals matter more](2026-08-16-software-engineering-fundamentals-matter-more.md) · *hackernews · Score 4*
+- **2026-08-16** — [React for Agents: Astro Creator Brings Hooks to his Meta-Harness, Flue](2026-08-16-react-for-agents-astro-creator-brings-hooks-to-his-meta-harn.md) · *latentspace · Score 5*
+- **2026-08-16** — [ProofRun – a local verification receipt for AI coding agents](2026-08-16-proofrun-a-local-verification-receipt-for-ai-coding-agents.md) · *hackernews · Score 4*
+- **2026-08-16** — [Patterns and problems in emerging multi-agent systems](2026-08-16-patterns-and-problems-in-emerging-multi-agent-systems.md) · *hackernews · Score 4*
+- **2026-08-16** — [CORS Chat](2026-08-16-cors-chat.md) · *simonwillison · Score 4*
+- **2026-08-16** — [Building an AI Text Detector From Scratch](2026-08-16-building-an-ai-text-detector-from-scratch.md) · *aheadofai · Score 4*
+- **2026-08-16** — [Big Pickle on SWE Atlas – Codebase QnA](2026-08-16-big-pickle-on-swe-atlas-codebase-qna.md) · *hackernews · Score 4*
+- **2026-08-16** — [21,000 MCP servers exposed: the protocol reaches a security inflection point](2026-08-16-21-000-mcp-servers-exposed-the-protocol-reaches-a-security-i.md) · *hackernews · Score 4*
 - **2026-08-15** — [Why does Opus 5 feel worse to work with?](2026-08-15-why-does-opus-5-feel-worse-to-work-with.md) · *hackernews · Score 5*
 - **2026-08-15** — [Taiwan bestätigt KI-gestützten Cyberangriff auf Behörden](2026-08-15-taiwan-bestatigt-ki-gestutzten-cyberangriff-auf-behorden.md) · *heise · Score 4*
 - **2026-08-15** — [Neue KI-Modelle: Gemini 3.7 Flash und DeepSeek V4-Pro im Vergleich](2026-08-15-neue-ki-modelle-gemini-3-7-flash-und-deepseek-v4-pro-im-verg.md) · *heise · Score 4*
