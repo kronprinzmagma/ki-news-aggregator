@@ -1,0 +1,45 @@
+# Dependabot — einziges Dependency-Tooling in diesem Repo (Entscheid 2026-08-14).
+#
+# Achtung, Sonderfall: Dies war das EINZIGE Repo, in dem die Renovate-App
+# tatsaechlich Zugriff hatte und lief. Mit der Standardisierung auf Dependabot
+# wurde renovate.json auch hier entfernt. Wenn wieder Renovate-PRs auftauchen,
+# ist die App noch installiert und muss auf GitHub fuer dieses Repo entzogen
+# werden (Settings -> GitHub Apps -> Renovate).
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Zurich"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      npm-minor-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      timezone: "Europe/Zurich"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      actions:
+        patterns:
+          - "*"
