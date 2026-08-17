@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**865 Einträge** · Top-Quellen: heise (317) · hackernews (256) · simonwillison (154) · latentspace (75) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**876 Einträge** · Top-Quellen: heise (324) · hackernews (259) · simonwillison (155) · latentspace (75) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-17** — [WTF: Anthropic sagt, sein Wasserzeichen funktioniere. Vielleicht. Manchmal.](2026-08-17-wtf-anthropic-sagt-sein-wasserzeichen-funktioniere-vielleich.md) · *heise · Score 4*
+- **2026-08-17** — [The AI Credit Resale Economy](2026-08-17-the-ai-credit-resale-economy.md) · *hackernews · Score 4*
+- **2026-08-17** — [Stripe will reportedly acquire OpenRouter for $7B+](2026-08-17-stripe-will-reportedly-acquire-openrouter-for-7b.md) · *hackernews · Score 4*
+- **2026-08-17** — [Qwen 3.8 27B is excellent, but it defaults to wildly overthinking things](2026-08-17-qwen-3-8-27b-is-excellent-but-it-defaults-to-wildly-overthin.md) · *simonwillison · Score 4*
+- **2026-08-17** — [MathCode, Mathematical Coding Agent](2026-08-17-mathcode-mathematical-coding-agent.md) · *hackernews · Score 4*
+- **2026-08-17** — [Marktwert in Monaten vervierfacht: OpenRouter angeblich vor Übernahme](2026-08-17-marktwert-in-monaten-vervierfacht-openrouter-angeblich-vor-u.md) · *heise · Score 4*
+- **2026-08-17** — [Lokale KI ausprobiert: Das leistet Qwen3.8-27B](2026-08-17-lokale-ki-ausprobiert-das-leistet-qwen3-8-27b.md) · *heise · Score 4*
+- **2026-08-17** — [KI macht Teams schneller – leider auch bei schlechten Prozessen](2026-08-17-ki-macht-teams-schneller-leider-auch-bei-schlechten-prozesse.md) · *heise · Score 4*
+- **2026-08-17** — [KI-Agenten bezahlen APIs automatisch mit Cloudflare Wallets](2026-08-17-ki-agenten-bezahlen-apis-automatisch-mit-cloudflare-wallets.md) · *heise · Score 4*
+- **2026-08-17** — [heise+ | KI verrät die Stimmung im Hörbuch schon vor dem Reinhören](2026-08-17-heise-ki-verrat-die-stimmung-im-horbuch-schon-vor-dem-reinho.md) · *heise · Score 4*
+- **2026-08-17** — [ChatGPT zeigt mehr Nutzern Werbeeinblendungen](2026-08-17-chatgpt-zeigt-mehr-nutzern-werbeeinblendungen.md) · *heise · Score 4*
 - **2026-08-16** — [Software Engineering fundamentals matter more](2026-08-16-software-engineering-fundamentals-matter-more.md) · *hackernews · Score 4*
 - **2026-08-16** — [React for Agents: Astro Creator Brings Hooks to his Meta-Harness, Flue](2026-08-16-react-for-agents-astro-creator-brings-hooks-to-his-meta-harn.md) · *latentspace · Score 5*
 - **2026-08-16** — [ProofRun – a local verification receipt for AI coding agents](2026-08-16-proofrun-a-local-verification-receipt-for-ai-coding-agents.md) · *hackernews · Score 4*
