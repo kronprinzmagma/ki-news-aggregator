@@ -7,7 +7,7 @@
     "test": "node --test"
   },
   "dependencies": {
-    "better-sqlite3": "^12.10.0",
+    "better-sqlite3": "^13.0.3",
     "zod": "^4.4.3"
   }
 }
