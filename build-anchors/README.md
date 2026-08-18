@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**876 Einträge** · Top-Quellen: heise (324) · hackernews (259) · simonwillison (155) · latentspace (75) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**882 Einträge** · Top-Quellen: heise (324) · hackernews (262) · simonwillison (157) · latentspace (76) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-18** — [We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility](2026-08-18-we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai.md) · *simonwillison · Score 4*
+- **2026-08-18** — [The Benchmarkpocalypse](2026-08-18-the-benchmarkpocalypse.md) · *hackernews · Score 4*
+- **2026-08-18** — [Qwen 3.8 27B scores 52 on the Artificial Analysis Intelligence Index](2026-08-18-qwen-3-8-27b-scores-52-on-the-artificial-analysis-intelligen.md) · *simonwillison · Score 4*
+- **2026-08-18** — [India has paved the way for charging merchants a fee on UPI transactions](2026-08-18-india-has-paved-the-way-for-charging-merchants-a-fee-on-upi-.md) · *hackernews · Score 4*
+- **2026-08-18** — [[AINews] Stripe buys OpenRouter for $7B](2026-08-18-ainews-stripe-buys-openrouter-for-7b.md) · *latentspace · Score 5*
+- **2026-08-18** — [AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira](2026-08-18-ai-generated-github-copilot-autofix-allowed-compromise-of-sn.md) · *hackernews · Score 5*
 - **2026-08-17** — [WTF: Anthropic sagt, sein Wasserzeichen funktioniere. Vielleicht. Manchmal.](2026-08-17-wtf-anthropic-sagt-sein-wasserzeichen-funktioniere-vielleich.md) · *heise · Score 4*
 - **2026-08-17** — [The AI Credit Resale Economy](2026-08-17-the-ai-credit-resale-economy.md) · *hackernews · Score 4*
 - **2026-08-17** — [Stripe will reportedly acquire OpenRouter for $7B+](2026-08-17-stripe-will-reportedly-acquire-openrouter-for-7b.md) · *hackernews · Score 4*
