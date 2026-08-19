@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**882 Einträge** · Top-Quellen: heise (324) · hackernews (262) · simonwillison (157) · latentspace (76) · huggingface (23) · interconnects (12) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**893 Einträge** · Top-Quellen: heise (325) · hackernews (268) · simonwillison (158) · latentspace (77) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-19** — [Turbovec – Google's TurboQuant for vector search in Rust](2026-08-19-turbovec-google-s-turboquant-for-vector-search-in-rust.md) · *hackernews · Score 5*
+- **2026-08-19** — [Teaching Everyone to Fish for Tokens](2026-08-19-teaching-everyone-to-fish-for-tokens.md) · *interconnects · Score 4*
+- **2026-08-19** — [Palomar: A registry of Lean verified mathematics](2026-08-19-palomar-a-registry-of-lean-verified-mathematics.md) · *hackernews · Score 4*
+- **2026-08-19** — [Mojo🔥 is now open source](2026-08-19-mojo-is-now-open-source.md) · *simonwillison · Score 4*
+- **2026-08-19** — [KI prüft KI: OpenAI verspricht nach Angriff auf Hugging Face mehr Kontrolle](2026-08-19-ki-pruft-ki-openai-verspricht-nach-angriff-auf-hugging-face-.md) · *heise · Score 4*
+- **2026-08-19** — [How Much Memory Does Your Agent Actually Need?](2026-08-19-how-much-memory-does-your-agent-actually-need.md) · *huggingface · Score 5*
+- **2026-08-19** — [Frontier Model Cost and Open-Weights Popularity is Driving Demand for Model Routing](2026-08-19-frontier-model-cost-and-open-weights-popularity-is-driving-d.md) · *latentspace · Score 4*
+- **2026-08-19** — [Cerebras CS-4](2026-08-19-cerebras-cs-4.md) · *hackernews · Score 4*
+- **2026-08-19** — [Apple announces changes for apps in the European Union](2026-08-19-apple-announces-changes-for-apps-in-the-european-union.md) · *hackernews · Score 4*
+- **2026-08-19** — [AI usage patterns in software teams](2026-08-19-ai-usage-patterns-in-software-teams.md) · *hackernews · Score 4*
+- **2026-08-19** — [A 3D fruit fly on macOS desktop powered by the real FlyWire connectome](2026-08-19-a-3d-fruit-fly-on-macos-desktop-powered-by-the-real-flywire-.md) · *hackernews · Score 4*
 - **2026-08-18** — [We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility](2026-08-18-we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai.md) · *simonwillison · Score 4*
 - **2026-08-18** — [The Benchmarkpocalypse](2026-08-18-the-benchmarkpocalypse.md) · *hackernews · Score 4*
 - **2026-08-18** — [Qwen 3.8 27B scores 52 on the Artificial Analysis Intelligence Index](2026-08-18-qwen-3-8-27b-scores-52-on-the-artificial-analysis-intelligen.md) · *simonwillison · Score 4*
