@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**893 Einträge** · Top-Quellen: heise (325) · hackernews (268) · simonwillison (158) · latentspace (77) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**904 Einträge** · Top-Quellen: heise (325) · hackernews (275) · simonwillison (160) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-20** — [Unsloth Dynamic 3.0 GGUFs](2026-08-20-unsloth-dynamic-3-0-ggufs.md) · *hackernews · Score 4*
+- **2026-08-20** — [smolmachines / smolvm as a sandbox for untrusted Python & JavaScript](2026-08-20-smolmachines-smolvm-as-a-sandbox-for-untrusted-python-javasc.md) · *simonwillison · Score 4*
+- **2026-08-20** — [Ornith-1.5: From Self-Scaffolding to Self-Improvement](2026-08-20-ornith-1-5-from-self-scaffolding-to-self-improvement.md) · *hackernews · Score 4*
+- **2026-08-20** — [OpenRouter is joining Stripe](2026-08-20-openrouter-is-joining-stripe.md) · *hackernews · Score 4*
+- **2026-08-20** — [Launch HN: OneCLI (YC S26) – OSS sandboxed agent harness for teams](2026-08-20-launch-hn-onecli-yc-s26-oss-sandboxed-agent-harness-for-team.md) · *hackernews · Score 4*
+- **2026-08-20** — [Feature Request: Support AGENTS.md](2026-08-20-feature-request-support-agents-md.md) · *hackernews · Score 4*
+- **2026-08-20** — [Extensible Software in the age of LLMs](2026-08-20-extensible-software-in-the-age-of-llms.md) · *hackernews · Score 4*
+- **2026-08-20** — [DFlash 2: Keep Drafting Parallel](2026-08-20-dflash-2-keep-drafting-parallel.md) · *hackernews · Score 4*
+- **2026-08-20** — [Conceptual integrity and counting lines of code](2026-08-20-conceptual-integrity-and-counting-lines-of-code.md) · *simonwillison · Score 4*
+- **2026-08-20** — [[AINews] Memory prices up 500% in 12 months](2026-08-20-ainews-memory-prices-up-500-in-12-months.md) · *latentspace · Score 4*
+- **2026-08-20** — [[AINews] Death of Params: Z.ai CEO Jie Tang on GLM 5.3 and the new Post-training Scaling Law](2026-08-20-ainews-death-of-params-z-ai-ceo-jie-tang-on-glm-5-3-and-the-.md) · *latentspace · Score 5*
 - **2026-08-19** — [Turbovec – Google's TurboQuant for vector search in Rust](2026-08-19-turbovec-google-s-turboquant-for-vector-search-in-rust.md) · *hackernews · Score 5*
 - **2026-08-19** — [Teaching Everyone to Fish for Tokens](2026-08-19-teaching-everyone-to-fish-for-tokens.md) · *interconnects · Score 4*
 - **2026-08-19** — [Palomar: A registry of Lean verified mathematics](2026-08-19-palomar-a-registry-of-lean-verified-mathematics.md) · *hackernews · Score 4*
