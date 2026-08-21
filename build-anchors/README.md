@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**904 Einträge** · Top-Quellen: heise (325) · hackernews (275) · simonwillison (160) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**911 Einträge** · Top-Quellen: heise (325) · hackernews (279) · simonwillison (163) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-21** — [There's no such thing as a small software team anymore](2026-08-21-there-s-no-such-thing-as-a-small-software-team-anymore.md) · *hackernews · Score 4*
+- **2026-08-21** — [Quoting Jeremy Morrell](2026-08-21-quoting-jeremy-morrell.md) · *simonwillison · Score 4*
+- **2026-08-21** — [Malicious Rust crate Arrayref runs a build-time payload](2026-08-21-malicious-rust-crate-arrayref-runs-a-build-time-payload.md) · *hackernews · Score 4*
+- **2026-08-21** — [Every Model Cheats](2026-08-21-every-model-cheats.md) · *hackernews · Score 5*
+- **2026-08-21** — [Codex on AWS bedrock bug causing 10x charges](2026-08-21-codex-on-aws-bedrock-bug-causing-10x-charges.md) · *hackernews · Score 4*
+- **2026-08-21** — [ChatGPT search now uses the site:operator at scale](2026-08-21-chatgpt-search-now-uses-the-site-operator-at-scale.md) · *simonwillison · Score 4*
+- **2026-08-21** — [A shot-scraper-style JSON API on Bun 1.4's new Bun.WebView](2026-08-21-a-shot-scraper-style-json-api-on-bun-1-4-s-new-bun-webview.md) · *simonwillison · Score 4*
 - **2026-08-20** — [Unsloth Dynamic 3.0 GGUFs](2026-08-20-unsloth-dynamic-3-0-ggufs.md) · *hackernews · Score 4*
 - **2026-08-20** — [smolmachines / smolvm as a sandbox for untrusted Python & JavaScript](2026-08-20-smolmachines-smolvm-as-a-sandbox-for-untrusted-python-javasc.md) · *simonwillison · Score 4*
 - **2026-08-20** — [Ornith-1.5: From Self-Scaffolding to Self-Improvement](2026-08-20-ornith-1-5-from-self-scaffolding-to-self-improvement.md) · *hackernews · Score 4*
