@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**911 Einträge** · Top-Quellen: heise (325) · hackernews (279) · simonwillison (163) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**915 Einträge** · Top-Quellen: heise (326) · hackernews (280) · simonwillison (165) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-22** — [Stop Making TUIs](2026-08-22-stop-making-tuis.md) · *simonwillison · Score 4*
+- **2026-08-22** — [llm-openrouter 0.7](2026-08-22-llm-openrouter-0-7.md) · *simonwillison · Score 4*
+- **2026-08-22** — [KI-Update Deep-Dive: Die Zukunft menschlicher Synchronstimmen ist bedroht](2026-08-22-ki-update-deep-dive-die-zukunft-menschlicher-synchronstimmen.md) · *heise · Score 4*
+- **2026-08-22** — [How we made a text-to-speech model respond in sub-50 ms](2026-08-22-how-we-made-a-text-to-speech-model-respond-in-sub-50-ms.md) · *hackernews · Score 5*
 - **2026-08-21** — [There's no such thing as a small software team anymore](2026-08-21-there-s-no-such-thing-as-a-small-software-team-anymore.md) · *hackernews · Score 4*
 - **2026-08-21** — [Quoting Jeremy Morrell](2026-08-21-quoting-jeremy-morrell.md) · *simonwillison · Score 4*
 - **2026-08-21** — [Malicious Rust crate Arrayref runs a build-time payload](2026-08-21-malicious-rust-crate-arrayref-runs-a-build-time-payload.md) · *hackernews · Score 4*
