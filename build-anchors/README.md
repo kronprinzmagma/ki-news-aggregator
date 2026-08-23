@@ -2,10 +2,26 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**915 Einträge** · Top-Quellen: heise (326) · hackernews (280) · simonwillison (165) · latentspace (79) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**931 Einträge** · Top-Quellen: heise (338) · hackernews (281) · simonwillison (167) · latentspace (80) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-23** — [Wasserzeichen für Anthropics Claude: Coder entwickelt Tool zum Entfernen](2026-08-23-wasserzeichen-fur-anthropics-claude-coder-entwickelt-tool-zu.md) · *heise · Score 4*
+- **2026-08-23** — [Smarte Brille RayNeo iO setzt auf Knochenschall und KI-Projektion](2026-08-23-smarte-brille-rayneo-io-setzt-auf-knochenschall-und-ki-proje.md) · *heise · Score 4*
+- **2026-08-23** — [Niedersächsischer Datenschutzbeauftragter rügt Polizeigesetz](2026-08-23-niedersachsischer-datenschutzbeauftragter-rugt-polizeigesetz.md) · *heise · Score 4*
+- **2026-08-23** — [New MCP Roadmap](2026-08-23-new-mcp-roadmap.md) · *hackernews · Score 4*
+- **2026-08-23** — [More than just code review](2026-08-23-more-than-just-code-review.md) · *simonwillison · Score 4*
+- **2026-08-23** — [Microsoft behebt Sicherheitslücke: KI-Assistent Copilot verrät Schwachstellen](2026-08-23-microsoft-behebt-sicherheitslucke-ki-assistent-copilot-verra.md) · *heise · Score 4*
+- **2026-08-23** — [llm 0.33](2026-08-23-llm-0-33.md) · *simonwillison · Score 4*
+- **2026-08-23** — [LinkedIn-Nutzer melden etliche Beiträge als KI-Slop](2026-08-23-linkedin-nutzer-melden-etliche-beitrage-als-ki-slop.md) · *heise · Score 4*
+- **2026-08-23** — [KI-Aufsicht: Niedersachsen warnt vor Entmachtung der Datenschutzbehörden](2026-08-23-ki-aufsicht-niedersachsen-warnt-vor-entmachtung-der-datensch.md) · *heise · Score 4*
+- **2026-08-23** — [Flugbegleiter gehen gegen Verkauf von Daten insolventer Fluglinie an Google vor](2026-08-23-flugbegleiter-gehen-gegen-verkauf-von-daten-insolventer-flug.md) · *heise · Score 4*
+- **2026-08-23** — [Doctolibs Opt-out in Frankreich: Blaupause für Gesundheitsdaten in Deutschland?](2026-08-23-doctolibs-opt-out-in-frankreich-blaupause-fur-gesundheitsdat.md) · *heise · Score 4*
+- **2026-08-23** — [Carlsen vs. OpenAI: ChatGPT erstellt ganze Druckvorlagen für „NEINhorn“-Plagiate](2026-08-23-carlsen-vs-openai-chatgpt-erstellt-ganze-druckvorlagen-fur-n.md) · *heise · Score 4*
+- **2026-08-23** — [Apple TV: Apple Intelligence kommt – via Siri AI](2026-08-23-apple-tv-apple-intelligence-kommt-via-siri-ai.md) · *heise · Score 4*
+- **2026-08-23** — [[AINews] 10% worse, 100x cheaper, 10000x faster: Why Simulation is taking over](2026-08-23-ainews-10-worse-100x-cheaper-10000x-faster-why-simulation-is.md) · *latentspace · Score 4*
+- **2026-08-23** — [AI für SRE: Warum Automatisierung das Ziel ist und KI nur ein Werkzeug](2026-08-23-ai-fur-sre-warum-automatisierung-das-ziel-ist-und-ki-nur-ein.md) · *heise · Score 4*
+- **2026-08-23** — [7,5 Milliarden US-Dollar für Gründer und Investoren: Stripe übernimmt OpenRouter](2026-08-23-7-5-milliarden-us-dollar-fur-grunder-und-investoren-stripe-u.md) · *heise · Score 4*
 - **2026-08-22** — [Stop Making TUIs](2026-08-22-stop-making-tuis.md) · *simonwillison · Score 4*
 - **2026-08-22** — [llm-openrouter 0.7](2026-08-22-llm-openrouter-0-7.md) · *simonwillison · Score 4*
 - **2026-08-22** — [KI-Update Deep-Dive: Die Zukunft menschlicher Synchronstimmen ist bedroht](2026-08-22-ki-update-deep-dive-die-zukunft-menschlicher-synchronstimmen.md) · *heise · Score 4*
