@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**931 Einträge** · Top-Quellen: heise (338) · hackernews (281) · simonwillison (167) · latentspace (80) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (3) · lastweekinai (3) · venturebeat (3)
+**941 Einträge** · Top-Quellen: heise (341) · hackernews (284) · simonwillison (169) · latentspace (81) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-24** — [What Is a Harness?](2026-08-24-what-is-a-harness.md) · *hackernews · Score 4*
+- **2026-08-24** — [The Evolution of the Agent Harness](2026-08-24-the-evolution-of-the-agent-harness.md) · *latentspace · Score 4*
+- **2026-08-24** — [Quoting Drew Breunig](2026-08-24-quoting-drew-breunig.md) · *simonwillison · Score 4*
+- **2026-08-24** — [Nvidia erhöht Preise der KI-Server für Rechenzentren wohl um über 15 Prozent](2026-08-24-nvidia-erhoht-preise-der-ki-server-fur-rechenzentren-wohl-um.md) · *heise · Score 4*
+- **2026-08-24** — [I gave Qwen 3.8 27B a reverse-engineering job and it finished in 30 minutes](2026-08-24-i-gave-qwen-3-8-27b-a-reverse-engineering-job-and-it-finishe.md) · *hackernews · Score 4*
+- **2026-08-24** — [How Claude Watermarks AI-Generated Text](2026-08-24-how-claude-watermarks-ai-generated-text.md) · *aheadofai · Score 4*
+- **2026-08-24** — [Firmendaten: Ausgaben für KI-Modell Fable 5 von Anthropic stagnieren längst](2026-08-24-firmendaten-ausgaben-fur-ki-modell-fable-5-von-anthropic-sta.md) · *heise · Score 4*
+- **2026-08-24** — [Fast and Hard Code](2026-08-24-fast-and-hard-code.md) · *hackernews · Score 4*
+- **2026-08-24** — [Bühl als Pioniermodell: Bosch setzt auf Roboter aus dem Schwarzwald](2026-08-24-buhl-als-pioniermodell-bosch-setzt-auf-roboter-aus-dem-schwa.md) · *heise · Score 4*
+- **2026-08-24** — [Anthropic’s best AI model struggles to attract users as cheaper tools thrive](2026-08-24-anthropic-s-best-ai-model-struggles-to-attract-users-as-chea.md) · *simonwillison · Score 4*
 - **2026-08-23** — [Wasserzeichen für Anthropics Claude: Coder entwickelt Tool zum Entfernen](2026-08-23-wasserzeichen-fur-anthropics-claude-coder-entwickelt-tool-zu.md) · *heise · Score 4*
 - **2026-08-23** — [Smarte Brille RayNeo iO setzt auf Knochenschall und KI-Projektion](2026-08-23-smarte-brille-rayneo-io-setzt-auf-knochenschall-und-ki-proje.md) · *heise · Score 4*
 - **2026-08-23** — [Niedersächsischer Datenschutzbeauftragter rügt Polizeigesetz](2026-08-23-niedersachsischer-datenschutzbeauftragter-rugt-polizeigesetz.md) · *heise · Score 4*
