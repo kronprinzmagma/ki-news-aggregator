@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**941 Einträge** · Top-Quellen: heise (341) · hackernews (284) · simonwillison (169) · latentspace (81) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
+**945 Einträge** · Top-Quellen: heise (341) · hackernews (287) · simonwillison (169) · latentspace (82) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-25** — [Thomson Reuters Launches Its Own Frontier Model](2026-08-25-thomson-reuters-launches-its-own-frontier-model.md) · *hackernews · Score 4*
+- **2026-08-25** — [LLMs could control their host machines by exploiting inference engines](2026-08-25-llms-could-control-their-host-machines-by-exploiting-inferen.md) · *hackernews · Score 4*
+- **2026-08-25** — [Headlong: A Microharness for Persistent Agents](2026-08-25-headlong-a-microharness-for-persistent-agents.md) · *hackernews · Score 4*
+- **2026-08-25** — [[AINews] Andrew Ng gets into AI Engineering](2026-08-25-ainews-andrew-ng-gets-into-ai-engineering.md) · *latentspace · Score 4*
 - **2026-08-24** — [What Is a Harness?](2026-08-24-what-is-a-harness.md) · *hackernews · Score 4*
 - **2026-08-24** — [The Evolution of the Agent Harness](2026-08-24-the-evolution-of-the-agent-harness.md) · *latentspace · Score 4*
 - **2026-08-24** — [Quoting Drew Breunig](2026-08-24-quoting-drew-breunig.md) · *simonwillison · Score 4*
