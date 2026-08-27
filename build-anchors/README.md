@@ -2,10 +2,29 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**945 Einträge** · Top-Quellen: heise (341) · hackernews (287) · simonwillison (169) · latentspace (82) · huggingface (24) · interconnects (13) · anthropic (10) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
+**964 Einträge** · Top-Quellen: heise (351) · hackernews (288) · simonwillison (172) · latentspace (86) · huggingface (24) · interconnects (13) · anthropic (11) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
 
 ## Liste
 
+- **2026-08-27** — [🔬“We have foundation models for language, not for physics” — Anima Anandkumar, Bren Professor of Computing](2026-08-27-we-have-foundation-models-for-language-not-for-physics-anima.md) · *latentspace · Score 4*
+- **2026-08-27** — [„Spider-Man“-Artbook zeigt den mutmaßlichen KI-Einsatz bei Marvel](2026-08-27-spider-man-artbook-zeigt-den-mutmasslichen-ki-einsatz-bei-ma.md) · *heise · Score 4*
+- **2026-08-27** — [Salesforce: Claude wird zur neuen CRM-Oberfläche](2026-08-27-salesforce-claude-wird-zur-neuen-crm-oberflache.md) · *heise · Score 5*
+- **2026-08-27** — [Qwen3.8-Flash-Next](2026-08-27-qwen3-8-flash-next.md) · *simonwillison · Score 4*
+- **2026-08-27** — [Quoting Paul Dix](2026-08-27-quoting-paul-dix.md) · *simonwillison · Score 4*
+- **2026-08-27** — [Perplexity bringt KI-Agent mit „Portable Computer“ auf lokale Nvidia-Hardware](2026-08-27-perplexity-bringt-ki-agent-mit-portable-computer-auf-lokale-.md) · *heise · Score 4*
+- **2026-08-27** — [Ox Alpha: Was hinter dem Hype um das anonyme KI-Modell steckt](2026-08-27-ox-alpha-was-hinter-dem-hype-um-das-anonyme-ki-modell-steckt.md) · *heise · Score 4*
+- **2026-08-27** — [Needle: The benchmark your search engine can't memorize](2026-08-27-needle-the-benchmark-your-search-engine-can-t-memorize.md) · *hackernews · Score 4*
+- **2026-08-27** — [McKinsey: Vertrauen der Firmen in KI wächst schnell, die Gewinne daraus nicht](2026-08-27-mckinsey-vertrauen-der-firmen-in-ki-wachst-schnell-die-gewin.md) · *heise · Score 4*
+- **2026-08-27** — [Mac mini M6 und Mac Studio M5 Pro: Kopfüber in die KI-Ära | Mac & i-Podcast](2026-08-27-mac-mini-m6-und-mac-studio-m5-pro-kopfuber-in-die-ki-ara-mac.md) · *heise · Score 4*
+- **2026-08-27** — [Lovable CTO: The Future of SaaS Is Apps That Agents Can Use](2026-08-27-lovable-cto-the-future-of-saas-is-apps-that-agents-can-use.md) · *latentspace · Score 4*
+- **2026-08-27** — [llm-anthropic 0.27](2026-08-27-llm-anthropic-0-27.md) · *simonwillison · Score 4*
+- **2026-08-27** — [Für KI-Training: Großbritannien bekommt Zugriff auf Militärdaten der Ukraine](2026-08-27-fur-ki-training-grossbritannien-bekommt-zugriff-auf-militard.md) · *heise · Score 4*
+- **2026-08-27** — [Funding better evaluations of AI’s impact on wellbeing](2026-08-27-funding-better-evaluations-of-ai-s-impact-on-wellbeing.md) · *anthropic · Score 4*
+- **2026-08-27** — [ChatGPT: OpenAI bringt 5-Stunden-Limit wieder zurück – wer davon betroffen ist](2026-08-27-chatgpt-openai-bringt-5-stunden-limit-wieder-zuruck-wer-davo.md) · *heise · Score 4*
+- **2026-08-27** — [Arduino Ventuno Q kann jetzt vorbestellt werden](2026-08-27-arduino-ventuno-q-kann-jetzt-vorbestellt-werden.md) · *heise · Score 4*
+- **2026-08-27** — [Anthropic spendiert seiner KI Claude einen eigenen Browser](2026-08-27-anthropic-spendiert-seiner-ki-claude-einen-eigenen-browser.md) · *heise · Score 4*
+- **2026-08-27** — [[AINews] NVIDIA buys HuggingFace for $13B, as OpenAI publishes their HF incident retro](2026-08-27-ainews-nvidia-buys-huggingface-for-13b-as-openai-publishes-t.md) · *latentspace · Score 4*
+- **2026-08-27** — [[AINews] Hot Chips: OpenAI’s Jalapeño, Cerebras CS-5, Groq 3 LPX, Apple M6](2026-08-27-ainews-hot-chips-openai-s-jalapeno-cerebras-cs-5-groq-3-lpx-.md) · *latentspace · Score 5*
 - **2026-08-25** — [Thomson Reuters Launches Its Own Frontier Model](2026-08-25-thomson-reuters-launches-its-own-frontier-model.md) · *hackernews · Score 4*
 - **2026-08-25** — [LLMs could control their host machines by exploiting inference engines](2026-08-25-llms-could-control-their-host-machines-by-exploiting-inferen.md) · *hackernews · Score 4*
 - **2026-08-25** — [Headlong: A Microharness for Persistent Agents](2026-08-25-headlong-a-microharness-for-persistent-agents.md) · *hackernews · Score 4*
