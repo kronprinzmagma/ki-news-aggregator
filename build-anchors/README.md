@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**964 Einträge** · Top-Quellen: heise (351) · hackernews (288) · simonwillison (172) · latentspace (86) · huggingface (24) · interconnects (13) · anthropic (11) · golem (9) · aheadofai (4) · lastweekinai (3) · venturebeat (3)
+**969 Einträge** · Top-Quellen: heise (351) · hackernews (288) · simonwillison (173) · latentspace (86) · huggingface (24) · anthropic (13) · interconnects (13) · golem (9) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-08-28** — [When agents act on their own, governance has to live in the data layer](2026-08-28-when-agents-act-on-their-own-governance-has-to-live-in-the-d.md) · *venturebeat · Score 4*
+- **2026-08-28** — [Previewing the Model Hardware Standard](2026-08-28-previewing-the-model-hardware-standard.md) · *anthropic · Score 5*
+- **2026-08-28** — [Expanding our support for scientists](2026-08-28-expanding-our-support-for-scientists.md) · *anthropic · Score 4*
+- **2026-08-28** — [Enterprise AI's real risk isn't autonomous agents. It's the complexity between them.](2026-08-28-enterprise-ai-s-real-risk-isn-t-autonomous-agents-it-s-the-c.md) · *venturebeat · Score 4*
+- **2026-08-28** — [Breaking Claude Code Opus 5 Auto Mode](2026-08-28-breaking-claude-code-opus-5-auto-mode.md) · *simonwillison · Score 5*
 - **2026-08-27** — [🔬“We have foundation models for language, not for physics” — Anima Anandkumar, Bren Professor of Computing](2026-08-27-we-have-foundation-models-for-language-not-for-physics-anima.md) · *latentspace · Score 4*
 - **2026-08-27** — [„Spider-Man“-Artbook zeigt den mutmaßlichen KI-Einsatz bei Marvel](2026-08-27-spider-man-artbook-zeigt-den-mutmasslichen-ki-einsatz-bei-ma.md) · *heise · Score 4*
 - **2026-08-27** — [Salesforce: Claude wird zur neuen CRM-Oberfläche](2026-08-27-salesforce-claude-wird-zur-neuen-crm-oberflache.md) · *heise · Score 5*
