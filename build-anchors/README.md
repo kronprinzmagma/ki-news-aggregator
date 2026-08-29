@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**969 Einträge** · Top-Quellen: heise (351) · hackernews (288) · simonwillison (173) · latentspace (86) · huggingface (24) · anthropic (13) · interconnects (13) · golem (9) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**976 Einträge** · Top-Quellen: heise (351) · hackernews (292) · simonwillison (173) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-08-29** — [Samsung's Processing-in-Memory (PIM)](2026-08-29-samsung-s-processing-in-memory-pim.md) · *hackernews · Score 4*
+- **2026-08-29** — [Migrating to HTTPX2](2026-08-29-migrating-to-httpx2.md) · *hackernews · Score 4*
+- **2026-08-29** — [Just the rumour of a bug is enough to find an exploit these days](2026-08-29-just-the-rumour-of-a-bug-is-enough-to-find-an-exploit-these-.md) · *hackernews · Score 5*
+- **2026-08-29** — [I accidentally turned LLM memory into program analysis](2026-08-29-i-accidentally-turned-llm-memory-into-program-analysis.md) · *hackernews · Score 5*
+- **2026-08-29** — [Cursor: Hacker bei Cyberangriffen mittels KI-Agenten erwischt](2026-08-29-cursor-hacker-bei-cyberangriffen-mittels-ki-agenten-erwischt.md) · *golem · Score 4*
+- **2026-08-29** — [Bildbearbeitung: Adobe integriert neuen KI-Assistenten in Photoshop](2026-08-29-bildbearbeitung-adobe-integriert-neuen-ki-assistenten-in-pho.md) · *golem · Score 4*
+- **2026-08-29** — [[AINews] OpenAI shuts off Cursor](2026-08-29-ainews-openai-shuts-off-cursor.md) · *latentspace · Score 4*
 - **2026-08-28** — [When agents act on their own, governance has to live in the data layer](2026-08-28-when-agents-act-on-their-own-governance-has-to-live-in-the-d.md) · *venturebeat · Score 4*
 - **2026-08-28** — [Previewing the Model Hardware Standard](2026-08-28-previewing-the-model-hardware-standard.md) · *anthropic · Score 5*
 - **2026-08-28** — [Expanding our support for scientists](2026-08-28-expanding-our-support-for-scientists.md) · *anthropic · Score 4*
