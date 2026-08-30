@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**976 Einträge** · Top-Quellen: heise (351) · hackernews (292) · simonwillison (173) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**987 Einträge** · Top-Quellen: heise (359) · hackernews (294) · simonwillison (174) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-08-30** — [Xcena and Samsung's Near Memory Compute CXL Device](2026-08-30-xcena-and-samsung-s-near-memory-compute-cxl-device.md) · *hackernews · Score 4*
+- **2026-08-30** — [Was ich über lokale KI gelernt habe](2026-08-30-was-ich-uber-lokale-ki-gelernt-habe.md) · *heise · Score 4*
+- **2026-08-30** — [software-architektur.tv: KI als Spiegel – ein Gespräch mit Kevlin Henney](2026-08-30-software-architektur-tv-ki-als-spiegel-ein-gesprach-mit-kevl.md) · *heise · Score 4*
+- **2026-08-30** — [Shopping-App und Hotline: Apple setzt verstärkt auf KI – zunächst in den USA](2026-08-30-shopping-app-und-hotline-apple-setzt-verstarkt-auf-ki-zunach.md) · *heise · Score 4*
+- **2026-08-30** — [Nvidia's AI advantage is moving beyond the GPU](2026-08-30-nvidia-s-ai-advantage-is-moving-beyond-the-gpu.md) · *hackernews · Score 4*
+- **2026-08-30** — [Nutanix baut KI-Plattform für Agenten aus](2026-08-30-nutanix-baut-ki-plattform-fur-agenten-aus.md) · *heise · Score 4*
+- **2026-08-30** — [Massiver Umbau gekippt: Meta wollte „KI-nativ“ werden – und scheiterte](2026-08-30-massiver-umbau-gekippt-meta-wollte-ki-nativ-werden-und-schei.md) · *heise · Score 4*
+- **2026-08-30** — [Introducing Hy4 Preview](2026-08-30-introducing-hy4-preview.md) · *simonwillison · Score 4*
+- **2026-08-30** — [Hugging-Face-Angriff: OpenAI-Abschlussbericht liefert neue Erkenntnisse](2026-08-30-hugging-face-angriff-openai-abschlussbericht-liefert-neue-er.md) · *heise · Score 4*
+- **2026-08-30** — [Google erweitert Video-KI Gemini Omni Flash auf Version 1.1](2026-08-30-google-erweitert-video-ki-gemini-omni-flash-auf-version-1-1.md) · *heise · Score 4*
+- **2026-08-30** — [Anthropic vs. Pentagon: US-Regierung handelte „rechtswidrig und unbegründet“](2026-08-30-anthropic-vs-pentagon-us-regierung-handelte-rechtswidrig-und.md) · *heise · Score 4*
 - **2026-08-29** — [Samsung's Processing-in-Memory (PIM)](2026-08-29-samsung-s-processing-in-memory-pim.md) · *hackernews · Score 4*
 - **2026-08-29** — [Migrating to HTTPX2](2026-08-29-migrating-to-httpx2.md) · *hackernews · Score 4*
 - **2026-08-29** — [Just the rumour of a bug is enough to find an exploit these days](2026-08-29-just-the-rumour-of-a-bug-is-enough-to-find-an-exploit-these-.md) · *hackernews · Score 5*
