@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**987 Einträge** · Top-Quellen: heise (359) · hackernews (294) · simonwillison (174) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**997 Einträge** · Top-Quellen: heise (366) · hackernews (296) · simonwillison (175) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-08-31** — [Understanding ChatGPT Work](2026-08-31-understanding-chatgpt-work.md) · *simonwillison · Score 4*
+- **2026-08-31** — [P99 0 ms* autocomplete for 240M domain names](2026-08-31-p99-0-ms-autocomplete-for-240m-domain-names.md) · *hackernews · Score 4*
+- **2026-08-31** — [OpenAI macht Ernst mit Kommerz: Wie Werbung bei ChatGPT künftig geregelt wird](2026-08-31-openai-macht-ernst-mit-kommerz-wie-werbung-bei-chatgpt-kunft.md) · *heise · Score 4*
+- **2026-08-31** — [Nvidia DLSS 5: Modder machen KI-Gesichter in allerlei Spielen lauffähig](2026-08-31-nvidia-dlss-5-modder-machen-ki-gesichter-in-allerlei-spielen.md) · *heise · Score 4*
+- **2026-08-31** — [Neuanmeldungen für GitHub Copilot Business und Enterprise wieder erlaubt](2026-08-31-neuanmeldungen-fur-github-copilot-business-und-enterprise-wi.md) · *heise · Score 4*
+- **2026-08-31** — [Milliardenklage von Sony Music und Warner gegen Anthropic](2026-08-31-milliardenklage-von-sony-music-und-warner-gegen-anthropic.md) · *heise · Score 4*
+- **2026-08-31** — [KI-Boom beim Mac: Apple will mitmachen, hat aber Lieferprobleme](2026-08-31-ki-boom-beim-mac-apple-will-mitmachen-hat-aber-lieferproblem.md) · *heise · Score 4*
+- **2026-08-31** — [How to build a diffusion language model](2026-08-31-how-to-build-a-diffusion-language-model.md) · *hackernews · Score 4*
+- **2026-08-31** — [heise+ | Webseiten intelligent auslesen: Smarter scrapen mit Python und KI](2026-08-31-heise-webseiten-intelligent-auslesen-smarter-scrapen-mit-pyt.md) · *heise · Score 4*
+- **2026-08-31** — [Gerichtsurteil: Anthropic muss runter von der schwarzen Liste des Pentagons](2026-08-31-gerichtsurteil-anthropic-muss-runter-von-der-schwarzen-liste.md) · *heise · Score 4*
 - **2026-08-30** — [Xcena and Samsung's Near Memory Compute CXL Device](2026-08-30-xcena-and-samsung-s-near-memory-compute-cxl-device.md) · *hackernews · Score 4*
 - **2026-08-30** — [Was ich über lokale KI gelernt habe](2026-08-30-was-ich-uber-lokale-ki-gelernt-habe.md) · *heise · Score 4*
 - **2026-08-30** — [software-architektur.tv: KI als Spiegel – ein Gespräch mit Kevlin Henney](2026-08-30-software-architektur-tv-ki-als-spiegel-ein-gesprach-mit-kevl.md) · *heise · Score 4*
