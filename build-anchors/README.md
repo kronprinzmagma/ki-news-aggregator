@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**997 Einträge** · Top-Quellen: heise (366) · hackernews (296) · simonwillison (175) · latentspace (87) · huggingface (24) · anthropic (13) · interconnects (13) · golem (11) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1002 Einträge** · Top-Quellen: heise (366) · hackernews (297) · simonwillison (176) · latentspace (88) · huggingface (24) · anthropic (14) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-01** — [Suchmaschine: Google testet komplette KI-Antworten direkt in der Suche](2026-09-01-suchmaschine-google-testet-komplette-ki-antworten-direkt-in-.md) · *golem · Score 4*
+- **2026-09-01** — [Introducing wrapture](2026-09-01-introducing-wrapture.md) · *simonwillison · Score 4*
+- **2026-09-01** — [Improving our alignment and security efforts](2026-09-01-improving-our-alignment-and-security-efforts.md) · *anthropic · Score 4*
+- **2026-09-01** — [DoltLite: A SQLite fork with Git-style version control, built with 2k agent PRs](2026-09-01-doltlite-a-sqlite-fork-with-git-style-version-control-built-.md) · *hackernews · Score 4*
+- **2026-09-01** — [[AINews] Fal’s H3 Max Live breaks the infinite videogen barrier](2026-09-01-ainews-fal-s-h3-max-live-breaks-the-infinite-videogen-barrie.md) · *latentspace · Score 4*
 - **2026-08-31** — [Understanding ChatGPT Work](2026-08-31-understanding-chatgpt-work.md) · *simonwillison · Score 4*
 - **2026-08-31** — [P99 0 ms* autocomplete for 240M domain names](2026-08-31-p99-0-ms-autocomplete-for-240m-domain-names.md) · *hackernews · Score 4*
 - **2026-08-31** — [OpenAI macht Ernst mit Kommerz: Wie Werbung bei ChatGPT künftig geregelt wird](2026-08-31-openai-macht-ernst-mit-kommerz-wie-werbung-bei-chatgpt-kunft.md) · *heise · Score 4*
