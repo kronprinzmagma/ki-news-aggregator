@@ -2,10 +2,31 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1002 Einträge** · Top-Quellen: heise (366) · hackernews (297) · simonwillison (176) · latentspace (88) · huggingface (24) · anthropic (14) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1023 Einträge** · Top-Quellen: heise (378) · hackernews (299) · simonwillison (179) · latentspace (90) · huggingface (25) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-02** — [The efficient frontier of LLM inference](2026-09-02-the-efficient-frontier-of-llm-inference.md) · *hackernews · Score 4*
+- **2026-09-02** — [The creator of Jujutsu has joined ERSC](2026-09-02-the-creator-of-jujutsu-has-joined-ersc.md) · *hackernews · Score 4*
+- **2026-09-02** — [Studie zeigt: Wer KI versteht, hat mehr Angst um seinen Arbeitsplatz](2026-09-02-studie-zeigt-wer-ki-versteht-hat-mehr-angst-um-seinen-arbeit.md) · *heise · Score 4*
+- **2026-09-02** — [Quoting Rick Brewster](2026-09-02-quoting-rick-brewster.md) · *simonwillison · Score 4*
+- **2026-09-02** — [PRs NOT Welcome: How Top AI Open Source Projects Are Managing Thousands of Contributors](2026-09-02-prs-not-welcome-how-top-ai-open-source-projects-are-managing.md) · *latentspace · Score 4*
+- **2026-09-02** — [Pixel 11 Pro zuerst: Gemini hilft bei der Gerätesteuerung](2026-09-02-pixel-11-pro-zuerst-gemini-hilft-bei-der-geratesteuerung.md) · *heise · Score 4*
+- **2026-09-02** — [Pentagon startet eigene Version von ChatGPT und Grok](2026-09-02-pentagon-startet-eigene-version-von-chatgpt-und-grok.md) · *heise · Score 4*
+- **2026-09-02** — [OpenAI schätzt sein Werbegeschäft aktuell auf 1 Milliarde Jahresumsatz](2026-09-02-openai-schatzt-sein-werbegeschaft-aktuell-auf-1-milliarde-ja.md) · *heise · Score 4*
+- **2026-09-02** — [Milliardendeal: Nvidia investiert in den Chiphersteller MediaTek](2026-09-02-milliardendeal-nvidia-investiert-in-den-chiphersteller-media.md) · *heise · Score 4*
+- **2026-09-02** — [KI-Skalierung: Investitionen steigen, Erfolg bleibt aus](2026-09-02-ki-skalierung-investitionen-steigen-erfolg-bleibt-aus.md) · *heise · Score 4*
+- **2026-09-02** — [KI-Dokumentation beim Arzt: Patienten entdecken Fehler vor Ärzten](2026-09-02-ki-dokumentation-beim-arzt-patienten-entdecken-fehler-vor-ar.md) · *heise · Score 4*
+- **2026-09-02** — [Jetzt patchen! Angreifer attackieren Langflow-Instanzen mit Schadcode](2026-09-02-jetzt-patchen-angreifer-attackieren-langflow-instanzen-mit-s.md) · *heise · Score 4*
+- **2026-09-02** — [Introducing @huggingface/kernels: 200+ WebGPU Kernels for Local AI](2026-09-02-introducing-huggingface-kernels-200-webgpu-kernels-for-local.md) · *huggingface · Score 5*
+- **2026-09-02** — [DSA: EU-Kommission stuft ChatGPT als „besonders große Suchmaschine“ ein](2026-09-02-dsa-eu-kommission-stuft-chatgpt-als-besonders-grosse-suchmas.md) · *heise · Score 5*
+- **2026-09-02** — [Developing Enterprise Frontier Safeguards with our customers](2026-09-02-developing-enterprise-frontier-safeguards-with-our-customers.md) · *anthropic · Score 4*
+- **2026-09-02** — [datasette-mcp 0.2](2026-09-02-datasette-mcp-0-2.md) · *simonwillison · Score 4*
+- **2026-09-02** — [Codex bundles LibreOffice](2026-09-02-codex-bundles-libreoffice.md) · *simonwillison · Score 4*
+- **2026-09-02** — [Anthropic warnt Opfer von Infostealern](2026-09-02-anthropic-warnt-opfer-von-infostealern.md) · *heise · Score 4*
+- **2026-09-02** — [Anthropic stellt Kommunikationsstandard für Hardware vor](2026-09-02-anthropic-stellt-kommunikationsstandard-fur-hardware-vor.md) · *heise · Score 5*
+- **2026-09-02** — [Anthropic sichert sich weitere KI-Rechenleistung für 35 Milliarden Dollar](2026-09-02-anthropic-sichert-sich-weitere-ki-rechenleistung-fur-35-mill.md) · *heise · Score 4*
+- **2026-09-02** — [[AINews] Claude Fable/Mythos 5.1: new SOTA model, 75% cache price cut but 70% more output tokens](2026-09-02-ainews-claude-fable-mythos-5-1-new-sota-model-75-cache-price.md) · *latentspace · Score 5*
 - **2026-09-01** — [Suchmaschine: Google testet komplette KI-Antworten direkt in der Suche](2026-09-01-suchmaschine-google-testet-komplette-ki-antworten-direkt-in-.md) · *golem · Score 4*
 - **2026-09-01** — [Introducing wrapture](2026-09-01-introducing-wrapture.md) · *simonwillison · Score 4*
 - **2026-09-01** — [Improving our alignment and security efforts](2026-09-01-improving-our-alignment-and-security-efforts.md) · *anthropic · Score 4*
