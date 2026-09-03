@@ -2,10 +2,20 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1023 Einträge** · Top-Quellen: heise (378) · hackernews (299) · simonwillison (179) · latentspace (90) · huggingface (25) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1033 Einträge** · Top-Quellen: heise (385) · hackernews (299) · simonwillison (181) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-03** — [US-Regierung unterstützt OpenAI im Urheberrechtsstreit mit New York Times](2026-09-03-us-regierung-unterstutzt-openai-im-urheberrechtsstreit-mit-n.md) · *heise · Score 4*
+- **2026-09-03** — [Real-Time Intelligence with IBM Time Series Models on Confluent](2026-09-03-real-time-intelligence-with-ibm-time-series-models-on-conflu.md) · *huggingface · Score 4*
+- **2026-09-03** — [Patientenperspektive fehlt in vielen Studien zu medizinischer KI](2026-09-03-patientenperspektive-fehlt-in-vielen-studien-zu-medizinische.md) · *heise · Score 4*
+- **2026-09-03** — [llm-gemini 0.34](2026-09-03-llm-gemini-0-34.md) · *simonwillison · Score 4*
+- **2026-09-03** — [KI-Bildgeneratoren: Darf Laion urheberrechtlich geschützte Fotos nutzen?](2026-09-03-ki-bildgeneratoren-darf-laion-urheberrechtlich-geschutzte-fo.md) · *heise · Score 4*
+- **2026-09-03** — [„Keine freiwillige Einwilligung“: Sprecher gehen gegen Netflix-KI vor](2026-09-03-keine-freiwillige-einwilligung-sprecher-gehen-gegen-netflix-.md) · *heise · Score 4*
+- **2026-09-03** — [Jira-Alternative OpenProject 17.8 lässt KI-Assistenten ins Projektmanagement](2026-09-03-jira-alternative-openproject-17-8-lasst-ki-assistenten-ins-p.md) · *heise · Score 4*
+- **2026-09-03** — [IFA: Philips Hue startet Automatikbau per KI-Bot, bringt Backups und steuert Nanoleaf](2026-09-03-ifa-philips-hue-startet-automatikbau-per-ki-bot-bringt-backu.md) · *heise · Score 4*
+- **2026-09-03** — [Für Unternehmen: Zero Data Retention-Option für Fable](2026-09-03-fur-unternehmen-zero-data-retention-option-fur-fable.md) · *heise · Score 4*
+- **2026-09-03** — [Claude's new system prompt really doesn't want to reproduce song lyrics](2026-09-03-claude-s-new-system-prompt-really-doesn-t-want-to-reproduce-.md) · *simonwillison · Score 4*
 - **2026-09-02** — [The efficient frontier of LLM inference](2026-09-02-the-efficient-frontier-of-llm-inference.md) · *hackernews · Score 4*
 - **2026-09-02** — [The creator of Jujutsu has joined ERSC](2026-09-02-the-creator-of-jujutsu-has-joined-ersc.md) · *hackernews · Score 4*
 - **2026-09-02** — [Studie zeigt: Wer KI versteht, hat mehr Angst um seinen Arbeitsplatz](2026-09-02-studie-zeigt-wer-ki-versteht-hat-mehr-angst-um-seinen-arbeit.md) · *heise · Score 4*
