@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1033 Einträge** · Top-Quellen: heise (385) · hackernews (299) · simonwillison (181) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1042 Einträge** · Top-Quellen: heise (390) · hackernews (302) · simonwillison (182) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-04** — [Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out](2026-09-04-which-tools-do-claude-codex-and-cursor-choose-we-measured-17.md) · *hackernews · Score 5*
+- **2026-09-04** — [Nvidia übernimmt Hugging Face für 12,93 Milliarden US-Dollar](2026-09-04-nvidia-ubernimmt-hugging-face-fur-12-93-milliarden-us-dollar.md) · *heise · Score 4*
+- **2026-09-04** — [Muse Spark 1.3: Meta schließt zu Spitzenmodellen auf](2026-09-04-muse-spark-1-3-meta-schliesst-zu-spitzenmodellen-auf.md) · *heise · Score 4*
+- **2026-09-04** — [Kubermatic AI: Teure GPUs besser nutzen – auch Team-übergreifend](2026-09-04-kubermatic-ai-teure-gpus-besser-nutzen-auch-team-ubergreifen.md) · *heise · Score 4*
+- **2026-09-04** — [KI-Update kompakt: ChatGPT als Suchmaschine, MHS, OpenClaw 2.0, git-Schadcode](2026-09-04-ki-update-kompakt-chatgpt-als-suchmaschine-mhs-openclaw-2-0-.md) · *heise · Score 4*
+- **2026-09-04** — [K2 Horizon: A connected fleet of six open models](2026-09-04-k2-horizon-a-connected-fleet-of-six-open-models.md) · *hackernews · Score 4*
+- **2026-09-04** — [Grep beats LSP? Why coding agents ignore your fancier tools](2026-09-04-grep-beats-lsp-why-coding-agents-ignore-your-fancier-tools.md) · *hackernews · Score 5*
+- **2026-09-04** — [GPT‑6 Astra](2026-09-04-gpt-6-astra.md) · *simonwillison · Score 4*
+- **2026-09-04** — [Auf RTL: Per KI veränderte Folgen von „Ulrich Wetzel – Das Strafgericht“ im TV](2026-09-04-auf-rtl-per-ki-veranderte-folgen-von-ulrich-wetzel-das-straf.md) · *heise · Score 4*
 - **2026-09-03** — [US-Regierung unterstützt OpenAI im Urheberrechtsstreit mit New York Times](2026-09-03-us-regierung-unterstutzt-openai-im-urheberrechtsstreit-mit-n.md) · *heise · Score 4*
 - **2026-09-03** — [Real-Time Intelligence with IBM Time Series Models on Confluent](2026-09-03-real-time-intelligence-with-ibm-time-series-models-on-conflu.md) · *huggingface · Score 4*
 - **2026-09-03** — [Patientenperspektive fehlt in vielen Studien zu medizinischer KI](2026-09-03-patientenperspektive-fehlt-in-vielen-studien-zu-medizinische.md) · *heise · Score 4*
