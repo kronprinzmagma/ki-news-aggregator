@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1042 Einträge** · Top-Quellen: heise (390) · hackernews (302) · simonwillison (182) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1053 Einträge** · Top-Quellen: heise (396) · hackernews (306) · simonwillison (183) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-05** — [The Pelican comparison grid for Astra is pretty interesting](2026-09-05-the-pelican-comparison-grid-for-astra-is-pretty-interesting.md) · *simonwillison · Score 4*
+- **2026-09-05** — [Raus aus der Tokenfalle – mit VMware](2026-09-05-raus-aus-der-tokenfalle-mit-vmware.md) · *heise · Score 4*
+- **2026-09-05** — [Portal by Spotify cut my Claude Code token usage by 90%](2026-09-05-portal-by-spotify-cut-my-claude-code-token-usage-by-90.md) · *hackernews · Score 5*
+- **2026-09-05** — [OpenAI-Agenten streiten beim Hacken über Ethik – und machen trotzdem weiter](2026-09-05-openai-agenten-streiten-beim-hacken-uber-ethik-und-machen-tr.md) · *heise · Score 4*
+- **2026-09-05** — [Nvidia PAIR: KI-Inferenz auf Heimgeräten verteilen](2026-09-05-nvidia-pair-ki-inferenz-auf-heimgeraten-verteilen.md) · *heise · Score 4*
+- **2026-09-05** — [GPT-6 Astra in code review: Gains, privacy, and cost](2026-09-05-gpt-6-astra-in-code-review-gains-privacy-and-cost.md) · *hackernews · Score 4*
+- **2026-09-05** — [Google WeatherNext 3: KI-Wettervorhersage wird präziser und schneller](2026-09-05-google-weathernext-3-ki-wettervorhersage-wird-praziser-und-s.md) · *heise · Score 4*
+- **2026-09-05** — [Google ermöglicht KI-gestützte Sprachsteuerung in den eigenen Workspace-Apps](2026-09-05-google-ermoglicht-ki-gestutzte-sprachsteuerung-in-den-eigene.md) · *heise · Score 4*
+- **2026-09-05** — [EU-Cloudverband: Broadcom greift nach Kontrolle über die KI-Zukunft in Firmen](2026-09-05-eu-cloudverband-broadcom-greift-nach-kontrolle-uber-die-ki-z.md) · *heise · Score 4*
+- **2026-09-05** — [Artificial Analysis Intelligence Index v4.2](2026-09-05-artificial-analysis-intelligence-index-v4-2.md) · *hackernews · Score 4*
+- **2026-09-05** — [AI handles incidents, engineers lose touch with their systems](2026-09-05-ai-handles-incidents-engineers-lose-touch-with-their-systems.md) · *hackernews · Score 4*
 - **2026-09-04** — [Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out](2026-09-04-which-tools-do-claude-codex-and-cursor-choose-we-measured-17.md) · *hackernews · Score 5*
 - **2026-09-04** — [Nvidia übernimmt Hugging Face für 12,93 Milliarden US-Dollar](2026-09-04-nvidia-ubernimmt-hugging-face-fur-12-93-milliarden-us-dollar.md) · *heise · Score 4*
 - **2026-09-04** — [Muse Spark 1.3: Meta schließt zu Spitzenmodellen auf](2026-09-04-muse-spark-1-3-meta-schliesst-zu-spitzenmodellen-auf.md) · *heise · Score 4*
