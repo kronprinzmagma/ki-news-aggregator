@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1053 Einträge** · Top-Quellen: heise (396) · hackernews (306) · simonwillison (183) · latentspace (90) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1057 Einträge** · Top-Quellen: heise (396) · hackernews (307) · simonwillison (184) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-06** — [Using Blender with coding agents on macOS](2026-09-06-using-blender-with-coding-agents-on-macos.md) · *simonwillison · Score 4*
+- **2026-09-06** — [OpenClaw Power, MacBook Simplicity: Five Days With Grok Bot](2026-09-06-openclaw-power-macbook-simplicity-five-days-with-grok-bot.md) · *latentspace · Score 4*
+- **2026-09-06** — [GPT-6 Astra: an automated AI Engineer you can hire for <$6 an hour](2026-09-06-gpt-6-astra-an-automated-ai-engineer-you-can-hire-for-6-an-h.md) · *latentspace · Score 5*
+- **2026-09-06** — [AI, Tools and Transformation](2026-09-06-ai-tools-and-transformation.md) · *hackernews · Score 4*
 - **2026-09-05** — [The Pelican comparison grid for Astra is pretty interesting](2026-09-05-the-pelican-comparison-grid-for-astra-is-pretty-interesting.md) · *simonwillison · Score 4*
 - **2026-09-05** — [Raus aus der Tokenfalle – mit VMware](2026-09-05-raus-aus-der-tokenfalle-mit-vmware.md) · *heise · Score 4*
 - **2026-09-05** — [Portal by Spotify cut my Claude Code token usage by 90%](2026-09-05-portal-by-spotify-cut-my-claude-code-token-usage-by-90.md) · *hackernews · Score 5*
