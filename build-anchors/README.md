@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1057 Einträge** · Top-Quellen: heise (396) · hackernews (307) · simonwillison (184) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1062 Einträge** · Top-Quellen: heise (399) · hackernews (309) · simonwillison (184) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
 
 ## Liste
 
+- **2026-09-07** — [Speculative Decoding in vLLM on AMD GPUs](2026-09-07-speculative-decoding-in-vllm-on-amd-gpus.md) · *hackernews · Score 4*
+- **2026-09-07** — [Montag: OpenAIs selbständiger Agentenschwarm, mathematische Verifizierung per KI](2026-09-07-montag-openais-selbstandiger-agentenschwarm-mathematische-ve.md) · *heise · Score 4*
+- **2026-09-07** — [LG smart TVs caught logging audio with screen off and snooping on local devices](2026-09-07-lg-smart-tvs-caught-logging-audio-with-screen-off-and-snoopi.md) · *hackernews · Score 4*
+- **2026-09-07** — [Bericht: Großbank UBS macht KI-Kenntnisse zur Einstellungsvoraussetzung](2026-09-07-bericht-grossbank-ubs-macht-ki-kenntnisse-zur-einstellungsvo.md) · *heise · Score 4*
+- **2026-09-07** — [13 Millionen Zeilen Code: KI verifiziert Beweis von Fermats letztem Satz](2026-09-07-13-millionen-zeilen-code-ki-verifiziert-beweis-von-fermats-l.md) · *heise · Score 4*
 - **2026-09-06** — [Using Blender with coding agents on macOS](2026-09-06-using-blender-with-coding-agents-on-macos.md) · *simonwillison · Score 4*
 - **2026-09-06** — [OpenClaw Power, MacBook Simplicity: Five Days With Grok Bot](2026-09-06-openclaw-power-macbook-simplicity-five-days-with-grok-bot.md) · *latentspace · Score 4*
 - **2026-09-06** — [GPT-6 Astra: an automated AI Engineer you can hire for <$6 an hour](2026-09-06-gpt-6-astra-an-automated-ai-engineer-you-can-hire-for-6-an-h.md) · *latentspace · Score 5*
