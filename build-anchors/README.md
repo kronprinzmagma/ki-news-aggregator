@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1062 Einträge** · Top-Quellen: heise (399) · hackernews (309) · simonwillison (184) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · aheadofai (4) · lastweekinai (3)
+**1070 Einträge** · Top-Quellen: heise (401) · hackernews (313) · simonwillison (185) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · lastweekinai (4) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-08** — [Video compressor](2026-09-08-video-compressor.md) · *simonwillison · Score 4*
+- **2026-09-08** — [There's a new \"Google Jail\" for independent wikis](2026-09-08-there-s-a-new-google-jail-for-independent-wikis.md) · *hackernews · Score 4*
+- **2026-09-08** — [The VMs Powering Mobile Agents (Instinct, Claude Code)](2026-09-08-the-vms-powering-mobile-agents-instinct-claude-code.md) · *hackernews · Score 5*
+- **2026-09-08** — [Last Week in AI #343 - GPT-6, OpenAI’s agents chatted on a wiki, Fable 5.1](2026-09-08-last-week-in-ai-343-gpt-6-openai-s-agents-chatted-on-a-wiki-.md) · *lastweekinai · Score 4*
+- **2026-09-08** — [I tested 10 model/harness combinations on the same Three.js task](2026-09-08-i-tested-10-model-harness-combinations-on-the-same-three-js-.md) · *hackernews · Score 4*
+- **2026-09-08** — [How well do agents use test/verification techniques?](2026-09-08-how-well-do-agents-use-test-verification-techniques.md) · *hackernews · Score 5*
+- **2026-09-08** — [Ein Start-up entfernt Verweigerung aus KI-Modellen und verdient daran](2026-09-08-ein-start-up-entfernt-verweigerung-aus-ki-modellen-und-verdi.md) · *heise · Score 4*
+- **2026-09-08** — [Chinas KI-Entkopplung: DeepSeek setzt mit neuer Großbestellung auf Huawei](2026-09-08-chinas-ki-entkopplung-deepseek-setzt-mit-neuer-grossbestellu.md) · *heise · Score 4*
 - **2026-09-07** — [Speculative Decoding in vLLM on AMD GPUs](2026-09-07-speculative-decoding-in-vllm-on-amd-gpus.md) · *hackernews · Score 4*
 - **2026-09-07** — [Montag: OpenAIs selbständiger Agentenschwarm, mathematische Verifizierung per KI](2026-09-07-montag-openais-selbstandiger-agentenschwarm-mathematische-ve.md) · *heise · Score 4*
 - **2026-09-07** — [LG smart TVs caught logging audio with screen off and snooping on local devices](2026-09-07-lg-smart-tvs-caught-logging-audio-with-screen-off-and-snoopi.md) · *hackernews · Score 4*
