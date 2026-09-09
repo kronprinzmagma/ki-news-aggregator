@@ -2,10 +2,22 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1070 Einträge** · Top-Quellen: heise (401) · hackernews (313) · simonwillison (185) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (13) · golem (12) · venturebeat (5) · lastweekinai (4) · aheadofai (4)
+**1082 Einträge** · Top-Quellen: heise (408) · hackernews (315) · simonwillison (186) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-09** — [„WeWorm“: Zero-Click-Wurm hätte alle Konten von WeChat übernehmen können](2026-09-09-weworm-zero-click-wurm-hatte-alle-konten-von-wechat-ubernehm.md) · *heise · Score 4*
+- **2026-09-09** — [Urheberrechtsklage: Zwei US-Zeitungen fordern Vernichtung von KI-Modellen](2026-09-09-urheberrechtsklage-zwei-us-zeitungen-fordern-vernichtung-von.md) · *heise · Score 4*
+- **2026-09-09** — [Navier-Stokes: Möglicher KI-Durchbruch wird von Kontroverse überschattet](2026-09-09-navier-stokes-moglicher-ki-durchbruch-wird-von-kontroverse-u.md) · *heise · Score 4*
+- **2026-09-09** — [Meta Platforms bringt persönlichen KI-Agenten „Muse“ für alltägliche Aufgaben](2026-09-09-meta-platforms-bringt-personlichen-ki-agenten-muse-fur-allta.md) · *heise · Score 4*
+- **2026-09-09** — [LWiAI Podcast #256 - Fable 5.1, Astra Tease, Gemini 3.8 Flash](2026-09-09-lwiai-podcast-256-fable-5-1-astra-tease-gemini-3-8-flash.md) · *lastweekinai · Score 4*
+- **2026-09-09** — [LLMs im Browser – Teil 1: Eine neue KI-Runtime](2026-09-09-llms-im-browser-teil-1-eine-neue-ki-runtime.md) · *heise · Score 4*
+- **2026-09-09** — [Latest open artifacts (#24): Motif-3, GLM-5.3, Hy4-preview and open model licenses](2026-09-09-latest-open-artifacts-24-motif-3-glm-5-3-hy4-preview-and-ope.md) · *interconnects · Score 4*
+- **2026-09-09** — [Kubernetes-Orchestrierung für das KI-Modelltraining mit Karmada](2026-09-09-kubernetes-orchestrierung-fur-das-ki-modelltraining-mit-karm.md) · *heise · Score 4*
+- **2026-09-09** — [Introducing ChatGPT Images 2.5](2026-09-09-introducing-chatgpt-images-2-5.md) · *simonwillison · Score 4*
+- **2026-09-09** — [I-have-ADHD: A skill to stop coding agents from burying the answer](2026-09-09-i-have-adhd-a-skill-to-stop-coding-agents-from-burying-the-a.md) · *hackernews · Score 4*
+- **2026-09-09** — [Benchmarking Qwen3.8 27B quantizations: 4-bit holds up, 1-bit collapses](2026-09-09-benchmarking-qwen3-8-27b-quantizations-4-bit-holds-up-1-bit-.md) · *hackernews · Score 5*
+- **2026-09-09** — [Agent Tia: TeamViewer-KI soll IT-Probleme eigenständig beheben](2026-09-09-agent-tia-teamviewer-ki-soll-it-probleme-eigenstandig-behebe.md) · *heise · Score 4*
 - **2026-09-08** — [Video compressor](2026-09-08-video-compressor.md) · *simonwillison · Score 4*
 - **2026-09-08** — [There's a new \"Google Jail\" for independent wikis](2026-09-08-there-s-a-new-google-jail-for-independent-wikis.md) · *hackernews · Score 4*
 - **2026-09-08** — [The VMs Powering Mobile Agents (Instinct, Claude Code)](2026-09-08-the-vms-powering-mobile-agents-instinct-claude-code.md) · *hackernews · Score 5*
