@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1082 Einträge** · Top-Quellen: heise (408) · hackernews (315) · simonwillison (186) · latentspace (92) · huggingface (26) · anthropic (15) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1088 Einträge** · Top-Quellen: heise (408) · hackernews (319) · simonwillison (187) · latentspace (93) · huggingface (26) · anthropic (15) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-10** — [Training a 3.8B LLM to 0.384 CORE for $998](2026-09-10-training-a-3-8b-llm-to-0-384-core-for-998.md) · *hackernews · Score 4*
+- **2026-09-10** — [Qwen 3.8 follows GPT-5.5 Pro reasoning prefills](2026-09-10-qwen-3-8-follows-gpt-5-5-pro-reasoning-prefills.md) · *hackernews · Score 4*
+- **2026-09-10** — [Factoring RSA 260](2026-09-10-factoring-rsa-260.md) · *hackernews · Score 4*
+- **2026-09-10** — [Desert Ant Labs: local, fast models that run on device](2026-09-10-desert-ant-labs-local-fast-models-that-run-on-device.md) · *hackernews · Score 5*
+- **2026-09-10** — [Creepy crawlies](2026-09-10-creepy-crawlies.md) · *simonwillison · Score 4*
+- **2026-09-10** — [[AINews] not much happened today](2026-09-10-ainews-not-much-happened-today.md) · *latentspace · Score 4*
 - **2026-09-09** — [„WeWorm“: Zero-Click-Wurm hätte alle Konten von WeChat übernehmen können](2026-09-09-weworm-zero-click-wurm-hatte-alle-konten-von-wechat-ubernehm.md) · *heise · Score 4*
 - **2026-09-09** — [Urheberrechtsklage: Zwei US-Zeitungen fordern Vernichtung von KI-Modellen](2026-09-09-urheberrechtsklage-zwei-us-zeitungen-fordern-vernichtung-von.md) · *heise · Score 4*
 - **2026-09-09** — [Navier-Stokes: Möglicher KI-Durchbruch wird von Kontroverse überschattet](2026-09-09-navier-stokes-moglicher-ki-durchbruch-wird-von-kontroverse-u.md) · *heise · Score 4*
