@@ -2,10 +2,32 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1088 Einträge** · Top-Quellen: heise (408) · hackernews (319) · simonwillison (187) · latentspace (93) · huggingface (26) · anthropic (15) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1110 Einträge** · Top-Quellen: heise (422) · hackernews (323) · simonwillison (190) · latentspace (93) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-11** — [Vierter Hacking-Vorfall: Weiteres Anthropic-Modell bricht aus Testumgebung aus](2026-09-11-vierter-hacking-vorfall-weiteres-anthropic-modell-bricht-aus.md) · *heise · Score 4*
+- **2026-09-11** — [Universal Music: KI-Plattform von ElevenLabs soll Fans remixen lassen](2026-09-11-universal-music-ki-plattform-von-elevenlabs-soll-fans-remixe.md) · *heise · Score 4*
+- **2026-09-11** — [The Gemini app is now available for Windows](2026-09-11-the-gemini-app-is-now-available-for-windows.md) · *hackernews · Score 4*
+- **2026-09-11** — [Suno v6: Neue KI-Modelle und Funktionen nach Einigung mit Musiklabels](2026-09-11-suno-v6-neue-ki-modelle-und-funktionen-nach-einigung-mit-mus.md) · *heise · Score 4*
+- **2026-09-11** — [Streit um KI-Beweise: Ein weiterer Mathematiker erhebt Vorwürfe gegen OpenAI](2026-09-11-streit-um-ki-beweise-ein-weiterer-mathematiker-erhebt-vorwur.md) · *heise · Score 4*
+- **2026-09-11** — [Smart Glasses: Metas Flirt mit Gesichtserkennung hat ein juristisches Nachspiel](2026-09-11-smart-glasses-metas-flirt-mit-gesichtserkennung-hat-ein-juri.md) · *heise · Score 4*
+- **2026-09-11** — [Prime Video: KI passt Lippenbewegungen an die Synchronfassung an](2026-09-11-prime-video-ki-passt-lippenbewegungen-an-die-synchronfassung.md) · *heise · Score 4*
+- **2026-09-11** — [OpenAI Agents API](2026-09-11-openai-agents-api.md) · *hackernews · Score 5*
+- **2026-09-11** — [OpenAI-Agenten haben auf mehr als 10 weiteren Websites unerlaubt kommuniziert](2026-09-11-openai-agenten-haben-auf-mehr-als-10-weiteren-websites-unerl.md) · *heise · Score 4*
+- **2026-09-11** — [Neki – Sharded Postgres](2026-09-11-neki-sharded-postgres.md) · *hackernews · Score 4*
+- **2026-09-11** — [Native is now the future of mobile at Shopify](2026-09-11-native-is-now-the-future-of-mobile-at-shopify.md) · *simonwillison · Score 4*
+- **2026-09-11** — [Microsoft will Salesforce Kunden ablocken – mit KI](2026-09-11-microsoft-will-salesforce-kunden-ablocken-mit-ki.md) · *heise · Score 4*
+- **2026-09-11** — [KI absichern und belegen: OWASP veröffentlicht neue Hilfe](2026-09-11-ki-absichern-und-belegen-owasp-veroffentlicht-neue-hilfe.md) · *heise · Score 4*
+- **2026-09-11** — [Fibrose-Wirkstoff aus der KI scheint biologisches Patientenalter zu senken](2026-09-11-fibrose-wirkstoff-aus-der-ki-scheint-biologisches-patientena.md) · *heise · Score 4*
+- **2026-09-11** — [Detecting and countering misuse of AI: September 2026](2026-09-11-detecting-and-countering-misuse-of-ai-september-2026.md) · *anthropic · Score 4*
+- **2026-09-11** — [Cognition launches new SWE-2 model, Rivaling Fable 5.1 and GPT-Astra](2026-09-11-cognition-launches-new-swe-2-model-rivaling-fable-5-1-and-gp.md) · *hackernews · Score 4*
+- **2026-09-11** — [Chinas Open-Weight-Modelle spielen noch keine Rolle](2026-09-11-chinas-open-weight-modelle-spielen-noch-keine-rolle.md) · *heise · Score 4*
+- **2026-09-11** — [.blend URL Viewer](2026-09-11-blend-url-viewer.md) · *simonwillison · Score 4*
+- **2026-09-11** — [Any Nix package, live in your browser](2026-09-11-any-nix-package-live-in-your-browser.md) · *simonwillison · Score 4*
+- **2026-09-11** — [Anthropic hat angeblich untersagte KI-Forschung an Biowaffen unterbunden](2026-09-11-anthropic-hat-angeblich-untersagte-ki-forschung-an-biowaffen.md) · *heise · Score 4*
+- **2026-09-11** — [Anstieg von Verbrauch an KI-Tokens – was einige Claude-Nutzer berichten](2026-09-11-anstieg-von-verbrauch-an-ki-tokens-was-einige-claude-nutzer-.md) · *heise · Score 4*
+- **2026-09-11** — [Adobe Premiere Pro und After Effects: Generative KI in der Zeitleiste](2026-09-11-adobe-premiere-pro-und-after-effects-generative-ki-in-der-ze.md) · *heise · Score 4*
 - **2026-09-10** — [Training a 3.8B LLM to 0.384 CORE for $998](2026-09-10-training-a-3-8b-llm-to-0-384-core-for-998.md) · *hackernews · Score 4*
 - **2026-09-10** — [Qwen 3.8 follows GPT-5.5 Pro reasoning prefills](2026-09-10-qwen-3-8-follows-gpt-5-5-pro-reasoning-prefills.md) · *hackernews · Score 4*
 - **2026-09-10** — [Factoring RSA 260](2026-09-10-factoring-rsa-260.md) · *hackernews · Score 4*
