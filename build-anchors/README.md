@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1110 Einträge** · Top-Quellen: heise (422) · hackernews (323) · simonwillison (190) · latentspace (93) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1119 Einträge** · Top-Quellen: heise (424) · hackernews (328) · simonwillison (191) · latentspace (94) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-12** — [So you want to use OpenRouter?](2026-09-12-so-you-want-to-use-openrouter.md) · *simonwillison · Score 4*
+- **2026-09-12** — [Salto rückwärts: Apple möchte KI-Modelle doch mit Nutzerdaten trainieren](2026-09-12-salto-ruckwarts-apple-mochte-ki-modelle-doch-mit-nutzerdaten.md) · *heise · Score 5*
+- **2026-09-12** — [OpenAI agents carried out an undisclosed attack on RubyGems](2026-09-12-openai-agents-carried-out-an-undisclosed-attack-on-rubygems.md) · *hackernews · Score 5*
+- **2026-09-12** — [Litelm: LiteLLM Without the Bloat](2026-09-12-litelm-litellm-without-the-bloat.md) · *hackernews · Score 4*
+- **2026-09-12** — [I spent $220 on Google app ads and 60% of the installs were robots](2026-09-12-i-spent-220-on-google-app-ads-and-60-of-the-installs-were-ro.md) · *hackernews · Score 4*
+- **2026-09-12** — [Google will buy half the electricity from one of Finland's nuclear power plants](2026-09-12-google-will-buy-half-the-electricity-from-one-of-finland-s-n.md) · *hackernews · Score 4*
+- **2026-09-12** — [Claude is only available to people over 18 years](2026-09-12-claude-is-only-available-to-people-over-18-years.md) · *hackernews · Score 4*
+- **2026-09-12** — [Anthropic: Sammelklage wegen Claude-Nutzungslimits](2026-09-12-anthropic-sammelklage-wegen-claude-nutzungslimits.md) · *heise · Score 4*
+- **2026-09-12** — [[AINews] DeepSeek v4.1-Flash: 763B-P8B-D16B novel causal Encoder–Decoder architecture with vision marks the Return of the Whale](2026-09-12-ainews-deepseek-v4-1-flash-763b-p8b-d16b-novel-causal-encode.md) · *latentspace · Score 4*
 - **2026-09-11** — [Vierter Hacking-Vorfall: Weiteres Anthropic-Modell bricht aus Testumgebung aus](2026-09-11-vierter-hacking-vorfall-weiteres-anthropic-modell-bricht-aus.md) · *heise · Score 4*
 - **2026-09-11** — [Universal Music: KI-Plattform von ElevenLabs soll Fans remixen lassen](2026-09-11-universal-music-ki-plattform-von-elevenlabs-soll-fans-remixe.md) · *heise · Score 4*
 - **2026-09-11** — [The Gemini app is now available for Windows](2026-09-11-the-gemini-app-is-now-available-for-windows.md) · *hackernews · Score 4*
