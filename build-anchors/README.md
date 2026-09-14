@@ -2,10 +2,12 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1126 Einträge** · Top-Quellen: heise (424) · hackernews (331) · simonwillison (194) · latentspace (95) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1128 Einträge** · Top-Quellen: heise (424) · hackernews (332) · simonwillison (195) · latentspace (95) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-14** — [OpenArch – PyTorch implementations of modern LLM architectures](2026-09-14-openarch-pytorch-implementations-of-modern-llm-architectures.md) · *hackernews · Score 4*
+- **2026-09-14** — [datasette 0.65.4](2026-09-14-datasette-0-65-4.md) · *simonwillison · Score 4*
 - **2026-09-13** — [Why are AI agents lying, cheating and coordinating?](2026-09-13-why-are-ai-agents-lying-cheating-and-coordinating.md) · *hackernews · Score 4*
 - **2026-09-13** — [The Rise of the Forward Deployed Engineer — and How To Do the Job Right](2026-09-13-the-rise-of-the-forward-deployed-engineer-and-how-to-do-the-.md) · *latentspace · Score 4*
 - **2026-09-13** — [Real-SWE: Benchmarking AI models on private, real-world, enterprise codebases](2026-09-13-real-swe-benchmarking-ai-models-on-private-real-world-enterp.md) · *hackernews · Score 5*
