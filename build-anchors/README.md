@@ -2,10 +2,24 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1128 Einträge** · Top-Quellen: heise (424) · hackernews (332) · simonwillison (195) · latentspace (95) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1142 Einträge** · Top-Quellen: heise (434) · hackernews (333) · simonwillison (196) · latentspace (97) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-15** — [Salesforce Enterprise AI Harness: KI-Infrastruktur für Unternehmen](2026-09-15-salesforce-enterprise-ai-harness-ki-infrastruktur-fur-untern.md) · *heise · Score 4*
+- **2026-09-15** — [OpenObserve zeigt, warum KI-Agenten falsche Antworten geben](2026-09-15-openobserve-zeigt-warum-ki-agenten-falsche-antworten-geben.md) · *heise · Score 4*
+- **2026-09-15** — [Nvidia, Palantir und Cisco bauen KI-Stack für Behörden](2026-09-15-nvidia-palantir-und-cisco-bauen-ki-stack-fur-behorden.md) · *heise · Score 4*
+- **2026-09-15** — [Mediatek stellt neuen 2-nm-Prozessor Dimensity 9600 Pro vor](2026-09-15-mediatek-stellt-neuen-2-nm-prozessor-dimensity-9600-pro-vor.md) · *heise · Score 4*
+- **2026-09-15** — [Jugendschutz im Netz: Kalifornien erlässt strenge Regeln für KI und Social Media](2026-09-15-jugendschutz-im-netz-kalifornien-erlasst-strenge-regeln-fur-.md) · *heise · Score 4*
+- **2026-09-15** — [iOS und macOS 27: Apple schickt System-Updates ins Rennen](2026-09-15-ios-und-macos-27-apple-schickt-system-updates-ins-rennen.md) · *heise · Score 4*
+- **2026-09-15** — [Humanity’s Last Invention — Richard Socher of Recursive](2026-09-15-humanity-s-last-invention-richard-socher-of-recursive.md) · *latentspace · Score 4*
+- **2026-09-15** — [GPU-Marktanalyse: Überraschendes Absatzplus bei Grafikkarten](2026-09-15-gpu-marktanalyse-uberraschendes-absatzplus-bei-grafikkarten.md) · *heise · Score 4*
+- **2026-09-15** — [Fraunhofer-Studie: KI-Robotik ist umfassender als Humanoide](2026-09-15-fraunhofer-studie-ki-robotik-ist-umfassender-als-humanoide.md) · *heise · Score 4*
+- **2026-09-15** — [EU-Kommission an KI-Firmen: „Bringt euren Laden in Ordnung“](2026-09-15-eu-kommission-an-ki-firmen-bringt-euren-laden-in-ordnung.md) · *heise · Score 4*
+- **2026-09-15** — [DSGVO vs. Smart Glasses: Warum Ray-Ban-Meta-Träger haftbar gemacht werden können](2026-09-15-dsgvo-vs-smart-glasses-warum-ray-ban-meta-trager-haftbar-gem.md) · *heise · Score 4*
+- **2026-09-15** — [commit-rewriter 0.1](2026-09-15-commit-rewriter-0-1.md) · *simonwillison · Score 4*
+- **2026-09-15** — [Charts built for Chat](2026-09-15-charts-built-for-chat.md) · *hackernews · Score 4*
+- **2026-09-15** — [[AINews] AEF-1 standard emerges for Third Party Evaluators, as Xai, OpenAI, and Anthropic all cosign](2026-09-15-ainews-aef-1-standard-emerges-for-third-party-evaluators-as-.md) · *latentspace · Score 4*
 - **2026-09-14** — [OpenArch – PyTorch implementations of modern LLM architectures](2026-09-14-openarch-pytorch-implementations-of-modern-llm-architectures.md) · *hackernews · Score 4*
 - **2026-09-14** — [datasette 0.65.4](2026-09-14-datasette-0-65-4.md) · *simonwillison · Score 4*
 - **2026-09-13** — [Why are AI agents lying, cheating and coordinating?](2026-09-13-why-are-ai-agents-lying-cheating-and-coordinating.md) · *hackernews · Score 4*
