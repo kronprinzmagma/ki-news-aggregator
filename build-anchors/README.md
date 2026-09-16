@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1142 Einträge** · Top-Quellen: heise (434) · hackernews (333) · simonwillison (196) · latentspace (97) · huggingface (26) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1153 Einträge** · Top-Quellen: heise (434) · hackernews (340) · simonwillison (198) · latentspace (98) · huggingface (27) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-16** — [Your Agent Aced the Task. Will It Do It Again?](2026-09-16-your-agent-aced-the-task-will-it-do-it-again.md) · *huggingface · Score 5*
+- **2026-09-16** — [We got admin access to Baseten's production GitHub](2026-09-16-we-got-admin-access-to-baseten-s-production-github.md) · *hackernews · Score 4*
+- **2026-09-16** — [Stay discoverable in search while disallowing AI training](2026-09-16-stay-discoverable-in-search-while-disallowing-ai-training.md) · *hackernews · Score 4*
+- **2026-09-16** — [Quoting Laurie Voss](2026-09-16-quoting-laurie-voss.md) · *simonwillison · Score 4*
+- **2026-09-16** — [Mistral X Mozilla: Private, Multilingual AI Browsing](2026-09-16-mistral-x-mozilla-private-multilingual-ai-browsing.md) · *hackernews · Score 4*
+- **2026-09-16** — [Learning to solve hard problems in RL for LLMs by never giving up](2026-09-16-learning-to-solve-hard-problems-in-rl-for-llms-by-never-givi.md) · *hackernews · Score 4*
+- **2026-09-16** — [Introducing System One Models and Jev](2026-09-16-introducing-system-one-models-and-jev.md) · *hackernews · Score 4*
+- **2026-09-16** — [Gemini Live audio](2026-09-16-gemini-live-audio.md) · *simonwillison · Score 4*
+- **2026-09-16** — [Can Skills Learned in Games Transfer to Real-World Work?](2026-09-16-can-skills-learned-in-games-transfer-to-real-world-work.md) · *latentspace · Score 4*
+- **2026-09-16** — [Building a Linux GPU Driver for the M4 Mac Mini in One Month](2026-09-16-building-a-linux-gpu-driver-for-the-m4-mac-mini-in-one-month.md) · *hackernews · Score 5*
+- **2026-09-16** — [Apple Reference Image: A New Approach for Verified Photography](2026-09-16-apple-reference-image-a-new-approach-for-verified-photograph.md) · *hackernews · Score 4*
 - **2026-09-15** — [Salesforce Enterprise AI Harness: KI-Infrastruktur für Unternehmen](2026-09-15-salesforce-enterprise-ai-harness-ki-infrastruktur-fur-untern.md) · *heise · Score 4*
 - **2026-09-15** — [OpenObserve zeigt, warum KI-Agenten falsche Antworten geben](2026-09-15-openobserve-zeigt-warum-ki-agenten-falsche-antworten-geben.md) · *heise · Score 4*
 - **2026-09-15** — [Nvidia, Palantir und Cisco bauen KI-Stack für Behörden](2026-09-15-nvidia-palantir-und-cisco-bauen-ki-stack-fur-behorden.md) · *heise · Score 4*
