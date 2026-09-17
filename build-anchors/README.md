@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1153 Einträge** · Top-Quellen: heise (434) · hackernews (340) · simonwillison (198) · latentspace (98) · huggingface (27) · anthropic (16) · interconnects (14) · golem (12) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1161 Einträge** · Top-Quellen: heise (434) · hackernews (343) · simonwillison (199) · latentspace (100) · huggingface (27) · anthropic (16) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-17** — [Underwriting Superintelligence: Backing Agents you can Sue — Rune Kvist, AIUC](2026-09-17-underwriting-superintelligence-backing-agents-you-can-sue-ru.md) · *latentspace · Score 5*
+- **2026-09-17** — [Training a 4B model to produce 81% faster query plans than Postgres](2026-09-17-training-a-4b-model-to-produce-81-faster-query-plans-than-po.md) · *hackernews · Score 5*
+- **2026-09-17** — [Nvidia announces native GPU programming in Rust](2026-09-17-nvidia-announces-native-gpu-programming-in-rust.md) · *hackernews · Score 5*
+- **2026-09-17** — [Mistral-Integration: Mit Open Source macht Mozilla Firefox zum KI-Browser](2026-09-17-mistral-integration-mit-open-source-macht-mozilla-firefox-zu.md) · *golem · Score 4*
+- **2026-09-17** — [(g+) Softwareentwicklung: Wo KI beim Programmieren stark ist - und wo nicht](2026-09-17-g-softwareentwicklung-wo-ki-beim-programmieren-stark-ist-und.md) · *golem · Score 4*
+- **2026-09-17** — [Cloudflare/Security-Audit-Skill](2026-09-17-cloudflare-security-audit-skill.md) · *hackernews · Score 4*
+- **2026-09-17** — [Claude Cowork and chat are now one Claude](2026-09-17-claude-cowork-and-chat-are-now-one-claude.md) · *simonwillison · Score 4*
+- **2026-09-17** — [[AINews] Reality Checks on AI News (Yegge shuts down Gas Town, Databricks’ +60% Astra cost)](2026-09-17-ainews-reality-checks-on-ai-news-yegge-shuts-down-gas-town-d.md) · *latentspace · Score 4*
 - **2026-09-16** — [Your Agent Aced the Task. Will It Do It Again?](2026-09-16-your-agent-aced-the-task-will-it-do-it-again.md) · *huggingface · Score 5*
 - **2026-09-16** — [We got admin access to Baseten's production GitHub](2026-09-16-we-got-admin-access-to-baseten-s-production-github.md) · *hackernews · Score 4*
 - **2026-09-16** — [Stay discoverable in search while disallowing AI training](2026-09-16-stay-discoverable-in-search-while-disallowing-ai-training.md) · *hackernews · Score 4*
