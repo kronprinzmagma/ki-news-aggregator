@@ -2,10 +2,37 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1161 Einträge** · Top-Quellen: heise (434) · hackernews (343) · simonwillison (199) · latentspace (100) · huggingface (27) · anthropic (16) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1188 Einträge** · Top-Quellen: heise (451) · hackernews (348) · simonwillison (201) · latentspace (101) · huggingface (27) · anthropic (18) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-18** — [Werbung in ChatGPT: OpenAI plant „gesponserten Agenten“ und Anzeigen per Prompt](2026-09-18-werbung-in-chatgpt-openai-plant-gesponserten-agenten-und-anz.md) · *heise · Score 4*
+- **2026-09-18** — [Telstra outage: The night a network decided the year was 2006](2026-09-18-telstra-outage-the-night-a-network-decided-the-year-was-2006.md) · *hackernews · Score 4*
+- **2026-09-18** — [Shapelearn Qwen 3.8 27B (13.1 GB VRAM)](2026-09-18-shapelearn-qwen-3-8-27b-13-1-gb-vram.md) · *hackernews · Score 4*
+- **2026-09-18** — [Self-generated prompt injections in compaction summaries](2026-09-18-self-generated-prompt-injections-in-compaction-summaries.md) · *simonwillison · Score 4*
+- **2026-09-18** — [OpenAI entdeckt KI-Fehlverhalten auch bei alltäglichen Routineaufgaben](2026-09-18-openai-entdeckt-ki-fehlverhalten-auch-bei-alltaglichen-routi.md) · *heise · Score 4*
+- **2026-09-18** — [Nach dem Hugging-Face-Hack: Was jetzt auf die IT zukommt](2026-09-18-nach-dem-hugging-face-hack-was-jetzt-auf-die-it-zukommt.md) · *heise · Score 4*
+- **2026-09-18** — [Measurements for understanding the pace of AI development inside frontier labs](2026-09-18-measurements-for-understanding-the-pace-of-ai-development-in.md) · *anthropic · Score 4*
+- **2026-09-18** — [KI und Dilemmata: Sprachmodelle verteilen Organspenden anders als Menschen](2026-09-18-ki-und-dilemmata-sprachmodelle-verteilen-organspenden-anders.md) · *heise · Score 4*
+- **2026-09-18** — [KI-Coding-Tools: Wenn Entwickler die Modelle der Hersteller umgehen](2026-09-18-ki-coding-tools-wenn-entwickler-die-modelle-der-hersteller-u.md) · *heise · Score 4*
+- **2026-09-18** — [iPhone 18 Pro: So funktioniert Apples Herkunftsnachweis für Fotos](2026-09-18-iphone-18-pro-so-funktioniert-apples-herkunftsnachweis-fur-f.md) · *heise · Score 4*
+- **2026-09-18** — [Introducing the Life Sciences Verification Program](2026-09-18-introducing-the-life-sciences-verification-program.md) · *anthropic · Score 4*
+- **2026-09-18** — [Hyperlinks und mehr KI bei Instagram: Meta One kostet bis 500 Dollar pro Monat](2026-09-18-hyperlinks-und-mehr-ki-bei-instagram-meta-one-kostet-bis-500.md) · *heise · Score 4*
+- **2026-09-18** — [How To Write With An LLM](2026-09-18-how-to-write-with-an-llm.md) · *simonwillison · Score 4*
+- **2026-09-18** — [Hister: A private search engine for the pages you visit and the files you keep](2026-09-18-hister-a-private-search-engine-for-the-pages-you-visit-and-t.md) · *hackernews · Score 4*
+- **2026-09-18** — [„Größter Diebstahl von Arbeitskraft“: Intern Kritik bei Microsoft an KI-Training](2026-09-18-grosster-diebstahl-von-arbeitskraft-intern-kritik-bei-micros.md) · *heise · Score 4*
+- **2026-09-18** — [Google warnt: KI-Agenten im Smart Home können sich unerwünscht verhalten](2026-09-18-google-warnt-ki-agenten-im-smart-home-konnen-sich-unerwunsch.md) · *heise · Score 4*
+- **2026-09-18** — [Google-Suche ja, Modelltraining nein: Neue Cloudflare-Regeln](2026-09-18-google-suche-ja-modelltraining-nein-neue-cloudflare-regeln.md) · *heise · Score 4*
+- **2026-09-18** — [Gemini 3.8 Live: Upgrade bei Echtzeit-Sprachmodellen für Voice Agents](2026-09-18-gemini-3-8-live-upgrade-bei-echtzeit-sprachmodellen-fur-voic.md) · *heise · Score 4*
+- **2026-09-18** — [Erste AR-Brille für Verbraucher: Snap stellt KI und neue Apps für Specs vor](2026-09-18-erste-ar-brille-fur-verbraucher-snap-stellt-ki-und-neue-apps.md) · *heise · Score 4*
+- **2026-09-18** — [Deutschland und Kanada investieren Millionen in KI-Projekt \"LawZero\"](2026-09-18-deutschland-und-kanada-investieren-millionen-in-ki-projekt-l.md) · *heise · Score 4*
+- **2026-09-18** — [Das KI-Modell „Jev“ liefert Entscheidungen statt Texte](2026-09-18-das-ki-modell-jev-liefert-entscheidungen-statt-texte.md) · *heise · Score 4*
+- **2026-09-18** — [Cloud-Wettbewerb: Broadcom ist weiter auf Rot, SAP gerät wegen KI unter Druck](2026-09-18-cloud-wettbewerb-broadcom-ist-weiter-auf-rot-sap-gerat-wegen.md) · *heise · Score 4*
+- **2026-09-18** — [Bonsai 2 27B: Near-Lossless Compression in a 9x Smaller Footprint](2026-09-18-bonsai-2-27b-near-lossless-compression-in-a-9x-smaller-footp.md) · *hackernews · Score 4*
+- **2026-09-18** — [Bend – A language that blocks AI mistakes via proof, on CPU and GPU](2026-09-18-bend-a-language-that-blocks-ai-mistakes-via-proof-on-cpu-and.md) · *hackernews · Score 4*
+- **2026-09-18** — [Anthropic: Claude übernimmt immer mehr Arbeit an eigener Weiterentwicklung](2026-09-18-anthropic-claude-ubernimmt-immer-mehr-arbeit-an-eigener-weit.md) · *heise · Score 4*
+- **2026-09-18** — [[AINews] not much happened today](2026-09-18-ainews-not-much-happened-today.md) · *latentspace · Score 4*
+- **2026-09-18** — [AGNTCon + MCPCon: Agentische KI wird erwachsen](2026-09-18-agntcon-mcpcon-agentische-ki-wird-erwachsen.md) · *heise · Score 5*
 - **2026-09-17** — [Underwriting Superintelligence: Backing Agents you can Sue — Rune Kvist, AIUC](2026-09-17-underwriting-superintelligence-backing-agents-you-can-sue-ru.md) · *latentspace · Score 5*
 - **2026-09-17** — [Training a 4B model to produce 81% faster query plans than Postgres](2026-09-17-training-a-4b-model-to-produce-81-faster-query-plans-than-po.md) · *hackernews · Score 5*
 - **2026-09-17** — [Nvidia announces native GPU programming in Rust](2026-09-17-nvidia-announces-native-gpu-programming-in-rust.md) · *hackernews · Score 5*
