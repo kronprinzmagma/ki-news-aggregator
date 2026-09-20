@@ -2,10 +2,11 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1195 Einträge** · Top-Quellen: heise (451) · hackernews (351) · simonwillison (203) · latentspace (102) · huggingface (27) · anthropic (19) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1196 Einträge** · Top-Quellen: heise (451) · hackernews (352) · simonwillison (203) · latentspace (102) · huggingface (27) · anthropic (19) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-20** — [Brood War Bench](2026-09-20-brood-war-bench.md) · *hackernews · Score 4*
 - **2026-09-19** — [Quoting Thariq Shihipar](2026-09-19-quoting-thariq-shihipar.md) · *simonwillison · Score 4*
 - **2026-09-19** — [Partnering with Accenture on embedded evaluation](2026-09-19-partnering-with-accenture-on-embedded-evaluation.md) · *anthropic · Score 4*
 - **2026-09-19** — [NASA-IBM Lunar Foundation open-Source Geospatial AI Model](2026-09-19-nasa-ibm-lunar-foundation-open-source-geospatial-ai-model.md) · *hackernews · Score 4*
