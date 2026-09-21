@@ -2,10 +2,16 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1196 Einträge** · Top-Quellen: heise (451) · hackernews (352) · simonwillison (203) · latentspace (102) · huggingface (27) · anthropic (19) · golem (14) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1202 Einträge** · Top-Quellen: heise (452) · hackernews (356) · simonwillison (203) · latentspace (102) · huggingface (27) · anthropic (19) · golem (15) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-21** — [Token statt Bauchgefühl: Splunk soll KI kalkulierbar machen](2026-09-21-token-statt-bauchgefuhl-splunk-soll-ki-kalkulierbar-machen.md) · *heise · Score 4*
+- **2026-09-21** — [Kev: Tiny Jev-like family of decision models built on top of Qwen3.5](2026-09-21-kev-tiny-jev-like-family-of-decision-models-built-on-top-of-.md) · *hackernews · Score 4*
+- **2026-09-21** — [I turned Jev into a (lousy) chatbot](2026-09-21-i-turned-jev-into-a-lousy-chatbot.md) · *hackernews · Score 4*
+- **2026-09-21** — [I am often wrong](2026-09-21-i-am-often-wrong.md) · *hackernews · Score 4*
+- **2026-09-21** — [Google best�tigt: KI-Modell Gemini knackt drei echte Firmen](2026-09-21-google-best-tigt-ki-modell-gemini-knackt-drei-echte-firmen.md) · *golem · Score 4*
+- **2026-09-21** — [AX – Google’s Open Agentic Orchestrator](2026-09-21-ax-google-s-open-agentic-orchestrator.md) · *hackernews · Score 4*
 - **2026-09-20** — [Brood War Bench](2026-09-20-brood-war-bench.md) · *hackernews · Score 4*
 - **2026-09-19** — [Quoting Thariq Shihipar](2026-09-19-quoting-thariq-shihipar.md) · *simonwillison · Score 4*
 - **2026-09-19** — [Partnering with Accenture on embedded evaluation](2026-09-19-partnering-with-accenture-on-embedded-evaluation.md) · *anthropic · Score 4*
