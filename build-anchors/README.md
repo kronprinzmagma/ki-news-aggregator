@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1202 Einträge** · Top-Quellen: heise (452) · hackernews (356) · simonwillison (203) · latentspace (102) · huggingface (27) · anthropic (19) · golem (15) · interconnects (14) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1213 Einträge** · Top-Quellen: heise (452) · hackernews (359) · simonwillison (207) · latentspace (103) · huggingface (29) · anthropic (19) · interconnects (15) · golem (15) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-22** — [tokenizers v1: encode, decode and scaling, measured](2026-09-22-tokenizers-v1-encode-decode-and-scaling-measured.md) · *huggingface · Score 4*
+- **2026-09-22** — [The current balance of power in open models](2026-09-22-the-current-balance-of-power-in-open-models.md) · *interconnects · Score 4*
+- **2026-09-22** — [Study: Young users (9 to 18Y) ditch Google for AI, with unknown consequences](2026-09-22-study-young-users-9-to-18y-ditch-google-for-ai-with-unknown-.md) · *hackernews · Score 4*
+- **2026-09-22** — [Spymarks, Not Watermarks](2026-09-22-spymarks-not-watermarks.md) · *hackernews · Score 4*
+- **2026-09-22** — [Quoting voxium](2026-09-22-quoting-voxium.md) · *simonwillison · Score 4*
+- **2026-09-22** — [MCP was always a bad idea?](2026-09-22-mcp-was-always-a-bad-idea.md) · *simonwillison · Score 4*
+- **2026-09-22** — [llm-keys-ui 0.1](2026-09-22-llm-keys-ui-0-1.md) · *simonwillison · Score 4*
+- **2026-09-22** — [Jun Kim, oMLX creator and maintainer, joins Hugging Face to support the MLX community](2026-09-22-jun-kim-omlx-creator-and-maintainer-joins-hugging-face-to-su.md) · *huggingface · Score 4*
+- **2026-09-22** — [Cloudflare Python Workers are now generally available](2026-09-22-cloudflare-python-workers-are-now-generally-available.md) · *simonwillison · Score 4*
+- **2026-09-22** — [Can gzip be a language model?](2026-09-22-can-gzip-be-a-language-model.md) · *hackernews · Score 4*
+- **2026-09-22** — [[AINews] Xiaomi MiMo-V2.6-Pro 1T-A42B: the new top Open Weights model, trained for $3M](2026-09-22-ainews-xiaomi-mimo-v2-6-pro-1t-a42b-the-new-top-open-weights.md) · *latentspace · Score 4*
 - **2026-09-21** — [Token statt Bauchgefühl: Splunk soll KI kalkulierbar machen](2026-09-21-token-statt-bauchgefuhl-splunk-soll-ki-kalkulierbar-machen.md) · *heise · Score 4*
 - **2026-09-21** — [Kev: Tiny Jev-like family of decision models built on top of Qwen3.5](2026-09-21-kev-tiny-jev-like-family-of-decision-models-built-on-top-of-.md) · *hackernews · Score 4*
 - **2026-09-21** — [I turned Jev into a (lousy) chatbot](2026-09-21-i-turned-jev-into-a-lousy-chatbot.md) · *hackernews · Score 4*
