@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1213 Einträge** · Top-Quellen: heise (452) · hackernews (359) · simonwillison (207) · latentspace (103) · huggingface (29) · anthropic (19) · interconnects (15) · golem (15) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1221 Einträge** · Top-Quellen: heise (452) · hackernews (361) · simonwillison (210) · latentspace (104) · huggingface (30) · anthropic (19) · interconnects (16) · golem (15) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-23** — [WordPress: Unauthenticated path traversal leading to conditional RCE](2026-09-23-wordpress-unauthenticated-path-traversal-leading-to-conditio.md) · *hackernews · Score 4*
+- **2026-09-23** — [Unreal Agent](2026-09-23-unreal-agent.md) · *hackernews · Score 4*
+- **2026-09-23** — [llm-anthropic 0.29](2026-09-23-llm-anthropic-0-29.md) · *simonwillison · Score 5*
+- **2026-09-23** — [llm 0.36](2026-09-23-llm-0-36.md) · *simonwillison · Score 4*
+- **2026-09-23** — [How UK AISI and EvalEval Are Making Benchmark Results Reproducible](2026-09-23-how-uk-aisi-and-evaleval-are-making-benchmark-results-reprod.md) · *huggingface · Score 4*
+- **2026-09-23** — [Debating RSI, the US-China Gap, and Jaggedness with JS Denain of Epoch AI](2026-09-23-debating-rsi-the-us-china-gap-and-jaggedness-with-js-denain-.md) · *interconnects · Score 4*
+- **2026-09-23** — [Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, and a new price war](2026-09-23-claude-opus-5-5-gpt-6-sol-gpt-6-luna-and-a-new-price-war.md) · *simonwillison · Score 5*
+- **2026-09-23** — [🔬 An Oscar, Two Asteroids, and the Algorithm in Your sklearn: John Platt on AI for Science](2026-09-23-an-oscar-two-asteroids-and-the-algorithm-in-your-sklearn-joh.md) · *latentspace · Score 4*
 - **2026-09-22** — [tokenizers v1: encode, decode and scaling, measured](2026-09-22-tokenizers-v1-encode-decode-and-scaling-measured.md) · *huggingface · Score 4*
 - **2026-09-22** — [The current balance of power in open models](2026-09-22-the-current-balance-of-power-in-open-models.md) · *interconnects · Score 4*
 - **2026-09-22** — [Study: Young users (9 to 18Y) ditch Google for AI, with unknown consequences](2026-09-22-study-young-users-9-to-18y-ditch-google-for-ai-with-unknown-.md) · *hackernews · Score 4*
