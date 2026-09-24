@@ -2,10 +2,19 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1221 Einträge** · Top-Quellen: heise (452) · hackernews (361) · simonwillison (210) · latentspace (104) · huggingface (30) · anthropic (19) · interconnects (16) · golem (15) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1230 Einträge** · Top-Quellen: heise (452) · hackernews (362) · simonwillison (212) · latentspace (106) · huggingface (31) · anthropic (20) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-24** — [VSCode's SSH Agent Is Bananas (2025)](2026-09-24-vscode-s-ssh-agent-is-bananas-2025.md) · *hackernews · Score 4*
+- **2026-09-24** — [Streaming: Youtube l�sst Nutzer eigene Feeds per KI-Prompt erstellen](2026-09-24-streaming-youtube-l-sst-nutzer-eigene-feeds-per-ki-prompt-er.md) · *golem · Score 4*
+- **2026-09-24** — [llm-typesafe 0.1a0](2026-09-24-llm-typesafe-0-1a0.md) · *simonwillison · Score 4*
+- **2026-09-24** — [KI-Angriff auf Australien: OpenAI-Agent hat sich in Regierungsportal gehackt](2026-09-24-ki-angriff-auf-australien-openai-agent-hat-sich-in-regierung.md) · *golem · Score 4*
+- **2026-09-24** — [Jev: System One models for Prod, not God — with Diogo Almeida, CEO, TypeSafe AI](2026-09-24-jev-system-one-models-for-prod-not-god-with-diogo-almeida-ce.md) · *latentspace · Score 4*
+- **2026-09-24** — [How to Use NVIDIA Warp and MjWarp to Accelerate Robotics Simulation and Learning Workflows](2026-09-24-how-to-use-nvidia-warp-and-mjwarp-to-accelerate-robotics-sim.md) · *huggingface · Score 4*
+- **2026-09-24** — [Gemini 3.8 TTS Playground](2026-09-24-gemini-3-8-tts-playground.md) · *simonwillison · Score 4*
+- **2026-09-24** — [Claude discovers a novel enzyme system with CRISPR-like repeats](2026-09-24-claude-discovers-a-novel-enzyme-system-with-crispr-like-repe.md) · *anthropic · Score 5*
+- **2026-09-24** — [[AINews] Meta Connect 2026: Muse glasses, voice, video, and Charm](2026-09-24-ainews-meta-connect-2026-muse-glasses-voice-video-and-charm.md) · *latentspace · Score 4*
 - **2026-09-23** — [WordPress: Unauthenticated path traversal leading to conditional RCE](2026-09-23-wordpress-unauthenticated-path-traversal-leading-to-conditio.md) · *hackernews · Score 4*
 - **2026-09-23** — [Unreal Agent](2026-09-23-unreal-agent.md) · *hackernews · Score 4*
 - **2026-09-23** — [llm-anthropic 0.29](2026-09-23-llm-anthropic-0-29.md) · *simonwillison · Score 5*
