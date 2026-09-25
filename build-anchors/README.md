@@ -2,10 +2,32 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1230 Einträge** · Top-Quellen: heise (452) · hackernews (362) · simonwillison (212) · latentspace (106) · huggingface (31) · anthropic (20) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1252 Einträge** · Top-Quellen: heise (469) · hackernews (364) · simonwillison (212) · latentspace (108) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-25** — [Viele Nutzer vertrauen KI-Chatbots intime Themen an](2026-09-25-viele-nutzer-vertrauen-ki-chatbots-intime-themen-an.md) · *heise · Score 4*
+- **2026-09-25** — [Two-tier encryption in the UK](2026-09-25-two-tier-encryption-in-the-uk.md) · *hackernews · Score 5*
+- **2026-09-25** — [The Situation Report](2026-09-25-the-situation-report.md) · *anthropic · Score 4*
+- **2026-09-25** — [Studie als KI-Agent: Stanford-Tool macht Forschungsartikel interaktiv](2026-09-25-studie-als-ki-agent-stanford-tool-macht-forschungsartikel-in.md) · *heise · Score 4*
+- **2026-09-25** — [Schäden durch KI: EU diskutiert neue Haftungsregeln](2026-09-25-schaden-durch-ki-eu-diskutiert-neue-haftungsregeln.md) · *heise · Score 4*
+- **2026-09-25** — [Sanders-Vorschlag: KI-Entwickler drohen 20 Jahre Haft](2026-09-25-sanders-vorschlag-ki-entwickler-drohen-20-jahre-haft.md) · *heise · Score 4*
+- **2026-09-25** — [Runway’s WorldPrompt and the Engineering of Real-Time Worlds](2026-09-25-runway-s-worldprompt-and-the-engineering-of-real-time-worlds.md) · *latentspace · Score 4*
+- **2026-09-25** — [Photonisches Computing: Open-Source-SDK für energieeffiziente KI-Anwendungen](2026-09-25-photonisches-computing-open-source-sdk-fur-energieeffiziente.md) · *heise · Score 4*
+- **2026-09-25** — [Nach Analyse von DNA-Datenbanken: Claude soll neues Enzymsystem entdeckt haben](2026-09-25-nach-analyse-von-dna-datenbanken-claude-soll-neues-enzymsyst.md) · *heise · Score 4*
+- **2026-09-25** — [Mittwoch: Anthropic startet Claude-5.5-Modelle, Österreich mit neuem Bundesamt](2026-09-25-mittwoch-anthropic-startet-claude-5-5-modelle-osterreich-mit.md) · *heise · Score 4*
+- **2026-09-25** — [KI-Bescheide ohne menschliches Zutun in Österreich](2026-09-25-ki-bescheide-ohne-menschliches-zutun-in-osterreich.md) · *heise · Score 4*
+- **2026-09-25** — [Jev Based Code Review](2026-09-25-jev-based-code-review.md) · *hackernews · Score 4*
+- **2026-09-25** — [heise-Angebot: Jetzt in der Make 5/26: Agentic Coding für Maker](2026-09-25-heise-angebot-jetzt-in-der-make-5-26-agentic-coding-fur-make.md) · *heise · Score 4*
+- **2026-09-25** — [Google Health Guardian: Insulinresistenz- und Blutdruck-Trends für Pixel Watches](2026-09-25-google-health-guardian-insulinresistenz-und-blutdruck-trends.md) · *heise · Score 4*
+- **2026-09-25** — [Google bringt Echtzeit-Avatare für Gemini-Sprachagenten](2026-09-25-google-bringt-echtzeit-avatare-fur-gemini-sprachagenten.md) · *heise · Score 4*
+- **2026-09-25** — [Geschätzt wurden Millionen: NSA gibt Milliarden US-Dollar für KI-Prüfung aus](2026-09-25-geschatzt-wurden-millionen-nsa-gibt-milliarden-us-dollar-fur.md) · *heise · Score 4*
+- **2026-09-25** — [Foundries vs Navigators: Lowering the Cost of Science](2026-09-25-foundries-vs-navigators-lowering-the-cost-of-science.md) · *latentspace · Score 4*
+- **2026-09-25** — [ChatGPT Voice wird agentischer und greift auf externe Dienste zu](2026-09-25-chatgpt-voice-wird-agentischer-und-greift-auf-externe-dienst.md) · *heise · Score 4*
+- **2026-09-25** — [Bundestags-KI: Eigener Chatbot soll Schatten-KI im Parlament ablösen](2026-09-25-bundestags-ki-eigener-chatbot-soll-schatten-ki-im-parlament-.md) · *heise · Score 4*
+- **2026-09-25** — [Angriff mit KI-Agenten auf hunderte Shops: 600.000 Kreditkartendaten geklaut](2026-09-25-angriff-mit-ki-agenten-auf-hunderte-shops-600-000-kreditkart.md) · *heise · Score 4*
+- **2026-09-25** — [Analyse: KI-Umsatz in den USA müsste für Refinanzierung jährlich um 80 % steigen](2026-09-25-analyse-ki-umsatz-in-den-usa-musste-fur-refinanzierung-jahrl.md) · *heise · Score 4*
+- **2026-09-25** — [AI Summit Barcelona: Praxis statt Pitches für Europas KI-Zukunft](2026-09-25-ai-summit-barcelona-praxis-statt-pitches-fur-europas-ki-zuku.md) · *heise · Score 4*
 - **2026-09-24** — [VSCode's SSH Agent Is Bananas (2025)](2026-09-24-vscode-s-ssh-agent-is-bananas-2025.md) · *hackernews · Score 4*
 - **2026-09-24** — [Streaming: Youtube l�sst Nutzer eigene Feeds per KI-Prompt erstellen](2026-09-24-streaming-youtube-l-sst-nutzer-eigene-feeds-per-ki-prompt-er.md) · *golem · Score 4*
 - **2026-09-24** — [llm-typesafe 0.1a0](2026-09-24-llm-typesafe-0-1a0.md) · *simonwillison · Score 4*
