@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1252 Einträge** · Top-Quellen: heise (469) · hackernews (364) · simonwillison (212) · latentspace (108) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1256 Einträge** · Top-Quellen: heise (469) · hackernews (366) · simonwillison (213) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-26** — [OpenRouter: from Seed to Stripe — with OpenRouter’s Alex Atallah & AMP’s Anjney Midha](2026-09-26-openrouter-from-seed-to-stripe-with-openrouter-s-alex-atalla.md) · *latentspace · Score 4*
+- **2026-09-26** — [Floci: Locally emulating any cloud service](2026-09-26-floci-locally-emulating-any-cloud-service.md) · *hackernews · Score 5*
+- **2026-09-26** — [First Principles Thinking](2026-09-26-first-principles-thinking.md) · *hackernews · Score 4*
+- **2026-09-26** — [commit-rewriter 0.2](2026-09-26-commit-rewriter-0-2.md) · *simonwillison · Score 4*
 - **2026-09-25** — [Viele Nutzer vertrauen KI-Chatbots intime Themen an](2026-09-25-viele-nutzer-vertrauen-ki-chatbots-intime-themen-an.md) · *heise · Score 4*
 - **2026-09-25** — [Two-tier encryption in the UK](2026-09-25-two-tier-encryption-in-the-uk.md) · *hackernews · Score 5*
 - **2026-09-25** — [The Situation Report](2026-09-25-the-situation-report.md) · *anthropic · Score 4*
