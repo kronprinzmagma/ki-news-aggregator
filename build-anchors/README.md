@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1256 Einträge** · Top-Quellen: heise (469) · hackernews (366) · simonwillison (213) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1263 Einträge** · Top-Quellen: heise (474) · hackernews (366) · simonwillison (215) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-27** — [Wasserzeichen für KI-Texte: Anthropic weitet Anwendung aus](2026-09-27-wasserzeichen-fur-ki-texte-anthropic-weitet-anwendung-aus.md) · *heise · Score 4*
+- **2026-09-27** — [OpenAI informiert „dutzende“ Institutionen über unbefugte KI-Interaktionen](2026-09-27-openai-informiert-dutzende-institutionen-uber-unbefugte-ki-i.md) · *heise · Score 4*
+- **2026-09-27** — [Note on 24th September 2026](2026-09-27-note-on-24th-september-2026.md) · *simonwillison · Score 4*
+- **2026-09-27** — [Microsoft beerdigt „Copilot+“](2026-09-27-microsoft-beerdigt-copilot.md) · *heise · Score 4*
+- **2026-09-27** — [Kākāpō Party](2026-09-27-kakapo-party.md) · *simonwillison · Score 4*
+- **2026-09-27** — [Externe Benchmarks: Claude Opus 5.5 überholt Astra von OpenAI und Fable 5.1](2026-09-27-externe-benchmarks-claude-opus-5-5-uberholt-astra-von-openai.md) · *heise · Score 4*
+- **2026-09-27** — [DMEXCO: Wenn der KI-Agent die Kampagne bucht](2026-09-27-dmexco-wenn-der-ki-agent-die-kampagne-bucht.md) · *heise · Score 4*
 - **2026-09-26** — [OpenRouter: from Seed to Stripe — with OpenRouter’s Alex Atallah & AMP’s Anjney Midha](2026-09-26-openrouter-from-seed-to-stripe-with-openrouter-s-alex-atalla.md) · *latentspace · Score 4*
 - **2026-09-26** — [Floci: Locally emulating any cloud service](2026-09-26-floci-locally-emulating-any-cloud-service.md) · *hackernews · Score 5*
 - **2026-09-26** — [First Principles Thinking](2026-09-26-first-principles-thinking.md) · *hackernews · Score 4*
