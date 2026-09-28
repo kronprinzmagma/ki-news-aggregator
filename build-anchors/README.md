@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1263 Einträge** · Top-Quellen: heise (474) · hackernews (366) · simonwillison (215) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1270 Einträge** · Top-Quellen: heise (475) · hackernews (370) · simonwillison (217) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-28** — [Quoting Muse AI Agent](2026-09-28-quoting-muse-ai-agent.md) · *simonwillison · Score 4*
+- **2026-09-28** — [Prompting Claude Opus 5.5](2026-09-28-prompting-claude-opus-5-5.md) · *hackernews · Score 5*
+- **2026-09-28** — [Made by Mechanical Means](2026-09-28-made-by-mechanical-means.md) · *hackernews · Score 5*
+- **2026-09-28** — [Imp is a full port of DSPy to the BEAM](2026-09-28-imp-is-a-full-port-of-dspy-to-the-beam.md) · *hackernews · Score 4*
+- **2026-09-28** — [Fast eine Milliarde Dollar mehr: KI treibt US-Krankenhauskosten in die Höhe](2026-09-28-fast-eine-milliarde-dollar-mehr-ki-treibt-us-krankenhauskost.md) · *heise · Score 4*
+- **2026-09-28** — [Ember-1](2026-09-28-ember-1.md) · *hackernews · Score 4*
+- **2026-09-28** — [Bluesky reply bot checker](2026-09-28-bluesky-reply-bot-checker.md) · *simonwillison · Score 4*
 - **2026-09-27** — [Wasserzeichen für KI-Texte: Anthropic weitet Anwendung aus](2026-09-27-wasserzeichen-fur-ki-texte-anthropic-weitet-anwendung-aus.md) · *heise · Score 4*
 - **2026-09-27** — [OpenAI informiert „dutzende“ Institutionen über unbefugte KI-Interaktionen](2026-09-27-openai-informiert-dutzende-institutionen-uber-unbefugte-ki-i.md) · *heise · Score 4*
 - **2026-09-27** — [Note on 24th September 2026](2026-09-27-note-on-24th-september-2026.md) · *simonwillison · Score 4*
