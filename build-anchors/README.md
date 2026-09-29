@@ -2,10 +2,18 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1270 Einträge** · Top-Quellen: heise (475) · hackernews (370) · simonwillison (217) · latentspace (109) · huggingface (31) · anthropic (21) · golem (17) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1278 Einträge** · Top-Quellen: heise (475) · hackernews (373) · simonwillison (219) · latentspace (111) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-29** — [Quoting @joedaroo](2026-09-29-quoting-joedaroo.md) · *simonwillison · Score 4*
+- **2026-09-29** — [Nvidia wants to put a watchdog chip next to every AI agent](2026-09-29-nvidia-wants-to-put-a-watchdog-chip-next-to-every-ai-agent.md) · *hackernews · Score 4*
+- **2026-09-29** — [Microsoft: Microsoft baut Copilot zur Agentenplattform um](2026-09-29-microsoft-microsoft-baut-copilot-zur-agentenplattform-um.md) · *golem · Score 4*
+- **2026-09-29** — [Jeff – Jev-compatible 0.8B decision models, trained at home, ~30 ms](2026-09-29-jeff-jev-compatible-0-8b-decision-models-trained-at-home-30-.md) · *hackernews · Score 4*
+- **2026-09-29** — [ESP32S3 cluster running 1.58-bit (BitNet) Language model](2026-09-29-esp32s3-cluster-running-1-58-bit-bitnet-language-model.md) · *hackernews · Score 4*
+- **2026-09-29** — [Claude Sonnet 5.5](2026-09-29-claude-sonnet-5-5.md) · *simonwillison · Score 5*
+- **2026-09-29** — [Claude Code’s Next Era — Thariq Shihipar, Anthropic](2026-09-29-claude-code-s-next-era-thariq-shihipar-anthropic.md) · *latentspace · Score 4*
+- **2026-09-29** — [[AINews] AMD buys World Labs for $8.2B, as Atlas solves sparse reconstruction problem for robotics, design and more](2026-09-29-ainews-amd-buys-world-labs-for-8-2b-as-atlas-solves-sparse-r.md) · *latentspace · Score 4*
 - **2026-09-28** — [Quoting Muse AI Agent](2026-09-28-quoting-muse-ai-agent.md) · *simonwillison · Score 4*
 - **2026-09-28** — [Prompting Claude Opus 5.5](2026-09-28-prompting-claude-opus-5-5.md) · *hackernews · Score 5*
 - **2026-09-28** — [Made by Mechanical Means](2026-09-28-made-by-mechanical-means.md) · *hackernews · Score 5*
