@@ -2,10 +2,15 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1278 Einträge** · Top-Quellen: heise (475) · hackernews (373) · simonwillison (219) · latentspace (111) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1283 Einträge** · Top-Quellen: heise (475) · hackernews (376) · simonwillison (220) · latentspace (112) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-09-30** — [Vermont replacing power plants with home batteries](2026-09-30-vermont-replacing-power-plants-with-home-batteries.md) · *hackernews · Score 4*
+- **2026-09-30** — [Quoting Anthropic Frontier Red Team](2026-09-30-quoting-anthropic-frontier-red-team.md) · *simonwillison · Score 4*
+- **2026-09-30** — [Livenerf: Has Opus 5.5 been nerfed yet?](2026-09-30-livenerf-has-opus-5-5-been-nerfed-yet.md) · *hackernews · Score 5*
+- **2026-09-30** — [GPT-6.1 Sol replaces GPT-6 Sol after just 7 days, with near-Astra intelligence](2026-09-30-gpt-6-1-sol-replaces-gpt-6-sol-after-just-7-days-with-near-a.md) · *hackernews · Score 4*
+- **2026-09-30** — [[AINews] OpenAI DevDay 2026: Dots, 6.1 Sol, Ultrafast, Decisions API, Agents API, Spaces, Marketplace, and 1.2 Billion ChatGPT WAU](2026-09-30-ainews-openai-devday-2026-dots-6-1-sol-ultrafast-decisions-a.md) · *latentspace · Score 5*
 - **2026-09-29** — [Quoting @joedaroo](2026-09-29-quoting-joedaroo.md) · *simonwillison · Score 4*
 - **2026-09-29** — [Nvidia wants to put a watchdog chip next to every AI agent](2026-09-29-nvidia-wants-to-put-a-watchdog-chip-next-to-every-ai-agent.md) · *hackernews · Score 4*
 - **2026-09-29** — [Microsoft: Microsoft baut Copilot zur Agentenplattform um](2026-09-29-microsoft-microsoft-baut-copilot-zur-agentenplattform-um.md) · *golem · Score 4*
