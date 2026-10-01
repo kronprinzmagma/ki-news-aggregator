@@ -2,10 +2,26 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1283 Einträge** · Top-Quellen: heise (475) · hackernews (376) · simonwillison (220) · latentspace (112) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (5) · venturebeat (5) · aheadofai (4)
+**1299 Einträge** · Top-Quellen: heise (486) · hackernews (379) · simonwillison (221) · latentspace (112) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-01** — [Zu viele KI-Vorfälle: US-Behörde untersucht Anthropic, METR, OpenAI](2026-10-01-zu-viele-ki-vorfalle-us-behorde-untersucht-anthropic-metr-op.md) · *heise · Score 4*
+- **2026-10-01** — [Play Store: Google testet neue Abomodelle für nutzungsbasierte Abrechnung](2026-10-01-play-store-google-testet-neue-abomodelle-fur-nutzungsbasiert.md) · *heise · Score 4*
+- **2026-10-01** — [Photo Scrubber — local face blur & metadata removal](2026-10-01-photo-scrubber-local-face-blur-metadata-removal.md) · *simonwillison · Score 4*
+- **2026-10-01** — [Mistral eröffnet KI-Standort in München](2026-10-01-mistral-eroffnet-ki-standort-in-munchen.md) · *heise · Score 4*
+- **2026-10-01** — [Milliardendeal: AMD will jungen Spezialisten für 3D-KI-Welten übernehmen](2026-10-01-milliardendeal-amd-will-jungen-spezialisten-fur-3d-ki-welten.md) · *heise · Score 4*
+- **2026-10-01** — [LiveRamp erweitert ChatGPT-Partnerschaft: Was passiert mit Daten?](2026-10-01-liveramp-erweitert-chatgpt-partnerschaft-was-passiert-mit-da.md) · *heise · Score 4*
+- **2026-10-01** — [Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents](2026-10-01-launch-hn-magnitude-yc-s25-self-optimizing-inference-engine-.md) · *hackernews · Score 4*
+- **2026-10-01** — [Last Week in AI #345 - 5 new models, 9 misalignment incidents, some Dots](2026-10-01-last-week-in-ai-345-5-new-models-9-misalignment-incidents-so.md) · *lastweekinai · Score 4*
+- **2026-10-01** — [KI-Tool soll helfen: „Nachhaltigkeit im Krankenhaus muss sich auch rechnen“](2026-10-01-ki-tool-soll-helfen-nachhaltigkeit-im-krankenhaus-muss-sich-.md) · *heise · Score 4*
+- **2026-10-01** — [KI in der Reha: Entlastung bei der Dokumentation, offene Fragen zum Arztberuf](2026-10-01-ki-in-der-reha-entlastung-bei-der-dokumentation-offene-frage.md) · *heise · Score 4*
+- **2026-10-01** — [KI-Agenten vom Anbieter: Schnell gebaut, schwer zu betreiben](2026-10-01-ki-agenten-vom-anbieter-schnell-gebaut-schwer-zu-betreiben.md) · *heise · Score 4*
+- **2026-10-01** — [GPT-6.1 Astra fällt bei Sicherheitstests durch und wird nicht veröffentlicht](2026-10-01-gpt-6-1-astra-fallt-bei-sicherheitstests-durch-und-wird-nich.md) · *heise · Score 4*
+- **2026-10-01** — [Google: Alphabet klagt gegen EU-Anordnungen zu Android und Suche](2026-10-01-google-alphabet-klagt-gegen-eu-anordnungen-zu-android-und-su.md) · *heise · Score 4*
+- **2026-10-01** — [Gemini 4 Argon](2026-10-01-gemini-4-argon.md) · *hackernews · Score 5*
+- **2026-10-01** — [Antrag auf einstweilige Verfügung: ChatGPT soll nicht menschlich wirken](2026-10-01-antrag-auf-einstweilige-verfugung-chatgpt-soll-nicht-menschl.md) · *heise · Score 4*
+- **2026-10-01** — [5x faster Edge Functions: V8 isolates to Firecracker MicroVMs](2026-10-01-5x-faster-edge-functions-v8-isolates-to-firecracker-microvms.md) · *hackernews · Score 4*
 - **2026-09-30** — [Vermont replacing power plants with home batteries](2026-09-30-vermont-replacing-power-plants-with-home-batteries.md) · *hackernews · Score 4*
 - **2026-09-30** — [Quoting Anthropic Frontier Red Team](2026-09-30-quoting-anthropic-frontier-red-team.md) · *simonwillison · Score 4*
 - **2026-09-30** — [Livenerf: Has Opus 5.5 been nerfed yet?](2026-09-30-livenerf-has-opus-5-5-been-nerfed-yet.md) · *hackernews · Score 5*
