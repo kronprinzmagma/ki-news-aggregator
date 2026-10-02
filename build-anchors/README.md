@@ -2,10 +2,21 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1299 Einträge** · Top-Quellen: heise (486) · hackernews (379) · simonwillison (221) · latentspace (112) · huggingface (31) · anthropic (21) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
+**1310 Einträge** · Top-Quellen: heise (486) · hackernews (383) · simonwillison (222) · latentspace (116) · huggingface (32) · anthropic (22) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-02** — [Why Dwarkesh is Wrong about Computer Use + How OpenAI shipped its Jev competitor in 1 Week](2026-10-02-why-dwarkesh-is-wrong-about-computer-use-how-openai-shipped-.md) · *latentspace · Score 5*
+- **2026-10-02** — [Quoting Matthew Green](2026-10-02-quoting-matthew-green.md) · *simonwillison · Score 4*
+- **2026-10-02** — [Pi Durable](2026-10-02-pi-durable.md) · *hackernews · Score 4*
+- **2026-10-02** — [Pi 1.0](2026-10-02-pi-1-0.md) · *hackernews · Score 4*
+- **2026-10-02** — [Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs](2026-10-02-introducing-olmo-core-3-open-scalable-training-infrastructur.md) · *huggingface · Score 5*
+- **2026-10-02** — [Clef: Open-weight decision models, and new RL fine-tuning platform](2026-10-02-clef-open-weight-decision-models-and-new-rl-fine-tuning-plat.md) · *hackernews · Score 5*
+- **2026-10-02** — [Barclays scales Claude to upgrade operations and improve client experience](2026-10-02-barclays-scales-claude-to-upgrade-operations-and-improve-cli.md) · *anthropic · Score 4*
+- **2026-10-02** — [ArXiv's Updated Rate Limit Policy](2026-10-02-arxiv-s-updated-rate-limit-policy.md) · *hackernews · Score 4*
+- **2026-10-02** — [[AINews] Pi 1.0, Pi Durable, and AIE NYC](2026-10-02-ainews-pi-1-0-pi-durable-and-aie-nyc.md) · *latentspace · Score 4*
+- **2026-10-02** — [[AINews] Opus 5.5 is good at explainer videos](2026-10-02-ainews-opus-5-5-is-good-at-explainer-videos.md) · *latentspace · Score 4*
+- **2026-10-02** — [Academia is for Ambition — Alex Zhang, MIT](2026-10-02-academia-is-for-ambition-alex-zhang-mit.md) · *latentspace · Score 4*
 - **2026-10-01** — [Zu viele KI-Vorfälle: US-Behörde untersucht Anthropic, METR, OpenAI](2026-10-01-zu-viele-ki-vorfalle-us-behorde-untersucht-anthropic-metr-op.md) · *heise · Score 4*
 - **2026-10-01** — [Play Store: Google testet neue Abomodelle für nutzungsbasierte Abrechnung](2026-10-01-play-store-google-testet-neue-abomodelle-fur-nutzungsbasiert.md) · *heise · Score 4*
 - **2026-10-01** — [Photo Scrubber — local face blur & metadata removal](2026-10-01-photo-scrubber-local-face-blur-metadata-removal.md) · *simonwillison · Score 4*
