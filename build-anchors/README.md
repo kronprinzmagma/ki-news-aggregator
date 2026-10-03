@@ -2,10 +2,25 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1310 Einträge** · Top-Quellen: heise (486) · hackernews (383) · simonwillison (222) · latentspace (116) · huggingface (32) · anthropic (22) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
+**1325 Einträge** · Top-Quellen: heise (493) · hackernews (388) · simonwillison (222) · latentspace (118) · huggingface (32) · anthropic (23) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-03** — [With most information hidden, the game Stratego had stumped AI until now](2026-10-03-with-most-information-hidden-the-game-stratego-had-stumped-a.md) · *hackernews · Score 4*
+- **2026-10-03** — [Weniger Prompt, mehr Platz für Code: Pi 1.0.0 ist da](2026-10-03-weniger-prompt-mehr-platz-fur-code-pi-1-0-0-ist-da.md) · *heise · Score 4*
+- **2026-10-03** — [Weniger Abhängigkeit von KI-Anbietern: Eclipse startet Sovereign AI Foundation](2026-10-03-weniger-abhangigkeit-von-ki-anbietern-eclipse-startet-sovere.md) · *heise · Score 4*
+- **2026-10-03** — [Updates to Full Disk Access in macOS](2026-10-03-updates-to-full-disk-access-in-macos.md) · *hackernews · Score 4*
+- **2026-10-03** — [QSSR: Sony bringt KI-Upscaling auf die normale Playstation 5](2026-10-03-qssr-sony-bringt-ki-upscaling-auf-die-normale-playstation-5.md) · *heise · Score 4*
+- **2026-10-03** — [One month coding with GLM 5.3 Flash](2026-10-03-one-month-coding-with-glm-5-3-flash.md) · *hackernews · Score 4*
+- **2026-10-03** — [Microsoft erweitert KI-Modellfamilie MAI um drei Audio-Modelle](2026-10-03-microsoft-erweitert-ki-modellfamilie-mai-um-drei-audio-model.md) · *heise · Score 4*
+- **2026-10-03** — [Memory-Safe WebP Decoding](2026-10-03-memory-safe-webp-decoding.md) · *hackernews · Score 4*
+- **2026-10-03** — [KI-Update kompakt: Gemini 4 Argon, Manus Cue, ChatGPT-Werbung, Reha-Kliniken](2026-10-03-ki-update-kompakt-gemini-4-argon-manus-cue-chatgpt-werbung-r.md) · *heise · Score 4*
+- **2026-10-03** — [KI-Übersichten: Google vergütet Publisher – Spanne offenbar enorm](2026-10-03-ki-ubersichten-google-vergutet-publisher-spanne-offenbar-eno.md) · *heise · Score 4*
+- **2026-10-03** — [Inside-Out AI: Rebuilding Airbnb Behind the Scenes and Across the Guest Experience](2026-10-03-inside-out-ai-rebuilding-airbnb-behind-the-scenes-and-across.md) · *latentspace · Score 4*
+- **2026-10-03** — [Cloudflare OHTTP gateway](2026-10-03-cloudflare-ohttp-gateway.md) · *hackernews · Score 4*
+- **2026-10-03** — [Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap](2026-10-03-anthropic-invests-100-million-to-train-10-000-engineers-and-.md) · *anthropic · Score 4*
+- **2026-10-03** — [America.gov: KI-Chatbot für US-Bürger gestartet](2026-10-03-america-gov-ki-chatbot-fur-us-burger-gestartet.md) · *heise · Score 4*
+- **2026-10-03** — [[AINews] not much happened today](2026-10-03-ainews-not-much-happened-today.md) · *latentspace · Score 4*
 - **2026-10-02** — [Why Dwarkesh is Wrong about Computer Use + How OpenAI shipped its Jev competitor in 1 Week](2026-10-02-why-dwarkesh-is-wrong-about-computer-use-how-openai-shipped-.md) · *latentspace · Score 5*
 - **2026-10-02** — [Quoting Matthew Green](2026-10-02-quoting-matthew-green.md) · *simonwillison · Score 4*
 - **2026-10-02** — [Pi Durable](2026-10-02-pi-durable.md) · *hackernews · Score 4*
