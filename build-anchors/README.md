@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1325 Einträge** · Top-Quellen: heise (493) · hackernews (388) · simonwillison (222) · latentspace (118) · huggingface (32) · anthropic (23) · golem (18) · interconnects (16) · lastweekinai (6) · venturebeat (5) · aheadofai (4)
+**1332 Einträge** · Top-Quellen: heise (495) · hackernews (391) · simonwillison (223) · latentspace (118) · huggingface (32) · anthropic (23) · golem (18) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-04** — [We want you to build the next Git platform on Cloudflare](2026-10-04-we-want-you-to-build-the-next-git-platform-on-cloudflare.md) · *hackernews · Score 4*
+- **2026-10-04** — [We're going to need default hard budget caps on pretty much everything](2026-10-04-we-re-going-to-need-default-hard-budget-caps-on-pretty-much-.md) · *simonwillison · Score 4*
+- **2026-10-04** — [Nvidias DGX Spark wird trotz halbiertem RAM teurer](2026-10-04-nvidias-dgx-spark-wird-trotz-halbiertem-ram-teurer.md) · *heise · Score 4*
+- **2026-10-04** — [Missing Link: Our Best Machines – Was bin ich ohne meinen KI-Assistenten?](2026-10-04-missing-link-our-best-machines-was-bin-ich-ohne-meinen-ki-as.md) · *heise · Score 4*
+- **2026-10-04** — [LWiAI Podcast #258 - Opus 5.5, Sol and Luna, Muse, DeepSeek-V4.1-Flash, Xi](2026-10-04-lwiai-podcast-258-opus-5-5-sol-and-luna-muse-deepseek-v4-1-f.md) · *lastweekinai · Score 4*
+- **2026-10-04** — [How to hack time, with C2PA](2026-10-04-how-to-hack-time-with-c2pa.md) · *hackernews · Score 4*
+- **2026-10-04** — [Agents don't need memory, they need documentation](2026-10-04-agents-don-t-need-memory-they-need-documentation.md) · *hackernews · Score 4*
 - **2026-10-03** — [With most information hidden, the game Stratego had stumped AI until now](2026-10-03-with-most-information-hidden-the-game-stratego-had-stumped-a.md) · *hackernews · Score 4*
 - **2026-10-03** — [Weniger Prompt, mehr Platz für Code: Pi 1.0.0 ist da](2026-10-03-weniger-prompt-mehr-platz-fur-code-pi-1-0-0-ist-da.md) · *heise · Score 4*
 - **2026-10-03** — [Weniger Abhängigkeit von KI-Anbietern: Eclipse startet Sovereign AI Foundation](2026-10-03-weniger-abhangigkeit-von-ki-anbietern-eclipse-startet-sovere.md) · *heise · Score 4*
