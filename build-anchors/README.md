@@ -2,10 +2,14 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1332 Einträge** · Top-Quellen: heise (495) · hackernews (391) · simonwillison (223) · latentspace (118) · huggingface (32) · anthropic (23) · golem (18) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1336 Einträge** · Top-Quellen: heise (495) · hackernews (393) · simonwillison (223) · latentspace (118) · huggingface (32) · anthropic (23) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-05** — [Web Search API](2026-10-05-web-search-api.md) · *hackernews · Score 4*
+- **2026-10-05** — [Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s](2026-10-05-run-qwen-3-8-flash-next-125b-on-consumer-hardware-rtx-4090-a.md) · *hackernews · Score 5*
+- **2026-10-05** — [(g+) Open-Source-KI-Agent im Selbstversuch: Schickt mich Hermes als ITler in Fr�hrente?](2026-10-05-g-open-source-ki-agent-im-selbstversuch-schickt-mich-hermes-.md) · *golem · Score 4*
+- **2026-10-05** — [78 Milliarden Parameter: Aleph Alpha ver�ffentlicht KI-Modell mit Deutsch-Schwerpunkt](2026-10-05-78-milliarden-parameter-aleph-alpha-ver-ffentlicht-ki-modell.md) · *golem · Score 4*
 - **2026-10-04** — [We want you to build the next Git platform on Cloudflare](2026-10-04-we-want-you-to-build-the-next-git-platform-on-cloudflare.md) · *hackernews · Score 4*
 - **2026-10-04** — [We're going to need default hard budget caps on pretty much everything](2026-10-04-we-re-going-to-need-default-hard-budget-caps-on-pretty-much-.md) · *simonwillison · Score 4*
 - **2026-10-04** — [Nvidias DGX Spark wird trotz halbiertem RAM teurer](2026-10-04-nvidias-dgx-spark-wird-trotz-halbiertem-ram-teurer.md) · *heise · Score 4*
