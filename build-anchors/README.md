@@ -2,10 +2,17 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1336 Einträge** · Top-Quellen: heise (495) · hackernews (393) · simonwillison (223) · latentspace (118) · huggingface (32) · anthropic (23) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1343 Einträge** · Top-Quellen: heise (495) · hackernews (397) · simonwillison (225) · latentspace (119) · huggingface (32) · anthropic (23) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-06** — [Why Common Lisp is now the best programming language](2026-10-06-why-common-lisp-is-now-the-best-programming-language.md) · *hackernews · Score 4*
+- **2026-10-06** — [Qwen3.8 27B addition in words](2026-10-06-qwen3-8-27b-addition-in-words.md) · *simonwillison · Score 4*
+- **2026-10-06** — [Quoting Felix Rieseberg](2026-10-06-quoting-felix-rieseberg.md) · *simonwillison · Score 4*
+- **2026-10-06** — [Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates](2026-10-06-opus-5-5-agents-discover-two-room-temperature-magnetic-semic.md) · *hackernews · Score 4*
+- **2026-10-06** — [Dust: Pretraining Transformers Without Backpropagation](2026-10-06-dust-pretraining-transformers-without-backpropagation.md) · *hackernews · Score 4*
+- **2026-10-06** — [ChatGPT is adding real cartoonists' signatures to fake New Yorker cartoons](2026-10-06-chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yo.md) · *hackernews · Score 4*
+- **2026-10-06** — [[AINews] Reflection Beam - 501B-A23B American Open Model](2026-10-06-ainews-reflection-beam-501b-a23b-american-open-model.md) · *latentspace · Score 4*
 - **2026-10-05** — [Web Search API](2026-10-05-web-search-api.md) · *hackernews · Score 4*
 - **2026-10-05** — [Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s](2026-10-05-run-qwen-3-8-flash-next-125b-on-consumer-hardware-rtx-4090-a.md) · *hackernews · Score 5*
 - **2026-10-05** — [(g+) Open-Source-KI-Agent im Selbstversuch: Schickt mich Hermes als ITler in Fr�hrente?](2026-10-05-g-open-source-ki-agent-im-selbstversuch-schickt-mich-hermes-.md) · *golem · Score 4*
