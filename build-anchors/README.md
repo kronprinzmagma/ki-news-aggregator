@@ -2,10 +2,37 @@
 
 Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
 
-**1343 Einträge** · Top-Quellen: heise (495) · hackernews (397) · simonwillison (225) · latentspace (119) · huggingface (32) · anthropic (23) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1370 Einträge** · Top-Quellen: heise (514) · hackernews (397) · simonwillison (232) · latentspace (119) · huggingface (32) · anthropic (24) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-07** — [Using Parseable with Datasette for OpenTelemetry traces](2026-10-07-using-parseable-with-datasette-for-opentelemetry-traces.md) · *simonwillison · Score 4*
+- **2026-10-07** — [Streit mit der EU: Siri AI frühestens in Monaten auf iPhone und iPad](2026-10-07-streit-mit-der-eu-siri-ai-fruhestens-in-monaten-auf-iphone-u.md) · *heise · Score 4*
+- **2026-10-07** — [Sogar Chatverläufe: KI-Anbieter geben Daten ihrer Nutzer weiter](2026-10-07-sogar-chatverlaufe-ki-anbieter-geben-daten-ihrer-nutzer-weit.md) · *heise · Score 5*
+- **2026-10-07** — [Scrimshaw Jukebox](2026-10-07-scrimshaw-jukebox.md) · *simonwillison · Score 4*
+- **2026-10-07** — [Sammelklage gegen McDonald’s: KI-Preise sollen Kartellrecht verletzen](2026-10-07-sammelklage-gegen-mcdonald-s-ki-preise-sollen-kartellrecht-v.md) · *heise · Score 4*
+- **2026-10-07** — [OpenAI versieht KI-Text mit Wasserzeichen – aber nur in der EU](2026-10-07-openai-versieht-ki-text-mit-wasserzeichen-aber-nur-in-der-eu.md) · *heise · Score 4*
+- **2026-10-07** — [OpenAI “rogue” agent activities found on Wikimedia projects](2026-10-07-openai-rogue-agent-activities-found-on-wikimedia-projects.md) · *simonwillison · Score 4*
+- **2026-10-07** — [Lokale KI auf dem Mac: Ollama nutzt MLX als Standard](2026-10-07-lokale-ki-auf-dem-mac-ollama-nutzt-mlx-als-standard.md) · *heise · Score 4*
+- **2026-10-07** — [llm-openai-decisions 0.1a0](2026-10-07-llm-openai-decisions-0-1a0.md) · *simonwillison · Score 5*
+- **2026-10-07** — [llm-mistral 0.16](2026-10-07-llm-mistral-0-16.md) · *simonwillison · Score 4*
+- **2026-10-07** — [KI-Schäden: Versicherer prüfen Kosten und investieren](2026-10-07-ki-schaden-versicherer-prufen-kosten-und-investieren.md) · *heise · Score 4*
+- **2026-10-07** — [KI-Rezepte: In den USA darf eine KI nun Akne-Medikamente verschreiben](2026-10-07-ki-rezepte-in-den-usa-darf-eine-ki-nun-akne-medikamente-vers.md) · *heise · Score 4*
+- **2026-10-07** — [KI-Brillen: Norwegen will zeitweiliges Verbot an ausgewählten Orten einführen](2026-10-07-ki-brillen-norwegen-will-zeitweiliges-verbot-an-ausgewahlten.md) · *heise · Score 4*
+- **2026-10-07** — [Kalifornien zwingt OpenAI zur Herausgabe von Hugging-Face-Akten](2026-10-07-kalifornien-zwingt-openai-zur-herausgabe-von-hugging-face-ak.md) · *heise · Score 4*
+- **2026-10-07** — [Introducing Mistral Large 4: Le chonk](2026-10-07-introducing-mistral-large-4-le-chonk.md) · *simonwillison · Score 4*
+- **2026-10-07** — [Inhalte bearbeitet: Auch Wikipedia war das Ziel „ausgebrochener“ KI-Agenten](2026-10-07-inhalte-bearbeitet-auch-wikipedia-war-das-ziel-ausgebrochene.md) · *heise · Score 4*
+- **2026-10-07** — [IBM Bob: COBOL trifft KI – ohne Umweg über die Cloud](2026-10-07-ibm-bob-cobol-trifft-ki-ohne-umweg-uber-die-cloud.md) · *heise · Score 4*
+- **2026-10-07** — [Google: Gemini-Pro-Modelle erfordern ab Oktober ein AI-Pro-Abo](2026-10-07-google-gemini-pro-modelle-erfordern-ab-oktober-ein-ai-pro-ab.md) · *heise · Score 4*
+- **2026-10-07** — [Expanding the Cyber Verification Program](2026-10-07-expanding-the-cyber-verification-program.md) · *anthropic · Score 4*
+- **2026-10-07** — [Existenzielle Gefahr: Flut an KI-generierten Einreichungen bedroht arXiv](2026-10-07-existenzielle-gefahr-flut-an-ki-generierten-einreichungen-be.md) · *heise · Score 4*
+- **2026-10-07** — [EmbeddingGemma 2](2026-10-07-embeddinggemma-2.md) · *simonwillison · Score 4*
+- **2026-10-07** — [Copilot auf Platz eins: GitHub stellt neuen Review-Benchmark vor](2026-10-07-copilot-auf-platz-eins-github-stellt-neuen-review-benchmark-.md) · *heise · Score 4*
+- **2026-10-07** — [ChatGPT-App für macOS: Angreifer konnten sensible Daten einsehen – wie bei Muse](2026-10-07-chatgpt-app-fur-macos-angreifer-konnten-sensible-daten-einse.md) · *heise · Score 4*
+- **2026-10-07** — [BMW streicht Managementebenen und setzt auf agentische KI-Systeme](2026-10-07-bmw-streicht-managementebenen-und-setzt-auf-agentische-ki-sy.md) · *heise · Score 4*
+- **2026-10-07** — [Apple Health wird zum Fitness-Influencer | Mac & i-Podcast](2026-10-07-apple-health-wird-zum-fitness-influencer-mac-i-podcast.md) · *heise · Score 4*
+- **2026-10-07** — [Anthropic: Pentagon vollendet Abschied, Meta und Microsoft schränken Nutzung ein](2026-10-07-anthropic-pentagon-vollendet-abschied-meta-und-microsoft-sch.md) · *heise · Score 4*
+- **2026-10-07** — [Anthropic bündelt Cyberprogramme und führt drei Zugriffsstufen ein](2026-10-07-anthropic-bundelt-cyberprogramme-und-fuhrt-drei-zugriffsstuf.md) · *heise · Score 4*
 - **2026-10-06** — [Why Common Lisp is now the best programming language](2026-10-06-why-common-lisp-is-now-the-best-programming-language.md) · *hackernews · Score 4*
 - **2026-10-06** — [Qwen3.8 27B addition in words](2026-10-06-qwen3-8-27b-addition-in-words.md) · *simonwillison · Score 4*
 - **2026-10-06** — [Quoting Felix Rieseberg](2026-10-06-quoting-felix-rieseberg.md) · *simonwillison · Score 4*
