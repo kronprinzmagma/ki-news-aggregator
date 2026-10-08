@@ -1,6 +1,6 @@
 # Review vor der NZZ-Demo
 
-Stand: 8. Oktober 2026. Review des öffentlichen GitHub-Repositories, der Produktionsartefakte und veröffentlichter Artikel. Keine Änderungen an Code, Prompts, Workflows oder veröffentlichten Ausgaben.
+Historischer Review vor den Korrekturen am 8. Oktober 2026: öffentliches GitHub-Repository, Produktionsartefakte und veröffentlichte Artikel. Die folgenden Befunde beschreiben den damaligen Zustand. Umgesetzte Korrekturen und verbleibende Grenzen stehen im [Abschlussbericht](CLEANUP.md).
 
 **Urteil:** Als funktionierender Prototyp ist das Projekt vorführbar. Als redaktionell verlässlich geprüfter KI-News-Dienst ist es derzeit noch nicht überzeugend abgesichert. Der wichtigste Mangel ist eine Qualitätskontrolle, die leere Ergebnisse als unauffälligen Review darstellt. Hinzu kommen nachweisbare Fehler in einzelnen Artikeln und eine Auswahlheuristik, die schwächere Meldungen aufgrund beliebiger Wortüberschneidungen veröffentlicht.
 

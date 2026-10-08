@@ -9,8 +9,8 @@
   "n_failed": 0,
   "metrics": {
     "mae": 0.563,
-    "pearson_r": 0.7894,
-    "accuracy_at_1": 0.938
+    "pearson_r": 0.845,
+    "accuracy_at_1": 0.875
   },
   "score_distribution": {
     "human": {
@@ -22,10 +22,9 @@
     },
     "model": {
       "1": 1,
-      "2": 5,
-      "3": 2,
-      "4": 7,
-      "5": 1
+      "2": 8,
+      "3": 1,
+      "4": 6
     }
   },
   "details": [
@@ -34,11 +33,11 @@
       "url": "https://simonwillison.net/2026/Oct/6/llm-openai-decisions/",
       "quelle": "simonwillison",
       "human_score": 2,
-      "model_score": 3,
-      "begründung": "OpenAI veröffentlicht eine neue Decisions API für strukturierte Klassifizierung (yes/no, choices, scores) mit Bild-Support und 10x schnellerem Output; der llm-openai-decisions Plugin ermöglicht lokale Integration, bleibt aber ein technisches Tool für Entwickler mit speziellen API-Workflows und ohne nachvollziehbare Auswirkung auf die alltägliche Produktnutzung dieser Produktperson.",
+      "model_score": 2,
+      "begründung": "Simon Willison veröffentlicht ein CLI-Plugin für strukturierte KI-Entscheidungen; für eine Produktperson ohne Engineering-Setup zu speziell und ohne belegten Nutzen außer der technischen Kapselung.",
       "strategy_only": false,
       "pre_filtered": null,
-      "diff": 1,
+      "diff": 0,
       "error": null
     },
     {
@@ -47,7 +46,7 @@
       "quelle": "simonwillison",
       "human_score": 2,
       "model_score": 2,
-      "begründung": "Simon Willison zeigt eine technische Integrationsmöglichkeit zwischen Parseable und Datasette über OpenTelemetry, aber ohne Mehrwert für eine Produktperson ohne Engineering-Wissen: Das ist Infrastruktur-Setup (Observability-Tool), nicht nachvollziehbar relevant für KI-Produktnutzung oder -entscheidungen.",
+      "begründung": "Datasette + Parseable für OpenTelemetry-Traces ist eine DevOps-/Infrastruktur-Integration für Software-Operatoren, nicht für Produktentwicklung oder KI-Nutzung relevant: keine neuen KI-Fähigkeiten, keine Produktkonsequenzen, keine Nutzer-Sichtbarkeit.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -59,7 +58,7 @@
       "quelle": "hackernews",
       "human_score": 1,
       "model_score": 1,
-      "begründung": "Programmiersprache-Advocacy für Common Lisp im Kontext von LLMs, ohne konkrete neue Funktionen, Nutzererfahrungen oder nachvollziehbare Produktveränderungen für eine Non-Engineer Produktperson – reine technische Debatte über Sprachdesign.",
+      "begründung": "Reiner Sprachenvergleich für Entwickler ohne KI-Produktkonsequenzen; nicht relevant für Produktperson ohne Engineering-Fokus.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -71,7 +70,7 @@
       "quelle": "hackernews",
       "human_score": 2,
       "model_score": 2,
-      "begründung": "Dust ist ein Forschungsansatz zu Alternativen für Backpropagation; ohne konkrete Verfügbarkeit, Framework-Integration oder nutzbare Implementierung bleibt es ein akademisches Benchmark-Thema ohne direkten Produktnutzen für diese Produktperson.",
+      "begründung": "Dust ist eine Forschungsmethode zum Training von Transformern ohne Backpropagation – ein reines Machine-Learning-Infrastruktur-Paper ohne neue Nutzer-Features, keine produktnahe Veränderung für Claude-Nutzer oder Produktverantwortliche, die nicht selbst Modelle trainieren.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -83,7 +82,7 @@
       "quelle": "simonwillison",
       "human_score": 3,
       "model_score": 2,
-      "begründung": "Ein Hobbyexperiment zum Zahladdieren mit lokalen Modellen; für eine Produktperson ohne Engineering-Setup völlig unverwertbar, da weder neue Funktionen noch Nutzer- oder Kostenveränderungen entstehen.",
+      "begründung": "Simon Willison testet Qwen 3.8 auf Addieraufgaben mit ausgeschriebenen Zahlen – ein sehr enges Benchmark ohne Produktrelevanz für die Zielgruppe, da weder eine neue nutzbare Funktion noch ein Vertrauens- oder Kostenproblem belegt ist.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": -1,
@@ -95,7 +94,7 @@
       "quelle": "latentspace",
       "human_score": 3,
       "model_score": 2,
-      "begründung": "Reflection Beam ist ein neues Open-Weight-Modell, aber die Ankündigung bleibt fragmentarisch: Vergleiche zu veralteten Baselines (Inkling, GLM 5.2), technische Metriken ohne konkrete Anwendungsvorhersagen, unklar wann Download/Integration tatsächlich verfügbar ist. Für eine Produktperson ohne Engineering kein unmittelbar nutzbarer Erkenntnisgewinn, zu viel Fachdiskurs über MFU und Architektur, zu wenig darüber, was sich praktisch für KI-Nutzung oder eigene Modellwahl ändert.",
+      "begründung": "Reflection Beam ist ein neues Open-Weights-Modell; der Artikel enthält aber nur Modellgrösse und generische Benchmark-Ergebnisse ohne konkrete Nutzerfunktionen, nachvollziehbare Kosten-/Zugangsänderung oder beobachtbare Produktveränderungen für diese Produktperson.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": -1,
@@ -106,11 +105,11 @@
       "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
       "quelle": "simonwillison",
       "human_score": 2,
-      "model_score": 4,
-      "begründung": "Anthropic verlagert Cowork-Inference in die Cloud statt auf Nutzergeräte: weniger Ressourcen lokal, ständiges Laufen, Nutzbarkeit auch vom Smartphone – konkrete Verbesserung für alltägliche Produktivitätsnutzung mit Claude.",
+      "model_score": 2,
+      "begründung": "Ein kurzes Zitat über Computer-Use-Features ohne konkrete Infos zu Verfügbarkeit, Kosten oder nachvollziehbarem Produktnutzen für die Zielgruppe – zu dünn für praktische Produktentscheidungen.",
       "strategy_only": false,
       "pre_filtered": null,
-      "diff": 2,
+      "diff": 0,
       "error": null
     },
     {
@@ -119,7 +118,7 @@
       "quelle": "simonwillison",
       "human_score": 2,
       "model_score": 2,
-      "begründung": "llm-mistral Plugin erhält Unterstützung für Reasoning-Modelle wie Mistral Large 4; zu speziell für eine Produktperson ohne Entwickler-Setup, kein nachvollziehbarer Unterschied für Claude-Nutzer.",
+      "begründung": "Plugin-Versionsbump für ein Entwicklerwerkzeug; ohne konkrete neue Nutzenfähigkeit oder Verhaltensänderung für Produktentscheidungen nicht relevant.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -130,11 +129,11 @@
       "url": "https://www.heise.de/news/Google-bezahlt-offenbar-rund-100-Publisher-fuer-KI-Antworten-in-der-Suche-11473155.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
       "quelle": "heise",
       "human_score": 5,
-      "model_score": 4,
-      "begründung": "Google zahlt Publishers erstmals für KI-Inhalte mit massiv schwankender Spanne (unter 1.000 bis über 1 Million USD), was zeigt, dass Medienprodukte von KI-generierten Zusammenfassungen unterschiedlich profitieren und Verhandlungsspielraum haben – relevant für Content-Strategien und die Frage, wie wertvoll eigene Inhalte für KI-Systeme sind.",
+      "model_score": 3,
+      "begründung": "Google zahlt Publisher für KI-Übersichten, doch die Berechnung bleibt intransparent und die berichteten Spannen sind zu dünn dokumentiert – für Produktentscheidungen dieser Person zu vage und spekulativ.",
       "strategy_only": true,
       "pre_filtered": null,
-      "diff": -1,
+      "diff": -2,
       "error": null
     },
     {
@@ -143,7 +142,7 @@
       "quelle": "hackernews",
       "human_score": 5,
       "model_score": 4,
-      "begründung": "ChatGPT reproduziert real existierende Künstlersignaturen auf gefälschten Cartoons, was ein konkretes Vertrauens- und Authentizitätsproblem für Nutzer und Medienprodukte schafft: Man kann nicht mehr verlässlich unterscheiden, wer einen Inhalt tatsächlich gemacht hat.",
+      "begründung": "OpenAI generiert Cartoons mit gefälschten Künstlersignaturen echter Zeichner – ein konkretes Vertrauens- und Urheberrechtsproblem, das zeigt, wie KI-Outputs die Produktneutralität und Glaubwürdigkeit untergraben und auch nach Meldung nicht behoben wird.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": -1,
@@ -154,11 +153,11 @@
       "url": "https://www.heise.de/news/Diese-Daten-geben-ChatGPT-Gemini-Claude-und-Co-ueber-uns-an-Dritte-11476698.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
       "quelle": "heise",
       "human_score": 5,
-      "model_score": 5,
-      "begründung": "Alle neun KI-Anbieter (ChatGPT, Claude, Gemini, Grok, DeepSeek, Perplexity, Le Chat, Meta AI, Copilot) geben Chatverläufe und persönliche Gesprächsinhalte (Gesundheit, Finanzen, Standort) an Werbetracker und Drittanbieter weiter – teilweise mit vollständiger Nachverfolgbarkeit durch persistent Identifiers, auch im Inkognito-Modus. Dies ist eine konkrete, überprüfbare Vertrauens- und Datenschutzveränderung, die für jede Produktperson, die diese Tools nutzt oder empfiehlt, unmittelbar handlungsrelevant ist.",
+      "model_score": 4,
+      "begründung": "Studie dokumentiert, dass Claude und ChatGPT Chatverläufe an externe Dienste weitergeben – eine konkrete Vertrauensfrage, die diese Produktperson direkt bei der Entscheidung über sensible Eingaben beeinflussen sollte, auch wenn die Studie noch nicht begutachtet ist.",
       "strategy_only": false,
       "pre_filtered": null,
-      "diff": 0,
+      "diff": -1,
       "error": null
     },
     {
@@ -167,7 +166,7 @@
       "quelle": "simonwillison",
       "human_score": 5,
       "model_score": 4,
-      "begründung": "AWS hat endlich harte Ausgabenlimits mit automatischer Unterbrechung eingeführt – genau das, was KI-Agenten-Nutzende brauchen, um Überraschungsrechnungen zu vermeiden. Konkrete neue Kontrollierbarkeit für persönliche Projekte und experimentelle Workloads.",
+      "begründung": "Simon Willison fordert harte Kostendeckel für nutzungsabhängig abgerechnete Dienste als Schutz vor autonomen KI-Überlastungskosten; AWS und Google Cloud bieten solche Limits bereits an, was eine konkrete neue Option für Produktmacher bedeutet, die KI-Agenten einsetzen, um unkontrollierte Rechnungen zu vermeiden.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": -1,
@@ -178,11 +177,11 @@
       "url": "https://www.anthropic.com/news/barclays-scales-claude",
       "quelle": "anthropic",
       "human_score": 4,
-      "model_score": 3,
-      "begründung": "Barclays skaliert Claude intern für Softwareentwicklung und Legacy-Modernisierung; eine glaubwürdige Enterprise-Fallstudie, aber ohne konkrete neue Funktionen, Zugangsänderungen oder nachprüfbare Produktkonsequenzen für die Produktperson selbst.",
+      "model_score": 2,
+      "begründung": "Barclays nutzt Claude intern für E-Mail-Klassifizierung und Mitarbeiter-Support – konkrete Anwendung, aber für diese Produktperson ohne einsehbare Nutzungsmetriken, Kosten-Effekte oder nachvollziehbare Konsequenzen für eigene Produkte nicht verwertbar; reine Erfolgsgeschichte eines Anbieters ohne neue Erkenntnisse zum Produkteinsatz.",
       "strategy_only": true,
       "pre_filtered": null,
-      "diff": -1,
+      "diff": -2,
       "error": null
     },
     {
@@ -191,7 +190,7 @@
       "quelle": "simonwillison",
       "human_score": 4,
       "model_score": 4,
-      "begründung": "Simon Willison baute mit Claude Opus 5.5 ein lokales Web-Tool zur automatischen Gesichtsunkenntlichmachung und Metadaten-Entfernung – direkt nutzbar für Produktmanager, die Fotos mit Privatspäre-Anforderungen teilen möchten, ohne Server-Upload.",
+      "begründung": "Photo Scrubber ermöglicht direktes Verwischen von Gesichtern und Metadaten-Entfernung im Browser – ein konkreter, sofort nutzbarer Privacy-Schutz beim Bildteilen ohne Server-Upload oder technisches Setup.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -203,7 +202,7 @@
       "quelle": "hackernews",
       "human_score": 4,
       "model_score": 4,
-      "begründung": "Sicherheitsforscher David Buchanan zeigt einen konkreten Vertrauensbruch: C2PA-Metadaten, die als kryptographisch unfälschbar vermarktet werden, können manipuliert werden – mit praktischem Beweis (gefälschtes Lotto-Gewinn-Bild mit korrektem Zeitstempel). Produktperson muss verstehen, dass C2PA-Authentifizierung für Bilder nicht das leistet, was Nutzer erwarten.",
+      "begründung": "David Buchanan demonstriert eine praktische Sicherheitslücke in C2PA: Bilder lassen sich manipulieren, während der Herkunftsnachweis und Zeitstempel gültig bleiben – eine konkrete Vertrauensfrage für Produktpersonen, die auf visuellen Beweis oder Authentizität als Nutzerversprechen setzen.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -215,7 +214,7 @@
       "quelle": "heise",
       "human_score": 4,
       "model_score": 4,
-      "begründung": "OpenAI führt Textgrain-Wasserzeichen in der EU ein, um KI-generierte Texte erkennbar zu machen – eine konkrete Compliance-Massnahme mit praktischer Konsequenz: In der EU werden ChatGPT-Outputs ab sofort gekennzeichnet, ausserhalb nicht, und API-Kunden müssen es manuell aktivieren. Für Produktpersonen relevant, um nachvollziehen zu können, ob und wie eigene KI-Inhalte gekennzeichnet werden und welche Erkennungsquoten bei unterschiedlichen Texttypen erwartet werden können.",
+      "begründung": "OpenAI führt Textgrain-Wasserzeichen in der EU ein – eine konkrete, regulatorisch getriebene Änderung, die Produktpersonen verstehen müssen: Es markiert KI-Text unsichtbar, der Detektor kommt später, Grenzen sind klar (kurze/bearbeitete Texte entgehen dem System), rechtliche und Vertrauens-Implikationen sind nachvollziehbar.",
       "strategy_only": false,
       "pre_filtered": null,
       "diff": 0,
@@ -225,24 +224,26 @@
   "usage": {
     "totals": {
       "calls": 16,
-      "input_tokens": 38872,
-      "output_tokens": 2681,
+      "input_tokens": 31968,
+      "output_tokens": 2313,
       "cache_read_input_tokens": 0,
       "cache_creation_input_tokens": 0,
-      "usd": 0.052277
+      "usd": 0.043533
     },
     "by_log_tag": [
       {
         "log_tag": "score-eval",
         "model": "claude-haiku-4-5-20251001",
         "calls": 16,
-        "input_tokens": 38872,
-        "output_tokens": 2681,
+        "input_tokens": 31968,
+        "output_tokens": 2313,
         "cache_read_input_tokens": 0,
         "cache_creation_input_tokens": 0,
-        "usd": 0.052277
+        "usd": 0.043533
       }
     ],
     "cache_hit_rate": 0
-  }
+  },
+  "input_origin": "editorial-source-summary-2026-10-08",
+  "interpretation": "Redaktionelle Relevanz-Kalibrierung; kein unabhängiger menschlicher Goldstandard. human_score/human sind historische Feldnamen für reference_score/Referenzverteilung."
 }

@@ -7,6 +7,9 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 # Working Map
 
+- `reviews/2026-10-08/REVIEW.md`: ursprünglicher NZZ-Review, historischer Zustand.
+- `reviews/2026-10-08/CLEANUP.md`: umgesetzte Redaktion-/GitHub-Korrekturen und verbleibende Grenzen.
+
 Diese Datei ist eine knappe Orientierung für die aktuelle Arbeit. Keine vollständige Projektinventur.
 
 ## Immer relevant für den aktuellen Stand

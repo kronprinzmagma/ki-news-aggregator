@@ -2,6 +2,9 @@
 
 > 🤖 **KI-generierter Inhalt.** Auswahl und Zusammenfassungen beruhen auf den verlinkten Originalquellen.
 
+🎧 **Audio-Version:** [anhören / herunterladen](https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-07.mp3) · ~3 Min.
+
+
 Heute 3 ausgewählte Nachrichten: Studie: Chatbots geben Daten an externe Dienste weiter; ChatGPT bekommt in der EU ein unsichtbares Textwasserzeichen; Utah erlaubt KI-Rezepte für Akne-Medikamente.
 
 ---

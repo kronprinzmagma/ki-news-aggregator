@@ -1,6 +1,6 @@
 ## Relevanzprofil ab 8. Oktober 2026
 
-CI verwendet `EVAL_DATASET=pm-baseline.json`: 16 ausgewogene Fälle mit `reference_score` und expliziter Begründung für den nicht-technischen Produktleser. Diese Labels wurden redaktionell aus dem aktuellen Nutzerauftrag abgeleitet und sind als `editorial-calibration-2026-10-08` gekennzeichnet. Sie sind kein unabhängiger menschlicher Goldstandard. Positive Fälle: Datenschutz, Medienherkunft, Vergütung, praktische Kostenkontrolle; negative Fälle: Plugin-Versionen, Telemetrie, Programmiersprachen und reine Trainingsdetails.
+CI verwendet `EVAL_DATASET=pm-baseline.json`: 16 ausgewogene Fälle mit `reference_score` und expliziter Begründung für den nicht-technischen Produktleser. Die Testeingaben sind kurze redaktionelle Zusammenfassungen der verlinkten Quellen, keine archivierten Volltexte. Sie prüfen die Relevanz-Kalibrierung, nicht die Volltextverarbeitung oder Quellentreue. Diese Labels wurden redaktionell aus dem aktuellen Nutzerauftrag abgeleitet und sind als `editorial-calibration-2026-10-08` gekennzeichnet. Sie sind kein unabhängiger menschlicher Goldstandard. Positive Fälle: Datenschutz, Medienherkunft, Vergütung, praktische Kostenkontrolle; negative Fälle: Plugin-Versionen, Telemetrie, Programmiersprachen und reine Trainingsdetails.
 
 `node evals/run_eval.js` ohne Variable prüft weiterhin die unveränderten 38 historischen Nutzerlabels. Deren technische Persona passt teilweise nicht mehr: Das absichtliche Herabstufen von Plugin-Meldungen kann dort eine Regression auslösen. Die MAE-Grenze 1.5 bleibt in beiden Fällen gleich. Reports nennen Datensatz und Label-Ursprung; der separate PM-Report überschreibt den historischen Report nicht. Neue Nutzerbewertungen bleiben erforderlich, um die Kalibrierung unabhängig zu prüfen.
 
@@ -17,7 +17,7 @@ Zwei Evals laufen unabhängig voneinander auf unterschiedlichen Pipeline-Stufen:
 
 | Eval | Datei | Pipeline-Stufe | Frage |
 |---|---|---|---|
-| Scoring-Eval | `run_eval.js` | Score-Stufe | Stimmen Modell-Scores mit menschlich vergebenen Goldstandard-Scores überein? |
+| Scoring-Eval | `run_eval.js` | Score-Stufe | Stimmen Modell-Scores mit den Referenzbewertungen des gewählten Datensatzes überein? |
 | Deliver-Eval | `deliver_eval.js` | Deliver-Stufe | Sind die geschriebenen 3-Block-Aufbereitungen faktentreu zum Source-Text und stilistisch sauber? |
 
 ---
@@ -27,9 +27,9 @@ Zwei Evals laufen unabhängig voneinander auf unterschiedlichen Pipeline-Stufen:
 Der Aggregator bewertet täglich KI-News-Artikel mit einem Score von 1–5. Dieser Score entscheidet, welche Artikel im täglichen GitHub-Issue landen. Wenn der Scoring-Prompt schlecht kalibriert ist, entstehen zwei Probleme:
 
 - **False positives:** Irrelevante Artikel (Funding-Meldungen, Marketing) kommen durch
-- **False negatives:** Gute technische Artikel werden aussortiert
+- **False negatives:** Für den Leser relevante Nachrichten werden aussortiert
 
-Das Eval misst, wie gut das Modell mit den eigenen Urteilen übereinstimmt, die manuell auf einem Goldstandard vergeben wurden.
+Das Eval misst die Übereinstimmung mit den Referenzbewertungen. Historisches Nutzerfeedback und die redaktionelle PM-Kalibrierung haben unterschiedliche Herkunft; Details stehen oben.
 
 `run_eval.js` importiert denselben Scoring-Pfad aus `lib/scoring.js` wie `score.js`: Prompt, Tool-Schema, Input-Truncation und deterministische Prefilter bleiben dadurch gekoppelt. `run_eval.py` existiert nur noch als Kompatibilitaets-Wrapper fuer alte lokale Befehle.
 
