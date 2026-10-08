@@ -51,9 +51,10 @@ function ghRequest(pathSuffix, accept = 'application/vnd.github+json') {
         'X-GitHub-Api-Version': '2022-11-28',
       },
     }, res => {
-      let data = '';
-      res.on('data', c => data += c);
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf8');
         if (res.statusCode >= 400) return reject(new Error(`GitHub API ${res.statusCode}: ${data.slice(0, 200)}`));
         resolve({ status: res.statusCode, body: data, headers: res.headers });
       });
@@ -491,6 +492,17 @@ async function main() {
   const { daily: audioByDate, weekly: weeklyAudioByDate } = await getAudioByDate();
   // Weekly → Audio-Mapping über das Wochenend-Datum (zweites Datum im Range).
   const weekEnd = w => { const ds = w.range.match(/\d{4}-\d{2}-\d{2}/g) || []; return ds[1] || ds[0] || null; };
+
+  // An asset alone does not authorize publication: an edited issue may have
+  // withdrawn its audio. Keep players and feeds aligned with published links.
+  for (const d of dailies) {
+    const audio = audioByDate.get(d.date);
+    if (audio && !d.issue.body?.includes(audio.name)) audioByDate.delete(d.date);
+  }
+  for (const w of weeklies) {
+    const audio = weeklyAudioByDate.get(weekEnd(w));
+    if (audio && !w.issue.body?.includes(audio.name)) weeklyAudioByDate.delete(weekEnd(w));
+  }
 
   await fs.rm(OUT_DIR, { recursive: true, force: true });
   await fs.mkdir(path.join(OUT_DIR, 'daily'), { recursive: true });
