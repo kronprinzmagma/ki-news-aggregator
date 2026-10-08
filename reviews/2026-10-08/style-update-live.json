@@ -1,0 +1,35 @@
+{
+  "feeds": [
+    {
+      "type": "daily",
+      "items": 114,
+      "latest_title": "KI Daily – 2026-10-07",
+      "enclosure_url": "https://kronprinzmagma.github.io/ki-news-aggregator/audio/daily-2026-10-07.mp3",
+      "enclosure_bytes": 5215488,
+      "http_status": 200
+    },
+    {
+      "type": "weekly",
+      "items": 17,
+      "latest_title": "KI Weekly – KW 40 (2026-09-28 – 2026-10-04)",
+      "enclosure_url": "https://kronprinzmagma.github.io/ki-news-aggregator/audio/weekly-2026-10-04.mp3",
+      "enclosure_bytes": 4516992,
+      "http_status": 200
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://kronprinzmagma.github.io/ki-news-aggregator/daily/2026-10-07.html",
+      "content_verified": true,
+      "audio_player": true,
+      "http_status": 200
+    },
+    {
+      "url": "https://kronprinzmagma.github.io/ki-news-aggregator/weekly/kw-40.html",
+      "content_verified": true,
+      "audio_player": true,
+      "http_status": 200
+    }
+  ],
+  "empty_daily_has_no_audio": true
+}

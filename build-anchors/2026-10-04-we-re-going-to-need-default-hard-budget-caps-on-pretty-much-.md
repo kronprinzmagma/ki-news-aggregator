@@ -3,14 +3,14 @@ date: 2026-10-04
 source: simonwillison
 score: 4
 article_url: https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/
-article_title: "We're going to need default hard budget caps on pretty much everything"
+article_title: "KI-Kosten: Eine Warnung ist noch keine Ausgabengrenze"
 ---
 
-# Build-Anker
+# Praktischer Hinweis
 
-Öffne die Spending-Limits-Seiten von AWS und Google Cloud und vergleiche: Welcher Dienst erlaubt heute einen harten Abschalter pro Projekt, welcher nur E-Mail-Warnungen – dokumentiere die Lücken in einer einfachen Tabelle.
+Bei einem kostenpflichtigen Dienst lohnt sich eine konkrete Unterscheidung: Warnt die Budgeteinstellung nur, oder stoppt sie tatsächlich die Nutzung? Ebenso wichtig ist, welche Kosten die Grenze überhaupt abdeckt.
 
 ---
 
-*Aus dem [KI Daily vom 2026-10-04](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=KI+Daily+2026-10-04).*
-*Quelle: [We're going to need default hard budget caps on pretty much everything](https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/) (simonwillison, Score 4/5)*
+*Aus dem [KI Daily vom 2026-10-04](https://github.com/kronprinzmagma/ki-news-aggregator/issues/213).*
+*Quelle: [KI-Kosten: Eine Warnung ist noch keine Ausgabengrenze](https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/) (simonwillison, Score 4/5)*

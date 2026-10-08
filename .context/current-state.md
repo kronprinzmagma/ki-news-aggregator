@@ -9,7 +9,7 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 Stand: 2026-10-08
 
-Aktueller Abschluss: 21 Ausgaben der ersten Issue-Seite überarbeitet, sieben Dailys von 87 auf elf Beiträge reduziert, 20 Hörfassungen neu erzeugt. Details und Betriebsgrenzen: `reviews/2026-10-08/CLEANUP.md`. Audio-Assets ohne aktuellen Link im Issue werden aus Archiv-Player und Podcast-Feed ausgeschlossen. Die folgenden datierten Abschnitte dokumentieren die Historie; widersprechende Angaben sind durch den Massstab oben ersetzt.
+Aktueller Textstand: Die 21 Ausgaben der ersten Issue-Seite sind bereinigt; sieben Dailys enthalten nach der Auswahlkorrektur elf Beiträge. Der anschliessend bestätigte Erklärungsstil ist in den sechs nichtleeren Dailys und allen 14 Weeklys umgesetzt, mit mehr Hintergrund und praktischen Hinweisen. Alle 20 zugehörigen Hörfassungen sind aus diesen Texten erneut erzeugt. Details: `reviews/2026-10-08/STYLE-UPDATE.md`; die erste Korrekturfassung ist in `reviews/2026-10-08/CLEANUP.md` dokumentiert. Audio-Assets ohne aktuellen Link im Issue werden aus Archiv-Player und Podcast-Feed ausgeschlossen. Die folgenden datierten Abschnitte dokumentieren die Historie; widersprechende Angaben sind durch den Massstab oben ersetzt.
 
 ## Audio-Ausgabe für Daily (2026-06-09, neu)
 

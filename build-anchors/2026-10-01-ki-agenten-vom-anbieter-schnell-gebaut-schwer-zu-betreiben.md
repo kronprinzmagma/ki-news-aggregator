@@ -3,14 +3,14 @@ date: 2026-10-01
 source: heise
 score: 4
 article_url: https://www.heise.de/news/KI-Agenten-vom-Anbieter-Schnell-gebaut-schwer-zu-betreiben-11472309.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag
-article_title: "KI-Agenten vom Anbieter: Schnell gebaut, schwer zu betreiben"
+article_title: "Gartner warnt vor Folgekosten massgeschneiderter KI-Lösungen"
 ---
 
-# Build-Anker
+# Praktischer Hinweis
 
-Erstelle mit Claude eine einseitige Checkliste (Markdown), die vor Beginn eines FDE-Projekts Zuständigkeiten, IP-Rechte und Exit-Kriterien abfragt – und prüfe, welche Punkte dein aktueller Anbietervertrag bereits abdeckt.
+Ein Angebot sollte benennen, wer Betrieb und Änderungen übernimmt, welches Wissen beim eigenen Team bleibt und wie ein Wechsel möglich wäre. Diese Punkte lassen sich vor der Beauftragung klären.
 
 ---
 
-*Aus dem [KI Daily vom 2026-10-01](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=KI+Daily+2026-10-01).*
-*Quelle: [KI-Agenten vom Anbieter: Schnell gebaut, schwer zu betreiben](https://www.heise.de/news/KI-Agenten-vom-Anbieter-Schnell-gebaut-schwer-zu-betreiben-11472309.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) (heise, Score 4/5)*
+*Aus dem [KI Daily vom 2026-10-01](https://github.com/kronprinzmagma/ki-news-aggregator/issues/210).*
+*Quelle: [Gartner warnt vor Folgekosten massgeschneiderter KI-Lösungen](https://www.heise.de/news/KI-Agenten-vom-Anbieter-Schnell-gebaut-schwer-zu-betreiben-11472309.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) (heise, Score 4/5)*

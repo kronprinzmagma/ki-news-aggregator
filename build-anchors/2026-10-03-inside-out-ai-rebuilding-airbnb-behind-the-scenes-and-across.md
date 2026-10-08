@@ -3,14 +3,14 @@ date: 2026-10-03
 source: latentspace
 score: 4
 article_url: https://www.latent.space/p/airbnb
-article_title: "Inside-Out AI: Rebuilding Airbnb Behind the Scenes and Across the Guest Experience"
+article_title: "Airbnb berichtet von KI-Erfolgen im Kundensupport"
 ---
 
-# Build-Anker
+# Praktischer Hinweis
 
-Baue mit Claude Code einen Minimal-Prototyp einer Support-Antwortfunktion: Gib zehn echte Nutzeranfragen ein und miss, wie viele Antworten direkt verwendbar sind – so siehst du konkret, wo die Grenze zwischen «KI-Entwurf» und «menschliche Korrektur» in deinem Kontext liegt.
+Bei der Planung eines KI-Supports gehören die Fälle für eine menschliche Übergabe ausdrücklich zum Konzept. Sicherheitsfragen sind ein naheliegendes Beispiel; die passenden Grenzen hängen vom eigenen Angebot ab.
 
 ---
 
-*Aus dem [KI Daily vom 2026-10-03](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=KI+Daily+2026-10-03).*
-*Quelle: [Inside-Out AI: Rebuilding Airbnb Behind the Scenes and Across the Guest Experience](https://www.latent.space/p/airbnb) (latentspace, Score 4/5)*
+*Aus dem [KI Daily vom 2026-10-03](https://github.com/kronprinzmagma/ki-news-aggregator/issues/212).*
+*Quelle: [Airbnb berichtet von KI-Erfolgen im Kundensupport](https://www.latent.space/p/airbnb) (latentspace, Score 4/5)*

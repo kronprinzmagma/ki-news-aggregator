@@ -3,14 +3,14 @@ date: 2026-10-04
 source: hackernews
 score: 4
 article_url: https://www.da.vidbuchanan.co.uk/blog/hacking-time.html
-article_title: "How to hack time, with C2PA"
+article_title: "Ein gültiger Foto-Nachweis kann trotzdem täuschen"
 ---
 
-# Build-Anker
+# Praktischer Hinweis
 
-Öffne verify.contentauthenticity.org, lade drei C2PA-signierte Bilder (z.B. von Leica- oder Pixel-Kameras) hoch und notiere jeweils, wie gross der als «excluded» markierte Dateibereich im Verhältnis zur Gesamtdatei ist.
+Wenn ein Produkt Bilder als «verifiziert» kennzeichnet, sollte es erklären, welche Angaben geprüft wurden und ob der Nachweis den Bildinhalt erfasst. Ein grünes Häkchen ohne diese Erklärung kann mehr Sicherheit vermitteln, als die Prüfung bietet.
 
 ---
 
-*Aus dem [KI Daily vom 2026-10-04](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=KI+Daily+2026-10-04).*
-*Quelle: [How to hack time, with C2PA](https://www.da.vidbuchanan.co.uk/blog/hacking-time.html) (hackernews, Score 4/5)*
+*Aus dem [KI Daily vom 2026-10-04](https://github.com/kronprinzmagma/ki-news-aggregator/issues/213).*
+*Quelle: [Ein gültiger Foto-Nachweis kann trotzdem täuschen](https://www.da.vidbuchanan.co.uk/blog/hacking-time.html) (hackernews, Score 4/5)*

@@ -1,0 +1,371 @@
+[
+  {
+    "number": 217,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-07",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/217",
+    "article_count": 3,
+    "word_counts": [
+      200,
+      207,
+      212
+    ],
+    "review": [
+      {
+        "url": "https://www.heise.de/news/Diese-Daten-geben-ChatGPT-Gemini-Claude-und-Co-ueber-uns-an-Dritte-11476698.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 4,
+        "comprehension": 4,
+        "relevance": 5
+      },
+      {
+        "url": "https://www.heise.de/news/OpenAI-versieht-KI-Text-mit-Wasserzeichen-aber-nur-in-der-EU-11476910.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 5,
+        "comprehension": 4,
+        "relevance": 4
+      },
+      {
+        "url": "https://www.heise.de/news/US-Bundesstaat-Utah-KI-darf-erstmals-Medikament-verschreiben-11478185.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 5,
+        "comprehension": 5,
+        "relevance": 4
+      }
+    ]
+  },
+  {
+    "number": 216,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-06",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/216",
+    "article_count": 1,
+    "word_counts": [
+      187
+    ],
+    "review": [
+      {
+        "url": "https://www.niemanlab.org/2026/10/chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yorker-cartoons/",
+        "faithfulness": 5,
+        "comprehension": 5,
+        "relevance": 5
+      }
+    ]
+  },
+  {
+    "number": 213,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-04",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/213",
+    "article_count": 2,
+    "word_counts": [
+      187,
+      190
+    ],
+    "review": [
+      {
+        "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+        "faithfulness": 5,
+        "comprehension": 4,
+        "relevance": 4
+      },
+      {
+        "url": "https://www.da.vidbuchanan.co.uk/blog/hacking-time.html",
+        "faithfulness": 5,
+        "comprehension": 4,
+        "relevance": 4
+      }
+    ]
+  },
+  {
+    "number": 212,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-03",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/212",
+    "article_count": 2,
+    "word_counts": [
+      202,
+      200
+    ],
+    "review": [
+      {
+        "url": "https://www.latent.space/p/airbnb",
+        "faithfulness": 5,
+        "comprehension": 4,
+        "relevance": 4
+      },
+      {
+        "url": "https://www.heise.de/news/Google-bezahlt-offenbar-rund-100-Publisher-fuer-KI-Antworten-in-der-Suche-11473155.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 5,
+        "comprehension": 5,
+        "relevance": 4
+      }
+    ]
+  },
+  {
+    "number": 211,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-02",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/211",
+    "article_count": 1,
+    "word_counts": [
+      199
+    ],
+    "review": [
+      {
+        "url": "https://www.anthropic.com/news/barclays-scales-claude",
+        "faithfulness": 5,
+        "comprehension": 4,
+        "relevance": 4
+      }
+    ]
+  },
+  {
+    "number": 210,
+    "type": "daily",
+    "title": "KI Daily – 2026-10-01",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/210",
+    "article_count": 2,
+    "word_counts": [
+      202,
+      196
+    ],
+    "review": [
+      {
+        "url": "https://www.heise.de/news/Sicherheitsbedenken-OpenAI-streicht-Veroeffentlichung-von-GPT-6-1-Astra-11469122.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 5,
+        "comprehension": 5,
+        "relevance": 5
+      },
+      {
+        "url": "https://www.heise.de/news/KI-Agenten-vom-Anbieter-Schnell-gebaut-schwer-zu-betreiben-11472309.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+        "faithfulness": 5,
+        "comprehension": 5,
+        "relevance": 5
+      }
+    ]
+  },
+  {
+    "number": 214,
+    "type": "weekly",
+    "title": "KI Weekly – KW 40 (2026-09-28 – 2026-10-04)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/214",
+    "word_counts": [
+      170,
+      151,
+      156
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 205,
+    "type": "weekly",
+    "title": "KI Weekly – KW 39 (2026-09-21 – 2026-09-27)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/205",
+    "word_counts": [
+      170,
+      164,
+      170
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 197,
+    "type": "weekly",
+    "title": "KI Weekly – KW 38 (2026-09-14 – 2026-09-20)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/197",
+    "word_counts": [
+      170,
+      153,
+      177
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 189,
+    "type": "weekly",
+    "title": "KI Weekly – KW 37 (2026-09-07 – 2026-09-13)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/189",
+    "word_counts": [
+      165,
+      165,
+      160
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 180,
+    "type": "weekly",
+    "title": "KI Weekly – KW 36 (2026-08-31 – 2026-09-06)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/180",
+    "word_counts": [
+      162,
+      166,
+      165
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 171,
+    "type": "weekly",
+    "title": "KI Weekly – KW 35 (2026-08-24 – 2026-08-30)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/171",
+    "word_counts": [
+      177,
+      182,
+      194
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 164,
+    "type": "weekly",
+    "title": "KI Weekly – KW 34 (2026-08-17 – 2026-08-23)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/164",
+    "word_counts": [
+      158,
+      161,
+      161
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 154,
+    "type": "weekly",
+    "title": "KI Weekly – KW 33 (2026-08-10 – 2026-08-16)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/154",
+    "word_counts": [
+      169,
+      171,
+      142
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 145,
+    "type": "weekly",
+    "title": "KI Weekly – KW 32 (2026-08-03 – 2026-08-09)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/145",
+    "word_counts": [
+      177,
+      144,
+      185
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 137,
+    "type": "weekly",
+    "title": "KI Weekly – KW 31 (2026-07-27 – 2026-08-02)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/137",
+    "word_counts": [
+      146,
+      145,
+      129
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 129,
+    "type": "weekly",
+    "title": "KI Weekly – KW 30 (2026-07-20 – 2026-07-26)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/129",
+    "word_counts": [
+      177,
+      151,
+      178
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 121,
+    "type": "weekly",
+    "title": "KI Weekly – KW 29 (2026-07-13 – 2026-07-19)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/121",
+    "word_counts": [
+      172,
+      153,
+      186
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 113,
+    "type": "weekly",
+    "title": "KI Weekly – KW 28 (2026-07-06 – 2026-07-12)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/113",
+    "word_counts": [
+      147,
+      132,
+      147
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": []
+    }
+  },
+  {
+    "number": 105,
+    "type": "weekly",
+    "title": "KI Weekly – KW 27 (2026-06-29 – 2026-07-05)",
+    "url": "https://github.com/kronprinzmagma/ki-news-aggregator/issues/105",
+    "word_counts": [
+      159,
+      174,
+      154
+    ],
+    "review": {
+      "faithfulness": 5,
+      "comprehension": 5,
+      "issues": [],
+      "reviewer": "editorial-source-check",
+      "note": "Direkter Abgleich aller drei Themen: 30 Prozent ausdrücklich als Anbieterangabe; sprachabhängige Unterschiede als Willisons Test; Einführungsrabatt historisch; Zugriffsrechte und Labortests begrenzt; Delegation als berichteter Programmierablauf. Wiederholte KI-Prüfungen ergaben widersprüchliche oder nur zitierte Einwände ohne konkreten Fehler und wurden nicht als Freigabe verwendet. Die Prüflogs bleiben lokal erhalten."
+    }
+  }
+]

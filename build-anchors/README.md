@@ -1,6 +1,6 @@
 # Build-Anker — Sammlung
 
-Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Jeder Anker ist so geschnitten, dass er in 2–4 Stunden mit Claude Code umsetzbar ist – keine Wochenprojekte, keine Hardware-Setups.
+Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
 **1370 Einträge** · Top-Quellen: heise (514) · hackernews (397) · simonwillison (232) · latentspace (119) · huggingface (32) · anthropic (24) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
@@ -8,16 +8,16 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 
 - **2026-10-07** — [Using Parseable with Datasette for OpenTelemetry traces](2026-10-07-using-parseable-with-datasette-for-opentelemetry-traces.md) · *simonwillison · Score 4*
 - **2026-10-07** — [Streit mit der EU: Siri AI frühestens in Monaten auf iPhone und iPad](2026-10-07-streit-mit-der-eu-siri-ai-fruhestens-in-monaten-auf-iphone-u.md) · *heise · Score 4*
-- **2026-10-07** — [Sogar Chatverläufe: KI-Anbieter geben Daten ihrer Nutzer weiter](2026-10-07-sogar-chatverlaufe-ki-anbieter-geben-daten-ihrer-nutzer-weit.md) · *heise · Score 5*
+- **2026-10-07** — [Studie: Chatbots geben Daten an externe Dienste weiter](2026-10-07-sogar-chatverlaufe-ki-anbieter-geben-daten-ihrer-nutzer-weit.md) · *heise · Score 5*
 - **2026-10-07** — [Scrimshaw Jukebox](2026-10-07-scrimshaw-jukebox.md) · *simonwillison · Score 4*
 - **2026-10-07** — [Sammelklage gegen McDonald’s: KI-Preise sollen Kartellrecht verletzen](2026-10-07-sammelklage-gegen-mcdonald-s-ki-preise-sollen-kartellrecht-v.md) · *heise · Score 4*
-- **2026-10-07** — [OpenAI versieht KI-Text mit Wasserzeichen – aber nur in der EU](2026-10-07-openai-versieht-ki-text-mit-wasserzeichen-aber-nur-in-der-eu.md) · *heise · Score 4*
+- **2026-10-07** — [ChatGPT bekommt in der EU ein unsichtbares Textwasserzeichen](2026-10-07-openai-versieht-ki-text-mit-wasserzeichen-aber-nur-in-der-eu.md) · *heise · Score 4*
 - **2026-10-07** — [OpenAI “rogue” agent activities found on Wikimedia projects](2026-10-07-openai-rogue-agent-activities-found-on-wikimedia-projects.md) · *simonwillison · Score 4*
 - **2026-10-07** — [Lokale KI auf dem Mac: Ollama nutzt MLX als Standard](2026-10-07-lokale-ki-auf-dem-mac-ollama-nutzt-mlx-als-standard.md) · *heise · Score 4*
 - **2026-10-07** — [llm-openai-decisions 0.1a0](2026-10-07-llm-openai-decisions-0-1a0.md) · *simonwillison · Score 5*
 - **2026-10-07** — [llm-mistral 0.16](2026-10-07-llm-mistral-0-16.md) · *simonwillison · Score 4*
 - **2026-10-07** — [KI-Schäden: Versicherer prüfen Kosten und investieren](2026-10-07-ki-schaden-versicherer-prufen-kosten-und-investieren.md) · *heise · Score 4*
-- **2026-10-07** — [KI-Rezepte: In den USA darf eine KI nun Akne-Medikamente verschreiben](2026-10-07-ki-rezepte-in-den-usa-darf-eine-ki-nun-akne-medikamente-vers.md) · *heise · Score 4*
+- **2026-10-07** — [Utah erlaubt KI-Rezepte für Akne-Medikamente](2026-10-07-ki-rezepte-in-den-usa-darf-eine-ki-nun-akne-medikamente-vers.md) · *heise · Score 4*
 - **2026-10-07** — [KI-Brillen: Norwegen will zeitweiliges Verbot an ausgewählten Orten einführen](2026-10-07-ki-brillen-norwegen-will-zeitweiliges-verbot-an-ausgewahlten.md) · *heise · Score 4*
 - **2026-10-07** — [Kalifornien zwingt OpenAI zur Herausgabe von Hugging-Face-Akten](2026-10-07-kalifornien-zwingt-openai-zur-herausgabe-von-hugging-face-ak.md) · *heise · Score 4*
 - **2026-10-07** — [Introducing Mistral Large 4: Le chonk](2026-10-07-introducing-mistral-large-4-le-chonk.md) · *simonwillison · Score 4*
@@ -38,18 +38,18 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 - **2026-10-06** — [Quoting Felix Rieseberg](2026-10-06-quoting-felix-rieseberg.md) · *simonwillison · Score 4*
 - **2026-10-06** — [Opus 5.5 agents discover two room-temperature magnetic semiconductor candidates](2026-10-06-opus-5-5-agents-discover-two-room-temperature-magnetic-semic.md) · *hackernews · Score 4*
 - **2026-10-06** — [Dust: Pretraining Transformers Without Backpropagation](2026-10-06-dust-pretraining-transformers-without-backpropagation.md) · *hackernews · Score 4*
-- **2026-10-06** — [ChatGPT is adding real cartoonists' signatures to fake New Yorker cartoons](2026-10-06-chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yo.md) · *hackernews · Score 4*
+- **2026-10-06** — [KI-Cartoons tragen Unterschriften echter Künstler](2026-10-06-chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yo.md) · *hackernews · Score 4*
 - **2026-10-06** — [[AINews] Reflection Beam - 501B-A23B American Open Model](2026-10-06-ainews-reflection-beam-501b-a23b-american-open-model.md) · *latentspace · Score 4*
 - **2026-10-05** — [Web Search API](2026-10-05-web-search-api.md) · *hackernews · Score 4*
 - **2026-10-05** — [Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s](2026-10-05-run-qwen-3-8-flash-next-125b-on-consumer-hardware-rtx-4090-a.md) · *hackernews · Score 5*
 - **2026-10-05** — [(g+) Open-Source-KI-Agent im Selbstversuch: Schickt mich Hermes als ITler in Fr�hrente?](2026-10-05-g-open-source-ki-agent-im-selbstversuch-schickt-mich-hermes-.md) · *golem · Score 4*
 - **2026-10-05** — [78 Milliarden Parameter: Aleph Alpha ver�ffentlicht KI-Modell mit Deutsch-Schwerpunkt](2026-10-05-78-milliarden-parameter-aleph-alpha-ver-ffentlicht-ki-modell.md) · *golem · Score 4*
 - **2026-10-04** — [We want you to build the next Git platform on Cloudflare](2026-10-04-we-want-you-to-build-the-next-git-platform-on-cloudflare.md) · *hackernews · Score 4*
-- **2026-10-04** — [We're going to need default hard budget caps on pretty much everything](2026-10-04-we-re-going-to-need-default-hard-budget-caps-on-pretty-much-.md) · *simonwillison · Score 4*
+- **2026-10-04** — [KI-Kosten: Eine Warnung ist noch keine Ausgabengrenze](2026-10-04-we-re-going-to-need-default-hard-budget-caps-on-pretty-much-.md) · *simonwillison · Score 4*
 - **2026-10-04** — [Nvidias DGX Spark wird trotz halbiertem RAM teurer](2026-10-04-nvidias-dgx-spark-wird-trotz-halbiertem-ram-teurer.md) · *heise · Score 4*
 - **2026-10-04** — [Missing Link: Our Best Machines – Was bin ich ohne meinen KI-Assistenten?](2026-10-04-missing-link-our-best-machines-was-bin-ich-ohne-meinen-ki-as.md) · *heise · Score 4*
 - **2026-10-04** — [LWiAI Podcast #258 - Opus 5.5, Sol and Luna, Muse, DeepSeek-V4.1-Flash, Xi](2026-10-04-lwiai-podcast-258-opus-5-5-sol-and-luna-muse-deepseek-v4-1-f.md) · *lastweekinai · Score 4*
-- **2026-10-04** — [How to hack time, with C2PA](2026-10-04-how-to-hack-time-with-c2pa.md) · *hackernews · Score 4*
+- **2026-10-04** — [Ein gültiger Foto-Nachweis kann trotzdem täuschen](2026-10-04-how-to-hack-time-with-c2pa.md) · *hackernews · Score 4*
 - **2026-10-04** — [Agents don't need memory, they need documentation](2026-10-04-agents-don-t-need-memory-they-need-documentation.md) · *hackernews · Score 4*
 - **2026-10-03** — [With most information hidden, the game Stratego had stumped AI until now](2026-10-03-with-most-information-hidden-the-game-stratego-had-stumped-a.md) · *hackernews · Score 4*
 - **2026-10-03** — [Weniger Prompt, mehr Platz für Code: Pi 1.0.0 ist da](2026-10-03-weniger-prompt-mehr-platz-fur-code-pi-1-0-0-ist-da.md) · *heise · Score 4*
@@ -60,8 +60,8 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 - **2026-10-03** — [Microsoft erweitert KI-Modellfamilie MAI um drei Audio-Modelle](2026-10-03-microsoft-erweitert-ki-modellfamilie-mai-um-drei-audio-model.md) · *heise · Score 4*
 - **2026-10-03** — [Memory-Safe WebP Decoding](2026-10-03-memory-safe-webp-decoding.md) · *hackernews · Score 4*
 - **2026-10-03** — [KI-Update kompakt: Gemini 4 Argon, Manus Cue, ChatGPT-Werbung, Reha-Kliniken](2026-10-03-ki-update-kompakt-gemini-4-argon-manus-cue-chatgpt-werbung-r.md) · *heise · Score 4*
-- **2026-10-03** — [KI-Übersichten: Google vergütet Publisher – Spanne offenbar enorm](2026-10-03-ki-ubersichten-google-vergutet-publisher-spanne-offenbar-eno.md) · *heise · Score 4*
-- **2026-10-03** — [Inside-Out AI: Rebuilding Airbnb Behind the Scenes and Across the Guest Experience](2026-10-03-inside-out-ai-rebuilding-airbnb-behind-the-scenes-and-across.md) · *latentspace · Score 4*
+- **2026-10-03** — [Google bezahlt ausgewählte Verlage für KI-Übersichten](2026-10-03-ki-ubersichten-google-vergutet-publisher-spanne-offenbar-eno.md) · *heise · Score 4*
+- **2026-10-03** — [Airbnb berichtet von KI-Erfolgen im Kundensupport](2026-10-03-inside-out-ai-rebuilding-airbnb-behind-the-scenes-and-across.md) · *latentspace · Score 4*
 - **2026-10-03** — [Cloudflare OHTTP gateway](2026-10-03-cloudflare-ohttp-gateway.md) · *hackernews · Score 4*
 - **2026-10-03** — [Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap](2026-10-03-anthropic-invests-100-million-to-train-10-000-engineers-and-.md) · *anthropic · Score 4*
 - **2026-10-03** — [America.gov: KI-Chatbot für US-Bürger gestartet](2026-10-03-america-gov-ki-chatbot-fur-us-burger-gestartet.md) · *heise · Score 4*
@@ -72,7 +72,7 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 - **2026-10-02** — [Pi 1.0](2026-10-02-pi-1-0.md) · *hackernews · Score 4*
 - **2026-10-02** — [Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs](2026-10-02-introducing-olmo-core-3-open-scalable-training-infrastructur.md) · *huggingface · Score 5*
 - **2026-10-02** — [Clef: Open-weight decision models, and new RL fine-tuning platform](2026-10-02-clef-open-weight-decision-models-and-new-rl-fine-tuning-plat.md) · *hackernews · Score 5*
-- **2026-10-02** — [Barclays scales Claude to upgrade operations and improve client experience](2026-10-02-barclays-scales-claude-to-upgrade-operations-and-improve-cli.md) · *anthropic · Score 4*
+- **2026-10-02** — [Barclays nutzt Claude für interne Auskünfte und E-Mails](2026-10-02-barclays-scales-claude-to-upgrade-operations-and-improve-cli.md) · *anthropic · Score 4*
 - **2026-10-02** — [ArXiv's Updated Rate Limit Policy](2026-10-02-arxiv-s-updated-rate-limit-policy.md) · *hackernews · Score 4*
 - **2026-10-02** — [[AINews] Pi 1.0, Pi Durable, and AIE NYC](2026-10-02-ainews-pi-1-0-pi-durable-and-aie-nyc.md) · *latentspace · Score 4*
 - **2026-10-02** — [[AINews] Opus 5.5 is good at explainer videos](2026-10-02-ainews-opus-5-5-is-good-at-explainer-videos.md) · *latentspace · Score 4*
@@ -87,8 +87,8 @@ Konkrete Abend-Projekte mit Claude Code, die aus den täglichen [KI-News-Briefin
 - **2026-10-01** — [Last Week in AI #345 - 5 new models, 9 misalignment incidents, some Dots](2026-10-01-last-week-in-ai-345-5-new-models-9-misalignment-incidents-so.md) · *lastweekinai · Score 4*
 - **2026-10-01** — [KI-Tool soll helfen: „Nachhaltigkeit im Krankenhaus muss sich auch rechnen“](2026-10-01-ki-tool-soll-helfen-nachhaltigkeit-im-krankenhaus-muss-sich-.md) · *heise · Score 4*
 - **2026-10-01** — [KI in der Reha: Entlastung bei der Dokumentation, offene Fragen zum Arztberuf](2026-10-01-ki-in-der-reha-entlastung-bei-der-dokumentation-offene-frage.md) · *heise · Score 4*
-- **2026-10-01** — [KI-Agenten vom Anbieter: Schnell gebaut, schwer zu betreiben](2026-10-01-ki-agenten-vom-anbieter-schnell-gebaut-schwer-zu-betreiben.md) · *heise · Score 4*
-- **2026-10-01** — [GPT-6.1 Astra fällt bei Sicherheitstests durch und wird nicht veröffentlicht](2026-10-01-gpt-6-1-astra-fallt-bei-sicherheitstests-durch-und-wird-nich.md) · *heise · Score 4*
+- **2026-10-01** — [Gartner warnt vor Folgekosten massgeschneiderter KI-Lösungen](2026-10-01-ki-agenten-vom-anbieter-schnell-gebaut-schwer-zu-betreiben.md) · *heise · Score 4*
+- **2026-10-01** — [OpenAI hält ein Modell nach Sicherheitstests zurück](2026-10-01-gpt-6-1-astra-fallt-bei-sicherheitstests-durch-und-wird-nich.md) · *heise · Score 4*
 - **2026-10-01** — [Google: Alphabet klagt gegen EU-Anordnungen zu Android und Suche](2026-10-01-google-alphabet-klagt-gegen-eu-anordnungen-zu-android-und-su.md) · *heise · Score 4*
 - **2026-10-01** — [Gemini 4 Argon](2026-10-01-gemini-4-argon.md) · *hackernews · Score 5*
 - **2026-10-01** — [Antrag auf einstweilige Verfügung: ChatGPT soll nicht menschlich wirken](2026-10-01-antrag-auf-einstweilige-verfugung-chatgpt-soll-nicht-menschl.md) · *heise · Score 4*

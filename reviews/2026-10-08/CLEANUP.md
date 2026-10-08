@@ -1,6 +1,6 @@
 # Abschluss des Reviews für die NZZ-Demo
 
-Stand: 8. Oktober 2026. Der [ursprüngliche Review](REVIEW.md) dokumentiert den Zustand vor den Korrekturen. Die dort gefundenen redaktionellen Fehler und die unzuverlässige Qualitätsprüfung wurden gezielt behoben.
+Stand: erste Korrekturfassung am 8. Oktober 2026. Die anschliessend vom Leser bestätigte ausführlichere Aufbereitung ist in [STYLE-UPDATE.md](STYLE-UPDATE.md) dokumentiert und ersetzt die unten genannten Längengrenzen und Pflichtversuche. Der [ursprüngliche Review](REVIEW.md) dokumentiert den Zustand vor den Korrekturen. Die dort gefundenen redaktionellen Fehler und die unzuverlässige Qualitätsprüfung wurden gezielt behoben.
 
 ## Was jetzt vorführbar ist
 

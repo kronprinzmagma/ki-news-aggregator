@@ -1,6 +1,6 @@
 # KI Daily – 7. Oktober 2026 · Textentwurf
 
-Die drei Nachrichten bleiben dieselben. Dieser Entwurf gibt ihnen mehr Erklärung und Einordnung. Er ist noch nicht veröffentlicht; die Hörfassungen sind unverändert.
+Die drei Nachrichten bleiben dieselben. Der Leser hat diesen Erklärungsstil bestätigt. Die drei Texte wurden am 8. Oktober 2026 unverändert in der Daily-Ausgabe veröffentlicht; die Hörfassung wurde anschliessend erneuert.
 
 Heute geht es um drei Fragen: Wer bekommt Daten aus unseren KI-Gesprächen? Wie aussagekräftig ist ein Wasserzeichen in einem KI-Text? Und unter welchen Bedingungen darf eine KI selbst Rezepte ausstellen?
 

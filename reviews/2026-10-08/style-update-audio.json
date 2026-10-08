@@ -1,0 +1,275 @@
+[
+  {
+    "number": 217,
+    "type": "daily",
+    "article_count": 3,
+    "words": [
+      200,
+      207,
+      212
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-07.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5215488,
+    "audio_updated_at": "2026-10-08T11:29:40Z"
+  },
+  {
+    "number": 216,
+    "type": "daily",
+    "article_count": 1,
+    "words": [
+      187
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-06.mp3",
+    "audio_estimated_minutes": 2,
+    "audio_bytes": 1845120,
+    "audio_updated_at": "2026-10-08T11:28:57Z"
+  },
+  {
+    "number": 213,
+    "type": "daily",
+    "article_count": 2,
+    "words": [
+      187,
+      190
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-04.mp3",
+    "audio_estimated_minutes": 4,
+    "audio_bytes": 3624192,
+    "audio_updated_at": "2026-10-08T11:29:27Z"
+  },
+  {
+    "number": 212,
+    "type": "daily",
+    "article_count": 2,
+    "words": [
+      202,
+      200
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-03.mp3",
+    "audio_estimated_minutes": 4,
+    "audio_bytes": 3838464,
+    "audio_updated_at": "2026-10-08T11:29:55Z"
+  },
+  {
+    "number": 211,
+    "type": "daily",
+    "article_count": 1,
+    "words": [
+      199
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-02.mp3",
+    "audio_estimated_minutes": 2,
+    "audio_bytes": 2469120,
+    "audio_updated_at": "2026-10-08T11:30:02Z"
+  },
+  {
+    "number": 210,
+    "type": "daily",
+    "article_count": 2,
+    "words": [
+      202,
+      196
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/daily-2026-10-01.mp3",
+    "audio_estimated_minutes": 4,
+    "audio_bytes": 3877632,
+    "audio_updated_at": "2026-10-08T11:30:35Z"
+  },
+  {
+    "number": 214,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      170,
+      151,
+      156
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-10-04.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 4516992,
+    "audio_updated_at": "2026-10-08T11:47:38Z"
+  },
+  {
+    "number": 205,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      170,
+      164,
+      170
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-09-27.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5147520,
+    "audio_updated_at": "2026-10-08T11:47:28Z"
+  },
+  {
+    "number": 197,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      170,
+      153,
+      177
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-09-20.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5321856,
+    "audio_updated_at": "2026-10-08T11:47:38Z"
+  },
+  {
+    "number": 189,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      165,
+      165,
+      160
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-09-13.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 4694016,
+    "audio_updated_at": "2026-10-08T11:48:44Z"
+  },
+  {
+    "number": 180,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      162,
+      166,
+      165
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-09-06.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5445888,
+    "audio_updated_at": "2026-10-08T11:49:07Z"
+  },
+  {
+    "number": 171,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      177,
+      182,
+      194
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-08-30.mp3",
+    "audio_estimated_minutes": 6,
+    "audio_bytes": 5326080,
+    "audio_updated_at": "2026-10-08T11:49:06Z"
+  },
+  {
+    "number": 164,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      158,
+      161,
+      161
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-08-23.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 4569600,
+    "audio_updated_at": "2026-10-08T11:49:57Z"
+  },
+  {
+    "number": 154,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      169,
+      171,
+      142
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-08-16.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5181696,
+    "audio_updated_at": "2026-10-08T11:50:36Z"
+  },
+  {
+    "number": 145,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      177,
+      144,
+      185
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-08-09.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 3550080,
+    "audio_updated_at": "2026-10-08T11:50:44Z"
+  },
+  {
+    "number": 137,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      146,
+      145,
+      129
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-08-02.mp3",
+    "audio_estimated_minutes": 4,
+    "audio_bytes": 4101888,
+    "audio_updated_at": "2026-10-08T11:51:09Z"
+  },
+  {
+    "number": 129,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      177,
+      151,
+      178
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-07-26.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5191296,
+    "audio_updated_at": "2026-10-08T11:52:07Z"
+  },
+  {
+    "number": 121,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      172,
+      153,
+      186
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-07-19.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 5197824,
+    "audio_updated_at": "2026-10-08T11:52:08Z"
+  },
+  {
+    "number": 113,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      147,
+      132,
+      147
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-07-12.mp3",
+    "audio_estimated_minutes": 4,
+    "audio_bytes": 4164096,
+    "audio_updated_at": "2026-10-08T11:52:17Z"
+  },
+  {
+    "number": 105,
+    "type": "weekly",
+    "themes": 3,
+    "words": [
+      159,
+      174,
+      154
+    ],
+    "audio_url": "https://github.com/kronprinzmagma/ki-news-aggregator/releases/download/podcast/weekly-2026-07-05.mp3",
+    "audio_estimated_minutes": 5,
+    "audio_bytes": 4889088,
+    "audio_updated_at": "2026-10-08T11:54:32Z"
+  }
+]
