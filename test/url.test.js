@@ -22,3 +22,7 @@ test('normalizeUrl ist idempotent', () => {
 test('normalizeUrl gibt ungültige URLs unverändert zurück', () => {
   assert.equal(normalizeUrl('kein url'), 'kein url');
 });
+
+test('normalizeUrl removes Heise tracking while keeping functional query parameters', () => {
+  assert.equal(normalizeUrl('https://example.com/a?wt_mc=rss&lang=de'), 'https://example.com/a?lang=de');
+});

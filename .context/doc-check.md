@@ -22,14 +22,14 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 - [ ] Weekly-Digest-Abschnitt vorhanden und aktuell (themen-zentriert, 3 Themen, optional Audio)
 - [ ] Schedule korrekt: Daily 05:30 UTC, Weekly 08:00 UTC sonntags, Feedback-Loop 10:00 UTC sonntags
 - [ ] Tagesübergreifende Dedup korrekt: **7 Tage Lookback** (`CROSS_DAY_DEDUP_LOOKBACK`), Issue des laufenden Tages ausgeschlossen
-- [ ] Review-Schlaufe (**5 Ebenen**, inkl. `comprehension_nontechnical`) + Rewrite-Loop beschrieben
+- [ ] Review-Schlaufe (**6 Ebenen**, inkl. `comprehension_nontechnical`) + Rewrite-Loop beschrieben
 - [ ] Volltext-Gate (`thin_content_filtered`) erwähnt
 - [ ] lib/-Modulliste aktuell (inkl. `url`, `concurrency`)
 - [ ] Keine veralteten „geplant"-Markierungen für bereits implementierte Features
 
 ### README.md
 
-- [ ] Review-Loop-Dimensionen: **fünf** (nicht vier)
+- [ ] Review-Loop-Dimensionen: **sechs** (inkl. Quellentreue)
 - [ ] Feedback-Checkbox-Labels: `Besonders wertvoll` / `Später weiterverfolgen` / `Zu kompliziert erklärt` / `Thema nicht relevant`
 - [ ] Promote-Logik: `wertvoll → 5` (zu_kompliziert blockiert NICHT, nur `poor_writeup`-Flag); `irrelevant UND NICHT wertvoll → 1`
 - [ ] Workflow-Liste vollständig (inkl. test.yml, feedback-loop.yml, audio-backfill.yml)
@@ -61,7 +61,7 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 - [ ] Modellversionen korrekt (vollständige Version mit Datum)
 - [ ] Schedule-Zeiten korrekt
 - [ ] Datenhaltung korrekt (SQLite + JSON-Audit-Artefakte, nicht „keine Datenbank")
-- [ ] Review-Ebenen (5) und Checkbox-Anzahl (4) korrekt
+- [ ] Review-Ebenen (6) und Checkbox-Anzahl (4) korrekt
 
 ### .context/working-map.md
 

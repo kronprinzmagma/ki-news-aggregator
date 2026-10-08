@@ -120,7 +120,7 @@ function weekRange(referenceDate) {
 
 // ─── Weekly-Prompt ────────────────────────────────────────────────────────────
 
-const WEEKLY_PROMPT = (articles, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM OHNE tiefes Engineering-Wissen, mit Hands-on-Ambition (Claude Code, Anthropic API). Nicht im Scope: Backlog, Sprint, Stakeholder.
+const WEEKLY_PROMPT = (articles, weekInfo) => `Wöchentlicher KI-Digest für eine erfahrene Product Owner / PM OHNE tiefes Engineering-Wissen, mit Interesse an eigener KI-Nutzung (Claude, Claude Code). Nicht im Scope: Backlog, Sprint, Stakeholder.
 
 Das Weekly ist KEINE Wiederholung der Daily-Artikel. Es ist ein redaktioneller Wochenrückblick: Du identifizierst die WICHTIGSTEN ÜBERGREIFENDEN THEMEN der Woche und bereitest sie ausführlicher und verständlicher auf als die einzelnen Daily-Einträge. Die Leserin hat die Daily-Artikel schon gesehen – Mehrwert entsteht NUR durch Synthese und Einordnung, nicht durch erneutes Nacherzählen.
 
@@ -142,7 +142,7 @@ Richtung: ${a.richtung}`).join('\n\n')}
 
 Struktur der Ausgabe (Markdown):
 
-**Einleitung** (3–4 Sätze): Dominante Strömung der Woche. Was hat sich gegenüber der Vorwoche verschoben? Direkt, verständlich, kein Jargon.
+**Einleitung** (3–4 Sätze): Dominante Strömung der Woche. Keine Vergleiche mit einer Vorwoche, deren Daten nicht vorliegen. Direkt, verständlich, kein Jargon.
 
 Dann GENAU 3 Themen der Woche. Wähle die drei wichtigsten übergreifenden Themen aus dem Pool (nicht zwingend die drei höchsten Scores – sondern die, die zusammen die Story der Woche ergeben). Score-5-Artikel sind starke Kandidaten, aber keine Pflicht. Jedes Thema exakt so:
 
@@ -152,17 +152,17 @@ Dann GENAU 3 Themen der Woche. Wähle die drei wichtigsten übergreifenden Theme
 - [ ] Zu kompliziert erklärt
 - [ ] Thema nicht relevant
 
-[Ein ausführlicher Absatz, 4–6 Sätze: Was ist diese Woche zu diesem Thema passiert (verständlich zusammengefasst, mehrere Artikel zu einem Bild verbunden)? Warum hängen diese Entwicklungen zusammen? Was bedeutet das für die KI-Richtung und für konkrete Produktentscheidungen? Konkreter Akteur + Bewegung, keine Schablonen wie "der Engpass verschiebt sich".]
+[Ein ausführlicher Absatz, 3–4 kurze Sätze: Was ist diese Woche zu diesem Thema passiert (verständlich zusammengefasst, mehrere Artikel zu einem Bild verbunden)? Warum hängen diese Entwicklungen zusammen? Was bedeutet das für die KI-Richtung und für konkrete Produktentscheidungen? Konkreter Akteur + Bewegung, keine Schablonen wie "der Engpass verschiebt sich".]
 
-**Dran bleiben:** [Ein Beobachtungs- oder Build-Anker für das Thema: im Browser oder mit Claude in unter 1–2h machbar, mit messbarer/vergleichender Erkenntnis. Kein Entwickler-Setup, kein Kernel-Build, kein Modelltraining.]
+**Dran bleiben:** [Ein Beobachtungs- oder Build-Anker für das Thema: im Browser oder mit Claude in 10–30 Minuten machbar, mit messbarer/vergleichender Erkenntnis. Kein Entwickler-Setup, kein Kernel-Build, kein Modelltraining.]
 
-_Belege:_ [2–4 stützende Artikel als kompakte Liste, je eine Zeile: [Titel](url) (Quelle, Score X) – ein Halbsatz, warum er zum Thema gehört.]
+_Belege:_ [1–2 stützende Artikel als kompakte Liste, je eine Zeile: [Titel](url) (Quelle, Score X) – ein Halbsatz, warum er zum Thema gehört.]
 
 ---
 
 **Wochenimpuls** (1–2 Sätze): Ein konkreter Anker aus der Gesamtschau der Woche.
 
-Regeln: Nur Fakten aus dem Input. Keine Artikel-Volltextwiederholung – Artikel erscheinen nur in den Belegen-Listen. Kürzel wie P1/O2 nicht in der Ausgabe. Ziel ca. 600–800 Wörter – die Themen-Absätze sind der Kern, nicht eine lange Artikelliste.`;
+Regeln: Nur Fakten aus dem Input. Interpretationen vorsichtig kennzeichnen. Keine unbelegten Absichten, Marktfolgen, rechtlichen Schlüsse oder erfundenen Termine. Kleine Forschungsversuche nicht als allgemeine Leistungszusage darstellen. Technische Plugin- und Infrastrukturmeldungen ohne klaren Nutzen für Nicht-Entwickler weglassen. Keine Artikel-Volltextwiederholung – Artikel erscheinen nur in den Belegen-Listen. Kürzel wie P1/O2 nicht in der Ausgabe. Höchstens 450 Wörter – die Themen-Absätze sind der Kern, nicht eine lange Artikelliste.`;
 
 async function createWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;

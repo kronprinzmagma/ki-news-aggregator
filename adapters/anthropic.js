@@ -12,7 +12,7 @@ export async function fetchArticles() {
   return Promise.all(articles.map(a => enrichFromUrl(a, {
     logTag: 'anthropic',
     useMetaDescription: true,
-    maxLength: 3000,
+    maxLength: 8000,
     extractOptions: { preferArticle: false },
     fetchOptions: { timeoutMs: 15_000 },
     shouldEnrich: art => art.url.includes('anthropic.com/'),

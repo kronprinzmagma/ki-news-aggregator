@@ -14,6 +14,6 @@ export async function fetchArticles() {
   return Promise.all(aiArticles.map(a => enrichFromUrl(a, {
     logTag: 'golem',
     useMetaDescription: true,
-    maxLength: 3000,
+    maxLength: 8000,
   })));
 }

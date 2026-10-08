@@ -146,7 +146,7 @@ Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
 - [x] Neues Output-Schema: drei Blöcke pro Artikel (Was ist neu / Produktrelevanz / Projektanker), max. 120 Wörter
 - [x] Feedback-Checkboxen pro Daily-Artikel: besonders wertvoll / später weiterverfolgen
-- [x] Claude-only Review-Schlaufe in `deliver.js`: ausgewählte Artikel + bis zu zwei ausgeschlossene Beispiele je Score 1/2/3, advisory in Run-Summary
+- [x] Claude-only Review-Schlaufe in `deliver.js`: ausgewählte Artikel + bis zu zwei ausgeschlossene Beispiele je Score 1/2/3, Veröffentlichungsgate mit Quellentext, vollständiger Review-Abdeckung und Prüfung nach Rewrite
 - [x] Latent-Space- und Simon-Willison-Adapter reichern dünne Feed-Texte aus der Artikelseite an
 - [x] Leerer Tag erzeugt kein Issue
 - [x] Issue-Titel vereinheitlicht auf `KI Daily – YYYY-MM-DD`
@@ -173,3 +173,11 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Podcast verzeichnis-tauglich: itunes:image + generiertes Cover (scripts/make-cover.js)
 - [x] Embeddings-Dedup-Eval als manuelles A/B-Experiment (evals/embedding_dedup_eval.js)
 - [ ] Embeddings-Eval auswerten und Disagreements labeln (nur bei klarem Vorteil Produktions-Umbau)
+
+## Redaktionelle Korrektur – 2026-10-08
+
+- [x] Persönlicher Nutzen ohne Engineering-Wissen statt Entwickler-News
+- [x] Höchstens fünf Daily-Artikel, einfache Überschriften und kurze Versuche
+- [x] Clientseitige Schema-/Token-Abbruch-Prüfung und Quellentreue-Gate
+- [x] Wort-Cluster-Bonus aus der Produktionsauswahl entfernt
+- [x] Zeichensatzkorrektur für RSS und Audio-Neuvertonung bestehender Issues

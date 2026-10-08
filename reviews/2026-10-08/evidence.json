@@ -1,0 +1,643 @@
+{
+  "as_of": "2026-10-08",
+  "repository": "https://github.com/kronprinzmagma/ki-news-aggregator",
+  "github_main_sha": "c02499a097e3e4d9de7ff958d9bc42c6f40ac78d",
+  "code_matches_local": true,
+  "tests": {
+    "passed": 37,
+    "failed": 0,
+    "node": "22.20.0"
+  },
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "daily_runs": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-07T11:54:31Z",
+      "databaseId": 37617274519,
+      "event": "schedule",
+      "headSha": "f28b34fbbbf59b7a5d95b34d3a07fdaab95e4007",
+      "startedAt": "2026-10-07T11:54:31Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-06T12:08:52Z",
+      "databaseId": 37461196146,
+      "event": "schedule",
+      "headSha": "1b18e23720605f4a6177a518846eed6801829ee8",
+      "startedAt": "2026-10-06T12:08:52Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-05T12:28:43Z",
+      "databaseId": 37309799866,
+      "event": "schedule",
+      "headSha": "c8f75009870f8dbd85a378ee3d80dac0aa0fe141",
+      "startedAt": "2026-10-05T12:28:43Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-04T11:12:17Z",
+      "databaseId": 37197936785,
+      "event": "schedule",
+      "headSha": "4360e22b577ee54fee811b4843961cde4ff61a44",
+      "startedAt": "2026-10-04T11:12:17Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-03T10:30:58Z",
+      "databaseId": 37116669683,
+      "event": "schedule",
+      "headSha": "bb72f8cb8d4e0a774b07be71585a65848a908ffc",
+      "startedAt": "2026-10-03T10:30:58Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-02T11:13:48Z",
+      "databaseId": 36999848116,
+      "event": "schedule",
+      "headSha": "462018c9f01f3304bd9f9a6f018ebbe94e79eb79",
+      "startedAt": "2026-10-02T11:13:48Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-01T11:43:59Z",
+      "databaseId": 36857203732,
+      "event": "schedule",
+      "headSha": "3f83992cb2e755c09a58a2115fbf23b59deb948c",
+      "startedAt": "2026-10-01T11:43:59Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-30T11:16:25Z",
+      "databaseId": 36707518261,
+      "event": "schedule",
+      "headSha": "a4e87bae70e82c2c79acb063a6a03ed744dd2360",
+      "startedAt": "2026-09-30T11:16:25Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-29T11:28:42Z",
+      "databaseId": 36561982122,
+      "event": "schedule",
+      "headSha": "b1b4c2d56424b446ae1c29e98475275d2480fc6a",
+      "startedAt": "2026-09-29T11:28:42Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-28T11:52:10Z",
+      "databaseId": 36418238069,
+      "event": "schedule",
+      "headSha": "a55b73348e12df789ea6ead74d41d2c7e633105b",
+      "startedAt": "2026-09-28T11:52:10Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-27T10:39:31Z",
+      "databaseId": 36313235929,
+      "event": "schedule",
+      "headSha": "e23ffd5fe76b28aaf3edd4f57bd4679cb392db73",
+      "startedAt": "2026-09-27T10:39:31Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-26T10:03:24Z",
+      "databaseId": 36234621720,
+      "event": "schedule",
+      "headSha": "29003a25588031b715adc440f707b1be6ee88fa2",
+      "startedAt": "2026-09-26T10:03:24Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-25T10:23:44Z",
+      "databaseId": 36123739695,
+      "event": "schedule",
+      "headSha": "72289f54c4eca2f00c778564aec2f27a52bec16c",
+      "startedAt": "2026-09-25T10:23:44Z",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-24T10:20:21Z",
+      "databaseId": 35986634305,
+      "event": "schedule",
+      "headSha": "9fb1cab142b60bad897d1a2ecd60c4c781edf929",
+      "startedAt": "2026-09-24T10:20:21Z",
+      "status": "completed"
+    }
+  ],
+  "weekly_runs": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-04T13:36:20Z",
+      "databaseId": 37206211657,
+      "event": "schedule",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-27T13:27:37Z",
+      "databaseId": 36322463498,
+      "event": "schedule",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-20T12:47:36Z",
+      "databaseId": 35511634048,
+      "event": "schedule",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-13T13:01:47Z",
+      "databaseId": 34758687117,
+      "event": "schedule",
+      "status": "completed"
+    }
+  ],
+  "review_coverage": [
+    {
+      "date": "2026-10-01",
+      "review_input_count": 18,
+      "review_result_keys": [],
+      "review_output_count": 0,
+      "published_count": 16,
+      "rewrites": 0,
+      "artifact_sha256": "8b407d7902fd55f0fe57a35d5ffd3f2e73d44e93bed6d859f1a4b24de5805f6e"
+    },
+    {
+      "date": "2026-10-02",
+      "review_input_count": 11,
+      "review_result_keys": [
+        "selected_articles"
+      ],
+      "review_output_count": 11,
+      "published_count": 11,
+      "rewrites": 7,
+      "artifact_sha256": "16643fc1a6db26ba042a6619faf9ae034e923824d0530a8a88298a62ef6edde8"
+    },
+    {
+      "date": "2026-10-03",
+      "review_input_count": 15,
+      "review_result_keys": [],
+      "review_output_count": 0,
+      "published_count": 15,
+      "rewrites": 0,
+      "artifact_sha256": "c3cda2a36293d288e3757381f6420b193bc50e32fad38e769c155c005d6e98f6"
+    },
+    {
+      "date": "2026-10-04",
+      "review_input_count": 7,
+      "review_result_keys": [
+        "selected_articles",
+        "low_score_samples"
+      ],
+      "review_output_count": 7,
+      "published_count": 7,
+      "rewrites": 5,
+      "artifact_sha256": "e80428fdda130facb70c265eaaf9eca7be747a5b25a418b96c722c991bca4c8e"
+    },
+    {
+      "date": "2026-10-05",
+      "review_input_count": 4,
+      "review_result_keys": [
+        "selected_articles",
+        "low_score_samples",
+        "process_adjustments",
+        "overall_assessment"
+      ],
+      "review_output_count": 4,
+      "published_count": 4,
+      "rewrites": 3,
+      "artifact_sha256": "19cbb7bc297a73439f295ebb90923a8cc8911eaa4c55102972a54bf1c4f88f0c"
+    },
+    {
+      "date": "2026-10-06",
+      "review_input_count": 7,
+      "review_result_keys": [
+        "selected_articles",
+        "low_score_samples"
+      ],
+      "review_output_count": 7,
+      "published_count": 7,
+      "rewrites": 4,
+      "artifact_sha256": "f70a07781fd26daac9702ff7620edd96a4eb477cdf58b224a9c47b1424d060d9"
+    },
+    {
+      "date": "2026-10-07",
+      "review_input_count": 28,
+      "review_result_keys": [],
+      "review_output_count": 0,
+      "published_count": 27,
+      "rewrites": 0,
+      "artifact_sha256": "435b0ea1368b6126ba474e8554c4b23b17a3b00bbe2126b3a9133b19b4d025c0"
+    }
+  ],
+  "content_stats": [
+    {
+      "date": "KI Daily – 2026-10-07",
+      "n": 27,
+      "words": 3287,
+      "over120": 15,
+      "sources": {
+        "simonwillison": 7,
+        "heise": 19,
+        "anthropic": 1
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-06",
+      "n": 7,
+      "words": 906,
+      "over120": 4,
+      "sources": {
+        "simonwillison": 2,
+        "latentspace": 1,
+        "hackernews": 4
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-05",
+      "n": 4,
+      "words": 422,
+      "over120": 2,
+      "sources": {
+        "hackernews": 2,
+        "golem": 2
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-04",
+      "n": 7,
+      "words": 875,
+      "over120": 4,
+      "sources": {
+        "simonwillison": 1,
+        "hackernews": 3,
+        "lastweekinai": 1,
+        "heise": 2
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-03",
+      "n": 15,
+      "words": 1948,
+      "over120": 9,
+      "sources": {
+        "latentspace": 2,
+        "anthropic": 1,
+        "hackernews": 5,
+        "heise": 7
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-02",
+      "n": 11,
+      "words": 1291,
+      "over120": 5,
+      "sources": {
+        "latentspace": 4,
+        "hackernews": 4,
+        "huggingface": 1,
+        "anthropic": 1,
+        "simonwillison": 1
+      }
+    },
+    {
+      "date": "KI Daily – 2026-10-01",
+      "n": 16,
+      "words": 1971,
+      "over120": 8,
+      "sources": {
+        "hackernews": 3,
+        "simonwillison": 1,
+        "heise": 11,
+        "lastweekinai": 1
+      }
+    }
+  ],
+  "adapter_health": [
+    {
+      "adapter": "huggingface",
+      "runs": 14,
+      "total_fetched": 12188,
+      "total_truncated": 32,
+      "error_runs": 0
+    },
+    {
+      "adapter": "thebatch",
+      "runs": 14,
+      "total_fetched": 5262,
+      "total_truncated": 1,
+      "error_runs": 0
+    },
+    {
+      "adapter": "heise",
+      "runs": 14,
+      "total_fetched": 454,
+      "total_truncated": 203,
+      "error_runs": 2
+    },
+    {
+      "adapter": "simonwillison",
+      "runs": 14,
+      "total_fetched": 420,
+      "total_truncated": 3,
+      "error_runs": 0
+    },
+    {
+      "adapter": "latentspace",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "lastweekinai",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "interconnects",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "benevans",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "aheadofai",
+      "runs": 14,
+      "total_fetched": 280,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "hackernews",
+      "runs": 14,
+      "total_fetched": 240,
+      "total_truncated": 63,
+      "error_runs": 2
+    },
+    {
+      "adapter": "yannickilcher",
+      "runs": 14,
+      "total_fetched": 210,
+      "total_truncated": 0,
+      "error_runs": 0
+    },
+    {
+      "adapter": "anthropic",
+      "runs": 14,
+      "total_fetched": 205,
+      "total_truncated": 1,
+      "error_runs": 0
+    },
+    {
+      "adapter": "golem",
+      "runs": 14,
+      "total_fetched": 94,
+      "total_truncated": 0,
+      "error_runs": 5
+    },
+    {
+      "adapter": "hackernews-show",
+      "runs": 5,
+      "total_fetched": 6,
+      "total_truncated": 6,
+      "error_runs": 0
+    },
+    {
+      "adapter": "venturebeat",
+      "runs": 14,
+      "total_fetched": 0,
+      "total_truncated": 0,
+      "error_runs": 14
+    },
+    {
+      "adapter": "a16z",
+      "runs": 14,
+      "total_fetched": 0,
+      "total_truncated": 0,
+      "error_runs": 14
+    }
+  ],
+  "scoring_eval": {
+    "n_total": 38,
+    "n_scored": 38,
+    "n_failed": 0,
+    "metrics": {
+      "mae": 0.842,
+      "pearson_r": 0.6385,
+      "accuracy_at_1": 0.868
+    },
+    "publication_boundary_errors": [
+      {
+        "title": "Big Words",
+        "human_score": 4,
+        "model_score": 2
+      },
+      {
+        "title": "Behind the Scenes Hardening Firefox with Claude Mythos Preview",
+        "human_score": 3,
+        "model_score": 5
+      },
+      {
+        "title": "CRDTs merge concurrent edits. Why not concurrent creation?",
+        "human_score": 1,
+        "model_score": 4
+      },
+      {
+        "title": "datasette-agent 0.3a0",
+        "human_score": 1,
+        "model_score": 5
+      }
+    ]
+  },
+  "sample20": [
+    {
+      "title": "llm-openai-decisions 0.1a0",
+      "issue": 217,
+      "source_url": "https://simonwillison.net/2026/Oct/6/llm-openai-decisions/",
+      "words": 117,
+      "source_input_chars": 3348
+    },
+    {
+      "title": "Sogar Chatverläufe: KI-Anbieter geben Daten ihrer Nutzer weiter",
+      "issue": 217,
+      "source_url": "https://www.heise.de/news/Diese-Daten-geben-ChatGPT-Gemini-Claude-und-Co-ueber-uns-an-Dritte-11476698.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 115,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "OpenAI “rogue” agent activities found on Wikimedia projects",
+      "issue": 217,
+      "source_url": "https://simonwillison.net/2026/Oct/7/openai-rogue-agents-wikimedia/",
+      "words": 125,
+      "source_input_chars": 4000
+    },
+    {
+      "title": "Using Parseable with Datasette for OpenTelemetry traces",
+      "issue": 217,
+      "source_url": "https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry/",
+      "words": 99,
+      "source_input_chars": 874
+    },
+    {
+      "title": "Expanding the Cyber Verification Program",
+      "issue": 217,
+      "source_url": "https://www.anthropic.com/news/cyber-verification-program",
+      "words": 135,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "EmbeddingGemma 2",
+      "issue": 217,
+      "source_url": "https://simonwillison.net/2026/Oct/6/hn-49983751/",
+      "words": 133,
+      "source_input_chars": 1415
+    },
+    {
+      "title": "Copilot auf Platz eins: GitHub stellt neuen Review-Benchmark vor",
+      "issue": 217,
+      "source_url": "https://www.heise.de/news/GitHub-ReviewBench-Benchmark-fuer-KI-gestuetzte-Code-Reviews-11478889.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 128,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "BMW streicht Managementebenen und setzt auf agentische KI-Systeme",
+      "issue": 217,
+      "source_url": "https://www.heise.de/news/BMW-will-20-Prozent-seines-Managements-abbauen-11475761.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 147,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Streit mit der EU: Siri AI frühestens in Monaten auf iPhone und iPad",
+      "issue": 217,
+      "source_url": "https://www.heise.de/news/Siri-AI-in-der-EU-iPhone-und-iPad-Nutzer-muessen-weiter-warten-11476199.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 131,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Apple Health wird zum Fitness-Influencer | Mac & i-Podcast",
+      "issue": 217,
+      "source_url": "https://www.heise.de/news/Apple-Health-wird-zum-Fitness-Influencer-Mac-i-Podcast-11473299.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 111,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Qwen3.8 27B addition in words",
+      "issue": 216,
+      "source_url": "https://simonwillison.net/2026/Oct/4/qwen38-addition-in-words/",
+      "words": 110,
+      "source_input_chars": 1642
+    },
+    {
+      "title": "ChatGPT is adding real cartoonists' signatures to fake New Yorker cartoons",
+      "issue": 216,
+      "source_url": "https://www.niemanlab.org/2026/10/chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yorker-cartoons/",
+      "words": 113,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Dust: Pretraining Transformers Without Backpropagation",
+      "issue": 216,
+      "source_url": "https://qlabs.sh/research/dust",
+      "words": 133,
+      "source_input_chars": 2999
+    },
+    {
+      "title": "Why Common Lisp is now the best programming language",
+      "issue": 216,
+      "source_url": "https://www.vivienhenz.com/common-lisp",
+      "words": 133,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s",
+      "issue": 215,
+      "source_url": "https://github.com/Niko1221/Strata",
+      "words": 122,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "Web Search API",
+      "issue": 215,
+      "source_url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+      "words": 133,
+      "source_input_chars": 858
+    },
+    {
+      "title": "How to hack time, with C2PA",
+      "issue": 213,
+      "source_url": "https://www.da.vidbuchanan.co.uk/blog/hacking-time.html",
+      "words": 122,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "We're going to need default hard budget caps on pretty much everything",
+      "issue": 213,
+      "source_url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+      "words": 110,
+      "source_input_chars": 3258
+    },
+    {
+      "title": "Agents don't need memory, they need documentation",
+      "issue": 213,
+      "source_url": "https://liao.gg/blog/agents-dont-need-memory",
+      "words": 150,
+      "source_input_chars": 3000
+    },
+    {
+      "title": "KI-Übersichten: Google vergütet Publisher – Spanne offenbar enorm",
+      "issue": 212,
+      "source_url": "https://www.heise.de/news/Google-bezahlt-offenbar-rund-100-Publisher-fuer-KI-Antworten-in-der-Suche-11473155.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "words": 126,
+      "source_input_chars": 3000
+    }
+  ],
+  "podcasts": {
+    "daily": {
+      "url": "https://kronprinzmagma.github.io/ki-news-aggregator/feed-daily.xml",
+      "episode_count": 116,
+      "latest": "2026-10-07",
+      "feed_status": 200,
+      "latest_audio_head_status": 200
+    },
+    "weekly": {
+      "url": "https://kronprinzmagma.github.io/ki-news-aggregator/feed-weekly.xml",
+      "episode_count": 17,
+      "latest": "2026-10-04",
+      "feed_status": 200,
+      "latest_audio_head_status": 200
+    },
+    "audio_listened": false
+  }
+}
