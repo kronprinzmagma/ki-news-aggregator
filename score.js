@@ -4,7 +4,7 @@ import { loadEnv, requireEnv } from './lib/env.js';
 import { todayString } from './lib/date.js';
 import { claudeBatch, BatchStuckError, getUsageSummary } from './lib/claude.js';
 import { SCORE_MODEL, SCORE_CUTOFF_DELIVER, CROSS_DAY_DEDUP_LOOKBACK } from './lib/config.js';
-import { applyEventDedup, applyClusterBonus } from './lib/topic-overlap.js';
+import { applyEventDedup } from './lib/topic-overlap.js';
 import { recordUsage, closeStore } from './lib/store.js';
 import { loadRecentlyPublished, detectCrossDayDuplicate } from './lib/cross-day-dedup.js';
 import { runWithConcurrency } from './lib/concurrency.js';
@@ -153,16 +153,15 @@ async function main() {
     scored.filter(a => a.score !== null),
     { onPenalty: (loser, winner) => console.log(`[dedup] Score -1 für "${loser.titel}" (Event-Überschneidung mit "${winner.titel}")`) }
   );
-  const boosted = applyClusterBonus(deduplicated, {
-    onBonus: (article, anchor) => console.log(`[cluster] Score +1 für "${article.titel}" (ergänzt "${anchor.titel}")`),
-  });
+  // Wortüberschneidungen dürfen einen Score-3-Artikel nicht publizierbar machen.
+  const scoredFinal = deduplicated;
 
-  const deliverCandidates = boosted.filter(a => a.score >= SCORE_CUTOFF_DELIVER).length;
-  const belowDeliverCutoff = boosted.length - deliverCandidates;
-  console.log(`\n${boosted.length} bewertete Artikel gespeichert, ${deliverCandidates} mit Score >= ${SCORE_CUTOFF_DELIVER}, ${belowDeliverCutoff} unter Deliver-Cutoff, ${failedCount} API-Fehler`);
+  const deliverCandidates = scoredFinal.filter(a => a.score >= SCORE_CUTOFF_DELIVER).length;
+  const belowDeliverCutoff = scoredFinal.length - deliverCandidates;
+  console.log(`\n${scoredFinal.length} bewertete Artikel gespeichert, ${deliverCandidates} mit Score >= ${SCORE_CUTOFF_DELIVER}, ${belowDeliverCutoff} unter Deliver-Cutoff, ${failedCount} API-Fehler`);
 
   const filename = `scored-${date}.json`;
-  await fs.writeFile(filename, JSON.stringify(boosted, null, 2), 'utf-8');
+  await fs.writeFile(filename, JSON.stringify(scoredFinal, null, 2), 'utf-8');
   console.log(`Gespeichert: ${filename}`);
 
   const usage = getUsageSummary();

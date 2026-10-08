@@ -23,7 +23,7 @@ async function enrich(article) {
           const externalText = extractArticleText(externalHtml);
           const combined = [fromPage, externalText].filter(Boolean).join(' ').trim();
           if (combined.length > (article.rohtext || '').length) {
-            return { ...article, rohtext: combined.slice(0, 4000) };
+            return { ...article, rohtext: combined.slice(0, 8000) };
           }
         } catch (err) {
           console.warn(`[simonwillison] Externer Link nicht ladbar (${externalUrl}): ${err.message}`);
@@ -32,7 +32,7 @@ async function enrich(article) {
     }
 
     if (fromPage.length > (article.rohtext || '').length) {
-      return { ...article, rohtext: fromPage.slice(0, 4000) };
+      return { ...article, rohtext: fromPage.slice(0, 8000) };
     }
   } catch (err) {
     console.warn(`[simonwillison] Artikeltext konnte nicht geladen werden (${article.titel}): ${err.message}`);

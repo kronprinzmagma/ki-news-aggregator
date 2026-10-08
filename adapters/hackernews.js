@@ -13,7 +13,7 @@ export async function fetchArticles() {
   return Promise.all(articles.map(a => enrichFromUrl(a, {
     logTag: 'hackernews',
     useMetaDescription: true,
-    maxLength: 3000,
+    maxLength: 8000,
     shouldEnrich: art => art.quelle !== 'hackernews-show',
   })));
 }

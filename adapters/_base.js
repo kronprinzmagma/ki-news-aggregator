@@ -15,7 +15,7 @@ export function extractArticleText(html, {
   blockRegex = DEFAULT_BLOCK_REGEX,
   boilerplateRegex = DEFAULT_BOILERPLATE_REGEX,
   minBlockLength = 45,
-  maxLength = 4000,
+  maxLength = 8000,
   preferArticle = true,
 } = {}) {
   let scope = html;
@@ -152,7 +152,7 @@ export function parseAtom(xml, quelle) {
  */
 export async function enrichFromUrl(article, {
   minLength = 1500,
-  maxLength = 3000,
+  maxLength = 8000,
   logTag = 'enrich',
   fetchOptions = {},
   useMetaDescription = false,

@@ -30,3 +30,36 @@ test('resolved DNS answers cannot point at internal addresses', async () => {
   );
   await assert.doesNotReject(() => resolveSafeAddresses('feed.example.test', publicLookup));
 });
+
+test('HTTP body decoding preserves UTF-8 characters split across network chunks', async t => {
+  const { default: https } = await import('node:https');
+  const { EventEmitter } = await import('node:events');
+  const { httpGet } = await import('../lib/http.js');
+  t.mock.method(https, 'get', (_url, _options, callback) => {
+    const req = new EventEmitter(); req.setTimeout = () => {};
+    queueMicrotask(() => {
+      const res = new EventEmitter(); res.statusCode = 200; res.headers = {}; callback(res);
+      const bytes = Buffer.from('Frührente');
+      res.emit('data', bytes.subarray(0, 3));
+      res.emit('data', bytes.subarray(3));
+      res.emit('end');
+    });
+    return req;
+  });
+  assert.equal(await httpGet('https://example.test', { enforceSafeUrl: false }), 'Frührente');
+});
+
+test('HTTP body decoding respects ISO-8859-1 feed charset', async t => {
+  const { default: https } = await import('node:https');
+  const { EventEmitter } = await import('node:events');
+  const { httpGet } = await import('../lib/http.js');
+  t.mock.method(https, 'get', (_url, _options, callback) => {
+    const req = new EventEmitter(); req.setTimeout = () => {};
+    queueMicrotask(() => {
+      const res = new EventEmitter(); res.statusCode = 200;
+      res.headers = { 'content-type': 'application/rss+xml; charset=ISO-8859-1' };
+      callback(res); res.emit('data', Buffer.from('Frührente', 'latin1')); res.emit('end');
+    }); return req;
+  });
+  assert.equal(await httpGet('https://example.test', { enforceSafeUrl: false }), 'Frührente');
+});

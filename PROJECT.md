@@ -8,7 +8,7 @@ Der Zweck ist ein persönlicher PM-/Produkt-Intelligence-Feed: wichtige KI-Entwi
 
 ## Persona
 
-Product Owner / Product Manager mit technischer Hands-on-Ambition. Will wichtige KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, AI-Adoption, Build-vs-Buy, Kosten, Risiken, Nutzererwartungen und eigene Prototypen? Baut eigene Tools mit Claude Code und Anthropic API, aber der Primärfilter ist nicht "kann ich daraus ein Mini-Tool bauen?", sondern "ändert das meine Produkt- oder Markt-Sicht?"
+Product Owner / Product Manager ohne Engineering-Wissen, mit Interesse an eigener KI-Nutzung. Will wichtige KI-Entwicklungen früh verstehen: was ändert sich für Produktstrategie, AI-Adoption, Build-vs-Buy, Kosten, Risiken, Nutzererwartungen und eigene Prototypen? Nutzt Claude und Claude Code, aber der Primärfilter ist nicht "kann ich daraus ein Mini-Tool bauen?", sondern "ändert das meine Produkt- oder Markt-Sicht?"
 
 **Explizit nicht im Scope:** Backlog-Pflege, Sprint-Mechanik, Ticket-Optimierung, generische Stakeholder-Kommunikation, Jira-/Linear-Integrationen.
 
@@ -28,7 +28,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, nutzt Score-1/2/3-Samples fuer die Review-Schlaufe, filtert fuer die Ausgabe auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
-**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 5 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technische Produktleser) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
+**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 6 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Quellentreue, Verständlichkeit für nicht-technische Produktleser) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 
@@ -38,12 +38,12 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 ## Was guten Output ausmacht
 
-- **Kein künstliches Mengenlimit** – Relevanz gewinnt, typisch 3–5 Artikel pro Issue
+- **Höchstens fünf Artikel** – wenige persönlich relevante Nachrichten, keine Auffüllung
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
   1. Was ist neu (max. 3 Sätze, nüchtern, keine Halluzinationen)
   2. Was es für die KI-Richtung heisst (1–2 Sätze, Strömung dahinter)
-  3. Build-Anker: aktiver Imperativsatz, konkret genug für einen Abend mit Claude Code
+  3. Build-Anker: aktiver Imperativsatz, 10–30 Minuten im Browser/Claude, ohne Entwickler-Setup
 - **Feedback im Issue:** Pro Artikel vier Checkboxen – `Besonders wertvoll`, `Später weiterverfolgen`, `Zu kompliziert erklärt`, `Thema nicht relevant` (die negativen sind das Trainingssignal für den Feedback-Loop)
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
 - **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.
@@ -61,3 +61,5 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Datenhaltung | SQLite (`better-sqlite3`, lokale `ki-news.db`, gitignored, in CI via Actions-Cache persistiert) für Cross-Day-Dedup, Usage-Log und Run-Historie; JSON-Files im Repo-Root bleiben als Audit-Artefakte (ebenfalls gitignored) |
 | Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |
+
+Stand 2026-10-08: Redaktionelle Auswahl vor der Aufbereitung; drei Blöcke zusammen höchstens 110 Wörter. Review bekommt den Quellentext, validiert jede URL und bricht bei fehlender/abgeschnittener Antwort ab. Relevanz, Quellentreue und Verständlichkeit mindestens 4/5, guter Input und starker Issue-Fit sind Pflicht; Rewrites werden erneut geprüft. Final schwache Texte werden ausgeschlossen. Kein Cluster-Bonus durch gemeinsame Wörter. Weekly höchstens 450 Wörter; Einordnung ohne unbelegte Rechts-/Marktfolgen.

@@ -42,7 +42,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 
 - CLI-Befehl `node score.js` liest `articles-YYYY-MM-DD.json` für `RUN_DATE` oder das heutige UTC-Datum ein
 - Jeder Artikel wird per Claude API (`claude-haiku-4-5-20251001`) bewertet
-- Relevanzprofil: Capability-Sprünge bei Modellen, hands-on Tooling/Pattern (SDKs, MCP, Eval, Prompting), Architektur-Erkenntnisse zu agentischen Systemen, strategische Marktverschiebungen
+- Relevanzprofil: konkreter Nutzen für eine Produktperson ohne Engineering-Wissen: eigene KI-Nutzung, Nutzer, Kosten, Vertrauen und Medien
 - Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)
 - Rate Limiting: maximal 5 parallele Requests, Retry bei 429
@@ -53,14 +53,14 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node deliver.js` liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum ein
 - Nur Artikel mit Score >= 4 werden verwendet
 - Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
-- Kein künstliches Mengenlimit; bei Gleichstand bevorzugt Lab-Quellen (anthropic, openai, deepmind, latentspace, simonwillison)
-- Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 120 Wörter):
+- Redaktionelle Auswahl: höchstens fünf relevante Artikel (`DAILY_MAX_ARTICLES`), weniger ist gut. Keine Auffüllung mit Plugin-/SDK-/Infrastruktur-News. Wort-Overlap gibt keinen Score-Bonus mehr.
+- Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 110 Wörter):
   1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
-  2. **Was es für die KI-Richtung heisst** (1–2 Sätze): Strömung dahinter
-  3. **Build-Anker** (1–2 Sätze): zwei zugelassene Stile unter derselben Block-Überschrift – *Bau-Stil* (in 2–4h mit Claude Code + gängigem Stack umsetzbar) oder *Beobachtungs-Stil* (im Browser/mit Claude in <1h, für Themen ohne sinnvollen Bau-Abend). Verboten: Entwickler-Setup wie `cargo install`, `wasmtime`-Builds, eigene GPU, Kompilieren, Modelltraining. Keine Backlog/Sprint-Anwendungen.
+  2. **Was es für die KI-Richtung heisst** (1–2 Sätze): konkreter persönlicher Nutzen, vorsichtige Einordnung
+  3. **Build-Anker**: ein kleiner Versuch oder Vergleich in 10–30 Minuten im Browser/Claude, mit konkretem Ergebnis und ohne Entwickler-Setup.
 - Verständlichkeit ist Pflicht: Zielperson ist eine Produktperson OHNE tiefes Engineering-Wissen. Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die nicht sofort einzuordnen ist, wird in einem Halbsatz erklärt oder weggelassen (deutsch wie englisch, auch Zahlen). Gilt für alle drei Blöcke und die Einleitung.
 - Jeder Artikel enthält im Issue vier Feedback-Checkboxen: zwei positive (`Besonders wertvoll`, `Später weiterverfolgen`) und zwei negative (`Zu kompliziert erklärt`, `Thema nicht relevant`). Die negativen Labels sind bewusst trennscharf: `Zu kompliziert erklärt` misst die Aufbereitung (Verständlichkeit), `Thema nicht relevant` misst die Auswahl – vorher als `Schlecht aufbereitet`/`Irrelevanter Inhalt` vermischt. Negative Häkchen sind das spätere Trainingssignal für Prompt-Iteration und Goldstandard-Erweiterung. Häkchen persistieren über Issue-Rewrites via `extractFeedbackStates` / `applyFeedbackStates` (Match per Label; alte Labels werden bei offenen Issues nicht über den Rename hinweg übernommen). `scripts/promote-feedback.js` matcht beide Label-Varianten.
-- Überblick am Anfang: max. 4 Sätze, Trend des Tages, keine PO-/Stakeholder-Sprache
+- Überblick aus der finalen Auswahl: zwei Sätze, maximal 50 Wörter, belegte Nachricht und Nutzen
 - Issue-Titel: `KI Daily – YYYY-MM-DD`
 - Issue-Body startet mit AI-Disclaimer als Blockzitat (EU AI Act Art. 50(4)): kennzeichnet maschinengenerierten Inhalt
 - Leerer Tag (kein Artikel >= 4): **kein Issue**, nur Log-Ausgabe
@@ -71,7 +71,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Speichert als summary-YYYY-MM-DD.md
 - Schreibt zusätzlich `run-summary-YYYY-MM-DD.json` als Debug-/Audit-Artefakt
 - **Audio-Hörfassung (optional, Konsum-Kanal):** Ist `OPENAI_API_KEY` gesetzt, wird nach dem Rewrite-Loop eine gesprochene Fassung erzeugt (`lib/audio.js`): Claude (`AUDIO_SCRIPT_MODEL`) schreibt aus Überblick + finalen Aufbereitungen ein Sprech-Skript (Markdown/Links raus, Überschriften als Übergänge, Intro mit KI-Disclaimer), OpenAI `gpt-4o-mini-tts` (Stimme `AUDIO_VOICE`, Default `onyx`) synthetisiert MP3, das als Asset der rollierenden Release `AUDIO_RELEASE_TAG` (`podcast`) hochgeladen wird (`daily-YYYY-MM-DD.mp3`). Das Issue erhält einen `🎧 Audio-Version`-Link, die Metadaten landen in `run-summary`. Fehlt der Key oder schlägt ein Schritt fehl, ist es ein No-Op – der Daily-Lauf bricht nie daran ab. `scripts/build-archive.js` baut daraus einen Podcast-RSS-Feed (`_site/feed-daily.xml`) und bettet einen Player auf den Daily-Detailseiten ein. Konfiguration in `lib/config.js` (`AUDIO_*`). Das Weekly hat eine analoge Hörfassung (`generateWeeklyAudio`, Asset `weekly-YYYY-MM-DD.mp3` mit dem Sonntags-Datum, Feed `_site/feed-weekly.xml`).
-- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 5 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Verständlichkeit für nicht-technischen Produktleser `comprehension_nontechnical` 1–5) – inkl. Bewertung der geschriebenen drei Blöcke. `comprehension_nontechnical <= 3` triggert ein Rewrite.
+- Führt eine Claude-only Review-Schlaufe aus: ausgewählte Issue-Artikel plus bis zu zwei ausgeschlossene Beispiele je niedriger Score-Stufe 1, 2 und 3 werden auf 6 Ebenen geprüft (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Quellentreue anhand des Originaltexts (`faithfulness`), Verständlichkeit für nicht-technischen Produktleser `comprehension_nontechnical` 1–5) – inkl. Bewertung der geschriebenen drei Blöcke. Produkt-Relevanz, Quellentreue und Verständlichkeit müssen jeweils mindestens 4 sein; Input gut und Issue-Fit stark. Rewrites werden erneut geprüft. Fehlendes/ungültiges Review oder Token-Abbruch stoppt Veröffentlichung; schwache finale Texte werden ausgeschlossen.
 - Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen
 - Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`
 - Tonalität: Deutsch, Schweizer Hochdeutsch, direkt
@@ -81,8 +81,8 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
 - Holt die Daily-Issues der ausgewiesenen Woche per GitHub API (Label-Filter `summary`, Wochenbereichs-Filter aus dem Issue-Titel), parst die Artikel primär aus den `ki-news-meta`-Markern (Regex nur als Fallback), URL-Dedup über Tage
 - **Themen-zentriert (kein Artikel-Re-Run):** Claude wählt aus dem Artikel-Pool (Score 4+5, nach Score sortiert) die 3 wichtigsten übergreifenden **Themen der Woche**. Score-5-Artikel sind starke Kandidaten, aber keine Pflicht-Ausbreitung mehr.
-- Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), ein ausführlicher Synthese-Absatz (4–6 Sätze, verständlich), ein „Dran bleiben"-Anker (Beobachtungs-/Build-Stil) und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
-- Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Ziel ca. 600–800 Wörter, dadurch body-limit-sicher
+- Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), ein ausführlicher Synthese-Absatz (3–4 kurze Sätze, verständlich), ein „Dran bleiben"-Anker (Beobachtungs-/Build-Stil) und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
+- Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Höchstens 450 Wörter, dadurch body-limit-sicher
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
 - Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet (UTC-Datumslogik)
 - Optionale Audio-Hörfassung wie beim Daily (`OPENAI_API_KEY` nötig), 🎧-Link im Issue-Body
@@ -105,3 +105,9 @@ Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das 
 ## Dokumentations-Pflicht nach jeder Änderung
 
 Nach jeder Session, die Code oder Konfiguration ändert: `.context/doc-check.md` vollständig abarbeiten, bevor „alles aktualisiert" gesagt wird. Diese Checkliste definiert für jede Doku-Datei, welche Fakten mit dem Code übereinstimmen müssen.
+
+## Redaktioneller Massstab (2026-10-08)
+
+Daily: höchstens 110 Wörter je Artikel, drei Blöcke, einfache deutsche Überschriften. Build-Anker: 10–30 Minuten im Browser/Claude, kein Entwickler-Setup. Überblick erst nach der finalen Qualitätsprüfung. `lib/editorial.js` enthält Auswahl, Längen-/Strukturprüfung und Review-Abdeckung. `scripts/refresh-issue-audio.js` vertont bestehende Dailys/Weeklys erneut; `audio-backfill.yml` akzeptiert dafür kommagetrennte `issue_numbers`. HTTP respektiert Feed-Zeichensätze (z.B. Golem ISO-8859-1) und dekodiert vollständige Buffer. Volltext-Puffer bis 8000 Zeichen; Consent-Seiten bleiben ungeeignete Quellen.
+
+Strukturierte API-Antworten: `strict: true` mit API-kompatibler Schema-Kopie; vollständige Constraints bleiben clientseitig geprüft. Ein Wiederholungsversuch bei ungültiger Struktur, dann Abbruch. `eval.yml` installiert jetzt die für diese Prüfung benötigten Abhängigkeiten.

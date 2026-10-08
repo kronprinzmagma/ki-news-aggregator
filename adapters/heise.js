@@ -11,7 +11,7 @@ export async function fetchArticles() {
   return Promise.all(aiArticles.map(a => enrichFromUrl(a, {
     logTag: 'heise',
     useMetaDescription: true,
-    maxLength: 3000,
+    maxLength: 8000,
     // Die Seite enthaelt Teaser-<article>-Templates vor dem echten Beitrag.
     extractOptions: { preferArticle: false },
   })));

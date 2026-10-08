@@ -11,6 +11,10 @@ on:
         description: 'Daily-Datum (YYYY-MM-DD) – leer = letztes Daily-Issue'
         required: false
         default: ''
+      issue_numbers:
+        description: 'Daily-/Weekly-Issue-Nummern, kommagetrennt; leer = Daily nach Datum'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -18,7 +22,7 @@ permissions:
 jobs:
   audio:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -38,7 +42,13 @@ jobs:
         # Input via env statt direkter ${{ }}-Interpolation (Injection-Härtung).
         env:
           DATE_INPUT: ${{ github.event.inputs.date }}
-        run: node scripts/generate-audio.js "$DATE_INPUT"
+          ISSUE_NUMBERS: ${{ github.event.inputs.issue_numbers }}
+        run: |
+          if [ -n "$ISSUE_NUMBERS" ]; then
+            node scripts/refresh-issue-audio.js "$ISSUE_NUMBERS"
+          else
+            node scripts/generate-audio.js "$DATE_INPUT"
+          fi
 
       - name: Upload local MP3 artifact
         if: always()

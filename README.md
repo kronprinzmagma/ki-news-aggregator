@@ -4,7 +4,7 @@
 ![Schedule](https://img.shields.io/badge/runs-daily%2005%3A30%20UTC-informational?style=flat)
 [![Live archive](https://img.shields.io/badge/live-archive-2ea44f?style=flat)](https://kronprinzmagma.github.io/ki-news-aggregator/)
 
-A daily AI briefing for product managers and POs who are starting to build things themselves — with Claude Code, the Anthropic API, tools like that. Not aimed at developers.
+A daily AI briefing for product managers and POs who are starting to build things themselves — with Claude and Claude Code. Not aimed at developers.
 
 <!-- HERO-VISUAL — bitte hier ein Bild einfügen (stärkster visueller Hebel):
      Screenshot einer echten, gerenderten Tagesausgabe (statt nur des Links) —
@@ -23,23 +23,23 @@ You're a senior PM or PO who's moved past just speccing things out for engineers
 
 Most AI newsletters assume you either work at a lab or want to fine-tune a model. The ones aimed at business audiences are all market trends and funding rounds. Neither is useful when what you actually want to know is: what just became possible, and is there something worth trying with it this weekend?
 
-Every morning at 05:30 UTC the pipeline fetches 15 sources, scores them for relevance, and writes up the articles that made the cut. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a concrete project to try tonight with Claude Code — no server setup, no ML background required.
+Scheduled daily at 05:30 UTC (GitHub may start later), the pipeline fetches 15 sources, scores them for relevance, and selects at most five useful articles; fewer is fine. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a simple 10–30 minute experiment in a browser or Claude — no server setup, no ML background required.
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
 
 **Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
 
-**Build-anchor catalog:** [build-anchors/](build-anchors/) — one concrete evening project extracted per article, auto-committed daily. Grows into a browseable collection over time.
+**Build-anchor catalog:** [build-anchors/](build-anchors/) — one small practical experiment extracted per article, auto-committed daily. Grows into a browseable collection over time.
 
 ---
 
 ## What the write-ups look like
 
-The briefing is in German (Swiss standard). Each article gets three blocks, capped at around 120 words total.
+The briefing is in German (Swiss standard). Each article gets three blocks, capped at 110 words total.
 
-The first block covers what's new — factually, without hype, without repeating the headline. The second block ("Was es für die KI-Richtung heisst") is supposed to be an actual opinion: given this development, where is the field moving, and what should you be paying attention to? Not a summary of the article, more of a positioning take.
+The first block covers what's new — factually, without hype, without repeating the headline. The second block ("Was es für die KI-Richtung heisst") explains the concrete benefit for personal AI use, users, costs, trust or media. Interpretations are cautious and distinguished from reported facts.
 
-The third block is the build anchor. Every article has to produce one concrete project — something doable in an evening, alone, without infrastructure setup and without any ML background. The scope constraint (2–4 hours with Claude Code) is deliberate. Not "you could build a platform around this" but "here's the smallest thing you could make tonight that would actually teach you something."
+The third block is a practical anchor: a small comparison or experiment in the browser or Claude, with a clear result, taking 10–30 minutes and requiring no developer setup.
 
 Things that get filtered out before any of this: funding announcements, "AI is transforming industry X" pieces, and anything where the relevance only makes sense if you already have an engineering background.
 
@@ -51,11 +51,11 @@ Three stages run sequentially:
 
 **1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
 
-**2. Score** — Each article is sent to `claude-haiku-4-5-20251001` with a relevance rubric calibrated to the product-builder persona. High-relevance signals: model capability jumps, hands-on SDK/MCP/eval patterns, agentic architecture insights, strategic market shifts. Low-relevance signals: generic "AI transforms industry" pieces, pure VC announcements, undifferentiated Show HN posts. Output is structured JSON (`score 1–5`, `begründung`) via tool-use. Only Score ≥ 4 reaches publication.
+**2. Score** — Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
-**3. Deliver** — Articles scoring ≥ 4 are processed by `claude-sonnet-4-6` into the fixed three-block format. A review loop checks every article on five dimensions — product relevance, technical substance, learning value, write-up quality, and comprehension for a non-technical product reader — and rewrites any article flagged `needs_rewrite` before it enters the issue. A hard gate excludes articles whose write-up had to fall back to "Volltext nicht verfügbar". The issue is published to GitHub; a Markdown summary and a JSON audit artefact are written to disk. Optionally — if `OPENAI_API_KEY` is set — a spoken-word version of the daily is generated (`gpt-4o-mini-tts`), hosted as a GitHub Release asset, linked in the issue, and exposed as a podcast RSS feed.
+**3. Deliver** — Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three short blocks. The review receives the original source text and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
 
-**Weekly** — A Sunday digest fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each with a synthesis paragraph, a "stay on it" anchor and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
+**Weekly** — A digest of at most 450 words, scheduled on Sundays, fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each with a synthesis paragraph, a "stay on it" anchor and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
 
 ---
 
@@ -86,14 +86,15 @@ flowchart TD
     Filter{"Score ≥ 4?"}
     XDay["Cross-day dedup<br/>SQLite · 7-day lookback<br/>URL + title similarity"]
     Topic["Within-day topic dedup<br/>shared-token heuristic"]
+    Select["Editorial selection<br/>at most 5 useful stories"]
     Write["deliver.js<br/>Claude Sonnet 4.6<br/>3-block format per article"]
-    Review["Review loop<br/>5-dim quality check<br/>→ rewrite if weak"]
+    Review["Review loop<br/>6-dim + source check<br/>→ rewrite if weak"]
     Issue["GitHub Issue<br/>'KI Daily – YYYY-MM-DD'"]
     Store[("SQLite<br/>articles · scores<br/>issues · history")]
     Weekly["weekly.js<br/>Sunday synthesis<br/>last 7 daily issues"]
 
     Sources --> Ingest --> Score --> Filter
-    Filter -- yes --> XDay --> Topic --> Write --> Review --> Issue
+    Filter -- yes --> XDay --> Topic --> Select --> Write --> Review --> Issue
     Filter -- no --> Store
     Issue --> Store
     Store -.7 days.-> Weekly --> Issue
@@ -124,7 +125,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 ## Engineering notes
 
-**Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback — the API guarantees a schema-conformant object or fails the call. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
+**Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback — strict tool use constrains field types and the client validates the full JSON schema and rejects truncated responses. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
 
 **Prompt caching for cost efficiency.** The scoring stage sends the system prompt — including the full relevance rubric — as an Anthropic `cache_control: ephemeral` prefix. Only the per-article content varies across calls. This significantly reduces token cost on days with high article volume.
 
