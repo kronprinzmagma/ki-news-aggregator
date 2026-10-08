@@ -25,9 +25,11 @@ Most AI newsletters assume you either work at a lab or want to fine-tune a model
 
 Scheduled daily at 05:30 UTC (GitHub may start later), the pipeline fetches 15 sources, scores them for relevance, and selects at most five useful articles; fewer is fine. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a simple 10–30 minute experiment in a browser or Claude — no server setup, no ML background required.
 
-**See a real output:** [samples/example-daily.md](samples/example-daily.md) — a recent daily issue, exactly as it was generated and posted.
+**See a real output:** [samples/example-daily.md](samples/example-daily.md) — the reviewed Daily from 7 October 2026, as published on GitHub.
 
 **Browse the full archive:** [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/) — every daily and weekly briefing as a static site, auto-rebuilt after each run.
+
+**Podcast subscriptions:** [Daily RSS](https://kronprinzmagma.github.io/ki-news-aggregator/feed-daily.xml) · [Weekly RSS](https://kronprinzmagma.github.io/ki-news-aggregator/feed-weekly.xml). Add the feed URL in your podcast app.
 
 **Build-anchor catalog:** [build-anchors/](build-anchors/) — one small practical experiment extracted per article, auto-committed daily. Grows into a browseable collection over time.
 

@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-08",
+  "model": "claude-haiku-4-5-20251001",
+  "dataset": "pm-baseline.json",
+  "label_origin": "editorial-calibration-2026-10-08",
+  "scoring_path": "lib/scoring.js",
+  "n_total": 16,
+  "n_scored": 16,
+  "n_failed": 0,
+  "metrics": {
+    "mae": 0.563,
+    "pearson_r": 0.7894,
+    "accuracy_at_1": 0.938
+  },
+  "score_distribution": {
+    "human": {
+      "1": 1,
+      "2": 5,
+      "3": 2,
+      "4": 4,
+      "5": 4
+    },
+    "model": {
+      "1": 1,
+      "2": 5,
+      "3": 2,
+      "4": 7,
+      "5": 1
+    }
+  },
+  "details": [
+    {
+      "titel": "llm-openai-decisions 0.1a0",
+      "url": "https://simonwillison.net/2026/Oct/6/llm-openai-decisions/",
+      "quelle": "simonwillison",
+      "human_score": 2,
+      "model_score": 3,
+      "begründung": "OpenAI veröffentlicht eine neue Decisions API für strukturierte Klassifizierung (yes/no, choices, scores) mit Bild-Support und 10x schnellerem Output; der llm-openai-decisions Plugin ermöglicht lokale Integration, bleibt aber ein technisches Tool für Entwickler mit speziellen API-Workflows und ohne nachvollziehbare Auswirkung auf die alltägliche Produktnutzung dieser Produktperson.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 1,
+      "error": null
+    },
+    {
+      "titel": "Using Parseable with Datasette for OpenTelemetry traces",
+      "url": "https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry/",
+      "quelle": "simonwillison",
+      "human_score": 2,
+      "model_score": 2,
+      "begründung": "Simon Willison zeigt eine technische Integrationsmöglichkeit zwischen Parseable und Datasette über OpenTelemetry, aber ohne Mehrwert für eine Produktperson ohne Engineering-Wissen: Das ist Infrastruktur-Setup (Observability-Tool), nicht nachvollziehbar relevant für KI-Produktnutzung oder -entscheidungen.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "Why Common Lisp is now the best programming language",
+      "url": "https://www.vivienhenz.com/common-lisp",
+      "quelle": "hackernews",
+      "human_score": 1,
+      "model_score": 1,
+      "begründung": "Programmiersprache-Advocacy für Common Lisp im Kontext von LLMs, ohne konkrete neue Funktionen, Nutzererfahrungen oder nachvollziehbare Produktveränderungen für eine Non-Engineer Produktperson – reine technische Debatte über Sprachdesign.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "Dust: Pretraining Transformers Without Backpropagation",
+      "url": "https://qlabs.sh/research/dust",
+      "quelle": "hackernews",
+      "human_score": 2,
+      "model_score": 2,
+      "begründung": "Dust ist ein Forschungsansatz zu Alternativen für Backpropagation; ohne konkrete Verfügbarkeit, Framework-Integration oder nutzbare Implementierung bleibt es ein akademisches Benchmark-Thema ohne direkten Produktnutzen für diese Produktperson.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "Qwen3.8 27B addition in words",
+      "url": "https://simonwillison.net/2026/Oct/4/qwen38-addition-in-words/",
+      "quelle": "simonwillison",
+      "human_score": 3,
+      "model_score": 2,
+      "begründung": "Ein Hobbyexperiment zum Zahladdieren mit lokalen Modellen; für eine Produktperson ohne Engineering-Setup völlig unverwertbar, da weder neue Funktionen noch Nutzer- oder Kostenveränderungen entstehen.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "[AINews] Reflection Beam - 501B-A23B American Open Model",
+      "url": "https://www.latent.space/p/ainews-reflection-beam-501b-a23b",
+      "quelle": "latentspace",
+      "human_score": 3,
+      "model_score": 2,
+      "begründung": "Reflection Beam ist ein neues Open-Weight-Modell, aber die Ankündigung bleibt fragmentarisch: Vergleiche zu veralteten Baselines (Inkling, GLM 5.2), technische Metriken ohne konkrete Anwendungsvorhersagen, unklar wann Download/Integration tatsächlich verfügbar ist. Für eine Produktperson ohne Engineering kein unmittelbar nutzbarer Erkenntnisgewinn, zu viel Fachdiskurs über MFU und Architektur, zu wenig darüber, was sich praktisch für KI-Nutzung oder eigene Modellwahl ändert.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "Quoting Felix Rieseberg",
+      "url": "https://simonwillison.net/2026/Oct/5/felix-rieseberg/",
+      "quelle": "simonwillison",
+      "human_score": 2,
+      "model_score": 4,
+      "begründung": "Anthropic verlagert Cowork-Inference in die Cloud statt auf Nutzergeräte: weniger Ressourcen lokal, ständiges Laufen, Nutzbarkeit auch vom Smartphone – konkrete Verbesserung für alltägliche Produktivitätsnutzung mit Claude.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 2,
+      "error": null
+    },
+    {
+      "titel": "llm-mistral 0.16",
+      "url": "https://simonwillison.net/2026/Oct/6/llm-mistral/",
+      "quelle": "simonwillison",
+      "human_score": 2,
+      "model_score": 2,
+      "begründung": "llm-mistral Plugin erhält Unterstützung für Reasoning-Modelle wie Mistral Large 4; zu speziell für eine Produktperson ohne Entwickler-Setup, kein nachvollziehbarer Unterschied für Claude-Nutzer.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "KI-Übersichten: Google vergütet Publisher – Spanne offenbar enorm",
+      "url": "https://www.heise.de/news/Google-bezahlt-offenbar-rund-100-Publisher-fuer-KI-Antworten-in-der-Suche-11473155.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "quelle": "heise",
+      "human_score": 5,
+      "model_score": 4,
+      "begründung": "Google zahlt Publishers erstmals für KI-Inhalte mit massiv schwankender Spanne (unter 1.000 bis über 1 Million USD), was zeigt, dass Medienprodukte von KI-generierten Zusammenfassungen unterschiedlich profitieren und Verhandlungsspielraum haben – relevant für Content-Strategien und die Frage, wie wertvoll eigene Inhalte für KI-Systeme sind.",
+      "strategy_only": true,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "ChatGPT is adding real cartoonists' signatures to fake New Yorker cartoons",
+      "url": "https://www.niemanlab.org/2026/10/chatgpt-is-adding-real-cartoonists-signatures-to-fake-new-yorker-cartoons/",
+      "quelle": "hackernews",
+      "human_score": 5,
+      "model_score": 4,
+      "begründung": "ChatGPT reproduziert real existierende Künstlersignaturen auf gefälschten Cartoons, was ein konkretes Vertrauens- und Authentizitätsproblem für Nutzer und Medienprodukte schafft: Man kann nicht mehr verlässlich unterscheiden, wer einen Inhalt tatsächlich gemacht hat.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "Sogar Chatverläufe: KI-Anbieter geben Daten ihrer Nutzer weiter",
+      "url": "https://www.heise.de/news/Diese-Daten-geben-ChatGPT-Gemini-Claude-und-Co-ueber-uns-an-Dritte-11476698.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "quelle": "heise",
+      "human_score": 5,
+      "model_score": 5,
+      "begründung": "Alle neun KI-Anbieter (ChatGPT, Claude, Gemini, Grok, DeepSeek, Perplexity, Le Chat, Meta AI, Copilot) geben Chatverläufe und persönliche Gesprächsinhalte (Gesundheit, Finanzen, Standort) an Werbetracker und Drittanbieter weiter – teilweise mit vollständiger Nachverfolgbarkeit durch persistent Identifiers, auch im Inkognito-Modus. Dies ist eine konkrete, überprüfbare Vertrauens- und Datenschutzveränderung, die für jede Produktperson, die diese Tools nutzt oder empfiehlt, unmittelbar handlungsrelevant ist.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "We're going to need default hard budget caps on pretty much everything",
+      "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+      "quelle": "simonwillison",
+      "human_score": 5,
+      "model_score": 4,
+      "begründung": "AWS hat endlich harte Ausgabenlimits mit automatischer Unterbrechung eingeführt – genau das, was KI-Agenten-Nutzende brauchen, um Überraschungsrechnungen zu vermeiden. Konkrete neue Kontrollierbarkeit für persönliche Projekte und experimentelle Workloads.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "Barclays scales Claude to upgrade operations and improve client experience",
+      "url": "https://www.anthropic.com/news/barclays-scales-claude",
+      "quelle": "anthropic",
+      "human_score": 4,
+      "model_score": 3,
+      "begründung": "Barclays skaliert Claude intern für Softwareentwicklung und Legacy-Modernisierung; eine glaubwürdige Enterprise-Fallstudie, aber ohne konkrete neue Funktionen, Zugangsänderungen oder nachprüfbare Produktkonsequenzen für die Produktperson selbst.",
+      "strategy_only": true,
+      "pre_filtered": null,
+      "diff": -1,
+      "error": null
+    },
+    {
+      "titel": "Photo Scrubber — local face blur & metadata removal",
+      "url": "https://simonwillison.net/2026/Sep/29/photo-scrubber/",
+      "quelle": "simonwillison",
+      "human_score": 4,
+      "model_score": 4,
+      "begründung": "Simon Willison baute mit Claude Opus 5.5 ein lokales Web-Tool zur automatischen Gesichtsunkenntlichmachung und Metadaten-Entfernung – direkt nutzbar für Produktmanager, die Fotos mit Privatspäre-Anforderungen teilen möchten, ohne Server-Upload.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "How to hack time, with C2PA",
+      "url": "https://www.da.vidbuchanan.co.uk/blog/hacking-time.html",
+      "quelle": "hackernews",
+      "human_score": 4,
+      "model_score": 4,
+      "begründung": "Sicherheitsforscher David Buchanan zeigt einen konkreten Vertrauensbruch: C2PA-Metadaten, die als kryptographisch unfälschbar vermarktet werden, können manipuliert werden – mit praktischem Beweis (gefälschtes Lotto-Gewinn-Bild mit korrektem Zeitstempel). Produktperson muss verstehen, dass C2PA-Authentifizierung für Bilder nicht das leistet, was Nutzer erwarten.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    },
+    {
+      "titel": "OpenAI versieht KI-Text mit Wasserzeichen – aber nur in der EU",
+      "url": "https://www.heise.de/news/OpenAI-versieht-KI-Text-mit-Wasserzeichen-aber-nur-in-der-EU-11476910.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "quelle": "heise",
+      "human_score": 4,
+      "model_score": 4,
+      "begründung": "OpenAI führt Textgrain-Wasserzeichen in der EU ein, um KI-generierte Texte erkennbar zu machen – eine konkrete Compliance-Massnahme mit praktischer Konsequenz: In der EU werden ChatGPT-Outputs ab sofort gekennzeichnet, ausserhalb nicht, und API-Kunden müssen es manuell aktivieren. Für Produktpersonen relevant, um nachvollziehen zu können, ob und wie eigene KI-Inhalte gekennzeichnet werden und welche Erkennungsquoten bei unterschiedlichen Texttypen erwartet werden können.",
+      "strategy_only": false,
+      "pre_filtered": null,
+      "diff": 0,
+      "error": null
+    }
+  ],
+  "usage": {
+    "totals": {
+      "calls": 16,
+      "input_tokens": 38872,
+      "output_tokens": 2681,
+      "cache_read_input_tokens": 0,
+      "cache_creation_input_tokens": 0,
+      "usd": 0.052277
+    },
+    "by_log_tag": [
+      {
+        "log_tag": "score-eval",
+        "model": "claude-haiku-4-5-20251001",
+        "calls": 16,
+        "input_tokens": 38872,
+        "output_tokens": 2681,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "usd": 0.052277
+      }
+    ],
+    "cache_hit_rate": 0
+  }
+}

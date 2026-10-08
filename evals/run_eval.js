@@ -19,7 +19,8 @@ import { scoreArticleWithPrefilter } from '../lib/scoring.js';
 loadEnv();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const GOLD_FILE = path.join(__dirname, 'goldstandard.json');
+const DATASET_NAME = process.env.EVAL_DATASET || 'goldstandard.json';
+const GOLD_FILE = path.resolve(__dirname, DATASET_NAME);
 const RESULTS_DIR = path.join(__dirname, 'results');
 const CONCURRENCY = 5;
 
@@ -76,7 +77,7 @@ async function runWithConcurrency(items, fn, limit) {
 async function scoreGoldArticle(article, index) {
   try {
     const rating = await scoreArticleWithPrefilter(article, { logTag: 'score-eval' });
-    console.log(`  [${index + 1}] Score ${rating.score} (Human: ${article.human_score}) - ${article.titel.slice(0, 70)}`);
+    console.log(`  [${index + 1}] Score ${rating.score} (Referenz: ${article.human_score}) - ${article.titel.slice(0, 70)}`);
     return {
       titel: article.titel,
       url: article.url || '',
@@ -109,11 +110,14 @@ async function scoreGoldArticle(article, index) {
 export async function main() {
   requireEnv('ANTHROPIC_API_KEY');
 
-  const articles = JSON.parse(await fs.readFile(GOLD_FILE, 'utf-8'));
+  const rawArticles = JSON.parse(await fs.readFile(GOLD_FILE, 'utf-8'));
+  const articles = Array.isArray(rawArticles) ? rawArticles.map(a => ({ ...a, human_score: a.reference_score ?? a.human_score })) : rawArticles;
   if (!Array.isArray(articles) || articles.length === 0) {
-    throw new Error('goldstandard.json ist leer oder kein Array.');
+    throw new Error(`${DATASET_NAME} ist leer oder kein Array.`);
   }
 
+  if (articles.some(a => !Number.isInteger(a.human_score) || a.human_score < 1 || a.human_score > 5)) throw new Error('Referenz-Scores müssen ganze Zahlen von 1 bis 5 sein.');
+  console.log(`Datensatz: ${DATASET_NAME} · Labels: ${articles[0].label_origin || 'historisches Nutzerfeedback'}`);
   console.log(`Eval gestartet - ${articles.length} Artikel, Modell: ${SCORE_MODEL}`);
   console.log('-'.repeat(60));
 
@@ -130,10 +134,12 @@ export async function main() {
 
   await fs.mkdir(RESULTS_DIR, { recursive: true });
   const today = todayString();
-  const outFile = path.join(RESULTS_DIR, `${today}.json`);
+  const outFile = path.join(RESULTS_DIR, `${today}${DATASET_NAME === 'goldstandard.json' ? '' : '-' + path.basename(DATASET_NAME, '.json')}.json`);
   await fs.writeFile(outFile, JSON.stringify({
     date: today,
     model: SCORE_MODEL,
+    dataset: DATASET_NAME,
+    label_origin: articles[0].label_origin || 'historical-user-feedback',
     scoring_path: 'lib/scoring.js',
     n_total: articles.length,
     n_scored: scored.length,
@@ -165,7 +171,7 @@ export async function main() {
     ? '  Accuracy @+/-1:        -'
     : `  Accuracy @+/-1:        ${(accuracyAt1 * 100).toFixed(1)}%`);
   console.log();
-  console.log(`  Human-Score Verteilung:  ${JSON.stringify(humanDist)}`);
+  console.log(`  Referenz-Score Verteilung:  ${JSON.stringify(humanDist)}`);
   console.log(`  Model-Score Verteilung:  ${JSON.stringify(modelDist)}`);
   console.log();
   console.log(`  Report gespeichert: ${outFile}`);

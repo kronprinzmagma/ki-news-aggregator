@@ -1,9 +1,15 @@
+## Relevanzprofil ab 8. Oktober 2026
+
+CI verwendet `EVAL_DATASET=pm-baseline.json`: 16 ausgewogene Fälle mit `reference_score` und expliziter Begründung für den nicht-technischen Produktleser. Diese Labels wurden redaktionell aus dem aktuellen Nutzerauftrag abgeleitet und sind als `editorial-calibration-2026-10-08` gekennzeichnet. Sie sind kein unabhängiger menschlicher Goldstandard. Positive Fälle: Datenschutz, Medienherkunft, Vergütung, praktische Kostenkontrolle; negative Fälle: Plugin-Versionen, Telemetrie, Programmiersprachen und reine Trainingsdetails.
+
+`node evals/run_eval.js` ohne Variable prüft weiterhin die unveränderten 38 historischen Nutzerlabels. Deren technische Persona passt teilweise nicht mehr: Das absichtliche Herabstufen von Plugin-Meldungen kann dort eine Regression auslösen. Die MAE-Grenze 1.5 bleibt in beiden Fällen gleich. Reports nennen Datensatz und Label-Ursprung; der separate PM-Report überschreibt den historischen Report nicht. Neue Nutzerbewertungen bleiben erforderlich, um die Kalibrierung unabhängig zu prüfen.
+
 
 ## Aktueller redaktioneller Massstab – 2026-10-08
 
 Nicht-technischer Produktleser: höchstens fünf persönlich relevante Daily-Nachrichten; je 110 Wörter und ein 10–30-Minuten-Versuch im Browser/Claude. `lib/editorial.js` prüft Auswahl, Textstruktur und vollständige Review-Abdeckung. Review anhand des Originaltexts mit Quellentreue, erneut nach Rewrite; ungültige/abgeschnittene Antworten stoppen Publikation. Technische Plugin-/Infrastrukturmeldungen allein sind kein Topthema; Cluster-Bonus entfällt. Weekly höchstens 450 Wörter. `scripts/refresh-issue-audio.js` aktualisiert die Vertonung nach Issue-Änderungen. Ältere Aussagen zu Mengenlimit, advisory Review, Entwickler-Projekten und Cluster-Bonus sind überholt.
 
-Offen bleibt: Goldstandard an die neue Persona anpassen; die alten 38 Labels bevorzugen technische Meldungen und sind kein Nachweis für die neue redaktionelle Qualität. Source-Ausfälle und unzuverlässiger GitHub-Schedule sind durch diese Redaktion-Korrektur nicht behoben.
+Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. Für den CI-Relevanztest dient jetzt eine separate redaktionelle Kalibrierung (`pm-baseline.json`, 16 Fälle); sie ist kein Ersatz für neue menschliche Bewertungen. Source-Ausfälle und unzuverlässiger GitHub-Schedule sind durch diese Redaktion-Korrektur nicht behoben.
 
 # Eval-System – Dokumentation
 
