@@ -3,8 +3,7 @@ import https from 'https';
 import { todayString } from './lib/date.js';
 import { normalizeUrl } from './lib/url.js';
 import { recordAdapterHealth, recordAdapterTruncated, getStaleAdapters, closeStore } from './lib/store.js';
-import { githubRequest, ghPath } from './lib/github.js';
-import { REPO_SLUG } from './lib/config.js';
+import { syncAdapterAlerts } from './lib/adapter-alerts.js';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
 import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
@@ -62,7 +61,8 @@ async function runAdapters(runDate) {
     if (result.status === 'fulfilled') {
       console.log(`[${name}] ${result.value.length} Artikel geladen`);
       articles.push(...result.value);
-      perAdapter.push({ name, fetched: result.value.length, error: null });
+      const dates = result.value.map(article => article.datum).filter(date => date && Number.isFinite(Date.parse(date))).sort((a, b) => Date.parse(b) - Date.parse(a));
+      perAdapter.push({ name, fetched: result.value.length, error: null, latest: dates[0] || null });
     } else {
       console.error(`[${name}] Fehler: ${result.reason.message}`);
       perAdapter.push({ name, fetched: 0, error: result.reason.message });
@@ -77,7 +77,7 @@ async function runAdapters(runDate) {
       error_message: a.error,
     });
   }
-  return articles;
+  return { articles, health: perAdapter };
 }
 
 function deduplicate(articles) {
@@ -141,44 +141,6 @@ function backfillTruncatedPerAdapter(articles, runDate) {
   }
 }
 
-// Stale-Detection: Wenn ein Adapter ≥ 3 Tage 0 Artikel liefert, ein
-// GitHub-Issue mit Label "adapter-stale" anlegen (nur einmal pro Adapter,
-// dedupliziert anhand des Titels).
-async function alertOnStaleAdapters(token) {
-  if (!token) return;
-  const stale = getStaleAdapters(3);
-  if (stale.length === 0) return;
-  for (const s of stale) {
-    const issueTitle = `Adapter stale: ${s.adapter} (0 Artikel über ${s.runs} Läufe)`;
-    try {
-      const q = new URLSearchParams({ q: `repo:${REPO_SLUG} is:issue is:open in:title "${issueTitle}"` });
-      const { status, body } = await githubRequest(token, 'GET', ghPath.searchIssues(q));
-      if (status !== 200) {
-        console.warn(`[adapter-health] Issue-Suche fehlgeschlagen: HTTP ${status}`);
-        continue;
-      }
-      const existing = JSON.parse(body).items?.find(i => i.title === issueTitle);
-      if (existing) {
-        console.log(`[adapter-health] Stale-Issue für "${s.adapter}" existiert bereits: ${existing.html_url}`);
-        continue;
-      }
-      const issueBody = `Der Adapter \`${s.adapter}\` hat in den letzten ${s.runs} Daily-Läufen 0 Artikel geliefert (letzter Lauf: ${s.latest_run}).\n\nMögliche Ursachen:\n- Feed-URL umgezogen oder offline\n- Feed-Format umgestellt (RSS ↔ Atom)\n- Pattern-Filter (z.B. AI-Keyword bei a16z/Heise) zu strikt\n- Adapter-Logik durch HTML-Änderung gebrochen\n\nBitte prüfen.\n\n*Auto-generiert vom Daily-Ingest.*`;
-      const result = await githubRequest(token, 'POST', ghPath.issues(), {
-        title: issueTitle,
-        body: issueBody,
-        labels: ['adapter-stale'],
-      });
-      if (result.status === 201) {
-        console.warn(`[adapter-health] Issue erstellt für "${s.adapter}": ${JSON.parse(result.body).html_url}`);
-      } else {
-        console.warn(`[adapter-health] Issue-Erstellung fehlgeschlagen: HTTP ${result.status}`);
-      }
-    } catch (err) {
-      console.warn(`[adapter-health] Stale-Issue für "${s.adapter}" nicht erstellt: ${err.message}`);
-    }
-  }
-}
-
 function flagPricingSignals(articles) {
   const PRICING_PATTERN = /\$[\d.,]+|\bpricing\b|\bprice\b|\bkosten\b|\bpreis\b|\bper token\b|\bper request\b|\brate limit\b|\bfree tier\b|\bpaid plan\b|\bcost\b|\bgebühr\b|\btier\b/i;
   return articles.map(a => {
@@ -189,7 +151,7 @@ function flagPricingSignals(articles) {
 
 async function main() {
   const runDate = todayString();
-  const raw = await runAdapters(runDate);
+  const { articles: raw, health } = await runAdapters(runDate);
   const deduped = deduplicate(raw);
   const aged = filterByAge(deduped, runDate);
   const truncated = flagTruncated(aged);
@@ -202,7 +164,10 @@ async function main() {
   await fs.writeFile(filename, JSON.stringify(articles, null, 2), 'utf-8');
   console.log(`Gespeichert: ${filename}`);
 
-  await alertOnStaleAdapters(process.env.GH_PAT);
+  try {
+    const outcomes = await syncAdapterAlerts(process.env.GH_PAT, { health, stale: getStaleAdapters(3), runDate });
+    for (const outcome of outcomes) console.log(`[adapter-health] ${outcome.adapter}: ${outcome.action} #${outcome.number}`);
+  } catch (error) { console.warn(`[adapter-health] ${error.message}`); }
 }
 
 main()

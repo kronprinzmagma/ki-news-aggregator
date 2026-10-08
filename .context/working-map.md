@@ -41,6 +41,7 @@ Nicht erneut breit analysieren:
 - `lib/audio.js`: `generateDailyAudio()` – Sprech-Skript (Claude) → TTS → Release-Asset. Fehlertolerant, von `deliver.js` aufgerufen.
 - `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.
 - `lib/topic-overlap.js`: Eine Token-Overlap-Implementierung für Event-Dedup, Cluster-Bonus, Themen-Dedup, Related-Links.
+- `lib/adapter-alerts.js`: Quellenwarnungen anhand tatsächlicher Abrufe abgleichen, veraltete Warnungen auflösen und offene Ausfälle aktualisieren.
 - `lib/store.js`: SQLite-Persistenz (`better-sqlite3`, DB-Datei `ki-news.db`, lokal generiert, nicht im Repo). Cross-Day-Dedup liest aus `issue_articles`.
 - `lib/issue-format.js`: HTML-Kommentar-Metadaten (`<!-- ki-news-meta: {...} -->`) für robustes Re-Parsing. Weekly nutzt das zuerst, Regex-Fallback bleibt.
 - `lib/schema.js`: Zod-Schemas; Validierung beim Lesen von `articles-*.json`/`scored-*.json`.

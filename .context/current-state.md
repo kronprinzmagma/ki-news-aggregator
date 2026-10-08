@@ -178,3 +178,7 @@ Vier parallele Review-Agenten (Pipeline, Security/Infra, Adapter/Tests/Scripts, 
 ## Offene Punkte (nächste Session)
 
 Siehe `.tasks/NEXT.md`: Embeddings-Eval auswerten, Goldstandard Richtung 40, Audio-Stimme bestätigen, PR-Mechanismus (zurückgestellt bis Goldstandard belastbar).
+
+## Betriebsnachprüfung nach Freigabe 2026-10-08
+
+`lib/adapter-alerts.js` gleicht Quellenwarnungen nach jedem Ingest ab, aktualisiert laufende Ausfälle und schliesst genaue Fetch-Warnungen bei erfolgreicher Erholung. Die a16z-Quelle nutzt nun `https://www.a16z.news/feed`; der alte Substack-Host wird in GitHub Actions blockiert. Lokaler Abruf der kanonischen Domain erfolgreich; Runner-Nachprüfung folgt im Daily-Lauf. VentureBeat bleibt mit HTTP 429 ein tatsächlicher Ausfall. Erreichbarkeit und Publikationsaktualität sind getrennt: der Yannic-Feed ist erreichbar, enthält im aktuellen Abruf aber nur ältere Einträge.

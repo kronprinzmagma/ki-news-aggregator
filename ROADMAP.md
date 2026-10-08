@@ -187,3 +187,8 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Leser bestätigt den ausführlicheren Entwurf: Daily normalerweise 150–220 Wörter, maximal 300; Hintergrund und Grenzen verständlich ohne Originalquelle.
 - [x] Praktischer Hinweis ersetzt Pflicht-Build-Übung; Weekly drei erklärende Themen (gesamt etwa 650–800, maximal 900 Wörter).
 - [x] Parser, Audio-Prompts, Hinweiskatalog und Deterministik unterstützen neue und historische Blocknamen.
+
+## Betriebsnachprüfung 2026-10-08
+
+- [x] a16z-Feed auf die offizielle Newsletter-Domain umgestellt
+- [x] Quellenwarnungen aktualisieren und nach Abruf-Erholung automatisch schliessen; Aktualität separat kennzeichnen

@@ -1,7 +1,7 @@
 import { httpGet, parseRss } from './_base.js';
 
-// a16z Newsletter via Substack (a16z.com hat kein öffentliches RSS mehr).
-const FEED_URL = 'https://a16z.substack.com/feed';
+// Offizielle Newsletter-Domain; der alte Substack-Host blockiert CI-Abrufe.
+const FEED_URL = 'https://www.a16z.news/feed';
 
 // Nur Artikel mit KI-Bezug aufnehmen.
 const AI_PATTERN = /\b(ai|artificial intelligence|machine learning|llm|gpt|model|agent|foundation model|generative|deep learning|neural|claude|openai|anthropic|gemini|mistral|automation|robotics)\b/i;

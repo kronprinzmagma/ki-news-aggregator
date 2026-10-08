@@ -51,7 +51,7 @@ Things that get filtered out before any of this: funding announcements, "AI is t
 
 Three stages run sequentially:
 
-**1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run.
+**1. Ingest** — 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run. Fetch-failure warnings are refreshed while a source remains unavailable and closed after a successful fetch; this does not imply that its articles are current. The a16z newsletter uses its official `www.a16z.news/feed` address.
 
 **2. Score** — Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
