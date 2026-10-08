@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { applySelection, inspectWriteup, validateReviewCoverage } from '../lib/editorial.js';
 import { parseIssueForAudio, parseIssueNumbers } from '../scripts/refresh-issue-audio.js';
 import { articleMeta } from '../lib/issue-format.js';
+import { extractBuildAnchor } from '../lib/build-anchors.js';
+import { parseDailyIssue } from '../weekly.js';
 const candidates = Array.from({length:6},(_,i)=>({url:`https://example.com/${i}`,titel:`Artikel ${i}`,rohtext:'Quelle'}));
 const chosen = a => ({url:a.url,headline:'Verständliche Nachricht',reason:'Alltagsnutzen'});
 
@@ -26,10 +28,17 @@ test('review must cover every selected URL once, even if valid JSON is returned'
 test('damaged or overly long output fails deterministic publication checks', () => {
   const text='**Was ist neu**\nEin neues Angebot.\n**Was es für die KI-Richtung heisst**\nEinfach testen.\n**Build-Anker**\nVergleiche zwei Antworten.';
   assert.deepEqual(inspectWriteup(text),[]);
-  assert.ok(inspectWriteup(text+' '+ 'Wort '.repeat(125)).length);
+  assert.ok(inspectWriteup(text+' '+ 'Wort '.repeat(300)).length);
   assert.ok(inspectWriteup(text+' Volltext nicht verfügbar').length);
   assert.ok(inspectWriteup(text+' Fr�hrente').length);
   assert.ok(inspectWriteup('Nur ein Absatz.').length);
+});
+
+test('fuller explanations and practical advice pass while legacy headings remain readable', () => {
+  const text='**Was ist neu**\n'+ 'Erklärung '.repeat(120)+'\n**Was es für die KI-Richtung heisst**\n'+ 'Einordnung '.repeat(60)+'\n**Praktischer Hinweis**\n'+ 'Hinweis '.repeat(20);
+  assert.deepEqual(inspectWriteup(text),[]);
+  assert.deepEqual(inspectWriteup(text.replace('Praktischer Hinweis','Build-Anker')),[]);
+  assert.ok(inspectWriteup(text.replace('**Praktischer Hinweis**','')).length);
 });
 
 test('audio refresh reads final daily text, omitting feedback and quality footer', () => {
@@ -42,4 +51,15 @@ test('audio refresh reads final daily text, omitting feedback and quality footer
   assert.throws(()=>parseIssueForAudio({number:1,title:'KI Daily – 2026-10-07',body:''}),/keine Artikel/);
   assert.deepEqual(parseIssueNumbers('217,216,217'),[217,216]);
   assert.throws(()=>parseIssueNumbers('217;rm'),/Zahlen/);
+});
+
+test('weekly and practical-hint catalog retain the new third block and legacy anchors', () => {
+  const a={...candidates[0],score:4,quelle:'Quelle'};
+  for (const heading of ['Praktischer Hinweis','Build-Anker']) {
+    const text=`**Was ist neu**\nBelegte Änderung.\n**Was es für die KI-Richtung heisst**\nVerständliche Einordnung.\n**${heading}**\nPrüfe die Berechtigungen.`;
+    const body=articleMeta(a)+'\n### Nachricht\n'+text;
+    assert.equal(parseDailyIssue('2026-10-07',body)[0].anker,'Prüfe die Berechtigungen.');
+    assert.equal(extractBuildAnchor(text),'Prüfe die Berechtigungen.');
+    assert.match(parseIssueForAudio({number:1,title:'KI Daily – 2026-10-07',body}).aufbereitungen[0],/Prüfe die Berechtigungen/);
+  }
 });

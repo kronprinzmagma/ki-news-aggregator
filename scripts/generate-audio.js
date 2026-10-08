@@ -40,9 +40,10 @@ const SCRIPT_PROMPT = ({ date, body }) => `Du schreibst die Hörfassung eines t�
 Regeln:
 - Reiner Fliesstext zum Vorlesen. KEIN Markdown, keine Sternchen, keine Aufzählungszeichen, keine eckigen Klammern, keine URLs, keine Score-Angaben, keine Checkbox-Zeilen.
 - Ignoriere den AI-Disclaimer-Block, die Feedback-Checkboxen, die "Lies auch"-Hinweise, den vorhandenen Audio-Link und den Review-Schlaufe-Footer (alles unterhalb von "Review-Schlaufe"). Diese gehören nicht in die Hörfassung.
-- Wandle Block-Überschriften ("Was ist neu", "Was es für die KI-Richtung heisst", "Build-Anker") in natürliche gesprochene Übergänge um, statt sie wörtlich vorzulesen.
+- Wandle Block-Überschriften ("Was ist neu", "Was es für die KI-Richtung heisst", "Praktischer Hinweis", bei älteren Ausgaben "Build-Anker") in natürliche gesprochene Übergänge um, statt sie wörtlich vorzulesen.
 - Pro Artikel ein kurzer, hörbarer Übergang mit dem Thema/Titel, dann die drei Inhalte als zusammenhängende Sätze.
 - Sprich Zahlen und Prozente aus, wie man sie sagen würde.
+- Erhalte Erklärungen, Bedingungen und Unsicherheiten; kürze nicht auf Schlagzeilen.
 - Erfinde nichts dazu. Nutze ausschliesslich den gelieferten Text.
 - Tonalität: Deutsch, Schweizer Hochdeutsch, ruhig, sachlich, direkt. Keine Marketing-Floskeln.
 

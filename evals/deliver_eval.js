@@ -56,12 +56,12 @@ Zwei Dimensionen:
 
 1. FAITHFULNESS: Enthält der Writeup Behauptungen, die im Source-Text NICHT belegbar sind?
    - Beispiele für Verstösse: erfundene Modellnamen, erfundene Zahlen, erfundene Firmen/Partnerschaften, behauptete Benchmarks ohne Beleg, Schlussfolgerungen über Strategien, die im Text nicht stehen.
-   - Erlaubt: Einordnung in bekannte Strömungen (z.B. "Anthropic dreht X" ist OK, wenn der Text das nahelegt), Build-Vorschläge die über den Text hinausgehen (Block 3 ist per Design ein Anstoss).
+   - Erlaubt: Einordnung in bekannte Strömungen (z.B. "Anthropic dreht X" ist OK, wenn der Text das nahelegt), klar als eigene Anwendungsideen gekennzeichnete praktische Hinweise in Block 3.
    - Score 5 = vollständig belegbar; Score 1 = mehrere Halluzinationen.
 
 2. STYLE: Hält sich der Writeup an die Tonalität-Regeln des Deliver-Prompts?
    - Verboten: PO-/Stakeholder-/Sprint-Sprache, Marketing-Floskeln ohne Beleg, generische "KI verändert X"-Sätze, Schablonen wie "Build-vs-Buy verschiebt sich".
-   - Verboten in Block 3 (Build-Anker): Hedging ("könnte man", "liesse sich"), Kernel-Builds, eigenes Modelltraining, Hardware-Setup.
+   - Block 3 (Praktischer Hinweis, früher Build-Anker) hilft bei Nutzung oder Entscheidungen. Keine Pflichtübung, kein blosses Nachlesen, kein Kernel-Build, eigenes Modelltraining oder Hardware-Setup.
    - Score 5 = nüchtern und konkret; Score 1 = voller Marketing/Hedging.
 
 Wenn unklar, ob etwas belegbar ist: lieber als Hallucination markieren. Falsch-Positiv kostet weniger als Falsch-Negativ.
@@ -72,7 +72,7 @@ Gib das Urteil über das submit_judgement-Tool zurück.
 <article_url>${articleUrl}</article_url>
 
 <source_text>
-${sourceText.slice(0, 4000)}
+${sourceText.slice(0, 8000)}
 </source_text>
 
 <writeup>

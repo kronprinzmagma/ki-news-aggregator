@@ -109,7 +109,7 @@ Ziel: Über reine Funktionalität hinaus die Eigenarten dieses Projekts sichtbar
 - [x] A6: GitHub Pages-Archiv aller `summary-*.md`-Dateien (durchsuchbares Output-Archiv ohne Issue-API-Limits)
 - [x] B4: Banned-Phrases-Detektion inline in Daily-Pipeline (deterministischer Regex aus Deliver-Prompt-Verboten, Treffer in `run-summary-*.json`)
 - [x] B3: Review-Schlaufe sichtbar im Issue-Footer (`<details>` mit Rewrite-Count und Top-Prozess-Empfehlungen)
-- [x] B1: Build-Anker als separate Markdown-Files unter `build-anchors/YYYY-MM-DD-slug.md` mit Frontmatter (durchsuchbarer Katalog von Abend-Projekten mit Claude Code)
+- [x] B1: Build-Anker als separate Markdown-Files unter `build-anchors/YYYY-MM-DD-slug.md` mit Frontmatter (durchsuchbarer Katalog praktischer Hinweise und älterer Projektideen)
 - [x] A7: Adapter-Health-Metriken in SQLite + Auto-Issue bei stillen Adaptern (3 Tage 0 Artikel)
 
 ---
@@ -144,7 +144,7 @@ Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review
 ## Erledigte Punkte
 
 - [x] Persona geschärft: PM/PO mit Hands-on-Ambition, aber ohne Backlog-/Sprint-/Stakeholder-Rauschen
-- [x] Neues Output-Schema: drei Blöcke pro Artikel (Was ist neu / Produktrelevanz / Projektanker), max. 120 Wörter
+- [x] Neues Output-Schema: drei Blöcke pro Artikel (Was ist neu / Produktrelevanz / Projektanker), historisch max. 120 Wörter; seit 2026-10-08 normalerweise 150–220, höchstens 300
 - [x] Feedback-Checkboxen pro Daily-Artikel: besonders wertvoll / später weiterverfolgen
 - [x] Claude-only Review-Schlaufe in `deliver.js`: ausgewählte Artikel + bis zu zwei ausgeschlossene Beispiele je Score 1/2/3, Veröffentlichungsgate mit Quellentext, vollständiger Review-Abdeckung und Prüfung nach Rewrite
 - [x] Latent-Space- und Simon-Willison-Adapter reichern dünne Feed-Texte aus der Artikelseite an
@@ -181,3 +181,9 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Clientseitige Schema-/Token-Abbruch-Prüfung und Quellentreue-Gate
 - [x] Wort-Cluster-Bonus aus der Produktionsauswahl entfernt
 - [x] Zeichensatzkorrektur für RSS und Audio-Neuvertonung bestehender Issues
+
+## Bestätigter Erklärungsstil – 2026-10-08
+
+- [x] Leser bestätigt den ausführlicheren Entwurf: Daily normalerweise 150–220 Wörter, maximal 300; Hintergrund und Grenzen verständlich ohne Originalquelle.
+- [x] Praktischer Hinweis ersetzt Pflicht-Build-Übung; Weekly drei erklärende Themen (gesamt etwa 650–800, maximal 900 Wörter).
+- [x] Parser, Audio-Prompts, Hinweiskatalog und Deterministik unterstützen neue und historische Blocknamen.

@@ -30,6 +30,7 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 ### README.md
 
 - [ ] Review-Loop-Dimensionen: **sechs** (inkl. Quellentreue)
+- [ ] Daily normalerweise 150–220 Wörter, max. 300; praktischer Hinweis ohne Pflichtübung; Weekly etwa 650–800, max. 900 Wörter
 - [ ] Feedback-Checkbox-Labels: `Besonders wertvoll` / `Später weiterverfolgen` / `Zu kompliziert erklärt` / `Thema nicht relevant`
 - [ ] Promote-Logik: `wertvoll → 5` (zu_kompliziert blockiert NICHT, nur `poor_writeup`-Flag); `irrelevant UND NICHT wertvoll → 1`
 - [ ] Workflow-Liste vollständig (inkl. test.yml, feedback-loop.yml, audio-backfill.yml)

@@ -54,10 +54,10 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Nur Artikel mit Score >= 4 werden verwendet
 - Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
 - Redaktionelle Auswahl: höchstens fünf relevante Artikel (`DAILY_MAX_ARTICLES`), weniger ist gut. Keine Auffüllung mit Plugin-/SDK-/Infrastruktur-News. Wort-Overlap gibt keinen Score-Bonus mehr.
-- Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (gesamt max. 110 Wörter):
-  1. **Was ist neu** (max. 3 Sätze): nüchtern, kein Marketing, keine Titel-Wiederholung
-  2. **Was es für die KI-Richtung heisst** (1–2 Sätze): konkreter persönlicher Nutzen, vorsichtige Einordnung
-  3. **Build-Anker**: ein kleiner Versuch oder Vergleich in 10–30 Minuten im Browser/Claude, mit konkretem Ergebnis und ohne Entwickler-Setup.
+- Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (normalerweise 150–220 Wörter, max. 300):
+  1. **Was ist neu**: belegte Änderung, Funktion, nötiger Hintergrund, wichtige Bedingungen und Grenzen; ein bis zwei verständliche Absätze
+  2. **Was es für die KI-Richtung heisst**: ein erklärender Absatz zum persönlichen Nutzen, klare Trennung von Fakten und vorsichtiger Einordnung
+  3. **Praktischer Hinweis**: nützlicher Gesichtspunkt für Nutzung oder Entscheidung; nur bei echtem Nutzen ein kleiner Vergleich. Keine Pflichtübung, kein Entwickler-Setup, kein blosses Nachlesen der Originalquelle. Alte Build-Anker bleiben lesbar.
 - Verständlichkeit ist Pflicht: Zielperson ist eine Produktperson OHNE tiefes Engineering-Wissen. Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die nicht sofort einzuordnen ist, wird in einem Halbsatz erklärt oder weggelassen (deutsch wie englisch, auch Zahlen). Gilt für alle drei Blöcke und die Einleitung.
 - Jeder Artikel enthält im Issue vier Feedback-Checkboxen: zwei positive (`Besonders wertvoll`, `Später weiterverfolgen`) und zwei negative (`Zu kompliziert erklärt`, `Thema nicht relevant`). Die negativen Labels sind bewusst trennscharf: `Zu kompliziert erklärt` misst die Aufbereitung (Verständlichkeit), `Thema nicht relevant` misst die Auswahl – vorher als `Schlecht aufbereitet`/`Irrelevanter Inhalt` vermischt. Negative Häkchen sind das spätere Trainingssignal für Prompt-Iteration und Goldstandard-Erweiterung. Häkchen persistieren über Issue-Rewrites via `extractFeedbackStates` / `applyFeedbackStates` (Match per Label; alte Labels werden bei offenen Issues nicht über den Rename hinweg übernommen). `scripts/promote-feedback.js` matcht beide Label-Varianten.
 - Überblick aus der finalen Auswahl: zwei Sätze, maximal 50 Wörter, belegte Nachricht und Nutzen
@@ -81,8 +81,8 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node weekly.js` erstellt ein wöchentliches Synthese-Issue
 - Holt die Daily-Issues der ausgewiesenen Woche per GitHub API (Label-Filter `summary`, Wochenbereichs-Filter aus dem Issue-Titel), parst die Artikel primär aus den `ki-news-meta`-Markern (Regex nur als Fallback), URL-Dedup über Tage
 - **Themen-zentriert (kein Artikel-Re-Run):** Claude wählt aus dem Artikel-Pool (Score 4+5, nach Score sortiert) die 3 wichtigsten übergreifenden **Themen der Woche**. Score-5-Artikel sind starke Kandidaten, aber keine Pflicht-Ausbreitung mehr.
-- Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), ein ausführlicher Synthese-Absatz (3–4 kurze Sätze, verständlich), ein „Dran bleiben"-Anker (Beobachtungs-/Build-Stil) und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
-- Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Höchstens 450 Wörter, dadurch body-limit-sicher
+- Pro Thema: Feedback-Checkboxen (auf Themen-Ebene), zwei bis drei erklärende Absätze, zusammen mit praktischem Hinweis etwa 150–200 Wörter und eine kompakte Belege-Liste der stützenden Artikel (Titel + Link + Quelle + Score + Halbsatz) – keine Volltext-Wiederholung
+- Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Insgesamt etwa 650–800 Wörter, höchstens 900; keine dünnen Quellen künstlich auffüllen
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
 - Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet (UTC-Datumslogik)
 - Optionale Audio-Hörfassung wie beim Daily (`OPENAI_API_KEY` nötig), 🎧-Link im Issue-Body
@@ -108,7 +108,7 @@ Nach jeder Session, die Code oder Konfiguration ändert: `.context/doc-check.md`
 
 ## Redaktioneller Massstab (2026-10-08)
 
-Daily: höchstens 110 Wörter je Artikel, drei Blöcke, einfache deutsche Überschriften. Build-Anker: 10–30 Minuten im Browser/Claude, kein Entwickler-Setup. Überblick erst nach der finalen Qualitätsprüfung. `lib/editorial.js` enthält Auswahl, Längen-/Strukturprüfung und Review-Abdeckung. `scripts/refresh-issue-audio.js` vertont bestehende Dailys/Weeklys erneut; `audio-backfill.yml` akzeptiert dafür kommagetrennte `issue_numbers`. HTTP respektiert Feed-Zeichensätze (z.B. Golem ISO-8859-1) und dekodiert vollständige Buffer. Volltext-Puffer bis 8000 Zeichen; Consent-Seiten bleiben ungeeignete Quellen.
+Daily: normalerweise 150–220 Wörter je Artikel, höchstens 300, drei Blöcke mit praktischem Hinweis. Die Nachricht muss ohne Nachlesen verständlich sein. Keine Pflichtübung, kein Entwickler-Setup. Überblick erst nach der finalen Qualitätsprüfung. `lib/editorial.js` enthält Auswahl, Längen-/Strukturprüfung und Review-Abdeckung. `scripts/refresh-issue-audio.js` vertont bestehende Dailys/Weeklys erneut; `audio-backfill.yml` akzeptiert dafür kommagetrennte `issue_numbers`. HTTP respektiert Feed-Zeichensätze (z.B. Golem ISO-8859-1) und dekodiert vollständige Buffer. Volltext-Puffer bis 8000 Zeichen; Consent-Seiten bleiben ungeeignete Quellen.
 
 Strukturierte API-Antworten: `strict: true` mit API-kompatibler Schema-Kopie; vollständige Constraints bleiben clientseitig geprüft. Ein Wiederholungsversuch bei ungültiger Struktur, dann Abbruch. `eval.yml` installiert jetzt die für diese Prüfung benötigten Abhängigkeiten.
 

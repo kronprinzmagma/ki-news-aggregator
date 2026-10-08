@@ -563,8 +563,8 @@ async function main() {
 <section class="section">
   <h2>Über dieses Archiv</h2>
   <article class="entry">
-    <p>Tägliche KI-News-Briefings, kuratiert aus 14 Quellen mit einer Claude-basierten Scoring- und Aufbereitungs-Pipeline. Jeden Morgen um 05:30 UTC läuft die Pipeline und veröffentlicht ein Issue im GitHub-Repository. Sonntags um 08:00 UTC kommt ein Wochen-Digest mit Synthese und kritischer Einordnung.</p>
-    <p>Pro Artikel drei Blöcke: <em>was neu ist</em>, <em>was es für die KI-Richtung heisst</em>, <em>Build-Anker</em> (ein konkretes Abend-Projekt mit Claude Code). Output ist Schweizer Hochdeutsch, direkt, ohne PO-Sprech.</p>
+    <p>Tägliche KI-News-Briefings, kuratiert aus 15 Quellen mit einer Claude-basierten Scoring- und Aufbereitungs-Pipeline. Die Pipeline ist täglich für 05:30 UTC geplant; GitHub kann sie verspätet starten. Sonntags um 08:00 UTC kommt ein Wochen-Digest mit Synthese und kritischer Einordnung.</p>
+    <p>Pro Artikel drei Blöcke: <em>was neu ist</em>, <em>was es für die KI-Richtung heisst</em>, <em>praktischer Hinweis</em>. Die Zusammenfassungen erklären Hintergrund, Bedeutung und Grenzen in meist 150–220 Wörtern. Output ist Schweizer Hochdeutsch, direkt, ohne PO-Sprech.</p>
     <p><a href="https://github.com/${REPO_OWNER}/${REPO_NAME}">→ Code &amp; Architektur auf GitHub</a></p>
   </article>
 </section>

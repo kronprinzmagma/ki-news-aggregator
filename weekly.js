@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url';
 import { loadEnv, requireEnv } from './lib/env.js';
 import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
@@ -20,7 +21,8 @@ function extractBlocks(section) {
   const neuMatch = /\*\*Was ist neu\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
   const richtungMatch = /\*\*Was es für die KI-Richtung heisst\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section)
     || /\*\*Warum es produktrelevant ist\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
-  const ankerMatch = /\*\*Build-Anker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
+  const ankerMatch = /\*\*Praktischer Hinweis\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
+    || /\*\*Build-Anker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
     || /\*\*Projektanker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section);
   return {
     wasIstNeu: neuMatch ? neuMatch[1].replace(/\n+/g, ' ').trim() : '',
@@ -29,7 +31,7 @@ function extractBlocks(section) {
   };
 }
 
-function parseDailyIssue(issueDate, body) {
+export function parseDailyIssue(issueDate, body) {
   // Primärquelle: versionierte ki-news-meta-Marker (url/score/quelle/titel
   // robust, Blöcke positionssicher zugeordnet). Regex nur als Fallback für
   // Issues vor Einführung der Marker.
@@ -126,7 +128,7 @@ Das Weekly ist KEINE Wiederholung der Daily-Artikel. Es ist ein redaktioneller W
 
 Tonalität: Schweizer Hochdeutsch, direkt, kein Marketing-Sprech. Keine Überschrift am Anfang – Titel wird extern gesetzt.
 
-VERSTÄNDLICHKEIT IST PFLICHT: Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die ein Produktmensch ohne Engineering-Hintergrund nicht sofort einordnet, wird in einem Halbsatz erklärt oder weggelassen – deutsch wie englisch, auch Zahlen (nicht "550B Parameter, 55B aktiv" oder "SWE-Bench 51,2 %" ohne Einordnung). Würde der Satz einen Nicht-Techniker stocken lassen, formuliere ihn um.
+VERSTÄNDLICHKEIT IST PFLICHT: Jeder Fachbegriff, jedes Kürzel und jede Benchmark-/Parameter-Zahl, die ein Produktmensch ohne Engineering-Hintergrund nicht sofort einordnet, wird in einem Halbsatz erklärt oder weggelassen – deutsch wie englisch, auch Zahlen (nicht "550B Parameter, 55B aktiv" oder "SWE-Bench 51,2 %" ohne Einordnung). Würde der Satz einen Nicht-Techniker stocken lassen, formuliere ihn um. Keine Listen von Modellversionen, Preisen, Testmetriken oder Infrastrukturdetails. Zusätzliche Länge dient Erklärung, Bedingungen und nachvollziehbarer Bedeutung. Ein Modellname oder eine Zahl nur, wenn sie für das Verständnis nötig ist.
 
 ---
 
@@ -152,9 +154,9 @@ Dann GENAU 3 Themen der Woche. Wähle die drei wichtigsten übergreifenden Theme
 - [ ] Zu kompliziert erklärt
 - [ ] Thema nicht relevant
 
-[Ein ausführlicher Absatz, 3–4 kurze Sätze: Was ist diese Woche zu diesem Thema passiert (verständlich zusammengefasst, mehrere Artikel zu einem Bild verbunden)? Warum hängen diese Entwicklungen zusammen? Was bedeutet das für die KI-Richtung und für konkrete Produktentscheidungen? Konkreter Akteur + Bewegung, keine Schablonen wie "der Engpass verschiebt sich".]
+[Zwei bis drei verständliche Absätze, insgesamt mit praktischem Hinweis etwa 150–200 Wörter je Thema: Was ist diese Woche passiert? Erkläre die nötigen Hintergründe und Bedingungen, verbinde verwandte Entwicklungen, wenn der Input den Zusammenhang trägt. Was bedeutet das für eigene KI-Nutzung oder konkrete Produktentscheidungen? Trenne Fakten, Anbieterangaben, Prognosen und vorsichtige Einordnung. Wichtige Unsicherheiten nennen. Die Leserin muss das Thema ohne Öffnen der Belege verstehen. Keine Schablonen wie "der Engpass verschiebt sich".]
 
-**Dran bleiben:** [Ein Beobachtungs- oder Build-Anker für das Thema: im Browser oder mit Claude in 10–30 Minuten machbar, mit messbarer/vergleichender Erkenntnis. Kein Entwickler-Setup, kein Kernel-Build, kein Modelltraining.]
+**Praktischer Hinweis:** [Ein hilfreicher Gesichtspunkt für die eigene Nutzung oder Entscheidung. Nur bei echtem Nutzen ein einfacher Vergleich im Browser oder mit Claude. Keine Pflichtübung, kein Verweis zum blossen Nachlesen, kein Entwickler-Setup.]
 
 _Belege:_ [1–2 stützende Artikel als kompakte Liste, je eine Zeile: [Titel](url) (Quelle, Score X) – ein Halbsatz, warum er zum Thema gehört.]
 
@@ -162,7 +164,7 @@ _Belege:_ [1–2 stützende Artikel als kompakte Liste, je eine Zeile: [Titel](u
 
 **Wochenimpuls** (1–2 Sätze): Ein konkreter Anker aus der Gesamtschau der Woche.
 
-Regeln: Nur Fakten aus dem Input. Interpretationen vorsichtig kennzeichnen. Keine unbelegten Absichten, Marktfolgen, rechtlichen Schlüsse oder erfundenen Termine. Kleine Forschungsversuche nicht als allgemeine Leistungszusage darstellen. Technische Plugin- und Infrastrukturmeldungen ohne klaren Nutzen für Nicht-Entwickler weglassen. Keine Artikel-Volltextwiederholung – Artikel erscheinen nur in den Belegen-Listen. Kürzel wie P1/O2 nicht in der Ausgabe. Höchstens 450 Wörter – die Themen-Absätze sind der Kern, nicht eine lange Artikelliste.`;
+Regeln: Nur Fakten aus dem Input. Interpretationen vorsichtig kennzeichnen. Keine unbelegten Absichten, Marktfolgen, rechtlichen Schlüsse oder erfundenen Termine. Kleine Forschungsversuche nicht als allgemeine Leistungszusage darstellen. Technische Plugin- und Infrastrukturmeldungen ohne klaren Nutzen für Nicht-Entwickler weglassen. Keine Artikel-Volltextwiederholung – Artikel erscheinen nur in den Belegen-Listen. Kürzel wie P1/O2 nicht in der Ausgabe. Insgesamt etwa 650–800 Wörter, höchstens 900 einschliesslich Feedback und Belegen. Einfache Themen dürfen kürzer bleiben; keine Fakten zum Auffüllen erfinden.`;
 
 async function createWeeklyIssue(token, weekInfo, body) {
   const issueTitle = `KI Weekly – KW ${weekInfo.kw} (${weekInfo.from} – ${weekInfo.to})`;
@@ -261,6 +263,6 @@ ${digestBody}
   }
 }
 
-main()
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main()
   .catch(err => { console.error('[weekly] Fehler:', err.message); process.exit(1); })
   .finally(() => closeStore());

@@ -41,9 +41,9 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 - **Höchstens fünf Artikel** – wenige persönlich relevante Nachrichten, keine Auffüllung
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
-  1. Was ist neu (max. 3 Sätze, nüchtern, keine Halluzinationen)
-  2. Was es für die KI-Richtung heisst (1–2 Sätze, Strömung dahinter)
-  3. Build-Anker: aktiver Imperativsatz, 10–30 Minuten im Browser/Claude, ohne Entwickler-Setup
+  1. Was ist neu (Funktion, Hintergrund und Bedingungen verständlich erklären, keine Halluzinationen)
+  2. Was es für die KI-Richtung heisst (nachvollziehbare Bedeutung, Fakten und Interpretation trennen)
+  3. Praktischer Hinweis: hilfreicher Gesichtspunkt für Nutzung oder Entscheidung, keine Pflichtübung oder Nachlese-Aufgabe
 - **Feedback im Issue:** Pro Artikel vier Checkboxen – `Besonders wertvoll`, `Später weiterverfolgen`, `Zu kompliziert erklärt`, `Thema nicht relevant` (die negativen sind das Trainingssignal für den Feedback-Loop)
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
 - **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.
@@ -62,4 +62,4 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |
 
-Stand 2026-10-08: Redaktionelle Auswahl vor der Aufbereitung; drei Blöcke zusammen höchstens 110 Wörter. Review bekommt den Quellentext, validiert jede URL und bricht bei fehlender/abgeschnittener Antwort ab. Relevanz, Quellentreue und Verständlichkeit mindestens 4/5, guter Input und starker Issue-Fit sind Pflicht; Rewrites werden erneut geprüft. Final schwache Texte werden ausgeschlossen. Kein Cluster-Bonus durch gemeinsame Wörter. Weekly höchstens 450 Wörter; Einordnung ohne unbelegte Rechts-/Marktfolgen.
+Stand 2026-10-08: Redaktionelle Auswahl vor der Aufbereitung; drei Blöcke zusammen normalerweise 150–220 Wörter, höchstens 300; ohne Nachlesen der Originalquelle verständlich. Review bekommt den Quellentext, validiert jede URL und bricht bei fehlender/abgeschnittener Antwort ab. Relevanz, Quellentreue und Verständlichkeit mindestens 4/5, guter Input und starker Issue-Fit sind Pflicht; Rewrites werden erneut geprüft. Final schwache Texte werden ausgeschlossen. Kein Cluster-Bonus durch gemeinsame Wörter. Weekly etwa 650–800 Wörter, höchstens 900; Einordnung ohne unbelegte Rechts-/Marktfolgen.

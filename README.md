@@ -23,7 +23,7 @@ You're a senior PM or PO who's moved past just speccing things out for engineers
 
 Most AI newsletters assume you either work at a lab or want to fine-tune a model. The ones aimed at business audiences are all market trends and funding rounds. Neither is useful when what you actually want to know is: what just became possible, and is there something worth trying with it this weekend?
 
-Scheduled daily at 05:30 UTC (GitHub may start later), the pipeline fetches 15 sources, scores them for relevance, and selects at most five useful articles; fewer is fine. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a simple 10–30 minute experiment in a browser or Claude — no server setup, no ML background required.
+Scheduled daily at 05:30 UTC (GitHub may start later), the pipeline fetches 15 sources, scores them for relevance, and selects at most five useful articles; fewer is fine. Three blocks per article: what actually changed (no restating the headline), what it signals about where AI is heading, and a practical tip for using AI or making a decision. Each write-up normally has 150–220 words and explains the context without requiring you to open the source.
 
 **See a real output:** [samples/example-daily.md](samples/example-daily.md) — the reviewed Daily from 7 October 2026, as published on GitHub.
 
@@ -31,17 +31,17 @@ Scheduled daily at 05:30 UTC (GitHub may start later), the pipeline fetches 15 s
 
 **Podcast subscriptions:** [Daily RSS](https://kronprinzmagma.github.io/ki-news-aggregator/feed-daily.xml) · [Weekly RSS](https://kronprinzmagma.github.io/ki-news-aggregator/feed-weekly.xml). Add the feed URL in your podcast app.
 
-**Build-anchor catalog:** [build-anchors/](build-anchors/) — one small practical experiment extracted per article, auto-committed daily. Grows into a browseable collection over time.
+**Build-anchor catalog:** [build-anchors/](build-anchors/) — practical tips and older project ideas extracted from articles, auto-committed daily. Grows into a browseable collection over time.
 
 ---
 
 ## What the write-ups look like
 
-The briefing is in German (Swiss standard). Each article gets three blocks, capped at 110 words total.
+The briefing is in German (Swiss standard). Each article gets three blocks, normally 150–220 words in total, with a hard ceiling of 300. Simple news may be shorter; thin sources are never padded with invented detail.
 
-The first block covers what's new — factually, without hype, without repeating the headline. The second block ("Was es für die KI-Richtung heisst") explains the concrete benefit for personal AI use, users, costs, trust or media. Interpretations are cautious and distinguished from reported facts.
+The first block explains what changed, how it works, the necessary background and important limitations — factually and without hype. The second block ("Was es für die KI-Richtung heisst") explains the concrete benefit for personal AI use, users, costs, trust or media. Interpretations are cautious and distinguished from reported facts.
 
-The third block is a practical anchor: a small comparison or experiment in the browser or Claude, with a clear result, taking 10–30 minutes and requiring no developer setup.
+The third block ("Praktischer Hinweis") offers a useful perspective for personal use or a decision. A small browser/Claude comparison is suggested only when it helps; exercises and reading the source are not prerequisites for understanding the briefing.
 
 Things that get filtered out before any of this: funding announcements, "AI is transforming industry X" pieces, and anything where the relevance only makes sense if you already have an engineering background.
 
@@ -55,9 +55,9 @@ Three stages run sequentially:
 
 **2. Score** — Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
-**3. Deliver** — Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three short blocks. The review receives the original source text and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
+**3. Deliver** — Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three explanatory blocks. The review receives the original source text and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
 
-**Weekly** — A digest of at most 450 words, scheduled on Sundays, fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each with a synthesis paragraph, a "stay on it" anchor and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
+**Weekly** — A digest of roughly 650–800 words (at most 900), scheduled on Sundays, fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each explained in roughly 150–200 words with a practical tip and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
 
 ---
 
