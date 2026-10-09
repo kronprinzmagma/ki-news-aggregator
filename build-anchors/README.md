@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1371 Einträge** · Top-Quellen: heise (514) · hackernews (397) · simonwillison (232) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1373 Einträge** · Top-Quellen: heise (514) · hackernews (398) · simonwillison (233) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-09** — [Quoting Victoria Kim](2026-10-09-quoting-victoria-kim.md) · *simonwillison · Score 4*
+- **2026-10-09** — [OpenAI fires three safety researchers for \"mishandling research information\"](2026-10-09-openai-fires-three-safety-researchers-for-mishandling-resear.md) · *hackernews · Score 4*
 - **2026-10-08** — [Introducing Claude Haiku 5.5](2026-10-08-introducing-claude-haiku-5-5.md) · *anthropic · Score 5*
 - **2026-10-07** — [Using Parseable with Datasette for OpenTelemetry traces](2026-10-07-using-parseable-with-datasette-for-opentelemetry-traces.md) · *simonwillison · Score 4*
 - **2026-10-07** — [Streit mit der EU: Siri AI frühestens in Monaten auf iPhone und iPad](2026-10-07-streit-mit-der-eu-siri-ai-fruhestens-in-monaten-auf-iphone-u.md) · *heise · Score 4*
