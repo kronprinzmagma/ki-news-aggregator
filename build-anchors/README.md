@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1375 Einträge** · Top-Quellen: heise (514) · hackernews (398) · simonwillison (235) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1376 Einträge** · Top-Quellen: heise (515) · hackernews (398) · simonwillison (235) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-11** — [KI von Anthropic reichte Fake-Hinweis auf Polizei-Seite ein](2026-10-11-ki-von-anthropic-reichte-fake-hinweis-auf-polizei-seite-ein.md) · *heise · Score 5*
 - **2026-10-10** — [Quoting The New York Times](2026-10-10-quoting-the-new-york-times.md) · *simonwillison · Score 4*
 - **2026-10-10** — [Claude Haiku 5.5](2026-10-10-claude-haiku-5-5.md) · *simonwillison · Score 4*
 - **2026-10-09** — [Quoting Victoria Kim](2026-10-09-quoting-victoria-kim.md) · *simonwillison · Score 4*
