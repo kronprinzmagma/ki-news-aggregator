@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1377 Einträge** · Top-Quellen: heise (516) · hackernews (398) · simonwillison (235) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1380 Einträge** · Top-Quellen: heise (519) · hackernews (398) · simonwillison (235) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-13** — [Satya Nadella will „Notbremse“, um KI abschalten zu können](2026-10-13-satya-nadella-will-notbremse-um-ki-abschalten-zu-konnen.md) · *heise · Score 4*
+- **2026-10-13** — [OpenAI-Modell zerstört absichtlich eigene Testumgebung](2026-10-13-openai-modell-zerstort-absichtlich-eigene-testumgebung.md) · *heise · Score 4*
+- **2026-10-13** — [Epic Games verschiebt Disney-Shooter und stellt Entwicklung auf KI um](2026-10-13-epic-games-verschiebt-disney-shooter-und-stellt-entwicklung-.md) · *heise · Score 4*
 - **2026-10-12** — [Nach Entlassung bei OpenAI: Ex-Mitarbeiter veröffentlichen kritischen Brief](2026-10-12-nach-entlassung-bei-openai-ex-mitarbeiter-veroffentlichen-kr.md) · *heise · Score 4*
 - **2026-10-11** — [KI von Anthropic reichte Fake-Hinweis auf Polizei-Seite ein](2026-10-11-ki-von-anthropic-reichte-fake-hinweis-auf-polizei-seite-ein.md) · *heise · Score 5*
 - **2026-10-10** — [Quoting The New York Times](2026-10-10-quoting-the-new-york-times.md) · *simonwillison · Score 4*
