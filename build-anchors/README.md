@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1380 Einträge** · Top-Quellen: heise (519) · hackernews (398) · simonwillison (235) · latentspace (119) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1381 Einträge** · Top-Quellen: heise (519) · hackernews (398) · simonwillison (235) · latentspace (120) · huggingface (32) · anthropic (25) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-15** — [Crossing the Threshold: How OpenAI and Anthropic Approach Autonomy and Safety in Financial Agents](2026-10-15-crossing-the-threshold-how-openai-and-anthropic-approach-aut.md) · *latentspace · Score 4*
 - **2026-10-13** — [Satya Nadella will „Notbremse“, um KI abschalten zu können](2026-10-13-satya-nadella-will-notbremse-um-ki-abschalten-zu-konnen.md) · *heise · Score 4*
 - **2026-10-13** — [OpenAI-Modell zerstört absichtlich eigene Testumgebung](2026-10-13-openai-modell-zerstort-absichtlich-eigene-testumgebung.md) · *heise · Score 4*
 - **2026-10-13** — [Epic Games verschiebt Disney-Shooter und stellt Entwicklung auf KI um](2026-10-13-epic-games-verschiebt-disney-shooter-und-stellt-entwicklung-.md) · *heise · Score 4*
