@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1387 Einträge** · Top-Quellen: heise (522) · hackernews (400) · simonwillison (235) · latentspace (120) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1389 Einträge** · Top-Quellen: heise (524) · hackernews (400) · simonwillison (235) · latentspace (120) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-21** — [MIT-Forscherin warnt: KI könnte bei Menschen falsche Erinnerungen erzeugen](2026-10-21-mit-forscherin-warnt-ki-konnte-bei-menschen-falsche-erinneru.md) · *heise · Score 4*
+- **2026-10-21** — [KI-Markt im Wandel: Unternehmen wechseln Modelle immer häufiger](2026-10-21-ki-markt-im-wandel-unternehmen-wechseln-modelle-immer-haufig.md) · *heise · Score 4*
 - **2026-10-20** — [How abliterated models can get you pwned](2026-10-20-how-abliterated-models-can-get-you-pwned.md) · *hackernews · Score 4*
 - **2026-10-19** — [KI-Kopien des Grüffelo: Illustrator Axel Scheffler will gegen Betreiber klagen](2026-10-19-ki-kopien-des-gruffelo-illustrator-axel-scheffler-will-gegen.md) · *heise · Score 4*
 - **2026-10-19** — [KI im Recruiting: Wie McKinsey Bewerbende mit Chatbots testet](2026-10-19-ki-im-recruiting-wie-mckinsey-bewerbende-mit-chatbots-testet.md) · *heise · Score 4*
