@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1390 Einträge** · Top-Quellen: heise (524) · hackernews (401) · simonwillison (235) · latentspace (120) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1391 Einträge** · Top-Quellen: heise (524) · hackernews (401) · simonwillison (235) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-23** — [[AINews] Black October](2026-10-23-ainews-black-october.md) · *latentspace · Score 4*
 - **2026-10-22** — [Claude Duet](2026-10-22-claude-duet.md) · *hackernews · Score 5*
 - **2026-10-21** — [MIT-Forscherin warnt: KI könnte bei Menschen falsche Erinnerungen erzeugen](2026-10-21-mit-forscherin-warnt-ki-konnte-bei-menschen-falsche-erinneru.md) · *heise · Score 4*
 - **2026-10-21** — [KI-Markt im Wandel: Unternehmen wechseln Modelle immer häufiger](2026-10-21-ki-markt-im-wandel-unternehmen-wechseln-modelle-immer-haufig.md) · *heise · Score 4*
