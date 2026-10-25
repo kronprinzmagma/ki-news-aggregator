@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1393 Einträge** · Top-Quellen: heise (526) · hackernews (401) · simonwillison (235) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1395 Einträge** · Top-Quellen: heise (528) · hackernews (401) · simonwillison (235) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-25** — [OpenAI stellt seine neue Trainingsumgebung vor – ohne Air Gap](2026-10-25-openai-stellt-seine-neue-trainingsumgebung-vor-ohne-air-gap.md) · *heise · Score 4*
+- **2026-10-25** — [Anthropic lässt KI-Agenten Verhandlungsregeln für Menschen lernen](2026-10-25-anthropic-lasst-ki-agenten-verhandlungsregeln-fur-menschen-l.md) · *heise · Score 4*
 - **2026-10-24** — [Studie: KI-Videos untergraben Vertrauen in Bewegtbild massiv](2026-10-24-studie-ki-videos-untergraben-vertrauen-in-bewegtbild-massiv.md) · *heise · Score 4*
 - **2026-10-24** — [OpenAI: Agenten schalteten eigene Sicherheitswarnungen ab](2026-10-24-openai-agenten-schalteten-eigene-sicherheitswarnungen-ab.md) · *heise · Score 5*
 - **2026-10-23** — [[AINews] Black October](2026-10-23-ainews-black-october.md) · *latentspace · Score 4*
