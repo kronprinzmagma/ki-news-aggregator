@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1396 Einträge** · Top-Quellen: heise (528) · hackernews (402) · simonwillison (235) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1398 Einträge** · Top-Quellen: heise (528) · hackernews (403) · simonwillison (236) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-28** — [Quoting Jason Koebler](2026-10-28-quoting-jason-koebler.md) · *simonwillison · Score 4*
+- **2026-10-28** — [Barcelona unrest: how to fabricate a protest in the age of TikTok](2026-10-28-barcelona-unrest-how-to-fabricate-a-protest-in-the-age-of-ti.md) · *hackernews · Score 4*
 - **2026-10-26** — [IBM CEO says open weight models are now good and cheap on-prem](2026-10-26-ibm-ceo-says-open-weight-models-are-now-good-and-cheap-on-pr.md) · *hackernews · Score 4*
 - **2026-10-25** — [OpenAI stellt seine neue Trainingsumgebung vor – ohne Air Gap](2026-10-25-openai-stellt-seine-neue-trainingsumgebung-vor-ohne-air-gap.md) · *heise · Score 4*
 - **2026-10-25** — [Anthropic lässt KI-Agenten Verhandlungsregeln für Menschen lernen](2026-10-25-anthropic-lasst-ki-agenten-verhandlungsregeln-fur-menschen-l.md) · *heise · Score 4*
