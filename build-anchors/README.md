@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1398 Einträge** · Top-Quellen: heise (528) · hackernews (403) · simonwillison (236) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1401 Einträge** · Top-Quellen: heise (530) · hackernews (404) · simonwillison (236) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-29** — [Wenn KI wählen müsste: GPT und Grok liefern gegensätzliche Empfehlungen](2026-10-29-wenn-ki-wahlen-musste-gpt-und-grok-liefern-gegensatzliche-em.md) · *heise · Score 4*
+- **2026-10-29** — [I Used AI to Fake a Scientific Paper. Here's What Happened](2026-10-29-i-used-ai-to-fake-a-scientific-paper-here-s-what-happened.md) · *hackernews · Score 4*
+- **2026-10-29** — [Anthropics Börsengang: Die Milliardenrisiken hinter dem KI-Boom](2026-10-29-anthropics-borsengang-die-milliardenrisiken-hinter-dem-ki-bo.md) · *heise · Score 4*
 - **2026-10-28** — [Quoting Jason Koebler](2026-10-28-quoting-jason-koebler.md) · *simonwillison · Score 4*
 - **2026-10-28** — [Barcelona unrest: how to fabricate a protest in the age of TikTok](2026-10-28-barcelona-unrest-how-to-fabricate-a-protest-in-the-age-of-ti.md) · *hackernews · Score 4*
 - **2026-10-26** — [IBM CEO says open weight models are now good and cheap on-prem](2026-10-26-ibm-ceo-says-open-weight-models-are-now-good-and-cheap-on-pr.md) · *hackernews · Score 4*
