@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1401 Einträge** · Top-Quellen: heise (530) · hackernews (404) · simonwillison (236) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1403 Einträge** · Top-Quellen: heise (531) · hackernews (404) · simonwillison (237) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-10-30** — [Untersuchung: Experten übernehmen oft unbewusst KI-Entscheidungen](2026-10-30-untersuchung-experten-ubernehmen-oft-unbewusst-ki-entscheidu.md) · *heise · Score 4*
+- **2026-10-30** — [The October inflection point for vibe game development](2026-10-30-the-october-inflection-point-for-vibe-game-development.md) · *simonwillison · Score 4*
 - **2026-10-29** — [Wenn KI wählen müsste: GPT und Grok liefern gegensätzliche Empfehlungen](2026-10-29-wenn-ki-wahlen-musste-gpt-und-grok-liefern-gegensatzliche-em.md) · *heise · Score 4*
 - **2026-10-29** — [I Used AI to Fake a Scientific Paper. Here's What Happened](2026-10-29-i-used-ai-to-fake-a-scientific-paper-here-s-what-happened.md) · *hackernews · Score 4*
 - **2026-10-29** — [Anthropics Börsengang: Die Milliardenrisiken hinter dem KI-Boom](2026-10-29-anthropics-borsengang-die-milliardenrisiken-hinter-dem-ki-bo.md) · *heise · Score 4*
