@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1403 Einträge** · Top-Quellen: heise (531) · hackernews (404) · simonwillison (237) · latentspace (121) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1405 Einträge** · Top-Quellen: heise (531) · hackernews (404) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-01** — [How We Took Over ChatGPT Accounts](2026-11-01-how-we-took-over-chatgpt-accounts.md) · *simonwillison · Score 4*
+- **2026-11-01** — [Agents Prompt People: Using Agents for Long-Horizon Financial Work](2026-11-01-agents-prompt-people-using-agents-for-long-horizon-financial.md) · *latentspace · Score 4*
 - **2026-10-30** — [Untersuchung: Experten übernehmen oft unbewusst KI-Entscheidungen](2026-10-30-untersuchung-experten-ubernehmen-oft-unbewusst-ki-entscheidu.md) · *heise · Score 4*
 - **2026-10-30** — [The October inflection point for vibe game development](2026-10-30-the-october-inflection-point-for-vibe-game-development.md) · *simonwillison · Score 4*
 - **2026-10-29** — [Wenn KI wählen müsste: GPT und Grok liefern gegensätzliche Empfehlungen](2026-10-29-wenn-ki-wahlen-musste-gpt-und-grok-liefern-gegensatzliche-em.md) · *heise · Score 4*
