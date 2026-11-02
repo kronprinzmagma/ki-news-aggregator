@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1405 Einträge** · Top-Quellen: heise (531) · hackernews (404) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1407 Einträge** · Top-Quellen: heise (533) · hackernews (404) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-02** — [USA halten Prüfregeln für KI-Modelle unter Verschluss](2026-11-02-usa-halten-prufregeln-fur-ki-modelle-unter-verschluss.md) · *heise · Score 4*
+- **2026-11-02** — [Claude-Code-Erweiterung im Cursor-Marktplatz mit Malware infiziert](2026-11-02-claude-code-erweiterung-im-cursor-marktplatz-mit-malware-inf.md) · *heise · Score 4*
 - **2026-11-01** — [How We Took Over ChatGPT Accounts](2026-11-01-how-we-took-over-chatgpt-accounts.md) · *simonwillison · Score 4*
 - **2026-11-01** — [Agents Prompt People: Using Agents for Long-Horizon Financial Work](2026-11-01-agents-prompt-people-using-agents-for-long-horizon-financial.md) · *latentspace · Score 4*
 - **2026-10-30** — [Untersuchung: Experten übernehmen oft unbewusst KI-Entscheidungen](2026-10-30-untersuchung-experten-ubernehmen-oft-unbewusst-ki-entscheidu.md) · *heise · Score 4*
