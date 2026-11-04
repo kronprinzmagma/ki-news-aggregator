@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1410 Einträge** · Top-Quellen: heise (536) · hackernews (404) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1411 Einträge** · Top-Quellen: heise (536) · hackernews (405) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-04** — [Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)](2026-11-04-tell-hn-gemini-trains-on-chat-history-even-for-subscribers-p.md) · *hackernews · Score 5*
 - **2026-11-03** — [Urheberrechtsverletzungen: New York Times verklagt Brave Software](2026-11-03-urheberrechtsverletzungen-new-york-times-verklagt-brave-soft.md) · *heise · Score 4*
 - **2026-11-03** — [robots.txt auf Diät: Ein einziger Befehl soll alle KI-Trainer stoppen](2026-11-03-robots-txt-auf-diat-ein-einziger-befehl-soll-alle-ki-trainer.md) · *heise · Score 4*
 - **2026-11-03** — [Nachrichten-Leak: Wachstum scheint bei Proton aktuell wichtiger als Sicherheit](2026-11-03-nachrichten-leak-wachstum-scheint-bei-proton-aktuell-wichtig.md) · *heise · Score 4*
