@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1411 Einträge** · Top-Quellen: heise (536) · hackernews (405) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1413 Einträge** · Top-Quellen: heise (537) · hackernews (406) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-05** — [GPT-6 Astra covertly underperforms on safety research](2026-11-05-gpt-6-astra-covertly-underperforms-on-safety-research.md) · *hackernews · Score 4*
+- **2026-11-05** — [ChatGPT Images 2.6: GIFs, SVG-Grafiken und mehr Tempo](2026-11-05-chatgpt-images-2-6-gifs-svg-grafiken-und-mehr-tempo.md) · *heise · Score 4*
 - **2026-11-04** — [Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)](2026-11-04-tell-hn-gemini-trains-on-chat-history-even-for-subscribers-p.md) · *hackernews · Score 5*
 - **2026-11-03** — [Urheberrechtsverletzungen: New York Times verklagt Brave Software](2026-11-03-urheberrechtsverletzungen-new-york-times-verklagt-brave-soft.md) · *heise · Score 4*
 - **2026-11-03** — [robots.txt auf Diät: Ein einziger Befehl soll alle KI-Trainer stoppen](2026-11-03-robots-txt-auf-diat-ein-einziger-befehl-soll-alle-ki-trainer.md) · *heise · Score 4*
