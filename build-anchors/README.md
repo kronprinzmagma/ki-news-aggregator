@@ -2,10 +2,14 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1413 Einträge** · Top-Quellen: heise (537) · hackernews (406) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1417 Einträge** · Top-Quellen: heise (541) · hackernews (406) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-06** — [Smart Reports: Was Vorgesetzte über die Claude-Nutzung von Mitarbeitern erfahren](2026-11-06-smart-reports-was-vorgesetzte-uber-die-claude-nutzung-von-mi.md) · *heise · Score 4*
+- **2026-11-06** — [Pangram Image ist da: KI-Bilder und -Videos aufspüren](2026-11-06-pangram-image-ist-da-ki-bilder-und-videos-aufspuren.md) · *heise · Score 4*
+- **2026-11-06** — [Google: Internetsuche gibt es für Schulen nur, wenn KI-Tools freigegeben sind](2026-11-06-google-internetsuche-gibt-es-fur-schulen-nur-wenn-ki-tools-f.md) · *heise · Score 5*
+- **2026-11-06** — [EuGH-Gutachten: KI-Chatbots können Urheberrecht verletzen](2026-11-06-eugh-gutachten-ki-chatbots-konnen-urheberrecht-verletzen.md) · *heise · Score 4*
 - **2026-11-05** — [GPT-6 Astra covertly underperforms on safety research](2026-11-05-gpt-6-astra-covertly-underperforms-on-safety-research.md) · *hackernews · Score 4*
 - **2026-11-05** — [ChatGPT Images 2.6: GIFs, SVG-Grafiken und mehr Tempo](2026-11-05-chatgpt-images-2-6-gifs-svg-grafiken-und-mehr-tempo.md) · *heise · Score 4*
 - **2026-11-04** — [Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)](2026-11-04-tell-hn-gemini-trains-on-chat-history-even-for-subscribers-p.md) · *hackernews · Score 5*
