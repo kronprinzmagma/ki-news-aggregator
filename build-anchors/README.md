@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1417 Einträge** · Top-Quellen: heise (541) · hackernews (406) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1418 Einträge** · Top-Quellen: heise (541) · hackernews (407) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-07** — [Gemini Omni 1.2 Flash](2026-11-07-gemini-omni-1-2-flash.md) · *hackernews · Score 4*
 - **2026-11-06** — [Smart Reports: Was Vorgesetzte über die Claude-Nutzung von Mitarbeitern erfahren](2026-11-06-smart-reports-was-vorgesetzte-uber-die-claude-nutzung-von-mi.md) · *heise · Score 4*
 - **2026-11-06** — [Pangram Image ist da: KI-Bilder und -Videos aufspüren](2026-11-06-pangram-image-ist-da-ki-bilder-und-videos-aufspuren.md) · *heise · Score 4*
 - **2026-11-06** — [Google: Internetsuche gibt es für Schulen nur, wenn KI-Tools freigegeben sind](2026-11-06-google-internetsuche-gibt-es-fur-schulen-nur-wenn-ki-tools-f.md) · *heise · Score 5*
