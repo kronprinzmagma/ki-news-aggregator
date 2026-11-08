@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1418 Einträge** · Top-Quellen: heise (541) · hackernews (407) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1420 Einträge** · Top-Quellen: heise (543) · hackernews (407) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-08** — [Neue Siri-AI-Funktionen: Datei-Zugriff, Entwicklerverbesserungen und mehr](2026-11-08-neue-siri-ai-funktionen-datei-zugriff-entwicklerverbesserung.md) · *heise · Score 4*
+- **2026-11-08** — [Missing Link: Wenn die KI zuhört, wo Menschen es nicht mehr tun](2026-11-08-missing-link-wenn-die-ki-zuhort-wo-menschen-es-nicht-mehr-tu.md) · *heise · Score 4*
 - **2026-11-07** — [Gemini Omni 1.2 Flash](2026-11-07-gemini-omni-1-2-flash.md) · *hackernews · Score 4*
 - **2026-11-06** — [Smart Reports: Was Vorgesetzte über die Claude-Nutzung von Mitarbeitern erfahren](2026-11-06-smart-reports-was-vorgesetzte-uber-die-claude-nutzung-von-mi.md) · *heise · Score 4*
 - **2026-11-06** — [Pangram Image ist da: KI-Bilder und -Videos aufspüren](2026-11-06-pangram-image-ist-da-ki-bilder-und-videos-aufspuren.md) · *heise · Score 4*
