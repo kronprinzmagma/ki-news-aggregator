@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1420 Einträge** · Top-Quellen: heise (543) · hackernews (407) · simonwillison (238) · latentspace (122) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1422 Einträge** · Top-Quellen: heise (543) · hackernews (408) · simonwillison (238) · latentspace (123) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-10** — [Fireworks AI security breach impacts Notion and their customers](2026-11-10-fireworks-ai-security-breach-impacts-notion-and-their-custom.md) · *hackernews · Score 4*
+- **2026-11-10** — [[AINews] Fable 5.2 retakes World #1 LLM spot as $ANT IPO roadshow begins](2026-11-10-ainews-fable-5-2-retakes-world-1-llm-spot-as-ant-ipo-roadsho.md) · *latentspace · Score 4*
 - **2026-11-08** — [Neue Siri-AI-Funktionen: Datei-Zugriff, Entwicklerverbesserungen und mehr](2026-11-08-neue-siri-ai-funktionen-datei-zugriff-entwicklerverbesserung.md) · *heise · Score 4*
 - **2026-11-08** — [Missing Link: Wenn die KI zuhört, wo Menschen es nicht mehr tun](2026-11-08-missing-link-wenn-die-ki-zuhort-wo-menschen-es-nicht-mehr-tu.md) · *heise · Score 4*
 - **2026-11-07** — [Gemini Omni 1.2 Flash](2026-11-07-gemini-omni-1-2-flash.md) · *hackernews · Score 4*
