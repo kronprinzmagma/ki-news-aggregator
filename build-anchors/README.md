@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1424 Einträge** · Top-Quellen: heise (543) · hackernews (408) · simonwillison (239) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1425 Einträge** · Top-Quellen: heise (543) · hackernews (408) · simonwillison (240) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-14** — [llm-gemini 0.37](2026-11-14-llm-gemini-0-37.md) · *simonwillison · Score 4*
 - **2026-11-13** — [Quoting Prompting Claude Fable 5.2](2026-11-13-quoting-prompting-claude-fable-5-2.md) · *simonwillison · Score 4*
 - **2026-11-11** — [Designing for Agents — Zeno Rocha, Resend](2026-11-11-designing-for-agents-zeno-rocha-resend.md) · *latentspace · Score 4*
 - **2026-11-10** — [Fireworks AI security breach impacts Notion and their customers](2026-11-10-fireworks-ai-security-breach-impacts-notion-and-their-custom.md) · *hackernews · Score 4*
