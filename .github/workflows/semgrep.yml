@@ -1,0 +1,28 @@
+# Statische Sicherheitspruefung mit Semgrep OSS (Entscheid Nils 2026-11-17).
+# Laeuft vollstaendig im Runner: kein Semgrep-Konto, keine Metriken, kein Code
+# verlaesst GitHub; nur die Regelpakete werden aus der Semgrep-Registry geladen.
+# Vorerst nur Warnung: Funde erscheinen im Log, der Job bleibt gruen. Blockieren
+# (Flag --error) erst, wenn die Funde einige Wochen gesichtet sind.
+name: Semgrep
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Semgrep installieren
+        run: pip install semgrep==1.185.0
+      - name: Semgrep (nur Warnung)
+        run: semgrep scan --config p/javascript --config p/typescript --metrics=off
