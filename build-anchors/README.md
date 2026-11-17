@@ -2,10 +2,11 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1428 Einträge** · Top-Quellen: heise (544) · hackernews (410) · simonwillison (240) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1429 Einträge** · Top-Quellen: heise (544) · hackernews (411) · simonwillison (240) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-17** — [Optimizely compromised, served malware on Zoom, GitLab](2026-11-17-optimizely-compromised-served-malware-on-zoom-gitlab.md) · *hackernews · Score 4*
 - **2026-11-16** — [Old Bitly links are being hijacked](2026-11-16-old-bitly-links-are-being-hijacked.md) · *hackernews · Score 4*
 - **2026-11-15** — [United Airlines untersagt KI-Agenten das Buchen von Flügen](2026-11-15-united-airlines-untersagt-ki-agenten-das-buchen-von-flugen.md) · *heise · Score 4*
 - **2026-11-15** — [Lovable apps expose passport details and more than 200K private messages](2026-11-15-lovable-apps-expose-passport-details-and-more-than-200k-priv.md) · *hackernews · Score 5*
