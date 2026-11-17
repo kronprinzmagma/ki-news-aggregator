@@ -4,10 +4,14 @@
   "type": "module",
   "scripts": {
     "eval:review": "node evals/review-ui/server.js",
+    "eval:injection": "PROMPTFOO_DISABLE_REMOTE_GENERATION=true PROMPTFOO_DISABLE_TELEMETRY=1 PROMPTFOO_DISABLE_UPDATE=1 promptfoo eval -c evals/redteam/promptfooconfig.yaml -o evals/results/injection-latest.json -j 2 --no-cache --no-progress-bar",
     "test": "node --test"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.123.1"
   }
 }
