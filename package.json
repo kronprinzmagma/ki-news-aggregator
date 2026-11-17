@@ -13,5 +13,10 @@
   },
   "devDependencies": {
     "promptfoo": "^0.125.1"
+  },
+  "overrides": {
+    "@hono/node-server": "2.1.6",
+    "glob": "^14.0.2",
+    "minimatch": "^11.0.1"
   }
 }
