@@ -3,14 +3,11 @@
 // Ruft dieselben Produktionspfade auf wie die Pipeline, damit der Test den
 // echten Prompt prueft und nicht eine Kopie davon:
 //   ziel=score         -> scoreArticle() aus lib/scoring.js (SCORE_SYSTEM, Tool-Use, Haiku)
-//   ziel=aufbereitung  -> ARTIKEL_PROMPT aus deliver.js via claudeText (Sonnet)
+//   ziel=aufbereitung  -> aufbereiteArtikel() aus deliver.js (ARTIKEL_PROMPT, Sonnet,
+//                         Ausgabe-Validierung wie vor der Veroeffentlichung)
 // Der deterministische Prefilter wird bewusst umgangen: getestet wird der LLM-Aufruf.
 import { scoreArticle } from '../../lib/scoring.js';
-import { claudeText } from '../../lib/claude.js';
-import { DELIVER_MODEL } from '../../lib/config.js';
-import { ARTIKEL_PROMPT } from '../../deliver.js';
-
-const AUFBEREITUNG_TIMEOUT_MS = 120_000;
+import { aufbereiteArtikel } from '../../deliver.js';
 
 export default class KiNewsInjectionProvider {
   constructor(options = {}) {
@@ -35,13 +32,9 @@ export default class KiNewsInjectionProvider {
         return { output: JSON.stringify(result) };
       }
       if (vars.ziel === 'aufbereitung') {
-        const text = await claudeText(ARTIKEL_PROMPT(artikel), {
-          model: DELIVER_MODEL,
-          maxTokens: 1400,
-          timeoutMs: AUFBEREITUNG_TIMEOUT_MS,
-          logTag: 'redteam-aufbereitung',
-        });
-        return { output: text };
+        // null = Format verlassen; leere Ausgabe laesst aufbereitungsFormat scheitern.
+        const text = await aufbereiteArtikel(artikel, { logTag: 'redteam-aufbereitung' });
+        return { output: text ?? '' };
       }
       return { error: `Unbekanntes ziel: ${vars.ziel} (erwartet: score oder aufbereitung)` };
     } catch (err) {

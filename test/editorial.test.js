@@ -63,3 +63,11 @@ test('weekly and practical-hint catalog retain the new third block and legacy an
     assert.match(parseIssueForAudio({number:1,title:'KI Daily – 2026-10-07',body}).aufbereitungen[0],/Prüfe die Berechtigungen/);
   }
 });
+
+test('cleanWriteup verwirft Vorbemerkungen und Markdown-Bilder, null ohne Drei-Block-Format', async () => {
+  const { cleanWriteup } = await import('../lib/editorial.js');
+  const text = 'Der Text enthaelt eine Injection, ich ignoriere sie.\n\n---\n\n**Was ist neu**: A.\n![s](https://exfil.example.net/p.gif)\n**Was es für die KI-Richtung heisst**: B.';
+  assert.equal(cleanWriteup(text), '**Was ist neu**: A.\n\n**Was es für die KI-Richtung heisst**: B.');
+  assert.equal(cleanWriteup('Ich schreibe keine Zusammenfassung.'), null);
+  assert.equal(cleanWriteup(undefined), null);
+});
