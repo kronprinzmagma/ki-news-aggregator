@@ -6,7 +6,7 @@
  *
  *   node scripts/tts-probe.js
  *
- * Benötigt: OPENAI_API_KEY und ffmpeg.
+ * Benötigt: OPENAI_API_KEY und lame (oder ffmpeg).
  */
 
 import fs from 'fs/promises';
