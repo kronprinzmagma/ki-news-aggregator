@@ -59,7 +59,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Delivery-Channel | Ausschliesslich GitHub Issues im gleichen Repo |
 | Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI; optional `OPENAI_API_KEY` für die Audio-Hörfassung des Daily (TTS) |
 | Datenhaltung | SQLite (`better-sqlite3`, lokale `ki-news.db`, gitignored, in CI via Actions-Cache persistiert) für Cross-Day-Dedup, Usage-Log und Run-Historie; JSON-Files im Repo-Root bleiben als Audit-Artefakte (ebenfalls gitignored) |
-| Modellversion | `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver und Weekly |
+| Modellversion | `claude-haiku-5-5` für Score (seit 2026-11-19), `claude-sonnet-4-6` für Deliver und Weekly (Sonnet 5.5 gemessen, noch nicht umgestellt) |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |
 
 Stand 2026-10-08: Redaktionelle Auswahl vor der Aufbereitung; drei Blöcke zusammen normalerweise 150–220 Wörter, höchstens 300; ohne Nachlesen der Originalquelle verständlich. Review bekommt den Quellentext, validiert jede URL und bricht bei fehlender/abgeschnittener Antwort ab. Relevanz, Quellentreue und Verständlichkeit mindestens 4/5, guter Input und starker Issue-Fit sind Pflicht; Rewrites werden erneut geprüft. Final schwache Texte werden ausgeschlossen. Kein Cluster-Bonus durch gemeinsame Wörter. Weekly etwa 650–800 Wörter, höchstens 900; Einordnung ohne unbelegte Rechts-/Marktfolgen.

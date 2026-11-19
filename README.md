@@ -85,7 +85,7 @@ flowchart TD
 
     Ingest["ingest.js<br/>15 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
     Pre["Pre-filter without LLM<br/>cross-day dedup (7 days)<br/>deterministic pre-score"]
-    Score["score.js<br/>Claude Haiku 4.5 · batch or parallel<br/>event dedup"]
+    Score["score.js<br/>Claude Haiku 5.5 · batch or parallel<br/>event dedup"]
     Filter{"Score ≥ 4?"}
     XDay["Cross-day dedup again<br/>URL + title similarity"]
     Select["Editorial selection<br/>at most 5 useful stories"]
@@ -198,7 +198,7 @@ lib/                   — Shared modules: claude, github, http, store,
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI TTS (`gpt-4o-mini-tts`, optional audio) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
+Node.js (ESM, no framework) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI TTS (`gpt-4o-mini-tts`, optional audio) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
 
 ---
 

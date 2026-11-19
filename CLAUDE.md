@@ -13,7 +13,7 @@ Drei Bausteine, sequenziell:
 ## Stack
 
 - Node.js, keine Frameworks
-- Claude API via REST: `claude-haiku-4-5-20251001` fürs Scoring, `claude-sonnet-4-6` für Delivering, Review und Weekly. Strukturierte Outputs via Tool-Use.
+- Claude API via REST: `claude-haiku-5-5` fürs Scoring, `claude-sonnet-4-6` für Delivering, Review und Weekly. Strukturierte Outputs via Tool-Use. `lib/claude.js` (`buildMessageParams`) setzt für 5.5-Modelle die nötigen Parameter: Denken aus (Haiku `disabled`, Sonnet `between_tools`), bei Sonnet 5.5 kein erzwungenes Werkzeug (`auto` plus Anweisung). Modellwechsel nur nach Vergleichslauf (`evals/run_eval.js`, `evals/deliver_model_compare.js`, Injection-Eval).
 - OpenAI API via REST: `gpt-4o-mini-tts` für die optionale Audio-Hörfassung von Daily und Weekly (TTS). Nur aktiv, wenn `OPENAI_API_KEY` gesetzt ist – sonst No-Op.
 - Geteilte Module in `lib/`: `claude` (Retry mit exponentiellem Backoff + Jitter, Caching), `github` (inkl. Release-Asset-Upload), `http` (SSRF-Schutz, Header-Drop bei Cross-Host-Redirects), `config` (Modelle, Schwellwerte, Stopwords, `DACH_AI_PATTERN`), `text-utils`, `url` (`normalizeUrl` für Dedup), `concurrency` (`runWithConcurrency`, geteilt von score + deliver), `topic-overlap` (vereinheitlichte Heuristik), `schema` (Zod), `store` (SQLite), `issue-format` (versionierte HTML-Kommentar-Metadaten, `parseArticleSections`), `tts` (OpenAI TTS, Chunking), `audio` (Daily-/Weekly-Hörfassung: Skript → TTS → Release-Asset), `env`, `date`
 - Adapter-Basis in `adapters/_base.js`: HTTP-GET, RSS-/Atom-Parsing, Content-Extraktion, Enrichment
@@ -43,7 +43,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 ## Akzeptanzkriterien Baustein 2 (Score)
 
 - CLI-Befehl `node score.js` liest `articles-YYYY-MM-DD.json` für `RUN_DATE` oder das heutige UTC-Datum ein
-- Jeder Artikel wird per Claude API (`claude-haiku-4-5-20251001`) bewertet
+- Jeder Artikel wird per Claude API (`claude-haiku-5-5`) bewertet
 - Relevanzprofil: konkreter Nutzen für eine Produktperson ohne Engineering-Wissen: eigene KI-Nutzung, Nutzer, Kosten, Vertrauen und Medien
 - Niedrige Relevanz: generische "KI verändert Branche"-Artikel, reine VC-Meldungen, Show-HN ohne Differenzierung, Marketing ohne neue Capability
 - Antwort als strukturierter JSON: score (1-5), begründung (1 Satz)

@@ -150,7 +150,7 @@ function fetchSourceTexts(urls) {
 
 // ─── Eval-Runner ─────────────────────────────────────────────────────────────
 
-async function judgeOne(block, sourceText) {
+export async function judgeOne(block, sourceText, { model = SCORE_MODEL } = {}) {
   const banned = detectBannedPhrases(block.writeup);
   let judgement = null;
   let judgeError = null;
@@ -159,7 +159,7 @@ async function judgeOne(block, sourceText) {
   }
   try {
     judgement = await claudeStructured({
-      model: SCORE_MODEL,
+      model: model,
       messages: [{
         role: 'user',
         content: JUDGE_PROMPT({
