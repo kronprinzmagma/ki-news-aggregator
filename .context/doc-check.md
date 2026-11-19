@@ -19,11 +19,11 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 - [ ] Modellversionen korrekt: `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver, Review, Weekly und Audio-Skript
 - [ ] Quellenliste vollständig (aktuell **15 aktive Adapter** + NewsAPI inaktiv)
 - [ ] Score-Schwelle korrekt: `>= 4` ins Issue; scored-JSON enthält alle erfolgreich bewerteten Artikel
-- [ ] Weekly-Digest-Abschnitt vorhanden und aktuell (themen-zentriert, 3 Themen, optional Audio)
+- [ ] Weekly-Digest-Abschnitt vorhanden und aktuell (3 Themen, Originalquellen-Gate mit geprüftem Rewrite vor Audio und Veröffentlichung)
 - [ ] Schedule korrekt: Daily 05:30 UTC, Weekly 08:00 UTC sonntags, Feedback-Loop 10:00 UTC sonntags
 - [ ] Tagesübergreifende Dedup korrekt: **7 Tage Lookback** (`CROSS_DAY_DEDUP_LOOKBACK`), Issue des laufenden Tages ausgeschlossen
 - [ ] Review-Schlaufe (**6 Ebenen**, inkl. `comprehension_nontechnical`) + Rewrite-Loop beschrieben
-- [ ] Volltext-Gate (`thin_content_filtered`) erwähnt
+- [ ] Volltext-Gate (`thin_content_filtered`) erwähnt; Quellenwarnungen schliessen nur nach tatsächlicher Abruf-Erholung
 - [ ] lib/-Modulliste aktuell (inkl. `url`, `concurrency`)
 - [ ] Keine veralteten „geplant"-Markierungen für bereits implementierte Features
 

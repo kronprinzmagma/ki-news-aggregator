@@ -6,6 +6,8 @@ import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
 import { parseArticleSections } from './lib/issue-format.js';
 import { generateWeeklyAudio } from './lib/audio.js';
+import { reviewWeeklyDigest, weeklyReviewPassed, requireWeeklyPublication } from './lib/weekly-editorial.js';
+import fs from 'node:fs/promises';
 
 loadEnv();
 
@@ -232,10 +234,42 @@ async function main() {
   console.log(`[weekly] ${allArticles.length} unique Artikel – Pool für Themenwahl: ${articlePool.length} (davon ${score5Count} Score 5)`);
 
   console.log('[weekly] Generiere themen-zentrierten Digest per Claude...');
-  const digestBody = await claudeText(
+  let digestBody = await claudeText(
     WEEKLY_PROMPT(articlePool, weekInfo),
     { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly' }
   );
+
+  const sourceCache = new Map();
+  let editorial;
+  try {
+    editorial = await reviewWeeklyDigest(digestBody, articlePool, { sourceCache });
+    if (editorial.issues.length || !weeklyReviewPassed(editorial.review)) {
+      console.log('[weekly] Qualitätsprüfung verlangt Überarbeitung.');
+      digestBody = await claudeText(
+        WEEKLY_PROMPT(articlePool, weekInfo) + `\n\nÜberarbeite den folgenden Entwurf anhand der Prüfung. Behebe konkret die Fehler und erhalte belegte Erklärungen. Keine neuen Quellen oder Fakten.\n<pruefung>${JSON.stringify(editorial)}</pruefung>\n<entwurf>${JSON.stringify(digestBody)}</entwurf>`,
+        { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly-rewrite' }
+      );
+      editorial = await reviewWeeklyDigest(digestBody, articlePool, { sourceCache });
+    }
+  } catch (error) {
+    await fs.writeFile(`weekly-review-${weekInfo.to}.json`, JSON.stringify({ weekInfo, error: error.message, editorial }, null, 2));
+    throw error;
+  }
+  await fs.writeFile(`weekly-review-${weekInfo.to}.json`, JSON.stringify({ weekInfo, editorial }, null, 2));
+  requireWeeklyPublication(editorial);
+  console.log('[weekly] Originalquellen, Struktur und redaktionelle Prüfung bestanden.');
+
+  const makeIssueBody = audioLine => `# KI Weekly – KW ${weekInfo.kw}
+*${weekInfo.from} – ${weekInfo.to} · ${allArticles.length} Artikel (${dailyIssues.length} Daily Issues)*
+
+> 🤖 **KI-generierter Inhalt.** Synthese und Einordnung sind von Claude (Anthropic) verfasst, aggregiert aus den Daily Issues der Woche. Hinweis nach EU AI Act Art. 50(4).
+${audioLine}
+${digestBody}
+
+*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3Asummary)*`;
+  if (makeIssueBody('🎧 **Audio-Version:** [anhören / herunterladen](https://example.com/audio.mp3) · ~10 Min.').split(/\s+/).filter(Boolean).length > 900) {
+    throw new Error('Weekly-Veröffentlichung gestoppt: vollständige Ausgabe überschreitet 900 Wörter.');
+  }
 
   // Audio-Hörfassung (optional, No-Op ohne OPENAI_API_KEY) – vor der
   // Issue-Erstellung, damit der 🎧-Link direkt in den Body kann.
@@ -244,14 +278,7 @@ async function main() {
     ? `\n🎧 **Audio-Version:** [anhören / herunterladen](${audio.audio_url})${audio.est_duration_sec ? ` · ~${Math.round(audio.est_duration_sec / 60)} Min.` : ''}\n`
     : '';
 
-  const issueBody = `# KI Weekly – KW ${weekInfo.kw}
-*${weekInfo.from} – ${weekInfo.to} · ${allArticles.length} Artikel (${dailyIssues.length} Daily Issues)*
-
-> 🤖 **KI-generierter Inhalt.** Synthese und Einordnung sind von Claude (Anthropic) verfasst, aggregiert aus den Daily Issues der Woche. Hinweis nach EU AI Act Art. 50(4).
-${audioLine}
-${digestBody}
-
-*Generiert aus den KI Daily Issues der Woche. Einzelartikel: [Daily Issues](https://github.com/${REPO_SLUG}/issues?q=label%3Asummary)*`;
+  const issueBody = makeIssueBody(audioLine);
 
   const issueUrl = await createWeeklyIssue(token, weekInfo, issueBody);
   console.log(`[weekly] Fertig: ${issueUrl}`);

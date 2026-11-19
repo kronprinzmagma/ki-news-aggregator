@@ -3,7 +3,7 @@
 
 Nicht-technischer Produktleser: höchstens fünf persönlich relevante Daily-Nachrichten; normalerweise je 150–220 Wörter (maximal 300), mit Hintergrund, nachvollziehbarer Bedeutung und praktischem Hinweis. Die Nachricht muss ohne Nachlesen der Originalquelle verständlich sein; keine Pflichtübung und kein Auffüllen dünner Quellen. `lib/editorial.js` prüft Auswahl, Textstruktur und vollständige Review-Abdeckung. Review anhand des Originaltexts mit Quellentreue, erneut nach Rewrite; ungültige/abgeschnittene Antworten stoppen Publikation. Technische Plugin-/Infrastrukturmeldungen allein sind kein Topthema; Cluster-Bonus entfällt. Weekly: drei erklärende Themen mit je etwa 150–200 Wörtern, insgesamt etwa 650–800, höchstens 900 Wörter. `scripts/refresh-issue-audio.js` aktualisiert die Vertonung nach Issue-Änderungen. Ältere Aussagen zu Mengenlimit, advisory Review, Entwickler-Projekten und Cluster-Bonus sind überholt.
 
-Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Source-Ausfälle und unzuverlässiger GitHub-Schedule sind durch diese Redaktion-Korrektur nicht behoben.
+Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Die anschliessende Betriebsnachprüfung ergänzt das Weekly-Originalquellen-Gate und die automatische Erholung von Quellenwarnungen. VentureBeat und unzuverlässige GitHub-Schedules bleiben dokumentierte Betriebsgrenzen.
 
 # Current State
 

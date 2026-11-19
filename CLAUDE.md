@@ -87,6 +87,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - Zusätzlich: Einleitung und Wochenimpuls. Verständlichkeit ist Pflicht (gleiche Regel wie Daily). Insgesamt etwa 650–800 Wörter, höchstens 900; keine dünnen Quellen künstlich auffüllen
 - Issue-Titel: `KI Weekly – KW XX (YYYY-MM-DD – YYYY-MM-DD)`
 - Erstellt immer ein neues Issue (kein Upsert); bei Lauf ausserhalb Sonntag wird die letzte abgeschlossene Woche berechnet (UTC-Datumslogik)
+- **Veröffentlichungsgate:** `lib/weekly-editorial.js` prüft drei Themen, Feedback, praktische Hinweise, bekannte Beleg-URLs und die Länge. Alle zitierten Originaltexte werden neu geladen; fehlende, dünne oder beschädigte Quellen stoppen den Lauf. Quellentreue, Verständlichkeit und Relevanz jeweils mindestens 4/5, keine offenen Fehler. Ein Rewrite wird erneut geprüft. Erst danach Audio und Issue-Erstellung. `weekly-review-*.json` wird als Workflow-Artefakt gesichert.
 - Optionale Audio-Hörfassung wie beim Daily (`OPENAI_API_KEY` nötig), 🎧-Link im Issue-Body
 
 ## Feedback-Loop & Statistik

@@ -38,3 +38,12 @@ jobs:
 
       - name: Weekly Digest
         run: node weekly.js
+
+      - name: Upload editorial review
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: weekly-editorial-review
+          retention-days: 30
+          if-no-files-found: ignore
+          path: weekly-review-*.json

@@ -1,6 +1,6 @@
 # Bestätigter Erklärungsstil für Texte und Hörfassungen
 
-Am 8. Oktober 2026 hat der Leser den ausführlicheren [Daily-Entwurf](DAILY-TEXTENTWURF.md) bestätigt und die Umsetzung für alle bereinigten Ausgaben sowie die Hörfassungen freigegeben. Diese Fassung ersetzt die Längengrenzen und Pflichtversuche der ersten [Korrekturfassung](CLEANUP.md).
+Am 8. Oktober 2026 hat der Leser den ausführlicheren [Daily-Entwurf](DAILY-TEXTENTWURF.md) bestätigt und die Umsetzung für alle bereinigten Ausgaben sowie die Hörfassungen freigegeben. Diese Fassung ersetzt die Längengrenzen und Pflichtversuche der ersten [Korrekturfassung](CLEANUP.md). Die spätere [Betriebsnachprüfung](POSTFLIGHT.md) ergänzt den hier dokumentierten Stand um weitere technische Korrekturen.
 
 ## Texte und künftige Ausgaben
 

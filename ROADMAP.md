@@ -192,3 +192,4 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 
 - [x] a16z-Feed auf die offizielle Newsletter-Domain umgestellt
 - [x] Quellenwarnungen aktualisieren und nach Abruf-Erholung automatisch schliessen; Aktualität separat kennzeichnen
+- [x] Weekly: Struktur-/Längengrenzen und Originalquellen-Review als Veröffentlichungsgate, erneute Prüfung nach einem Rewrite, Workflow-Artefakte

@@ -3,12 +3,14 @@
 
 Nicht-technischer Produktleser: höchstens fünf persönlich relevante Daily-Nachrichten; normalerweise je 150–220 Wörter (maximal 300), mit Hintergrund, nachvollziehbarer Bedeutung und praktischem Hinweis. Die Nachricht muss ohne Nachlesen der Originalquelle verständlich sein; keine Pflichtübung und kein Auffüllen dünner Quellen. `lib/editorial.js` prüft Auswahl, Textstruktur und vollständige Review-Abdeckung. Review anhand des Originaltexts mit Quellentreue, erneut nach Rewrite; ungültige/abgeschnittene Antworten stoppen Publikation. Technische Plugin-/Infrastrukturmeldungen allein sind kein Topthema; Cluster-Bonus entfällt. Weekly: drei erklärende Themen mit je etwa 150–200 Wörtern, insgesamt etwa 650–800, höchstens 900 Wörter. `scripts/refresh-issue-audio.js` aktualisiert die Vertonung nach Issue-Änderungen. Ältere Aussagen zu Mengenlimit, advisory Review, Entwickler-Projekten und Cluster-Bonus sind überholt.
 
-Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Source-Ausfälle und unzuverlässiger GitHub-Schedule sind durch diese Redaktion-Korrektur nicht behoben.
+Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Die anschliessende Betriebsnachprüfung ergänzt das Weekly-Originalquellen-Gate und die automatische Erholung von Quellenwarnungen. VentureBeat und unzuverlässige GitHub-Schedules bleiben dokumentierte Betriebsgrenzen.
 
 # Working Map
 
 - `reviews/2026-10-08/REVIEW.md`: ursprünglicher NZZ-Review, historischer Zustand.
-- `reviews/2026-10-08/CLEANUP.md`: umgesetzte Redaktion-/GitHub-Korrekturen und verbleibende Grenzen.
+- `reviews/2026-10-08/CLEANUP.md`: erste Korrekturfassung, historischer Stand.
+- `reviews/2026-10-08/STYLE-UPDATE.md`: bestätigter Erklärungsstil, Texte und Hörfassungen.
+- `reviews/2026-10-08/POSTFLIGHT.md`: abschliessende Betriebsnachprüfung und weitere Fehlerkorrekturen.
 
 Diese Datei ist eine knappe Orientierung für die aktuelle Arbeit. Keine vollständige Projektinventur.
 
@@ -41,6 +43,7 @@ Nicht erneut breit analysieren:
 - `lib/audio.js`: `generateDailyAudio()` – Sprech-Skript (Claude) → TTS → Release-Asset. Fehlertolerant, von `deliver.js` aufgerufen.
 - `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.
 - `lib/topic-overlap.js`: Eine Token-Overlap-Implementierung für Event-Dedup, Cluster-Bonus, Themen-Dedup, Related-Links.
+- `lib/weekly-editorial.js`: Struktur und Belege prüfen, Originaltexte neu laden und Review vor Vertonung/Veröffentlichung erzwingen.
 - `lib/adapter-alerts.js`: Quellenwarnungen anhand tatsächlicher Abrufe abgleichen, veraltete Warnungen auflösen und offene Ausfälle aktualisieren.
 - `lib/store.js`: SQLite-Persistenz (`better-sqlite3`, DB-Datei `ki-news.db`, lokal generiert, nicht im Repo). Cross-Day-Dedup liest aus `issue_articles`.
 - `lib/issue-format.js`: HTML-Kommentar-Metadaten (`<!-- ki-news-meta: {...} -->`) für robustes Re-Parsing. Weekly nutzt das zuerst, Regex-Fallback bleibt.
@@ -53,8 +56,8 @@ Nicht erneut vollständig lesen:
 
 ## Evals
 
-- `evals/run_eval.py`: Eval-Runner. Aktuell bekannter Drift zum Produktionsprompt in `score.js`.
-- `evals/goldstandard.json`: Goldstandard. Enthält aktuell noch drei generische Platzhalter.
+- `evals/run_eval.js`: aktueller Eval-Runner, nutzt den Produktionspfad von `score.js`. CI-Dataset: `pm-baseline.json`.
+- `evals/goldstandard.json`: 38 historische Nutzerbewertungen, unverändert erhalten.
 - `evals/EVALS.md`: Eval-Doku; enthält jetzt Anleitung zur Review-Oberfläche.
 - `evals/review-ui/server.js`: Lokaler HTTP-Server, liest `articles-*.json`, schreibt `evals/goldstandard.json`.
 - `evals/review-ui/index.html`: UI-Struktur.

@@ -1,12 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { applySelection, inspectWriteup, validateReviewCoverage } from '../lib/editorial.js';
+import { applySelection, inspectWriteup, validateReviewCoverage, inspectQuantityUnits, buildDailyOverview } from '../lib/editorial.js';
 import { parseIssueForAudio, parseIssueNumbers } from '../scripts/refresh-issue-audio.js';
 import { articleMeta } from '../lib/issue-format.js';
 import { extractBuildAnchor } from '../lib/build-anchors.js';
 import { parseDailyIssue } from '../weekly.js';
 const candidates = Array.from({length:6},(_,i)=>({url:`https://example.com/${i}`,titel:`Artikel ${i}`,rohtext:'Quelle'}));
 const chosen = a => ({url:a.url,headline:'Verständliche Nachricht',reason:'Alltagsnutzen'});
+
+test('token context limits cannot silently become character or word limits', () => {
+  const source='Requests up to 100,000 input tokens are cheaper.';
+  assert.ok(inspectQuantityUnits("Anfragen bis 100'000 Zeichen.", source).length);
+  assert.ok(inspectQuantityUnits('Bis 100.000 Wörter.', source).length);
+  assert.ok(inspectQuantityUnits('Bis 1,5 Millionen Zeichen.', '1.5 million tokens').length);
+  assert.deepEqual(inspectQuantityUnits("Bis 100'000 Tokens.", source), []);
+  assert.deepEqual(inspectQuantityUnits('Bis 100000 characters.', source+' A separate field allows 100000 characters.'), []);
+  assert.deepEqual(inspectQuantityUnits('Ein Text mit 2000 Zeichen.', source), []);
+});
+
+test('daily overview reuses reviewed headlines and never adds an unchecked savings claim', () => {
+  assert.equal(buildDailyOverview([{display_title:'Anthropic senkt Verbrauchspreise',titel:'Original'}]),'Heute ausgewählt: Anthropic senkt Verbrauchspreise.');
+  assert.doesNotMatch(buildDailyOverview(candidates), /75|90|billiger|garantiert/);
+  const long=candidates.map(article=>({...article,display_title:'Wort '.repeat(15).trim()}));
+  assert.ok(buildDailyOverview(long).split(/\s+/).length<=50);
+});
 
 test('editorial selection limits volume and rejects fabricated or duplicate sources', () => {
   assert.throws(()=>applySelection(candidates,{articles:candidates.map(chosen)}),/Tageslimit/);

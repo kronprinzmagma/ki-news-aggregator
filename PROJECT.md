@@ -63,3 +63,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |
 
 Stand 2026-10-08: Redaktionelle Auswahl vor der Aufbereitung; drei Blöcke zusammen normalerweise 150–220 Wörter, höchstens 300; ohne Nachlesen der Originalquelle verständlich. Review bekommt den Quellentext, validiert jede URL und bricht bei fehlender/abgeschnittener Antwort ab. Relevanz, Quellentreue und Verständlichkeit mindestens 4/5, guter Input und starker Issue-Fit sind Pflicht; Rewrites werden erneut geprüft. Final schwache Texte werden ausgeschlossen. Kein Cluster-Bonus durch gemeinsame Wörter. Weekly etwa 650–800 Wörter, höchstens 900; Einordnung ohne unbelegte Rechts-/Marktfolgen.
+
+## Betriebsnachprüfung 2026-10-08
+
+Quellenwarnungen werden nach erfolgreichen Abrufen geschlossen und bei fortgesetzten Ausfällen aktualisiert. a16z nutzt die offizielle Newsletter-Domain. Weekly-Veröffentlichung und Vertonung setzen jetzt Strukturprüfung und Review der neu geladenen Originalquellen voraus; eine geprüfte Überarbeitung ist möglich. Fehlende Quellen oder ungenügende finale Qualität stoppen die Veröffentlichung.

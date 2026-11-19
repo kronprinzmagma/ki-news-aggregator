@@ -3,19 +3,19 @@
 
 Nicht-technischer Produktleser: höchstens fünf persönlich relevante Daily-Nachrichten; normalerweise je 150–220 Wörter (maximal 300), mit Hintergrund, nachvollziehbarer Bedeutung und praktischem Hinweis. Die Nachricht muss ohne Nachlesen der Originalquelle verständlich sein; keine Pflichtübung und kein Auffüllen dünner Quellen. `lib/editorial.js` prüft Auswahl, Textstruktur und vollständige Review-Abdeckung. Review anhand des Originaltexts mit Quellentreue, erneut nach Rewrite; ungültige/abgeschnittene Antworten stoppen Publikation. Technische Plugin-/Infrastrukturmeldungen allein sind kein Topthema; Cluster-Bonus entfällt. Weekly: drei erklärende Themen mit je etwa 150–200 Wörtern, insgesamt etwa 650–800, höchstens 900 Wörter. `scripts/refresh-issue-audio.js` aktualisiert die Vertonung nach Issue-Änderungen. Ältere Aussagen zu Mengenlimit, advisory Review, Entwickler-Projekten und Cluster-Bonus sind überholt.
 
-Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Source-Ausfälle und unzuverlässiger GitHub-Schedule sind durch diese Redaktion-Korrektur nicht behoben.
+Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt jetzt `evals/pm-baseline.json` mit 16 explizit redaktionellen Kalibrierungsfällen. Offen bleibt eine unabhängige Bestätigung durch neue Nutzerbewertungen. Die anschliessende Betriebsnachprüfung ergänzt das Weekly-Originalquellen-Gate und die automatische Erholung von Quellenwarnungen. VentureBeat und unzuverlässige GitHub-Schedules bleiben dokumentierte Betriebsgrenzen.
 
 # Next Task
 
 ## Offene Punkte (Priorität absteigend)
 
-### 1. Eval-Goldstandard weiter wachsen lassen
+### 1. Unabhängige Leserbewertungen sammeln
 
-Stand 11.06.: 34 Einträge (17 via erstem feedback-loop-Lauf promotet). Ziel: ~50 mit breiterer Score-Verteilung (aktuell 21× Score 5, nur 1× Score 2 – Mittelfeld-Urteile fehlen). Wächst automatisch über `feedback-loop.yml` (sonntags); beim Lesen auch mal „Thema nicht relevant" bei Mittelmass setzen, nicht nur Extreme markieren.
+38 historische Nutzerlabels bleiben unverändert. Der neue CI-Datensatz enthält 16 explizit redaktionell kalibrierte Fälle für die nichttechnische Produktperspektive. Neue echte Leserbewertungen zu Auswahl und Verständlichkeit sammeln und beide Referenzen getrennt halten; den Kalibrierungssatz nicht als unabhängigen Nutzernachweis ausgeben.
 
-### 2. Scoring-Prompt-Kalibrierung beobachten
+### 2. Betriebsgrenzen beobachten
 
-Prompt am 11.06. gegen die Feedback-Outlier kalibriert (Pearson 0.48 → 0.75, Acc@±1 91%). Nach den nächsten ~10 Goldstandard-Zugängen prüfen, ob die Werte halten (kein Overfitting auf das 34er-Set). Bekannter Rest-Ausreisser: CRDT-Artikel (Dev-Tool ohne KI-Kern wird trotz Regel mit 4 bewertet).
+VentureBeat liefert weiterhin HTTP 429. Keinen veralteten Ersatzfeed als funktionierende Nachrichtenquelle ausgeben. a16z nutzt die kanonische Newsletter-Domain; Quellenwarnungen werden nach Erholung geschlossen. Der Yannic-Feed ist erreichbar, enthält aber ältere Einträge. GitHub-Schedules bleiben verspätungsanfällig; ein garantierter Versandzeitpunkt braucht einen unabhängig betriebenen Trigger.
 
 ### 3. Audio-Stimme final wählen
 

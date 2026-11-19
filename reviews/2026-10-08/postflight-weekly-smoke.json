@@ -1,0 +1,24 @@
+{
+  "issues": [],
+  "review": {
+    "faithfulness": 5,
+    "comprehension": 5,
+    "product_relevance": 5,
+    "needs_rewrite": false,
+    "issues": []
+  },
+  "sources": [
+    {
+      "url": "https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/",
+      "characters": 1540
+    },
+    {
+      "url": "https://github.com/ninjahawk/livenerf",
+      "characters": 8000
+    },
+    {
+      "url": "https://www.heise.de/news/Missing-Link-Our-Best-Machines-Was-bin-ich-ohne-meinen-KI-Assistenten-11467180.html",
+      "characters": 8000
+    }
+  ]
+}
