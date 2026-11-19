@@ -46,6 +46,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install ffmpeg (MP3-Kodierung der Hörfassung)
+        # Die Realtime-API liefert rohes PCM; ffmpeg macht daraus die MP3.
+        # Nur nötig, wenn Audio aktiv ist.
+        if: env.OPENAI_API_KEY != ''
+        # Audio darf den Lauf nie abbrechen: scheitert apt, fällt nur das MP3 weg.
+        continue-on-error: true
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg
+
       - name: Set run date
         # Input via env statt direkter ${{ }}-Interpolation im Skript
         # (Actions-Script-Injection-Härtung).
