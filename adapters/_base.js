@@ -1,5 +1,6 @@
 import { httpGet, isSafeUrl } from '../lib/http.js';
 import { decodeHtmlEntities, stripTags, extractCdata } from '../lib/text-utils.js';
+import { extractReadableText } from '../lib/readable.js';
 
 export { httpGet, isSafeUrl, decodeHtmlEntities, stripTags, extractCdata };
 
@@ -43,6 +44,21 @@ export function extractArticleText(html, {
     }
   }
   return chunks.join(' ').replace(/\s+/g, ' ').trim().slice(0, maxLength);
+}
+
+// Unter dieser Länge gilt der Bibliothekstext als zu dünn; dann zählt der
+// Rückfall auf die eigenen Suchmuster, falls er mehr liefert.
+export const READABLE_MIN_CHARS = 300;
+
+/**
+ * Haupttext einer Seite: zuerst defuddle (lib/readable.js), die eigenen
+ * Suchmuster (extractArticleText) nur als Rückfall.
+ */
+export async function extractBodyText(html, url, { maxLength = 8000, extractOptions = {} } = {}) {
+  const readable = await extractReadableText(html, url, { maxLength });
+  if (readable.length >= READABLE_MIN_CHARS) return readable;
+  const fallback = extractArticleText(html, { maxLength, ...extractOptions });
+  return fallback.length > readable.length ? fallback : readable;
 }
 
 export function extractMetaDescription(html) {
@@ -166,7 +182,7 @@ export async function enrichFromUrl(article, {
   try {
     const html = await httpGet(article.url, fetchOptions);
     const meta = useMetaDescription ? extractMetaDescription(html) : '';
-    const body = extractArticleText(html, { maxLength, ...extractOptions });
+    const body = await extractBodyText(html, article.url, { maxLength, extractOptions });
     const enriched = [meta, body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
     if (enriched.length > (article.rohtext || '').length) {
       return { ...article, rohtext: enriched.slice(0, maxLength) };

@@ -1,4 +1,4 @@
-import { httpGet, parseAtom, extractArticleText, isSafeUrl } from './_base.js';
+import { httpGet, parseAtom, extractBodyText, isSafeUrl } from './_base.js';
 
 const FEED_URL = 'https://simonwillison.net/atom/everything/';
 
@@ -12,7 +12,7 @@ async function enrich(article) {
   if (!isSafeUrl(article.url)) return article;
   try {
     const html = await httpGet(article.url);
-    const fromPage = extractArticleText(html);
+    const fromPage = await extractBodyText(html, article.url);
 
     // Wenn der Artikel-Text dünn ist: externen Link nachladen.
     if (fromPage.length < 2500) {
@@ -20,7 +20,7 @@ async function enrich(article) {
       if (externalUrl && isSafeUrl(externalUrl)) {
         try {
           const externalHtml = await httpGet(externalUrl);
-          const externalText = extractArticleText(externalHtml);
+          const externalText = await extractBodyText(externalHtml, externalUrl);
           const combined = [fromPage, externalText].filter(Boolean).join(' ').trim();
           if (combined.length > (article.rohtext || '').length) {
             return { ...article, rohtext: combined.slice(0, 8000) };
