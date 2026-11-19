@@ -73,3 +73,31 @@ test('parseAtom: fehlender Link → Entry wird übersprungen', () => {
   const xml = `<feed><entry><title>Nur Titel</title></entry></feed>`;
   assert.equal(parseAtom(xml, 'q').length, 0);
 });
+
+// ─── Bibliothek (defuddle) mit eigenen Suchmustern als Rückfall ──────────────
+import { extractBodyText } from '../adapters/_base.js';
+import { extractReadableText } from '../lib/readable.js';
+
+const satz = 'Ein neues Sprachmodell fasst lange Dokumente schneller zusammen und erklärt dabei die Quellen. ';
+
+test('extractBodyText holt Text aus div-Seiten, die die Suchmuster verfehlen', async () => {
+  const html = `<html><head><title>T</title></head><body><nav>Menü Start Login</nav>
+    <div class="blog-content"><h1>Titel</h1>${Array.from({ length: 8 }, () => `<div class="para">${satz}</div>`).join('')}</div>
+    <footer>Impressum</footer></body></html>`;
+  const text = await extractBodyText(html, 'https://example.org/blog/a');
+  assert.ok(text.length >= 300, `zu kurz: ${text.length}`);
+  assert.match(text, /Sprachmodell/);
+  assert.doesNotMatch(text, /Impressum/);
+});
+
+test('extractBodyText liefert bei leerer Seite einen leeren Text statt eines Fehlers', async () => {
+  assert.equal(await extractBodyText('', 'https://example.org/leer'), '');
+  assert.equal(typeof await extractReadableText('<<<kaputt', 'https://example.org/x'), 'string');
+});
+
+test('extractReadableText setzt Leerzeichen zwischen Blöcken und entfernt Scripts', async () => {
+  const html = `<html><body><article><p>${satz}Erster.</p><p>Zweiter${satz}</p><script>alert(1)</script></article></body></html>`;
+  const text = await extractReadableText(html, 'https://example.org/b');
+  assert.match(text, /Erster\. Zweiter/);
+  assert.doesNotMatch(text, /alert/);
+});
