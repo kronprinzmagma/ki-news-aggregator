@@ -33,6 +33,7 @@ import { checkTranscriptFidelity, realtimeSpeak, synthesizeSpeech } from '../lib
 
 function fakeConnect(script) {
   const sent = [];
+  const sockets = [];
   const connect = (url, headers) => {
     const ws = {
       url, headers, sent,
@@ -43,10 +44,11 @@ function fakeConnect(script) {
       },
       close() { this.closed = true; },
     };
+    sockets.push(ws);
     setImmediate(() => ws.onmessage?.({ data: JSON.stringify({ type: 'session.created' }) }));
     return ws;
   };
-  return { connect, sent };
+  return { connect, sent, sockets };
 }
 
 function speakingServer({ transcriptFor = (t) => t, status = 'completed', error = null } = {}) {
@@ -73,7 +75,7 @@ test('checkTranscriptFidelity akzeptiert wörtliches Vorlesen und lehnt Antworte
 
 test('realtimeSpeak schickt Sitzung, Text und Auth-Header und sammelt Audio', async () => {
   process.env.OPENAI_API_KEY = 'test-key';
-  const { connect, sent } = fakeConnect(speakingServer());
+  const { connect, sent, sockets } = fakeConnect(speakingServer());
   const res = await realtimeSpeak('Hallo Welt.', { model: 'gpt-realtime-2.1-mini', voice: 'cedar', timeoutMs: 2000, connect });
   assert.equal(res.pcm.length, 480);
   assert.equal(res.transcript, 'Hallo Welt.');
@@ -81,6 +83,9 @@ test('realtimeSpeak schickt Sitzung, Text und Auth-Header und sammelt Audio', as
   assert.deepEqual(update.session.output_modalities, ['audio']);
   assert.equal(update.session.audio.output.voice, 'cedar');
   assert.equal(update.session.audio.output.format.type, 'audio/pcm');
+  assert.equal(sockets[0].headers.Authorization, 'Bearer test-key');
+  assert.match(sockets[0].url, /^wss:\/\/api\.openai\.com\/v1\/realtime\?model=gpt-realtime-2\.1-mini$/);
+  assert.doesNotMatch(sockets[0].url, /test-key/);
 });
 
 test('synthesizeSpeech wiederholt bei abweichendem Transkript und bricht dann ab', async () => {
@@ -110,4 +115,24 @@ test('synthesizeSpeech meldet Tokens und Dauer und fügt Pausen zwischen Stücke
   assert.ok(stats.chunks > 1);
   assert.equal(stats.audio_output_tokens, 50 * stats.chunks);
   assert.ok(pcm.length > 480 * stats.chunks); // Pausen dazwischen
+});
+
+test('synthesizeSpeech verrechnet auch verworfene Versuche und Text-Ausgabe-Tokens', async () => {
+  process.env.OPENAI_API_KEY = 'test-key';
+  const satz = 'Ein Satz zum Vorlesen, der genau so gesprochen werden soll.';
+  let versuch = 0;
+  // Erster Versuch weicht ab (wird verworfen, kostet aber), zweiter stimmt.
+  const server = speakingServer({ transcriptFor: (t) => (++versuch === 1 ? 'Gerne helfe ich dir.' : t) });
+  const { connect } = fakeConnect(server);
+  let stats;
+  const { ttsCostUsd } = await import('../lib/audio.js');
+  const origWarn = console.warn; console.warn = () => {};
+  try {
+    await synthesizeSpeech(satz, { connect, maxRetries: 1, encode: async (b) => b, onStats: (s) => { stats = s; } });
+  } finally { console.warn = origWarn; }
+  assert.equal(stats.attempts, 2);
+  assert.equal(stats.audio_output_tokens, 100);
+  assert.equal(stats.text_input_tokens, 40);
+  assert.equal(stats.text_output_tokens, 0);
+  assert.ok(ttsCostUsd({ ...stats, text_output_tokens: 1e6 }) > ttsCostUsd(stats));
 });
