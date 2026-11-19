@@ -15,6 +15,11 @@ on:
         description: 'Daily-/Weekly-Issue-Nummern, kommagetrennt; leer = Daily nach Datum'
         required: false
         default: ''
+      probe:
+        description: 'Nur kurze Vorlese-Probe (fester Testsatz, kein Upload)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -38,7 +43,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install lame (MP3-Kodierung)
+        timeout-minutes: 8
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends lame
+
+      - name: Vorlese-Probe
+        if: github.event.inputs.probe == 'true'
+        run: node scripts/tts-probe.js
+
       - name: Generate audio
+        if: github.event.inputs.probe != 'true'
         # Input via env statt direkter ${{ }}-Interpolation (Injection-Härtung).
         env:
           DATE_INPUT: ${{ github.event.inputs.date }}
@@ -57,4 +71,6 @@ jobs:
           name: audio-${{ github.event.inputs.date || 'latest' }}
           retention-days: 14
           if-no-files-found: ignore
-          path: audio-*.mp3
+          path: |
+            audio-*.mp3
+            tts-probe.mp3
