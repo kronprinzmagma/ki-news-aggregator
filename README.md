@@ -55,7 +55,7 @@ Three stages run sequentially:
 
 **2. Score:** Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
-**3. Deliver:** Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three explanatory blocks. The review receives the original source text and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
+**3. Deliver:** Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three explanatory blocks. The review receives the cleaned source text (see prompt-injection defence below) and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
 
 **Weekly:** a digest of roughly 650–800 words (at most 900), scheduled on Sundays, fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each explained in roughly 150–200 words with a practical tip and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
 
@@ -135,6 +135,8 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback: strict tool use constrains field types and the client validates the full JSON schema and rejects truncated responses. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
 
+**Prompt-injection defence.** Article text is untrusted input that ends up in a public issue. Before scoring, selection, write-up and review, `sanitizeSourceText` normalises it (NFKC) and strips zero-width, bidi and tag characters, HTML comments, tags with attributes and Markdown images. The write-up prompt separates data from instructions and repeats the instructions after the data; `cleanWriteup` validates the output before publication and drops an article whose write-up lost its required structure. A promptfoo red-team eval with fixed injection cases (`evals/redteam/`, workflow `injection.yml`) runs through the same production path.
+
 **Cheap model for scoring.** Scoring runs on Claude Haiku; only the per-article content varies across calls. The system prompt is marked as an Anthropic `cache_control: ephemeral` prefix, but at about 1,000 tokens it stays below Haiku's cache minimum, so the saving comes from the model choice (the code comment estimates about CHF 5 a month instead of about CHF 20 with Sonnet).
 
 **Rate limiting and retry.** The scoring stage caps at 5 parallel Claude API requests. 429 responses trigger exponential backoff via a shared retry wrapper in `lib/claude.js`. Retry logic is centralised and not duplicated across callers.
@@ -147,7 +149,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **SSRF protection.** All outbound HTTP in `lib/http.js` resolves HTTPS targets before connecting, rejects private/reserved IPv4 and IPv6 addresses, pins the approved lookup into the request, and repeats the check on redirects. Adapters cannot be pointed at internal network addresses.
 
-**Adapter base class.** `adapters/_base.js` provides HTTP fetch, RSS/Atom parsing, content extraction, and enrichment. Source-specific adapters extend this base; adding a new source requires only the feed URL and any source-specific filter logic.
+**Adapter base class.** `adapters/_base.js` provides HTTP fetch, RSS/Atom parsing, content extraction, and enrichment. The main text of a page is extracted with the `defuddle` library (`lib/readable.js`, no network access of its own, so every fetch still goes through the SSRF guard), with the project's own patterns as fallback; on 39 pages that previously yielded under 300 characters, short extractions dropped from 19 to 4. Source-specific adapters extend this base; adding a new source requires only the feed URL and any source-specific filter logic.
 
 **Shared config layer.** Model names, score thresholds and dedup parameters are defined once in `lib/config.js`; concurrency limits and the article age limit sit next to the stage that uses them (`score.js`, `deliver.js`, `ingest.js`).
 
@@ -198,7 +200,7 @@ lib/                   — Shared modules: claude, github, http, store,
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI Realtime API (`gpt-realtime-2.1-mini`, optional audio) + LAME · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
+Node.js (ESM, no framework) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI Realtime API (`gpt-realtime-2.1-mini`, optional audio) + LAME · `defuddle` · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
 
 ---
 
