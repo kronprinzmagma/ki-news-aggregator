@@ -34,7 +34,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       timezone: "Europe/Zurich"
     open-pull-requests-limit: 3
     commit-message:
