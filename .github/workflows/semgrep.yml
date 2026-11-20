@@ -19,9 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # Python 3.14 statt 3.15: semgrep 1.186.0 liefert Wheels nur bis cp314; unter 3.15
+      # bricht semgrep-core in der CI ab (exit -11, 2026-11-20). Anheben, sobald ein
+      # Release cp315-Wheels hat.
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.15"
+          python-version: "3.14"
       - name: Semgrep installieren
         run: pip install semgrep==1.185.0
       - name: Semgrep (nur Warnung)
