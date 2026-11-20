@@ -1,28 +1,8 @@
 {
-  "generated_at": "2026-11-19T14:44:23.054Z",
+  "generated_at": "2026-11-20T14:22:55.290Z",
   "lookback_days": 60,
   "issues": 54,
   "usage_daily": [
-    {
-      "run_date": "2026-09-20",
-      "stage": "deliver",
-      "calls": 4,
-      "input_tokens": 8586,
-      "output_tokens": 3779,
-      "cache_read": 0,
-      "cache_creation": 0,
-      "usd": 0.0824
-    },
-    {
-      "run_date": "2026-09-20",
-      "stage": "score",
-      "calls": 30,
-      "input_tokens": 101213,
-      "output_tokens": 4169,
-      "cache_read": 0,
-      "cache_creation": 0,
-      "usd": 0.061
-    },
     {
       "run_date": "2026-09-21",
       "stage": "deliver",
@@ -1142,6 +1122,26 @@
       "cache_read": 15712,
       "cache_creation": 1964,
       "usd": 0.001
+    },
+    {
+      "run_date": "2026-11-20",
+      "stage": "deliver",
+      "calls": 6,
+      "input_tokens": 11867,
+      "output_tokens": 3549,
+      "cache_read": 0,
+      "cache_creation": 1049,
+      "usd": 0.0928
+    },
+    {
+      "run_date": "2026-11-20",
+      "stage": "score",
+      "calls": 28,
+      "input_tokens": 22233,
+      "output_tokens": 6214,
+      "cache_read": 53028,
+      "cache_creation": 1964,
+      "usd": 0.0031
     }
   ],
   "issue_sources": [
@@ -1152,12 +1152,12 @@
     },
     {
       "quelle": "hackernews",
-      "articles": 62,
+      "articles": 61,
       "avg_score": 4.18
     },
     {
       "quelle": "simonwillison",
-      "articles": 39,
+      "articles": 40,
       "avg_score": 4.1
     },
     {
@@ -1195,8 +1195,8 @@
     {
       "adapter": "huggingface",
       "runs": 14,
-      "total_fetched": 11752,
-      "total_truncated": 40,
+      "total_fetched": 11767,
+      "total_truncated": 32,
       "error_runs": 1
     },
     {
@@ -1216,9 +1216,9 @@
     {
       "adapter": "heise",
       "runs": 14,
-      "total_fetched": 387,
+      "total_fetched": 349,
       "total_truncated": 157,
-      "error_runs": 5
+      "error_runs": 6
     },
     {
       "adapter": "lastweekinai",
@@ -1279,14 +1279,14 @@
     {
       "adapter": "a16z",
       "runs": 14,
-      "total_fetched": 95,
+      "total_fetched": 94,
       "total_truncated": 13,
       "error_runs": 0
     },
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 74,
+      "total_fetched": 75,
       "total_truncated": 0,
       "error_runs": 3
     },
