@@ -100,7 +100,8 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 **Daily:** 05:30 UTC täglich (`daily-news.yml`), Wochenende eingeschlossen.
 **Weekly:** 08:00 UTC sonntags (`weekly-digest.yml`), nach dem Daily.
 **Feedback-Loop:** 10:00 UTC sonntags (`feedback-loop.yml`), nach dem Weekly.
-**Tests:** `test.yml` führt `npm test` bei jedem Push/PR aus.
+**Tests:** `test.yml` führt `npm test` bei jedem Push/PR aus (CI auf Node 26). `semgrep.yml` prüft bei Push/PR, vorerst nur als Warnung; `injection.yml` (Prompt-Injection-Eval mit promptfoo) läuft nur manuell.
+**Archiv:** `publish-archive.yml` nach jedem erfolgreichen Daily/Weekly, Rückfall täglich 09:00 UTC.
 
 Das Laufdatum kommt in GitHub Actions aus `RUN_DATE=YYYY-MM-DD`. Lokal wird das aktuelle UTC-Datum verwendet. Die Pipeline fällt bewusst nicht auf alte `articles-*` oder `scored-*` Dateien zurück, damit kein Daily-Issue aus veralteten Daten entsteht.
 

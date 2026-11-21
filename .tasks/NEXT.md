@@ -19,7 +19,7 @@ Prompt am 11.06. gegen die Feedback-Outlier kalibriert (Pearson 0.48 → 0.75, A
 
 ### 3. Audio-Stimme final wählen
 
-Optional: Stimmen-Samples vergleichen, Default (`AUDIO_VOICE`, aktuell `onyx`) bestätigen oder wechseln.
+Optional: Stimmen-Samples vergleichen, Default (`AUDIO_VOICE`, aktuell `cedar`; seit dem Wechsel auf `gpt-realtime-2.1-mini` gibt es `onyx` nicht mehr) bestätigen oder wechseln.
 
 ### 4. PR-Mechanismus: process_adjustments → Pull Request
 

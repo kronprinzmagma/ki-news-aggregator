@@ -68,7 +68,7 @@ Three stages run sequentially:
 08:00 UTC Sunday    →  weekly.js → GitHub Issue
 ```
 
-A Watchdog workflow monitors the daily run and retriggers after failed publishes or other failed runs. A Close-Old-Issues workflow archives stale issues automatically.
+A Watchdog workflow (07:00 UTC) monitors the daily run and retriggers after failed publishes or other failed runs. A Close-Old-Issues workflow (07:30 UTC) archives stale issues automatically. `publish-archive.yml` rebuilds the GitHub Pages archive after each successful daily or weekly run, with a daily 09:00 UTC fallback; `feedback-loop.yml` runs on Sundays at 10:00 UTC.
 
 ---
 
@@ -185,22 +185,27 @@ score.js               — Stage 2: relevance scoring via Claude Haiku
 deliver.js             — Stage 3: write-up, review loop, GitHub Issue
 weekly.js              — Sunday synthesis digest
 adapters/              — One adapter per source (16 source files + _base.js;
-                         15 davon aktiv verdrahtet, newsapi.js inaktiv)
+                         15 wired into ingest.js, newsapi.js inactive)
 lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
                          close-old-issues, eval.yml, publish-archive.yml,
                          test.yml, feedback-loop.yml, audio-backfill.yml,
-                         embedding-dedup-eval.yml
+                         embedding-dedup-eval.yml, injection.yml (manual),
+                         semgrep.yml (warning only)
+scripts/               — Archive build, stats export, feedback promotion,
+                         audio refresh, cover generation
+evals/                 — Scoring, deliver and injection evals, review UI
+test/                  — node:test suite (`npm test`)
 ```
 
-**Environment variables** (in addition to the secrets listed below): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain),  `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run.
+**Environment variables** (in addition to the secrets listed below): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain), `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run, `NEWSAPI_KEY` is read only by the inactive NewsAPI adapter, `KI_NEWS_SCORE_MODEL` / `KI_NEWS_DELIVER_MODEL` override the models for eval comparison runs, `LAME_PATH` / `FFMPEG_PATH` point to the audio encoders.
 
 ---
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI Realtime API (`gpt-realtime-2.1-mini`, optional audio) + LAME · `defuddle` · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
+Node.js (ESM, no framework; CI on Node 26) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI Realtime API (`gpt-realtime-2.1-mini`, optional audio) + LAME · `defuddle` + `linkedom` · `better-sqlite3` · Zod · promptfoo (injection eval) · Semgrep (CI) · GitHub Actions · GitHub Issues + Releases API
 
 ---
 

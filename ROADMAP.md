@@ -136,7 +136,8 @@ Ziel: Nicht die Aufbereitung kippt bei täglichen Digests (die fängt die Review
 - [x] Podcast-RSS-Feed (`_site/feed-daily.xml`) + `<audio>`-Player auf den Daily-Detailseiten in `scripts/build-archive.js`; Feed im Index verlinkt.
 - [x] `🎧 Audio-Version`-Link im Daily-Issue; Audio-Metadaten in `run-summary-*.json`.
 - [x] Weekly-Audio nach gleichem Muster (`generateWeeklyAudio`, eigener Feed `feed-weekly.xml`, Player auf Weekly-Seiten)
-- [ ] Stimmen-Samples vergleichen und Default-Stimme final wählen (aktuell `onyx`)
+- [x] Vorlesen auf `gpt-realtime-2.1-mini` (Realtime-API, LAME-Encoder) umgestellt, weil `gpt-4o-mini-tts` am 06.01.2027 abgeschaltet wird (2026-11-19)
+- [ ] Stimmen-Samples vergleichen und Default-Stimme final wählen (aktuell `cedar`)
 - [ ] Optional: Dialog-Stil (zwei Stimmen, NotebookLM-artig) evaluieren, falls Vorlese-Stil zu trocken
 
 ---
@@ -172,7 +173,7 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Stats-Seite im Pages-Archiv: scripts/export-stats.js → assets/stats.json → stats.html (Kosten/Tag, Cache-Hit-Rate, Quellen, Adapter-Health)
 - [x] Podcast verzeichnis-tauglich: itunes:image + generiertes Cover (scripts/make-cover.js)
 - [x] Embeddings-Dedup-Eval als manuelles A/B-Experiment (evals/embedding_dedup_eval.js)
-- [ ] Embeddings-Eval auswerten und Disagreements labeln (nur bei klarem Vorteil Produktions-Umbau)
+- [x] Embeddings-Eval ausgewertet (Lauf 2026-06-11): Heuristik gewinnt, kein Produktions-Umbau (Details `evals/EVALS.md`)
 
 ## Redaktionelle Korrektur – 2026-10-08
 
@@ -192,3 +193,10 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 
 - [x] a16z-Feed auf die offizielle Newsletter-Domain umgestellt
 - [x] Quellenwarnungen aktualisieren und nach Abruf-Erholung automatisch schliessen; Aktualität separat kennzeichnen
+
+## Modelle, Sicherheit, CI – 2026-11
+
+- [x] Scoring auf `claude-haiku-5-5`; Aufbereitung bleibt nach Vergleichslauf auf `claude-sonnet-4-6` (`lib/config.js`, `evals/deliver_model_compare.js`)
+- [x] Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) und promptfoo-Eval mit festen Fällen (`evals/redteam/`, `injection.yml`)
+- [x] Haupttext-Extraktion mit defuddle, eigene Suchmuster als Rückfall (`lib/readable.js`)
+- [x] Semgrep-Prüfung in CI (vorerst nur Warnung), CI auf Node 26

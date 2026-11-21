@@ -16,7 +16,7 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 
 ### CLAUDE.md (wichtigste Datei – wird von neuen Sessions als erstes gelesen)
 
-- [ ] Modellversionen korrekt: `claude-haiku-4-5-20251001` für Score, `claude-sonnet-4-6` für Deliver, Review, Weekly und Audio-Skript
+- [ ] Modellversionen korrekt: `claude-haiku-5-5` für Score, `claude-sonnet-4-6` für Deliver, Review, Weekly und Audio-Skript
 - [ ] Quellenliste vollständig (aktuell **15 aktive Adapter** + NewsAPI inaktiv)
 - [ ] Score-Schwelle korrekt: `>= 4` ins Issue; scored-JSON enthält alle erfolgreich bewerteten Artikel
 - [ ] Weekly-Digest-Abschnitt vorhanden und aktuell (themen-zentriert, 3 Themen, optional Audio)
@@ -33,8 +33,8 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 - [ ] Daily normalerweise 150–220 Wörter, max. 300; praktischer Hinweis ohne Pflichtübung; Weekly etwa 650–800, max. 900 Wörter
 - [ ] Feedback-Checkbox-Labels: `Besonders wertvoll` / `Später weiterverfolgen` / `Zu kompliziert erklärt` / `Thema nicht relevant`
 - [ ] Promote-Logik: `wertvoll → 5` (zu_kompliziert blockiert NICHT, nur `poor_writeup`-Flag); `irrelevant UND NICHT wertvoll → 1`
-- [ ] Workflow-Liste vollständig (inkl. test.yml, feedback-loop.yml, audio-backfill.yml)
-- [ ] ENV-Variablen-Block aktuell (`KI_NEWS_DB`, `PAGES_URL`, `NEWSAPI_KEY`, `SCORE_USE_BATCH`, `RUN_DATE`)
+- [ ] Workflow-Liste vollständig (inkl. test.yml, feedback-loop.yml, audio-backfill.yml, injection.yml, semgrep.yml)
+- [ ] ENV-Variablen-Block aktuell (`KI_NEWS_DB`, `PAGES_URL`, `NEWSAPI_KEY`, `SCORE_USE_BATCH`, `RUN_DATE`, `KI_NEWS_SCORE_MODEL`, `KI_NEWS_DELIVER_MODEL`, `LAME_PATH`, `FFMPEG_PATH`)
 - [ ] Quellen-Tabelle und Mermaid-Diagramm konsistent mit aktiven Adaptern
 
 ### evals/EVALS.md
@@ -59,7 +59,7 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 
 ### PROJECT.md
 
-- [ ] Modellversionen korrekt (vollständige Version mit Datum)
+- [ ] Modellversionen korrekt (wie in `lib/config.js`)
 - [ ] Schedule-Zeiten korrekt
 - [ ] Datenhaltung korrekt (SQLite + JSON-Audit-Artefakte, nicht „keine Datenbank")
 - [ ] Review-Ebenen (6) und Checkbox-Anzahl (4) korrekt
