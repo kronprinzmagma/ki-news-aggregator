@@ -37,7 +37,10 @@ Nicht erneut breit analysieren:
 - `lib/config.js`: Modelle, Repo-Slug, Score-Schwellen, Lab-Quellen, Stopwords. Zentrale Konstanten – nicht im Code verteilen.
 - `lib/claude.js`: Anthropic-API-Helper mit Retry, Prompt Caching, `callClaude/claudeText/claudeJson`. Wird von score/deliver/weekly genutzt.
 - `lib/github.js`: GitHub-API-Helper + `ghPath` für REPO_SLUG-relative Routen; zusätzlich Release-Asset-Helper (`getOrCreateRelease`, `uploadReleaseAsset` über uploads.github.com, `deleteReleaseAsset`) fürs Audio-Hosting.
-- `lib/tts.js`: OpenAI-`gpt-4o-mini-tts`-Helper (`synthesizeSpeech`, `chunkForTts`), Retry + Chunking. Nur aktiv mit `OPENAI_API_KEY`.
+- `lib/tts.js`: OpenAI-Realtime-Vorlesen mit `gpt-realtime-2.1-mini` (Chunking, Transkript-Prüfung, MP3 via `lame`, Rückfall ffmpeg). Nur aktiv mit `OPENAI_API_KEY`.
+- `lib/readable.js`: Haupttext-Extraktion mit defuddle (DOM via linkedom, ohne eigene Netzabrufe).
+- `lib/editorial.js`: Redaktionelle Auswahl, Längen-/Strukturprüfung, Review-Abdeckung.
+- `lib/scoring.js`: Score-Systemprompt (`SCORE_SYSTEM`) und `scoreArticle`, geteilt von `score.js` und den Evals.
 - `lib/audio.js`: `generateDailyAudio()` – Sprech-Skript (Claude) → TTS → Release-Asset. Fehlertolerant, von `deliver.js` aufgerufen.
 - `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.
 - `lib/topic-overlap.js`: Eine Token-Overlap-Implementierung für Event-Dedup, Cluster-Bonus, Themen-Dedup, Related-Links.
@@ -53,7 +56,8 @@ Nicht erneut vollständig lesen:
 
 ## Evals
 
-- `evals/run_eval.py`: Eval-Runner. Aktuell bekannter Drift zum Produktionsprompt in `score.js`.
+- `evals/run_eval.js`: Scoring-Eval-Runner, nutzt denselben Pfad wie `score.js` (`evals/run_eval.py` ist nur noch Kompatibilitäts-Wrapper).
+- `evals/redteam/`: Prompt-Injection-Eval (promptfoo, `npm run eval:injection`, Workflow `injection.yml` nur manuell).
 - `evals/goldstandard.json`: Goldstandard. Enthält aktuell noch drei generische Platzhalter.
 - `evals/EVALS.md`: Eval-Doku; enthält jetzt Anleitung zur Review-Oberfläche.
 - `evals/review-ui/server.js`: Lokaler HTTP-Server, liest `articles-*.json`, schreibt `evals/goldstandard.json`.

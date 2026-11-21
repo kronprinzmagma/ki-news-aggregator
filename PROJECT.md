@@ -34,7 +34,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **GitHub Actions** (`.github/workflows/daily-news.yml`): Cron `30 5 * * *` → täglich 05:30 UTC (= 07:30 CEST / 06:30 CET). Ein Tag ohne relevante Artikel erzeugt weiterhin kein Issue.
 
-**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert die Artikel der Daily-Issues der abgeschlossenen Woche (URL-Dedup, Wochenbereichs-Filter) und erstellt per Claude Sonnet ein themen-zentriertes Synthese-Issue: Claude wählt die 3 wichtigsten übergreifenden Themen der Woche aus dem Pool (Score 4+5), je mit Synthese-Absatz, „Dran bleiben"-Anker und Belege-Liste; dazu Einleitung und Wochenimpuls. Optional mit Audio-Hörfassung (`feed-weekly.xml`).
+**Weekly Digest** (`.github/workflows/weekly-digest.yml`): Cron `0 8 * * 0` → sonntags 08:00 UTC. `weekly.js` aggregiert die Artikel der Daily-Issues der abgeschlossenen Woche (URL-Dedup, Wochenbereichs-Filter) und erstellt per Claude Sonnet ein themen-zentriertes Synthese-Issue: Claude wählt die 3 wichtigsten übergreifenden Themen der Woche aus dem Pool (Score 4+5), je mit erklärenden Absätzen, praktischem Hinweis und Belege-Liste; dazu Einleitung und Wochenimpuls. Optional mit Audio-Hörfassung (`feed-weekly.xml`).
 
 ## Was guten Output ausmacht
 
@@ -57,7 +57,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 | LLM-Modell Scoring | Claude Haiku (kostensensitiv, viele Artikel pro Tag) |
 | LLM-Modell Deliver | Claude Sonnet (höhere Qualität, wenige Aufrufe) |
 | Delivery-Channel | Ausschliesslich GitHub Issues im gleichen Repo |
-| Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI; optional `OPENAI_API_KEY` für die Audio-Hörfassung des Daily (TTS) |
+| Secrets | `ANTHROPIC_API_KEY` und `GH_PAT` via `.env` lokal / GitHub Secrets in CI; optional `OPENAI_API_KEY` für die Audio-Hörfassung von Daily und Weekly (`gpt-realtime-2.1-mini`) |
 | Datenhaltung | SQLite (`better-sqlite3`, lokale `ki-news.db`, gitignored, in CI via Actions-Cache persistiert) für Cross-Day-Dedup, Usage-Log und Run-Historie; JSON-Files im Repo-Root bleiben als Audit-Artefakte (ebenfalls gitignored) |
 | Modellversion | `claude-haiku-5-5` für Score (seit 2026-11-19), `claude-sonnet-4-6` für Deliver und Weekly (Sonnet 5.5 gemessen, noch nicht umgestellt) |
 | Laufdatum | `RUN_DATE=YYYY-MM-DD` in CI; lokal fällt der Lauf auf das aktuelle UTC-Datum zurück |

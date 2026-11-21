@@ -7,11 +7,19 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 # Current State
 
-Stand: 2026-10-08
+Stand: 2026-11-21
+
+## Technischer Stand 2026-11-21
+
+- Scoring auf `claude-haiku-5-5`; Aufbereitung, Review, Weekly und Audio-Skript bleiben auf `claude-sonnet-4-6` (Vergleichslauf in `evals/EVALS.md`, Konstanten in `lib/config.js`).
+- Vorlesen über `gpt-realtime-2.1-mini` (Realtime-API, Stimme `cedar`, MP3 via `lame`); `gpt-4o-mini-tts` wird am 06.01.2027 abgeschaltet. Angaben zu `gpt-4o-mini-tts` und `onyx` weiter unten sind überholt.
+- Haupttext-Extraktion mit defuddle (`lib/readable.js`), eigene Suchmuster als Rückfall.
+- Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) plus promptfoo-Eval (`evals/redteam/`, `injection.yml`, nur manuell).
+- CI auf Node 26; Semgrep (`semgrep.yml`) bei Push/PR, vorerst nur als Warnung. `npm test`: 76 Tests.
 
 Aktueller Textstand: Die 21 Ausgaben der ersten Issue-Seite sind bereinigt; sieben Dailys enthalten nach der Auswahlkorrektur elf Beiträge. Der anschliessend bestätigte Erklärungsstil ist in den sechs nichtleeren Dailys und allen 14 Weeklys umgesetzt, mit mehr Hintergrund und praktischen Hinweisen. Alle 20 zugehörigen Hörfassungen sind aus diesen Texten erneut erzeugt. Details: `reviews/2026-10-08/STYLE-UPDATE.md`; die erste Korrekturfassung ist in `reviews/2026-10-08/CLEANUP.md` dokumentiert. Audio-Assets ohne aktuellen Link im Issue werden aus Archiv-Player und Podcast-Feed ausgeschlossen. Die folgenden datierten Abschnitte dokumentieren die Historie; widersprechende Angaben sind durch den Massstab oben ersetzt.
 
-## Audio-Ausgabe für Daily (2026-06-09, neu)
+## Audio-Ausgabe für Daily (2026-06-09; TTS-Modell und Stimme überholt, siehe oben)
 
 Konsum-Kanal ergänzt: das fertige Daily kann jetzt als Audio angehört werden (Input: ein Textblock wird morgens übersprungen, Audio unterwegs kommt durch).
 
