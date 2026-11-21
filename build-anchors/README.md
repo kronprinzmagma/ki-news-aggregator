@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1434 Einträge** · Top-Quellen: heise (546) · hackernews (412) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1437 Einträge** · Top-Quellen: heise (548) · hackernews (412) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (1)
 
 ## Liste
 
+- **2026-11-21** — [Signal is blocking Gemini and Siri AI from reading your screen](2026-11-21-signal-is-blocking-gemini-and-siri-ai-from-reading-your-scre.md) · *theverge · Score 4*
+- **2026-11-21** — [KI-generierte Präzedenzfälle: Anwältin vom EGMR ausgeschlossen](2026-11-21-ki-generierte-prazedenzfalle-anwaltin-vom-egmr-ausgeschlosse.md) · *heise · Score 4*
+- **2026-11-21** — [Experiment: KIs identifizieren Zivilisten als Schussziele](2026-11-21-experiment-kis-identifizieren-zivilisten-als-schussziele.md) · *heise · Score 4*
 - **2026-11-20** — [Token fraud is here and it’s BAD (YouTube)](2026-11-20-token-fraud-is-here-and-it-s-bad-youtube.md) · *simonwillison · Score 4*
 - **2026-11-19** — [GPT‑6.2 Astra and GPT‑6.2 Sol](2026-11-19-gpt-6-2-astra-and-gpt-6-2-sol.md) · *simonwillison · Score 4*
 - **2026-11-18** — [Zu neugierige KI-Agenten: Apple warnt Mac-Nutzer nachdrücklich vor Freigabe](2026-11-18-zu-neugierige-ki-agenten-apple-warnt-mac-nutzer-nachdrucklic.md) · *heise · Score 5*
