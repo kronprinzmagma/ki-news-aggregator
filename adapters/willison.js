@@ -1,4 +1,4 @@
-import { httpGet, parseAtom, extractArticleText, isSafeUrl } from './_base.js';
+import { httpGet, parseAtom, extractArticleText, isSafeUrl, isRecent, withHostLimit } from './_base.js';
 
 const FEED_URL = 'https://simonwillison.net/atom/everything/';
 
@@ -10,8 +10,10 @@ function extractExternalLink(html) {
 
 async function enrich(article) {
   if (!isSafeUrl(article.url)) return article;
+  // Ältere Feed-Einträge fallen im Altersfilter weg – kein Abruf nötig.
+  if (!isRecent(article.datum)) return article;
   try {
-    const html = await httpGet(article.url);
+    const html = await withHostLimit(article.url, () => httpGet(article.url));
     const fromPage = extractArticleText(html);
 
     // Wenn der Artikel-Text dünn ist: externen Link nachladen.
@@ -19,7 +21,7 @@ async function enrich(article) {
       const externalUrl = extractExternalLink(html);
       if (externalUrl && isSafeUrl(externalUrl)) {
         try {
-          const externalHtml = await httpGet(externalUrl);
+          const externalHtml = await withHostLimit(externalUrl, () => httpGet(externalUrl));
           const externalText = extractArticleText(externalHtml);
           const combined = [fromPage, externalText].filter(Boolean).join(' ').trim();
           if (combined.length > (article.rohtext || '').length) {

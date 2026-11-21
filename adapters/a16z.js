@@ -1,4 +1,4 @@
-import { httpGet, parseRss } from './_base.js';
+import { httpGet, parseRss, enrichFromUrl } from './_base.js';
 
 // Offizielle Newsletter-Domain; der alte Substack-Host blockiert CI-Abrufe.
 const FEED_URL = 'https://www.a16z.news/feed';
@@ -9,5 +9,8 @@ const AI_PATTERN = /\b(ai|artificial intelligence|machine learning|llm|gpt|model
 export async function fetchArticles() {
   const xml = await httpGet(FEED_URL);
   const all = parseRss(xml, 'a16z');
-  return all.filter(a => AI_PATTERN.test(`${a.titel} ${a.rohtext || ''}`));
+  const aiArticles = all.filter(a => AI_PATTERN.test(`${a.titel} ${a.rohtext || ''}`));
+  // Der Feed liefert nur Teaser; ohne Volltext fielen alle Artikel pauschal
+  // in den truncated-Pre-Filter (Score 2).
+  return Promise.all(aiArticles.map(a => enrichFromUrl(a, { logTag: 'a16z', useMetaDescription: true })));
 }

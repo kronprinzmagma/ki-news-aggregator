@@ -25,6 +25,16 @@ Optional: Stimmen-Samples vergleichen, Default (`AUDIO_VOICE`, aktuell `onyx`) b
 
 Bewusst zurückgestellt: Auto-PRs mit Prompt-Änderungen ohne Eval-Gate riskieren stillen Qualitäts-Drift. Sinnvoller als Vorschlags-Issue mit angehängtem Eval-Resultat – setzt einen belastbaren Goldstandard (Punkt 2) voraus.
 
+### 5. Offene Punkte aus der Ingest-Stabilisierung (2026-11-21)
+
+- Wirkung im ersten Actions-Lauf prüfen: Anteil `truncated` bei Heise/Hugging Face, Laufzeit, keine 429-Sperren.
+- Golem liefert ohne Volltext faktisch nichts mehr: entfernen oder durch eine DACH-/Schweizer Quelle ersetzen.
+- Bereits bewertete Artikel mit unverändertem Text nicht erneut bewerten (133 von 370 URLs wurden mehrfach bewertet).
+- Themen-Dedup ohne Allerweltswörter (`ki`, `agenten`); Hacker News auf KI-Bezug filtern.
+- Review: Jahreszahlen und Zahlen in Überschriften gegen die Quelle prüfen.
+- Feedback-Häkchen fehlen seit 2026-06-16: wieder setzen oder `feedback-loop.yml` pausieren.
+- Issue «Adapter stale: venturebeat» von Hand schliessen.
+
 ---
 
 ## Erledigt (Juni 2026, Review-Session)
