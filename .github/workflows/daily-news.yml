@@ -33,7 +33,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # Wir wollen pushen können
           persist-credentials: true
@@ -68,7 +68,7 @@ jobs:
           fi
 
       - name: Restore SQLite run history
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
@@ -118,7 +118,7 @@ jobs:
 
       - name: Save SQLite run history
         if: always() && hashFiles('ki-news.db') != ''
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-${{ github.run_id }}
