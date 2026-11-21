@@ -1,8 +1,66 @@
-import { httpGet, isSafeUrl } from '../lib/http.js';
+import { httpGet as rawHttpGet, isSafeUrl } from '../lib/http.js';
 import { decodeHtmlEntities, stripTags, extractCdata } from '../lib/text-utils.js';
 import { extractReadableText } from '../lib/readable.js';
+import { MAX_ARTICLE_AGE_DAYS, ENRICH_HOST_CONCURRENCY } from '../lib/config.js';
+import { todayString } from '../lib/date.js';
 
-export { httpGet, isSafeUrl, decodeHtmlEntities, stripTags, extractCdata };
+export { isSafeUrl, decodeHtmlEntities, stripTags, extractCdata };
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+/** Vorübergehend = Netzwerkfehler, Timeout, 408, 429 oder 5xx. Andere 4xx nicht. */
+export function isTransientHttpError(err) {
+  const status = /^HTTP (\d{3}) /.exec(err?.message || '')?.[1];
+  if (!status) return !/Unsichere URL|Private Ziel-IP|Zu viele Redirects|Response zu gross|Textkodierung/.test(err?.message || '');
+  return status === '408' || status === '429' || status.startsWith('5');
+}
+
+/**
+ * GET für Adapter: wie lib/http, aber mit einem Wiederholungsversuch bei
+ * vorübergehenden Fehlern. Ohne ihn kippt ein einzelner Timeout den ganzen
+ * Feed (z.B. hnrss) oder den Volltext eines Artikels.
+ */
+export async function httpGet(url, { retries = 1, retryDelayMs = 1500, fetchImpl = rawHttpGet, ...options } = {}) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fetchImpl(url, options);
+    } catch (err) {
+      if (attempt >= retries || !isTransientHttpError(err)) throw err;
+      await sleep(retryDelayMs * (attempt + 1));
+    }
+  }
+}
+
+/**
+ * Liegt das Artikeldatum im Ingest-Fenster? Artikel ohne (parsebares) Datum
+ * gelten als aktuell – dieselbe Regel wie der Altersfilter in ingest.js.
+ */
+export function isRecent(datum, runDate = todayString(), maxAgeDays = MAX_ARTICLE_AGE_DAYS) {
+  if (!datum) return true;
+  const date = new Date(datum);
+  if (isNaN(date.getTime())) return true;
+  const cutoff = new Date(`${runDate}T00:00:00Z`);
+  cutoff.setUTCDate(cutoff.getUTCDate() - maxAgeDays);
+  return date >= cutoff;
+}
+
+// Volltext-Abrufe pro Host begrenzen: Hunderte parallele Requests an denselben
+// Server enden in HTTP 429 (Hugging Face) oder gescheiterten Verbindungen (Heise).
+const hostQueues = new Map();
+export async function withHostLimit(url, task, limit = ENRICH_HOST_CONCURRENCY) {
+  let host = '';
+  try { host = new URL(url).hostname; } catch { /* ungültige URL: ohne Limit */ }
+  if (!hostQueues.has(host)) hostQueues.set(host, { active: 0, waiting: [] });
+  const state = hostQueues.get(host);
+  if (state.active >= limit) await new Promise(resolve => state.waiting.push(resolve));
+  else state.active++;
+  try {
+    return await task();
+  } finally {
+    const next = state.waiting.shift();
+    if (next) next(); else state.active--;
+  }
+}
 
 const DEFAULT_BLOCK_REGEX = /<(h1|h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/gi;
 const DEFAULT_BOILERPLATE_REGEX = /(subscribe|newsletter|sign in|privacy|terms|cookie)/i;
@@ -12,19 +70,30 @@ const DEFAULT_BOILERPLATE_REGEX = /(subscribe|newsletter|sign in|privacy|terms|c
  * Bevorzugt <article>, dann <main>, sonst das ganze Dokument.
  * Entfernt Scripts, Styles, Navigation und Footer.
  */
-export function extractArticleText(html, {
+export function extractArticleText(html, options = {}) {
+  const { preferArticle = true } = options;
+  if (!preferArticle) return extractBlocks(html, options);
+  const articleMatch = /<article\b[^>]*>([\s\S]*?)<\/article>/i.exec(html);
+  const mainMatch = /<main\b[^>]*>([\s\S]*?)<\/main>/i.exec(html);
+  const scope = articleMatch ? articleMatch[1] : (mainMatch ? mainMatch[1] : null);
+  if (scope === null) return extractBlocks(html, options);
+  const scoped = extractBlocks(scope, options);
+  // Manche Seiten setzen ein leeres oder Teaser-<article> vor den eigentlichen
+  // Beitrag (z.B. Hugging Face Blog). Liefert der Ausschnitt kaum Text, zählt
+  // das ganze Dokument.
+  if (scoped.length >= MIN_SCOPED_TEXT_LENGTH) return scoped;
+  const whole = extractBlocks(html, options);
+  return whole.length > scoped.length ? whole : scoped;
+}
+
+const MIN_SCOPED_TEXT_LENGTH = 300;
+
+function extractBlocks(scope, {
   blockRegex = DEFAULT_BLOCK_REGEX,
   boilerplateRegex = DEFAULT_BOILERPLATE_REGEX,
   minBlockLength = 45,
   maxLength = 8000,
-  preferArticle = true,
 } = {}) {
-  let scope = html;
-  if (preferArticle) {
-    const articleMatch = /<article\b[^>]*>([\s\S]*?)<\/article>/i.exec(html);
-    const mainMatch = /<main\b[^>]*>([\s\S]*?)<\/main>/i.exec(html);
-    scope = articleMatch ? articleMatch[1] : (mainMatch ? mainMatch[1] : html);
-  }
   const content = scope
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
@@ -44,6 +113,14 @@ export function extractArticleText(html, {
     }
   }
   return chunks.join(' ').replace(/\s+/g, ' ').trim().slice(0, maxLength);
+}
+
+// Einwilligungs-Seiten (z.B. Golem leitet jeden Artikelabruf dorthin um) sind
+// kein Artikeltext. Ohne diese Prüfung ersetzte der Consent-Text den Teaser und
+// der Artikel wurde auf Basis von Werbe-Hinweisen bewertet und aufbereitet.
+const CONSENT_PAGE_REGEX = /consent is not possible inside an iframe|consent dialog could not be loaded|advertising and content can be personalised|zustimmung zur datenverarbeitung|mit werbung und tracking weiterlesen|cookies zustimmen/i;
+export function looksLikeConsentPage(text = '') {
+  return CONSENT_PAGE_REGEX.test(text);
 }
 
 // Unter dieser Länge gilt der Bibliothekstext als zu dünn; dann zählt der
@@ -165,6 +242,9 @@ export function parseAtom(xml, quelle) {
 /**
  * Enrichment-Helper: Wenn der Artikeltext kürzer als minLength ist,
  * lade die Artikelseite nach und extrahiere zusätzlichen Text.
+ * Artikel ausserhalb des Ingest-Fensters werden nicht abgerufen – sie fallen
+ * im Altersfilter ohnehin weg (ein Feed-Archiv mit 900 Einträgen löste sonst
+ * 900 Requests pro Lauf aus).
  */
 export async function enrichFromUrl(article, {
   minLength = 1500,
@@ -174,16 +254,23 @@ export async function enrichFromUrl(article, {
   useMetaDescription = false,
   extractOptions = {},
   shouldEnrich,
+  runDate,
+  fetchImpl = httpGet,
 } = {}) {
   if ((article.rohtext || '').length >= minLength) return article;
+  if (!isRecent(article.datum, runDate)) return article;
   if (!isSafeUrl(article.url)) return article;
   if (shouldEnrich && !shouldEnrich(article)) return article;
 
   try {
-    const html = await httpGet(article.url, fetchOptions);
+    const html = await withHostLimit(article.url, () => fetchImpl(article.url, fetchOptions));
     const meta = useMetaDescription ? extractMetaDescription(html) : '';
     const body = await extractBodyText(html, article.url, { maxLength, extractOptions });
     const enriched = [meta, body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (looksLikeConsentPage(enriched)) {
+      console.warn(`[${logTag}] Einwilligungs-Seite statt Artikeltext (${article.titel}) – Teaser bleibt.`);
+      return article;
+    }
     if (enriched.length > (article.rohtext || '').length) {
       return { ...article, rohtext: enriched.slice(0, maxLength) };
     }

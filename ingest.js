@@ -2,6 +2,8 @@ import fs from 'fs/promises';
 import https from 'https';
 import { todayString } from './lib/date.js';
 import { normalizeUrl } from './lib/url.js';
+import { MAX_ARTICLE_AGE_DAYS } from './lib/config.js';
+import { isRecent } from './adapters/_base.js';
 import { recordAdapterHealth, recordAdapterTruncated, getStaleAdapters, closeStore } from './lib/store.js';
 import { syncAdapterAlerts } from './lib/adapter-alerts.js';
 import { fetchArticles as fetchWillison } from './adapters/willison.js';
@@ -9,7 +11,7 @@ import { fetchArticles as fetchLatentSpace } from './adapters/latentspace.js';
 import { fetchArticles as fetchAnthropic } from './adapters/anthropic.js';
 import { fetchArticles as fetchHackerNews } from './adapters/hackernews.js';
 import { fetchArticles as fetchLastWeekInAI } from './adapters/lastweekinai.js';
-import { fetchArticles as fetchVentureBeat } from './adapters/venturebeat.js';
+import { fetchArticles as fetchTheVerge } from './adapters/theverge.js';
 import { fetchArticles as fetchHuggingFace } from './adapters/huggingface.js';
 import { fetchArticles as fetchAheadOfAI } from './adapters/aheadofai.js';
 import { fetchArticles as fetchInterconnects } from './adapters/interconnects.js';
@@ -20,8 +22,9 @@ import { fetchArticles as fetchA16z } from './adapters/a16z.js';
 import { fetchArticles as fetchHeise } from './adapters/heise.js';
 import { fetchArticles as fetchGolem } from './adapters/golem.js';
 
-const MAX_ARTICLE_AGE_DAYS = 3;
-const ADAPTER_TIMEOUT_MS = 30_000;
+// Volltext-Abrufe laufen pro Host begrenzt und mit einem Wiederholungsversuch;
+// 30 s reichten dafür nicht in jedem Fall.
+const ADAPTER_TIMEOUT_MS = 90_000;
 
 function withTimeout(promise, ms, name) {
   let timeoutId;
@@ -37,7 +40,7 @@ const ADAPTERS = [
   { name: 'anthropic', fn: fetchAnthropic },
   { name: 'hackernews', fn: fetchHackerNews },
   { name: 'lastweekinai', fn: fetchLastWeekInAI },
-  { name: 'venturebeat', fn: fetchVentureBeat },
+  { name: 'theverge', fn: fetchTheVerge },
   { name: 'huggingface', fn: fetchHuggingFace },
   { name: 'aheadofai', fn: fetchAheadOfAI },
   { name: 'interconnects', fn: fetchInterconnects },
@@ -93,13 +96,7 @@ function deduplicate(articles) {
 function filterByAge(articles, runDate) {
   // Cutoff vom Laufdatum ableiten (respektiert RUN_DATE), nicht von der
   // Wall-Clock – sonst filtert ein nachträglicher Lauf falsche Artikel.
-  const cutoff = new Date(`${runDate}T00:00:00Z`);
-  cutoff.setUTCDate(cutoff.getUTCDate() - MAX_ARTICLE_AGE_DAYS);
-  const filtered = articles.filter(a => {
-    if (!a.datum) return true;
-    const date = new Date(a.datum);
-    return isNaN(date.getTime()) || date >= cutoff;
-  });
+  const filtered = articles.filter(a => isRecent(a.datum, runDate));
   const dropped = articles.length - filtered.length;
   if (dropped > 0) console.log(`${dropped} Artikel als zu alt gefiltert (> ${MAX_ARTICLE_AGE_DAYS} Tage)`);
   return filtered;

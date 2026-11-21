@@ -16,7 +16,7 @@ Ziel: Der tägliche Output ist dicht, produktrelevant und ohne Verwaltungs-/Tool
 
 Ziel: Breitere und gezieltere Abdeckung der relevanten KI-Communitys.
 
-- [x] Adapter: **The Batch / deeplearning.ai** – `adapters/thebatch.js`, community-maintained Feed via `Olshansk/rss-feeds`
+- [x] Adapter: **The Batch / deeplearning.ai** – `adapters/thebatch.js`, seit 2026-11-21 offizieller deeplearning.ai-Feed (vorher Community-Feed via `Olshansk/rss-feeds`, im Oktober 2026 stehen geblieben)
 - [x] Adapter: **Ahead of AI** (Sebastian Raschka) – `adapters/aheadofai.js`
 - [x] Adapter: **Interconnects** (Nathan Lambert) – `adapters/interconnects.js`
 - [x] Adapter: **Yannic Kilcher** – `adapters/yannickilcher.js`, YouTube Atom-Feed
@@ -193,6 +193,18 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 
 - [x] a16z-Feed auf die offizielle Newsletter-Domain umgestellt
 - [x] Quellenwarnungen aktualisieren und nach Abruf-Erholung automatisch schliessen; Aktualität separat kennzeichnen
+
+## Ingest-Stabilisierung 2026-11-21
+
+- [x] Altersfilter vor dem Volltext-Abruf (vorher rund 1400 unnötige Abrufe pro Lauf), Limit pro Host, ein Wiederholungsversuch
+- [x] Anthropic über Sitemap + Artikelseite, The Batch über offiziellen Feed, The Verge (KI) ersetzt VentureBeat (dauerhaft HTTP 429)
+- [x] Warn-Issue `Feed veraltet` für erreichbare Feeds ohne frischen Eintrag
+- [x] Hugging-Face-Volltext (leeres `<article>`), a16z-Volltext, Golem-Teaser bereinigt und Einwilligungs-Seiten erkannt
+- [x] Redaktionelle Auswahl verwirft einzelne ungültige Einträge statt den Lauf abzubrechen
+- [ ] Golem: ohne Volltext faktisch stumm – entfernen oder ersetzen (Entscheid offen)
+- [ ] Bereits bewertete Artikel mit unverändertem Text nicht erneut bewerten
+- [ ] Themen-Dedup nicht auf Allerweltswörter (`ki`, `agenten`) stützen; Hacker News auf KI-Bezug filtern
+- [ ] Review: Jahreszahlen und Zahlen in Überschriften gegen die Quelle prüfen
 
 ## Modelle, Sicherheit, CI – 2026-11
 

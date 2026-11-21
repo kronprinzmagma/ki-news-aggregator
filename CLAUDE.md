@@ -21,11 +21,15 @@ Drei Bausteine, sequenziell:
 
 ## Quellen (Baustein 1)
 
-- RSS/Atom-Feeds: Simon Willison, Latent Space, Anthropic News, Hacker News, Last Week in AI, VentureBeat, Hugging Face, Ahead of AI, Interconnects, The Batch, Yannic Kilcher, Ben Evans (Strategie/Markt), a16z News (`www.a16z.news/feed`, KI-gefiltert), Heise Online (DACH-Perspektive, KI-gefiltert), Golem (DACH-Perspektive mit Developer-Fokus, KI-gefiltert)
+- RSS/Atom-Feeds: Simon Willison, Latent Space, Anthropic News, Hacker News, Last Week in AI, The Verge (KI-Ressort), Hugging Face, Ahead of AI, Interconnects, The Batch, Yannic Kilcher, Ben Evans (Strategie/Markt), a16z News (`www.a16z.news/feed`, KI-gefiltert), Heise Online (DACH-Perspektive, KI-gefiltert), Golem (DACH-Perspektive mit Developer-Fokus, KI-gefiltert)
 - NewsAPI-Adapter existiert, ist aber aktuell nicht im Haupt-Ingest aktiviert
 - KI-Pattern-Filter bei a16z, Heise und Golem: nur Artikel mit AI-/KI-Keywords im Titel oder Rohtext kommen durch
+- Anthropic hat keinen RSS-Feed: Kandidaten aus `anthropic.com/sitemap.xml` (kürzlich geänderte `/news/`-Seiten), Titel/Text/Veröffentlichungsdatum von der Artikelseite. The Batch kommt aus dem offiziellen deeplearning.ai-Feed (Volltext in `content:encoded`). Keine Drittanbieter-Scraper-Feeds mehr.
+- Golem leitet Artikelabrufe auf eine Einwilligungs-Seite um; Volltext ist nicht erreichbar. Golem-Artikel behalten den (bereinigten) Teaser und gelten als `truncated` (Auto-Score 2) – die Quelle liefert so faktisch keine Issue-Artikel.
 
-Quellenwarnungen werden über `lib/adapter-alerts.js` abgeglichen: bestehende Ausfälle aktualisieren, nach erfolgreichem Abruf die genaue Fetch-Warnung schliessen. Ein erreichbarer Feed mit alten Einträgen gilt dadurch nicht automatisch als aktuelle Nachrichtenquelle.
+**Volltext-Abruf (`enrichFromUrl` in `adapters/_base.js`):** nur für Artikel im Ingest-Fenster (`MAX_ARTICLE_AGE_DAYS`, 3 Tage ab Laufdatum) – der Altersfilter greift also vor dem Abruf, nicht erst danach. Höchstens `ENRICH_HOST_CONCURRENCY` (4) gleichzeitige Abrufe pro Host, ein Wiederholungsversuch bei vorübergehenden Fehlern (Timeout, Netzwerk, 408/429/5xx; gilt auch für Feed-Abrufe). Liefert ein `<article>`/`<main>`-Ausschnitt unter 300 Zeichen, zählt das ganze Dokument. Einwilligungs-Seiten ersetzen den Teaser nicht. Adapter-Timeout 90 s.
+
+Quellenwarnungen werden über `lib/adapter-alerts.js` abgeglichen: bestehende Ausfälle aktualisieren, nach erfolgreichem Abruf die genaue Fetch-Warnung schliessen. Ein erreichbarer Feed mit alten Einträgen gilt dadurch nicht automatisch als aktuelle Nachrichtenquelle: Liegt der neuste Eintrag mehr als `FEED_FRESHNESS_WARN_DAYS` (30) Tage zurück, entsteht ein Issue `Feed veraltet: <adapter> (neuster Eintrag YYYY-MM-DD)` (Label `adapter-stale`), das sich bei einem frischen Eintrag schliesst. Ausgenommen sind Quellen mit seltenen Beiträgen (`FEED_FRESHNESS_EXEMPT`: benevans, aheadofai).
 
 ## Akzeptanzkriterien Baustein 1 (Ingest)
 
@@ -55,7 +59,7 @@ Erfahrene Senior-Produktperson, die sich hands-on Richtung KI-Builder entwickelt
 - CLI-Befehl `node deliver.js` liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum ein
 - Nur Artikel mit Score >= 4 werden verwendet
 - Themen-Dedup: Bei gleichen Themen nur den stärkeren Artikel behalten
-- Redaktionelle Auswahl: höchstens fünf relevante Artikel (`DAILY_MAX_ARTICLES`), weniger ist gut. Keine Auffüllung mit Plugin-/SDK-/Infrastruktur-News. Wort-Overlap gibt keinen Score-Bonus mehr.
+- Redaktionelle Auswahl: höchstens fünf relevante Artikel (`DAILY_MAX_ARTICLES`), weniger ist gut. Das Modell gibt Kandidaten-ID und URL zurück; einzelne ungültige Einträge (unbekannte/doppelte Quelle, kein Titel) werden verworfen und geloggt, der Lauf bricht nur ab, wenn kein einziger Eintrag gültig ist. Keine Auffüllung mit Plugin-/SDK-/Infrastruktur-News. Wort-Overlap gibt keinen Score-Bonus mehr.
 - Jeder Artikel wird per Claude API aufbereitet in genau drei Blöcken (normalerweise 150–220 Wörter, max. 300):
   1. **Was ist neu**: belegte Änderung, Funktion, nötiger Hintergrund, wichtige Bedingungen und Grenzen; ein bis zwei verständliche Absätze
   2. **Was es für die KI-Richtung heisst**: ein erklärender Absatz zum persönlichen Nutzen, klare Trennung von Fakten und vorsichtiger Einordnung

@@ -51,7 +51,7 @@ Things that get filtered out before any of this: funding announcements, "AI is t
 
 Three stages run sequentially:
 
-**1. Ingest:** 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run. Fetch-failure warnings are refreshed while a source remains unavailable and closed after a successful fetch; this does not imply that its articles are current. The a16z newsletter uses its official `www.a16z.news/feed` address.
+**1. Ingest:** 15 adapters fetch RSS/Atom feeds and normalise each article into a shared schema (`titel`, `url`, `datum`, `quelle`, `rohtext`). Adapters for a16z, Heise Online and Golem apply keyword filters before passing articles downstream; a NewsAPI adapter exists but is currently inactive. URL deduplication runs at this stage; individual source failures do not abort the run. Full-text enrichment only runs for articles inside the three-day ingest window, with at most four concurrent requests per host and one retry on transient errors. Fetch-failure warnings are refreshed while a source remains unavailable and closed after a successful fetch; a reachable feed whose newest entry is older than 30 days gets its own `Feed veraltet` warning. Anthropic news is read from the official sitemap and article pages, The Batch from the official deeplearning.ai feed. The a16z newsletter uses its official `www.a16z.news/feed` address.
 
 **2. Score:** Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
@@ -80,7 +80,7 @@ flowchart TD
         S1["Labs<br/>Anthropic · HuggingFace"]
         S2["Practitioners<br/>Willison · Latent Space · Interconnects<br/>Ahead of AI · The Batch · Last Week in AI<br/>Yannic Kilcher"]
         S3["Community<br/>Hacker News"]
-        S4["Industry / Strategy<br/>VentureBeat · Ben Evans<br/>a16z (AI-filtered) · Heise (AI-filtered)<br/>Golem (AI-filtered)"]
+        S4["Industry / Strategy<br/>The Verge (AI) · Ben Evans<br/>a16z (AI-filtered) · Heise (AI-filtered)<br/>Golem (AI-filtered)"]
     end
 
     Ingest["ingest.js<br/>15 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
@@ -119,7 +119,7 @@ Most aggregators in this space sell source count as a feature. This one delibera
 | **Labs** | Anthropic, Hugging Face | First-party capability shifts. Anything filtered through a third party loses context. |
 | **Practitioners** | Simon Willison, Latent Space, Interconnects (Nathan Lambert), Ahead of AI (Sebastian Raschka), The Batch, Last Week in AI, Yannic Kilcher | People who *build* with the models and explain trade-offs. Highest signal-to-noise on what actually works. |
 | **Community** | Hacker News (front + Show HN, depriorised) | Captures release reactions and tooling discoveries the curated sources miss. Show HN is explicitly downscored to filter self-promotion. |
-| **Industry + strategy** | VentureBeat, Ben Evans, a16z (AI-filtered), Heise (AI-filtered, DACH lens), Golem (AI-filtered, DACH lens with developer focus) | Market and adoption context, kept separate from labs and practitioners so it does not dominate. |
+| **Industry + strategy** | The Verge (AI section), Ben Evans, a16z (AI-filtered), Heise (AI-filtered, DACH lens), Golem (AI-filtered, DACH lens with developer focus) | Market and adoption context, kept separate from labs and practitioners so it does not dominate. |
 
 Sources that were considered and rejected:
 - **Generic tech news** (TechCrunch, The Verge, Wired AI sections): high volume, low signal density. Marketing rewrites of press releases.

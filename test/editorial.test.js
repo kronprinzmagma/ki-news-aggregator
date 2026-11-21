@@ -10,11 +10,22 @@ const chosen = a => ({url:a.url,headline:'Verständliche Nachricht',reason:'Allt
 
 test('editorial selection limits volume and rejects fabricated or duplicate sources', () => {
   assert.throws(()=>applySelection(candidates,{articles:candidates.map(chosen)}),/Tageslimit/);
-  assert.throws(()=>applySelection(candidates,{articles:[chosen(candidates[0]),chosen(candidates[0])]}),/doppelte/);
   assert.throws(()=>applySelection(candidates,{articles:[{url:'https://unknown.test/',headline:'Neu'}]}),/unbekannte/);
+  assert.throws(()=>applySelection(candidates,{articles:[{url:candidates[0].url,headline:' '}]}),/keine Titel/);
   assert.throws(()=>applySelection(candidates,{}),/Auswahl fehlt/);
   assert.deepEqual(applySelection(candidates,{articles:[]}),[]);
   assert.equal(applySelection(candidates,{articles:[chosen(candidates[0])]} )[0].rohtext,'Quelle');
+});
+
+test('a single invalid selection entry is dropped instead of aborting the daily', () => {
+  const picked=applySelection(candidates,{articles:[chosen(candidates[0]),chosen(candidates[0]),{url:'https://unknown.test/',headline:'Erfunden',reason:'x'},chosen(candidates[2])]});
+  assert.deepEqual(picked.map(a=>a.url),[candidates[0].url,candidates[2].url]);
+});
+
+test('selection resolves a mangled URL through the candidate id, never an unknown id', () => {
+  const picked=applySelection(candidates,{articles:[{id:'K3',url:'https://example.com/2-gekuerzt',headline:'Über ID gefunden',reason:'x'},{id:'K99',url:'https://nope.test/',headline:'Unbekannt',reason:'x'}]});
+  assert.deepEqual(picked.map(a=>a.url),[candidates[2].url]);
+  assert.equal(picked[0].display_title,'Über ID gefunden');
 });
 
 test('review must cover every selected URL once, even if valid JSON is returned', () => {

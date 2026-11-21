@@ -15,7 +15,7 @@ Stand: 2026-11-21
 - Vorlesen über `gpt-realtime-2.1-mini` (Realtime-API, Stimme `cedar`, MP3 via `lame`); `gpt-4o-mini-tts` wird am 06.01.2027 abgeschaltet. Angaben zu `gpt-4o-mini-tts` und `onyx` weiter unten sind überholt.
 - Haupttext-Extraktion mit defuddle (`lib/readable.js`), eigene Suchmuster als Rückfall.
 - Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) plus promptfoo-Eval (`evals/redteam/`, `injection.yml`, nur manuell).
-- CI auf Node 26; Semgrep (`semgrep.yml`) bei Push/PR, vorerst nur als Warnung. `npm test`: 76 Tests.
+- CI auf Node 26; Semgrep (`semgrep.yml`) bei Push/PR, vorerst nur als Warnung. `npm test`: 90 Tests.
 
 Aktueller Textstand: Die 21 Ausgaben der ersten Issue-Seite sind bereinigt; sieben Dailys enthalten nach der Auswahlkorrektur elf Beiträge. Der anschliessend bestätigte Erklärungsstil ist in den sechs nichtleeren Dailys und allen 14 Weeklys umgesetzt, mit mehr Hintergrund und praktischen Hinweisen. Alle 20 zugehörigen Hörfassungen sind aus diesen Texten erneut erzeugt. Details: `reviews/2026-10-08/STYLE-UPDATE.md`; die erste Korrekturfassung ist in `reviews/2026-10-08/CLEANUP.md` dokumentiert. Audio-Assets ohne aktuellen Link im Issue werden aus Archiv-Player und Podcast-Feed ausgeschlossen. Die folgenden datierten Abschnitte dokumentieren die Historie; widersprechende Angaben sind durch den Massstab oben ersetzt.
 
@@ -76,7 +76,7 @@ Alle relevanten Adapter haben Artikel-Enrichment:
 - interconnects, lastweekinai, aheadofai: heute hinzugefügt
 - willison: fetcht zusätzlich externe Links wenn Seitentext < 2500 Zeichen
 
-Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilcher, venturebeat
+Adapter ohne Enrichment (nur RSS-Feed-Text): huggingface, thebatch, yannickilcher, venturebeat (überholt, siehe «Ingest-Stabilisierung 2026-11-21»)
 
 ## Weekly Digest (neu, heute implementiert)
 
@@ -190,3 +190,14 @@ Siehe `.tasks/NEXT.md`: Embeddings-Eval auswerten, Goldstandard Richtung 40, Aud
 ## Betriebsnachprüfung nach Freigabe 2026-10-08
 
 `lib/adapter-alerts.js` gleicht Quellenwarnungen nach jedem Ingest ab, aktualisiert laufende Ausfälle und schliesst genaue Fetch-Warnungen bei erfolgreicher Erholung. Die a16z-Quelle nutzt nun `https://www.a16z.news/feed`; der alte Substack-Host wird in GitHub Actions blockiert. Lokaler Abruf der kanonischen Domain erfolgreich; Runner-Nachprüfung folgt im Daily-Lauf. VentureBeat bleibt mit HTTP 429 ein tatsächlicher Ausfall. Erreichbarkeit und Publikationsaktualität sind getrennt: der Yannic-Feed ist erreichbar, enthält im aktuellen Abruf aber nur ältere Einträge.
+
+## Ingest-Stabilisierung 2026-11-21
+
+Auslöser: Auswertung von neun Tagesläufen (11.–20.11.). 65 % der Heise-, 46 % der Hugging-Face- und alle a16z-Artikel bekamen pauschal Auto-Score 2, weil der Volltext fehlte; Anthropic, The Batch und VentureBeat lieferten seit Wochen nichts; drei geprüfte Fehlläufe brachen in der redaktionellen Auswahl ab.
+
+- **Volltext:** `enrichFromUrl` ruft nur noch Artikel im 3-Tage-Fenster ab (vorher alle Feed-Einträge, rund 1400 Abrufe pro Lauf, dann verworfen). Limit 4 pro Host, ein Wiederholungsversuch, `autoSelectFamilyAttemptTimeout` 2 s, Netzwerkfehler ohne Meldung bekommen Code und URL. Leeres `<article>` fällt auf das ganze Dokument zurück (Hugging Face). a16z hat jetzt Enrichment. Lokaler Probelauf (mit defuddle-Extraktion aus PR 278): 111 Artikel, 11 ohne Volltext (7 Golem wegen Einwilligungs-Seite, 4 Hacker News), Heise 41 von 41 mit Volltext, Laufzeit rund 7 s. Die Wirkung in GitHub Actions ist noch nicht bestätigt.
+- **Feeds:** Anthropic über `sitemap.xml` + Artikelseite, The Batch über `charonhub.deeplearning.ai/rss/`, The Verge (KI) ersetzt VentureBeat. Neues Warn-Issue `Feed veraltet` (30 Tage, Ausnahmen benevans/aheadofai).
+- **Golem:** Artikelseiten leiten auf eine Einwilligungs-Seite um. Bisher ersetzte deren Text den Teaser (755 identische Zeichen je Artikel) und wurde bewertet. Jetzt bleibt der bereinigte Teaser (rund 120–190 Zeichen) → `truncated` → Auto-Score 2. Golem liefert damit faktisch keine Issue-Artikel mehr; Entscheid über Entfernen/Ersetzen offen.
+- **Deliver:** `applySelection` verwirft einzelne ungültige Auswahl-Einträge und ordnet über Kandidaten-ID oder URL zu; Abbruch nur noch, wenn kein Eintrag gültig ist.
+- **Nicht umgesetzt:** Mehrfachbewertung derselben URL an mehreren Tagen, Themen-Dedup über Allerweltswörter, Hacker-News-KI-Filter, Datums-/Überschriften-Prüfung im Review, verspäteter Schedule-Start. Feedback-Häkchen fehlen seit 2026-06-16; der Feedback-Loop läuft leer.
+- Das offene Issue «Adapter stale: venturebeat» schliesst sich nicht mehr von selbst (Adapter entfernt) und muss von Hand geschlossen werden.
