@@ -24,14 +24,23 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24'
+          node-version: '26'
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install lame (MP3-Kodierung der Hörfassung)
+        timeout-minutes: 5
+        # Die Realtime-API liefert rohes PCM; der LAME-Encoder macht daraus die MP3 (kleines Paket, statt ffmpeg mit 66 MB).
+        # Nur nötig, wenn Audio aktiv ist.
+        if: env.OPENAI_API_KEY != ''
+        # Audio darf den Lauf nie abbrechen: scheitert apt, fällt nur das MP3 weg.
+        continue-on-error: true
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends lame
 
       - name: Set run date
         run: echo "RUN_DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_ENV

@@ -29,7 +29,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: true
           # GH_PAT statt GITHUB_TOKEN: Pushes mit dem Standard-Token lösen
@@ -39,7 +39,7 @@ jobs:
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24'
+          node-version: '26'
 
       - name: Install dependencies
         run: npm ci
@@ -47,7 +47,7 @@ jobs:
       - name: Restore SQLite run history (read-only)
         # Liefert die Rohtexte für neue Goldstandard-Einträge. Kein Save:
         # dieser Workflow schreibt nicht in die DB.
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ki-news.db*
           key: ki-news-db-${{ runner.os }}-feedback-${{ github.run_id }}

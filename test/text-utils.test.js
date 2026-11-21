@@ -70,3 +70,10 @@ test('sanitizeSourceText verhindert den Ausbruch aus den Prompt-Tags', async () 
   assert.equal(sanitizeSourceText('a < b und c > d'), 'a < b und c > d');
   assert.equal(sanitizeSourceText(undefined), '');
 });
+
+test('sanitizeSourceText: nicht geschlossenes <!-- loescht den Rest des Textes nicht', async () => {
+  const { sanitizeSourceText } = await import('../lib/text-utils.js');
+  assert.equal(sanitizeSourceText('So beginnt ein Kommentar: <!-- und hier geht der Artikel weiter.'),
+    'So beginnt ein Kommentar: und hier geht der Artikel weiter.');
+  assert.equal(sanitizeSourceText('A <!-- versteckt --> B <!-- offen C'), 'A B offen C');
+});

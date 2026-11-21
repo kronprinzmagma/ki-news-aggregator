@@ -1,4 +1,4 @@
-import { httpGet, isRecent, withHostLimit, extractArticleText, extractMetaDescription, decodeHtmlEntities } from './_base.js';
+import { httpGet, isRecent, withHostLimit, extractBodyText, extractMetaDescription, decodeHtmlEntities } from './_base.js';
 
 // Anthropic publiziert keinen RSS-Feed. Der frühere Community-Feed (GitHub-
 // Scraper) blieb im Oktober 2026 stehen, ohne dass der Abruf fehlschlug.
@@ -22,7 +22,7 @@ export function parseSitemapNews(xml) {
   return entries.sort((a, b) => Date.parse(b.lastmod || 0) - Date.parse(a.lastmod || 0));
 }
 
-export function parseNewsPage(html, { url }) {
+export async function parseNewsPage(html, { url }) {
   const rawTitle = /<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i.exec(html)?.[1]
     || /<title>([^<]+)<\/title>/i.exec(html)?.[1]?.replace(/\s*[\\|]\s*Anthropic\s*$/, '');
   const titel = decodeHtmlEntities(rawTitle || '').trim();
@@ -35,7 +35,7 @@ export function parseNewsPage(html, { url }) {
   if (!date || isNaN(date.getTime())) return null;
   const datum = date.toISOString();
   // Die Seite hat Teaser-Templates vor dem Beitrag → preferArticle: false.
-  const body = extractArticleText(html, { maxLength: 8000, preferArticle: false });
+  const body = await extractBodyText(html, url, { maxLength: 8000, extractOptions: { preferArticle: false } });
   const rohtext = [extractMetaDescription(html), body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim().slice(0, 8000);
   return { titel, url, datum, quelle: 'anthropic', rohtext };
 }
@@ -49,7 +49,7 @@ export async function fetchArticles() {
   const pages = await Promise.all(candidates.map(async entry => {
     try {
       const html = await withHostLimit(entry.url, () => httpGet(entry.url, FETCH_OPTIONS));
-      return parseNewsPage(html, entry);
+      return await parseNewsPage(html, entry);
     } catch (err) {
       failed++;
       console.warn(`[anthropic] Artikelseite konnte nicht geladen werden (${entry.url}): ${err.message}`);

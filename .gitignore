@@ -20,3 +20,4 @@ node_modules/
 
 # GitHub-Pages-Build (vom publish-archive.yml-Workflow erzeugt)
 _site/
+tts-probe.mp3

@@ -235,15 +235,23 @@ function applyFeedbackStates(markdown, states) {
 
 // ─── Review-Run ──────────────────────────────────────────────────────────────
 
-export async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
+// Fremder Quelltext geht auch hier nur bereinigt in den Prompt (wie bei Scoring,
+// Auswahl und Aufbereitung): Die Review ist das Veroeffentlichungs-Gate, und ihr
+// rewrite_hint landet im REWRITE_PROMPT ausserhalb der Daten-Tags.
+export function reviewPayload(selectedArticles, summaries, lowScoreSamples) {
   const selectedPayload = selectedArticles.map((article, index) => ({
-    title: article.display_title || article.titel, url: article.url, source: article.quelle, score: article.score,
-    scoring_reason: article.begründung, source_text: (article.rohtext || '').slice(0, 8000), issue_summary: summaries[index],
+    title: sanitizeSourceText(article.display_title || article.titel), url: article.url, source: article.quelle, score: article.score,
+    scoring_reason: article.begründung, source_text: sanitizeSourceText(article.rohtext).slice(0, 8000), issue_summary: summaries[index],
   }));
   const samplePayload = lowScoreSamples.map(article => ({
-    title: article.display_title || article.titel, url: article.url, source: article.quelle, score: article.score,
-    scoring_reason: article.begründung, raw_text: (article.rohtext || '').slice(0, 600),
+    title: sanitizeSourceText(article.display_title || article.titel), url: article.url, source: article.quelle, score: article.score,
+    scoring_reason: article.begründung, raw_text: sanitizeSourceText(article.rohtext).slice(0, 600),
   }));
+  return { selectedPayload, samplePayload };
+}
+
+export async function reviewRun(selectedArticles, summaries, lowScoreSamples) {
+  const { selectedPayload, samplePayload } = reviewPayload(selectedArticles, summaries, lowScoreSamples);
 
   try {
     console.log('[review] Starte Claude-only Review-Schlaufe');

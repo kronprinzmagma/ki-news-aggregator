@@ -141,19 +141,19 @@ test('describeNetworkError: AggregateError ohne Meldung bekommt Code und URL', (
   assert.equal(describeNetworkError(named, 'https://x'), named);
 });
 
-test('anthropic: Sitemap liefert nur /news/-Beiträge, Übersichtsseiten ohne Datum fallen weg', () => {
+test('anthropic: Sitemap liefert nur /news/-Beiträge, Übersichtsseiten ohne Datum fallen weg', async () => {
   const xml = `<urlset><url><loc>https://www.anthropic.com/news/alt</loc><lastmod>2026-10-01T00:00:00Z</lastmod></url>
     <url><loc>https://www.anthropic.com/news/neu</loc><lastmod>2026-11-20T00:00:00Z</lastmod></url>
     <url><loc>https://www.anthropic.com/research/x</loc><lastmod>2026-11-20T00:00:00Z</lastmod></url>
     <url><loc>https://www.anthropic.com/news</loc></url></urlset>`;
   assert.deepEqual(parseSitemapNews(xml).map(e => e.url), ['https://www.anthropic.com/news/neu', 'https://www.anthropic.com/news/alt']);
   const page = `<html><head><title>Neu \\ Anthropic</title><meta property="og:title" content="Neues Modell &amp; mehr"><meta property="article:published_time" content="2026-11-20T00:00:00.000Z"></head><body>${para(10)}</body></html>`;
-  const article = parseNewsPage(page, { url: 'https://www.anthropic.com/news/neu' });
+  const article = await parseNewsPage(page, { url: 'https://www.anthropic.com/news/neu' });
   assert.equal(article.titel, 'Neues Modell & mehr');
   assert.equal(article.datum, '2026-11-20T00:00:00.000Z');
   assert.equal(article.quelle, 'anthropic');
   assert.ok(article.rohtext.length > 300);
-  assert.equal(parseNewsPage(`<html><head><title>Announcements \\ Anthropic</title></head><body>${para(10)}</body></html>`, { url: 'https://www.anthropic.com/news/announcements' }), null);
+  assert.equal(await parseNewsPage(`<html><head><title>Announcements \\ Anthropic</title></head><body>${para(10)}</body></html>`, { url: 'https://www.anthropic.com/news/announcements' }), null);
 });
 
 test('thebatch: Volltext kommt aus content:encoded', () => {
@@ -168,4 +168,32 @@ test('thebatch: Volltext kommt aus content:encoded', () => {
 test('golem: Teaser ohne kodierte Themen-Links und Zählpixel', () => {
   const raw = 'Zwei Sätze Teaser. Mehr nicht. (<a href="https://www.golem.de/specials/claude/">Claude</a>, <a href="https://www.golem.de/specials/wissen/">Wissen</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=1" alt="" width="1" height="1" />';
   assert.equal(cleanTeaser(raw), 'Zwei Sätze Teaser. Mehr nicht. (Claude, Wissen)');
+});
+
+// ─── Bibliothek (defuddle) mit eigenen Suchmustern als Rückfall ──────────────
+import { extractBodyText } from '../adapters/_base.js';
+import { extractReadableText } from '../lib/readable.js';
+
+const satz = 'Ein neues Sprachmodell fasst lange Dokumente schneller zusammen und erklärt dabei die Quellen. ';
+
+test('extractBodyText holt Text aus div-Seiten, die die Suchmuster verfehlen', async () => {
+  const html = `<html><head><title>T</title></head><body><nav>Menü Start Login</nav>
+    <div class="blog-content"><h1>Titel</h1>${Array.from({ length: 8 }, () => `<div class="para">${satz}</div>`).join('')}</div>
+    <footer>Impressum</footer></body></html>`;
+  const text = await extractBodyText(html, 'https://example.org/blog/a');
+  assert.ok(text.length >= 300, `zu kurz: ${text.length}`);
+  assert.match(text, /Sprachmodell/);
+  assert.doesNotMatch(text, /Impressum/);
+});
+
+test('extractBodyText liefert bei leerer Seite einen leeren Text statt eines Fehlers', async () => {
+  assert.equal(await extractBodyText('', 'https://example.org/leer'), '');
+  assert.equal(typeof await extractReadableText('<<<kaputt', 'https://example.org/x'), 'string');
+});
+
+test('extractReadableText setzt Leerzeichen zwischen Blöcken und entfernt Scripts', async () => {
+  const html = `<html><body><article><p>${satz}Erster.</p><p>Zweiter${satz}</p><script>alert(1)</script></article></body></html>`;
+  const text = await extractReadableText(html, 'https://example.org/b');
+  assert.match(text, /Erster\. Zweiter/);
+  assert.doesNotMatch(text, /alert/);
 });

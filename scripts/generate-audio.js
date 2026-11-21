@@ -20,6 +20,7 @@ import fs from 'fs/promises';
 import { loadEnv, requireEnv } from '../lib/env.js';
 import { claudeText } from '../lib/claude.js';
 import { synthesizeSpeech } from '../lib/tts.js';
+import { ttsCostUsd } from '../lib/audio.js';
 import { githubRequest, ghPath, getOrCreateRelease, uploadReleaseAsset } from '../lib/github.js';
 import {
   REPO_SLUG,
@@ -31,9 +32,6 @@ import {
 } from '../lib/config.js';
 
 loadEnv();
-
-const WORDS_PER_MINUTE = 130;
-const USD_PER_AUDIO_MINUTE = 0.015;
 
 const SCRIPT_PROMPT = ({ date, body }) => `Du schreibst die Hörfassung eines täglichen KI-News-Briefings, das eine Produktperson unterwegs (Pendeln, Sport) anhört. Aus dem geschriebenen Issue-Text wird ein flüssiger, gesprochener Monolog.
 
@@ -99,7 +97,10 @@ async function main() {
   console.log(`[audio] Skript: ${script.length} Zeichen, ${script.split(/\s+/).filter(Boolean).length} Wörter`);
 
   console.log('[audio] Synthetisiere MP3 …');
-  const mp3 = await synthesizeSpeech(script, { model: AUDIO_TTS_MODEL, voice: AUDIO_VOICE, logTag: 'audio-tts' });
+  let stats = null;
+  const mp3 = await synthesizeSpeech(script, {
+    model: AUDIO_TTS_MODEL, voice: AUDIO_VOICE, logTag: 'audio-tts', onStats: (s) => { stats = s; },
+  });
 
   // Lokale Kopie als Audit-Artefakt / Abhör-Möglichkeit.
   const localFile = `audio-${date}.mp3`;
@@ -112,11 +113,9 @@ async function main() {
   const audioUrl = await uploadReleaseAsset(token, release, `daily-${date}.mp3`, mp3, 'audio/mpeg');
   if (!audioUrl) { console.error('[audio] Asset-Upload fehlgeschlagen.'); process.exit(1); }
 
-  const wordCount = script.split(/\s+/).filter(Boolean).length;
-  const estMin = (wordCount / WORDS_PER_MINUTE).toFixed(1);
-  const estCost = ((wordCount / WORDS_PER_MINUTE) * USD_PER_AUDIO_MINUTE).toFixed(4);
+  const estMin = ((stats?.duration_sec ?? 0) / 60).toFixed(1);
   console.log(`\n[audio] Fertig: ${audioUrl}`);
-  console.log(`[audio] ~${estMin} Min · Stimme ${AUDIO_VOICE} · ~$${estCost} TTS`);
+  console.log(`[audio] ${estMin} Min · Stimme ${AUDIO_VOICE} · ~$${ttsCostUsd(stats)} TTS`);
 }
 
 main()

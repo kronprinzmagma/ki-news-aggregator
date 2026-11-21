@@ -59,3 +59,40 @@ test('strict tool schema preserves types and keeps unsupported constraints for c
   assert.match(sent.properties.rows.items.properties.rating.description,/minimum: 1/);
   assert.equal(original.properties.rows.maxItems,5);
 });
+
+// ─── 5.5-Modelle: modellabhängige Request-Parameter ─────────────────────────
+import { buildMessageParams, extractText } from '../lib/claude.js';
+
+test('buildMessageParams: Sonnet 5.5 ohne erzwungenes Werkzeug, Denken aus', () => {
+  const tools = [{ name: 'submit_x', input_schema: { type: 'object', properties: { a: { type: 'string' } }, required: ['a'] } }];
+  const p = buildMessageParams({
+    model: 'claude-sonnet-5-5', maxTokens: 100, messages: [{ role: 'user', content: 'x' }],
+    system: [{ type: 'text', text: 'S', cache_control: { type: 'ephemeral' } }],
+    tools, toolChoice: { type: 'tool', name: 'submit_x' },
+  });
+  assert.deepEqual(p.tool_choice, { type: 'auto' });
+  assert.deepEqual(p.thinking, { type: 'between_tools' });
+  assert.equal(p.system.length, 2);
+  assert.match(p.system[1].text, /submit_x/);
+});
+
+test('buildMessageParams: Haiku 5.5 behält erzwungenes Werkzeug, Denken aus', () => {
+  const p = buildMessageParams({
+    model: 'claude-haiku-5-5', maxTokens: 100, messages: [], tools: [{ name: 't', input_schema: { type: 'object', properties: {} } }],
+    toolChoice: { type: 'tool', name: 't' },
+  });
+  assert.deepEqual(p.tool_choice, { type: 'tool', name: 't' });
+  assert.deepEqual(p.thinking, { type: 'disabled' });
+});
+
+test('buildMessageParams: ältere Modelle unverändert', () => {
+  const p = buildMessageParams({ model: 'claude-sonnet-4-6', maxTokens: 10, messages: [], system: 'S', toolChoice: { type: 'tool', name: 't' } });
+  assert.equal(p.thinking, undefined);
+  assert.deepEqual(p.tool_choice, { type: 'tool', name: 't' });
+  assert.equal(p.system, 'S');
+});
+
+test('extractText überspringt thinking-Blöcke', () => {
+  assert.equal(extractText({ content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: 'Hallo' }] }), 'Hallo');
+  assert.equal(extractText({ content: [] }), null);
+});

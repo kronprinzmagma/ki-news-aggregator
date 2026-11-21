@@ -55,7 +55,7 @@ Three stages run sequentially:
 
 **2. Score:** Claude Haiku scores for a non-engineering product reader: practical new capabilities, user experience, cost, trust and media. Plugin versions, SDK plumbing and infrastructure without a clear personal benefit score below publication level. Shared title words no longer increase scores.
 
-**3. Deliver:** Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three explanatory blocks. The review receives the original source text and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
+**3. Deliver:** Claude Sonnet selects at most five articles from Score ≥ 4 candidates and writes three explanatory blocks. The review receives the cleaned source text (see prompt-injection defence below) and checks relevance, technical detail, learning value, input quality, comprehension and source faithfulness. Relevance, comprehension and faithfulness must each reach 4/5, input quality must be good and issue fit strong. Rewrites are reviewed again. Missing review rows, invalid structured data and truncated API responses stop publication; weak final texts are excluded. Overview and optional audio use the final selection. Audio is hosted as a GitHub Release asset and mirrored to the podcast feed.
 
 **Weekly:** a digest of roughly 650–800 words (at most 900), scheduled on Sundays, fetches the daily issues of the closed week and synthesises them theme-centred: Claude picks the 3 most important overarching themes of the week from the article pool (Score 4+5), each explained in roughly 150–200 words with a practical tip and a compact evidence list. Score-5 articles are strong candidates but no longer mandatory. If `OPENAI_API_KEY` is set, the weekly also gets a spoken-word version (`feed-weekly.xml`).
 
@@ -85,7 +85,7 @@ flowchart TD
 
     Ingest["ingest.js<br/>15 adapters · shared schema<br/>URL dedup · SSRF-protected fetch"]
     Pre["Pre-filter without LLM<br/>cross-day dedup (7 days)<br/>deterministic pre-score"]
-    Score["score.js<br/>Claude Haiku 4.5 · batch or parallel<br/>event dedup"]
+    Score["score.js<br/>Claude Haiku 5.5 · batch or parallel<br/>event dedup"]
     Filter{"Score ≥ 4?"}
     XDay["Cross-day dedup again<br/>URL + title similarity"]
     Select["Editorial selection<br/>at most 5 useful stories"]
@@ -93,7 +93,7 @@ flowchart TD
     Review["Review loop<br/>5 scores + input quality + issue fit<br/>→ rewrite if weak"]
     Issue["GitHub Issue<br/>'KI Daily – YYYY-MM-DD'"]
     Archive["GitHub Pages archive<br/>stats page · RSS feeds"]
-    Audio["Audio version (optional)<br/>gpt-4o-mini-tts · GitHub Release"]
+    Audio["Audio version (optional)<br/>gpt-realtime-2.1-mini · GitHub Release"]
     Feedback["Feedback checkboxes<br/>→ gold standard (weekly)"]
     Store[("SQLite<br/>articles · usage · adapter health")]
     Weekly["weekly.js<br/>Sunday synthesis<br/>from the week's daily issues"]
@@ -135,6 +135,8 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback: strict tool use constrains field types and the client validates the full JSON schema and rejects truncated responses. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
 
+**Prompt-injection defence.** Article text is untrusted input that ends up in a public issue. Before scoring, selection, write-up and review, `sanitizeSourceText` normalises it (NFKC) and strips zero-width, bidi and tag characters, HTML comments, tags with attributes and Markdown images. The write-up prompt separates data from instructions and repeats the instructions after the data; `cleanWriteup` validates the output before publication and drops an article whose write-up lost its required structure. A promptfoo red-team eval with fixed injection cases (`evals/redteam/`, workflow `injection.yml`) runs through the same production path.
+
 **Cheap model for scoring.** Scoring runs on Claude Haiku; only the per-article content varies across calls. The system prompt is marked as an Anthropic `cache_control: ephemeral` prefix, but at about 1,000 tokens it stays below Haiku's cache minimum, so the saving comes from the model choice (the code comment estimates about CHF 5 a month instead of about CHF 20 with Sonnet).
 
 **Rate limiting and retry.** The scoring stage caps at 5 parallel Claude API requests. 429 responses trigger exponential backoff via a shared retry wrapper in `lib/claude.js`. Retry logic is centralised and not duplicated across callers.
@@ -147,7 +149,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **SSRF protection.** All outbound HTTP in `lib/http.js` resolves HTTPS targets before connecting, rejects private/reserved IPv4 and IPv6 addresses, pins the approved lookup into the request, and repeats the check on redirects. Adapters cannot be pointed at internal network addresses.
 
-**Adapter base class.** `adapters/_base.js` provides HTTP fetch, RSS/Atom parsing, content extraction, and enrichment. Source-specific adapters extend this base; adding a new source requires only the feed URL and any source-specific filter logic.
+**Adapter base class.** `adapters/_base.js` provides HTTP fetch, RSS/Atom parsing, content extraction, and enrichment. The main text of a page is extracted with the `defuddle` library (`lib/readable.js`, no network access of its own, so every fetch still goes through the SSRF guard), with the project's own patterns as fallback; on 39 pages that previously yielded under 300 characters, short extractions dropped from 19 to 4. Source-specific adapters extend this base; adding a new source requires only the feed URL and any source-specific filter logic.
 
 **Shared config layer.** Model names, score thresholds and dedup parameters are defined once in `lib/config.js`; concurrency limits and the article age limit sit next to the stage that uses them (`score.js`, `deliver.js`, `ingest.js`).
 
@@ -163,7 +165,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Static archive via GitHub Pages.** `scripts/build-archive.js` fetches all daily and weekly issues via the GitHub API (with pre-rendered HTML body) and generates a polished landing site. Auto-rebuilt after each daily/weekly run by `publish-archive.yml`. Live: [kronprinzmagma.github.io/ki-news-aggregator](https://kronprinzmagma.github.io/ki-news-aggregator/).
 
-**Audio version as a private podcast (optional).** When `OPENAI_API_KEY` is set, the deliver stage turns the finished daily into a spoken-word episode: `claude-sonnet-4-6` rewrites the issue text into a clean speaking script (no markdown, no URLs, intro with AI disclaimer), `gpt-4o-mini-tts` synthesises it to MP3 (`lib/tts.js` chunks long scripts within the 4096-char API limit), and the file is uploaded as an asset of a rolling GitHub Release (`lib/audio.js`, `lib/github.js`). The archive build then generates podcast RSS feeds (`feed-daily.xml`, `feed-weekly.xml`; the weekly digest gets its own spoken-word version) with channel artwork (`cover.png`, generated by `scripts/make-cover.js`) and embeds an audio player on each daily and weekly page. Subscribe in any podcast app so the morning briefing lands in the slot that actually gets through. Fully optional and fault-tolerant: without the key, or on any error, the daily run behaves exactly as before. ~$0.10/day. Voice is configurable in `lib/config.js` (`AUDIO_*`, default `onyx`).
+**Audio version as a private podcast (optional).** When `OPENAI_API_KEY` is set, the deliver stage turns the finished daily into a spoken-word episode: `claude-sonnet-4-6` rewrites the issue text into a clean speaking script (no markdown, no URLs, intro with AI disclaimer), `gpt-realtime-2.1-mini` reads it aloud via the Realtime API (`lib/tts.js` splits long scripts, checks each transcript against the script and encodes MP3 with the LAME encoder; `gpt-4o-mini-tts` is retired on 2027-01-06), and the file is uploaded as an asset of a rolling GitHub Release (`lib/audio.js`, `lib/github.js`). The archive build then generates podcast RSS feeds (`feed-daily.xml`, `feed-weekly.xml`; the weekly digest gets its own spoken-word version) with channel artwork (`cover.png`, generated by `scripts/make-cover.js`) and embeds an audio player on each daily and weekly page. Subscribe in any podcast app so the morning briefing lands in the slot that actually gets through. Fully optional and fault-tolerant: without the key, or on any error, the daily run behaves exactly as before. ~$0.05–0.15/day. Voice is configurable in `lib/config.js` (`AUDIO_*`, default `cedar`).
 
 **Deterministic pre-filter + cross-day pre-dedup.** Before any article reaches the LLM, two cheap filters run: `lib/cross-day-dedup.js` drops articles that were already published in the last 7 daily issues (URL or title similarity), and a deterministic auto-score sets `score=2` for sources/formats that are structurally weak (`hackernews-show`, articles with `truncated=true`). On a typical run this drops ~60% of articles before the LLM ever sees them. These articles would have been filtered out downstream anyway, so this only saves cost.
 
@@ -198,7 +200,7 @@ lib/                   — Shared modules: claude, github, http, store,
 
 ## Stack
 
-Node.js (ESM, no framework) · Claude API (Haiku 4.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI TTS (`gpt-4o-mini-tts`, optional audio) · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
+Node.js (ESM, no framework) · Claude API (Haiku 5.5 + Sonnet 4.6, structured outputs via tool-use) · OpenAI Realtime API (`gpt-realtime-2.1-mini`, optional audio) + LAME · `defuddle` · `better-sqlite3` · Zod · GitHub Actions · GitHub Issues + Releases API
 
 ---
 

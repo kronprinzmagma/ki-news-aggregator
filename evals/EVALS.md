@@ -192,7 +192,7 @@ Während das Scoring-Eval prüft, ob die richtigen Artikel ausgewählt werden, p
 
 ### Was es misst
 
-**1. Faithfulness (LLM-as-Judge, Claude Haiku 4.5).** Für jeden Artikel-Writeup im letzten Daily-Issue wird der Source-Text aus der SQLite-Datenbank geladen und beides an einen Judge geschickt. Der Judge sucht nach Behauptungen im Writeup, die im Source-Text nicht belegbar sind — erfundene Modellnamen, Zahlen, Partnerschaften, behauptete Benchmarks ohne Beleg. Output: `faithfulness_score` (1–5) + Liste der konkreten Halluzinationen.
+**1. Faithfulness (LLM-as-Judge, Score-Modell, seit 2026-11-19 Claude Haiku 5.5).** Für jeden Artikel-Writeup im letzten Daily-Issue wird der Source-Text aus der SQLite-Datenbank geladen und beides an einen Judge geschickt. Der Judge sucht nach Behauptungen im Writeup, die im Source-Text nicht belegbar sind — erfundene Modellnamen, Zahlen, Partnerschaften, behauptete Benchmarks ohne Beleg. Output: `faithfulness_score` (1–5) + Liste der konkreten Halluzinationen.
 
 **2. Stil (LLM-as-Judge, gleiche Call).** Der Judge prüft, ob der Writeup PO-/Sprint-/Stakeholder-Sprache, generische "KI verändert X"-Sätze oder Hedging-Phrasen ("könnte man", "liesse sich") enthält. Output: `style_score` (1–5) + Liste konkreter Stil-Verstösse.
 
@@ -236,3 +236,11 @@ OPENAI_API_KEY=sk-... node evals/embedding_dedup_eval.js [--threshold 0.82]
 Output: Übereinstimmungs-Zählung plus die Disagreement-Paare mit Titeln (nur-Heuristik = mögliche False Positives, nur-Embeddings = mögliche Misses), als Konsole und `evals/results/embedding-dedup-*.json`. Es gibt bewusst kein automatisches Gewinner-Urteil — die Disagreements werden von Hand gelabelt. Erst bei klarem Embeddings-Vorteil lohnt sich ein Produktions-Umbau. Kosten pro Lauf: unter einem Rappen. Läuft auch in CI via `embedding-dedup-eval.yml` (workflow_dispatch; holt die `articles-*.json` aus den Daily-Run-Artefakten, weil der OpenAI-Key nur als Repo-Secret existiert).
 
 **Ergebnis Lauf 2026-06-11 (13 Tage, 24'894 Paare): Die Heuristik gewinnt klar.** 26 Paare flaggte nur die Heuristik — beim Durchsehen fast alles ECHTE Duplikate (Anthropic-Funding in drei Formulierungen, MAI-Models, Papst-Enzyklika, cross-language Heise↔EN), deren Cosine-Similarity nur 0.57–0.72 betrug, weil Sprache/Framing differieren. Embeddings hätten bei Schwelle 0.82 fast alles verpasst; eine Schwelle ~0.65 würde bei 25k Paaren False Positives riskieren. Nur-Embeddings fand lediglich Versions-Bump-Paare (`micropython-wasm 0.1a0`/`0.1a1`, cos 0.99), die unter der 3-Token-Schwelle liegen — vernachlässigbar. **Entscheid: Token-Overlap-Heuristik bleibt produktiv, kein Embeddings-Umbau.** Bekannte Restschwäche beider Ansätze: gleiche Story mit komplett verschiedenen Titeln im selben Issue (z.B. „Anthropic Walks Back Policy" vs. „If Claude Fable stops helping you") fängt keine der Methoden zuverlässig.
+
+---
+
+## Modellvergleich Deliver (`deliver_model_compare.js`)
+
+Vor jedem Wechsel des Aufbereitungsmodells: dieselben öffentlichen Artikel (lokale `articles-*.json`, nur Texte ab 2500 Zeichen) mit altem und neuem Modell auswählen, aufbereiten und reviewen lassen; ein fester Richter (`KI_NEWS_JUDGE_MODEL`, Default Haiku 4.5) bewertet Quellentreue und Stil, dazu die deterministischen Prüfungen (Format, Länge, Floskeln). Modell per `KI_NEWS_DELIVER_MODEL` wählen, Anzahl per `COMPARE_N`. Für das Scoring analog `KI_NEWS_SCORE_MODEL=… node evals/run_eval.js`.
+
+Messung 2026-11-19 (6 Artikel, Richter Haiku 4.5): Sonnet 4.6 Quellentreue Ø 4.67, Stil 4.83, Ø 212 Wörter, 0/6 über 300 Wörter, Selbst-Review verlangt 1 Neuschreiben; Sonnet 5.5 Quellentreue Ø 4.67, Stil 4.83, Ø 301 Wörter, 3/6 über 300, Selbst-Review verlangt 4 Neuschreiben. Auch mit `effort: medium` oder einer schärferen Längenregel blieb Sonnet 5.5 bei Ø 280 Wörtern. Darum bleibt die Aufbereitung vorerst auf Sonnet 4.6.

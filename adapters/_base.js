@@ -1,5 +1,6 @@
 import { httpGet as rawHttpGet, isSafeUrl } from '../lib/http.js';
 import { decodeHtmlEntities, stripTags, extractCdata } from '../lib/text-utils.js';
+import { extractReadableText } from '../lib/readable.js';
 import { MAX_ARTICLE_AGE_DAYS, ENRICH_HOST_CONCURRENCY } from '../lib/config.js';
 import { todayString } from '../lib/date.js';
 
@@ -120,6 +121,21 @@ function extractBlocks(scope, {
 const CONSENT_PAGE_REGEX = /consent is not possible inside an iframe|consent dialog could not be loaded|advertising and content can be personalised|zustimmung zur datenverarbeitung|mit werbung und tracking weiterlesen|cookies zustimmen/i;
 export function looksLikeConsentPage(text = '') {
   return CONSENT_PAGE_REGEX.test(text);
+}
+
+// Unter dieser Länge gilt der Bibliothekstext als zu dünn; dann zählt der
+// Rückfall auf die eigenen Suchmuster, falls er mehr liefert.
+export const READABLE_MIN_CHARS = 300;
+
+/**
+ * Haupttext einer Seite: zuerst defuddle (lib/readable.js), die eigenen
+ * Suchmuster (extractArticleText) nur als Rückfall.
+ */
+export async function extractBodyText(html, url, { maxLength = 8000, extractOptions = {} } = {}) {
+  const readable = await extractReadableText(html, url, { maxLength });
+  if (readable.length >= READABLE_MIN_CHARS) return readable;
+  const fallback = extractArticleText(html, { maxLength, ...extractOptions });
+  return fallback.length > readable.length ? fallback : readable;
 }
 
 export function extractMetaDescription(html) {
@@ -249,7 +265,7 @@ export async function enrichFromUrl(article, {
   try {
     const html = await withHostLimit(article.url, () => fetchImpl(article.url, fetchOptions));
     const meta = useMetaDescription ? extractMetaDescription(html) : '';
-    const body = extractArticleText(html, { maxLength, ...extractOptions });
+    const body = await extractBodyText(html, article.url, { maxLength, extractOptions });
     const enriched = [meta, body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
     if (looksLikeConsentPage(enriched)) {
       console.warn(`[${logTag}] Einwilligungs-Seite statt Artikeltext (${article.titel}) – Teaser bleibt.`);

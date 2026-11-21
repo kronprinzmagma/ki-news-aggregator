@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1432 Einträge** · Top-Quellen: heise (546) · hackernews (412) · simonwillison (240) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
+**1434 Einträge** · Top-Quellen: heise (546) · hackernews (412) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-20** — [Token fraud is here and it’s BAD (YouTube)](2026-11-20-token-fraud-is-here-and-it-s-bad-youtube.md) · *simonwillison · Score 4*
+- **2026-11-19** — [GPT‑6.2 Astra and GPT‑6.2 Sol](2026-11-19-gpt-6-2-astra-and-gpt-6-2-sol.md) · *simonwillison · Score 4*
 - **2026-11-18** — [Zu neugierige KI-Agenten: Apple warnt Mac-Nutzer nachdrücklich vor Freigabe](2026-11-18-zu-neugierige-ki-agenten-apple-warnt-mac-nutzer-nachdrucklic.md) · *heise · Score 5*
 - **2026-11-18** — [Klage gegen OpenAI: Kalifornien sieht öffentliche Sicherheit gefährdet](2026-11-18-klage-gegen-openai-kalifornien-sieht-offentliche-sicherheit-.md) · *heise · Score 4*
 - **2026-11-18** — [Google's AI answers reducing search traffic by 40%](2026-11-18-google-s-ai-answers-reducing-search-traffic-by-40.md) · *hackernews · Score 4*
