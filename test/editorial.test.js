@@ -82,3 +82,13 @@ test('cleanWriteup verwirft Vorbemerkungen und Markdown-Bilder, null ohne Drei-B
   assert.equal(cleanWriteup('Ich schreibe keine Zusammenfassung.'), null);
   assert.equal(cleanWriteup(undefined), null);
 });
+
+test('formatWriteup setzt die strukturierte Aufbereitung zu drei Blöcken zusammen', async () => {
+  const { formatWriteup, inspectWriteup: inspect, WRITEUP_BLOCKS, WRITEUP_MAX_WORDS } = await import('../lib/editorial.js');
+  const text = formatWriteup({ was_ist_neu: '**Was ist neu**: A.', ki_richtung: 'B.', praktischer_hinweis: ' C. ' });
+  assert.equal(text, '**Was ist neu**\nA.\n\n**Was es für die KI-Richtung heisst**\nB.\n\n**Praktischer Hinweis**\nC.');
+  assert.deepEqual(inspect(text), []);
+  assert.equal(formatWriteup({ was_ist_neu: 'A.', ki_richtung: ' ', praktischer_hinweis: 'C.' }), null);
+  assert.equal(formatWriteup(null), null);
+  assert.ok(WRITEUP_BLOCKS.reduce((s, b) => s + b.max, 0) <= WRITEUP_MAX_WORDS);
+});

@@ -11,7 +11,7 @@ Stand: 2026-11-21
 
 ## Technischer Stand 2026-11-21
 
-- Scoring auf `claude-haiku-5-5`; Aufbereitung, Review, Weekly und Audio-Skript bleiben auf `claude-sonnet-4-6` (Vergleichslauf in `evals/EVALS.md`, Konstanten in `lib/config.js`).
+- Scoring auf `claude-haiku-5-5`; Aufbereitung, Review, Weekly und Audio-Skript auf `claude-sonnet-5-5` seit 2026-11-22, Aufbereitung als strukturierte Ausgabe mit Wortbudget pro Block (Vergleichslauf in `evals/EVALS.md`, Konstanten in `lib/config.js`).
 - Vorlesen über `gpt-realtime-2.1-mini` (Realtime-API, Stimme `cedar`, MP3 via `lame`); `gpt-4o-mini-tts` wird am 06.01.2027 abgeschaltet. Angaben zu `gpt-4o-mini-tts` und `onyx` weiter unten sind überholt.
 - Haupttext-Extraktion mit defuddle (`lib/readable.js`), eigene Suchmuster als Rückfall.
 - Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) plus promptfoo-Eval (`evals/redteam/`, `injection.yml`, nur manuell).
