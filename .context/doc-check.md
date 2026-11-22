@@ -16,7 +16,7 @@ Für jede geänderte Datei: Welche der unten stehenden Doku-Punkte sind davon be
 
 ### CLAUDE.md (wichtigste Datei – wird von neuen Sessions als erstes gelesen)
 
-- [ ] Modellversionen korrekt: `claude-haiku-5-5` für Score, `claude-sonnet-4-6` für Deliver, Review, Weekly und Audio-Skript
+- [ ] Modellversionen korrekt: `claude-haiku-5-5` für Score, `claude-sonnet-5-5` für Deliver, Review, Weekly und Audio-Skript
 - [ ] Quellenliste vollständig (aktuell **15 aktive Adapter** + NewsAPI inaktiv)
 - [ ] Score-Schwelle korrekt: `>= 4` ins Issue; scored-JSON enthält alle erfolgreich bewerteten Artikel
 - [ ] Weekly-Digest-Abschnitt vorhanden und aktuell (themen-zentriert, 3 Themen, optional Audio)
