@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1437 Einträge** · Top-Quellen: heise (548) · hackernews (412) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (1)
+**1440 Einträge** · Top-Quellen: heise (550) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (1)
 
 ## Liste
 
+- **2026-11-22** — [Google Genie 4: Interaktive KI-Welten jetzt für Abonnenten verfügbar](2026-11-22-google-genie-4-interaktive-ki-welten-jetzt-fur-abonnenten-ve.md) · *heise · Score 4*
+- **2026-11-22** — [Gemini 4 Neon macht Googles Spitzenmodell Konkurrenz](2026-11-22-gemini-4-neon-macht-googles-spitzenmodell-konkurrenz.md) · *heise · Score 4*
+- **2026-11-22** — [Data Processing Incidents on Inference Providers](2026-11-22-data-processing-incidents-on-inference-providers.md) · *hackernews · Score 5*
 - **2026-11-21** — [Signal is blocking Gemini and Siri AI from reading your screen](2026-11-21-signal-is-blocking-gemini-and-siri-ai-from-reading-your-scre.md) · *theverge · Score 4*
 - **2026-11-21** — [KI-generierte Präzedenzfälle: Anwältin vom EGMR ausgeschlossen](2026-11-21-ki-generierte-prazedenzfalle-anwaltin-vom-egmr-ausgeschlosse.md) · *heise · Score 4*
 - **2026-11-21** — [Experiment: KIs identifizieren Zivilisten als Schussziele](2026-11-21-experiment-kis-identifizieren-zivilisten-als-schussziele.md) · *heise · Score 4*
