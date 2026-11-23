@@ -26,7 +26,7 @@ import { fetchArticles as fetchGolem } from './adapters/golem.js';
 // 30 s reichten dafür nicht in jedem Fall.
 const ADAPTER_TIMEOUT_MS = 90_000;
 
-function withTimeout(promise, ms, name) {
+function withTimeout(promise, ms) {
   let timeoutId;
   const timeout = new Promise((_, reject) => {
     timeoutId = setTimeout(() => reject(new Error(`Timeout nach ${ms / 1000}s`)), ms);
@@ -54,7 +54,7 @@ const ADAPTERS = [
 
 async function runAdapters(runDate) {
   const results = await Promise.allSettled(
-    ADAPTERS.map(a => withTimeout(a.fn(), ADAPTER_TIMEOUT_MS, a.name))
+    ADAPTERS.map(a => withTimeout(a.fn(), ADAPTER_TIMEOUT_MS))
   );
   const articles = [];
   const perAdapter = [];

@@ -33,7 +33,6 @@ import { closeStore } from '../lib/store.js';
 import { judgeOne } from './deliver_eval.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '..');
 const JUDGE_MODEL = process.env.KI_NEWS_JUDGE_MODEL || 'claude-haiku-4-5-20251001';
 const N = parseInt(process.env.COMPARE_N || '6', 10);
 const MIN_CHARS = 2500;

@@ -4,7 +4,6 @@ import {
   tokenize,
   sharedTokens,
   overlapCount,
-  articleOverlap,
   applyEventDedup,
   applyClusterBonus,
   dedupByTopic,
