@@ -32,6 +32,7 @@ import Database from 'better-sqlite3';
 import { loadEnv } from '../lib/env.js';
 import { parseArticleSections } from '../lib/issue-format.js';
 import { httpGet } from '../lib/http.js';
+import { htmlToPlainText } from '../lib/readable.js';
 import { listDailyIssues } from './_shared.js';
 
 loadEnv();
@@ -127,14 +128,7 @@ function fetchSourceTextsFromDb(urls) {
 async function fetchUrlText(url, timeoutMs = 10_000) {
   try {
     const body = await httpGet(url, { timeoutMs });
-    return body
-      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim()
-      .slice(0, 4000);
+    return htmlToPlainText(body, { maxLength: 4000 });
   } catch {
     return null;
   }

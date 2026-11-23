@@ -94,14 +94,18 @@ function extractBlocks(scope, {
   minBlockLength = 45,
   maxLength = 8000,
 } = {}) {
+  // Schlusstags mit Leerzeichen oder Attributen (`</script >`, `</script foo>`)
+  // beenden das Element im Browser ebenfalls, darum `\b[^>]*>` statt `>`
+  // (CodeQL js/bad-tag-filter). Dieser Pfad ist nur der Rückfall hinter
+  // defuddle; stripTags entfernt danach alle übrigen Tags.
   const content = scope
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
-    .replace(/<svg[\s\S]*?<\/svg>/gi, ' ')
-    .replace(/<nav[\s\S]*?<\/nav>/gi, ' ')
-    .replace(/<header[\s\S]*?<\/header>/gi, ' ')
-    .replace(/<footer[\s\S]*?<\/footer>/gi, ' ');
+    .replace(/<script[\s\S]*?<\/script\b[^>]*>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style\b[^>]*>/gi, ' ')
+    .replace(/<noscript[\s\S]*?<\/noscript\b[^>]*>/gi, ' ')
+    .replace(/<svg[\s\S]*?<\/svg\b[^>]*>/gi, ' ')
+    .replace(/<nav[\s\S]*?<\/nav\b[^>]*>/gi, ' ')
+    .replace(/<header[\s\S]*?<\/header\b[^>]*>/gi, ' ')
+    .replace(/<footer[\s\S]*?<\/footer\b[^>]*>/gi, ' ');
 
   const chunks = [];
   const re = new RegExp(blockRegex.source, blockRegex.flags);
