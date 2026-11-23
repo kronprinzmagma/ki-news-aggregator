@@ -16,7 +16,9 @@ ki-news.db-wal
 
 node_modules/
 .DS_Store
-.claude/
+# .claude/: nur die geteilte settings.json einchecken (deny-Regeln), alles andere bleibt lokal
+.claude/*
+!.claude/settings.json
 
 # GitHub-Pages-Build (vom publish-archive.yml-Workflow erzeugt)
 _site/
