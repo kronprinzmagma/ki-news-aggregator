@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1440 Einträge** · Top-Quellen: heise (550) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (1)
+**1443 Einträge** · Top-Quellen: heise (552) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (2)
 
 ## Liste
 
+- **2026-11-23** — [The vibe-coding revolution is coming to all the gadgets](2026-11-23-the-vibe-coding-revolution-is-coming-to-all-the-gadgets.md) · *theverge · Score 4*
+- **2026-11-23** — [Messenger Signal: Sperre für neugierige KI-Assistenten](2026-11-23-messenger-signal-sperre-fur-neugierige-ki-assistenten.md) · *heise · Score 4*
+- **2026-11-23** — [KI-Update Deep-Dive: Smart Glasses als Alltagshilfe](2026-11-23-ki-update-deep-dive-smart-glasses-als-alltagshilfe.md) · *heise · Score 4*
 - **2026-11-22** — [Google Genie 4: Interaktive KI-Welten jetzt für Abonnenten verfügbar](2026-11-22-google-genie-4-interaktive-ki-welten-jetzt-fur-abonnenten-ve.md) · *heise · Score 4*
 - **2026-11-22** — [Gemini 4 Neon macht Googles Spitzenmodell Konkurrenz](2026-11-22-gemini-4-neon-macht-googles-spitzenmodell-konkurrenz.md) · *heise · Score 4*
 - **2026-11-22** — [Data Processing Incidents on Inference Providers](2026-11-22-data-processing-incidents-on-inference-providers.md) · *hackernews · Score 5*
