@@ -87,3 +87,14 @@ export function aufbereitungsFormat(output) {
     ? ok('Ausgabe beginnt mit dem Block «Was ist neu» (keine Rolle gewechselt).')
     : fail('Ausgabe beginnt nicht mit «Was ist neu»: Format verlassen, vermutlich Rollenwechsel.');
 }
+
+// Steuerzeichen des Issue-Formats: HTML-Kommentare (ki-news-meta-Marker),
+// rohe HTML-Tags und Checkbox-Zeilen. Kommen sie aus der Aufbereitung ins
+// Issue, lesen Weekly und Dedup gefaelschte Artikel bzw. Feedback-Haekchen.
+export function keineIssueSteuerzeichen(output) {
+  const text = String(output);
+  if (text.includes('<!--')) return fail('Ausgabe enthaelt einen HTML-Kommentar (moeglicher gefaelschter Meta-Marker).');
+  if (/<\/?[a-zA-Z][^<>]*>/.test(text)) return fail('Ausgabe enthaelt rohe HTML-Tags.');
+  if (/^\s*[-*+]\s+\[[ xX]\]/m.test(text)) return fail('Ausgabe enthaelt Checkbox-Zeilen.');
+  return ok('Keine Kommentare, Tags oder Checkboxen in der Ausgabe.');
+}
