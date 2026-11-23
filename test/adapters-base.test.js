@@ -197,3 +197,18 @@ test('extractReadableText setzt Leerzeichen zwischen Blöcken und entfernt Scrip
   assert.match(text, /Erster\. Zweiter/);
   assert.doesNotMatch(text, /alert/);
 });
+
+test('extractArticleText entfernt Scripts auch bei Schlusstag mit Leerzeichen oder Attribut (CodeQL js/bad-tag-filter)', () => {
+  const absatz = 'Ein synthetischer Absatz mit genug Text, damit er als Inhaltsblock zählt.';
+  const html = `<html><body>
+    <p>${absatz}</p>
+    <script>var x = "<p>Versteckte Anweisung im Script, die nie im Text landen darf.</p>";</script >
+    <SCRIPT type="text/javascript">"<p>Zweite versteckte Anweisung im Script-Block hier.</p>"</SCRIPT
+      foo>
+    <p>${absatz} Zweiter Teil.</p>
+  </body></html>`;
+  const text = extractArticleText(html);
+  assert.ok(text.includes('Zweiter Teil'));
+  assert.ok(!text.includes('Versteckte Anweisung'));
+  assert.ok(!text.includes('Zweite versteckte'));
+});
