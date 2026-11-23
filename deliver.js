@@ -315,10 +315,14 @@ async function findExistingIssue(token, issueTitle) {
   // bei einem schnellen Rerun würde sonst ein zweites Daily-Issue entstehen.
   try {
     const r = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=summary&per_page=20'));
-    if (r.status !== 200) return null;
+    if (r.status !== 200) {
+      console.warn(`GitHub Issue-Liste (Rückfall) fehlgeschlagen: HTTP ${r.status}`);
+      return null;
+    }
     const issues = JSON.parse(r.body);
     return issues.filter(i => !i.pull_request).find(i => i.title === issueTitle) || null;
-  } catch {
+  } catch (err) {
+    console.warn(`GitHub Issue-Liste (Rückfall) nicht lesbar: ${err.message}`);
     return null;
   }
 }
@@ -641,7 +645,8 @@ async function main() {
     ueberblick = stripModelMarkup(await claudeText(UEBERBLICK_PROMPT(topArtikel, aufbereitungen),
       { model: DELIVER_MODEL, maxTokens: 180, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' }));
     if (!ueberblick) ueberblick = buildOverview(topArtikel);
-  } catch {
+  } catch (err) {
+    console.warn(`[overview] Einleitung per Modell fehlgeschlagen, Rückfall auf Titelliste: ${err.message}`);
     ueberblick = buildOverview(topArtikel);
   }
 
