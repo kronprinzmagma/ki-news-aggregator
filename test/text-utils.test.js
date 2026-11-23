@@ -77,3 +77,10 @@ test('sanitizeSourceText: nicht geschlossenes <!-- loescht den Rest des Textes n
     'So beginnt ein Kommentar: und hier geht der Artikel weiter.');
   assert.equal(sanitizeSourceText('A <!-- versteckt --> B <!-- offen C'), 'A B offen C');
 });
+
+test('sanitizeMarkdown escaped auch den Backslash (CodeQL js/incomplete-sanitization)', () => {
+  // Ohne Backslash-Escape würde "\<" zu "\\<": Markdown liest das als
+  // literalen Backslash plus rohes "<" – das Escape wäre ausgehebelt.
+  assert.equal(sanitizeMarkdown('a\\<b'), 'a\\\\\\<b');
+  assert.equal(sanitizeMarkdown('C:\\pfad'), 'C:\\\\pfad');
+});
