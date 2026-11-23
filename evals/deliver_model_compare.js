@@ -60,7 +60,7 @@ async function main() {
   console.log(`[compare] ${articles.length} Artikel · Kandidat ${DELIVER_MODEL} · Richter ${JUDGE_MODEL}`);
 
   // 1. Auswahl (Structured Output)
-  let selection = { ok: false };
+  let selection;
   try {
     const picked = await selectDailyArticles(articles);
     selection = { ok: true, count: picked.length, urls: picked.map(a => a.url) };

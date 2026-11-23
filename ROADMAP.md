@@ -169,6 +169,7 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Hochprio-Fixes: Rerun-Dedup (Issue des Lauftags ausgeschlossen), Score-Clamping, Unhandled Rejection im Asset-Upload, Entity-Decoding-Reihenfolge, Endlos-Redirect in promote-feedback
 - [x] Robustheit: fehlertolerante Aufbereitungen mit Concurrency-Limit, Exit 1 bei Score-Totalausfall, Injection-Härtung (Markdown, Meta-Marker, URLs, Workflow-Inputs)
 - [x] CI: test.yml (npm test bei Push/PR), Actions SHA-gepinnt, Concurrency-Gruppen, permissions-Baseline
+- [x] CI-Paket (2026-11-23): ESLint `js/recommended` blockierend und Testabdeckung (`--experimental-test-coverage`) in test.yml
 - [x] Feedback-Loop automatisiert: feedback-loop.yml (promote → Goldstandard-Commit → Scoring-Eval), eval-regression-Issue bei MAE > 1.5, Quellen-Feedback-Statistik (scripts/feedback-stats.js)
 - [x] Stats-Seite im Pages-Archiv: scripts/export-stats.js → assets/stats.json → stats.html (Kosten/Tag, Cache-Hit-Rate, Quellen, Adapter-Health)
 - [x] Podcast verzeichnis-tauglich: itunes:image + generiertes Cover (scripts/make-cover.js)
