@@ -106,3 +106,11 @@ test('stripModelMarkup entfernt auch unvollstaendige Kommentare und behaelt Chec
   assert.equal(stripModelMarkup('- [ ] Besonders wertvoll\nText', { keepCheckboxes: true }), '- [ ] Besonders wertvoll\nText');
   assert.equal(stripModelMarkup(undefined), '');
 });
+
+test('stripModelMarkup laesst aus verschachteltem Markup kein neues Tag entstehen', async () => {
+  const { stripModelMarkup } = await import('../lib/text-utils.js');
+  for (const input of ['<scr<b>ipt>alert(1)</script>', '<!<!-- x -->-- ki-news-meta: {} -->', '<<b>img src=x>', 'Rest <script']) {
+    const out = stripModelMarkup(input);
+    assert.ok(!/<[!/?a-zA-Z]/.test(out), `kein Tag- oder Kommentaranfang in ${JSON.stringify(out)}`);
+  }
+});
