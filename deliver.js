@@ -13,7 +13,7 @@ import {
   CROSS_DAY_DEDUP_LOOKBACK,
   DAILY_MAX_ARTICLES,
 } from './lib/config.js';
-import { sanitizeMarkdown, sanitizeUrl, sanitizeSourceText } from './lib/text-utils.js';
+import { sanitizeMarkdown, sanitizeUrl, sanitizeSourceText, stripModelMarkup } from './lib/text-utils.js';
 import { runWithConcurrency } from './lib/concurrency.js';
 import { normalizeUrl } from './lib/url.js';
 import { selectDailyArticles, inspectWriteup, cleanWriteup, formatWriteup, validateReviewCoverage, WRITEUP_TARGET_WORDS, WRITEUP_MAX_WORDS, WRITEUP_BLOCKS, WRITEUP_SCHEMA } from './lib/editorial.js';
@@ -636,8 +636,11 @@ async function main() {
 
   let ueberblick;
   try {
-    ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel, aufbereitungen),
-      { model: DELIVER_MODEL, maxTokens: 180, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' });
+    // Einleitung geht ungeprueft ins Issue: denselben Ausgabefilter anwenden
+    // wie bei den Aufbereitungen (keine Kommentare/Marker, Tags, Checkboxen).
+    ueberblick = stripModelMarkup(await claudeText(UEBERBLICK_PROMPT(topArtikel, aufbereitungen),
+      { model: DELIVER_MODEL, maxTokens: 180, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' }));
+    if (!ueberblick) ueberblick = buildOverview(topArtikel);
   } catch {
     ueberblick = buildOverview(topArtikel);
   }
