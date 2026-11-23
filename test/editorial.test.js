@@ -86,9 +86,56 @@ test('cleanWriteup verwirft Vorbemerkungen und Markdown-Bilder, null ohne Drei-B
 test('formatWriteup setzt die strukturierte Aufbereitung zu drei Blöcken zusammen', async () => {
   const { formatWriteup, inspectWriteup: inspect, WRITEUP_BLOCKS, WRITEUP_MAX_WORDS } = await import('../lib/editorial.js');
   const text = formatWriteup({ was_ist_neu: '**Was ist neu**: A.', ki_richtung: 'B.', praktischer_hinweis: ' C. ' });
-  assert.equal(text, '**Was ist neu**\nA.\n\n**Was es für die KI-Richtung heisst**\nB.\n\n**Praktischer Hinweis**\nC.');
+  assert.equal(text, '**Was ist neu**\n\nA.\n\n**Was es für die KI-Richtung heisst**\n\nB.\n\n**Praktischer Hinweis**\n\nC.');
   assert.deepEqual(inspect(text), []);
   assert.equal(formatWriteup({ was_ist_neu: 'A.', ki_richtung: ' ', praktischer_hinweis: 'C.' }), null);
   assert.equal(formatWriteup(null), null);
   assert.ok(WRITEUP_BLOCKS.reduce((s, b) => s + b.max, 0) <= WRITEUP_MAX_WORDS);
+});
+
+// ─── Lesbarkeit: Kernsatz, Stichpunkte, fette Schlüsselbegriffe ─────────────
+
+const STRUCTURED_FIELDS = {
+  was_ist_neu: 'Google hat **Gemini 4 Neon** vorgestellt, rund **40 Prozent schneller** als Carbon.\n• **Preis:** ab **1. Dezember** günstiger\n* **Verfügbar:** in der Gemini-App\nHintergrund in einem Satz.',
+  ki_richtung: 'Die Frage verschiebt sich.',
+  praktischer_hinweis: '**Kosten neu rechnen**, sobald der Preis gilt.',
+};
+
+test('formatWriteup vereinheitlicht Stichpunkte und trennt Liste und Absatz', async () => {
+  const { formatWriteup, inspectWriteup: inspect } = await import('../lib/editorial.js');
+  const text = formatWriteup(STRUCTURED_FIELDS);
+  assert.match(text, /vorgestellt, rund \*\*40 Prozent schneller\*\* als Carbon\.\n\n- \*\*Preis:\*\* ab \*\*1\. Dezember\*\* günstiger\n- \*\*Verfügbar:\*\* in der Gemini-App\n\nHintergrund/);
+  assert.deepEqual(inspect(text), []);
+});
+
+test('formatWriteup entschärft eine Blocküberschrift mitten im Feld', async () => {
+  const { formatWriteup } = await import('../lib/editorial.js');
+  const text = formatWriteup({ ...STRUCTURED_FIELDS, ki_richtung: 'Einordnung.\n**Praktischer Hinweis** doppelt' });
+  assert.equal(text.match(/\*\*Praktischer Hinweis\*\*/g).length, 1);
+});
+
+test('inspectWriteup bemängelt zu viel Fett und fette ganze Sätze', () => {
+  const base = '**Was ist neu**\n\nA.\n\n**Was es für die KI-Richtung heisst**\n\nB.\n\n**Praktischer Hinweis**\n\n';
+  assert.match(inspectWriteup(base + Array.from({ length: 9 }, (_, i) => `**Begriff${i}**`).join(' ')).join(' '), /Höchstens 8 Begriffe/);
+  assert.match(inspectWriteup(base + '**Das ist ein ganzer langer Satz, der komplett fett markiert ist.**').join(' '), /ganzen Sätze/);
+});
+
+test('Parser lesen fett markierte Begriffe und Kästchen nach dem Text', async () => {
+  const { formatWriteup } = await import('../lib/editorial.js');
+  const { sourceLine } = await import('../deliver.js');
+  const { extractWriteup } = await import('../lib/issue-format.js');
+  const a = { ...candidates[0], url: 'https://www.heise.de/news/x.html?wt=1', score: 4, quelle: 'heise' };
+  const writeup = formatWriteup(STRUCTURED_FIELDS);
+  const body = articleMeta(a) + '\n### Nachricht\n\n' + sourceLine(a) + '\n\n' + writeup + '\n\n- [x] Besonders wertvoll\n- [ ] Thema nicht relevant\n\n---\n\n<details>Review</details>';
+  assert.equal(sourceLine(a), 'Score 4/5 · [heise.de](https://www.heise.de/news/x.html?wt=1) · via heise');
+  assert.equal(extractWriteup(body), writeup);
+  const [parsed] = parseDailyIssue('2026-11-23', body);
+  assert.match(parsed.wasIstNeu, /^Google hat Gemini 4 Neon vorgestellt.*Verfügbar: in der Gemini-App Hintergrund in einem Satz\.$/);
+  assert.equal(parsed.richtung, 'Die Frage verschiebt sich.');
+  assert.equal(parsed.anker, 'Kosten neu rechnen, sobald der Preis gilt.');
+  assert.equal(extractBuildAnchor(writeup), '**Kosten neu rechnen**, sobald der Preis gilt.');
+  assert.equal(extractBuildAnchor(body.slice(body.indexOf('**Was ist neu**'))), '**Kosten neu rechnen**, sobald der Preis gilt.');
+  const audio = parseIssueForAudio({ number: 1, title: 'KI Daily – 2026-11-23', body });
+  assert.doesNotMatch(audio.aufbereitungen[0], /Besonders wertvoll|Thema nicht relevant|Review/);
+  assert.match(audio.aufbereitungen[0], /Kosten neu rechnen/);
 });

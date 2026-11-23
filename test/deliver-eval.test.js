@@ -33,3 +33,29 @@ test('deliver eval fails when selected summaries provide no writeups', () => {
     /Keine Artikel-Writeups/
   );
 });
+
+test('deliver eval liest auch Aufbereitungen mit Kästchen nach dem Text', () => {
+  const blocks = splitSummary(`<!-- ki-news-meta: {"url":"https://example.com/b","titel":"B","quelle":"lab","score":4} -->
+### B
+
+Score 4/5 · [example.com](https://example.com/b) · via lab
+
+**Was ist neu**
+
+Kernsatz mit **Begriff**.
+
+**Was es für die KI-Richtung heisst**
+
+Muster.
+
+**Praktischer Hinweis**
+
+Hinweis.
+
+- [ ] Besonders wertvoll
+
+---
+`);
+  assert.equal(blocks.length, 1);
+  assert.match(blocks[0].writeup, /Hinweis\.$/);
+});

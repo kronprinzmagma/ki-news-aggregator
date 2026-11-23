@@ -3,7 +3,7 @@ import https from 'node:https';
 import { pathToFileURL } from 'node:url';
 import { loadEnv, requireEnv } from '../lib/env.js';
 import { githubRequest, ghPath } from '../lib/github.js';
-import { parseArticleSections } from '../lib/issue-format.js';
+import { parseArticleSections, extractWriteup } from '../lib/issue-format.js';
 import { generateDailyAudio, generateWeeklyAudio } from '../lib/audio.js';
 import { runWithConcurrency } from '../lib/concurrency.js';
 
@@ -19,9 +19,9 @@ export function parseIssueForAudio(issue) {
       type: 'daily', date: daily[1], ueberblick,
       topArtikel: sections.map(({ meta, block }) => ({ ...meta, display_title: /^### (.+)$/m.exec(block)?.[1] || meta.titel })),
       aufbereitungen: sections.map(({ block }) => {
-        const start = block.indexOf('**Was ist neu**');
-        if (start < 0) throw new Error(`Daily #${issue.number}: Aufbereitung fehlt.`);
-        return block.slice(start).split('\n---')[0].trim();
+        const writeup = extractWriteup(block);
+        if (!writeup) throw new Error(`Daily #${issue.number}: Aufbereitung fehlt.`);
+        return writeup;
       }),
     };
   }
