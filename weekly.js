@@ -14,7 +14,7 @@ loadEnv();
 // Titel im Issue sind sanitizeMarkdown-escapt – fürs Weekly (Prompt + Belege-Links)
 // wieder entescapen, sonst landen \[ \* etc. in der Ausgabe.
 function unescapeMarkdown(s) {
-  return (s || '').replace(/\\([`*_[\]()#><])/g, '$1');
+  return (s || '').replace(/\\([\\`*_[\]()#><])/g, '$1');
 }
 
 function extractBlocks(section) {
