@@ -2,6 +2,7 @@
 // statt pro Script eigene HTTP-Implementierungen zu pflegen.
 // (Kandidat für lib/, sobald auch die Pipeline selbst paginierte Listen braucht.)
 
+import fs from 'node:fs/promises';
 import { githubRequest, ghPath } from '../lib/github.js';
 
 const DAILY_TITLE = /^KI Daily – \d{4}-\d{2}-\d{2}$/;
@@ -43,4 +44,28 @@ export async function listWeeklyIssues(token) {
     page++;
   }
   return all;
+}
+
+/**
+ * Liest evals/goldstandard.json. Nur eine fehlende Datei gilt als leerer
+ * Goldstandard. Eine kaputte oder unlesbare Datei bricht ab: Sonst schreibt
+ * promote-feedback.js nur die neuen Eintraege zurueck, feedback-loop.yml
+ * committet das, und der bisherige Goldstandard ist still verloren.
+ */
+export async function loadGoldstandard(file) {
+  let raw;
+  try {
+    raw = await fs.readFile(file, 'utf-8');
+  } catch (err) {
+    if (err?.code === 'ENOENT') return [];
+    throw new Error(`Goldstandard ${file} nicht lesbar: ${err.message}`);
+  }
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (err) {
+    throw new Error(`Goldstandard ${file} ist kein gueltiges JSON (${err.message}); Abbruch, damit er nicht ueberschrieben wird.`);
+  }
+  if (!Array.isArray(data)) throw new Error(`Goldstandard ${file} ist keine Liste; Abbruch, damit er nicht ueberschrieben wird.`);
+  return data;
 }

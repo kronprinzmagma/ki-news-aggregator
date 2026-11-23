@@ -212,5 +212,6 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Scoring auf `claude-haiku-5-5`; Aufbereitung bleibt nach Vergleichslauf auf `claude-sonnet-4-6` (`lib/config.js`, `evals/deliver_model_compare.js`)
 - [x] Aufbereitung, Review, Weekly und Audio-Skript auf `claude-sonnet-5-5`: Länge über strukturierte Ausgabe mit Wortbudget pro Block begrenzt, Vergleichslauf 2026-11-22 (`evals/EVALS.md`)
 - [x] Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) und promptfoo-Eval mit festen Fällen (`evals/redteam/`, `injection.yml`)
+- [x] Ausgabefilter vor dem Issue (`stripModelMarkup`, 2026-11-23): keine HTML-Kommentare (gefälschte Meta-Marker), rohen Tags oder Checkbox-Zeilen aus Modelltext; Injection-Fälle T13/T14
 - [x] Haupttext-Extraktion mit defuddle, eigene Suchmuster als Rückfall (`lib/readable.js`)
 - [x] Semgrep-Prüfung in CI (vorerst nur Warnung), CI auf Node 26

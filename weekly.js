@@ -6,6 +6,7 @@ import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
 import { parseArticleSections } from './lib/issue-format.js';
 import { generateWeeklyAudio } from './lib/audio.js';
+import { stripModelMarkup } from './lib/text-utils.js';
 
 loadEnv();
 
@@ -232,10 +233,12 @@ async function main() {
   console.log(`[weekly] ${allArticles.length} unique Artikel – Pool für Themenwahl: ${articlePool.length} (davon ${score5Count} Score 5)`);
 
   console.log('[weekly] Generiere themen-zentrierten Digest per Claude...');
-  const digestBody = await claudeText(
+  // Ausgabefilter vor dem Issue: keine HTML-Kommentare (gefaelschte Meta-Marker)
+  // und keine rohen Tags. Checkboxen gehoeren im Weekly zum Format (Themen-Feedback).
+  const digestBody = stripModelMarkup(await claudeText(
     WEEKLY_PROMPT(articlePool, weekInfo),
     { model: WEEKLY_MODEL, maxTokens: 4000, timeoutMs: 120_000, logTag: 'weekly' }
-  );
+  ), { keepCheckboxes: true });
 
   // Audio-Hörfassung (optional, No-Op ohne OPENAI_API_KEY) – vor der
   // Issue-Erstellung, damit der 🎧-Link direkt in den Body kann.
