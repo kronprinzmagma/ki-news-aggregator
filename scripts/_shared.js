@@ -58,13 +58,13 @@ export async function loadGoldstandard(file) {
     raw = await fs.readFile(file, 'utf-8');
   } catch (err) {
     if (err?.code === 'ENOENT') return [];
-    throw new Error(`Goldstandard ${file} nicht lesbar: ${err.message}`);
+    throw new Error(`Goldstandard ${file} nicht lesbar: ${err.message}`, { cause: err });
   }
   let data;
   try {
     data = JSON.parse(raw);
   } catch (err) {
-    throw new Error(`Goldstandard ${file} ist kein gueltiges JSON (${err.message}); Abbruch, damit er nicht ueberschrieben wird.`);
+    throw new Error(`Goldstandard ${file} ist kein gueltiges JSON (${err.message}); Abbruch, damit er nicht ueberschrieben wird.`, { cause: err });
   }
   if (!Array.isArray(data)) throw new Error(`Goldstandard ${file} ist keine Liste; Abbruch, damit er nicht ueberschrieben wird.`);
   return data;

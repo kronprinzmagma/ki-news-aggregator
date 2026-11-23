@@ -190,13 +190,15 @@ lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
                          close-old-issues, eval.yml, publish-archive.yml,
-                         test.yml, feedback-loop.yml, audio-backfill.yml,
+                         test.yml (ESLint + tests with coverage),
+                         feedback-loop.yml, audio-backfill.yml,
                          embedding-dedup-eval.yml, injection.yml (manual),
                          semgrep.yml (warning only)
 scripts/               — Archive build, stats export, feedback promotion,
                          audio refresh, cover generation
 evals/                 — Scoring, deliver and injection evals, review UI
-test/                  — node:test suite (`npm test`)
+test/                  — node:test suite (`npm test`; CI: `npm run lint`
+                         and `npm run test:coverage`)
 ```
 
 **Environment variables** (in addition to the secrets listed below): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain), `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run, `NEWSAPI_KEY` is read only by the inactive NewsAPI adapter, `KI_NEWS_SCORE_MODEL` / `KI_NEWS_DELIVER_MODEL` override the models for eval comparison runs, `LAME_PATH` / `FFMPEG_PATH` point to the audio encoders.
