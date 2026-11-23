@@ -69,7 +69,7 @@ Jeder Artikel im Daily-Issue hat vier Feedback-Checkboxen:
 | `weiterverfolgen` allein | Kein Promote (zu weiches Signal) |
 | `wertvoll` UND `irrelevant` | Kein Promote (widersprüchlich) |
 
-Dedupliziert wird per URL gegen bestehende Goldstandard-Einträge. Idempotent — das Script kann jederzeit erneut laufen.
+Dedupliziert wird per URL gegen bestehende Goldstandard-Einträge. Idempotent — das Script kann jederzeit erneut laufen. Fehlt `goldstandard.json`, beginnt der Goldstandard leer; ist die Datei kaputt (ungültiges JSON, keine Liste), bricht das Script mit Exit 1 ab, statt sie mit den neuen Einträgen zu überschreiben (`loadGoldstandard` in `scripts/_shared.js`). `feedback-loop.yml` committet dann nichts.
 
 ```bash
 GH_PAT=ghp_... node scripts/promote-feedback.js [--dry-run]
