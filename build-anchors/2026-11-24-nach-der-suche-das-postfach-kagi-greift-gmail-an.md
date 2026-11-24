@@ -8,7 +8,7 @@ article_title: "Nach der Suche das Postfach: Kagi greift Gmail an"
 
 # Praktischer Hinweis
 
-Wer testen will, kann die 60 Gratistage nutzen, ohne die Hauptadresse zu wechseln: eine eigene Domain oder Nebenadresse anbinden und prüfen, ob KI-Suche und Filter im Alltag wirklich helfen. Beachten: Mobile Apps und Adressbuch fehlen noch.
+Wer testen will, nutzt die 60 Tage zunächst mit einer Zweitadresse oder einer eigenen Domain statt der Hauptadresse. Prüfen Sie in dieser Zeit, ob die KI-Suche Ihre Fragen zuverlässig beantwortet und ob das Fehlen mobiler Apps im Alltag stört.
 
 ---
 

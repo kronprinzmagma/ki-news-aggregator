@@ -8,7 +8,7 @@ article_title: "Google führt eine neue Suchseite mit KI-Seitenleiste ohne Suchb
 
 # Praktischer Hinweis
 
-Wenn Sie Google privat nutzen: Probieren Sie den temporären Thread für heikle oder vorurteilsfreie Fragen, etwa Marktrecherchen, die Ihr Verlauf nicht prägen soll. Prüfen Sie kurz, ob Sie die Funktion im KI-Modus oben rechts finden.
+Testen Sie einmal im Browser, ob der temporäre Thread für heikle Recherchen taugt, etwa zu Wettbewerbern oder Ideen. Prüfen Sie, ob er sich wirklich vom bisherigen Verlauf löst. Ob Google intern etwas speichert, lässt die Meldung offen.
 
 ---
 

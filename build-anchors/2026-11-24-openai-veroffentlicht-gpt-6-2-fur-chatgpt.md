@@ -8,7 +8,7 @@ article_title: "OpenAI veröffentlicht GPT-6.2 für ChatGPT"
 
 # Praktischer Hinweis
 
-Falls Sie ein bezahltes Abo haben: Prüfen Sie, ob «GPT-6.2» in Ihrer Modellauswahl erscheint. Geben Sie dem alten und dem neuen Modell dieselbe, mehrteilige Aufgabe aus Ihrem Alltag und vergleichen Sie, ob alle Vorgaben eingehalten werden und ob zu oft abgelehnt wird.
+Wenn Sie ein bezahltes ChatGPT nutzen, prüfen Sie in der Modellauswahl, ob GPT-6.2 erscheint. Stellen Sie dann eine Ihrer typischen, mehrteiligen Aufgaben mit festen Vorgaben (Ton, Länge, Format) und vergleichen Sie, ob sich das Modell daran hält.
 
 ---
 

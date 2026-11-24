@@ -2,7 +2,7 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1448 Einträge** · Top-Quellen: heise (556) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (3)
+**1449 Einträge** · Top-Quellen: heise (557) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (3)
 
 ## Liste
 
@@ -10,6 +10,7 @@ Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Br
 - **2026-11-24** — [OpenAI veröffentlicht GPT-6.2 für ChatGPT](2026-11-24-openai-veroffentlicht-gpt-6-2-fur-chatgpt.md) · *heise · Score 4*
 - **2026-11-24** — [Nach der Suche das Postfach: Kagi greift Gmail an](2026-11-24-nach-der-suche-das-postfach-kagi-greift-gmail-an.md) · *heise · Score 4*
 - **2026-11-24** — [KI-Kennzeichnung und National Geographic – die Fotonews der Woche 47/2026](2026-11-24-ki-kennzeichnung-und-national-geographic-die-fotonews-der-wo.md) · *heise · Score 4*
+- **2026-11-24** — [Google integriert Nest-Geräte in Home-App und wechselt im Smart Home zu Gemini](2026-11-24-google-integriert-nest-gerate-in-home-app-und-wechselt-im-sm.md) · *heise · Score 4*
 - **2026-11-24** — [Google führt eine neue Suchseite mit KI-Seitenleiste ohne Suchbutton ein](2026-11-24-google-fuhrt-eine-neue-suchseite-mit-ki-seitenleiste-ohne-su.md) · *heise · Score 4*
 - **2026-11-23** — [The vibe-coding revolution is coming to all the gadgets](2026-11-23-the-vibe-coding-revolution-is-coming-to-all-the-gadgets.md) · *theverge · Score 4*
 - **2026-11-23** — [Messenger Signal: Sperre für neugierige KI-Assistenten](2026-11-23-messenger-signal-sperre-fur-neugierige-ki-assistenten.md) · *heise · Score 4*
