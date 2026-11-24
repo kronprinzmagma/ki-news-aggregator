@@ -41,9 +41,10 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 - **Höchstens fünf Artikel** – wenige persönlich relevante Nachrichten, keine Auffüllung
 - **Nur Score >= 4** – kein Rauschen, kein "weitere Artikel"-Abschnitt
 - **Pro Artikel genau drei Blöcke:**
-  1. Was ist neu (Funktion, Hintergrund und Bedingungen verständlich erklären, keine Halluzinationen)
+  1. Was ist neu (Kernsatz, 2–4 Stichpunkte mit fettem Stichwort, kurzer Hintergrund; keine Halluzinationen)
   2. Was es für die KI-Richtung heisst (nachvollziehbare Bedeutung, Fakten und Interpretation trennen)
   3. Praktischer Hinweis: hilfreicher Gesichtspunkt für Nutzung oder Entscheidung, keine Pflichtübung oder Nachlese-Aufgabe
+- **Lesbarkeit:** wenige fett markierte Schlüsselbegriffe pro Artikel, Quellenlink mit Ziel-Domain, Feedback-Kästchen nach dem Text
 - **Feedback im Issue:** Pro Artikel vier Checkboxen – `Besonders wertvoll`, `Später weiterverfolgen`, `Zu kompliziert erklärt`, `Thema nicht relevant` (die negativen sind das Trainingssignal für den Feedback-Loop)
 - **Keine Redundanz:** Wenn zwei Artikel denselben Trend beschreiben, gewinnt der stärkere
 - **Keine künstliche Quellenquote:** Wenn die fünf relevantesten Artikel aus derselben Quelle kommen, ist das okay – Relevanz gewinnt.

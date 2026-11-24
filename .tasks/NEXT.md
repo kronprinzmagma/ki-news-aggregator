@@ -9,6 +9,10 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 ## Offene Punkte (Priorität absteigend)
 
+### 0. Lesbarkeits-Format im ersten Daily prüfen (seit 2026-11-24)
+
+Kernsatz, Stichpunkte und fette Begriffe sind nur mit Tests geprüft, nicht mit echten Modelltexten. Nach dem ersten Lauf Wortzahl, Fettmenge und Review-Werte ansehen.
+
 ### 1. Eval-Goldstandard weiter wachsen lassen
 
 Stand 11.06.: 34 Einträge (17 via erstem feedback-loop-Lauf promotet). Ziel: ~50 mit breiterer Score-Verteilung (aktuell 21× Score 5, nur 1× Score 2 – Mittelfeld-Urteile fehlen). Wächst automatisch über `feedback-loop.yml` (sonntags); beim Lesen auch mal „Thema nicht relevant" bei Mittelmass setzen, nicht nur Extreme markieren.

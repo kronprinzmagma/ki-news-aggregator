@@ -30,6 +30,7 @@ import { loadEnv, requireEnv } from '../lib/env.js';
 import { todayString } from '../lib/date.js';
 import { claudeStructured, getUsageSummary } from '../lib/claude.js';
 import { SCORE_MODEL } from '../lib/config.js';
+import { extractWriteup } from '../lib/issue-format.js';
 import { closeStore } from '../lib/store.js';
 import { detectBannedPhrases } from '../lib/text-quality.js';
 import Database from 'better-sqlite3';
@@ -119,14 +120,9 @@ export function splitSummary(markdown) {
     try { meta = JSON.parse(matches[i][1]); } catch { continue; }
     if (!meta?.url) continue;
 
-    // 3-Block-Writeup beginnt nach der "Score X/5 · [quelle](url)"-Zeile
-    // und den beiden Checkbox-Zeilen.
-    const writeupStart = section.search(/\*\*Was ist neu\*\*/);
-    if (writeupStart === -1) continue;
-    const writeupEnd = section.search(/\n---\n/);
-    const writeup = section
-      .slice(writeupStart, writeupEnd === -1 ? undefined : writeupEnd)
-      .trim();
+    // 3-Block-Writeup ab «Was ist neu» bis zu Trenner oder Feedback-Kästchen.
+    const writeup = extractWriteup(section);
+    if (!writeup) continue;
 
     blocks.push({ url: meta.url, titel: meta.titel, quelle: meta.quelle, score: meta.score, writeup });
   }

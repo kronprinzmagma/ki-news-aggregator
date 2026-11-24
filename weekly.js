@@ -4,7 +4,7 @@ import { claudeText, getUsageSummary } from './lib/claude.js';
 import { githubRequest, ghPath } from './lib/github.js';
 import { WEEKLY_MODEL, REPO_SLUG } from './lib/config.js';
 import { recordUsage, closeStore } from './lib/store.js';
-import { parseArticleSections } from './lib/issue-format.js';
+import { parseArticleSections, extractWriteup } from './lib/issue-format.js';
 import { generateWeeklyAudio } from './lib/audio.js';
 import { stripModelMarkup } from './lib/text-utils.js';
 
@@ -18,17 +18,18 @@ function unescapeMarkdown(s) {
   return (s || '').replace(/\\([\\`*_[\]()#><])/g, '$1');
 }
 
+// Ein Block endet erst an der nächsten Blocküberschrift, nicht beim ersten
+// «**»: Seit 2026-11-23 enthalten die Blöcke fett markierte Begriffe.
+const NEXT_BLOCK = String.raw`(?=\n\*\*(?:Was ist neu|Was es für die KI-Richtung heisst|Warum es produktrelevant ist|Praktischer Hinweis|Build-Anker|Projektanker)\*\*|\n>|$)`;
+const blockRe = heading => new RegExp(String.raw`\*\*${heading}\*\*\s*([\s\S]*?)` + NEXT_BLOCK);
+const flatten = m => (m ? m[1].replace(/\*\*/g, '').replace(/\n+/g, ' ').trim() : '');
+
 function extractBlocks(section) {
-  const neuMatch = /\*\*Was ist neu\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
-  const richtungMatch = /\*\*Was es für die KI-Richtung heisst\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section)
-    || /\*\*Warum es produktrelevant ist\*\*\s*([\s\S]*?)(?=\*\*|$)/.exec(section);
-  const ankerMatch = /\*\*Praktischer Hinweis\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
-    || /\*\*Build-Anker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section)
-    || /\*\*Projektanker\*\*\s*([\s\S]*?)(?=\*\*|>|$)/.exec(section);
+  const text = extractWriteup(section) || section;
   return {
-    wasIstNeu: neuMatch ? neuMatch[1].replace(/\n+/g, ' ').trim() : '',
-    richtung: richtungMatch ? richtungMatch[1].replace(/\n+/g, ' ').trim() : '',
-    anker: ankerMatch ? ankerMatch[1].replace(/\n+/g, ' ').trim() : '',
+    wasIstNeu: flatten(blockRe('Was ist neu').exec(text)),
+    richtung: flatten(blockRe('Was es für die KI-Richtung heisst').exec(text) || blockRe('Warum es produktrelevant ist').exec(text)),
+    anker: flatten(blockRe('Praktischer Hinweis').exec(text) || blockRe('Build-Anker').exec(text) || blockRe('Projektanker').exec(text)),
   };
 }
 
