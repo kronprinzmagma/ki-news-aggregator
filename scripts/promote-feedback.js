@@ -33,7 +33,7 @@ import { loadEnv } from '../lib/env.js';
 import { parseArticleSections } from '../lib/issue-format.js';
 import { httpGet } from '../lib/http.js';
 import { htmlToPlainText } from '../lib/readable.js';
-import { listDailyIssues } from './_shared.js';
+import { listDailyIssues, loadGoldstandard } from './_shared.js';
 
 loadEnv();
 
@@ -141,13 +141,10 @@ async function main() {
   const issues = await listDailyIssues(TOKEN);
   console.log(`[promote] ${issues.length} Daily-Issues gefunden`);
 
-  // Aktuellen Goldstandard laden
-  let goldstandard;
-  try {
-    goldstandard = JSON.parse(await fs.readFile(GOLD_FILE, 'utf-8'));
-  } catch {
-    goldstandard = [];
-  }
+  // Aktuellen Goldstandard laden: fehlt die Datei, startet er leer; ist sie
+  // kaputt, bricht der Lauf ab (Exit 1), statt sie mit den neuen Eintraegen
+  // zu ueberschreiben.
+  const goldstandard = await loadGoldstandard(GOLD_FILE);
   const existingUrls = new Set(goldstandard.map(g => g.url));
   console.log(`[promote] ${goldstandard.length} bestehende Goldstandard-Einträge`);
 

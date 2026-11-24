@@ -7,7 +7,7 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 # Current State
 
-Stand: 2026-11-23
+Stand: 2026-11-24
 
 ## Lesbarkeit der Aufbereitung (2026-11-23)
 
@@ -22,7 +22,8 @@ Stand: 2026-11-23
 - Vorlesen über `gpt-realtime-2.1-mini` (Realtime-API, Stimme `cedar`, MP3 via `lame`); `gpt-4o-mini-tts` wird am 06.01.2027 abgeschaltet. Angaben zu `gpt-4o-mini-tts` und `onyx` weiter unten sind überholt.
 - Haupttext-Extraktion mit defuddle (`lib/readable.js`), eigene Suchmuster als Rückfall.
 - Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) plus promptfoo-Eval (`evals/redteam/`, `injection.yml`, nur manuell).
-- CI auf Node 26; Semgrep (`semgrep.yml`) bei Push/PR, vorerst nur als Warnung. `npm test`: 102 Tests.
+- CI auf Node 26; Semgrep (`semgrep.yml`) bei Push/PR, vorerst nur als Warnung. Seit 2026-11-23 in `test.yml` ESLint (`js/recommended`, blockierend) und Tests mit Abdeckungsbericht (Zeilen rund 62 %). `npm test`: 116 Tests.
+- 2026-11-23: Ausgabefilter `stripModelMarkup` vor dem Issue (Aufbereitung, Einleitung, Weekly; Injection-Fälle T13/T14); `promote-feedback.js` bricht bei kaputter `goldstandard.json` ab, statt sie zu überschreiben.
 
 Aktueller Textstand: Die 21 Ausgaben der ersten Issue-Seite sind bereinigt; sieben Dailys enthalten nach der Auswahlkorrektur elf Beiträge. Der anschliessend bestätigte Erklärungsstil ist in den sechs nichtleeren Dailys und allen 14 Weeklys umgesetzt, mit mehr Hintergrund und praktischen Hinweisen. Alle 20 zugehörigen Hörfassungen sind aus diesen Texten erneut erzeugt. Details: `reviews/2026-10-08/STYLE-UPDATE.md`; die erste Korrekturfassung ist in `reviews/2026-10-08/CLEANUP.md` dokumentiert. Audio-Assets ohne aktuellen Link im Issue werden aus Archiv-Player und Podcast-Feed ausgeschlossen. Die folgenden datierten Abschnitte dokumentieren die Historie; widersprechende Angaben sind durch den Massstab oben ersetzt.
 

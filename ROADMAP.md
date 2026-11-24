@@ -169,6 +169,7 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Hochprio-Fixes: Rerun-Dedup (Issue des Lauftags ausgeschlossen), Score-Clamping, Unhandled Rejection im Asset-Upload, Entity-Decoding-Reihenfolge, Endlos-Redirect in promote-feedback
 - [x] Robustheit: fehlertolerante Aufbereitungen mit Concurrency-Limit, Exit 1 bei Score-Totalausfall, Injection-Härtung (Markdown, Meta-Marker, URLs, Workflow-Inputs)
 - [x] CI: test.yml (npm test bei Push/PR), Actions SHA-gepinnt, Concurrency-Gruppen, permissions-Baseline
+- [x] CI-Paket (2026-11-23): ESLint `js/recommended` blockierend und Testabdeckung (`--experimental-test-coverage`) in test.yml
 - [x] Feedback-Loop automatisiert: feedback-loop.yml (promote → Goldstandard-Commit → Scoring-Eval), eval-regression-Issue bei MAE > 1.5, Quellen-Feedback-Statistik (scripts/feedback-stats.js)
 - [x] Stats-Seite im Pages-Archiv: scripts/export-stats.js → assets/stats.json → stats.html (Kosten/Tag, Cache-Hit-Rate, Quellen, Adapter-Health)
 - [x] Podcast verzeichnis-tauglich: itunes:image + generiertes Cover (scripts/make-cover.js)
@@ -211,5 +212,6 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 - [x] Scoring auf `claude-haiku-5-5`; Aufbereitung bleibt nach Vergleichslauf auf `claude-sonnet-4-6` (`lib/config.js`, `evals/deliver_model_compare.js`)
 - [x] Aufbereitung, Review, Weekly und Audio-Skript auf `claude-sonnet-5-5`: Länge über strukturierte Ausgabe mit Wortbudget pro Block begrenzt, Vergleichslauf 2026-11-22 (`evals/EVALS.md`)
 - [x] Prompt-Injection-Härtung (`sanitizeSourceText`, `cleanWriteup`) und promptfoo-Eval mit festen Fällen (`evals/redteam/`, `injection.yml`)
+- [x] Ausgabefilter vor dem Issue (`stripModelMarkup`, 2026-11-23): keine HTML-Kommentare (gefälschte Meta-Marker), rohen Tags oder Checkbox-Zeilen aus Modelltext; Injection-Fälle T13/T14
 - [x] Haupttext-Extraktion mit defuddle, eigene Suchmuster als Rückfall (`lib/readable.js`)
 - [x] Semgrep-Prüfung in CI (vorerst nur Warnung), CI auf Node 26

@@ -33,7 +33,6 @@ import { closeStore } from '../lib/store.js';
 import { judgeOne } from './deliver_eval.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '..');
 const JUDGE_MODEL = process.env.KI_NEWS_JUDGE_MODEL || 'claude-haiku-4-5-20251001';
 const N = parseInt(process.env.COMPARE_N || '6', 10);
 const MIN_CHARS = 2500;
@@ -61,7 +60,7 @@ async function main() {
   console.log(`[compare] ${articles.length} Artikel · Kandidat ${DELIVER_MODEL} · Richter ${JUDGE_MODEL}`);
 
   // 1. Auswahl (Structured Output)
-  let selection = { ok: false };
+  let selection;
   try {
     const picked = await selectDailyArticles(articles);
     selection = { ok: true, count: picked.length, urls: picked.map(a => a.url) };

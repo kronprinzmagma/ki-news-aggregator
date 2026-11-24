@@ -135,7 +135,7 @@ The aggregator scores everything that comes in. A source that consistently drops
 
 **Structured LLM output via tool-use.** The scoring stage and the review pass use Anthropic's structured-output pattern: the model is forced to call a named tool (`submit_score`, `submit_review`) whose `input_schema` defines the exact return shape. No regex JSON-strip, no parse fallback: strict tool use constrains field types and the client validates the full JSON schema and rejects truncated responses. Downstream JSON files are still validated against Zod schemas in `lib/schema.js` as a second defence at the file-IO boundary.
 
-**Prompt-injection defence.** Article text is untrusted input that ends up in a public issue. Before scoring, selection, write-up and review, `sanitizeSourceText` normalises it (NFKC) and strips zero-width, bidi and tag characters, HTML comments, tags with attributes and Markdown images. The write-up prompt separates data from instructions and repeats the instructions after the data; `cleanWriteup` validates the output before publication and drops an article whose write-up lost its required structure. A promptfoo red-team eval with fixed injection cases (`evals/redteam/`, workflow `injection.yml`) runs through the same production path.
+**Prompt-injection defence.** Article text is untrusted input that ends up in a public issue. Before scoring, selection, write-up and review, `sanitizeSourceText` normalises it (NFKC) and strips zero-width, bidi and tag characters, HTML comments, tags with attributes and Markdown images. The write-up prompt separates data from instructions and repeats the instructions after the data; `cleanWriteup` validates the output before publication and drops an article whose write-up lost its required structure; `stripModelMarkup` removes HTML comments (a forged `ki-news-meta` marker would otherwise be read as a real article by the weekly digest and the cross-day dedup), raw HTML tags and checkbox lines from the write-ups, the overview and the weekly digest. A promptfoo red-team eval with fixed injection cases (`evals/redteam/`, workflow `injection.yml`) runs through the same production path.
 
 **Cheap model for scoring.** Scoring runs on Claude Haiku; only the per-article content varies across calls. The system prompt is marked as an Anthropic `cache_control: ephemeral` prefix, but at about 1,000 tokens it stays below Haiku's cache minimum, so the saving comes from the model choice (the code comment estimates about CHF 5 a month instead of about CHF 20 with Sonnet).
 
@@ -190,13 +190,15 @@ lib/                   — Shared modules: claude, github, http, store,
                          schema, config, topic-overlap, issue-format, …
 .github/workflows/     — daily-news.yml, weekly-digest.yml, watchdog,
                          close-old-issues, eval.yml, publish-archive.yml,
-                         test.yml, feedback-loop.yml, audio-backfill.yml,
+                         test.yml (ESLint + tests with coverage),
+                         feedback-loop.yml, audio-backfill.yml,
                          embedding-dedup-eval.yml, injection.yml (manual),
                          semgrep.yml (warning only)
 scripts/               — Archive build, stats export, feedback promotion,
                          audio refresh, cover generation
 evals/                 — Scoring, deliver and injection evals, review UI
-test/                  — node:test suite (`npm test`)
+test/                  — node:test suite (`npm test`; CI: `npm run lint`
+                         and `npm run test:coverage`)
 ```
 
 **Environment variables** (in addition to the secrets listed below): `KI_NEWS_DB` overrides the SQLite path, `PAGES_URL` overrides the GitHub-Pages base URL for feeds (custom domain), `SCORE_USE_BATCH=false` switches scoring to synchronous calls, `RUN_DATE=YYYY-MM-DD` backdates a run, `NEWSAPI_KEY` is read only by the inactive NewsAPI adapter, `KI_NEWS_SCORE_MODEL` / `KI_NEWS_DELIVER_MODEL` override the models for eval comparison runs, `LAME_PATH` / `FFMPEG_PATH` point to the audio encoders.

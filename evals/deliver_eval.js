@@ -30,7 +30,7 @@ import { loadEnv, requireEnv } from '../lib/env.js';
 import { todayString } from '../lib/date.js';
 import { claudeStructured, getUsageSummary } from '../lib/claude.js';
 import { SCORE_MODEL } from '../lib/config.js';
-import { parseArticleMetas, extractWriteup } from '../lib/issue-format.js';
+import { extractWriteup } from '../lib/issue-format.js';
 import { closeStore } from '../lib/store.js';
 import { detectBannedPhrases } from '../lib/text-quality.js';
 import Database from 'better-sqlite3';

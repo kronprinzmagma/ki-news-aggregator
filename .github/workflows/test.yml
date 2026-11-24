@@ -1,7 +1,7 @@
 name: Tests
 
-# Führt die node:test-Suite bei jedem Push/PR aus – vorher liefen die Tests
-# ausschliesslich lokal.
+# Führt bei jedem Push/PR ESLint (js/recommended, blockierend) und die
+# node:test-Suite mit Abdeckungsbericht aus (Katalog C5/C9).
 
 on:
   push:
@@ -26,5 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm test
+      - name: Lint (ESLint js/recommended)
+        run: npm run lint
+
+      - name: Run tests with coverage
+        run: npm run test:coverage

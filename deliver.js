@@ -13,7 +13,7 @@ import {
   CROSS_DAY_DEDUP_LOOKBACK,
   DAILY_MAX_ARTICLES,
 } from './lib/config.js';
-import { sanitizeMarkdown, sanitizeUrl, sanitizeSourceText } from './lib/text-utils.js';
+import { sanitizeMarkdown, sanitizeUrl, sanitizeSourceText, stripModelMarkup } from './lib/text-utils.js';
 import { runWithConcurrency } from './lib/concurrency.js';
 import { normalizeUrl } from './lib/url.js';
 import { selectDailyArticles, inspectWriteup, cleanWriteup, formatWriteup, validateReviewCoverage, WRITEUP_TARGET_WORDS, WRITEUP_MAX_WORDS, WRITEUP_BLOCKS, WRITEUP_SCHEMA } from './lib/editorial.js';
@@ -330,10 +330,14 @@ async function findExistingIssue(token, issueTitle) {
   // bei einem schnellen Rerun würde sonst ein zweites Daily-Issue entstehen.
   try {
     const r = await githubRequest(token, 'GET', ghPath.issues('?state=all&labels=summary&per_page=20'));
-    if (r.status !== 200) return null;
+    if (r.status !== 200) {
+      console.warn(`GitHub Issue-Liste (Rückfall) fehlgeschlagen: HTTP ${r.status}`);
+      return null;
+    }
     const issues = JSON.parse(r.body);
     return issues.filter(i => !i.pull_request).find(i => i.title === issueTitle) || null;
-  } catch {
+  } catch (err) {
+    console.warn(`GitHub Issue-Liste (Rückfall) nicht lesbar: ${err.message}`);
     return null;
   }
 }
@@ -651,9 +655,13 @@ async function main() {
 
   let ueberblick;
   try {
-    ueberblick = await claudeText(UEBERBLICK_PROMPT(topArtikel, aufbereitungen),
-      { model: DELIVER_MODEL, maxTokens: 180, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' });
-  } catch {
+    // Einleitung geht ungeprueft ins Issue: denselben Ausgabefilter anwenden
+    // wie bei den Aufbereitungen (keine Kommentare/Marker, Tags, Checkboxen).
+    ueberblick = stripModelMarkup(await claudeText(UEBERBLICK_PROMPT(topArtikel, aufbereitungen),
+      { model: DELIVER_MODEL, maxTokens: 180, timeoutMs: API_TIMEOUT_MS, logTag: 'overview' }));
+    if (!ueberblick) ueberblick = buildOverview(topArtikel);
+  } catch (err) {
+    console.warn(`[overview] Einleitung per Modell fehlgeschlagen, Rückfall auf Titelliste: ${err.message}`);
     ueberblick = buildOverview(topArtikel);
   }
 

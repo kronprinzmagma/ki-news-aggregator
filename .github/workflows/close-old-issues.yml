@@ -9,28 +9,23 @@ on:
 jobs:
   close-old-issues:
     runs-on: ubuntu-latest
-    # Arbeitet ausschliesslich mit GH_PAT – das Workflow-Token braucht nichts.
-    permissions: {}
+    # Schreibt nur mit GH_PAT; das Workflow-Token braucht nur Lesen fuer den Checkout.
+    permissions:
+      contents: read
     timeout-minutes: 10
 
     steps:
-      - name: Issues mit Label 'summary' schliessen, die älter als 7 Tage sind
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+
+      # Dailies (Label summary) nach 7 Tagen schliessen, von den Wochenrueckblicken
+      # (Label weekly-digest) die letzten 14 offen lassen. Warnungen und andere Issues
+      # bleiben unberuehrt. Logik und Tests: scripts/close-old-issues.js,
+      # test/issue-retention.test.js (nachgebaut aus gesichert/2026-10-08).
+      - name: Alte Briefings archivieren (Inhalt unveraendert)
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          CUTOFF=$(date -d '7 days ago' --iso-8601=seconds)
-          echo "Schliesse Issues älter als: $CUTOFF"
-
-          gh issue list \
-            --repo "$GITHUB_REPOSITORY" \
-            --label summary \
-            --state open \
-            --json number,createdAt \
-            | jq -r --arg cutoff "$CUTOFF" \
-                '.[] | select(.createdAt < $cutoff) | .number' \
-            | while read -r num; do
-                echo "Schliesse Issue #$num"
-                gh issue close "$num" \
-                  --repo "$GITHUB_REPOSITORY" \
-                  --comment "Automatisch geschlossen nach 7 Tagen."
-              done
+        run: node scripts/close-old-issues.js
