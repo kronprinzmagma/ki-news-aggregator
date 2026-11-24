@@ -2,12 +2,15 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1449 Einträge** · Top-Quellen: heise (557) · hackernews (413) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · aheadofai (4) · theverge (3)
+**1452 Einträge** · Top-Quellen: heise (558) · hackernews (414) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · theverge (4) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-24** — [Tidal bans AI-generated music](2026-11-24-tidal-bans-ai-generated-music.md) · *hackernews · Score 4*
+- **2026-11-24** — [The New York Times warns photographers not to update Photoshop over AI features](2026-11-24-the-new-york-times-warns-photographers-not-to-update-photosh.md) · *theverge · Score 5*
 - **2026-11-24** — [Oregon and Virginia sue SpaceX over Grok’s porn deepfakes](2026-11-24-oregon-and-virginia-sue-spacex-over-grok-s-porn-deepfakes.md) · *theverge · Score 4*
 - **2026-11-24** — [OpenAI veröffentlicht GPT-6.2 für ChatGPT](2026-11-24-openai-veroffentlicht-gpt-6-2-fur-chatgpt.md) · *heise · Score 4*
+- **2026-11-24** — [Nothing stellt am 8. Dezember KI-Ohrhörer Ear (note) mit Aufnahmefunktion vor](2026-11-24-nothing-stellt-am-8-dezember-ki-ohrhorer-ear-note-mit-aufnah.md) · *heise · Score 4*
 - **2026-11-24** — [Nach der Suche das Postfach: Kagi greift Gmail an](2026-11-24-nach-der-suche-das-postfach-kagi-greift-gmail-an.md) · *heise · Score 4*
 - **2026-11-24** — [KI-Kennzeichnung und National Geographic – die Fotonews der Woche 47/2026](2026-11-24-ki-kennzeichnung-und-national-geographic-die-fotonews-der-wo.md) · *heise · Score 4*
 - **2026-11-24** — [Google integriert Nest-Geräte in Home-App und wechselt im Smart Home zu Gemini](2026-11-24-google-integriert-nest-gerate-in-home-app-und-wechselt-im-sm.md) · *heise · Score 4*

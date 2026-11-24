@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T16:15:33.486Z",
+  "generated_at": "2026-11-24T18:49:36.066Z",
   "lookback_days": 60,
   "issues": 54,
   "usage_daily": [
@@ -1126,33 +1126,33 @@
     {
       "run_date": "2026-11-24",
       "stage": "deliver",
-      "calls": 18,
-      "input_tokens": 131442,
-      "output_tokens": 25123,
-      "cache_read": 0,
-      "cache_creation": 8672,
-      "usd": 0.5358
+      "calls": 29,
+      "input_tokens": 229752,
+      "output_tokens": 41046,
+      "cache_read": 2164,
+      "cache_creation": 13828,
+      "usd": 0.905
     },
     {
       "run_date": "2026-11-24",
       "stage": "score",
-      "calls": 141,
-      "input_tokens": 165687,
-      "output_tokens": 31187,
-      "cache_read": 272996,
-      "cache_creation": 3928,
-      "usd": 0.0177
+      "calls": 209,
+      "input_tokens": 247096,
+      "output_tokens": 46152,
+      "cache_read": 404584,
+      "cache_creation": 5892,
+      "usd": 0.0263
     }
   ],
   "issue_sources": [
     {
       "quelle": "heise",
-      "articles": 114,
+      "articles": 113,
       "avg_score": 4.06
     },
     {
       "quelle": "hackernews",
-      "articles": 52,
+      "articles": 53,
       "avg_score": 4.23
     },
     {
@@ -1171,13 +1171,13 @@
       "avg_score": 4.29
     },
     {
-      "quelle": "golem",
+      "quelle": "theverge",
       "articles": 3,
-      "avg_score": 4
+      "avg_score": 4.33
     },
     {
-      "quelle": "theverge",
-      "articles": 2,
+      "quelle": "golem",
+      "articles": 3,
       "avg_score": 4
     },
     {
@@ -1209,7 +1209,7 @@
     {
       "adapter": "heise",
       "runs": 14,
-      "total_fetched": 467,
+      "total_fetched": 462,
       "total_truncated": 157,
       "error_runs": 3
     },
@@ -1259,7 +1259,7 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 240,
-      "total_truncated": 58,
+      "total_truncated": 59,
       "error_runs": 2
     },
     {
@@ -1286,8 +1286,8 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 75,
-      "total_truncated": 27,
+      "total_fetched": 73,
+      "total_truncated": 25,
       "error_runs": 3
     },
     {

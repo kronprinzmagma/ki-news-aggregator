@@ -8,7 +8,7 @@ article_title: "KI-Kennzeichnung und National Geographic – die Fotonews der Wo
 
 # Praktischer Hinweis
 
-Prüfen Sie, wie Ihr Team KI-Bilder in Präsentationen, Websites oder Produkten benennt. Ein Beispiel: «Illustration (KI-generiert)» statt «Foto». Eine kurze Durchsicht der letzten Materialien reicht. Rechtlich verbindlich ist das nicht; bei Unsicherheit fragen Sie Ihre Rechtsabteilung.
+Das ist meine eigene Idee, nicht Teil des Berichts: Sehen Sie Ihre Texte und Präsentationen durch. Wo steht «Foto» bei einem **KI-generierten** Bild? Dort könnten Sie «KI-Bild» oder «Illustration» schreiben. Das ist **eine Vorsichtsmassnahme**, keine Rechtsberatung.
 
 ---
 

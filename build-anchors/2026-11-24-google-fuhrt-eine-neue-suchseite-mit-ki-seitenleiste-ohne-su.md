@@ -8,7 +8,7 @@ article_title: "Google führt eine neue Suchseite mit KI-Seitenleiste ohne Suchb
 
 # Praktischer Hinweis
 
-Testen Sie einmal im Browser, ob der temporäre Thread für heikle Recherchen taugt, etwa zu Wettbewerbern oder Ideen. Prüfen Sie, ob er sich wirklich vom bisherigen Verlauf löst. Ob Google intern etwas speichert, lässt die Meldung offen.
+Probieren Sie den **temporären Chat** für heikle Recherchen, etwa zu Wettbewerbern oder Personalthemen, damit nichts im Verlauf landet. Prüfen Sie ausserdem, wie viel **Traffic** Ihre Website aus der Google-Suche bekommt, und beobachten Sie dessen Entwicklung.
 
 ---
 
