@@ -28,7 +28,7 @@ deliver.js → summary-YYYY-MM-DD.md + GitHub Issue
 
 **Deliver** (`deliver.js`): Liest `scored-YYYY-MM-DD.json` für dasselbe Laufdatum, nutzt Score-1/2/3-Samples fuer die Review-Schlaufe, filtert fuer die Ausgabe auf Score >= 4, dedupliziert Themen-Cluster, bereitet jeden Artikel in drei Blöcken auf, erstellt GitHub Issue.
 
-**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 6 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Quellentreue, Verständlichkeit für nicht-technische Produktleser) – inkl. der geschriebenen drei Blöcke. Artikel mit `needs_rewrite=true` werden sofort mit konkretem `rewrite_hint` neu aufbereitet, bevor sie ins Issue gehen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
+**Review-Schlaufe + Rewrite-Loop** (`deliver.js`): Nach der Aufbereitung bewertet Claude jeden Artikel auf 6 Ebenen (Produkt-Relevanz, Technische Substanz, Lernwert, Aufbereitungsqualität, Quellentreue, Verständlichkeit für nicht-technische Produktleser) – inkl. der geschriebenen drei Blöcke. Bestandene Texte bleiben unverändert; schwache werden in höchstens zwei Runden mit konkretem Hinweis überarbeitet und neu geprüft (`lib/review-loop.js`), danach ausgeschlossen. Zusätzlich werden bis zu zwei ausgeschlossene Beispiele je Score-Stufe 1/2/3 geprüft. Ergebnis und `process_adjustments` landen in `run-summary-YYYY-MM-DD.json`.
 
 **Adapter** (`adapters/`): Jeder Adapter ist ein eigenes Modul mit `fetchArticles()`-Export. Liefert Array von `{ titel, url, datum, quelle, rohtext }`. Fehler einzelner Adapter brechen den Gesamtlauf nicht ab.
 

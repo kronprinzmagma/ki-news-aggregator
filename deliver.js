@@ -16,8 +16,8 @@ import {
 import { sanitizeMarkdown, sanitizeUrl, sanitizeSourceText, stripModelMarkup } from './lib/text-utils.js';
 import { PERSONA, TOPIC_RULES } from './lib/persona.js';
 import { runWithConcurrency } from './lib/concurrency.js';
-import { normalizeUrl } from './lib/url.js';
-import { selectDailyArticles, inspectWriteup, cleanWriteup, formatWriteup, validateReviewCoverage, WRITEUP_TARGET_WORDS, WRITEUP_MAX_WORDS, WRITEUP_BLOCKS, WRITEUP_SCHEMA } from './lib/editorial.js';
+import { runReviewLoop } from './lib/review-loop.js';
+import { selectDailyArticles, cleanWriteup, formatWriteup, validateReviewCoverage, WRITEUP_TARGET_WORDS, WRITEUP_MAX_WORDS, WRITEUP_BLOCKS, WRITEUP_SCHEMA } from './lib/editorial.js';
 import { detectBannedPhrasesBatch } from './lib/text-quality.js';
 import { writeBuildAnchor, writeBuildAnchorIndex } from './lib/build-anchors.js';
 import { dedupByTopic } from './lib/topic-overlap.js';
@@ -577,56 +577,25 @@ async function main() {
     process.exit(1);
   }
 
-  runSummary.review = await reviewRun(topArtikel, aufbereitungen, lowScoreSamples);
-  if (runSummary.review.error) {
+  const loop = await runReviewLoop({
+    articles: topArtikel, texts: aufbereitungen, lowScoreSamples,
+    review: reviewRun,
+    rewrite: (artikel, text, hint) => aufbereiteArtikel(artikel, {
+      prompt: REWRITE_PROMPT(artikel, text, { hint }), logTag: 'rewrite',
+    }),
+  });
+  runSummary.review = loop.review;
+  if (loop.reviewInitial) runSummary.review_initial = loop.reviewInitial;
+  runSummary.deliver.quality_excluded = loop.excluded;
+  runSummary.deliver.rewrites = loop.rewrites;
+  runSummary.deliver.rewrite_log = loop.rewriteLog;
+  if (loop.error) {
     await writeRunSummary(date, runSummary);
-    throw new Error(`Veröffentlichung gestoppt: ${runSummary.review.error}`);
+    throw new Error(`Veröffentlichung ${loop.rewriteLog.length ? 'nach Rewrite ' : ''}gestoppt: ${loop.error}`);
   }
-  let rewriteCount = 0;
-  const excluded = [];
-  for (let i = topArtikel.length - 1; i >= 0; i--) {
-    const row = runSummary.review.result.selected_articles.find(r => normalizeUrl(r.url) === normalizeUrl(topArtikel[i].url));
-    if (row.product_relevance < 4 || row.input_quality !== 'good') {
-      excluded.push({ url: topArtikel[i].url, reason: row.reason });
-      topArtikel.splice(i, 1);
-      aufbereitungen.splice(i, 1);
-      continue;
-    }
-    const issues = inspectWriteup(aufbereitungen[i]);
-    if (!row.needs_rewrite && row.faithfulness >= 4 && row.comprehension_nontechnical >= 4 && row.issue_fit === 'strong' && !issues.length) continue;
-    try {
-      const rewritten = await aufbereiteArtikel(topArtikel[i], {
-        prompt: REWRITE_PROMPT(topArtikel[i], aufbereitungen[i], { hint: [row.rewrite_hint || row.reason, ...issues].join(' ') }),
-        logTag: 'rewrite',
-      });
-      if (rewritten === null) throw new Error('Rewrite ohne Drei-Block-Format');
-      aufbereitungen[i] = rewritten;
-      rewriteCount++;
-    } catch (err) {
-      excluded.push({ url: topArtikel[i].url, reason: `Rewrite fehlgeschlagen: ${err.message}` });
-      topArtikel.splice(i, 1);
-      aufbereitungen.splice(i, 1);
-    }
-  }
-  if (rewriteCount && topArtikel.length) {
-    runSummary.review_initial = runSummary.review;
-    runSummary.review = await reviewRun(topArtikel, aufbereitungen, []);
-    if (runSummary.review.error) {
-      await writeRunSummary(date, runSummary);
-      throw new Error(`Veröffentlichung nach Rewrite gestoppt: ${runSummary.review.error}`);
-    }
-  }
-  for (let i = topArtikel.length - 1; i >= 0; i--) {
-    const row = runSummary.review.result.selected_articles.find(r => normalizeUrl(r.url) === normalizeUrl(topArtikel[i].url));
-    if (row.product_relevance >= 4 && row.input_quality === 'good' && row.faithfulness >= 4
-        && row.comprehension_nontechnical >= 4 && row.issue_fit === 'strong' && !row.needs_rewrite
-        && !inspectWriteup(aufbereitungen[i]).length) continue;
-    excluded.push({ url: topArtikel[i].url, reason: row.reason });
-    topArtikel.splice(i, 1);
-    aufbereitungen.splice(i, 1);
-  }
-  runSummary.deliver.quality_excluded = excluded;
-  runSummary.deliver.rewrites = rewriteCount;
+  const rewriteCount = loop.rewrites;
+  topArtikel.splice(0, topArtikel.length, ...loop.items.map(i => i.article));
+  aufbereitungen.splice(0, aufbereitungen.length, ...loop.items.map(i => i.text));
 
   // Harter Gate "Volltext nicht verfügbar" (.tasks/NEXT.md #1): Artikel, deren
   // finale Aufbereitung oder Rohtext den Marker enthält, kommen nie ins Issue –

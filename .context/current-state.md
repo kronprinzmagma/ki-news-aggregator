@@ -9,6 +9,12 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 Stand: 2026-11-25
 
+## Rewrite-Schlaufe behält bestandene Texte (2026-11-25)
+
+- Anlass: «Claude Ship» (Score 5) bestand am 25.11. die erste Review, wurde wegen eines Formfehlers trotzdem neu geschrieben, verlor dabei Quellentreue (3) und fiel weg. Welcher Formfehler, ist nicht protokolliert.
+- Neu: `lib/review-loop.js` (nur überarbeitete Texte werden neu geprüft, höchstens zwei Runden, `deliver.rewrite_log`); `limitBold` nimmt überzähliges Fett ohne Modellaufruf zurück. Qualitätsschwellen unverändert. Tests: `test/review-loop.test.js`; `npm test`: 125 Tests.
+- Nicht gemessen: kein Lauf mit echten API-Aufrufen; erster Beleg ist das nächste Daily.
+
 ## Auswahl auf PO/Builder-Profil (2026-11-25)
 
 - Anlass: Daily vom 24.11. bestand vor allem aus Konsum- und Medienthemen; Nils markierte Tidal und Photoshop als nicht relevant.
