@@ -178,7 +178,7 @@ Ziel: Befunde des tiefgreifenden Multi-Agenten-Reviews vollständig umsetzen und
 
 ## Redaktionelle Korrektur – 2026-10-08
 
-- [x] Persönlicher Nutzen ohne Engineering-Wissen statt Entwickler-News
+- [x] Persönlicher Nutzen ohne Engineering-Wissen statt Entwickler-News (Themenwahl seit 2026-11-25 ersetzt durch PO/Builder-Profil in `lib/persona.js`)
 - [x] Höchstens fünf Daily-Artikel, einfache Überschriften und kurze Versuche
 - [x] Clientseitige Schema-/Token-Abbruch-Prüfung und Quellentreue-Gate
 - [x] Wort-Cluster-Bonus aus der Produktionsauswahl entfernt

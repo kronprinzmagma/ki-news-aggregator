@@ -7,7 +7,14 @@ Der historische Goldstandard mit 38 Nutzerlabels bleibt unverändert. CI nutzt j
 
 # Current State
 
-Stand: 2026-11-24
+Stand: 2026-11-25
+
+## Auswahl auf PO/Builder-Profil (2026-11-25)
+
+- Anlass: Daily vom 24.11. bestand vor allem aus Konsum- und Medienthemen; Nils markierte Tidal und Photoshop als nicht relevant.
+- Ursache: Das Profil vom 2026-10-08 schloss Entwickler-News aus und belohnte Vertrauen/Medien; Meldungen ohne KI-Kern erreichten Score 4.
+- Neu: `lib/persona.js` als eine Quelle für Scoring, Auswahl, Aufbereitung und Review. Messwerte in `evals/EVALS.md`. Antwortlimit beim Scoring 500 statt 300 Tokens.
+- Offen: Ein Neulauf am selben Tag wählt weiterhin neu aus.
 
 ## Lesbarkeit der Aufbereitung (2026-11-23)
 
