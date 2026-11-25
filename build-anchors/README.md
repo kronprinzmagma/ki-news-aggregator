@@ -2,10 +2,13 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1452 Einträge** · Top-Quellen: heise (558) · hackernews (414) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · theverge (4) · aheadofai (4)
+**1455 Einträge** · Top-Quellen: heise (561) · hackernews (414) · simonwillison (242) · latentspace (124) · huggingface (32) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · theverge (4) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-25** — [OpenAI veröffentlicht GPT-6.2 für ChatGPT](2026-11-25-openai-veroffentlicht-gpt-6-2-fur-chatgpt.md) · *heise · Score 4*
+- **2026-11-25** — [KI-Experiment: Anthropic führt KI-Agenten in Versuchung](2026-11-25-ki-experiment-anthropic-fuhrt-ki-agenten-in-versuchung.md) · *heise · Score 4*
+- **2026-11-25** — [Keine Secrets für Agenten: Eclipse Enclave schickt Agenten in die Sandbox](2026-11-25-keine-secrets-fur-agenten-eclipse-enclave-schickt-agenten-in.md) · *heise · Score 4*
 - **2026-11-24** — [Tidal bans AI-generated music](2026-11-24-tidal-bans-ai-generated-music.md) · *hackernews · Score 4*
 - **2026-11-24** — [The New York Times warns photographers not to update Photoshop over AI features](2026-11-24-the-new-york-times-warns-photographers-not-to-update-photosh.md) · *theverge · Score 5*
 - **2026-11-24** — [Oregon and Virginia sue SpaceX over Grok’s porn deepfakes](2026-11-24-oregon-and-virginia-sue-spacex-over-grok-s-porn-deepfakes.md) · *theverge · Score 4*
