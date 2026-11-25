@@ -8,7 +8,7 @@ article_title: "Keine Secrets für Agenten: Eclipse Enclave schickt Agenten in d
 
 # Praktischer Hinweis
 
-Prüfe, was dein Agent heute sieht: Schlüssel in Umgebungsvariablen, Zugriff auf den Home-Ordner, Schreibrechte im Projekt. **Nur das Projektverzeichnis freigeben** und keine echten Schlüssel offenlegen, wo es geht. Den Enclave-Einsatz brauchst du dafür nicht.
+Prüfe, was dein Coding-Agent heute sehen darf: **Schlüssel im Projektordner, Home-Verzeichnis, offenes Internet**. Trenne Agentenarbeit von Ordnern mit Zugangsdaten und gib ihm eigene, begrenzte Schlüssel. Enclave selbst setzt Docker voraus und ist eher etwas für Technikaffine.
 
 ---
 

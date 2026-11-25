@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T13:51:49.393Z",
+  "generated_at": "2026-11-25T16:02:31.231Z",
   "lookback_days": 60,
   "issues": 54,
   "usage_daily": [
@@ -1126,29 +1126,29 @@
     {
       "run_date": "2026-11-25",
       "stage": "deliver",
-      "calls": 12,
-      "input_tokens": 85935,
-      "output_tokens": 17032,
+      "calls": 21,
+      "input_tokens": 154749,
+      "output_tokens": 30852,
       "cache_read": 2912,
-      "cache_creation": 5156,
-      "usd": 0.3557
+      "cache_creation": 10312,
+      "usd": 0.6444
     },
     {
       "run_date": "2026-11-25",
       "stage": "score",
-      "calls": 71,
-      "input_tokens": 84977,
-      "output_tokens": 15669,
-      "cache_read": 185430,
-      "cache_creation": 2649,
-      "usd": 0.0093
+      "calls": 135,
+      "input_tokens": 161336,
+      "output_tokens": 30107,
+      "cache_read": 352317,
+      "cache_creation": 5298,
+      "usd": 0.0177
     }
   ],
   "issue_sources": [
     {
       "quelle": "heise",
       "articles": 95,
-      "avg_score": 4.07
+      "avg_score": 4.08
     },
     {
       "quelle": "hackernews",
@@ -1157,7 +1157,7 @@
     },
     {
       "quelle": "simonwillison",
-      "articles": 31,
+      "articles": 32,
       "avg_score": 4.06
     },
     {
@@ -1187,8 +1187,8 @@
     },
     {
       "quelle": "huggingface",
-      "articles": 1,
-      "avg_score": 5
+      "articles": 2,
+      "avg_score": 4.5
     }
   ],
   "adapter_health": [
@@ -1209,7 +1209,7 @@
     {
       "adapter": "heise",
       "runs": 14,
-      "total_fetched": 496,
+      "total_fetched": 491,
       "total_truncated": 157,
       "error_runs": 2
     },
@@ -1259,7 +1259,7 @@
       "adapter": "hackernews",
       "runs": 14,
       "total_fetched": 240,
-      "total_truncated": 54,
+      "total_truncated": 56,
       "error_runs": 2
     },
     {
@@ -1286,8 +1286,8 @@
     {
       "adapter": "golem",
       "runs": 14,
-      "total_fetched": 71,
-      "total_truncated": 30,
+      "total_fetched": 70,
+      "total_truncated": 29,
       "error_runs": 3
     },
     {

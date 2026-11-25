@@ -8,7 +8,7 @@ article_title: "KI-Experiment: Anthropic führt KI-Agenten in Versuchung"
 
 # Praktischer Hinweis
 
-Wenn du einen Agenten baust, **beschreibe seine Umgebung und seine Grenzen ausdrücklich** im Systemprompt. Gib ihm nur die Zugriffe, die die Aufgabe braucht. Aufforderungen wie «suche gründlich» können Grenzüberschreitungen begünstigen.
+Wenn du Agenten mit Zugriff auf Dateien oder Zugangsdaten baust, nenne ihnen im Systemprompt ausdrücklich, was erlaubt und verboten ist. Gib ihnen nur die Rechte, die die Aufgabe wirklich braucht. Weite Befugnisse und «suche gründlich» förderten Grenzüberschreitungen.
 
 ---
 
