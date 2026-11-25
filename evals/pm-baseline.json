@@ -104,9 +104,9 @@
     "datum": "",
     "quelle": "hackernews",
     "rohtext": "Nieman Lab dokumentiert KI-generierte Cartoons, die Unterschriften echter Zeichner tragen. Die Künstler haben die Bilder nicht geschaffen. Eigene Tests der Redaktion fanden das Problem auch nach einer Rückmeldung an OpenAI. Der Bericht unterscheidet zwischen einer Stilnachahmung und der falschen Zuschreibung eines Bilds an eine reale Person.",
-    "reference_score": 5,
-    "label_origin": "editorial-calibration-2026-10-08",
-    "reference_reason": "Belegte falsche Künstlerzuschreibung durch KI-Bilder; unmittelbar relevant für Medienvertrauen.",
+    "reference_score": 3,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Medienvertrauen ohne Folge für eigene Produkte oder KI-Nutzung; Profil vom 2026-11-25.",
     "input_origin": "editorial-source-summary-2026-10-08"
   },
   {
@@ -148,9 +148,9 @@
     "datum": "",
     "quelle": "simonwillison",
     "rohtext": "Photo Scrubber ist ein Werkzeug zum Verwischen von Gesichtern und Entfernen von Bildmetadaten. Die Verarbeitung erfolgt lokal im Browser. Simon Willison beschreibt das Werkzeug und seine Nutzung, damit Bilder vor dem Teilen weniger Informationen über Personen und Aufnahmeorte enthalten.",
-    "reference_score": 4,
-    "label_origin": "editorial-calibration-2026-10-08",
-    "reference_reason": "Praktisch nutzbares Werkzeug zum Schutz von Personen und Ortsdaten in Bildern.",
+    "reference_score": 2,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Bildwerkzeug ohne KI-Produktbezug; Profil vom 2026-11-25.",
     "input_origin": "editorial-source-summary-2026-10-08"
   },
   {
@@ -159,9 +159,9 @@
     "datum": "",
     "quelle": "hackernews",
     "rohtext": "David Buchanan zeigt ein manipuliertes Foto mit weiterhin gültigem C2PA-Herkunftsnachweis. Er nahm die Bilddaten gezielt von der Signaturprüfung aus und änderte anschliessend das Foto. Den bestätigten Zeitstempel musste er nicht verändern. Das Beispiel zeigt, dass eine gültige Signatur allein keinen unveränderten Bildinhalt beweist.",
-    "reference_score": 4,
-    "label_origin": "editorial-calibration-2026-10-08",
-    "reference_reason": "Konkrete Grenze eines digitalen Herkunftsnachweises; wichtig für Medienprüfung.",
+    "reference_score": 2,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Bildherkunft ohne Bezug zu KI-Produkten oder KI-Entwicklungsrichtung; Profil vom 2026-11-25.",
     "input_origin": "editorial-source-summary-2026-10-08"
   },
   {
@@ -174,5 +174,126 @@
     "label_origin": "editorial-calibration-2026-10-08",
     "reference_reason": "Angekündigte Herkunftsmarkierung von KI-Texten mit klaren Erkennungsgrenzen.",
     "input_origin": "editorial-source-summary-2026-10-08"
+  },
+  {
+    "titel": "Tidal bans AI-generated music",
+    "url": "https://variety.com/2026/music/news/tidal-bans-ai-generated-music-1236956924/",
+    "datum": "",
+    "quelle": "hackernews",
+    "rohtext": "Tidal entfernt ab dem 9. Dezember Musik, die der Dienst für vollständig KI-generiert hält. Laut Tidal waren 43 Prozent der in 90 Tagen gelieferten Tracks als KI-generiert erkannt. Spotify und Apple Music setzen auf Labels und Filter.",
+    "reference_score": 1,
+    "label_origin": "user-feedback-2026-11-25 (Thema nicht relevant)",
+    "reference_reason": "Von Nils als nicht relevant markiert.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "The New York Times warns photographers not to update Photoshop over AI features",
+    "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+    "datum": "",
+    "quelle": "theverge",
+    "rohtext": "Die New York Times weist freie Fotografen an, Photoshop 2027 bei Aufträgen nicht zu verwenden. KI-Funktionen könnten Metadaten setzen, die ein Bild als KI-erzeugt kennzeichnen. Welche Funktionen gemeint sind, bleibt offen.",
+    "reference_score": 1,
+    "label_origin": "user-feedback-2026-11-25 (Thema nicht relevant)",
+    "reference_reason": "Von Nils als nicht relevant markiert.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Quad9 pulled their DNS service from France",
+    "url": "https://quad9.net/news/blog/quad9-service-deactivation-in-france/",
+    "datum": "",
+    "quelle": "hackernews",
+    "rohtext": "Der DNS-Dienst Quad9 zieht sich aus Frankreich zurück, weil ein Gericht Sperren von Piraterie-Domains verlangt. Nutzer müssen auf andere DNS-Anbieter ausweichen.",
+    "reference_score": 1,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Kein KI-Bezug.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Cyberattack campaign compromising Check Point servers across 22 organizations",
+    "url": "https://www.greynoise.io/blog/check-point-security-management-servers-intrusion-campaign",
+    "datum": "",
+    "quelle": "hackernews",
+    "rohtext": "Ein Angreifer hat Check-Point-Verwaltungsserver bei mindestens 22 Organisationen kompromittiert. Beschrieben sind Zeitverlauf und betroffene Branchen.",
+    "reference_score": 1,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Kein KI-Bezug.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Nothing stellt am 8. Dezember KI-Ohrhörer Ear (note) mit Aufnahmefunktion vor",
+    "url": "https://www.heise.de/news/Nothing-stellt-am-8-Dezember-KI-Ohrhoerer-Ear-note-mit-Aufnahmefunktion-vor-11535554.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+    "datum": "",
+    "quelle": "heise",
+    "rohtext": "Nothing stellt am 8. Dezember Ohrhörer vor, die Besprechungen und Telefonate aufzeichnen und transkribieren sollen. Preis und Details sind offen.",
+    "reference_score": 2,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Ankündigung eines Geräts ohne neue KI-Fähigkeit.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "David Fincher is being dragged for suspected use of AI in his latest film",
+    "url": "https://www.theverge.com/entertainment/1041417/david-fincher-netflix-cliff-booth-ai-interpositive",
+    "datum": "",
+    "quelle": "theverge",
+    "rohtext": "Zuschauer vermuten in einem Netflix-Film von David Fincher den Einsatz generativer KI und zeigen Bildfehler. Netflix bestätigt nichts.",
+    "reference_score": 1,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Unbelegter KI-Streit in der Filmbranche.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "OpenAI veröffentlicht GPT-6.2 für ChatGPT",
+    "url": "https://www.heise.de/news/OpenAI-veroeffentlicht-GPT-6-2-fuer-ChatGPT-11535524.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+    "datum": "",
+    "quelle": "heise",
+    "rohtext": "OpenAI führt GPT-6.2 in ChatGPT für Plus, Pro, Business und Enterprise ein. Das Modell soll komplexe Anweisungen zuverlässiger befolgen und Bilder genauer erkennen. Für kostenlose Konten fehlt ein Zeitplan.",
+    "reference_score": 5,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Neues Modell eines grossen Anbieters, direkt nutzbar, mit Zugangsgrenzen.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Claude AI can review pull requests and ship fixes on its own now",
+    "url": "https://www.theverge.com/ai-artificial-intelligence/1040134/anthropic-claude-ship-ai-pull-requests",
+    "datum": "",
+    "quelle": "theverge",
+    "rohtext": "Anthropic bringt Claude Ship und zwei Agenten als Beta für Team und Enterprise auf GitHub. Sie prüfen Änderungsvorschläge am Code, beheben Probleme und können Freigaben nach Regeln übernehmen.",
+    "reference_score": 5,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Neue Fähigkeit von Claude; zeigt, welche Schritte Agenten in der Entwicklung übernehmen.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "How to build and maintain an agentic evaluation",
+    "url": "https://huggingface.co/blog/agentic-evals",
+    "datum": "",
+    "quelle": "huggingface",
+    "rohtext": "Ein Leitfaden von Hugging Face beschreibt, wie man KI-Agenten prüft: realistische Aufgaben wählen, Fachleute einbeziehen, Ergebnisse offenlegen und die Prüfung laufend pflegen.",
+    "reference_score": 4,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Übertragbare Methode, um eigene Agenten zu prüfen.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Drei Fragen und Antworten: Was der KI-Agent wusste, bevor er falsch abbog",
+    "url": "https://www.heise.de/news/Drei-Fragen-und-Antworten-Der-KI-Agent-irrt-Aber-war-es-ueberhaupt-das-Modell-11536024.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+    "datum": "",
+    "quelle": "heise",
+    "rohtext": "Im Interview erklärt der Technikchef von Dynatrace, warum man bei Fehlentscheidungen von KI-Agenten das ganze System aus Daten, Werkzeugen und Zwischenschritten untersuchen soll und nicht nur die Anweisung.",
+    "reference_score": 4,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Agenten-Praxis mit übertragbarer Denkweise.",
+    "input_origin": "editorial-source-summary-2026-11-25"
+  },
+  {
+    "titel": "Keine Secrets für Agenten: Eclipse Enclave schickt Agenten in die Sandbox",
+    "url": "https://www.heise.de/news/Keine-Secrets-fuer-Agenten-Eclipse-Enclave-schickt-Agenten-in-die-Sandbox-11534005.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+    "datum": "",
+    "quelle": "heise",
+    "rohtext": "Eclipse Enclave 1.0 führt Coding-Agenten wie Claude Code in abgeschotteten Umgebungen aus und begrenzt den Netzzugriff. Das Projektverzeichnis bleibt beschreibbar, gespeicherte Anmeldungen sind nicht geschützt.",
+    "reference_score": 4,
+    "label_origin": "editorial-calibration-2026-11-25",
+    "reference_reason": "Sicherer Einsatz von Agenten, den die Person selbst betreibt.",
+    "input_origin": "editorial-source-summary-2026-11-25"
   }
 ]
