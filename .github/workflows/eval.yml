@@ -7,6 +7,7 @@ on:
       - 'score.js'
       - 'lib/config.js'
       - 'lib/scoring.js'
+      - 'lib/persona.js'
       - 'evals/**'
   workflow_dispatch:
     inputs:
