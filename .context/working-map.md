@@ -40,6 +40,7 @@ Nicht erneut breit analysieren:
 - `lib/tts.js`: OpenAI-Realtime-Vorlesen mit `gpt-realtime-2.1-mini` (Chunking, Transkript-Prüfung, MP3 via `lame`, Rückfall ffmpeg). Nur aktiv mit `OPENAI_API_KEY`.
 - `lib/readable.js`: Haupttext-Extraktion mit defuddle (DOM via linkedom, ohne eigene Netzabrufe).
 - `lib/editorial.js`: Redaktionelle Auswahl, Längen-/Strukturprüfung, Review-Abdeckung.
+- `lib/review-loop.js`: Prüfung und Überarbeitung vor der Veröffentlichung (höchstens zwei Runden).
 - `lib/scoring.js`: Score-Systemprompt (`SCORE_SYSTEM`) und `scoreArticle`, geteilt von `score.js` und den Evals.
 - `lib/audio.js`: `generateDailyAudio()` – Sprech-Skript (Claude) → TTS → Release-Asset. Fehlertolerant, von `deliver.js` aufgerufen.
 - `lib/http.js`: SSRF-sicherer GET-Helper für alle Adapter.

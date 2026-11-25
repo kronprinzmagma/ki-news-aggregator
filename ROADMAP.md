@@ -55,6 +55,7 @@ Ziel: Die Pipeline verbessert ihren Output eigenständig durch Review-gesteuerte
 
 - [x] Review-Schlaufe bewertet geschriebenen Output (drei Blöcke) auf 4 Ebenen und gibt `rewrite_hint`
 - [x] Rewrite-Loop: Artikel mit `needs_rewrite=true` werden sofort mit Review-Feedback neu aufbereitet
+- [x] Bestandene Texte bleiben stehen, zweite Rewrite-Runde, Fett-Grenze ohne Rewrite (2026-11-25)
 - [x] Artikel-Enrichment in allen relevanten Adaptern: interconnects, lastweekinai, aheadofai, willison (inkl. externer Link-Fetch)
 - [x] Prompt-Verbesserungen: Halluzinations-Schutz, Build-Anker-Validierung, Thin-Input-Markierung
 - [x] Tagesübergreifende URL-Dedup: Artikel aus den letzten 3 Issues werden vor Selektion gefiltert
