@@ -1,4 +1,13 @@
-## Relevanzprofil ab 8. Oktober 2026
+## Relevanzprofil ab 25. November 2026
+
+Profil in `lib/persona.js`. `pm-baseline.json` hat neu 27 Fälle: 11 neue (davon 2 aus Nils' Häkchen «Thema nicht relevant») und 3 neu eingestufte Medienfälle. Mehrere Fälle stehen auch als Kalibrierung im Prompt, der Datensatz ist dafür also kein unabhängiger Test. Unabhängiger sind die 38 Nutzerlabels in `goldstandard.json`; `eval.yml` ist dafür von Hand mit `dataset` startbar.
+
+| Datensatz | MAE vorher | nachher | Pearson vorher | nachher |
+|---|---|---|---|---|
+| pm-baseline (27) | 0.926 | 0.481 | 0.541 | 0.896 |
+| goldstandard (38, je 1 API-Fehler) | 1.459 | 1.243 | 0.387 | 0.492 |
+
+## Relevanzprofil ab 8. Oktober 2026 (überholt)
 
 CI verwendet `EVAL_DATASET=pm-baseline.json`: 16 ausgewogene Fälle mit `reference_score` und expliziter Begründung für den nicht-technischen Produktleser. Die Testeingaben sind kurze redaktionelle Zusammenfassungen der verlinkten Quellen, keine archivierten Volltexte. Sie prüfen die Relevanz-Kalibrierung, nicht die Volltextverarbeitung oder Quellentreue. Diese Labels wurden redaktionell aus dem aktuellen Nutzerauftrag abgeleitet und sind als `editorial-calibration-2026-10-08` gekennzeichnet. Sie sind kein unabhängiger menschlicher Goldstandard. Positive Fälle: Datenschutz, Medienherkunft, Vergütung, praktische Kostenkontrolle; negative Fälle: Plugin-Versionen, Telemetrie, Programmiersprachen und reine Trainingsdetails.
 
