@@ -2,10 +2,12 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1458 Einträge** · Top-Quellen: heise (562) · hackernews (414) · simonwillison (243) · latentspace (124) · huggingface (33) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · venturebeat (5) · theverge (4) · aheadofai (4)
+**1460 Einträge** · Top-Quellen: heise (563) · hackernews (414) · simonwillison (243) · latentspace (124) · huggingface (33) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · theverge (5) · venturebeat (5) · aheadofai (4)
 
 ## Liste
 
+- **2026-11-26** — [Amazon is reportedly in talks to end Muse AI shopping block](2026-11-26-amazon-is-reportedly-in-talks-to-end-muse-ai-shopping-block.md) · *theverge · Score 4*
+- **2026-11-26** — [Abrechnungsfehler: Was OpenAIs GPT-6.2-Korrektur für Abonnenten bedeutet](2026-11-26-abrechnungsfehler-was-openais-gpt-6-2-korrektur-fur-abonnent.md) · *heise · Score 4*
 - **2026-11-25** — [Three LLM inflection points in twelve months](2026-11-25-three-llm-inflection-points-in-twelve-months.md) · *simonwillison · Score 4*
 - **2026-11-25** — [OpenAI veröffentlicht GPT-6.2 für ChatGPT](2026-11-25-openai-veroffentlicht-gpt-6-2-fur-chatgpt.md) · *heise · Score 4*
 - **2026-11-25** — [KI-Experiment: Anthropic führt KI-Agenten in Versuchung](2026-11-25-ki-experiment-anthropic-fuhrt-ki-agenten-in-versuchung.md) · *heise · Score 4*
