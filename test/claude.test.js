@@ -96,3 +96,24 @@ test('extractText überspringt thinking-Blöcke', () => {
   assert.equal(extractText({ content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: 'Hallo' }] }), 'Hallo');
   assert.equal(extractText({ content: [] }), null);
 });
+
+test('batch ueber dem Zeitlimit wirft BatchStuckError, damit score.js auf Einzelaufrufe zurueckfaellt',async t=>{
+  const { claudeBatch, BatchStuckError }=await import('../lib/claude.js');
+  process.env.ANTHROPIC_API_KEY='test-only';
+  const calls=[];
+  t.mock.method(https,'request',(options,callback)=>{
+    calls.push(`${options.method} ${options.path}`);
+    const req=new EventEmitter();req.setTimeout=()=>{};req.write=()=>{};
+    req.end=()=>queueMicrotask(()=>{
+      const res=new EventEmitter();res.statusCode=200;res.headers={};callback(res);
+      // Batch laeuft nie zu Ende und meldet nie Fortschritt
+      res.emit('data',Buffer.from(JSON.stringify({id:'batch-slow',processing_status:'in_progress',request_counts:{processing:1}})));
+      res.emit('end');
+    });return req;
+  });
+  await assert.rejects(
+    ()=>claudeBatch([{custom_id:'a',...options,tools:[{name:'result',input_schema:schema}],toolChoice:{type:'tool',name:'result'}}],{pollIntervalMs:1,maxWaitMs:20,stuckTimeoutMs:60_000}),
+    err=>err instanceof BatchStuckError&&/Zeitlimit/.test(err.message),
+  );
+  assert.ok(calls.some(c=>c.startsWith('POST')&&c.endsWith('/cancel')),'Batch wird abgebrochen');
+});
