@@ -2,10 +2,15 @@
 
 Praktische Hinweise und ältere Projektideen, die aus den täglichen [KI-News-Briefings](https://github.com/kronprinzmagma/ki-news-aggregator/issues?q=is%3Aissue+%22KI+Daily%22) extrahiert wurden. Aktuelle Hinweise helfen bei Nutzung und Entscheidungen ohne Entwickler-Setup; ältere Einträge können umfangreichere Bauvorschläge enthalten.
 
-**1463 Einträge** · Top-Quellen: heise (564) · hackernews (415) · simonwillison (243) · latentspace (125) · huggingface (33) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · theverge (5) · venturebeat (5) · aheadofai (4)
+**1468 Einträge** · Top-Quellen: heise (565) · hackernews (418) · simonwillison (243) · latentspace (125) · huggingface (33) · anthropic (26) · golem (20) · interconnects (16) · lastweekinai (7) · theverge (5) · venturebeat (5) · aheadofai (4) · thebatch (1)
 
 ## Liste
 
+- **2026-11-28** — [Verbraucherzentrale mahnt OpenAI und Anthropic ab](2026-11-28-verbraucherzentrale-mahnt-openai-und-anthropic-ab.md) · *heise · Score 4*
+- **2026-11-28** — [GGUF LLM Models with Hidden Malware on Hugging Face Reached 2400 Victims](2026-11-28-gguf-llm-models-with-hidden-malware-on-hugging-face-reached-.md) · *hackernews · Score 4*
+- **2026-11-28** — [Convex skills send the user's app idea to a remote server without telling them](2026-11-28-convex-skills-send-the-user-s-app-idea-to-a-remote-server-wi.md) · *hackernews · Score 4*
+- **2026-11-28** — [Claude Code sabotage: preliminary benchmarking](2026-11-28-claude-code-sabotage-preliminary-benchmarking.md) · *hackernews · Score 4*
+- **2026-11-28** — [Carbon, Hydrogen, Neon, Oh My!: Google Gemini’s Updated Models Combine in Orchestrator](2026-11-28-carbon-hydrogen-neon-oh-my-google-gemini-s-updated-models-co.md) · *thebatch · Score 5*
 - **2026-11-27** — [Novita, StreamLake, etc. are ByteDance Ark wrappers](2026-11-27-novita-streamlake-etc-are-bytedance-ark-wrappers.md) · *hackernews · Score 4*
 - **2026-11-27** — [How Clay Builds GTM Agents — Jeff Barg, Head of AI](2026-11-27-how-clay-builds-gtm-agents-jeff-barg-head-of-ai.md) · *latentspace · Score 4*
 - **2026-11-27** — [AI-Supply-Chain: Günstige Inferenzangebote greifen Secrets ab](2026-11-27-ai-supply-chain-gunstige-inferenzangebote-greifen-secrets-ab.md) · *heise · Score 5*
